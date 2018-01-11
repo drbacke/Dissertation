@@ -1,0 +1,1222 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Gradient Enhanced Kriging
+\end_layout
+
+\begin_layout Section
+TODO
+\end_layout
+
+\begin_layout Standard
+Ordinary Kriging GEK CO-Kriging (eigenen Teil kenntlich machen) - Was kann
+ es darstellen und was nicht, auch die Kompromisse in der Kovarianzfunktion
+ zeigen, z.B.
+ bei Erichs Beispiel mit der zufälligen Low Fidelity Funktion.
+ Das Model gibt es eigentlich nicht her, trotzdem schafft er es oftmals
+ einen guten Kompromiss zu finden.
+ Training wird aber instabiler dadurch - Initialisierungsverfahren - Minimierung
+sverfahren / Konvergenzkriterium - Varianz, Diagonalaufschlag, Aufbau der
+ Korr Funktionen (exp) - Erzeugung der Cov Matrix und der Kov Funktionen
+ - statistische Grundlagen einstreuen ( Multivariate Normalverteilung, Verschieb
+ungssatz, Erwartungswerte usw.) - Likelihood - CovMatrix aufstellen - Hyperparame
+ter - ortsabhängige Cov Funktion - CO Kriging Betas - Versuch Likelihood
+ Schätzer Sigma - Diagonalaufschlag und Probleme beim Training
+\end_layout
+
+\begin_layout Subsection
+Gradient Enhanced Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Gradient-Enhanced-Kriging"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Gradient Enhanced Kriging ist eine Erweiterung des Ordinary Kriging.
+ Beim GEK gehen partielle Ableitungen in der Form 
+\begin_inset Formula $\frac{\partial y\left(x\right)}{\partial x}$
+\end_inset
+
+ an einigen beprobten Orten mit in die Bildung des Modells ein.
+ Der Trainingsvektor 
+\begin_inset Formula $\vec{y}_{s}\in\mathbb{R^{\mathrm{n+m}}}$
+\end_inset
+
+ kann in diesem Fall also die folgende Form annehmen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\vec{y}_{s}=\left(y\left(\vec{x}_{1}\right),...,y\left(\vec{x}_{n}\right),\frac{\partial y\left(\vec{x}_{n+1}\right)}{\partial x^{j}},...,\frac{\partial y\left(\vec{x}_{n+m}\right)}{\partial x^{j}}\right),j\in\left\{ 1,...,k\right\} $
+\end_inset
+
+ , wobei der obere Index von 
+\begin_inset Formula $x$
+\end_inset
+
+ die Variable darstellt, nach der abgeleitet wird und 
+\begin_inset Formula $m$
+\end_inset
+
+ ist die Anzahl der gegebenen partiellen Ableitungen.
+ Beim Aufstellen der Korrelationsmatrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ müssen also auch Kovarianzen/Korrelationen zwischen den Gradienten und
+ den Funktionswerten gebildet werden können.
+ Die Kovarianzfunktion zwischen zwei Zufallsvariablen ist wie folgt definiert:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\label{eq:DefinitionKovarianz}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um im Kriging Modell partielle Ableitungen verarbeiten zu können ist es
+ notwendig, dass die Kovarianzfunktionen in der folgenden Form gebildet
+ werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{l}}) & ,p,l\in\left\{ 1,...,k\right\} \label{eq:KovGrad1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right)) & ,p\in\left\{ 1,...,k\right\} \label{eq:KovGrad2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(Z\left(\vec{x}_{1}\right),\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{l}}) & ,l\in\left\{ 1,...,k\right\} \label{eq:KovGrad3}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per Definition aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DefinitionKovarianz"
+
+\end_inset
+
+ ergibt sich für Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovGrad1"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right))= & E\left[\left(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}}-E\left[\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}}\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\label{eq:CovAbleitungeingesetzt}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Korrelationsfunktion ist im Kriging vorgegeben ( Kapitel
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Korrelationsfunktionen"
+
+\end_inset
+
+ ).
+ Im Folgenden soll gezeigt werden, dass die Kovarianzfunktion 
+\begin_inset Formula $\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right))$
+\end_inset
+
+ auch durch einfaches Differenzieren von 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DefinitionKovarianz"
+
+\end_inset
+
+ bilden lässt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial x_{1}^{p}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & \frac{\partial}{\partial x_{1}^{p}}\left(E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\right]\\
+ & +E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\right]\\
+ & +E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es gilt 
+\begin_inset Formula $\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(x_{2}\right)-E\left[Z\left(x_{2}\right)\right]\right)=0$
+\end_inset
+
+, da der Ausdruck unabhängig von 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ ist.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+untitled= & E\left[\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\left(\frac{\partial}{\partial x_{1}^{p}}Z\left(\vec{x}_{1}\right)-E\left[\frac{\partial}{\partial x_{1}^{p}}Z\left(\vec{x}_{1}\right)\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieser Ausdruck entspricht Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovAbleitungeingesetzt"
+
+\end_inset
+
+, also gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right))= & \frac{\partial}{\partial x_{1}^{p}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))\label{eq:CovpartielleAbleitungUmformung}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+für die Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovGrad1"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovGrad3"
+
+\end_inset
+
+ gilt entsprechendes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{l}})= & \frac{\partial}{\partial x_{1}^{p}\partial x_{2}^{l}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{cov}(Z\left(\vec{x}_{1}\right),\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{l}}) & =\frac{\partial}{\partial x_{2}^{l}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da die Korrelationsfunktion vorgegeben ist, kann diese entsprechend abgeleitet
+ werden (sofern diese differenzierbar ist) und man erhält den nötigen Zusammenha
+ng zwischen den Funktionswerten und Gradienten.
+ Beispiele für Korrelationsfunktionen und deren Ableitungen werden in Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Korrelationsfunktionen"
+
+\end_inset
+
+ behandelt.
+\end_layout
+
+\begin_layout Standard
+Auf die Herleitung des Krige Schätzers und der Vorhersage der Varianz soll
+ hier im Weiteren nicht eingegangen werden, da diese im Wesentlichen der
+ Herleitung des Ordinary Kriging entsprechen.
+ Der Leser sei aber auf 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Krueger2013,han2009improving"
+
+\end_inset
+
+ verwiesen.
+ Die Bildung des Korrelationsvektors 
+\begin_inset Formula $\vec{r}$
+\end_inset
+
+ und des Erwartungswertvektors 
+\begin_inset Formula $\beta\vec{F}$
+\end_inset
+
+ sieht wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{F}\in\mathbb{R^{\mathrm{n}}} & =\left(\underset{n}{\underbrace{\left.1,...,1\right.}},\underset{m}{\underbrace{\left.0,...,0\right.}}\right)^{T}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{c}\in\mathbb{R^{\mathrm{n+m}}} & =\left(c\left[\vec{x}_{0},\vec{x}_{1}\right],...,c\left[\vec{x}_{0},\vec{x}_{n}\right],\frac{\partial c\left[\vec{x}_{0},\vec{x}_{n+1}\right]}{\partial x^{j}},...,\frac{\partial c\left[\vec{x}_{0},\vec{x}_{n+m}\right]}{\partial x^{j}}\right)^{T}\\
+ & ,\vec{x}\in\mathbb{R^{\mathrm{k}}},j\in\left\{ 1,...,k\right\} 
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}-2\vec{c}\mathbf{Cov}^{-1}\vec{F}+1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
+ dies einer binomischen Formel, also gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-1\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei erwähnt sei, dass die Ableitungen nach x auch nur teilweise vorhanden
+ sein können.
+ Es muss also nicht für jeden Member jede Ableitung nach jeder freien Variable
+ gegeben sein.
+\end_layout
+
+\begin_layout Standard
+Die Bildung der Matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Korrelationsmatrix"
+
+\end_inset
+
+ erläutert, da die softwaretechnische Umsetzung stark von der Bildung der
+ Matrix abhängt und dies im Zusammenhang erläutert werden soll.
+ 
+\end_layout
+
+\begin_layout Section
+Bildung der Korrelations-/Kovarianzmatrix
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Korrelationsmatrix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Kapitel soll die Softwaretechnische Umsetzung des Algorithmus
+ zur Bildung der Korrelationsmatrix dargestellt werden.
+ Da in den Algorithmen sehr viele Matrix Operationen verwendet werden, wurde
+ eine Matrix Klasse eingeführt.
+ Diese wird am Anfang des Kapitels erläutert.
+ 
+\end_layout
+
+\begin_layout Standard
+Im nächsten Abschnitt wird dann die Bildungsvorschrift der Matrix gezeigt
+ und darauf folgend eine häufig genutzte Korrelationsfunktion und deren
+ softwaretechnische Umsetzung erläutert.
+ 
+\end_layout
+
+\begin_layout Standard
+Der letzter Abschnitt zeigt dann den eigentlichen Algorithmus zur Bildung
+ der Korrelationsmatrix.
+\end_layout
+
+\begin_layout Subsection
+Bildungsvorschrift der Kovarianzmatrix
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Bildungsvorschrift-der-KorrelatiGEk"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Kovarianzmatrix 
+\begin_inset Formula $\mathbf{Cov}$
+\end_inset
+
+ beschreibt den paarweisen linearen Zusammenhang aller Stützstellen untereinande
+r.
+ Im Folgenden ist der allgemeine Aufbau einer Korrelationsmatrix zwischen
+ zwei Membern mit den entsprechenden Kovarianz zwischen den Zufallsvariablen
+ 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $Z\left(\overrightarrow{x_{1}}\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang ngerman
+ und 
+\begin_inset Formula $Z\left(\overrightarrow{x_{2}}\right)$
+\end_inset
+
+ an den Orten 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\lang english
+
+\begin_inset Formula $\overrightarrow{x_{1}},\overrightarrow{x_{2}}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+\lang ngerman
+ dargestellt.
+ Zusätzlich zu den Funktionswerten sind hier noch zwei partielle Ableitungen
+ nach der ersten freien Variablen z.B.
+ 
+\begin_inset Formula $\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}}$
+\end_inset
+
+ gegeben, wobei der obere Index von x die Variable nach der abgeleitet wird
+ angibt und der untere Index die Membernummer.
+ Die Kovarianzmatrix wurde hier aus Platzgründen nur mit zwei Membern gebildet
+ und kann natürlich Kovarianzmatrix zwischen beliebig vielen Membern und
+ partiellen Ableitungen enthalten.
+ Die erste Spalte und erste Zeile geben jeweils an, zwischen welchen Variablen
+ die Kovarianzmatrix gebildet wird, z.B.
+ Spalte zwei 
+\begin_inset Formula $Z\left(\overrightarrow{x_{2}}\right)$
+\end_inset
+
+ und Zeile eins 
+\begin_inset Formula $Z\left(\overrightarrow{x_{1}}\right)$
+\end_inset
+
+ würden eine Korrelation 
+\begin_inset Formula $c\left(Z\left(\overrightarrow{x_{1}}\right),Z\left(\vec{x}_{2}\right)\right)$
+\end_inset
+
+ ergeben.
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\lang english
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccc}
+ & Z\left(\vec{x}_{1}\right) & Z\left(\vec{x}_{2}\right) & \frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}}\\
+\hline Z\left(\vec{x}_{1}\right) & c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{1}\right)\right) & c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)\right) & c\left(x_{1},\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}}\right) & c\left(x_{1},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}}\right)\\
+Z\left(\vec{x}_{2}\right) & c\left(Z\left(\vec{x}_{2}\right),Z\left(\vec{x}_{1}\right)\right) & c\left(Z\left(\vec{x}_{2}\right),Z\left(\vec{x}_{2}\right)\right) & c\left(x_{2},\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}}\right) & c\left(x_{2},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}}\right)\\
+\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & c\left(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}},Z\left(\vec{x}_{1}\right)\right) & c\left(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}},Z\left(\vec{x}_{2}\right)\right) & c\left(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}},\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}}\right) & c\left(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}}\right)\\
+\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}} & c\left(\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}},Z\left(\vec{x}_{1}\right)\right) & c\left(\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}},Z\left(\vec{x}_{2}\right)\right) & c\left(\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}},\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}}\right) & c\left(\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}},\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{2}^{1}}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da für einen voherzusagenden Wert der Funktionswert unbekannt ist, die Kovarianz
+ aber zwischen diesem und den bekannten Membern berechnet werden muss, beschreib
+t man die Korrelation nur noch in Abhängigkeit vom Abstand der Stützstellen
+ untereinander.
+ Der Korrelationswert ist also unabhängig von den Funktionswerten.
+ Dies stellt allerdings nur eine Schätzung der Korrelation dar, für die
+ verschiedenste Ansätze existieren, einige davon werden in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Korrelationsfunktionen"
+
+\end_inset
+
+ beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)\right) & =c\left(\vec{x}_{1},\vec{x}_{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Korrelation zwischen Funktionswerten und partiellen Ableitungen, bzw.
+ zwischen partiellen Ableitungen und partiellen Ableitungen können wie in
+ Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovpartielleAbleitungUmformung"
+
+\end_inset
+
+ umgeformt werden zu
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right))= & \frac{\partial}{\partial x_{1}^{p}}c(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+die Korrelation soll ebenfalls nur abhängig vom Abstand im Parameterraum
+ sein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & \frac{\partial}{\partial x_{1}^{p}}c(\vec{x}_{1},\vec{x}_{2})
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die anderen Korrelationen für die partiellen Ableitungen sind in Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Gradient-Enhanced-Kriging"
+
+\end_inset
+
+ zu finden.
+ 
+\end_layout
+
+\begin_layout Standard
+Mit diesen Annahmen ergibt sich die allgemeine Form der Kovarianzmatrix
+ zwischen zwei Membern zu 
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccc}
+ & Z\left(\vec{x}_{1}\right) & Z\left(\vec{x}_{2}\right) & \frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}}\\
+\hline Z\left(\vec{x}_{1}\right) & c\left(\vec{x}_{1},\vec{x}_{1}\right) & c\left(\vec{x}_{1},\vec{x}_{2}\right) & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{2}^{1}}\\
+Z\left(\vec{x}_{2}\right) & c\left(\vec{x}_{2},\vec{x}_{1}\right) & c\left(\vec{x}_{2},\vec{x}_{2}\right) & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}}\\
+\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}\\
+\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Konkrete Korrelationsfunktionen, welche in dieser Software umgesetzt wurden,
+ werden in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Korrelationsfunktionen"
+
+\end_inset
+
+ beschrieben.
+ Die Korrelationsfunktionen sollen innerhalb der Matrix austauschbar sein,
+ was im entsprechenden Algorithmus zur Aufstellung der Matrix beachtet werden
+ muss.
+\end_layout
+
+\begin_layout Section
+Regularisierungsterm und Nugget 
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Größe der abgeleiteten Kovarianzen völlig anders als bei den Kovarianzen.
+ Deswegen ist ein additiver Ansatz unsinnig.
+ Diagonalaufschlag bei den Ableitung Paper von Christian verweisen
+\end_layout
+
+\begin_layout Subsection*
+Diagonalaufschlag einstellen über eine maximale Konditionszahl
+\end_layout
+
+\begin_layout Standard
+Während des Trainings kann es passieren, dass Hyperparameter eingestellt
+ werden, die eine schlechte Konditionierung der Korrelationsmatrix hervorrufen.
+ Dies kann bei der Cholesky Zerlegung problematisch werden.
+ Um die Konditionszahl zu verbessern, wird ein Diagonalaufschlag auf die
+ Hauptdiagonale der Matrix addiert.
+ Die Gauss Korrelationsfunktion würde sich damit wie folgt ändern (
+\begin_inset Formula $\delta_{i,j}$
+\end_inset
+
+ beschreibt hier das Kronecker Delta und 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ den Diagonalaufschlag):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c\left(\vec{x}_{i},\vec{x}_{j}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}+e^{\lambda}\delta_{i,j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es stellt sich allerdings die Frage, wie groß dieser Diagonalaufschlag im
+ Einzelfall sein muss und inwiefern dieser das Ergebnis beeinflusst bzw.
+ die Kondition verbessert.
+ Grundsätzlich sollte dieser so klein wie möglich gewählt werden, um die
+ Ursprungsmatrix so wenig wie möglich zu verändern.
+ Um einen optimalen Wert zu ermitteln, gibt es zwei verschiedene Möglichkeiten.
+ 
+\end_layout
+
+\begin_layout Standard
+Die erste Möglichkeit wäre, die Likelihood Funktion (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Likelihood Funktion"
+
+\end_inset
+
+) nach dem Diagonalaufschlag zu differenzieren.
+ Die Ableitung ist in diesem Fall sehr simpel, da alles außer dem Diagonalaufsch
+lag wegfällt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial c\left(\vec{x}_{i},\vec{x}_{j}\right)}{\partial\lambda} & =e^{\lambda}\delta_{i,j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Ableitung der Korrelationsmatrix nach dem Diagonalaufschlag ergibt also
+ eine Einheitsmatrix multipliziert mit dem Diagonalaufschlag:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{\frac{\partial R}{\partial\lambda}} & =e^{\lambda}\mathbf{E}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit ergibt sich die Ableitung der Likelihood Funktion nach dem Diagonalaufschl
+ag zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\lambda} & =\frac{e^{\lambda}}{2}\left[\textrm{Spur}\left(\mathbf{R}^{-1}\right)-\frac{1}{\sigma^{2}}(\vec{y}_{s}-\beta*\overrightarrow{F})^{T}\mathbf{R}^{-1}\mathbf{R}^{-1}(\vec{y}_{s}-\beta*\overrightarrow{F})\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mit dieser Formel wäre es nun möglich, den Diagonalaufschlag einfach als
+ zusätzlichen Hyperparameter zu minimieren.
+ Allerdings bedeutet dies natürlich einen zusätzlicher Aufwand.
+ Es soll daher nach einer einfacheren Methode gesucht werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein anderer möglicher Ansatz ist die Konditionszahl der Matrix.
+ Diese ist definiert als Quotient aus maximalem und minimalem Eigenwert
+ der Korrelationsmatrix:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\left|\frac{\Xi_{max}\left(\mathbf{R}\right)}{\Xi_{min}\left(\mathbf{R}\right)}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Überlegt man sich nun, welche Korrelationsmatrix am schlechtesten konditioniert
+ wäre, kommt man auf die Einsmatrix:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{R} & =\left[\begin{array}{ccc}
+1 & ... & 1\\
+... & ... & ...\\
+1 & ... & 1
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die minimalen und maximalen Eigenwerte der Einsmatrix sind bekannt:
+\begin_inset Formula 
+\begin{align*}
+\Xi_{min}\left(\mathbf{R}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Xi_{max}\left(\mathbf{R}\right) & =n
+\end{align*}
+
+\end_inset
+
+Dies würde einer unendlichen Konditionszahl entsprechen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\infty
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Addiert man nun den Diagonalaufschlag, bekommt man folgende Korrelationsmatrix:
+ 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{R} & =\left[\begin{array}{ccc}
+1+e^{\lambda} & ... & 1\\
+... & ... & ...\\
+1 & ... & 1+e^{\lambda}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus ergeben sich die folgenden neuen maximalen und minimalen Eigenwerte:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Xi_{min}\left(\mathbf{R}\right) & =e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Xi_{max}\left(\mathbf{R}\right) & =e^{\lambda}+n
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Und die entsprechende Konditionszahl verbessert sich zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\left|\frac{e^{\lambda}+n}{e^{\lambda}}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da die Matrix positiv definit sein muss und damit nur positive Eigenwerte
+ hat, kann der Betrag weggelassen werden:
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\frac{e^{\lambda}+n}{e^{\lambda}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wählt man nun für die Konditionszahl eine obere Grenze, bekommt man eine
+ Untergrenze für den Diagonalaufschlag:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa_{max} & >\frac{e^{\lambda}+n}{e^{\lambda}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+e^{\lambda} & >\frac{n}{\left(\kappa_{max}-1\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eine geeignete Grenze für die obere Grenze der Konditionszahl ist aus der
+ Erfahrung bekannt und liegt bei ca.
+ 
+\begin_inset Formula $10^{9}$
+\end_inset
+
+, dieser Wert kann im Einzelfall natürlich angepasst werden.
+ Der daraus resultierende Diagonalaufschlag würde bei einer üblichen Matrixgröße
+ von 5000x5000, 
+\begin_inset Formula $5*10^{-6}$
+\end_inset
+
+ betragen und es ist davon auszugehen, dass dieser so gut wie keinen Einfluss
+ auf das Endergebnis haben sollte.
+ 
+\begin_inset Formula $ $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Art der Berechnung des Diagonalaufschlags wird momentan im Code verwendet.
+ Die entsprechende Ableitung der Likelihood Funktion ist im Code bereits
+ umgesetzt, wird momentan allerdings nicht verwendet, da bisherige Tests
+ dafür noch keine Notwendigkeit zeigten.
+\end_layout
+
+\begin_layout Subsection*
+Diagonalaufschlag als Faktor
+\end_layout
+
+\begin_layout Standard
+Multipliziert man nun den Diagonalaufschlag, bekommt man folgende Korrelationsma
+trix: 
+\begin_inset Formula 
+\begin{align*}
+\mathbf{R} & =\left[\begin{array}{ccc}
+1\lambda & ... & 1\\
+... & ... & ...\\
+1 & ... & 1\lambda
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus ergeben sich die folgenden neuen maximalen und minimalen Eigenwerte:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Xi_{min}\left(\mathbf{R}\right) & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Xi_{max}\left(\mathbf{R}\right) & =\lambda+n-1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Und die entsprechende Konditionszahl verbessert sich zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\left|\frac{\lambda+n-1}{\lambda-1}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da die Matrix positiv definit sein muss und damit nur positive Eigenwerte
+ hat, kann der Betrag weggelassen werden:
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\frac{\lambda+n-1}{\lambda-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wählt man nun für die Konditionszahl eine obere Grenze, bekommt man eine
+ Untergrenze für den Diagonalaufschlag:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\kappa_{max} & >\frac{\lambda+n-1}{\lambda-1}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\lambda & >\frac{n-1+\kappa_{max}}{\left(\kappa_{max}-1\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

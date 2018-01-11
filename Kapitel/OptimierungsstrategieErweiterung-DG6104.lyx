@@ -1,0 +1,2958 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Multifidelity Optimierungsstrategie
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Multifidelity-Optimierungsstrate"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im vorhergehenden Kapitel wurde die bisher verwendete Optimierungstrategie
+ im DLR beschrieben.
+ Das folgende Kapitel beschreibt eine Erweiterung dieser Strategie basierend
+ auf der Nutzung von mehreren Gütestufen.
+ Diese Art der Optimierungsstrategie wird wird Multifidelity-Optimierung
+ genannt.
+ 
+\end_layout
+
+\begin_layout Standard
+Im ersten Teil dieses Kapitels sollen allgemeine Grundlagen, sowie die Vorteile
+ und Grenzen einer solchen Strategie ausgearbeitet werden.
+ Darauf aufbauend wird im zweiten Teil dieses Kapitels die konkrete Umsetzung
+ innerhalb der Optimierungssoftware AutoOpti beschrieben.
+\end_layout
+
+\begin_layout Section
+Grundlagen - Multifidelity
+\end_layout
+
+\begin_layout Standard
+Um die Idee hinter einem Multifidelity-Verfahren zu verstehen, ist es sinnvoll
+ einen exemplarischen Ablauf einer Turbomaschinenoptimierung zu betrachten.
+ 
+\end_layout
+
+\begin_layout Standard
+1.
+ Worum gehts überhaupt? Was ist high und Low und warum das ganze?
+\end_layout
+
+\begin_layout Standard
+2.
+ Einige Fragen werden geklärt, warum z.B.
+ nicht erst nur Low und dann nur High oder 2 verschiedene Optimierungen?
+ Und start mit der letzten
+\end_layout
+
+\begin_layout Standard
+In der Regel gibt es eine Low-Fidelity Prozesskette und eine High-Fidelity
+ Prozesskette.
+ Die Low-Fidelity Prozesskette ist zwar sehr schnell berechnet, jedoch ist
+ diese normalerweise auch mit einer größeren Ungenauigkeit behaftet.
+ Die High-Fidelity Prozesskette hingegen ist deutlich aufwendiger, dafür
+ aber genauer.
+ Ein mögliches Beispiel wäre die 3D-Optimierung eines Triebwerksverdichters,
+ mit dem Ziel bei gleichbleibenden Druckverhältnis den Wirkungsgrad zu erhöhen.
+ Eine solche Optimierung erfordert im Normalfall eine Voruntersuchung des
+ Rechennetzes.
+ Auf der einen Seite soll das Rechennetz so grob wie möglich sein, mit dem
+ Ziel Zeit einzusparen.
+ Auf der anderen Seite muss es aber noch fein genug sein, um die zu untersuchend
+en Phänomene mit ausreichender Genauigkeit abbilden zu können.
+ 
+\end_layout
+
+\begin_layout Standard
+Wünschenswert wäre es allerdings, Rechennetze mit verschiedener Güte in
+ einer Optimierung zu verwenden und zwar so, dass das Optimierungsverfahren
+ maximale Zeit einspart bei minimalem Verlust an Information.
+ Beispielsweise könnte man ein grobes (Low-Fidelity) und ein feines Netz
+ (High-Fidelity) zur Verfügung stellen und würde erwarten, dass der grobe
+ Verlauf der Zielfunktion (bspw.
+ der Wirkungsgrad) bereits in den Low-Fidelity Daten enthalten ist.
+ Diese Information möchte man sich natürlich zunutze machen, was mit dem
+ bereits beschrieben CO-Kriging Verfahren möglich ist.
+ Die größte Schwierigkeit innerhalb der Optimierung besteht allerdings darin
+ zu entscheiden, wann welche Prozesskette verwendet wird.
+ Im folgenden Kapitel sollen verschiedene denkbare Lösungen für dieses Problem
+ beleuchtet werden.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auf der einen Seite sollte die Erzeugung eines Low-Fidelity Members eine
+ vergleichsweise kurze Zeit 
+\begin_inset Formula $t_{low}<t_{high}$
+\end_inset
+
+ benötigen.
+ Auf der anderen Seite aber einen größeren Fehler 
+\begin_inset Formula $F_{low}\geq F_{high}$
+\end_inset
+
+ haben als das High-Fidelity Modell und dadurch weniger Informationszugewinn
+ für das CO-Kriging Modell und die Optimierung liefern.
+\end_layout
+
+\begin_layout Standard
+Die Einbindung eines Multi-Fidelity Verfahrens in eine automatisierte Optimierun
+g stellt einen vor zahlreiche Probleme.
+ Die meisten dieser Probleme entstehen daraus, dass es mehrere Prozessketten
+ gibt, um einen Member zu berechnen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Aufsetzen einer MF Optimierungs benötigt auch relativ wenig zusätzlichen
+ Aufwand, was als Vorteil gegenüber anderen Beschleunigungsverfahren angesehen
+ werden kann.
+\end_layout
+
+\begin_layout Standard
+In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Besonderheiten-Turbomaschine"
+
+\end_inset
+
+ wurden einige Besonderheiten und die damit verbundenen Schwierigkeiten
+ von Turbomaschinenoptimierungen aufgelistet.
+ Die größten Probleme bereiten in der Regel die Größe des Suchraums in Kombinati
+on mit den extrem langen Prozesskettenzeiten.
+ Durch den sehr großen Suchraum ist es notwendig viele Stützstellen für
+ die Ersatzmodelle bereitzustellen, damit diese adäquate Schätzungen liefern
+ können.
+ Das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Reale-Turbomaschinen-Optimierung"
+
+\end_inset
+
+ gezeigt Beispiel hat 158 Dimensionen bei einer Prozesskettenzeit von 30h,
+ ein grober Richtwert für eine ausreichende Anzahl an Stützstellen für ein
+ Ordinary-Kriging-Ersatzmodell wird bspw.
+ 3-10*Anzahl Dimensionen angegeben (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jones2001,Jin2001"
+
+\end_inset
+
+) Bei 158 sind das 474 - 1580 Stützstellen, jede Stützstelle benötigt auf
+ 2 Rechenknoten ca.
+ 30h, die Gesamtzeit für die Optimierung kann man dann sehr grob mit 592-1976
+ Tagen beanschlagen.
+ Nutzt man mehrere Knoten gleichzeitig, so kann man die Zeit damit reduzieren.
+ In einem aktuellen Beispiel werden ca.
+ 20 Knoten verwendet, was die Zeit auf 60-200 Tage reduziert.
+ Allerdings sind die Optimierungsfortschritte bei vielen gleichzeitig rechnenden
+ Membern kleiner und je nach Auslastung des Clusters stehen nicht immer
+ so viele Knoten zur Verfügung.
+ Aus Erfahrungswerten wird solch eine komplexe Optimierung 4-5 Monate in
+ Anspruch nehmen.
+ 
+\end_layout
+
+\begin_layout Subsection
+Unterschiede zeigen Low und High bei einer einfachen Aero Funktion / Mechanik
+ Funktion
+\end_layout
+
+\begin_layout Standard
+Mises 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Drela2008"
+
+\end_inset
+
+ auf DCA-ähnliche Profile 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lieblein1955"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/andreas/GoogleDrive/Promotion/Diss/images/MultifidelityKapitel/Profiles.eps
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/andreas/GoogleDrive/promotion/Diss/images/LF_Mesh.eps
+	lyxscale 50
+	scale 35
+	rotateAngle 260
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/andreas/GoogleDrive/Promotion/Diss/images/HF_Mesh.pdf
+	lyxscale 50
+	scale 35
+	rotateAngle 260
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/andreas/GoogleDrive/Promotion/Diss/images/MultifidelityKapitel/2D_Differenzfunkion_HF_LF_Mises.pdf
+	scale 90
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename C:/Users/andreas/GoogleDrive/Promotion/Diss/images/MultifidelityKapitel/Differenzfunkion_HF_LF_Mises.pdf
+	scale 90
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Vorteile und Grenzen von Multifidelity Optimierungen / Warum nicht erst
+ nur Low und dann nur High?
+\end_layout
+
+\begin_layout Standard
+Grundsätzlich stellt sich als erstes die Frage nach dem Nutzen einer Multifideli
+ty Optimierung und insbesondere wo die Vorteile eines Multifidelity Ersatzmodell
+s wie dem CO-Kriging Verfahren liegen.
+ Es wäre ja auch durchaus denkbar zuerst eine reine Low-Fidelity Optimierung
+ durchzuführen und mit den Ergebnissen eine High Fidelity Optimierung zu
+ starten.
+ Die Hoffnung hierbei wäre, dass die Low-Fidelity Funktion nur verschoben
+ ist und das Minimum sich an derselben Stelle im Parameterraum befindet.
+ Die folgende Abbildung zeigt ein solches Verhalten, in rot dargestellt
+ ist die Low-Fidelity Funktion und in schwarz die High-Fidelity Funktion.
+ Die Low-Fidelity Funktion ist um -1 verschoben und zusätzlich leicht gestört
+ worden.
+ Würde man in diesem Fall zuerst die Low-Fidelity Funktion optimieren, so
+ würde man mit hoher Wahrscheinlichkeit das richtige Minimum finden und
+ bräuchte die High-Fidelity Funktion nicht mehr zu optimieren.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size huge
+BESSERES Beiospiel finden, z.B.
+ Skalierung durch Faktor !!!!!!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/MultiFidelityVorteile/Minimum.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In der Realität ist es allerdings möglich, dass die Low-Fidelity Funktion
+ lokale Minima aufweist die in der High-Fidelity Funktion nicht auftreten
+ müssen.
+ Startet man nun eine Low-Fidelity Optimierung und findet ein solche lokales
+ Minimum und verwendet dieses als Startpunkt in der High-Fidelity Optimierung,
+ so hat man im schlimmsten Fall nichts gewonnen.
+ Die gesamte vorangegangene Low-Fidelity Optimierung war somit umsonst oder
+ hat sich zumindest zeitlich nicht rentiert.
+ Man sollte zudem nicht vergessen, dass man es in realen Anwendungen mit
+ hochdimensionalen Funktionen zu tun hat und die Wahrscheinlichkeit für
+ lokale Minima eher steigen wird.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/MultiFidelityVorteile/LocalMinimum.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der umgekehrte Fall wäre ebenfalls möglich, in diesem wäre die High-Fidelity
+ Funktion komplexer als die Low-Fidelity Funktion.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/MultiFidelityVorteile/MinimumHFComplexer.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein weiteres Problem bei der stufenweisen Optimierung ist die Verwendung
+ von Restriktionen.
+ In der folgenden Abbildung sieht man die bereits vorgestellte Funktion.
+ Allerdings gibt es hier noch eine Restriktion welche durch die zwei blauen
+ Linien gekennzeichnet ist.
+ Ziel dieser Restriktion ist es, dass sich der Funktionwert innerhalb dieser
+ beiden blauen Linien befindet.
+ Verwendet man nun diese Restriktion in der vorhergehenden Low-Fidelity
+ Optimierung, so reicht eine simple Verschiebung der Low-Fidelity Funktion
+ bereits aus, um das gesuchte Minimum völlig zu verfehlen.
+ Startet man nun mit dem Ergebnis aus der Low-Fidelity Optimierung die High-Fide
+lity Optimierung, so hat die Low-Fidelity Optimierung letztlich keinerlei
+ Beschleunigung gebracht, im Gegenteil sogar.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/MultiFidelityVorteile/Restriction.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Nachteile existieren mit einem Multifidelity Ersatzmodell wie dem
+ CO-Kriging praktisch nicht.
+ Das Ersatzmodell würde die Low-Fidelity Daten nur als Tendenzen mitnehmen
+ insofern diese Informationen über die High-Fidelity Funktion enthalten.
+ Im schlimmsten Fall, würden die Low-Fidelity Daten einfach nicht verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Ersatzmodell bringt zusätzlich noch die Information inwiefern sich Standarda
+bweichung des Vorhersagefehlers durch ein Low-Fidelity Member reduziert.
+ Diese Information kann verwendet werden, wenn es notwendig ist zu entscheiden,
+ ob ein neuer Member in der Optimierung mit der Low- oder der High-Fidelity
+ Prozesskette berechnet werden soll.
+\end_layout
+
+\begin_layout Standard
+Die maximal mögliche Beschleunigung der Multifidelity Optimierung ist der
+ zeitliche Unterschied zwischen den Prozessketten, ist die Low-Fidelity
+ Prozesskette 5x so schnell wie die High-Fidelity Prozesskett, dann ist
+ das auch die maximal mögliche Beschleunigung der Optimierung.
+ In der Realität wird dieser Wert natürlich niemals ganz erreicht, im Weiteren
+ sollen aber verschiedene Verfahren vorgestellt werden mit denen man möglichst
+ nah an diesen theoretischen Wert kommen kann.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein weiterer Vorteil der Multifidelity Optimierung ist, dass bei der initialen
+ (oftmals zufälligen) Sample Erzeugung sehr viele Low-Fidelity Samples erzeugt
+ werden können.
+ Dies kann vorteilhaft sein, um größere Bereiche der Funktion bereits mit
+ Low-Fidelity Daten abzudecken und so den gesamten Funktionsverlauf besser
+ einschätzen zu können.
+ Die Wahrscheinlichkeit ein besseres lokales Minimum zu finden oder sogar
+ das globale Optimum wird so erhöht.
+\end_layout
+
+\begin_layout Standard
+Nachteilig an der Verwendung von Multifidelity Erstzmodellen ist insbesondere
+ der zusätzliche Entwicklungsaufwand.
+ Zudem müssen für eine Optimierung 2 Prozessketten bereitgestellt werden
+ und die Low-Fidelity Funktion sollte auch in irgendeiner Form mit der High-Fide
+lity Funktion korreliert sein.
+ Ist die Low-Fidelity Funktion vollständig unkorreliert, wird dies nach
+ einer Zeit vom Ersatzmodell zwar erkannt, allerdings benötigt das Modell
+ bis dahin einige Low-Fidelity Samples, die in diesem Fall dann umsonst
+ gerechnet worden sind.
+ Verwendet man aber bspw.
+ ein grobes und ein feines Rechennetz, so ist kaum davon auszugehen, dass
+ die Funktionen komplett unkorreliert sind.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein weiterer Nachteil ist, dass das Training für ein Multifidelity Ersatzmodell
+ aufwendiger und auch komplexer ist.
+ In der Regel ist die Trainingszeit aber zu vernachlässigen.
+\end_layout
+
+\begin_layout Section
+Multifidelity-Optimierungsstrategie in AutoOpti
+\end_layout
+
+\begin_layout Standard
+Ein großes Problem bei der Durchführung einer Multi-Fidelity Optimierung
+ ist die Erzeugung eines neuen Members.
+ Der grundlegende Ablauf der Erzeugung ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Automatisierte-Optimierung-imDLR"
+
+\end_inset
+
+ beschrieben.
+ Die Schwierigkeit besteht darin zu entscheiden, ob dieser Member mit der
+ Low-Fidelity Prozesskette oder der High-Fidelity Prozesskette berechnet
+ werden soll.
+ Auf der einen Seite sollte die Erzeugung eines Low-Fidelity Members eine
+ vergleichsweise kurze Zeit 
+\begin_inset Formula $t_{low}<t_{high}$
+\end_inset
+
+ benötigen.
+ Auf der anderen Seite aber einen größeren Fehler 
+\begin_inset Formula $F_{low}\geq F_{high}$
+\end_inset
+
+ haben als das High-Fidelity Modell und dadurch weniger Informationszugewinn
+ für das CO-Kriging Modell und die Optimierung liefern.
+ Benötigt wird also eine Entscheidungsfunktion 
+\begin_inset Formula $f$
+\end_inset
+
+ die diese Entscheidung optimal vornimmt.
+ Als optimal nehmen wir an, dass die Entscheidungsfunktion ihre Auswahl
+ so trifft, dass bei minimaler Zeit der maximale Informationszugewinn 
+\begin_inset Formula $I$
+\end_inset
+
+ für die gesamte Optimierung erreicht wird.
+ Eine Entscheidungsfunktion zu finden, die dies erfüllt ist allerdings unrealist
+isch, da hierfür jeder mögliche Verlauf der gesamten Optimierung bekannt
+ sein müsste.
+ Aus diesem Grund, müssen einige Vereinfachungen und Annahmen über die Entscheid
+ungsfunktion getroffen werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Als erstes nehmen wir an, dass es nur zwei mögliche Fidelities gibt, also
+ eine Prozesskette mit einer hohen Güte 
+\begin_inset Formula $high$
+\end_inset
+
+ und eine mit einer niedrigeren Güte 
+\begin_inset Formula $low$
+\end_inset
+
+.
+ Zudem definieren wir eine Zeit 
+\begin_inset Formula $t$
+\end_inset
+
+, welche im Wesentlichem der Zeit entspricht, die für die Berechnung der
+ jeweiligen Prozesskette 
+\begin_inset Formula $t\in\left\{ t_{low},t_{high}\right\} $
+\end_inset
+
+ benötigt wird.
+ Die Zeit für das Ersatzmodelltraining soll hier vernachlässigt werden.
+ Wie bereits schon erwähnt, definieren wir zusätzlich noch eine abstrakte
+ Größe, welche den Informationszugewinn oder den Fortschritt definiert,
+ der durch einen Member in der Optimierung erreicht wird.
+ Diese Größe 
+\begin_inset Formula $I\in\left\{ I_{low},I_{high}\right\} $
+\end_inset
+
+ ist für jeden Member und für jede Fidelity unterschiedlich.
+ 
+\end_layout
+
+\begin_layout Standard
+Für eine Multi-Fidelity Optimierung stellt sich außerdem die Frage, wie
+ man die Gütebestimmung der Member durchführt, z.B.
+ die Bestimmung des Paretorangs oder des Volumenzugewinns.
+ Grundsätzlich erscheint es sinnvoll, dafür nur die High-Fidelity Member
+ zu verwenden, da der Vergleich zwischen verschiedenen Fidelities sehr schwer
+ fällt.
+ Nimmt man beispielsweise an, dass alle Low-Fidelity Member zu schlechteren
+ Fitness Werten verschoben sind, so würden diese grundsätzlich schlechter
+ bewertet werden.
+ Außerdem interessiert den Anwender in der Regel nur das High-Fidelity Ergebnis.
+ Das wiederum bedeutet, dass nur High-Fidelity Member einen direkten Optimierung
+sfortschritt bringen können.
+ Low-Fidelity Member können also nur indirekten Einfluss auf den Optimierungsfor
+tschritt nehmen, indem sie das Ersatzmodell verbessern und den weiteren
+ Optimierungsverlauf so günstig beeinflussen.
+ Diese Thematik wird im Weiteren aber noch genauer besprochen.
+ Zusammengefasst ergeben sich also folgende allgemeine Annahmen und Bedingungen:
+\end_layout
+
+\begin_layout Itemize
+Zwei mögliche Fidelities werden betrachtet
+\end_layout
+
+\begin_layout Itemize
+Die Zeit für das Ersatzmodelltraining wird vernachlässigt
+\end_layout
+
+\begin_layout Itemize
+Nur High Fidelity Member werden für den Optimierungsfortschritt (z.B.
+ Volumenzugewinn, Paretorang) verwendet
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Der letzte Member sollte ein High Fidelity Member sein
+\end_layout
+
+\begin_layout Itemize
+Low-Fidelity Member können nur das Ersatzmodell verbessern und haben so
+ nur indirekten Einfluss auf den Optimierungfortschritt
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Multifidelity Prozess
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/Opti_Surrogate_Multifidelity.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Änderungen Prozesskette / Datenbank
+\end_layout
+
+\begin_layout Subsection
+Änderungen Optimierung auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Subsection
+Gütebestimmung
+\end_layout
+
+\begin_layout Subsection
+Initiales Sampling
+\end_layout
+
+\begin_layout Standard
+LHC/Random mit irgendeiner Wahrscheinlichkeit
+\end_layout
+
+\begin_layout Subsection
+Entscheidungsfunktion
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mglichkeiten-der-Membererzeugun"
+
+\end_inset
+
+ sollen einige Möglichkeiten der Membererzeugung abgebildet und kategorisiert
+ werden.
+ Es wird zuerst unterschieden, ob der Informationszugewinn in irgendeiner
+ Weise modelliert werden soll oder nicht.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/COKriging/MemberauswahlDiagram_white.pdf
+	scale 52
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mglichkeiten-der-Membererzeugun"
+
+\end_inset
+
+Möglichkeiten der Membererzeugung mit mehreren Fidelities
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informationszugewinn nicht modellieren
+\end_layout
+
+\begin_layout Standard
+Die einfachere Variante wäre es, den Informationszugewinn nicht zu modellieren.
+ In diesem Fall würde man die Auswahl der Fidelity bei der Membererzeugung
+ in irgendeiner Form vorgeben, ohne die benötigte Zeit oder den Informationszuge
+winn zu berücksichtigen.
+ Sinnvoll wäre hier z.B.
+ am Anfang relativ viele Low-Fidelity Member zu erzeugen, um den groben
+ Funktionsverlauf darzustellen und dann gegen Ende der Optimierung nur noch
+ High-Fidelity Member zu erzeugen.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine weitere und auch häufig verwendete Methode ist es, vor dem Beginn der
+ eigentlichen Optimierung einen festen Datensatz an Low-Fidelity Membern
+ zu erzeugen und diese dem Ersatzmodelltraining hinzuzufügen.
+ Während der Optimierung wird dann nur noch die High-Fidelity Prozesskette
+ verwendet.
+ Durch die anfangs hinzugefügten Low-Fidelity Member sollte sich das Ersatzmodel
+l verbessern und dies wiederum die eigentliche Optimierung beschleunigen.
+ Diese Methode ist sehr einfach umzusetzen, sollte aber nur am Anfang der
+ Optimierung einen Zugewinn bringen und zudem muss die Beschleunigung der
+ Optimierung größer sein als die anfangs investierte Arbeit für die Erzeugung
+ der Low-Fidelity Member.
+ In einem sehr ungünstigen Fall kann diese Methodik also sogar zu einer
+ Verlangsamung der Optimierung führen.
+ 
+\end_layout
+
+\begin_layout Standard
+CO-Kriging Formulierungen, welche auf einem Differenzmodell beruhen (z.B.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "j2011efficient"
+
+\end_inset
+
+) haben den Nachteil, dass jeder Member mit der Low-Fidelity Prozesskette
+ berechnet werden muss.
+ Eine Entscheidungsfunktion müsste in diesem Fall nur noch entscheiden,
+ ob ein Member nach der Low-Fidelity Berechnung noch die High-Fidelity Prozesske
+tte durchlaufen soll oder nicht.
+ 
+\end_layout
+
+\begin_layout Standard
+Dieser Ansatz lohnt sich insbesondere dann, wenn man auf Basis des Low-Fidelity
+ Members, die High-Fidelity Prozesskette fortsetzen kann.
+ Beispielsweise könnte man eine Strömungslösung nicht auskonvergieren lassen
+ und diese Lösung als Low-Fidelity Member verwenden.
+ Möchte man diesen Member dann noch mit der High-Fidelity Prozesskette berechnen
+, so kann man die bereits vorhandene Low-Fidelity Lösung einfach auskonvergieren
+ lassen und verliert so keine zusätzliche Zeit.
+ Um eine Entscheidung zu treffen, wann ein Member mit der High-Fidelity
+ Prozesskette berechnet werden soll, kann man den erhaltenen Low-Fidelity
+ Member dem Ersatzmodell hinzufügen und dann eine High-Fidelity Vorhersage
+ mit dem neuen Ersatzmodell treffen.
+ Anhand dieser Vorhersage kann dann eine sinnvolle Entscheidung getroffen
+ werden, ob der entsprechende Member zusätzlich noch mit der High-Fidelity
+ Prozesskette berechnet werden soll oder nicht.
+ 
+\end_layout
+
+\begin_layout Standard
+Sind die Low- und High-Fidelity Prozessketten allerdings völlig unabhängig
+ voneinander, verliert man diesen Zeitgewinn und damit wird die gesamte
+ Optimierung deutlich länger benötigen.
+ Betrachten wir daher die folgenden 3 Möglichkeiten:
+\end_layout
+
+\begin_layout Enumerate
+Alle 
+\begin_inset Formula $n$
+\end_inset
+
+ Member werden High-Fidelity berechnet.
+ Die Gesamtzeit beträgt: 
+\begin_inset Formula $t_{ges}=n*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Alle 
+\begin_inset Formula $n$
+\end_inset
+
+ Member werden Low-Fidelity berechnet, 
+\begin_inset Formula $x\in\left\{ 1...n\right\} $
+\end_inset
+
+ Member High-Fidelity.
+ Die Prozessketten sind unabhängig voneinander.
+ Die Gesamtzeit beträgt also: 
+\begin_inset Formula $t_{ges}=n*t_{low}+x*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Alle 
+\begin_inset Formula $n$
+\end_inset
+
+ Member werden Low-Fidelity berechnet, 
+\begin_inset Formula $x\in\left\{ 1...n\right\} $
+\end_inset
+
+ Member High-Fidelity.
+ Ein High-Fidelity Member beinhaltet die Low-Fidelity Prozesskette.
+ Die Gesamtzeit beträgt also: 
+\begin_inset Formula $t_{ges}=\left(n-x\right)t_{low}+x*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wir gehen zusätzlich davon aus, dass für jeden der 3 Fälle ein eigener durchschn
+ittlicher Informationszugewinn pro Member existiert.
+ Wobei bei Fall 2 und 3 davon ausgegangen wird, dass nur die Berechnung
+ eines High-Fidelity Members einen Informationsgewinn bringen kann.
+ Dieser Informationsgewinn kann aber durch Low-Fidelity Member höher ausfallen,
+ als bei der reinen High-Fidelity Optimierung.
+ 
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fall 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fall 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fall 3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gesamtzeit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n*t_{low}+x*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left(n-x\right)t_{low}+x*t_{high}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittl.
+ Inf.
+ Gewinn/Member
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $I_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $I_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ges.
+ Informationszugewinn
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n*I_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x*I_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x*I_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ges.
+ Informationsgewinn/Zeit 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{n*I_{1}}{n*t_{high}}=\frac{I_{1}}{t_{high}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{I_{2}*x}{n*t_{low}+x*t_{high}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{I_{3}*x}{\left(n-x\right)t_{low}+x*t_{high}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Drei mögliche Strategien für die 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Um diese Fälle zu vergleichen, nehmen wir Fall 1 als Referenzfall und vergleiche
+n die Informationsgehalt zu Zeit Verhältnisse miteinander.
+ Als erstes Fall 1 und Fall 2:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{1}}{t_{high}} & =\frac{I_{2}*x}{n*t_{low}+x*t_{high}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Stellt man nach 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}$
+\end_inset
+
+ um, so erhält man folgende Gleichung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{2}}{I_{1}} & =\frac{n}{x}\frac{t_{low}}{t_{high}}+1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Gleichung sagt aus, wie viel mehr Informationsgehalt pro berechneten
+ High-Fidelity Member benötigt wird, damit Fall 2 und Fall 1 dasselbe Informatio
+nsgehalt zu Zeit Verhältnis erhalten.
+ Das bedeutet, dass die 
+\begin_inset Formula $x$
+\end_inset
+
+ High-Fidelity Member die erzeugt werden, durch die vorher schon berechneten
+ Low-Fidelity Member den Faktor 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}$
+\end_inset
+
+ mehr an Information liefern müssen, damit die Optimierungen im Fall 1 und
+ Fall 2 gleichwertig sind.
+ Analoges gilt für Fall 1 und Fall 3:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{1}}{t_{high}} & =\frac{I_{3}*x}{\left(n-x\right)t_{low}+x*t_{high}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{1}}{I_{3}} & =\frac{t_{high}*x}{\left(n-x\right)t_{low}+x*t_{high}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{3}}{I_{1}} & =\frac{\left(n-x\right)t_{low}+x*t_{high}}{t_{high}*x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{3}}{I_{1}} & =\frac{\left(n-x\right)t_{low}}{x*t_{high}}+1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{I_{3}}{I_{1}} & =\frac{n}{x}\frac{t_{low}}{t_{high}}-\frac{t_{low}}{t_{high}}+1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Man kann sehen, dass das Verhältnis bei Fall 3 grundsätzlich kleiner ausfällt
+ und zwar um die Differenz von 
+\begin_inset Formula $\frac{t_{low}}{t_{high}}$
+\end_inset
+
+.
+ Wenn die Low-Fidelity Prozesskette also deutlich schneller ist, als die
+ High-Fidelity Prozesskette, so ist der Unterschied zwischen den Strategien
+ vernachlässigbar.
+ Als Werte einer CFD-Optimierung wären bspw.
+ die Erzeugung von 1000 Member denkbar und davon ca.
+ 100 mit der High-Fidelity Prozesskette, der zeitliche Unterschied könnte
+ im Bereich von Faktor 2 liegen.
+ Diese Werte sind natürlich nur beispielhaft und basieren auf Erfahrungswerten,
+ selbstverständlich haben sie keine allgemeine Gültigkeit.
+ In Fall 2 würde herauskommen, dass der Informationsgehalt pro High-Fidelity
+ Member um den Faktor 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}=5$
+\end_inset
+
+ größer sein müsste, als bei der reinen High-Fidelity Optimierung.
+ Bei Fall 3 würde der Faktor 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}=4.5$
+\end_inset
+
+ herauskommen.
+ Wenn die Low-Fidelity Prozesskette um den Faktor 5 schneller wäre, würden
+ die Faktoren 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}=2,\,\frac{I_{3}}{I_{1}}=1.8$
+\end_inset
+
+.
+ Es ist natürlich sehr schwierig den Informationsgehalt pro Member oder
+ den Faktor 
+\begin_inset Formula $\frac{I_{2}}{I_{1}}$
+\end_inset
+
+ bzw.
+ 
+\begin_inset Formula $\frac{I_{3}}{I_{1}}$
+\end_inset
+
+ quantitativ zu bewerten, dies soll an dieser Stelle aber auch gar nicht
+ geschehen.
+ Zudem ist dies auch eine stark vereinfachte Betrachtung, da der Informationszug
+ewinn im Laufe der Optimierung immer kleiner wird und ein Mittelwert daher
+ eine starke Vereinfachung darstellt.
+ Aber es kann einen Eindruck davon vermitteln, dass selbst mit solch relativ
+ simplen Multi-Fidelity Strategien eine Beschleunigung erreicht werden kann.
+ Man sieht zudem, dass diese Beschleunigung allerdings sehr stark von der
+ Güte und Geschwindigkeit des Low-Fidelity Modells abhängt.
+ Mit einer Strategie wie sie in Fall 3 angenommen wurde, kann man die Beschleuni
+gung insbesondere für langsamere Low-Fidelity Prozessketten verbessern.
+ Zudem spielt natürlich die Entscheidung, wann die High-Fidelity Prozesskette
+ ausgeführt werden soll eine große Rolle, damit kann insbesondere der Informatio
+nsgehalt pro High-Fidelity Member erhöht werden.
+ Ein nicht zu vernachlässigender Faktor ist natürlich auch immer der Umsetzungs-
+ und Implementierungsaufwand und dieser ist bei solchen Verfahren vergleichsweis
+e gering, was von Vorteil ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Im Weiteren sollen aber auch Verfahren vorgestellt werden, die durch Abschätzung
+/Extrapolation des Informationsgehalt zu Zeit Verhältnis eine dynamische
+ Entscheidung ermöglichen welche Fidelity verwendet werden soll und damit
+ einer optimalen Lösung näher kommen.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Informationszugewinn modellieren
+\end_layout
+
+\begin_layout Standard
+Die andere Möglichkeit (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mglichkeiten-der-Membererzeugun"
+
+\end_inset
+
+) ist es, ein Modell für den Informationszugewinn zu finden.
+ Eine Entscheidungsfunktion sollte dann immer die Fidelity wählen, welche
+ das größte Verhältnis von Informationszugewinn pro Zeit verspricht.
+ Hierbei sind zwei Möglichkeiten denkbar:
+\end_layout
+
+\begin_layout Paragraph*
+Während der Optimierung auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Standard
+Das Ergebnis und der Verlauf der Optimierung auf dem Ersatzmodell würde
+ verändert durch die Entscheidungsfunktion.
+\end_layout
+
+\begin_layout Paragraph*
+Nach der Optimierung auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Standard
+Der Entscheidungsfunktion wird also ein fester Ort übergeben und diese entscheid
+et dann welche Prozesskette ausgeführt wird.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die erste Variante müsste in die Optimierung auf dem Ersatzmodell integriert
+ werden.
+ Während der Optimierung auf dem Ersatzmodell müsste also bewertet werden,
+ inwiefern die Erzeugung eines Low- oder High-Fidelity Members auf dem Ersatzmod
+ell die Optimierung positiv beeinflusst oder nicht.
+ Dazu müsste man allerdings auch wissen, inwiefern die Erzeugung eines neuen
+ Members während der Optimierung auf dem Ersatzmodell das Ersatzmodell selbst
+ beeinflusst.
+ Dieses Problem ist analytisch nur sehr schwer bis gar nicht lösbar und
+ ob diese Variante zu besseren Ergebnissen führt als die zweite ist zudem
+ fraglich.
+ 
+\end_layout
+
+\begin_layout Standard
+In der Arbeit von Huang et.
+ al.
+ (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "huang2006sequential"
+
+\end_inset
+
+) wurde versucht über eine heuristische Funktion den ortsabhängigen Einfluss
+ der Fidelity Wahl auf das Expected Volume Gain abzuschätzen.
+ Durch die Ortsabhängigkeit, verändert sich natürlich auch die gesamte Optimieru
+ng auf dem Ersatzmodell und damit auch der gesamte Optimierungsverlauf.
+ Inwiefern ein heuristischer Ansatz immer zu einer Beschleunigung führt,
+ kann nur schwer abgeschätzt werden.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für die zweite Variante geht man also davon aus, dass aus der Optimierung
+ auf dem Ersatzmodell bereits ein Ort 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{n}$
+\end_inset
+
+ bekannt ist und eine Funktion, welche den Ort auf den Informationszugewinn
+ abbildet: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat*}{1}
+I:\mathbb{R}^{n} & \rightarrow\mathbb{R}^{2}\\
+\vec{x}\,\, & \mapsto\left(\begin{array}{c}
+I_{low}\\
+I_{high}
+\end{array}\right)
+\end{alignat*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei es für jede Fidelity jeweils nur einen Informationszugewinn gibt,
+ jedoch viele Zielfunktionale.
+ Zusätzlich benötigt man eine Entscheidungsfunktion:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{alignat}{1}
+f_{dec}:\mathbb{R}^{4} & \rightarrow\left\{ low,high\right\} \nonumber \\
+\left(\begin{array}{c}
+I_{low}\\
+t_{low}\\
+I_{high}\\
+t_{high}
+\end{array}\right)\,\, & \mapsto\begin{cases}
+low & ,\frac{I_{low}}{t_{low}}\geq\frac{I_{high}}{t_{high}}\\
+high & ,sonst
+\end{cases}\label{eq:Entscheidungsfunktion}
+\end{alignat}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Funktion wählt den Member mit dem größten Verhältnis an Informationszugewi
+nn pro Zeit.
+ Um den Informationszugewinn besser modellieren zu können, ist es sinnvoll,
+ einige Randbedingungen für diesen zu definieren.
+ Durch die Wahl der ortsabhängigen Kovarianzfunktionen (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:BildungsvorschriftCovarianzFunktionCOKriging"
+
+\end_inset
+
+) ergeben sich einige Randbedingungen für den Informationszugewinn eines
+ neuen Ortes 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+Falls 
+\begin_inset Formula $\forall cov_{err}\left(\vec{x_{0}},\vec{y}\right)=0$
+\end_inset
+
+, sollte gelten: 
+\begin_inset Formula $I_{high}\left(\vec{x}_{0}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Falls 
+\begin_inset Formula $\forall cov_{low}\left(\vec{x_{0}},\vec{y}\right)=0$
+\end_inset
+
+, sollte gelten: 
+\begin_inset Formula $I_{low}\left(\vec{x}_{0}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Ist der Ort bereits Low-Fidelity gerechnet worden, sollte gelten: 
+\begin_inset Formula $I_{low}\left(\vec{x}_{0}\right)=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Sobald ein neuer Low-Fidelity Member für die weitere Optimierung keinen
+ weiteren Fortschritt mehr bringen wird, soll High-Fidelity berechnet werden.
+\end_layout
+
+\begin_layout Enumerate
+Da es in der Regel mehrere Zielfunktionale für eine Fidelity gibt, müssen
+ diese Zielfunktionale auf einen Informationszugewinn abgebildet werden
+ können.
+ 
+\end_layout
+
+\begin_layout Standard
+Hierzu einige Erläuterungen:
+\end_layout
+
+\begin_layout Paragraph*
+1.
+ 
+\end_layout
+
+\begin_layout Standard
+Beim Start einer Optimierung werden zuerst einige High- und Low-Fidelity
+ Member zufällig erzeugt.
+ Bei der Erzeugung neuer Member auf dem Ersatzmodell ist also bereits ein
+ CO-Kriging Modell vorhanden.
+ Das Training der Modelle kann dazu führen, dass eine der beiden Kovarianzfunkti
+onen ausgeschaltet wird.
+ Dies passiert dann, wenn die Low- und High-Fidelity Daten vollkommen unkorrelie
+rt sind oder das High-Fidelity Modell komplett durch das Low-Fidelity Modell
+ beschrieben werden kann, was bei einer konstanten Verschiebung des Funktionswer
+tes der Fall wäre.
+ Die Entscheidungsfunktion sollte also nur noch Low-Fidelity Member erzeugen,
+ da diese schneller zu berechnen sind und die High-Fidelity Daten keinen
+ Informationszugewinn bringen.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+2.
+\end_layout
+
+\begin_layout Standard
+Entspricht prinzipiell dem ersten Fall, es sollten aber nur noch High-Fidelity
+ Member gerechnet werden, da das Low-Fidelity Modell keinen Informationszugewinn
+ liefert.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+3.
+\end_layout
+
+\begin_layout Standard
+Allgemein wird in einer automatisierten Optimierung ein Ranking der bereits
+ berechneten Member erstellt, z.B.
+ durch ein Pareto Ranking oder durch den Volumenzugewinn eines neuen Members
+ bezogen auf die Paretofront.
+ In der Regel würde man bei einem solchen Ranking nur die High-Fidelity
+ Member einbeziehen, da die Low-Fidelity Member eine völlig andere Position
+ im Fitnessraum aufweisen können.
+ Z.B.
+ könnten alle Low-Fidelity Fitnesswerte zu einem schlechteren Wert hin verschobe
+n sein und wären damit nur sehr schwer mit den High-Fidelity Membern vergleichba
+r.
+ Optimiert man nun auf dem Ersatzmodell und bezieht die Low-Fidelity Member
+ nicht mit in das Ranking ein kann es passieren, dass mehrfach hintereinander
+ ein Low-Fidelity Member an dieselbe Stelle gelegt wird, da dieser nicht
+ in das Ranking miteinbezogen wird.
+ Um dies zu vermeiden, muss der Informationszugewinn bei Wahl der Low-Fidelity
+ Prozesskette klein werden.
+ Zudem sollte der Informationszugewinn auch kleiner werden, wenn sich bereits
+ Low-Fidelity Punkte in unmittelbarer Nähe zu dem neuen Punkt 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+ befinden.
+ Die Kovarianzfunktion des Co-Kriging Modells wäre z.B.
+ eine geeignete Funktion dafür.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+4.
+\end_layout
+
+\begin_layout Standard
+Um diesen Punkt zu erläutern, betrachten wir als Beispiel eine fast auskonvergie
+rte Multi-Fidelity-Optimierung die der Einfachheit halber nur eine Zielfunktion
+ hat.
+ Die noch zu erreichenden Fortschritte in der Zielfunktion sind also nur
+ noch sehr klein.
+ Zusätzlich soll angenommen werden, dass die Low-Fidelity Funktion eine
+ stark geglättete Variante der High-Fidelity Funktion ist.
+ Die High-Fidelity Funktion hingegen soll eine sehr raue Funktion sein,
+ welche hoch aufgelöst werden muss, um diese gut interpolieren zu können.
+ In diesem Fall könnte man gegen Ende der Optimierung das CO-Kriging Ersatzmodel
+l nicht mehr durch zusätzliche Low-Fidelity Daten verbessern, da diese die
+ benötigte Information einfach nicht mehr beinhaltet.
+ Aus diesem Grund ist es erforderlich, dass der Informationszugewinn des
+ Low-Fidelity Modells in einem solchen Fall gegen Null geht.
+ Dies setzt allerdings eine Schätzung des Informationszugewinns im nächsten
+ Schritt voraus.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+5.
+\end_layout
+
+\begin_layout Standard
+Erfahrungsgemäß haben die meisten Optimierungen mehr als nur ein Zielfunktional
+ und oftmals sind die Zielfunktionale aus mehreren Funktionen zusammengesetzt.
+ Beispielsweise ist der isentrope Wirkungsgrad zusammengesetzt aus dem Totaldruc
+kverhältnis und dem Totaltemperaturverhältnis.
+ Der Wirkungsgrad könnte also durch zwei Ersatzmodelle bestimmt werden,
+ anstatt durch ein Ersatzmodell, welches direkt auf den Wirkungsgrad trainiert
+ wird.
+ Es muss also aus mehreren zusammengesetzten Zielfunktionalen ein Informationszu
+gewinn pro Fidelity abgebildet werden können.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Entscheidungsfunktion nur abhängig vom Ersatzmodell
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:EntscheidungsfunktionErsatzmodell"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Varianz des Fehlers als Gütemaß
+\end_layout
+
+\begin_layout Standard
+Varianzvorhersage, Informationsmaß wäre Varianzvorhersage HighFid und Varianzvor
+hersage LowFidelity-Varianzvorh High Fidelity
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+crit= & \frac{t_{train}+t_{optiOnMM}+t_{high}}{t_{train}+t_{optiOnMM}+t_{low}}*\sum^{Modelle}\frac{\sigma_{high}-\sigma_{high+low}}{\sigma_{high}-0}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Was noch fehlt wäre die Gewichtung der einzelnen Ersatzmodelle, da jedes
+ Modell ja für die Optimierung unterschiedliche wichtig ist, sollte man
+ hier eigentlich unterscheiden !!!
+\end_layout
+
+\begin_layout Standard
+dingt möchte.
+ Zudem müsste man die Likelihood Funktion neu optimieren
+\end_layout
+
+\begin_layout Paragraph*
+Gewichtung der Nebenbedingungs-Modelle durch 
+\end_layout
+
+\begin_layout Standard
+Was man möchte ist hauptsächlich bei Nichterfüllung von Nebenbedinungeun
+ diese je nach Wichtigkeit zu gewichten.
+ ahrscheinlichkeit 
+\end_layout
+
+\begin_layout Standard
+Dies ist relativ simpel möglich
+\end_layout
+
+\begin_layout Paragraph*
+Globale Varianzreduktion
+\end_layout
+
+\begin_layout Subsubsection*
+Wann würde eine globales Varianzkriterium zu einer anderen Entscheidung
+ führen als das lokale?
+\end_layout
+
+\begin_layout Standard
+Testfunktion, in der die Hauptinformation bereits im Low-Fidelity Modell
+ enthalten ist:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{high} & =2x+0.1\sin\left(20x\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{low} & =0.1\sin\left(20x\right)+0.2
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1DBeispiel_Funktion.png
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_Original.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieselbe Vorhersage mit einem zusätzlichen HF Sample an der Stelle x=0.35
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithHigh.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithLow.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_absFehler_Deviation.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Samples
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fehlerintegral (x über 0-1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dev Integral
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dev lokal x=0.35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Original
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000183472470246
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000295987939791
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0002337432566266
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++HF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000115168572795
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000159359003548
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0000000298023224
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++LF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.96393583479e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000101191138483
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0001315242093663
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Fall würden das lokale und globale Kriterium zu einer anderen
+ Entscheidung führen.
+\end_layout
+
+\begin_layout Subsubsection*
+Formales Kriterium
+\end_layout
+
+\begin_layout Standard
+Für ein Ersatzmodell:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\triangle H=\int\left(\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{H}\left(\vec{x}_{0}\right)\right)d\vec{x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\triangle L=\int\left(\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{L}\left(\vec{x}_{0}\right)\right)d\vec{x}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die relative Änderung sähe dann folgendermaßen aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\triangle H_{rel}=\int\left(\frac{\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{H}\left(\vec{x}_{0}\right)}{\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{L}\left(\vec{x}_{0}\right)}\right)dx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für mehrere Ersatzmodelle relative Varianzreduktion:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+crit= & \frac{t_{train}+t_{optiOnMM}+t_{high}}{t_{train}+t_{optiOnMM}+t_{low}}*\sum^{Modelle}\int\left(\frac{\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{H}\left(\vec{x}_{0}\right)}{\sigma_{H}^{2}\left(\vec{x}\right)-\sigma_{H}^{2}\left(\vec{x}\right)\mid y_{L}\left(\vec{x}_{0}\right)}\right)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Schwierigkeit liegt in der numerischen Berechnung der Integrale, hierfür
+ bietet sich eine Monte Carlo Integration an.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Entscheidungsfunktion über Volumenzugewinn 
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt soll im Detail darauf eingegangen werden, welche Möglichkeit
+en der Membererzeugung innerhalb einer Multifidelity Optimierung bestehen,
+ wenn man den Informationszugewinn modellieren möchte.
+ Um den Informationszugewinn zu modellieren bzw.
+ zu schätzen, benötigen wir zuerst ein geeignetes Maß für diesen.
+ Als bisher gutes Maß für den aktuellen Optimierungsfortschritt hat sich
+ bisher der kumulierte Volumenzugewinn herausgestellt.
+ Ein großer Vorteil der für dieses Maß spricht ist, dass mehrere Zielfunktionale
+ sinnvoll bewertet werden können.
+ Für weitere Informationen sei der Leser auf folgende Literatur verwiesen:
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keane2006statistical,AULICH"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../../Old/COKriging/MemberauswahlDiagram_green.pdf
+	scale 52
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Möglichkeiten-der-MembererzeugunGreen"
+
+\end_inset
+
+Möglichkeiten der Membererzeugung mit mehreren Fidelities
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Möglichkeiten-der-MembererzeugunGreen"
+
+\end_inset
+
+ ist diese Möglichkeit grün markiert.
+ Die nächste Frage die sich stellt, ist wie man den Informationszugewinn
+ schätzen kann.
+ In diesem Fall muss also konkret eine Schätzung über den Volumenzugewinn
+ im nächsten Optimierungsschritt angestellt werden.
+ Das in AutoOpti umgesetzte Verfahren zur Membererzeugung, kann mit den
+ Ersatzmodellvorhersagen einen erwarteten Volumenzugewinn berechnen.
+ Um einen neuen Member zu erzeugen, wird dieser erwartete Volumenzugewinn
+ dann maximiert.
+ Als Ergebnis erhält man einen Parametersatz/Ort mit dem höchsten erwarteten
+ Volumenzugewinn.
+ Wir gehen also davon aus, dass der Ort bereits durch eine Optimierung auf
+ dem Ersatzmodell gegeben ist und sich in der Datenbasis bereits einige
+ Low- und High-Fidelity Member befinden.
+ Um sich einer geeigneten Schätzung zu nähern, soll zuerst eine ideale aber
+ unpraktikable Lösung betrachtet werden, die dann durch einige Annahmen
+ und Einschränkungen zur Anwendung gebracht werden soll.
+ Es stellt sich außerdem noch die Frage, in welchem Raum (z.B.
+ Low- oder High-Fidelity Raum) die Zielfunktionale der Optimierung betrachtet
+ werden sollen.
+ Es erscheint sinnvoll, die Zielfunktion(en) im High-Fidelity Raum zu betrachten
+ und die Optimierung auf dem Ersatzmodell ebenfalls im High-Fidelity Raum
+ durchzuführen.
+ Die Verbindung zwischen High- und Low-Fidelity soll also nur über das Ersatzmod
+ell erfolgen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Angenommen man könnte den gesamten Verlauf einer Multi-Fidelity Optimierung
+ mit 2 Fidelities vom Anfang bis zum Ende voraussagen, wobei der Optimierungsfor
+tschritt durch den kumulierten Volumenzugewinn im High-Fidelity Raum definiert
+ ist.
+ Es werden 
+\begin_inset Formula $n$
+\end_inset
+
+ Member erzeugt und für jeden Member 
+\begin_inset Formula $i$
+\end_inset
+
+ hätte man die Wahl, ob dieser mit der Low- oder High-Fidelity Prozesskette
+ berechnet werden soll.
+ Aus diesen Überlegungen heraus gäbe es 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ mögliche Optimierungsverläufe, wobei jeder dieser Verläufe eine eigene
+ Zeit 
+\begin_inset Formula $t_{i}$
+\end_inset
+
+ benötigt und einen kumulierten Volumenzugewinn von 
+\begin_inset Formula $V_{i}$
+\end_inset
+
+ erreicht hat.
+ Die Berechnung eines Low-Fidelity Members soll immer die gleiche Zeit 
+\begin_inset Formula $t_{low}$
+\end_inset
+
+ benötigen und die eines High-Fidelity Members die Zeit 
+\begin_inset Formula $t_{high}$
+\end_inset
+
+.
+ Außerdem soll gelten, dass 
+\begin_inset Formula $t_{low}<t_{high}$
+\end_inset
+
+.
+ Daraus ergeben sich zusätzlich die minimal mögliche Zeit 
+\begin_inset Formula $t_{min}=\overset{n}{\sum}t_{low}$
+\end_inset
+
+ und die maximal mögliche Zeit 
+\begin_inset Formula $t_{max}=\overset{n}{\sum}t_{high}$
+\end_inset
+
+.
+ Es muss nun noch eine Annahme darüber getroffen werden, welcher der 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ Optimierungsverläufe als ideal angesehen wird.
+ Möglich wäre natürlich die Wahl des Optimierungverlaufs mit dem größten
+ kumulierten Volumenzugewinn.
+ Allerdings würde die benötigte Zeit völlig außer Acht gelassen.
+ Daher erscheint es sinnvoll zu sagen, dass der Optimierungsverlauf 
+\begin_inset Formula $i_{best}$
+\end_inset
+
+ als ideal angenommen wird, der die größte Steigung des kumulierten Volumenzugew
+inns aufweist: 
+\begin_inset Formula 
+\begin{align*}
+i_{best}=\left\{ \begin{array}{c}
+max\left(\frac{V_{i}}{t_{i}}\right)\\
+i\in\left\{ 1;n\right\} 
+\end{array}\left|t_{min}\leq t_{i}\leq t_{max}\right.\right\} 
+\end{align*}
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Selbstverständlich können wir unmöglich einen Verlauf, geschweige denn alle
+ möglichen Verläufe einer Optimierung vorhersagen.
+ Wenn dies möglich wäre, bräuchten man nicht mehr zu optimieren.
+ Also schränken wir diesen idealisierten Fall weiter ein und versuchen eine
+ Abschätzung darüber zu bekommen, inwiefern sich die Wahl der Prozesskette
+ auf die nächsten ein bis zwei Schritte auswirken.
+ Um dies zu bewerkstelligen, müssen wir wissen wie stark sich das Ersatzmodell
+ verbessert, wenn wir den nächsten Member High- oder Low-Fidelity berechnen
+ und dann dem Ersatzmodell hinzufügen.
+ Gehen wir also davon aus, dass wir uns innerhalb einer Optimierung befinden
+ und den nächsten zu berechnenden Member bestimmen möchten.
+ Hierfür wird eine Optimierung auf dem Ersatzmodell durchgeführt, welche
+ dann einen Ort für den nächsten zu berechnenden Member vorschlägt.
+ An diesem Zeitpunkt oder Optimierungsschritt 
+\begin_inset Formula $j$
+\end_inset
+
+ stellt sich nun die Frage, ob dieser vorgeschlagene Member nun mit der
+ High- oder Low-Fidelity Prozesskette berechnet werden soll.
+ Um nun zu bestimmen, welche Auswirkungen die Wahl auf den nächsten Optimierungs
+schritt hat, wären theoretisch folgende Schritte notwendig:
+\end_layout
+
+\begin_layout Enumerate
+Aus der Optimierung auf dem Ersatzmodell wird ein Ort vorgegeben.
+\end_layout
+
+\begin_layout Enumerate
+Member Low-Fidelity berechnen
+\end_layout
+
+\begin_layout Enumerate
+Das Ersatzmodell mit dem neuen Low-Fidelity Member trainieren
+\end_layout
+
+\begin_layout Enumerate
+Das globale Optimum für den erwarteten Volumenzugewinn auf dem Ersatzmodell
+ finden
+\end_layout
+
+\begin_layout Enumerate
+Member High-Fidelity berechnen
+\end_layout
+
+\begin_layout Enumerate
+Das Ersatzmodell mit dem neuen High-Fidelity Member trainieren
+\end_layout
+
+\begin_layout Enumerate
+Das globale Optimum für den erwarteten Volumenzugewinn auf dem Ersatzmodell
+ finden
+\end_layout
+
+\begin_layout Enumerate
+Die Prozesskette mit dem maximalen Volumenzugewinn pro Zeit wählen
+\end_layout
+
+\begin_layout Standard
+Diese Lösung ist natürlich immer noch unpraktikabel, da man in diesem Fall
+ beide Prozessketten durchlaufen muss (Punkte 2 und 5) und damit jeglichen
+ Zeitvorteil verliert.
+ Außerdem kann man das globale Optimum des Volumenzugewinns (Punkte 4 und
+ 7) nur mit großem Zeitaufwand bestimmen.
+ Den Punkt 5-7 hat man bei der Verwendung des Expected-Volume-Gain bereits
+ abgedeckt, hierfür wird auf dem Ersatzmodell optimiert und ein Member vorgeschl
+agen, der den höchsten zu erwartenden Volumenzugewinn im High-Fidelity Zielfunkt
+ionsraum verspricht.
+ Da dieses Thema schon in anderen Arbeiten behandelt wurde (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keane2006statistical,AULICH"
+
+\end_inset
+
+), beschäftigen wir uns im Weiteren nur noch mit der Modellierung von Punkt
+ 2-4.
+ Hierfür müssen wir weitere Annahmen und Vereinfachungen treffen.
+ Da die Zielfunktion nur im High-Fidelity Raum bewertet werden soll, bringt
+ ein neuer Low-Fidelity Member zuerst keinen direkten Volumenzugewinn.
+ Vielmehr möchte man mit einem neuen Low-Fidelity Member das Ersatzmodell
+ verbessern und damit den Suchraum weiter einschränken.
+ Oder etwas einfacher formuliert, möchte man Dadurch kann der Volumenzugewinn
+ in den darauffolgenden Schritten gesteigert werden.
+ Betrachtet man z.B.
+ einen Extremfall, bei dem es nur eine Zielfunktion gibt und sich Low- und
+ High-Fidelity Member nicht unterscheiden.
+ Die Low-Fidelity Prozesskette kann aber schneller berechnet werden.
+ In diesem Fall könnte es darauf hinauslaufen, dass man die gesamte Optimierung
+ ausschließlich Low-Fidelity Member erzeugt und nur den letzten Member mit
+ der High-Fidelity Prozesskette berechnet.
+ Durch das Ersatzmodell, könnte der Zielfunktionsraum so stark eingegrenzt
+ worden sein, dass der letzte High-Fidelity Member exakt das Minimum trifft.
+ Voraussetzung wäre natürlich eine entsprechend genaue und schnelle Low-Fidelity
+ Prozesskette und dass es nur ein Minimum gibt.
+ Jeder andere Optimierungsverlauf wäre in diesem Fall nicht optimal gewesen,
+ da man insgesamt mehr Zeit verbraucht hätte.
+ Im Folgenden sollen einige Möglichkeiten besprochen werden, um die Punkte
+ 2-4 zu modellieren.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Modellierung Punkt 2: Member Low-Fidelity berechnen
+\end_layout
+
+\begin_layout Standard
+Diesen Punkt zu modellieren ist relativ schwierig bzw.
+ aufwendig, da man bereits vor der Durchführung der Low-Fidelity Prozesskette
+ die Entscheidung treffen möchte, welche Prozesskette aufgerufen wird.
+ Eine mögliche Lösung für dieses Problem, ist die Verwendung des Ersatzmodells
+ um den Low-Fidelity Member abzuschätzen.
+ Das hier vorgestellte CO-Kriging Ersatzmodell ist in der Lage, sowohl Low-
+ als auch High-Fidelity Vorhersagen zu treffen (siehe die Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CO-Kriging-AnsatzVorhersageLowundHigh"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Validierung-CO-Kriging-Testfunkt2Low-Vorhersage"
+
+\end_inset
+
+).
+ Statt nun einen Low-Fidelity Member mit der Prozesskette zu berechnen,
+ kann man diesen für die Entscheidung erst mit dem Co-Kriging Modell vorhersagen.
+ Das Problem daran ist, dass man eine Verteilung als Antwort bekommt, also
+ einen Erwartungswert 
+\begin_inset Formula $E\left[\vec{x}_{0}\right]$
+\end_inset
+
+ an der Stelle 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+ und eine Varianz des Fehlers 
+\begin_inset Formula $var\left[F\left(\vec{x}_{0}\right)\right]$
+\end_inset
+
+ an derselben Stelle.
+ Dies wiederum bedeutet, dass sich unser echter Low-Fidelity Wert innerhalb
+ dieser Verteilung bewegen wird, es gibt also eine Unsicherheit bei dem
+ Low-Fidelity Wert.
+ Es stellt sich dann natürlich die Frage, wie man einen Member mit in das
+ Ersatzmodell aufnehmen kann, der mit einer Unsicherheit behaftet ist und
+ zudem ja auch aus dem Ersatzmodell stammt.
+ Dies erscheint erst einmal unsinnig, da man ja keine echte neue Information
+ in das Ersatzmodell steckt.
+ 
+\end_layout
+
+\begin_layout Standard
+Lassen wir diesen Punkt zuerst außen vor und beschäftigen uns mit der Frage,
+ wie man diese Verteilung mit in das Ersatzmodell aufnehmen kann.
+ Es gäbe zunächst die Möglichkeit, einfach den Erwartungswert mit in das
+ Ersatzmodell aufzunehmen, da dies der wahrscheinlichste Wert ist, in diesem
+ Fall lässt man die Unsicherheit allerdings komplett unbeachtet.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine andere Möglichkeit ist es, die Verteilung einfach zu simulieren, man
+ erzeugt also zufällig viele Member aus der Low-Fidelity Verteilung und
+ verwendet diese dann für das Ersatzmodell.
+ Der Nachteil liegt hierbei natürlich darin, dass man dieses Vorgehen sehr
+ oft durchführen muss.
+ Grundlegend erscheint dieses Vorgehen aber zunächst sinnvoll, wie genau
+ die Samples bei der Entscheidung verwendet werden können, soll in den nächsten
+ Schritten erklärt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine sinnvolle Strategie zur Erzeugung solcher Samples aus einer Normalverteilun
+g ist die Box-Muller Methode (siehe 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "box1958note"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Das Training der Ersatzmodelle in den Punkten 3 und 6 möchte man ebenfalls
+ weitestgehend vermeiden.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Einschub: Box Muller Methode
+\end_layout
+
+\begin_layout Standard
+Mit dieser Methode kann man aus zwei unabhängigen gleichverteilten Zufallszahlen
+ (
+\begin_inset Formula $U_{1},U_{2}$
+\end_inset
+
+), zwei standardnormalverteilte Zufallszahlen(
+\begin_inset Formula $Z_{1},Z_{2}$
+\end_inset
+
+) generieren.
+ Die zwei gleichverteilten Zufallszahlen kann man bspw.
+ aus einem Zufallszahlengenerator gewinnen, solche Generatoren sind z.B.
+ in der Boost Bibliothek verfügbar (siehe 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "boostrand"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Aus der Optimierung auf dem Ersatzmodell wird ein Ort vorgegeben.
+\end_layout
+
+\begin_layout Enumerate
+Schätzung des Expected Volume Gain falls der neue Member als Low- oder High-Fide
+lity berechnet wird.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Der Informationszugewinn wäre dann das geschätzte Expected Volume Gain für
+ jede Fidelity
+\end_layout
+
+\begin_layout Standard
+Oder
+\end_layout
+
+\begin_layout Enumerate
+Aus der Optimierung auf dem Ersatzmodell wird ein Ort vorgegeben.
+\end_layout
+
+\begin_layout Enumerate
+Schätzung über die Verbesserung des Ersatzmodells, wenn der Member als Low-Fidel
+ity hinzugefügt würde
+\end_layout
+
+\begin_layout Enumerate
+Schätzung über die Verbesserung des Ersatzmodells, wenn der Member als High-Fide
+lity hinzugefügt würde
+\end_layout
+
+\begin_layout Enumerate
+Der Informationszugewinn wäre dann die Verbesserung des Ersatzmodells
+\end_layout
+
+\begin_layout Standard
+Da die Modelle der Kovarianzfunktionen in diesem Kriging Verfahren nur Abhängig
+ vom Ort sind, ist man in der Lage die Kovarianzen zwischen dem neuen Member
+ und allen bereits vorhandenen zu bilden.
+\end_layout
+
+\begin_layout Standard
+Hierbei hat man zwei mögliche Annahmen, der neue Member ist ein High Fidelity
+ Member oder ein Low Fidelity Member.
+ Es kämen jeweils andere Kovarianzvektoren heraus.
+\end_layout
+
+\begin_layout Standard
+Nimmt man bspw an, man hat ein bereits vorhandenes Modell mit 2 High- und
+ 2 Low-Fidelity Membern und einen neu erzeugten Member 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{x} & =\left(\begin{array}{c}
+\vec{x}_{1h}\\
+\vec{x}_{2h}\\
+\vec{x}_{3l}\\
+\vec{x}_{4l}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nimmt man an, dass der neue Vektor ein Low Fidelity Member ist, ergibt sich
+ folgender Kovarianzvektor:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{cov}\left(\vec{x}_{0h},\vec{x}\right) & =\left(\begin{array}{c}
+\mathrm{cov_{low}\left(\textrm{\vec{x}_{0h},\vec{x}_{1h}}\right)+cov_{err}\left(\textrm{\vec{x}_{0h},\vec{x}_{1h}}\right)}\\
+\mathrm{cov_{low}\left(\textrm{\vec{x}_{0h},\vec{x}_{2h}}\right)+cov_{err}\left(\textrm{\vec{x}_{0h},\vec{x}_{2h}}\right)}\\
+\mathrm{cov_{low}}\left(\vec{x}_{0h},\vec{x}_{3l}\right)\\
+\mathrm{cov_{low}}\left(\vec{x}_{0h},\vec{x}_{4l}\right)
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im anderen Fall:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{cov}\left(\vec{x}_{0l},\vec{x}\right) & =\left(\begin{array}{c}
+\mathrm{cov_{low}\left(\textrm{\vec{x}_{0l},\vec{x}_{1h}}\right)}\\
+\mathrm{cov_{low}\textrm{\left(\vec{x}_{0l},\vec{x}_{2h}\right)}}\\
+\mathrm{cov_{low}}\left(\vec{x}_{0l},\vec{x}_{3l}\right)\\
+\mathrm{cov_{low}}\left(\vec{x}_{0l},\vec{x}_{4l}\right)
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+TODO
+\end_layout
+
+\begin_layout Standard
+- Änderungen der bisherigen Strategie - Datenbanken, Prozesskette, Training,
+ Entscheidungsfunktion, Optimierung auf dem Ersatzmodell, LF nur über das
+ EM gekoppelt - Trennen EM / AutoOpti über Interfaces - Kopplung C/C++
+\begin_inset Newline newline
+\end_inset
+
+Entscheidungsfunktion über Varianz VG ohne Sampling überhaupt sinnvoll?
+\end_layout
+
+\begin_layout Standard
+Hat man sich nach der Optimierung auf dem Ersatzmodel bereits für einen
+ Ort entschieden und möchte nur noch entscheiden, ob dieser Ort mit der
+ High Fidelity oder der Low-Fidelity Prozesskette durchlaufen werden soll,
+ ist nicht klar, ob die Varianz des EVG eine geeignete Entscheidungsfunktion
+ darstellt.
+\end_layout
+
+\begin_layout Standard
+Grundlegend möchte man die Entscheidung in diesem Fall so treffen, dass
+ sich das Ersatzmodell pro Zeit maximal verbessert.
+ Die Frage die sich stellt ist, welches Maß für die Ersatzmodellverbesserung
+ sinnvoll ist.
+ Auf den ersten Blick, erscheint die Varianz des Expected Volume Gain ein
+ geeignetes Maß darzustellen, da diese alle Fitnessfunktionen und auch Nebenbedi
+ngungen beinhaltet und diese sinnvoll in einem Maß miteinander kombiniert.
+\end_layout
+
+\begin_layout Standard
+Betrachtet man folgenden Fall, dass ein neuer Member außerhalb der Restriktionen
+ vorgeschlagen wird, dieser aber eine sehr hohe Standardabweichung in der
+ Vorhersage hat.
+ Die Wahrscheinlichkeit dafür, dass dieser Member innerhalb der Restriktionen
+ liegt, ist aber aufgrund der hohen Standardabweichung ebenfalls relativ
+ hoch.
+ Fügt man dem Ersatzmodell nun einen Low-Fidelity Member hinzu, so sollte
+ die Standardabweichung in der Vorhersage reduziert werden.
+ Das Expected Volume Gain sollte in diesem Fall kleiner werden, vorausgesetzt
+ man sampled die Low-Fidelity Vorhersage nicht.
+ Tut man dies, ist die Frage wie sich die Varianz des EVG ändert, 
+\end_layout
+
+\begin_layout Standard
+- Verschiedenen Verfahren nennem z.B.
+ gestuftes Verfahren also erst Low und dann mit den Ergebnissen eine High
+ Fidelity Optimierung starten
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+- Annahmen bei unserem Verfahren: DIe Thetas ändern sich nicht, also das
+ neue Sample passt in die Verteilung, und die Vertilung ist gut geschätzt.
+ Lokale Varianzreduktion,
+\end_layout
+
+\end_body
+\end_document

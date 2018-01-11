@@ -1,0 +1,199 @@
+%% LyX 2.2.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,ngerman,AT, texfonts]{dlrreport}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{color}
+\usepackage{refstyle}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{nomencl}
+% the following is useful when we have the old nomencl.sty package
+\providecommand{\printnomenclature}{\printglossary}
+\providecommand{\makenomenclature}{\makeglossary}
+\makenomenclature
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+
+\AtBeginDocument{\providecommand\figref[1]{\ref{fig:#1}}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+\RS@ifundefined{subsecref}
+  {\newref{subsec}{name = \RSsectxt}}
+  {}
+\RS@ifundefined{thmref}
+  {\def\RSthmtxt{theorem~}\newref{thm}{name = \RSthmtxt}}
+  {}
+\RS@ifundefined{lemref}
+  {\def\RSlemtxt{lemma~}\newref{lem}{name = \RSlemtxt}}
+  {}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{nomencl}
+\makenomenclature
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+%\usepackage{subfigure}
+
+\usepackage{verbatim}
+\usepackage{ifthen}
+\usepackage{ifpdf} 
+
+\usepackage{lscape}     %% supplies a landscape environment 
+
+% Tabellen
+\usepackage{tabularx}
+\usepackage{rotating} %benoetigt fuer tabellen quer
+\usepackage{booktabs} %Schoenere trennlinien in tabellen
+
+
+\usepackage{colortbl}
+\usepackage{transparent}
+\usepackage{framed} 
+\usepackage{amsmath}  %spezielle mathematikzeichen wie doppelintegral
+\usepackage{amssymb} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{bibgerm}
+%\usepackage{harvard} 
+%\renewcommand{\harvardand}{und}
+%\usepackage[authoryear]{natbib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}
+%\onehalfspacing
+\spacing{1.2}
+
+%%%%%%%%%%%% Definitionen %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\nomname}{Nomenklatur}
+\renewcommand{\nomgroup}[1]{%
+
+\ifthenelse{\equal{#1}{L}}{\item[\textbf{Lateinische Symbole}]}{%
+\ifthenelse{\equal{#1}{G}}{\item[\textbf{Griechische Symbole}]}{%
+\ifthenelse{\equal{#1}{A}}{\item[\textbf{Abkürzungen}]}{%
+\ifthenelse{\equal{#1}{S}}{\item[\textbf{Strömungstechnische Bezeichnungen}]}{}}}}}
+\def\pagedeclaration#1{\dotfill\nobreakspace#1 }
+
+
+\makeatletter % @in Befehlen auf code 11 setzen
+\newcommand\Kurzfassungname{Kurzfassung}
+\newenvironment{Kurzfassung}{%
+\titlepage
+    \@beginparpenalty\@lowpenalty
+     \begin{center}%
+       \bfseries \Kurzfassungname
+       \@endparpenalty\@M
+      \end{center}}%
+     {\par\endtitlepage\global\no@Kurzfassungfassungfalse}
+\defineasbibitem{\bibitem}
+\makeatother % @ wieder auf code 12 zurücksetzen
+
+\definecolor{hellgrau}{gray}{0.8}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%% Einstellungen + Extras %%%%%%%%%%%%%%%
+\sloppy  % Silbentrennung - keine Trennung bevorzugt auch bei größeren Abständen zwischen den Worten
+\makeglossary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%  Titel, Autor, etc. %%%%%%%%%%%%%%%%%
+\title{Multifidelity-Optimierungsverfahren für Turbomaschinen \vspace{0.5cm}  Dissertation  \vspace{0.5cm}  \bf}
+\runningtitle{Rachete}
+\trname{Dissertation}
+\author{Andreas Schmitz}
+\date{Oktober 2018}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%  Schalter %%%%%%%%%%%%%%%%%
+\newif\ifcomments
+%\commentstrue % comment out to hide comments
+
+
+
+%%%%%%%%%%%%%  Titel, Autor, etc. %%%%%%%%%%%%%%%%%
+\title{Entwicklung eines Multifidelity Optimierungsverfahrens für hochdimensionale Räume und große Datensätzen \vspace{0.5cm}  Dissertation  }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+
+\usepackage{babel}
+\usepackage{listings}
+\addto\captionsenglish{\renewcommand{\lstlistingname}{\inputencoding{latin9}Listing}}
+\addto\captionsngerman{\renewcommand{\lstlistingname}{\inputencoding{latin9}Listing}}
+\renewcommand{\lstlistingname}{\inputencoding{latin9}Listing}
+
+\begin{document}
+\maketitle
+
+\nomenclature{o}{Anzahl der Hyperparameter}\nomenclature{m}{Anzahl der gegebenen partiellen Ableitungen}\nomenclature{$\textrm{var}(X)$}{Varianz der Zufallsvariable X}\nomenclature{$\textrm{cov}(X,Y)$}{Kovarianzfunktion zwischen den Zufallsvariablen X und Y}\nomenclature{$\textrm{cov}(\vec{x},\vec{y})$}{Ortsabhängige Kovarianzfunktion zwischen den Ortsvektoren x und y}\nomenclature{$\mathbf{R}$}{Korrelationsmatrix}\nomenclature{$c(X,Y)$}{Korrelationsfunktion zwischen den Zufallsvariablen X und Y}\nomenclature{$y^{*}\left(\vec{x}\right)$}{Geschätzter Funktionswert an der Stelle $\vec{x}$}\nomenclature{$y\left(\vec{x}\right)$}{Bekannter Funktionswert oder Stützstelle an der Stelle $\vec{x}$}\nomenclature{$w_{i}$}{Gewichte eines Kriging Modells}\nomenclature{$F\left(\vec{x}\right)$}{Fehlerfunktion an der Stelle $\vec{x}$}\nomenclature{$\mathbf{Cov}$}{Kovarianzmatrix}
+
+\nomenclature{$\vec{h}$}{Euklidischer Abstandsvektor}\nomenclature{$h$}{Allgemeiner Hyperparameter }\nomenclature{$\vec{\beta}$}{Beta Vektor, beinhaltet alle Erwartungswerte des Modells.}\nomenclature{${\beta}_{i}$}{Eintrag des Beta Vektors, entspricht einem Erwartungswert. Beim Ordinary Kriging gibt es nur einen Erwartungswert}\nomenclature{$m_{f}$}{Anzahl der verwendenten Fidelities bei Multifidelity Verfahren}
+
+\nomenclature{$\sigma^{2}$}{Varianz} 
+
+\nomenclature{$\vec{r}$}{Korrelationsvektor}
+
+\nomenclature{$\vec{y}_{s}$}{Vektor, welcher alle bekannten Stützstellen enthält}
+
+\nomenclature{$\vec{\theta}$}{Hyperparameter einer Korrelationsfunktion, ohne Varianzen oder Regularisierungsterme}\nomenclature{$L$}{Likelihood Funktion}
+
+\nomenclature{$N$}{Multivariate Normalverteilung}\nomenclature{$\vec{F}$}{Der Vektor entspricht beim Ordinary-Kriging $\vec{1}$ und beim Gradient-Enhanced-Kriging sind die ersten $n-m$ Einträge Eins und für die restlichen $m$ Einträge Null}\nomenclature{$\kappa$}{Konditionszahl}\nomenclature{$\Xi$}{Eigenwert einer Matrix}\nomenclature{$\delta$}{Kronecker Delta}\nomenclature{$\lambda$}{Diagonalaufschlag}\nomenclature{$t$}{Zeit}\nomenclature{$f(...)$}{Entscheidungsfunktion}\nomenclature{$V$}{Kummulierte Volumenzugewinn einer Optimierung}\nomenclature{$P$}{Wahrscheinlichkeit}\nomenclature{$E[X]$}{Erwartungswert der Zufallsvariable X}
+
+{\huge{}Sicher:}{\huge \par}
+
+\textbf{\LARGE{}\nomenclature{SSE}{Streaming SIMD Extensions, eine Befehlssatzerweiterung für Prozessoren.}\nomenclature{AVX}{Advanced Vector Extensions, eine Befehlssatzerweiterung für Prozessoren. Nachfolger der SSE Architektur.}\nomenclature{SIMD}{Single Instruction Multiple Data, eine Architektur welche es erlaubt dieselbe Operation parallel auf einen sich verändernden Datenstrom anzuwenden. }}\nomenclature{k}{Anzahl der freien Variablen eines Members}\nomenclature{s}{Anzahl der verschiedenen Gütestufen bei einem Mutlifidelty Modell}\nomenclature{$\vec{x}$}{Ortsvektor}\nomenclature{$I$}{Informationsgehalt}\nomenclature[A]{Member}{Ein Satz freier Variablen mit dazugehörigen Funktionswerten. Beispielsweise ein Satz geometrischer Parameter mit berechneten mechanischen und aerodynamischen Größen.}\nomenclature{n}{Anzahl der beprobten Stützstellen, auch Member oder Samples genannt}
+
+\textbf{\LARGE{}Noch einbaue n: \cite{LeGratiet}\cite{box1958note}\cite{Eifinger2013}\cite{forrester2009recent}\cite{gibbs1997efficient}\cite{gill1981practical,gill2007numerical}\cite{Sacks2007a}\cite{Jones1998}\cite{keane2006statistical}
+\cite{Jones2001}(10dimensions Samples minimum) \cite{Jin2001}(3dimensions
+Samples minimum in vielen Fällen)}{\LARGE \par}
+
+\chapter*{{\normalsize{}\Kurzfassung 
+\addcontentsline{toc}{chapter}{Kurzfassung}
+\abstract 
+\addcontentsline{toc}{chapter}{Abstract}}}
+
+\include{Kapitel/Vorwort}
+
+\settowidth{\nomlabelwidth}{$\textrm{cov}(\vec{x},\vec{y})$}
+\printnomenclature{}
+
+\tableofcontents{}
+
+\include{Kapitel/Einleitung}
+
+\include{Kapitel/Optimierungsstrategie}\include{Kapitel/OptimierungsstrategieErweiterung}
+
+\include{Kapitel/Kriging}\include{Kapitel/SoftwaretechnischeUmsetzung}
+
+\include{Kapitel/Benchmarks}
+
+\include{Kapitel/RealeTurbomaschinenOptimierung}
+
+\include{Kapitel/AusblickFazit}
+
+\include{Kapitel/Anhang}
+
+\bibliographystyle{ieeetr}
+\bibliography{library}
+
+\end{document}

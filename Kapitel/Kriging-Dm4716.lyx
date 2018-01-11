@@ -1,0 +1,2273 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Die Kriging Verfahren 
+\end_layout
+
+\begin_layout Standard
+Den allgemeinsten Ansatz in dieser Arbeit stellt das CO-Kriging dar, das
+ Simple-, Ordinary- und Gradient-Enhanced-Kriging können als Spezialfall
+ es des CO-Krigings mit einer Fidelity angesehen werden.
+ Berücksichtigt man diesen Umstand in der Herleitung der Verfahren, so kann
+ man sich dies in der Planung der Softwarestruktur zu nutze machen und alle
+ Verfahren effizient in einem Code unterbringen.
+ Aus diesem Grund wird im ersten Abschnitt dieses Kapitels das CO-Kriging
+ behandelt und in den darauffolgenden Abschnitten folgen die Herleitungen
+ der anderen Kriging Verfahren auf Basis des CO-Krigings.
+ 
+\end_layout
+
+\begin_layout Standard
+Da die in dieser Arbeit entwickelte Kriging-Software einen sehr hohen Anwendungs
+bezug hat und auch industriell eingesetzt werden soll, wurde bei der mathematisc
+hen Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnisc
+he Umsetzbarkeit gelegt.
+ Dieser Punkt wird in der einschlägigen Literatur oftmals außer Acht gelassen,
+ was die Effizienz der Software sowie die Generalisierbarkeit negativ beeinfluss
+t.
+ 
+\end_layout
+
+\begin_layout Standard
+Zusätzlich zu den Herleitungen soll ein Abschnitt auch die Verbindung des
+ Simple-Kriging und einer Bedingten Normalverteilung herstellen, dieses
+ Kapitel dient insbesondere zum besseren Verständnis aller Verfahren.
+\end_layout
+
+\begin_layout Standard
+Der letzte Abschnitt behandelt einen Regularisierungsterms, welcher neben
+ der numerischen Stabilisierung ebenfalls das Approximationsverhalten der
+ Kriging Verfahren verändert.
+ 
+\end_layout
+
+\begin_layout Section
+Grundlagen Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Grundlagen-Kriging-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Unter Kriging versteht man statistische Verfahren zur Interpolation oder
+ Approximation von Werten an unbeprobten Orten.
+ Der Name des Verfahrens stammt von dem südafrikanischen Bergbauingenieur
+ Daniel Krige (1951), dieser versuchte eine optimale Interpolationsmethode
+ für den Bergbau zu entwickeln, die auf der räumlichen Abhängigkeit von
+ Messpunkten 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "kbiqb1953statistical"
+
+\end_inset
+
+ basiert.
+ Das Verfahren wurde später nach ihm benannt.
+ Der französische Mathematiker Georges Matheron (1963) entwickelte aus Kriges
+ Arbeit, schließlich die Kriging Theorie
+\begin_inset CommandInset citation
+LatexCommand citep
+key "matheron1963principles"
+
+\end_inset
+
+.
+ Das Kriging Verfahren hat heute in den Geowissenschaften sowie vielen anderen
+ Forschungsbereichen Verwendung gefunden.
+\end_layout
+
+\begin_layout Standard
+Die Vorteile von Kriging gegenüber anderer Methoden, wie z.B.
+ Inverser Distanzwichtung 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "shepard1968two"
+
+\end_inset
+
+, insbesondere bei der Nutzung innerhalb eines Optimierungsverfahrens, wie
+ es im Institut für Antriebstechnik existiert, sind:
+\end_layout
+
+\begin_layout Itemize
+Die Initialisierung ist sehr einfach, d.h.
+ das Verfahren liefert so gut wie immer gute Ergebnisse unabhängig von irgendwel
+chen Startparametern.
+ Bei Neuronalen Netzwerken z.B.
+ muss vor dem Training die Netztopologie, also die Anzahl der Gewichte und
+ die Struktur des Netzes angegeben werden.
+ Werden diese Parameter ungünstig gewählt, liefert das Neuronale Netz schlechte
+ oder gar keine Ergebnisse.
+ 
+\end_layout
+
+\begin_layout Itemize
+Das Extrapolationsverhalten ist bei einer Optimierung sehr vorteilhaft.
+ Da man bei einer Optimierung sehr schnell in Bereiche kommt, wo das Ersatzmodel
+l extrapolieren muss, sollten die vorhergesagten Werte möglichst sinnvoll
+ sein.
+ Beim Kriging liefert das Modell bei einer Extrapolation einen Erwartungswert.
+ Ein Neuronales Netzwerk bspw.
+ würde hier zufällige Werte vorhersagen, dies könnte bei einer Optimierung
+ zu Schwierigkeiten führen.
+ 
+\end_layout
+
+\begin_layout Itemize
+Kriging ist ein BLUE Schätzer 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "plackett1950some"
+
+\end_inset
+
+, Best Linear Unbiased Estimator.
+ Also ein linearer Erwartungstreuer Schätzer minimaler Varianz.
+ Im nächsten Abschnitt wird dies genauer erläutert.
+\end_layout
+
+\begin_layout Itemize
+Viele nichtstatistische Verfahren, wie z.B.
+ die Inverse Distanzwichtung 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "shepard1968two"
+
+\end_inset
+
+, beachten eine lokale Häufung von Stützstellen nicht.
+ Bei einer lokalen Häufung von Stützstellen sollten diese weniger stark
+ gewichtet werden.
+ Ein statistisches Verfahren wie Kriging beinhaltet die gesamte räumliche
+ Verteilung der Stützstellen 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Krueger2013"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Statistische Verfahren wie das Kriging können zusätzlich zur Vorhersage
+ des eigentlichen Funktionswertes auch eine Unsicherheit vorhersagen.
+ Dies kann innerhalb einer Optimierung ausgenutzt werden.
+ Weitere Erläuterungen dazu sind in den Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Optimierungsstrategie"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Multifidelity-Optimierungsstrate"
+
+\end_inset
+
+ gefunden werden.
+ 
+\end_layout
+
+\begin_layout Itemize
+Das Kriging Verfahren lässt sich sehr gut erweitern, beispielsweise die
+ Nutzung von Gradienteninformationen (Gradient Enhanced Kriging) oder verschiede
+ner Güteklassen (CO-Kriging).
+ Hierdurch ist es möglich alle diese Verfahren in einen Code unterzubringen.
+ 
+\end_layout
+
+\begin_layout Section
+Co-Kriging
+\end_layout
+
+\begin_layout Standard
+Der in diesem Kapitel vorgestellte Kriging Ansatz ist angelehnt an die Arbeiten
+ von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Han2010,han2012alternative"
+
+\end_inset
+
+ ,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ und 
+\color red
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Krueger2013"
+
+\end_inset
+
+
+\color inherit
+.
+ Die Unterschiede des hier vorgestellten Ansatzes zu den anderen Arbeiten
+ werden in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:VergleicheCoKrigingAndere"
+
+\end_inset
+
+ kurz erläutert.
+ 
+\end_layout
+
+\begin_layout Standard
+Angenommen man hat ein Programm (bspw.
+ einen Strömungslöser) welches in 
+\begin_inset Formula $s$
+\end_inset
+
+ verschiedenen Gütestufen (bspw.
+ verschiedene Rechennetzauflösungen) unterteilt werden kann.
+ Dieses Programm kann zu einem Parametersatz 
+\begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ jeweils einen Output für jede Gütestufe 
+\begin_inset Formula $y_{1}\left(\vec{x}\right),...,y_{s}\left(\vec{x}\right)$
+\end_inset
+
+ berechnen.
+ Der Informationsgehalt 
+\begin_inset Formula $I$
+\end_inset
+
+ einer jeweiligen Gütestufe soll bei steigender Gütezahl sinken 
+\begin_inset Formula $I_{i}>I_{i+1},i\in\left\{ 1,...,s-1\right\} $
+\end_inset
+
+, die erste Gütestufe ist somit die hochwertigste.
+ Ebenfalls wird die Annahme gestellt, dass eine hochwertigere Gütestufe
+ eine höhere Zeit 
+\begin_inset Formula $t_{i},i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ zum Berechnen eines Outputs 
+\begin_inset Formula $y_{i},i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ benötigt, es gilt also 
+\begin_inset Formula $t_{i}>t_{i+1},i\in\left\{ 1,...,s-1\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Da jedes Kriging Modell ein statistisches Interpolationsverfahren darstellt,
+ werden die Stützstellen der einzelnen Gütestufen 
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ als Realisierung eines Zufallsprozesses 
+\begin_inset Formula $Z_{i}\left(\vec{x}\right),i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ angesehen.
+ Desweiteren sollen die Zufallsprozesse der einzelnen Gütestufen stationär
+ sein, also einen konstanten Erwartungswert 
+\begin_inset Formula $E\left[Z_{i}\right]=const.$
+\end_inset
+
+ besitzen.
+ Annahmen über die Verteilung der Zufallsprozesse sollen an dieser Stelle
+ noch nicht getroffen werden, diese folgen im späteren Verlauf des Kapitels.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Kriging Verfahren soll an einer unbekannten Stelle 
+\begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ eine Schätzung über den Funktionswert 
+\begin_inset Formula $y_{i}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ einer bestimmten Gütestufe 
+\begin_inset Formula $i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ anstellen.
+ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert 
+\begin_inset Formula $y_{i}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ durch eine gewichtete Summe bestimmt werden kann.
+ Diese Summe wird aus den bekannten Stützstellen 
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ und den noch zu bestimmenden Gewichten 
+\begin_inset Formula $w_{i,j},i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+.
+ Der Einfachheit halber werden die Stützstellen wie auch die Gewichte zukünftig
+ durch die folgenden Vektoren beschrieben
+\begin_inset Formula $\vec{y}_{i}=\left(y_{i}\left(\vec{x}_{1}\right),...,y_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ und 
+\begin_inset Formula $\vec{w}_{i}=\left(w_{i,1},...,w_{i,n_{i}}\right)^{T},i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Kriging Modell soll immer eine spezielle Gütestufe vorhersagen, daraus
+ folgt die Gleichung für die Vorhersage der Gütestufe 
+\begin_inset Formula $k\in\left\{ 1,...,s\right\} $
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+y_{k}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{y}_{i}^{T}\vec{w}_{i}\label{eq:GewichtetSummeCOKriging}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da die Stützstellen 
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ einer Gütestufe 
+\begin_inset Formula $i$
+\end_inset
+
+ als Realisierung des jeweiligen stochastischen Prozesses 
+\begin_inset Formula $Z_{i}\left(\vec{x}\right),i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+angesehen werden, stammen diese aus dem folgenden Vektor 
+\begin_inset Formula $\vec{Z}_{i}=\left(Z_{i}\left(\vec{x}_{1}\right),...,Z_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} $
+\end_inset
+
+.
+ Der Krige Schätzer 
+\begin_inset Formula $Z_{k}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ für die Gütestufe 
+\begin_inset Formula $k$
+\end_inset
+
+ wird damit zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+Z_{k}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\label{eq:GewichtetSummeCOKrigingZufallsVektor}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Bestimmung der Gewichte
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt sollen einige grundlegende Annahmen getroffen werden,
+ über diese und weitere Annahmen können dann die gesuchten Gewichte bestimmt
+ werden.
+ 
+\begin_inset Formula $F$
+\end_inset
+
+ sei der Schätzfehler, 
+\begin_inset Formula $Z_{k}\left(\vec{x}\right)$
+\end_inset
+
+ sei der reale stochastische Prozess der vorherzusagenden Gütestufe 
+\begin_inset Formula $k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F\left(\vec{x}\right) & =Z_{k}\left(\vec{x}\right)-Z_{k}^{*}\left(\vec{x}\right)=Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
+ Erwartungswert des Schätzfehlers 0 ist.
+ Wobei 
+\begin_inset Formula $E\left[.\right]$
+\end_inset
+
+ den Erwartungswert darstellt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+E\left[F\left(\vec{x}\right)\right] & =0\label{eq:ErwartungSchatzfehlerNull-1-2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[Z_{k}^{*}\left(\vec{x}\right)\right]=0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+E\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right] & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right] & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right] & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E\left[Z_{k}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aufgrund der Stationarität soll gelten 
+\begin_inset Formula $E\left[Z_{i}\left(\vec{x}_{j}\right)\right]=E\left[Z_{i}\left(\vec{x}_{k}\right)\right]=\beta_{i},\forall j,k\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j} & =\beta_{k}\label{eq:SummeGewichteCOKriging}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eine weitere Nebenbedingung des Kriging Verfahrens ist die minimale Varianz
+ des Schätzfehlers:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\min_{w_{1},...,w_{n}}\textrm{var}\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\label{eq:VarianzMinimierungFormelCOKriging}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Varianz des Schätzfehlers kann mit Hilfe des Verschiebungssatz aus der
+ Statistik folgendermaßen umformuliert werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\textrm{var}\left[F\left(\vec{x}\right)\right]=\textrm{var}\left[Z\left(\vec{x}_{0}\right)-Z^{*}\left(\vec{x}_{0}\right)\right]=E\left[\left(\left(Z\left(\vec{x}\right)-Z^{*}\left(\vec{x}\right)\right)-E\left[Z\left(\vec{x}\right)-Z^{*}\left(\vec{x}\right)\right]\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Anhang-1-1"
+
+\end_inset
+
+ ist die vollständige Herleitung zu finden.
+ Die folgende Formulierung stellt das Ergebnis dar, wobei 
+\begin_inset Formula $\vec{w}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+ den Gewichtsvektor, 
+\begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
+\end_inset
+
+ die Kovarianzmatrix und 
+\begin_inset Formula $\overrightarrow{c}\mathbf{\in\mathbb{R^{\mathrm{n_{all}}}}}$
+\end_inset
+
+ 
+\begin_inset Formula $\overrightarrow{c}=\left(cov\left(Z_{i}\left(\vec{x}_{j}\right),Z\left(\vec{x}\right)\right),...,cov\left(Z_{s}\left(\vec{x}_{n_{s}}\right),Z\left(\vec{x}\right)\right)\right)^{T},i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+den Kovarianzvektor zwischen 
+\begin_inset Formula $Z_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ und 
+\begin_inset Formula $Z\left(\vec{x}\right)$
+\end_inset
+
+ darstellt.
+ Die Variable 
+\begin_inset Formula $n_{all}$
+\end_inset
+
+ beschreibt die Anzahl aller Stützstellen der verschiedenen Gütestufen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\label{eq:VarianzSchaetzfehlerGewichte}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit lässt sich folgende Minimierungsaufgabe mit Nebenbedingung stellen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\begin{cases}
+\min_{w_{1},...,w_{n}}\textrm{var}\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\\
+\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k} & =0
+\end{cases}\label{eq:Minimierungsaufgabe-1-2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mit dieser Formulierung kann nun die Minimierungsaufgabe aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Minimierungsaufgabe"
+
+\end_inset
+
+ gemäß der Multiplikatorenmethode von Lagrange gelöst werden 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bronteijn2008taschenbuch"
+
+\end_inset
+
+.
+ Als Lagrange Funktion 
+\begin_inset Formula $\Lambda\left(w,\lambda\right)$
+\end_inset
+
+ mit dem Lagrange Multiplikator 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ ergibt sich:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Lambda\left(w,\lambda\right):=\textrm{var}\left[F\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\nabla_{\lambda,w}\left(\textrm{var}\left[F\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus lässt sich das folgende Gleichungssystem ableiten:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\nabla_{w}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\wedge\,\,\nabla_{\lambda}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0\label{eq:MinimierungMitKovarianz-1-2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es werden folgende Variablen eingeführt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[Z\left(\vec{x}\right)\right] & =\sigma_{r}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit ergibt sich:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\nabla_{w}\left(\sigma_{r}^{2}-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{w}\left(\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\nabla_{\lambda}\left(\sigma_{r}^{2}-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{\lambda}\left(\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aufgelöst:
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\left(-2\nabla_{w}\overrightarrow{\textrm{c}}^{T}\vec{w}+\nabla_{w}\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{w}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{w}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\left(-2\nabla_{\lambda}\overrightarrow{\textrm{c}}^{T}\vec{w}+\nabla_{\lambda}\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{\lambda}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{\lambda}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenschritt:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\left(-2\overrightarrow{\textrm{c}}^{T}+2\vec{w}^{T}*\mathbf{Cov}\right)+\nabla_{w}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{w}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\nabla_{\lambda}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{\lambda}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenschritt:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\left(-2\overrightarrow{\textrm{c}}^{T}+2\vec{w}^{T}*\mathbf{Cov}\right)+\lambda\nabla_{w}\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Definiere 
+\begin_inset Formula $\vec{F}$
+\end_inset
+
+:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\vec{F} & =\left[\begin{array}{c}
+\beta_{1,1}\\
+\vdots\\
+\beta_{1,n_{1}}\\
+\vdots\\
+\beta_{s,n_{s}}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenschritt:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+-2\vec{c}^{T}+2\vec{w}^{T}*\mathbf{Cov}+\lambda\vec{F} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\vec{F}^{T}\vec{w} & =\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Umgeformt:
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\vec{w}^{T}*\mathbf{Cov}+\frac{\lambda\vec{F}}{2} & =\vec{c}^{T}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset Formula 
+\begin{align*}
+\wedge\,\,\vec{F}^{T}\vec{w} & =\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Matrix Schreibweise:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)\left(\begin{array}{c}
+\vec{w}^{T}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{c}
+\vec{c}^{T}\\
+\beta_{k}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\Leftrightarrow\left(\begin{array}{c}
+\vec{w}^{T}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)^{-1}\left(\begin{array}{c}
+\vec{c}^{T}\\
+\beta_{k}
+\end{array}\right)\label{eq:MatrixKrigingInverse-1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Auflösung der Gleichung nach den Gewichten bleibt prinzipiell dieselbe
+ wie im Ordinary Kriging.
+\end_layout
+
+\begin_layout Standard
+Die Inverse der Blockmatrix ergibt sich nach 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BlockMatrix"
+
+\end_inset
+
+ zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)^{-1} & =\left(\begin{array}{cc}
+\mathbf{Cov}^{-1}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\\
+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}F} & -\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eingesetzt in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MatrixKrigingInverse-1-1"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{c}
+\vec{w}^{T}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{cc}
+\mathbf{Cov}^{-1}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \;\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}F} & -\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{array}\right)\left(\begin{array}{c}
+\vec{c}^{T}\\
+\beta_{k}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus ergibt sich folgende Formulierung der gesuchten Gewichte:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w}^{T} & =\vec{c}^{T}\mathbf{Cov}^{-1}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\vec{w} & =\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\label{eq:FormelGewichte-1-3-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Allgemeine Kriging Vorhersage
+\end_layout
+
+\begin_layout Subsubsection
+Erwartungswert
+\end_layout
+
+\begin_layout Standard
+Setzt man die Gewichte in Formel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GewichtetSummeCOKrigingZufallsVektor"
+
+\end_inset
+
+ein, erhält man folgende Gleichung.
+ Wobei die Vektoren die Gewichte und Stützstellen aller Gütestufen enthalten.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+Z^{*}\left(\vec{x}\right) & =\vec{c}^{T}\mathbf{Cov}^{-1}\vec{y}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{y}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+Z^{*}\left(\vec{x}\right) & =\vec{c}^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\mu\vec{F}\right)+\mu\beta_{k}\label{eq:KoKrigingKovarianzVorhersage-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Vereinfachung-der-Vorhersageglei"
+
+\end_inset
+
+ kann gezeigt werden, dass folgende Gleichung gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus ergibt sich dann die letztendliche Formel für den Krige-Schätzer:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+Z^{*}\left(\vec{x}\right) & =\vec{c}^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\vec{F}\right)+\beta_{k}\label{eq:KoKrigingKovarianzVorhersage-1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Art der Formulierung bietet einen Vorteil bei der Vorhersage.
+ Insbesondere dann, wenn man verschiedene Fidelities vorhersagen möchte.
+ Da bei dieser Art der Formulierung der Vektor 
+\begin_inset Formula $\vec{F}$
+\end_inset
+
+ und der Wert 
+\begin_inset Formula $\mu$
+\end_inset
+
+ für alle Kriging Methoden gleich bleiben.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Varianz des Schätzfehlers direkte Herleitung 
+\end_layout
+
+\begin_layout Standard
+Varianz des 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzSchaetzfehlerGewichte"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\vec{w} & =\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\label{eq:FormelGewichte-1-3-1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\label{eq:VarianzSchaetzfehlerGewichte-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)+\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}\mathbf{Cov}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\vec{c}^{T}\mathbf{Cov}^{-1}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)*\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)*\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)*\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}*\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\vec{c}\beta_{k}-\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\vec{c}\beta_{k}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenrechnung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \beta_{k}=\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}=\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da der Nenner ein Skalar ergibt, gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k} & =\left(\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}=\frac{\vec{c}\mathbf{Cov}^{-1}\vec{F}^{T}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}-2\vec{c}\mathbf{Cov}^{-1}\vec{F}\beta_{k}+\beta_{k}^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
+ dies einer quadratischen Gleichung, also gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kovarianz zwischen zwei Vorhersagen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i},\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i},\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}\right)=E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}-\sum_{i=1}^{s}E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}-\sum_{j=1}^{s}E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i},\vec{Z}_{j}^{T}\vec{w}_{2j}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l},\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l},Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}w_{2j,m}cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die folgende Formulierung stellt das Ergebnis dar, wobei 
+\begin_inset Formula $\vec{w}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+ den Gewichtsvektor, 
+\begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
+\end_inset
+
+ die Kovarianzmatrix darstellt.
+ Die Variable 
+\begin_inset Formula $n_{all}$
+\end_inset
+
+ beschreibt die Anzahl aller Stützstellen der verschiedenen Gütestufen,
+ in dieser Formulierung sind also die Stützstellen und Gewichte aller Gütestufen
+ auf einmal formuliert.
+ In der softwaretechnischen Umsetzung wird dies ebenfalls so gehandhabt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}\label{eq:CovZweiVorhersagenGewichte}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Gewichtsvektoren sehen folgendermaßen aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w} & =\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w_{2}} & =\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Einsetzt in Formel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovZweiVorhersagenGewichte"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right)^{T}\mathbf{Cov} & \left(\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right)^{T} & \left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\left(\vec{c_{1}}^{T}\mathbf{Cov}^{-1}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right) & \left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\\
++ & \frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}\beta+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta\\
++ & \frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta+\frac{\beta^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eine Änderung ist nur auf Ebene der Vorhersage Formeln notwendig.
+ Geht man z.B.
+ davon aus, dass zwei Fidelity Stufen verwendet werden, dann muss man zum
+ Vorhersagen einer bestimmten Fidelity nur der Wert 
+\begin_inset Formula $\beta$
+\end_inset
+
+ mit dem entsprechenden Eintrag aus dem Vektor 
+\begin_inset Formula $\vec{\beta}$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Bestimmung-des-BetaCoKriging"
+
+\end_inset
+
+) ersetzen.
+ Außerdem muss der Vektor 
+\begin_inset Formula $\vec{c}$
+\end_inset
+
+ entsprechend gewählt werden.
+ Möchte man einen Punkt 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+ im High-Fidelity Raum vorhersagen, dann muss dieser Punkt auch als High-Fidelit
+y angesehen werden und die entsprechenden Kovarianzfunktion gewählt werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\vec{c}=\left[\begin{array}{c|c}
+ & Z_{high}\left(\vec{x}_{0}\right)\\
+\hline Z_{high}\left(\vec{x}_{1}\right) & cov\left(\vec{x}_{1},\vec{x}_{0}\right)\\
+Z_{high}\left(\vec{x}_{2}\right) & cov\left(\vec{x}_{2},\vec{x}_{0}\right)\\
+Z_{low}\left(\vec{x}_{3}\right) & cov\left(\vec{x}_{3},\vec{x}_{0}\right)\\
+Z_{low}\left(\vec{x}_{4}\right) & cov\left(\vec{x}_{4},\vec{x}_{0}\right)
+\end{array}\right]=\left[\begin{array}{c}
+cov\left(\vec{x}_{1high},\vec{x}_{0high}\right)\\
+cov\left(\vec{x}_{2high},\vec{x}_{0high}\right)\\
+cov\left(\vec{x}_{3low},\vec{x}_{0high}\right)\\
+cov\left(\vec{x}_{4low},\vec{x}_{0high}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Analog dazu für die Low-Fidelity Vorhersage, muss der Punkt 
+\begin_inset Formula $\vec{x}_{0}$
+\end_inset
+
+ als Low-Fidelity Punkt angesehen werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\vec{c}=\left[\begin{array}{c|c}
+ & Z_{low}\left(\vec{x}_{0}\right)\\
+\hline Z_{high}\left(\vec{x}_{1}\right) & cov\left(\vec{x}_{1},\vec{x}_{0}\right)\\
+Z_{high}\left(\vec{x}_{2}\right) & cov\left(\vec{x}_{2},\vec{x}_{0}\right)\\
+Z_{low}\left(\vec{x}_{3}\right) & cov\left(\vec{x}_{3},\vec{x}_{0}\right)\\
+Z_{low}\left(\vec{x}_{4}\right) & cov\left(\vec{x}_{4},\vec{x}_{0}\right)
+\end{array}\right]=\left[\begin{array}{c}
+cov\left(\vec{x}_{1high},\vec{x}_{0low}\right)\\
+cov\left(\vec{x}_{2high},\vec{x}_{0low}\right)\\
+cov\left(\vec{x}_{3low},\vec{x}_{0low}\right)\\
+cov\left(\vec{x}_{4low},\vec{x}_{0low}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die genaue Formulierung der Kovarianzfunktion und die Umsetzung wird in
+ den nächsten Kapiteln erläutert.
+\end_layout
+
+\begin_layout Subsubsection
+Verschiedene Fidelities vorhersagen
+\end_layout
+
+\begin_layout Standard
+dfsdf
+\end_layout
+
+\begin_layout Subsection
+Kovarianzmodell 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Der hier vorgestellte CO-Kriging Ansatz ist in den Grundzügen aus den Arbeiten
+ von Kennedy und Forrester hervorgegangen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Beta Bestimmung
+\end_layout
+
+\begin_layout Standard
+askjfnsöadgf
+\end_layout
+
+\begin_layout Standard
+
+\size giant
+WAS IST BETA BEWEIß
+\end_layout
+
+\begin_layout Section
+Simple und Ordinary Kriging als Spezialfall vom Co-Kriging
+\end_layout
+
+\begin_layout Standard
+Nur kurz erklären, mit Hinblick auf die gemeinsame Machbarkeit im Code
+\end_layout
+
+\begin_layout Section
+Gradient Enhanced Kriging als Spezialfall vom Oridnary Kriging
+\end_layout
+
+\begin_layout Standard
+Nur kurz erklären, mit Hinblick auf die gemeinsame Machbarkeit im Code
+\end_layout
+
+\begin_layout Section
+Maximum Likelihood für alle Kriging Verfahren
+\end_layout
+
+\begin_layout Standard
+An dieser Stelle wird nun die Annahme getroffen, dass die Daten einer Multivaria
+ten Normalverteilung entsprechen.
+ Diese Art der Verteilung bietet einige Vorteile:
+\end_layout
+
+\begin_layout Itemize
+Blabla
+\end_layout
+
+\begin_layout Itemize
+blabla
+\end_layout
+
+\begin_layout Standard
+Zudem wird vorausgesetzt, dass die Erwartungswerte des stationären Zufallsprozes
+ses bereits aus einem Likelihood Schätzer bekannt sind.
+ Die anderen notwendigen Hyperparameter, welche für die Verteilung notwendig
+ sind, sollen mit einer Maximierung des Likelihoods geschätzt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Diese Art des Trainings unterscheidet sich von der Arbeit von Kennedy &
+ O'Hagan und ebenfalls von der Arbeit von Keane.
+ 
+\end_layout
+
+\begin_layout Subsection
+Noch nicht eingeordnet
+\end_layout
+
+\begin_layout Standard
+- Additive Brücke vergleichen
+\end_layout
+
+\begin_layout Standard
+- Kennedy
+\end_layout
+
+\begin_layout Standard
+-Keane
+\end_layout
+
+\begin_layout Standard
+-Braunschweiger 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zimmermann2009"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Han2010"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+- Bei O'Hagan ist es zwingend, dass an jeder HF Stelle auch ein LF Sample
+ existiert.
+ Darin sehe ich einen relativ wichtigen Unterschied zu unserer Arbeit.
+ (Nachzulesen am Ende von 2.2, die Definition der DesignPoints) - Dass die
+ Likelihood Funktion mit einer vollständigen Matrix und den Varianzen als
+ Hyperparameter dasselbe Minimum haben soll, wie die Definition der beiden
+ einzelnen und unabhängigen Likelihood Funktionen bei O'Hagan, fällt mir
+ nur schwer zu glauben.
+ Zudem es bei uns auch keine direkten Schätzer für die Sigmas gibt.
+ SigmaLF und SigmaHF können in unserem Fall durchaus von den jeweils anderen
+ Samples beeinflusst werden und das passiert auch.
+ Was das angeht bin ich mir allerdings nicht sicher, ob das überhaupt in
+ Ordnung ist.
+\end_layout
+
+\begin_layout Standard
+- Bei Keane werden die Vorhersagen aus dem reinen LoFi Modell verwendet
+ um die Differenz-Kovarianzfunktion aufzustellen.
+ Wenn ich mich nicht täusche, verletzt er damit die Bedingung von O'Hagan
+ p(z|N) = p(z2|z1,s1,h2,sigma2)*p(z1|h1,sigma1), da p(z2|z1,s1,h2,sigma2)
+ dadurch von h1,sigma1 und beta1 abhängt.
+ Zudem bin ich mir nicht sicher, inwiefern man die Vorhersagen ohne Beachtung
+ der Unsicherheiten einsetzen sollte.
+ Das wird wahrscheinlich schon funktionieren, mir geht es aber wie gesagt
+ um die Unterschiede zu meiner Arbeit und auch darin sehe ich einen.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ werden die verschiedenen Daten als unabhängig angesehen (siehe Seite.
+ Zudem können dadurch Likelihood Schätzer für die Erwartungswerte und Varianzen
+ des Kriging Modells 
+\begin_inset Formula $\beta_{i},\sigma_{i}^{2}$
+\end_inset
+
+ mit 
+\begin_inset Formula $i=1...m_{f}$
+\end_inset
+
+ bestimmt werden.
+ Durch diese Annahme kann man die Hyperparameter für das die Datensätze
+ unabhängig voneinander bestimmen und im Nachhinein als gesamte Kovarianzfunktio
+n zusammensetzen.
+ Das Training der Hyperparameter wird dadurch vereinfacht und auch der numerisch
+e Aufwand sinkt dadurch.
+ Dies kommt daher, da man zwei unabhängige Trainings durchführt mit jeweils
+ einer Kovarianzmatrix der Größe des jeweiligen Datensatzes.
+ Als Beispiel müssten bei einer Anzahl von 
+\begin_inset Formula $n_{high}$
+\end_inset
+
+ High-Fidelity und 
+\begin_inset Formula $n_{low}$
+\end_inset
+
+ Low-Fidelity Stützstellen jeweils ein Training mit den Kovarianzmatrizen
+ 
+\begin_inset Formula $\mathbf{Cov_{high}}\in\mathbb{R^{\mathrm{n_{high}\times n_{high}}}},$
+\end_inset
+
+
+\begin_inset Formula $\mathbf{Cov_{low}}\in\mathbb{R^{\mathrm{n_{low}\times n_{low}}}}$
+\end_inset
+
+durchgeführt werden.
+ Jedes dieser Trainings hat in etwa eine Komplexität von 
+\begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Diese Annahme soll in dem Modell dieser Arbeit allerdings nicht getroffen
+ werden.
+ Der Grund dafür liegt darin, dass man den möglichen Raum der Hyperparameter
+ (wobei 
+\begin_inset Formula $o$
+\end_inset
+
+ die Anzahl der Hyperparameter angibt) von 
+\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}+o_{low}}}}$
+\end_inset
+
+ auf die beiden Räume 
+\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}}}}$
+\end_inset
+
+ und 
+\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}}}}$
+\end_inset
+
+auftrennt und damit mögliche Lösungen für die Hyperparameter ausschließt.
+ Um dies zu verdeutlichen soll ein Beispiel herangezogen werden:
+\end_layout
+
+\begin_layout Standard
+
+\size huge
+\color red
+Zusammengesetzte Kovarianzfunktion zeigen, vielleicht zusätzlich ein Beispiel
+ suchen welches mit dem anderen Modell nicht möglich wäre !!!!
+\end_layout
+
+\begin_layout Standard
+Die Vorteile bei der Wahl dieser Methode liegen bei:
+\end_layout
+
+\begin_layout Itemize
+Mehr 
+\begin_inset Quotes gld
+\end_inset
+
+Lösungswege
+\begin_inset Quotes grd
+\end_inset
+
+ für das Training durch einen größeren Hyperparameterraum 
+\end_layout
+
+\begin_layout Itemize
+Unabhängigkeit der Daten ist in den meisten Fällen nicht gegeben
+\end_layout
+
+\begin_layout Itemize
+Nur eine Kovarianzmatrix und ein Training, softwaretechnisch besser umsetzbar
+\end_layout
+
+\begin_layout Itemize
+Höherwertigeres Modell
+\end_layout
+
+\begin_layout Itemize
+An High Fidelity Punkten müssen keine Low-Fidelity Samples bekannt sein
+\end_layout
+
+\begin_layout Itemize
+An High-Fidelity Punkten können Low-Fidelity Samples liegen
+\end_layout
+
+\begin_layout Standard
+Die Nachteile bei der Wahl dieser Methode liegen bei:
+\end_layout
+
+\begin_layout Itemize
+Numerisch aufwendiger
+\end_layout
+
+\begin_layout Itemize
+Kein analytischer Likelihood Schätzer für 
+\begin_inset Formula $\sigma_{i}^{2}$
+\end_inset
+
+ mit 
+\begin_inset Formula $i=1...m_{f}$
+\end_inset
+
+ gefunden
+\end_layout
+
+\begin_layout Standard
+Welches Beta man einsetzt jängt davon ab, was man vorhersagen möchte.
+ Möchte ich, dass mein 
+\begin_inset Formula $E\left[Z\left(\vec{x}_{0}\right)\right]$
+\end_inset
+
+ dem HF Erwartungswert entsprich,.
+ so muss dieser eingesetzt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Formulierung in O'Hagan ist etwas anders, da dort das Beta2 dem Erwartungswe
+rt der Differenzfunktion entspricht.
+ In diesem Fall entsprich das Beta2 dem HF Erwartungswert, am Ergebnis ändert
+ dies allerdings nichts.
+\end_layout
+
+\begin_layout Section
+Zusammenhang zwischen Bedingter Normalverteilung und Kriging
+\end_layout
+
+\begin_layout Section
+Regularisierungsterm und Nugget für alle Verfahren
+\end_layout
+
+\begin_layout Section
+Vergleiche zu anderen Verfahren
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:VergleicheCoKrigingAndere"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei den braunschweigern, wird keine Normalverteilungsannahme getroffen.
+ Das Modell ist dadurch in unserem enthalten, aber ....
+\end_layout
+
+\begin_layout Standard
+Die Braunschweiger nutzen auch den MSE statt ....
+\end_layout
+
+\begin_layout Standard
+Keane verletzt die Unabhänbgigkeitsbedinung aus O'Hagan
+\end_layout
+
+\begin_layout Standard
+O'Hagan benötigt an jedem HF Punkt ien LF Sample zum Aufstellen der Differenz
+ Kovarianzfunktion.
+ 
+\end_layout
+
+\begin_layout Standard
+Gratiet ebenfalls ein eigener Ansatz, dieser soll hier aber nicht weiter
+ diskutiert werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Erwartungstreue noch durch 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:SummeGewichteCOKriging"
+
+\end_inset
+
+Die Formulierung in O'Hagan ist etwas anders, da dort das Beta2 dem Erwartungswe
+rt der Differenzfunktion entspricht.
+ In diesem Fall entsprich das Beta2 dem HF Erwartungswert, am Ergebnis ändert
+ dies allerdings nichts.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzMinimierungFormelCOKriging"
+
+\end_inset
+
+ anders als bei den Braunschweigern, hier wurde der MSE der Vorhersage der
+ HF Daten minimiert
+\end_layout
+
+\begin_layout Section
+Vorhersagen Beispiele 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/HF_LF_RealFunctions_2.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/OrdinaryKriging.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/COKriging_HFNoLFSampling.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/COKriging_ForresterSampling.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Beispiele zeigen, wo A,B und C geändert werden und die Faktoren/Summanden
+ sich entsprechend anpassen.
+ (my, sigma und beta)
+\end_layout
+
+\begin_layout Standard
+
+\size huge
+Vorhersage von LF Funktion zeigen !!!!
+\end_layout
+
+\end_body
+\end_document

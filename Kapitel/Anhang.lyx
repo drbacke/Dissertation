@@ -1,0 +1,5491 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+appendix
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Anhang
+\end_layout
+
+\begin_layout Subsection
+Beispiel einer einfachen Dichtefunktion für ein CO-Kriging Model 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:AnhangLikelihoodCOKrigingBsp"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Dichtefunktion eines CO-Kriging Modells der folgenden Parabelfunktion.
+ Die Low-Fidelity Funktion wurde für jedes Sample mit einem zufälligen Wert
+ zwischen -0.1 und 0.1 gestört und zusätzlich um einen konstanter Wert von
+ 10 verschoben.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{high}\left(x\right) & =x^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{low}\left(x\right) & =x^{2}+Random\left(-0.1,0.1\right)-10
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auf den Achsen sind die Hyperparameter 
+\begin_inset Formula $\theta_{low},\theta_{err}$
+\end_inset
+
+ zu sehen und der entsprechende Dichtefunktionswert der Likelihoodfunktion
+ ist farbig dargestellt.
+ In den verschiedenen Diagrammen wurden die Varianzen 
+\begin_inset Formula $\sigma_{err}^{2},\sigma_{low}^{2}$
+\end_inset
+
+ der Kovarianzfunkionen 
+\begin_inset Formula $cov_{err},cov_{low}$
+\end_inset
+
+ verändert (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzMatrixCOKriging"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Dieses Beispiel ist interessant, da man die Hyperparameter und die Varianzen
+ 
+\begin_inset Formula $\sigma_{err}^{2},\sigma_{low}^{2}$
+\end_inset
+
+ des CO-Kriging Modells in irgendeiner Form initialisieren muss.
+ Beim Ordinary Kriging sind es nur die Hälfte der Hyperparameter und die
+ Varianzen werden über einen Maximum Likelihood Schätzer bestimmt.
+ Besonders schwer ist die Initialisierung der Varianzen
+\end_layout
+
+\begin_layout Standard
+Training ist schwer, aufgrund lokaler Minima, daher ist die Initialisierung
+ besonders wichtig.
+\end_layout
+
+\begin_layout Standard
+Optimalwerte für THeta und mit angeben 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO_Kriging_Parabel_3DdensityFunction.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Produkt der Inversen und der Korrelationsmatrix, ergibt die Einheitsmatrix.
+ Da die Einheitsmatrix n Diagonalelemente besitzt, welche alle den Wert
+ 1.0 haben, muss die Spur der multiplizierten Matrizen n ergeben.
+ Gibt es numerische Ungenauigkeiten innerhalb der Invertierung, wird dieser
+ Wert wahrscheinlich von n abweichen.
+ Dies wird überprüft und bei Überschreitung eines Grenzwertes wird ebenfalls
+ eine Exception geworfen.
+ Diese wird mit allen anderen unbekannten Exceptions in Zeile 21 gefangen
+ und als Reaktion ein sehr hoher Likelihood Wert zurückgegeben.
+ 
+\end_layout
+
+\begin_layout Standard
+Nachdem alle Vektoren und Werte berechnet sind, wird in Zeile 26 die eigentliche
+ Likelihood Funktion berechnet (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Likelihood Funktion"
+
+\end_inset
+
+) und zurückgegeben.
+ 
+\end_layout
+
+\begin_layout Section
+Aerodynamische Größen
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnhangAerodynamische-Größen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/MultifidelityKapitel/DCA_generic.pdf
+	scale 30
+	BoundingBox 0bp 50bp 650bp 541bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Auswerteebenen-eines-exemplarisc"
+
+\end_inset
+
+Auswerteebenen eines exemplarischen Verdichtergitters
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Totaldruckverlust:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\omega=\frac{\frac{1}{\dot{m}_{2}}\int p_{t2}^{is}-p_{t2}\mathrm{d\dot{m}}}{\frac{1}{\dot{m}_{1}}\int p_{t1}-p_{1}\mathrm{d\dot{m}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei die Indizes sich auf die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Auswerteebenen-eines-exemplarisc"
+
+\end_inset
+
+ gezeigten Auswerteebenen vor und hinter dem Verdichtergitter beziehen.
+ 
+\begin_inset Formula $p_{t2}$
+\end_inset
+
+ beschreibt den Totaldruck an der Austrittsebene und 
+\begin_inset Formula $p_{t2}^{is}$
+\end_inset
+
+ den Totaldruck bei isentroper Zustandsänderung.
+ Der Massenstrom wird beschrieben durch die Variable 
+\begin_inset Formula $\dot{m}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Varianz der Fehlerfunktion 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Anhang-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\textrm{var}\left[F\left(\vec{x}\right)\right]=\textrm{var}\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=E\left[\left(\left(Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right)-E\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=E\left[\left(Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}-E\left[Z_{k}\left(\vec{x}\right)\right]+E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im folgenden Schritt wird das Skalarprodukt als Summe formuliert: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=E\left[\left(\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]-\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}\right]\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=E\left[\left(\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]-\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}\right)\right]\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]^{2}-2\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}\right)\right]\right.\\
+\left.+\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}\right)\right]^{2}\right]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]^{2}\right]-2E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\right]\right]\\
++E\left[\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\right]^{2}\right]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=\textrm{var}\left[Z_{k}\left(\vec{x}\right)\right]-2E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\right]\right]\\
++E\left[\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{i}-E\left[Z_{i}\right]\vec{1^{T}}\vec{w}_{i}\right)\right]^{2}\right]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=\textrm{var}\left[Z_{k}\left(\vec{x}\right)\right]-2E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\right]\right]\\
++E\left[\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\sum_{k=1}^{s}\sum_{l=1}^{n_{i}}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\left(Z_{k}\left(\vec{x}_{l}\right)w_{k,l}-E\left[Z_{k}\left(\vec{x}_{l}\right)w_{k,l}\right]\right)\right]\right]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=\textrm{var}\left[Z_{k}\left(\vec{x}\right)\right]-2\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[\left[Z_{k}\left(\vec{x}\right)-E\left[Z_{k}\left(\vec{x}\right)\right]\right]\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\right]\\
++\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\sum_{k=1}^{s}\sum_{l=1}^{n_{i}}E\left[\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j}-E\left[Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]\right)\left(Z_{k}\left(\vec{x}_{l}\right)w_{k,l}-E\left[Z_{k}\left(\vec{x}_{l}\right)w_{k,l}\right]\right)\right]
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=\textrm{var}\left[Z_{k}\left(\vec{x}\right)\right]-2\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\textrm{cov}\left(Z_{k}\left(\vec{x}\right),Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right)\\
++\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\sum_{k=1}^{s}\sum_{l=1}^{n_{i}}\textrm{cov}\left(Z_{i}\left(\vec{x}_{j}\right)w_{i,j},Z_{k}\left(\vec{x}_{l}\right)w_{k,l}\right)
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{multline*}
+=\textrm{var}\left[Z_{k}\left(\vec{x}\right)\right]-2\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}w_{i,j}\textrm{cov}\left(Z_{k}\left(\vec{x}\right),Z_{i}\left(\vec{x}_{j}\right)\right)\\
++\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}\sum_{k=1}^{s}\sum_{l=1}^{n_{i}}w_{i,j}w_{k,l}\textrm{cov}\left(Z_{i}\left(\vec{x}_{j}\right),Z_{k}\left(\vec{x}_{l}\right)\right)
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Matrix-Schreibweise ergibt sich die folgende Formulierung, wobei 
+\begin_inset Formula $\vec{w}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+ den Gewichtsvektor, 
+\begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
+\end_inset
+
+ die Kovarianzmatrix und 
+\begin_inset Formula $\overrightarrow{\textrm{cov}}\mathbf{\in\mathbb{R^{\mathrm{n_{all}}}}}$
+\end_inset
+
+ den Kovarianzvektor darstellt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\overrightarrow{\textrm{cov}}\left(Z\left(\vec{x}_{0}\right),Z\left(\vec{x}\right)\right)^{T}*\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\label{eq:VarianzFehlerZuCov-2-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Kovarianz zwischen Vorhersagen
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnhangKovarianz-zwischen-Vorhersagen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}\label{eq:AnhangCovZweiVorhersagen}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Gewichtsvektoren sehen folgendermaßen aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w_{1}} & =\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w_{2}} & =\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eingesetzt in die ursprüngliche Formel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AnhangCovZweiVorhersagen"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}*\\
+\mathbf{Cov}\left(\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}\\
+\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align right
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\left(\vec{c_{1}}^{T}\mathbf{Cov}^{-1}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)\\
+\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
++\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}\beta_{k}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
++\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Varianz des Schätzfehlers
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnhangVarianz-des-Schätzfehlers"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{w} & =\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)\\
++\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}\\*
+\mathbf{Cov}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\left(\vec{c}^{T}\mathbf{Cov}^{-1}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)\\*
+\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\left(-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)\\*
+\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\left(-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\right)\\*
+\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\\
+-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}\\*
+\left(\vec{c}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\\
+-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\vec{c}\beta_{k}\\
+-\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\vec{c}\beta_{k}\\
++\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
+-\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenrechnung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \beta_{k}=\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}=\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da der Nenner und der Zähler ein Skalar ergeben, gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k} & =\left(\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\beta_{k}=\frac{\vec{c}\mathbf{Cov}^{-1}\vec{F}^{T}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eingesetzt in die ursprüngliche Gleichung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\left(\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\\
+-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\left(\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\right)^{T}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}\\
+-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}-2\vec{c}\mathbf{Cov}^{-1}\vec{F}\beta_{k}+\beta_{k}^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
+ dies einer quadratischen Gleichung, also gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}_{0}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{k}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Zusammenhang Kovarianz und Fehler Varianz
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnhangZusammenhang-Kovarianz-undFehlerVarianz"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[Z_{k}^{*}\left(\vec{x}\right)\right]=cov\left(Z_{k}^{*}\left(\vec{x}\right),Z_{k}^{*}\left(\vec{x}\right)\right)=\vec{w}^{T}\mathbf{Cov}\vec{w}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Fehlervarianz setzt sich wie folgt zusammen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}\mathbf{Cov}\vec{w}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der letzte Term kann durch die Kovarianzformel 
+\begin_inset Formula $cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)$
+\end_inset
+
+ ersetzt werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+cov\left(Z_{k}^{*}\left(\vec{x}\right),Z_{k}^{*}\left(\vec{x}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Formuliert man die Gewichte und Kovarianz vollständig aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\vec{c}^{T}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)\\
++\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
++\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\beta_{k}+\beta_{k}^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{k}^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieses Ergebnis entspricht der Formel für 
+\begin_inset Formula $\textrm{var}\left[F\left(\vec{x}\right)\right]$
+\end_inset
+
+ vollständig und damit ist der Zusammenhang zwischen Kovarianz und Fehler
+ Varianz hergestellt.
+ 
+\end_layout
+
+\begin_layout Section
+Likelihood Schätzer Varianzen im CO-Kriging
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{Cov}=\left[\begin{array}{cc}
+a^{2}\sigma_{low}^{2}corr_{low}+\sigma_{err}^{2}corr_{err} & a\sigma_{low}^{2}corr_{low}\\
+a\sigma_{low}^{2}corr_{low} & \sigma_{low}^{2}corr_{low}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov}= & \left[\begin{array}{cc}
+C_{11} & C_{12}\\
+C_{21} & C_{22}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov}= & \left[\begin{array}{cc}
+a^{2}\sigma_{low}^{2}C_{11A}+a^{2}\sigma_{err}^{2}C_{11B} & a\sigma_{low}^{2}C_{12}\\
+a\sigma_{low}^{2}C_{21} & \sigma_{low}^{2}C_{22}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov^{-1}}= & \left[\begin{array}{cc}
+\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & -\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\\
+-C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Oben links:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}=\left(\left(a^{2}\sigma_{low}^{2}C_{11A}+a^{2}\sigma_{err}^{2}C_{11B}\right)-a\sigma_{low}^{2}C_{12}\left(\sigma_{low}^{2}C_{22}\right)^{-1}a\sigma_{low}^{2}C_{12}\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\left(a^{2}\left(\sigma_{low}^{2}C_{11A}+\sigma_{err}^{2}C_{11B}\right)-a^{2}C_{12}\left(C_{22}\right)^{-1}\sigma_{low}^{2}C_{12}\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\left(a^{2}\left(\sigma_{low}^{2}C_{11A}+\sigma_{err}^{2}C_{11B}-\sigma_{low}^{2}C_{12}\left(C_{22}\right)^{-1}C_{12}\right)\right)^{-1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & -\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\\
+-C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}
+\end{array}\right]\left[\begin{array}{cc}
+\vec{1} & \vec{0}\\
+\vec{0} & \vec{1}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & -\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\vec{1}\\
+-C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & \left(C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\right)\vec{1}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{G}^{T}\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\vec{1}^{T}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & -\vec{1}^{T}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\vec{1}\\
+-\vec{1}^{T}C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & \vec{1}^{T}\left(C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\right)\vec{1}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vorausgesetzt man kennt die Low Varianz bereits:
+\end_layout
+
+\begin_layout Section
+Korrelationsmatrix oder Kovarianzmatrix 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Einschub-Korrelation-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+In der einschlägigen Literatur wird die Kovarianzmatrix oftmals durch eine
+ Korrelationsmatrix ersetzt, 
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Die normierte Kovarianz ist die Korrelation und der Zusammenhang zwischen
+ Kovarianz und Korrelation sieht wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align}
+c\left(X,Y\right) & =\frac{\textrm{cov}\left(X,Y\right)}{\sqrt{\textrm{var}\left(X\right)}\sqrt{\textrm{var}\left(Y\right)}}\label{eq:KorrelationKovarianzZusammenhang-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Zudem soll der räumliche Zusammenhang zwischen zwei Zufallsvariablen nicht
+ von seiner absoluten Lage im Raum abhängig sein, sondern nur von deren
+ Abstandsvektor 
+\begin_inset Formula $h\in\mathbb{R^{\mathrm{n}}}=\left\{ x_{1}-y_{1},...,x_{n}-y_{n}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Die Kovarianz zwischen zwei gleichen Zufallsvariablen ist per Definition
+ die Varianz dieser Zufallsvariable:
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align*}
+\textrm{cov}\left(Z,Z\right) & =\textrm{var}\left(Z\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Da die Kovarianz allerdings nur vom Abstandsvektor abhängig ist und der
+ Abstandsvektor bei zwei gleichen Zufallsvariablen immer 
+\begin_inset Formula $\vec{0}$
+\end_inset
+
+ ist, kann man daraus folgern, dass die Kovarianz zwischen zwei gleichen
+ Zufallsvariablen immer konstant ist.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align*}
+\textrm{cov}\left(Z,Z\right) & =\textrm{cov}\left(h=\vec{0}\right)=const.
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Und somit ist auch die Varianz konstant:
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align}
+\Longrightarrow\textrm{var}\left[Z\right] & =\sigma^{2}=const.\label{eq:VarianzKonstant-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Durch die Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KorrelationKovarianzZusammenhang-1"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzKonstant-1"
+
+\end_inset
+
+ kann man die Kovarianzfunktion durch die Korrelationsfunktion ersetzen
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align*}
+c\left(X,Y\right)\sigma^{2} & =\textrm{cov}\left(X,Y\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Und somit auch die Kovarianzmatrix durch die Korrelationsmatrix 
+\begin_inset Formula $\mathbf{R}\in\mathbb{R^{\mathrm{n\times n}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov} & =\sigma^{2}\mathbf{R}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Damit lässt sich Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MinimierungMitKovarianz"
+
+\end_inset
+
+ umformulieren, wobei der Korrelationsvektor mit 
+\begin_inset Formula $\vec{r}\in\mathbb{R^{\mathrm{n}}}=\left(c\left[Z\left(\vec{x}_{0}\right),Z\left(\vec{x}_{1}\right)\right],...,c\left[Z\left(\vec{x}_{0}\right),Z\left(\vec{x}_{n}\right)\right]\right)^{T},\vec{x}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ bezeichnet wird.
+ Dieser beschreibt die Korrelationen zwischen dem Funktionswert, der vorhersagt
+ werden soll und dem Stützstellenvektor 
+\begin_inset Formula $\vec{y}_{s}$
+\end_inset
+
+.
+ Da der Funktionswert 
+\begin_inset Formula $y\left(x_{0}\right)$
+\end_inset
+
+ nicht bekannt ist, hängt die Korrelationsfunktion nur von dem Abstandsvektor
+ 
+\begin_inset Formula $\vec{h}\in\mathbb{R^{\mathrm{k}}}=\left\{ x_{0}-x_{1},...,x_{k}-x_{k}\right\} $
+\end_inset
+
+ ab.
+ Der Korrelationsvektor ergibt sich damit zu 
+\begin_inset Formula $\vec{r}\in\mathbb{R^{\mathrm{n}}}=\left(c\left[\vec{x}_{0},\vec{x}_{1}\right],...,c\left[\vec{x}_{0},\vec{x}_{n}\right]\right)^{T},\vec{x}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+.
+ Wie eine solche Korrelationsfunktion konkret umgesetzt wird, folgt in Kaptitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Korrelationsfunktionen"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Vereinfachung der Vorhersagegleichung 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Vereinfachung-der-Vorhersageglei"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An dieser Stelle stellt sich die Frage, inwiefern 
+\begin_inset Formula $\mu$
+\end_inset
+
+ und der Likelihood Schätzer für 
+\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times m_{f}}}}$
+\end_inset
+
+ zusammenhängen.
+ Der Likelihood Schätzer für 
+\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times m_{f}}}}$
+\end_inset
+
+ sieht wie folgt aus: 
+\end_layout
+
+\begin_layout Paragraph
+\begin_inset Formula 
+\[
+\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)=\vec{\tilde{\beta}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Vektor 
+\begin_inset Formula $\vec{F}\in\mathbb{R^{\mathrm{n\times1}}}$
+\end_inset
+
+ lässt sich auch umformulieren zu, wobei 
+\begin_inset Formula $G\in\mathbb{R^{\mathrm{n\times m_{f}}}}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\vec{F}=\left[\begin{array}{c}
+\vec{\beta_{1}}\\
+\vec{\beta_{2}}
+\end{array}\right]=G\vec{\tilde{\beta}}=G\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\left(G\vec{\tilde{\beta}}\right)^{T}\mathbf{Cov}^{-1}\vec{y}}{\left(G\vec{\tilde{\beta}}\right)^{T}\mathbf{Cov}^{-1}G\vec{\tilde{\beta}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\left(G\vec{\tilde{\beta}}\right)^{T}\mathbf{Cov}^{-1}\vec{y}}{\left(G\vec{\tilde{\beta}}\right)^{T}\mathbf{Cov}^{-1}G\vec{\tilde{\beta}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\left(G\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)\right)^{T}\mathbf{Cov}^{-1}\vec{y}}{\left(G\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)\right)^{T}\mathbf{Cov}^{-1}G\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)^{T}\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}G^{T}\mathbf{Cov}^{-1}\vec{y}}{\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)^{T}\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}G^{T}\mathbf{Cov}^{-1}G\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =\frac{\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)^{T}\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}G^{T}\mathbf{Cov}^{-1}\vec{y}}{\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)^{T}\left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus folgt letztlich:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mu & =1
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Beschleunigter Rückwärtsdifferenzierter-Cholesky-Algorithmus nach Smith
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Beschleunigter-BackChodec"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Innerhalb dieses Abschnittes soll eine Variante des Rückwärtsdifferenzierten-Cho
+lesky-Algorithmus nach Smith 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smith1995"
+
+\end_inset
+
+ gezeigt werden.
+ Diese Variante beinhaltet im Vergleich zum Original noch SIMD-Beschleunigungen
+ und eine Parallelisierung auf Thread Ebene.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language={[GNU]C++},numbers=left,numberstyle={\footnotesize},tabsize=4,extendedchars=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+int num_threads;
+\end_layout
+
+\begin_layout Plain Layout
+
+#pragma omp parallel 	{ 	num_threads= omp_get_num_threads(); 	} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+int n = this->getColumnSize(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+if(this->getColumnSize()!=adjointMat.getRowSize() or adjointMat.getRowSize()!=1){
+\end_layout
+
+\begin_layout Plain Layout
+
+	adjointMat = OpenMPMatrix<T>(n,n);
+\end_layout
+
+\begin_layout Plain Layout
+
+}             	
+\end_layout
+
+\begin_layout Plain Layout
+
+T* adjointArray = adjointMat.getArray(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+T* thisArray = (*this).getArray(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+T parallelTmp[num_threads*n];
+\end_layout
+
+\begin_layout Plain Layout
+
+T diag[n]; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+T inverseDiag[n]; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+T diagAdjoint[n]; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+T thisArrayLine[n];         	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d diagSSE; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d *diagAdjointSSE=(__m128d *)diagAdjoint; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d *inverseDiagSSE=(__m128d *)inverseDiag; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d bufSSE; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d buf2SSE; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d buf3SSE;
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d twoSSE = _mm_set_pd(2.0,2.0); 	
+\end_layout
+
+\begin_layout Plain Layout
+
+__m128d oneSSE = _mm_set_pd(1.0,1.0); 	
+\end_layout
+
+\begin_layout Plain Layout
+
+double tmpSSE;
+\end_layout
+
+\begin_layout Plain Layout
+
+for(int i=0; i<n/2; i++){ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	int iD = i*2;
+\end_layout
+
+\begin_layout Plain Layout
+
+	diag[iD] = thisArray[iD*n+iD];
+\end_layout
+
+\begin_layout Plain Layout
+
+	diag[iD+1] = thisArray[(iD+1)*n+iD+1];
+\end_layout
+
+\begin_layout Plain Layout
+
+	diagSSE = _mm_load_pd(&(diag[iD]) );
+\end_layout
+
+\begin_layout Plain Layout
+
+	inverseDiagSSE[i] = _mm_div_pd(oneSSE,diagSSE);
+\end_layout
+
+\begin_layout Plain Layout
+
+	diagAdjointSSE[i] = _mm_mul_pd(inverseDiagSSE[i],twoSSE);
+\end_layout
+
+\begin_layout Plain Layout
+
+	} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+if(n%2>0){
+\end_layout
+
+\begin_layout Plain Layout
+
+		int iD = n-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		diag[iD] = thisArray[iD*n+iD];
+\end_layout
+
+\begin_layout Plain Layout
+
+		inverseDiag[iD] = 1.0/diag[iD];
+\end_layout
+
+\begin_layout Plain Layout
+
+		diagAdjoint[iD]= 2.0*inverseDiag[iD]; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+for(int k=n-1; k>=0; k--){  
+\end_layout
+
+\begin_layout Plain Layout
+
+		A_memmove(thisArrayLine, &(thisArray[k*n]),n*sizeof(T));	
+\end_layout
+
+\begin_layout Plain Layout
+
+		int jStart=k+1;
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(k*n%2==0){
+\end_layout
+
+\begin_layout Plain Layout
+
+			// dafür sorgen, dass j in der Schleife immer gerade ist, um die load_pd
+ und nicht die loadu_pd zu verwenden
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(jStart%2>0 and jStart < n){
+\end_layout
+
+\begin_layout Plain Layout
+
+				adjointArray[k*n+jStart] -=  2.0*diagAdjoint[jStart] * thisArrayLine[jStart];
+\end_layout
+
+\begin_layout Plain Layout
+
+				jStart++;
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int j=jStart; j<n-1;j+=2){
+\end_layout
+
+\begin_layout Plain Layout
+
+				bufSSE =  _mm_load_pd(&(diagAdjoint[j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+				buf2SSE =  _mm_load_pd(&(thisArray[k*n+j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+				buf3SSE =  _mm_load_pd(&(adjointArray[k*n+j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+				_mm_store_pd( &(adjointArray[k*n+j]) , _mm_sub_pd(buf3SSE, _mm_mul_pd(twoSSE
+, _mm_mul_pd( bufSSE,buf2SSE ) ) ) );
+\end_layout
+
+\begin_layout Plain Layout
+
+			} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+			if( (n-(jStart)) % 2 > 0){
+\end_layout
+
+\begin_layout Plain Layout
+
+				adjointArray[k*n+(n-1)] -=  2.0*diagAdjoint[(n-1)] * thisArrayLine[(n-1)];
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int j=jStart; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				adjointArray[k*n+j] -=  2.0*diagAdjoint[j] * thisArrayLine[j];
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		if((n-k)/num_threads > 10 ){
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int i=0; i<num_threads;i++)
+\end_layout
+
+\begin_layout Plain Layout
+
+				A_memset(&(parallelTmp[i*n +k+2]), 0.0, (n-(k+2))*sizeof(T) );      		
+\end_layout
+
+\begin_layout Plain Layout
+
+			#pragma omp parallel for
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int j=k+1; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				int num_thread = omp_get_thread_num();
+\end_layout
+
+\begin_layout Plain Layout
+
+				for(int i=j+1; i<n;i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+					parallelTmp[num_thread*n+i] -=  adjointArray[j*n+i]* thisArrayLine[j];
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+			#pragma omp parallel for
+\end_layout
+
+\begin_layout Plain Layout
+
+ 			for(int j=k+2; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+    				for(int i=0; i<num_threads;i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+						adjointArray[k*n+j] += parallelTmp[i*n+j];
+\end_layout
+
+\begin_layout Plain Layout
+
+           			}
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int j=k+1; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				//int num_thread = omp_get_thread_num();
+\end_layout
+
+\begin_layout Plain Layout
+
+				for(int i=j+1; i<n;i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+					adjointArray[k*n+i] -=  adjointArray[j*n+i]* thisArrayLine[j];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		if((n-k)/num_threads > 4 ){
+\end_layout
+
+\begin_layout Plain Layout
+
+			#pragma omp parallel for private(bufSSE, buf2SSE)
+\end_layout
+
+\begin_layout Plain Layout
+
+ 			for(int j=k+1; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				if(j*n%2>0){
+\end_layout
+
+\begin_layout Plain Layout
+
+					for(int i=j+1; i<n;i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+						adjointArray[k*n+j] -=  adjointArray[j*n+i] * thisArrayLine[i];
+\end_layout
+
+\begin_layout Plain Layout
+
+					}
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+				else{//SSE 			
+\end_layout
+
+\begin_layout Plain Layout
+
+					__m128d ress = _mm_setzero_pd();
+\end_layout
+
+\begin_layout Plain Layout
+
+					int iStart=(j+1);
+\end_layout
+
+\begin_layout Plain Layout
+
+					double tmp=0.0; 				
+\end_layout
+
+\begin_layout Plain Layout
+
+					if(iStart%2 >0){
+\end_layout
+
+\begin_layout Plain Layout
+
+						adjointArray[k*n+j] -=  adjointArray[j*n+iStart] * thisArrayLine[iStart];
+\end_layout
+
+\begin_layout Plain Layout
+
+						iStart++;
+\end_layout
+
+\begin_layout Plain Layout
+
+					}
+\end_layout
+
+\begin_layout Plain Layout
+
+					for(int i=iStart; i<n-1;i+=2){
+\end_layout
+
+\begin_layout Plain Layout
+
+						bufSSE =  _mm_load_pd(&(thisArrayLine[i]));
+\end_layout
+
+\begin_layout Plain Layout
+
+						buf2SSE =  _mm_load_pd(&(adjointArray[j*n+i]));
+\end_layout
+
+\begin_layout Plain Layout
+
+						ress = _mm_sub_pd(ress,_mm_mul_pd(bufSSE,buf2SSE));
+\end_layout
+
+\begin_layout Plain Layout
+
+					}
+\end_layout
+
+\begin_layout Plain Layout
+
+					ress = _mm_hadd_pd(ress,ress);
+\end_layout
+
+\begin_layout Plain Layout
+
+					_mm_store_sd(&tmp, ress);
+\end_layout
+
+\begin_layout Plain Layout
+
+					adjointArray[k*n+j]=adjointArray[k*n+j]+tmp;
+\end_layout
+
+\begin_layout Plain Layout
+
+					if((n-iStart)%2 >0){
+\end_layout
+
+\begin_layout Plain Layout
+
+						adjointArray[k*n+j] -=  adjointArray[j*n+(n-1)] * thisArrayLine[(n-1)];
+\end_layout
+
+\begin_layout Plain Layout
+
+					}
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(int j=k+1; j<n;j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				for(int i=j+1; i<n;i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+					adjointArray[k*n+j] -=  adjointArray[j*n+i] * thisArrayLine[i];
+\end_layout
+
+\begin_layout Plain Layout
+
+				}
+\end_layout
+
+\begin_layout Plain Layout
+
+                			} 
+\end_layout
+
+\begin_layout Plain Layout
+
+		}             
+\end_layout
+
+\begin_layout Plain Layout
+
+		buf3SSE = _mm_set_pd1(inverseDiag[k]);
+\end_layout
+
+\begin_layout Plain Layout
+
+		__m128d ress = _mm_setzero_pd();
+\end_layout
+
+\begin_layout Plain Layout
+
+		jStart=(k*n)+(k+1);
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(jStart%2>0 and jStart < n+k*n -1){
+\end_layout
+
+\begin_layout Plain Layout
+
+			adjointArray[jStart] *=  inverseDiag[k];
+\end_layout
+
+\begin_layout Plain Layout
+
+			diagAdjoint[k] -=  adjointArray[jStart]*thisArray[jStart];
+\end_layout
+
+\begin_layout Plain Layout
+
+      			jStart++;
+\end_layout
+
+\begin_layout Plain Layout
+
+                		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		for(int j=jStart; j<n+k*n -1;j+=2){
+\end_layout
+
+\begin_layout Plain Layout
+
+			bufSSE =  _mm_load_pd(&(thisArray[j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+			buf2SSE = _mm_load_pd(&(adjointArray[j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+			_mm_store_pd(&(adjointArray[j]), _mm_mul_pd(buf2SSE,buf3SSE));
+\end_layout
+
+\begin_layout Plain Layout
+
+			buf2SSE = _mm_load_pd(&(adjointArray[j]));
+\end_layout
+
+\begin_layout Plain Layout
+
+			ress = _mm_sub_pd(ress, _mm_mul_pd(buf2SSE,bufSSE) ); 		
+\end_layout
+
+\begin_layout Plain Layout
+
+		} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		ress = _mm_hadd_pd(ress,ress);
+\end_layout
+
+\begin_layout Plain Layout
+
+		_mm_store_sd(&tmpSSE, ress);
+\end_layout
+
+\begin_layout Plain Layout
+
+		diagAdjoint[k] = diagAdjoint[k] + tmpSSE;
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(((n+k*n)-jStart)%2>0){
+\end_layout
+
+\begin_layout Plain Layout
+
+			adjointArray[n+k*n -1] *= inverseDiag[k];
+\end_layout
+
+\begin_layout Plain Layout
+
+			diagAdjoint[k] -=  adjointArray[n+k*n -1]*thisArray[n+k*n -1];
+\end_layout
+
+\begin_layout Plain Layout
+
+  		} 		diagAdjoint[k]=0.5*diagAdjoint[k]*  inverseDiag[k];
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+    for(int i=0; i<n; i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+		adjointArray[i*n+i] =diagAdjoint[i] ;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Alternative Herleitung der symbolischen Differenzierung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}= & \textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\phi_{ij}^{L}\left(A\right)= & \begin{cases}
+A_{ij} & i>j\\
+0.5A_{ij} & i=j\\
+0 & i<j
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\phi_{ij}^{U}\left(A\right)= & \begin{cases}
+0 & i>j\\
+0.5A_{ij} & i=j\\
+A_{ij} & i<j
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right) & =\textrm{Spur}\left(\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)+\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{Spur}\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}+\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\textrm{Spur}\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\textrm{Spur}\left(\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da 
+\begin_inset Formula $\mathbf{\mathbf{Cov}}^{-1}$
+\end_inset
+
+ und 
+\begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
+\end_inset
+
+ symmetrisch sind gilt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =2\textrm{Spur}\left(\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dies ist nun exakt dasselbe Ergebnis der symbolischen Differenzierung.
+ 
+\end_layout
+
+\begin_layout Section
+Wann würde eine globales Varianzkriterium zu einer anderen Entscheidung
+ führen als das lokale?
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:globalVarianzEntscheidungBsp"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Testfunktion, in der die Hauptinformation bereits im Low-Fidelity Modell
+ enthalten ist:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{high} & =2x+0.1\sin\left(20x\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{low} & =0.1\sin\left(20x\right)+0.2
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1DBeispiel_Funktion.png
+	scale 25
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_Original.png
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieselbe Vorhersage mit einem zusätzlichen HF Sample an der Stelle x=0.35
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithHigh.png
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithLow.png
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_absFehler_Deviation.png
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Samples
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fehlerintegral (x über 0-1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dev Integral
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dev lokal x=0.35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Original
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000183472470246
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000295987939791
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0002337432566266
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++HF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000115168572795
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000159359003548
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0000000298023224
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
++LF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.96393583479e-05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000101191138483
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0001315242093663
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Fall würden das lokale und globale Kriterium zu einer anderen
+ Entscheidung führen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+R-Matrix Bildungsvorschrift, mit 2 Ableitungen pro Punkt
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccccccccc}
+ & x1 & x2 & x3 & x1/p1 & x1/p2 & x2/p1 & x2/p2 & x2/p3 & x3/p1 & x3/p2\\
+\hline x1 & f\left(x_{1,}x_{1}\right) & f\left(x_{1,}x_{2}\right) & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x2 & f\left(x_{2,}x_{1}\right) & f\left(x_{2,}x_{2}\right) & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x3 & f\left(x_{3,}x_{1}\right) & f\left(x_{3,}x_{2}\right) & f\left(x_{3,}x_{3}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
+x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
+x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
+x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
+x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
+x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{2}}\\
+x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{2}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Durch Zeilen/Spaltentausch, kommt die für den Rechner effizientere Matrix:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccccccccc}
+ & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2 & x2/p3 & x3 & x3/p1 & x3/p2\\
+\hline x1 & f\left(x_{1,}x_{1}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
+x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
+x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{2,}x_{2}\right) & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
+x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
+x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
+x3 & f\left(x_{3,}x_{1}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{3,}x_{2}\right) & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{3,}x_{3}\right) & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{2}}\\
+x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{2}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Invariante Ausdrücke eingefügt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccccccccc}
+ & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2 & x2/p3 & x3 & x3/p1 & x3/p2\\
+\hline x1 & 1+e^{\lambda} & 0 & 0 & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x1/p1 & 0 & e^{\theta_{1}} & 0 & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
+x1/p2 & 0 & 0 & e^{\theta_{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
+x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & 1+e^{\lambda} & 0 & 0 & 0 & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
+x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & 0 & e^{\theta_{1}} & 0 & 0 & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
+x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & 0 & 0 & e^{\theta_{2}} & 0 & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
+x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & 0 & 0 & 0 & e^{\theta_{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
+x3 & f\left(x_{3,}x_{1}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{3,}x_{2}\right) & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & 1+e^{\lambda} & 0 & 0\\
+x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & 0 & e^{\theta_{1}} & 0\\
+x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & 0 & 0 & e^{\theta_{2}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccccc}
+ & x1 & x2 & x1/p2 & x1/p1 & x2/p2 & x2/p1\\
+\hline x1 & f\left(x_{1,}x_{1}\right) & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}}\\
+x2 & f\left(x_{2,}x_{1}\right) & f\left(x_{2,}x_{2}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}}\\
+x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}}\\
+x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}\\
+x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}}\\
+x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|cccccc}
+ & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2\\
+\hline x1 & 1+e^{\lambda} & 0 & 0 & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}}\\
+x1/p1 & 0 & e^{\theta_{1}} & 0 & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}}\\
+x1/p2 & 0 & 0 & e^{\theta_{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}}\\
+x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & 1+e^{\lambda} & 0 & 0\\
+x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & 0 & e^{\theta_{1}} & 0\\
+x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & 0 & 0 & e^{\theta_{2}}
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+f(x,y)=f(y,x) & \Longrightarrow Matrix\,\,ist\,\,symmetrisch
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Die 2ten Ableitungen sind unabhängig von der Reihenfolge der Ableitung:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}}=\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+bei Gauss:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}}=-\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+r-Vektor Bildungsvorschrift: Wie RMatrix Zeile/Spalte 1 nur mit Inputvektor
+ gebildet
+\end_layout
+
+\begin_layout Section
+Korrelationsfunktionen
+\end_layout
+
+\begin_layout Plain Layout
+Test
+\end_layout
+
+\begin_layout Subsection*
+Gauss (Theta quadrat, um negative Thetas direkt zu vermeiden.
+ Der RPROP muss dann nicht mehr nach unten begrenzt werden):
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(\theta_{k}^{2}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta\lambda^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\theta_{d}\left|x_{1d}-x_{2d}\right|^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =2\lambda\delta_{ij}\Rightarrow\frac{\partial R}{\partial\lambda}=2\lambda E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Schlecht, da die Ableitung bei 
+\begin_inset Formula $\theta_{d}=0$
+\end_inset
+
+ auch Null ist.
+ Ein Gradientenverfahren kommt dort also nicht mehr von selbst raus.
+\end_layout
+
+\begin_layout Plain Layout
+Daher wird eine andere Funktion verwendet:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{d}}\left|x_{1d}-x_{2d}\right|^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
+-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k\neq l\\
+e^{\theta_{k}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k=l
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Algorithmisch besser:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
+-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\frac{\partial f}{\partial x_{2}^{k}} & k\neq l\\
+\left(e^{\theta_{k}}-\left[\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\right]^{2}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k=l
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Falls 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(\overrightarrow{x}_{2},\overrightarrow{x}_{2}\right)}{\partial x_{2}^{k}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}\partial x_{1}^{l}} & =\begin{cases}
+0 & k\neq l\\
+e^{\theta_{k}} & k=l
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Berechnet sind in der vorherigen Funktion bereits
+\begin_inset Formula 
+\begin{align*}
+e^{\theta_{k}},f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right),\left(x_{1k}-x_{2k}\right),e^{\theta_{k}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Diese Werte können einfach übergeben werden und man spart dadurch 2x die
+ exp Funktion, eine Differenz, und 2 Multiplikationen
+\end_layout
+
+\begin_layout Plain Layout
+Nebenrechnung
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\frac{\partial}{\partial x_{2}^{l}}\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(\frac{\partial}{\partial x_{2}^{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(\frac{\partial\left(x_{1k}-x_{2k}\right)}{\partial x_{2}^{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(x_{1k}-x_{2k}\right)\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)}{\partial x_{2}^{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(-f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}-1\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Erste Ableitung nach Theta ableiten:
+\end_layout
+
+\begin_layout Plain Layout
+x1 k=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(-e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{l}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+x1 k!=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =-\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{p}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =\frac{1}{2}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{p}+\theta_{k}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+x2 k=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\left(-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\left(1-\frac{1}{2}\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+x2 k!=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}e^{\theta_{k}+\theta_{p}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Zweite Ableitung nach Theta ableiten:
+\end_layout
+
+\begin_layout Plain Layout
+k=l=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{p}\partial x_{2}^{p}\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{p}}\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}2e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left[\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(x_{1d}-x_{2d}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+k=l!=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)\left(e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}e^{\theta_{p}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+k!=l; k=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\left(e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+k!=l; l=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{l}}\left(e^{\theta_{l}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}+\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+k!=l; k!=p; l!=p
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =\frac{1}{2}e^{\theta_{l}+\theta_{k}+\theta_{p}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wenn x1=x2:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{l}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{p}\partial x_{1}^{p}\theta_{p}} & =e^{\theta_{p}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{k}\theta_{p}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{k}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{l}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{p}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Exponential Ansatz:
+\begin_inset Formula 
+\begin{align*}
+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left|x_{1d}-x_{2d}\right|^{p}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\frac{\partial}{\partial p}\left(\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\frac{\partial}{\partial p}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)log\left(\left|x_{1k}-x_{2k}\right|\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Kubischer Spline:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+f\left(x_{1},x_{2}\right) & =\overset{N}{\underset{j=1}{\prod}}p_{j}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\xi_{j} & =e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
+1-\frac{3}{a}\xi_{j}^{2}+\frac{1+a}{a^{2}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{1-a}\left(1-\xi_{j}\right)^{3} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{j}} & =\frac{\partial p_{j}}{\partial\theta_{j}}\overset{N}{\underset{i\neq j}{\prod}}p_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
+-\frac{6}{a}\left|x_{1j}-x_{2j}\right|^{2}e^{2\theta_{j}}+3\frac{1+a}{a^{2}}\left|x_{1j}-x_{2j}\right|^{3}e^{3\theta_{j}} & ,0\leq\xi_{j}\leq a\\
+-\frac{3}{1-a}\left|x_{1j}-x_{2j}\right|e^{\theta_{j}}\left(1-\left|x_{1j}-x_{2j}\right|e^{\theta_{j}}\right)^{2} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
+3\xi_{j}^{2}\left(\frac{1+a}{a^{2}}\xi_{j}-\frac{2}{a}\right) & ,0\leq\xi_{j}\leq a\\
+-\frac{3}{1-a}\xi_{j}\left(1-\xi_{j}\right)^{2} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial a} & =\overset{N}{\underset{j=1}{\sum}}\left(\frac{\partial p_{j}}{\partial a}\overset{N}{\underset{i\neq j}{\prod}}p_{i}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{j}}{\partial a} & =\begin{cases}
+\frac{3}{a^{2}}\xi_{j}^{2}-\frac{a+2}{a^{3}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{\left(1-a\right)^{2}}\left(1-\xi_{j}\right)^{3}, & a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kubischer Spline nach x
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}} & =\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
+1-\frac{3}{a}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{2}+\frac{1+a}{a^{2}}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{1-a}\left(1-e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
+-\frac{3}{a}2e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1+\frac{1+a}{a^{2}}3e^{2\theta_{k}}\left|x_{1k}-x_{2k}\right|{}^{2}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1 & ,0\leq\xi_{k}\leq a\\
+\frac{1}{1-a}3\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\left(-e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
+-\frac{3}{a}e^{\theta_{k}}2\left|x_{1k}-x_{2k}\right|e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1)+\frac{1+a}{a^{2}}3e^{2\theta_{k}}\left|x_{1k}-x_{2k}\right|{}^{2}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1) & ,0\leq\xi_{k}\leq a\\
+\frac{1}{1-a}3\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\left(-e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+2te Ableitung Kubischer Spline nach x
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}} & =\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}} & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{2\theta_{k}}\frac{\partial}{\partial x_{2}^{k}}\left[\left|x_{1k}-x_{2k}\right|\left(\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-2\right)\right] & ,0\leq\xi_{k}\leq a\\
+-\frac{3}{1-a}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial x_{2}^{k}}\left[\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\right] & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}} & =\begin{cases}
+-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}\xi_{k}-1\right] & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}e^{2\theta_{k}}\left[\left(1-\xi_{k}\right)\right] & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}} & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{l}}{\partial x_{2}^{l}} & =\begin{cases}
+-sgn\left(x_{1l}-x_{2l}\right)\frac{3}{a}e^{\theta_{l}}\xi\left(\frac{1+a}{a}\xi_{l}-2\right) & ,0\leq\xi_{l}\leq a\\
+sgn\left(x_{1l}-x_{2l}\right)\frac{3}{1-a}e^{\theta_{l}}\left(1-\xi_{l}\right)^{2} & ,a<\xi_{l}<1\\
+0 & ,\xi_{l}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}} & =\frac{6}{a}e^{2\theta_{k}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kubischer Spline nach Theta, erste Ableitung:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+p_{j}=0\Longrightarrow & \frac{\partial f}{\partial\theta_{p}}=0
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{k}} & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial p_{p}}{\partial\theta_{p}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =\frac{12}{a}e^{2\theta_{k}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kubischer Spline nach Theta, zweite Ableitung:
+\end_layout
+
+\begin_layout Plain Layout
+p=k=l
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+p!=k=l
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial^{2}p_{k}}{\partial x_{2}^{k}\partial x_{1}^{k}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+p=k!=l
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+p=l ; k!=l
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+p!=k!=l
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq l;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kubischer Spline nach a, erste Ableitung:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial a} & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+Für pj != 0, wenn pj = 0 ist die ganze Ableitung 0
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Formula 
+\begin{align*}
+ & =\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial p_{j}}{\partial a}}{p_{j}}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =-\frac{6}{a^{2}}e^{2\theta_{k}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}}\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Kubischer Spline nach a, zweite Ableitung:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\left[\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+= & \frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+=\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j} & \left[\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Produktableitungen nach Theta
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\xi_{k} & =e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
+\frac{\partial}{\partial\theta_{k}}\left(-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-1\right]\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{\partial}{\partial\theta_{k}}\left(\frac{6}{1-a}e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+-\frac{6}{a}\frac{\partial}{\partial\theta_{k}}\left(\frac{1+a}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}\frac{\partial}{\partial\theta_{k}}\left(e^{2\theta_{k}}-e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+-\frac{6}{a}\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-2e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}\left(2e^{2\theta_{k}}-3e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+-\frac{6}{a}e^{2\theta_{k}}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-2\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}e^{2\theta_{k}}\left(2-3\xi_{k}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+\frac{\partial}{\partial\theta_{k}}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi_{k}-2\right)\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{\partial}{\partial\theta_{k}}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\frac{\partial}{\partial\theta_{k}}\left(\frac{1+a}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-2e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\left(\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}\right)\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)+e^{\theta_{k}}\left(1-\xi_{k}\right)\frac{\partial}{\partial\theta_{k}}\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\left(e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)-2e^{\theta_{k}}\xi_{k}\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)\left(\left(1-\xi_{k}\right)-2\xi_{k}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-4\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-3\xi_{k}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+0 & ,0\leq\xi_{k}\leq a\\
+0 & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Produktableitungen nach a
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
+\frac{\partial}{\partial a}\left(-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-1\right]\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{\partial}{\partial a}\left(\frac{6}{1-a}e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+-6e^{2\theta_{k}}\frac{\partial}{\partial a}\left(\frac{1+a}{a^{2}}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-\frac{1}{a}\right) & ,0\leq\xi_{k}\leq a\\
+-e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\frac{\partial}{\partial a}\left(\frac{6}{1-a}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+-6e^{2\theta_{k}}\frac{1}{a^{2}}\left(1-\frac{2+a}{a}\xi_{k}\right) & ,0\leq\xi_{k}\leq a\\
+-e^{2\theta_{k}}\frac{6\left(1-\xi_{k}\right)}{\left(a-1\right)^{2}} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi_{k}-2\right)\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\xi_{k}\left(\frac{3\left(1+a\right)}{a^{2}}\xi_{k}-\frac{6}{a}\right)\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+ & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\xi_{k}\left(-3\frac{\left(2+a\right)}{a^{3}}\xi_{k}+\frac{6}{a^{2}}\right) & ,0\leq\xi_{k}\leq a\\
+-\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{\left(a-1\right)^{2}}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Konditionierung als Nebenbedinung für das Training
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\left|\frac{\Xi_{max}\left(R\right)}{\Xi_{min}\left(R\right)}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Da R immer positiv definit sein muss
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\kappa & =\frac{\Xi_{max}\left(R\right)}{\Xi_{min}\left(R\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Der betragsmäßig maximale Eigenwerte kann mit dem Mises / Potenzverfahren
+ gut gefunden werden.
+ Um den minimalen zu finden nutzt man folgenden Zusammenhang:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\Xi_{min}\left(R\right)= & \frac{1}{\Xi_{max}\left(R^{-1}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Xi_{max}\left(R^{-1}\right)$
+\end_inset
+
+ kann mit dem Mises Verfahren ohne Probleme gefunden werden.
+\end_layout
+
+\begin_layout Plain Layout
+Die Ableitung der Konditionierung nach den Hyperparametern:
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\kappa}{\partial\theta} & =\frac{\frac{\partial\Xi_{max}}{\partial\theta}\Xi_{min}-\Xi_{max}\frac{\partial\Xi_{min}}{\partial\theta}}{\Xi_{min}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Die Eigenwerte werden wie folgt abgeleitet:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+R\vec{x} & =\Xi\vec{x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\left(R\vec{x}\right)^{T} & =\left(\Xi\vec{x}\right)^{T}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\vec{x}^{T}R^{T} & =\Xi\vec{x}^{T}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial R\vec{x}}{\partial\theta} & =\frac{\partial\Xi\vec{x}}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial R}{\partial\theta}\vec{x}+R\frac{\partial\vec{x}}{\partial\theta} & =\frac{\partial\Xi}{\partial\theta}\vec{x}+\Xi\frac{\partial\vec{x}}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta} & =\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}+\vec{x}^{T}\Xi\frac{\partial\vec{x}}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+da die Matrix symmetrisch ist
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+R^{T} & =R
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}-\vec{x}^{T}R^{T}\frac{\partial\vec{x}}{\partial\theta}=\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}-\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}=\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}=\frac{\partial\Xi}{\partial\theta}\vec{x}^{T}\vec{x}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}}{\vec{x}^{T}\vec{x}}=\frac{\partial\Xi}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial\kappa}{\partial\theta} & =\frac{\frac{\vec{x}_{max}^{T}\frac{\partial R}{\partial\theta}\vec{x}_{max}}{\vec{x}_{max}^{T}\vec{x}_{max}}\Xi_{min}-\Xi_{max}\frac{\vec{x}_{min}^{T}\frac{\partial R}{\partial\theta}\vec{x}_{min}}{\vec{x}_{min}^{T}\vec{x_{min}}}}{\Xi_{min}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Die Eigenwerte nach dem Diagonalaufschlag abgeleitet:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial R\vec{x}}{\partial\lambda} & =\frac{\partial\Xi\vec{x}}{\partial\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+\frac{\vec{x}^{T}Ee^{\lambda}\vec{x}}{\vec{x}^{T}\vec{x}}=\frac{\partial\Xi}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+e^{\lambda}=\frac{\partial\Xi}{\partial\theta}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Die Gradienten der Nebenbedingung können hier sehr große werden und die
+ Nebenbedingung tendiert dann immer gegen eine Einheitsmatrix für R.
+ Zudem ist der Berechnungsaufwand relativ hoch und der Gradient basiert
+ auf der Inversen, was widerum zu Fehlern führen kann.
+\end_layout
+
+\begin_layout Section
+Checksumme:
+\end_layout
+
+\begin_layout Plain Layout
+Eine einfache Checksumme, ob die Diagonale der Einheitsmatrix entspricht.
+ Wenn die Invertierung nicht funktioniert hat, kommen hier typischerweise
+ Werte > 0 raus.
+ Dies ist ein schneller Check um die Qualität der Invertierung zu überprüfen.
+ Da die Ableitung allerdings auch auf der Inversen beruht, ist es nicht
+ möglich einen Gradienten für die Nebenbedinung zu finden.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{align*}
+Spur\left(RR^{-1}\right) & -N=0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+CO-Kriging
+\end_layout
+
+\begin_layout Subsection
+Braunschweiger Model:
+\end_layout
+
+\begin_layout Plain Layout
+Ansatz von den Braunschweigern 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
+
+\end_inset
+
+, nur für 2 Fidelities:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+Z^{*}\left(\vec{x}_{0}\right)=\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+Z^{*}\left(\vec{x}_{0}\right)=\sum_{i=1}^{n_{all}}w_{i}Z\left(\vec{x}_{i}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z\left(\vec{x}_{0}\right)-Z^{*}\left(\vec{x}_{0}\right)\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Annahme der Braunschweiger:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z_{i=1}\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+E\left[Z^{*}\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+BLUE:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+E\left[Z^{*}\left(\vec{x}_{0}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+E\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}E\left[Z\left(\vec{x}_{i,j}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+MSE:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z_{i=1}\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}-2Z_{i=1}\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}+\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}\right]-\textrm{E}\left[2Z_{i=1}\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{E}\left[\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Einschub, Verschiebungssatz:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+E\left[XY\right]=Cov\left[X,Y\right]+E\left[X\right]E\left[Y\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Ergibt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}\right]-2\left(Cov\left(Z_{i=1},\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)+\textrm{E}\left[Z_{i=1}\right]\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]\right)+\textrm{E}\left[\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{Var}\left[Z_{i=1}\right]+E\left[Z_{i=1}\right]{}^{2}-2Cov\left(Z_{i=1},\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)-2\textrm{E}\left[Z_{i=1}\right]\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{Var}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R=\left[\begin{array}{c|ccccc}
+ & x1_{h} & x2_{h} & x1_{l} & x2_{l} & x3_{l}\\
+\hline x1_{h} & f\left(x_{1h,}x_{1h}\right) & f\left(x_{1h,}x_{2h}\right) & f\left(x_{1h,}x_{1l}\right) & f\left(x_{1h,}x_{2l}\right) & f\left(x_{1h,}x_{3l}\right)\\
+x2_{h} & f\left(x_{2h,}x_{1h}\right) & f\left(x_{2h,}x_{2h}\right) & f\left(x_{2h,}x_{1l}\right) & f\left(x_{2h,}x_{2l}\right) & f\left(x_{2h,}x_{3l}\right)\\
+x1_{l} & f\left(x_{1l,}x_{1h}\right) & f\left(x_{1l,}x_{2h}\right) & f\left(x_{1l,}x_{1l}\right) & f\left(x_{1l,}x_{2l}\right) & f\left(x_{1l,}x_{3l}\right)\\
+x2_{l} & f\left(x_{2l,}x_{1h}\right) & f\left(x_{2l,}x_{2h}\right) & f\left(x_{2l,}x_{1l}\right) & f\left(x_{2l,}x_{2l}\right) & f\left(x_{2l,}x_{3l}\right)\\
+x3_{l} & f\left(x_{3l,}x_{1h}\right) & f\left(x_{3l,}x_{2h}\right) & f\left(x_{3l,}x_{1l}\right) & f\left(x_{3l,}x_{2l}\right) & f\left(x_{3l,}x_{3l}\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Effizienz
+\end_layout
+
+\begin_layout Plain Layout
+Likelihood nach ys ableiten, um unwichtige Member rauszufiltern, ORdinary
+ Kriging:
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\log(N)= & -n\log\left(\sigma^{2}\right)-\log\left(\det(\mathbf{\mathbf{R}})\right)-\frac{1}{\sigma^{2}}\left(\vec{y}_{s}-\frac{\vec{y}_{s}^{T}\mathbf{R}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{R}}^{-1}\left(\vec{y}_{s}-\frac{\vec{y}_{s}^{T}\mathbf{R}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\overrightarrow{F}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Spur schätzen 
+\begin_inset Formula 
+\[
+Spur\left(R\right)=E\left[\vec{d}^{T}R\vec{d}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+Spur\left(R\right)\approx\frac{1}{N}\sum\vec{d}^{T}R\vec{d}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+\vec{d}=\left[\begin{array}{c}
+N\left(0,1\right)\\
+\vdots\\
+N\left(0,1\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Invertierung teilweise sparen:
+\end_layout
+
+\begin_layout Plain Layout
+Beim Quasi Newton Line-Search keine Gradienten berechnen und dadurch kann
+ dort auf die Invertierung verzichtet werden.
+ Stattdessen lösen wir das durch die Cholesky Zerlegung und einem LGS.
+\end_layout
+
+\begin_layout Plain Layout
+Nur bei einem äußeren QN Schritt, wird die Matrix invertiert und dann der
+ Gradient damit berechnet.
+\end_layout
+
+\begin_layout Plain Layout
+Randomized Algorithms for Estimating the Trace of an Implicit Symmetric
+ Positive Semi-Deﬁnite Matrix
+\end_layout
+
+\begin_layout Plain Layout
+A stochastic estimator of the trace of the influence matrix for laplacian
+ smoothing splines M.F.
+ Hutchinson a
+\end_layout
+
+\begin_layout Plain Layout
+Efficient Implementation of Gaussian Processes, Mark Gibbs David J.C.
+ MacKay
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,143 @@
+%%
+%% This is file `dlrutils.def',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% dlr.dtx  (with options: `utils')
+%% This is a generated file.
+%% 
+%% Copyright (c) DLR.  All rights reserved.
+%% 
+%% This file contains official style files for DLR letters,
+%% faxes, memos, slides, protocols, and reports.
+%% Written by Dr. Patrick van der Smagt <smagt@dlr.de>.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{dlrutils.def}
+        [2008/12/09 v7.1.0
+DLR Classes utilities]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcount\@counttemp
+\newif\if@comma             \newif\if@newline
+\newif\if@notvoidtoks       \newif\if@toksnotequal
+\newif\if@beenhere          \newif\if@somethingbefore
+\newif\if@continueloop
+\newtoks\@toksbeforenewline \newtoks\@toksafternewline
+\newtoks\@toksbeforecomma   \newtoks\@toksempty
+\newtoks\@toksblank         \newtoks\@toksnewline
+\newtoks\@toksremaining     \newtoks\@toksitem
+\@toksempty={}
+\@toksblank={ }
+\@toksnewline={\\}
+\def\@blank{ }
+\def\@toksinput#1#2{
+ \def\@toksname{\csname @toks#1\endcsname}
+ \def\@countname{\csname @count#1\endcsname}
+ \@toksnotequal\@toksname\@toksempty
+ \if@toksnotequal \@addtotoks\@toksname\\ \fi
+ \@beenherefalse
+ \@toksremaining={#2}
+ \loop
+   \@tonewlinepull\@toksremaining
+   \@somethingbeforefalse
+   \@toksnotequal\@toksbeforenewline\@toksempty
+   \if@toksnotequal
+     \@toksnotequal\@toksbeforenewline\@toksblank
+     \if@toksnotequal
+       \@somethingbeforetrue
+     \fi
+   \fi
+   \if@somethingbefore
+     \if@beenhere
+       \@addtotoks\@toksname\\
+     \else
+       \@beenheretrue
+     \fi
+     \@addtokstotoks\@toksname\@toksbeforenewline
+     \@continuelooptrue
+     \advance\@countname by 1
+   \else
+     \@toksnotequal\@toksafternewline\@toksempty%
+     \if@toksnotequal
+       \@toksnotequal\@toksafternewline\@toksnewline%
+       \if@toksnotequal
+         \@continuelooptrue%
+       \else
+         \@continueloopfalse%
+       \fi
+     \else
+       \@continueloopfalse%
+     \fi
+   \fi
+   \if@continueloop \@toksremaining=\@toksafternewline
+ \repeat}
+\def\@tonewlinepull#1{\begingroup\let\\=\relax
+\expandafter\@tonewlinepullone\the#1\\\@empty
+\if@newline\expandafter\@tonewlinepullthree\the#1\@empty
+\else\fi\endgroup}%
+\def\@tonewlinepullone#1\\{\global\@toksbeforenewline={#1}%
+\futurelet\next\@tonewlinepulltwo}%
+\def\@tonewlinepulltwo#1\@empty{\global\@toksafternewline={#1}%
+\ifx\@empty\next\global\@newlinefalse
+\else\global\@newlinetrue\fi}%
+\def\@tonewlinepullthree#1\\{\global\@toksbeforenewline={#1}%
+\futurelet\next\@tonewlinepullfour}%
+\def\@tonewlinepullfour#1\@empty{\global\@toksafternewline={#1}%
+\ifx\@empty\next\global\@newlinefalse
+\else\global\@newlinetrue\fi}%
+\def\@unspaceleft#1{{\def\@macroname{#1}
+  \ifx #1\@empty
+  \else
+    \ifx #1\@blank
+      \global\expandafter\def\@macroname{}
+    \else
+      \expandafter\@unspaceleftone#1\relax\relax\@empty
+  \fi \fi}}
+
+\def\@unspaceleftone#1#2\relax{
+  \global\expandafter\def\@macroname{#1#2}\@unspacelefttwo}%
+\def\@unspacelefttwo#1\@empty{}
+\def\@upperunspaceleft#1{{\def\@macroname{#1}
+  \ifx #1\@empty
+  \else
+    \ifx #1\@blank
+      \global\expandafter\def\@macroname{}%
+    \else
+      \expandafter\@upperunspaceleftone#1\relax\relax\@empty
+    \fi \fi}}
+
+\def\@upperunspaceleftone#1#2\relax{
+ \global\expandafter\def\@macroname{\uppercase{#1#2}}\@unspacelefttwo}
+
+\def\@unspaceright#1{{\def\@macroname{#1}
+ \edef\@temp{#1}\expandafter\@unspacerightone#1\relax{} \relax\@empty}}
+
+\def\@unspacerightone#1 \relax{
+ \global\expandafter\edef\@macroname{#1}
+ \futurelet\next\@unspacerighttwo}
+ \def\@unspacerighttwo#1\@empty{
+ \ifx \@empty\next
+ \global\expandafter\edef\@macroname{\@temp}
+ \fi}
+\def\@addtotoks#1#2{#1=\expandafter{\the#1#2}}
+\def\@addtokstotoks#1#2{{\edef\deftemp{\the#1\the#2}
+ \global#1=\expandafter{\deftemp}}}
+\long\def\@ifemptyorundefined#1#2#3{%
+\expandafter\ifx\csname#1\endcsname\relax#2
+\else\expandafter\ifx\csname#1\endcsname\@empty#2
+\else\expandafter\ifx\csname#1\endcsname\@blank#2
+\else#3\fi\fi\fi}
+\def\@toksnotequal#1#2{\begingroup \edef\one{\the#1} \edef\two{\the#2}%
+\ifx\one\two\global\@toksnotequalfalse\else\global\@toksnotequaltrue\fi
+\endgroup}%
+\def\@advcountbydimen#1#2{\@counttemp=#2%
+\divide\@counttemp by 65536 \advance#1by \@counttemp}%
+\def\@notvoidtoks#1{\@addtotoks{#1}{\@empty}%
+\expandafter\@notvoidtoksone\the#1}%
+\def\@notvoidtoksone{\futurelet\next\@notvoidtokstwo}%
+\def\@notvoidtokstwo#1\@empty{\ifx \@empty\next \@notvoidtoksfalse
+\else \@notvoidtokstrue \fi}%
+\endinput
+%%
+%% End of file `dlrutils.def'.

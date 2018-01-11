@@ -1,0 +1,1312 @@
+%% This file has been automatically generated.  Do not edit.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{DLRStdo.clo}
+
+%% Data generated from stdo-de.txt
+\ifx\use@german\undefined\else
+\newcommand\StandortAS {
+    \def\INSTkrz{AS}
+    \def\INSTstandort{Almeria}
+    \def\INSTstrasse{Ctra. de Senes s/n}
+    \def\INSTort{04200 Tabernas}
+    \def\INSTland{Spanien}
+    \def\INSTfussEINS{Plataforma Solar de Almeria}
+    \def\INSTfussZWEI{Ctra. de Senes s/n}
+    \def\INSTfussDREI{04200 Tabernas}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+34\,950}
+    \def\INSTuv{}
+    \def\INSTtel{387900}
+    \def\INSTfax{365313}
+    \def\INSTpostadr{Apartado 39}
+    \def\STDOurl{}}
+\newcommand\StandortAU {
+    \def\INSTkrz{AU}
+    \def\INSTstandort{Augsburg}
+    \def\INSTstrasse{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTort{86153 Augsburg}
+    \def\INSTland{}
+    \def\INSTfussEINS{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTfussZWEI{86153 Augsburg}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0821}
+    \def\INSTuv{505-}
+    \def\INSTtel{01}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 10\,22\,35}
+    \def\STDOurl{}}
+\newcommand\StandortAW {
+    \def\INSTkrz{AW}
+    \def\INSTstandort{Ahrweiler}
+    \def\INSTstrasse{Wilhelmstra{\ss}e 56}
+    \def\INSTort{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTland{}
+    \def\INSTfussEINS{Wilhelmstra{\ss}e 56}
+    \def\INSTfussZWEI{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{02641}
+    \def\INSTuv{9733-}
+    \def\INSTtel{00}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBA {
+    \def\INSTkrz{BA}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Rutherfordstra{\ss}e 2}
+    \def\INSTort{12489 Berlin}
+    \def\INSTland{}
+    \def\INSTfussEINS{Berlin-Adlershof}
+    \def\INSTfussZWEI{Rutherfordstra{\ss}e 2}
+    \def\INSTfussDREI{12489 Berlin}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{030}
+    \def\INSTuv{67055-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBC {
+    \def\INSTkrz{BC}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTort{10623 Berlin}
+    \def\INSTland{}
+    \def\INSTfussEINS{Inst. f. Antriebstechnik}
+    \def\INSTfussZWEI{Abt. Triebwerksakustik Charlottenburg}
+    \def\INSTfussDREI{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTfussVIER{10623 Berlin}
+    \def\INSTvorwahl{030}
+    \def\INSTuv{310006-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBM {
+    \def\INSTkrz{BM}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Markgrafenstra{\ss}e 37}
+    \def\INSTort{10117 Berlin}
+    \def\INSTland{}
+    \def\INSTfussEINS{Markgrafenstra{\ss}e 37}
+    \def\INSTfussZWEI{10117 Berlin}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{030}
+    \def\INSTuv{67055-}
+    \def\INSTtel{470}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBO {
+    \def\INSTkrz{BO}
+    \def\INSTstandort{Bonn}
+    \def\INSTstrasse{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTort{53227 Bonn}
+    \def\INSTland{}
+    \def\INSTfussEINS{Bonn-Oberkassel}
+    \def\INSTfussZWEI{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTfussDREI{53227 Bonn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0228}
+    \def\INSTuv{447-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 30\,03\,64}
+    \def\STDOurl{}}
+\newcommand\StandortBR {
+    \def\INSTkrz{BR}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{H{\"u}nefeldstr. 1-5}
+    \def\INSTort{28199 Bremen}
+    \def\INSTland{}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Bremen}
+    \def\INSTfussZWEI{Raumfahrt Infrastruktur}
+    \def\INSTfussDREI{H{\"u}nefeldstr. 1-5}
+    \def\INSTfussVIER{28199 Bremen}
+    \def\INSTvorwahl{0421}
+    \def\INSTuv{}
+    \def\INSTtel{5394548}
+    \def\INSTfax{552193}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBS {
+    \def\INSTkrz{BS}
+    \def\INSTstandort{Braunschweig}
+    \def\INSTstrasse{Lilienthalplatz 7}
+    \def\INSTort{38108 Braunschweig}
+    \def\INSTland{}
+    \def\INSTfussEINS{Lilienthalplatz 7}
+    \def\INSTfussZWEI{38108 Braunschweig}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0531}
+    \def\INSTuv{295-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBX {
+    \def\INSTkrz{BX}
+    \def\INSTstandort{Br{\"u}ssel}
+    \def\INSTstrasse{98, Rue du Trône}
+    \def\INSTort{1050 Br{\"u}ssel}
+    \def\INSTland{Belgien}
+    \def\INSTfussEINS{B{\"u}ro Br{\"u}ssel}
+    \def\INSTfussZWEI{98, Rue du Trône}
+    \def\INSTfussDREI{1050 Br{\"u}ssel}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+32\,2}
+    \def\INSTuv{}
+    \def\INSTtel{5000841}
+    \def\INSTfax{5000840}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortEM {
+    \def\INSTkrz{EM}
+    \def\INSTstandort{Emmeloord}
+    \def\INSTstrasse{Postbus 175}
+    \def\INSTort{8300 Emmeloord}
+    \def\INSTland{Niederlande}
+    \def\INSTfussEINS{Postbus 175}
+    \def\INSTfussZWEI{8300 Emmeloord}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+31\,527}
+    \def\INSTuv{}
+    \def\INSTtel{248555}
+    \def\INSTfax{248582}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortFH {
+    \def\INSTkrz{FH}
+    \def\INSTstandort{Friedrichshafen}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88039 Friedrichshafen}
+    \def\INSTland{}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Friedrichshafen}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88039 Friedrichshafen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{07545}
+    \def\INSTuv{8-}
+    \def\INSTtel{3205}
+    \def\INSTfax{5890}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortGO {
+    \def\INSTkrz{GO}
+    \def\INSTstandort{G{\"o}ttingen}
+    \def\INSTstrasse{Bunsenstr. 10}
+    \def\INSTort{37073 G{\"o}ttingen}
+    \def\INSTland{}
+    \def\INSTfussEINS{Bunsenstr. 10}
+    \def\INSTfussZWEI{37073 G{\"o}ttingen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0551}
+    \def\INSTuv{709-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHA {
+    \def\INSTkrz{HA}
+    \def\INSTstandort{Hamburg-Harburg}
+    \def\INSTstrasse{Ei{\ss}endorfer Str. 38}
+    \def\INSTort{21073 Hamburg}
+    \def\INSTland{}
+    \def\INSTfussEINS{Technische Universit{\"a}t Hamburg-Harburg}
+    \def\INSTfussZWEI{Ei{\ss}endorfer Str. 38}
+    \def\INSTfussDREI{21073 Hamburg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{040}
+    \def\INSTuv{42878-}
+    \def\INSTtel{}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHB {
+    \def\INSTkrz{HB}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{Am Fallturm 1}
+    \def\INSTort{28359 Bremen}
+    \def\INSTland{}
+    \def\INSTfussEINS{Institut f{\"u}r Raumfahrtsysteme}
+    \def\INSTfussZWEI{Am Fallturm 1}
+    \def\INSTfussDREI{28359 Bremen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0421}
+    \def\INSTuv{24420-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHH {
+    \def\INSTkrz{HH}
+    \def\INSTstandort{Hamburg}
+    \def\INSTstrasse{Sportallee 54a}
+    \def\INSTort{22335 Hamburg}
+    \def\INSTland{}
+    \def\INSTfussEINS{Inst. f. Luft- und Raumfahrtmedizin}
+    \def\INSTfussZWEI{Abt. Luft- und Raumfahrtpsychologie}
+    \def\INSTfussDREI{Sportallee 54a}
+    \def\INSTfussVIER{22335 Hamburg}
+    \def\INSTvorwahl{040}
+    \def\INSTuv{513096-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortKP {
+    \def\INSTkrz{KP}
+    \def\INSTstandort{K{\"o}ln}
+    \def\INSTstrasse{Linder H{\"o}he}
+    \def\INSTort{51147 K{\"o}ln}
+    \def\INSTland{}
+    \def\INSTfussEINS{Porz-Wahnheide}
+    \def\INSTfussZWEI{Linder H{\"o}he}
+    \def\INSTfussDREI{51147 K{\"o}ln}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{02203}
+    \def\INSTuv{601-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{51170 K{\"o}ln}
+    \def\STDOurl{}}
+\newcommand\StandortLA {
+    \def\INSTkrz{LA}
+    \def\INSTstandort{Lampoldshausen}
+    \def\INSTstrasse{Lampoldshausen}
+    \def\INSTort{74239 Hardthausen}
+    \def\INSTland{}
+    \def\INSTfussEINS{Lampoldshausen}
+    \def\INSTfussZWEI{74239 Hardthausen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{06298}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortMU {
+    \def\INSTkrz{MU}
+    \def\INSTstandort{M{\"u}nchen}
+    \def\INSTstrasse{Postfach 13\,47}
+    \def\INSTort{85751 M{\"u}nchen}
+    \def\INSTland{}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht M{\"u}nchen}
+    \def\INSTfussZWEI{c/o MAN Technologie AG}
+    \def\INSTfussDREI{Postfach 13\,47}
+    \def\INSTfussVIER{85751 M{\"u}nchen}
+    \def\INSTvorwahl{089}
+    \def\INSTuv{1580-}
+    \def\INSTtel{7916}
+    \def\INSTfax{7721}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortNZ {
+    \def\INSTkrz{NZ}
+    \def\INSTstandort{Neustrelitz}
+    \def\INSTstrasse{Kalkhorstweg 53}
+    \def\INSTort{17235 Neustrelitz}
+    \def\INSTland{}
+    \def\INSTfussEINS{Kalkhorstweg 53}
+    \def\INSTfussZWEI{17235 Neustrelitz}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{03981}
+    \def\INSTuv{480-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOB {
+    \def\INSTkrz{OB}
+    \def\INSTstandort{Ottobrunn}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88503 Ottobrunn}
+    \def\INSTland{}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Ottobrunn}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88503 Ottobrunn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{089}
+    \def\INSTuv{}
+    \def\INSTtel{66085328}
+    \def\INSTfax{60883326}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOP {
+    \def\INSTkrz{OP}
+    \def\INSTstandort{Oberpfaffenhofen}
+    \def\INSTstrasse{Oberpfaffenhofen}
+    \def\INSTort{82234 We{\ss}ling}
+    \def\INSTland{}
+    \def\INSTfussEINS{Oberpfaffenhofen}
+    \def\INSTfussZWEI{82234 We{\ss}ling}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{08153}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Oberpfaffenhofen}
+    \def\STDOurl{}}
+\newcommand\StandortPA {
+    \def\INSTkrz{PA}
+    \def\INSTstandort{Paris}
+    \def\INSTstrasse{17 Avenue de Saxe}
+    \def\INSTort{F-75007 PARIS}
+    \def\INSTland{}
+    \def\INSTfussEINS{Centre A{\'e}rospatial Allemand}
+    \def\INSTfussZWEI{Association Loi 1901}
+    \def\INSTfussDREI{17 Avenue de Saxe}
+    \def\INSTfussVIER{F-75007 PARIS}
+    \def\INSTvorwahl{+33\,1}
+    \def\INSTuv{4219-}
+    \def\INSTtel{9426}
+    \def\INSTfax{9629}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortST {
+    \def\INSTkrz{ST}
+    \def\INSTstandort{Stuttgart}
+    \def\INSTstrasse{Pfaffenwaldring 38-40}
+    \def\INSTort{70569 Stuttgart}
+    \def\INSTland{}
+    \def\INSTfussEINS{Pfaffenwaldring 38-40}
+    \def\INSTfussZWEI{70569 Stuttgart}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{0711}
+    \def\INSTuv{6862-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 80\,03\,20}
+    \def\STDOurl{}}
+\newcommand\StandortTR {
+    \def\INSTkrz{TR}
+    \def\INSTstandort{Trauen}
+    \def\INSTstrasse{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTort{29328 Fa{\ss}berg}
+    \def\INSTland{}
+    \def\INSTfussEINS{Trauen}
+    \def\INSTfussZWEI{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTfussDREI{29328 Fa{\ss}berg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{05055}
+    \def\INSTuv{596-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWA {
+    \def\INSTkrz{WA}
+    \def\INSTstandort{Washington}
+    \def\INSTstrasse{1627 Eye Street, N.W., Suite 540}
+    \def\INSTort{Washington, D.C. 20006-4020}
+    \def\INSTland{USA}
+    \def\INSTfussEINS{Washington Office}
+    \def\INSTfussZWEI{1627 Eye Street, N.W.}
+    \def\INSTfussDREI{Suite 540}
+    \def\INSTfussVIER{Washington, D.C. 20006-4020}
+    \def\INSTvorwahl{+1\,202}
+    \def\INSTuv{}
+    \def\INSTtel{7854411}
+    \def\INSTfax{7854410}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWM {
+    \def\INSTkrz{WM}
+    \def\INSTstandort{Weilheim}
+    \def\INSTstrasse{Reichenbergstr. 8}
+    \def\INSTort{82362 Weilheim}
+    \def\INSTland{}
+    \def\INSTfussEINS{DLR Bodenstation Weilheim}
+    \def\INSTfussZWEI{Reichenbergstr. 8}
+    \def\INSTfussDREI{82362 Weilheim}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{08809}
+    \def\INSTuv{14-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\fi
+
+%% Data generated from stdo-fr.txt
+\ifx\use@french\undefined\else
+\newcommand\StandortAS {
+    \def\INSTkrz{AS}
+    \def\INSTstandort{Almeria}
+    \def\INSTstrasse{Ctra. de Senes s/n}
+    \def\INSTort{04200 Tabernas}
+    \def\INSTland{Espagne}
+    \def\INSTfussEINS{Plataforma Solar de Almeria}
+    \def\INSTfussZWEI{Ctra. de Senes s/n}
+    \def\INSTfussDREI{04200 Tabernas}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+34\,950}
+    \def\INSTuv{}
+    \def\INSTtel{387900}
+    \def\INSTfax{365313}
+    \def\INSTpostadr{Apartado 39}
+    \def\STDOurl{}}
+\newcommand\StandortAU {
+    \def\INSTkrz{AU}
+    \def\INSTstandort{Augsburg}
+    \def\INSTstrasse{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTort{86153 Augsburg}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTfussZWEI{86153 Augsburg}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,821}
+    \def\INSTuv{505-}
+    \def\INSTtel{01}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 10\,22\,35}
+    \def\STDOurl{}}
+\newcommand\StandortAW {
+    \def\INSTkrz{AW}
+    \def\INSTstandort{Ahrweiler}
+    \def\INSTstrasse{Wilhelmstra{\ss}e 56}
+    \def\INSTort{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Wilhelmstra{\ss}e 56}
+    \def\INSTfussZWEI{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,2641}
+    \def\INSTuv{9733-}
+    \def\INSTtel{00}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBA {
+    \def\INSTkrz{BA}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Rutherfordstra{\ss}e 2}
+    \def\INSTort{12489 Berlin}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Berlin-Adlershof}
+    \def\INSTfussZWEI{Rutherfordstra{\ss}e 2}
+    \def\INSTfussDREI{12489 Berlin}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{67055-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBC {
+    \def\INSTkrz{BC}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTort{10623 Berlin}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Inst. f. Antriebstechnik}
+    \def\INSTfussZWEI{Abt. Triebwerksakustik Charlottenburg}
+    \def\INSTfussDREI{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTfussVIER{10623 Berlin}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{310006-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBM {
+    \def\INSTkrz{BM}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Markgrafenstra{\ss}e 37}
+    \def\INSTort{10117 Berlin}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Markgrafenstra{\ss}e 37}
+    \def\INSTfussZWEI{10117 Berlin}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{67055-}
+    \def\INSTtel{470}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBO {
+    \def\INSTkrz{BO}
+    \def\INSTstandort{Bonn}
+    \def\INSTstrasse{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTort{53227 Bonn}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Bonn-Oberkassel}
+    \def\INSTfussZWEI{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTfussDREI{53227 Bonn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,228}
+    \def\INSTuv{447-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 30\,03\,64}
+    \def\STDOurl{}}
+\newcommand\StandortBR {
+    \def\INSTkrz{BR}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{H{\"u}nefeldstr. 1-5}
+    \def\INSTort{28199 Bremen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Bremen}
+    \def\INSTfussZWEI{Raumfahrt Infrastruktur}
+    \def\INSTfussDREI{H{\"u}nefeldstr. 1-5}
+    \def\INSTfussVIER{28199 Bremen}
+    \def\INSTvorwahl{+49\,421}
+    \def\INSTuv{}
+    \def\INSTtel{5394548}
+    \def\INSTfax{552193}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBS {
+    \def\INSTkrz{BS}
+    \def\INSTstandort{Braunschweig}
+    \def\INSTstrasse{Lilienthalplatz 7}
+    \def\INSTort{38108 Braunschweig}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Lilienthalplatz 7}
+    \def\INSTfussZWEI{38108 Braunschweig}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,531}
+    \def\INSTuv{295-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBX {
+    \def\INSTkrz{BX}
+    \def\INSTstandort{Bruxelles}
+    \def\INSTstrasse{98, Rue du Trône}
+    \def\INSTort{1050 Bruxelles}
+    \def\INSTland{Belgique}
+    \def\INSTfussEINS{Bureau Bruxelles}
+    \def\INSTfussZWEI{98, Rue du Trône}
+    \def\INSTfussDREI{1050 Bruxelles}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+32\,2}
+    \def\INSTuv{51466}
+    \def\INSTtel{71}
+    \def\INSTfax{70}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortEM {
+    \def\INSTkrz{EM}
+    \def\INSTstandort{Emmeloord}
+    \def\INSTstrasse{Postbus 175}
+    \def\INSTort{8300 Emmeloord}
+    \def\INSTland{Les Pays Bas}
+    \def\INSTfussEINS{Postbus 175}
+    \def\INSTfussZWEI{8300 Emmeloord}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+31\,527}
+    \def\INSTuv{}
+    \def\INSTtel{248555}
+    \def\INSTfax{248582}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortFH {
+    \def\INSTkrz{FH}
+    \def\INSTstandort{Friedrichshafen}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88039 Friedrichshafen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Friedrichshafen}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88039 Friedrichshafen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,7545}
+    \def\INSTuv{8-}
+    \def\INSTtel{3205}
+    \def\INSTfax{5890}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortGO {
+    \def\INSTkrz{GO}
+    \def\INSTstandort{G{\"o}ttingen}
+    \def\INSTstrasse{Bunsenstr. 10}
+    \def\INSTort{37073 G{\"o}ttingen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Bunsenstr. 10}
+    \def\INSTfussZWEI{37073 G{\"o}ttingen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,551}
+    \def\INSTuv{709-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHA {
+    \def\INSTkrz{HA}
+    \def\INSTstandort{Hamburg-Harburg}
+    \def\INSTstrasse{Ei{\ss}endorfer Str. 38}
+    \def\INSTort{21073 Hamburg}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Technische Universit{\"a}t Hamburg-Harburg}
+    \def\INSTfussZWEI{Ei{\ss}endorfer Str. 38}
+    \def\INSTfussDREI{21073 Hamburg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,40}
+    \def\INSTuv{42878-}
+    \def\INSTtel{}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHB {
+    \def\INSTkrz{HB}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{Am Fallturm 1}
+    \def\INSTort{28359 Bremen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Institut f{\"u}r Raumfahrtsysteme}
+    \def\INSTfussZWEI{Am Fallturm 1}
+    \def\INSTfussDREI{28359 Bremen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,421}
+    \def\INSTuv{24420-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHH {
+    \def\INSTkrz{HH}
+    \def\INSTstandort{Hamburg}
+    \def\INSTstrasse{Sportallee 54a}
+    \def\INSTort{22335 Hamburg}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Inst. f. Luft- und Raumfahrtmedizin}
+    \def\INSTfussZWEI{Abt. Luft- und Raumfahrtpsychologie}
+    \def\INSTfussDREI{Sportallee 54a}
+    \def\INSTfussVIER{22335 Hamburg}
+    \def\INSTvorwahl{+49\,40}
+    \def\INSTuv{513096-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortKP {
+    \def\INSTkrz{KP}
+    \def\INSTstandort{K{\"o}ln}
+    \def\INSTstrasse{Linder H{\"o}he}
+    \def\INSTort{51147 K{\"o}ln}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Porz-Wahnheide}
+    \def\INSTfussZWEI{Linder H{\"o}he}
+    \def\INSTfussDREI{51147 K{\"o}ln}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,2203}
+    \def\INSTuv{601-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{51170 K{\"o}ln}
+    \def\STDOurl{}}
+\newcommand\StandortLA {
+    \def\INSTkrz{LA}
+    \def\INSTstandort{Lampoldshausen}
+    \def\INSTstrasse{Lampoldshausen}
+    \def\INSTort{74239 Hardthausen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Lampoldshausen}
+    \def\INSTfussZWEI{74239 Hardthausen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,6298}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortMU {
+    \def\INSTkrz{MU}
+    \def\INSTstandort{M{\"u}nchen}
+    \def\INSTstrasse{Postfach 13\,47}
+    \def\INSTort{85751 M{\"u}nchen}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht M{\"u}nchen}
+    \def\INSTfussZWEI{c/o MAN Technologie AG}
+    \def\INSTfussDREI{Postfach 13\,47}
+    \def\INSTfussVIER{85751 M{\"u}nchen}
+    \def\INSTvorwahl{+49\,89}
+    \def\INSTuv{1580-}
+    \def\INSTtel{7916}
+    \def\INSTfax{7721}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortNZ {
+    \def\INSTkrz{NZ}
+    \def\INSTstandort{Neustrelitz}
+    \def\INSTstrasse{Kalkhorstweg 53}
+    \def\INSTort{17235 Neustrelitz}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Kalkhorstweg 53}
+    \def\INSTfussZWEI{17235 Neustrelitz}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,3981}
+    \def\INSTuv{480-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOB {
+    \def\INSTkrz{OB}
+    \def\INSTstandort{Ottobrunn}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88503 Ottobrunn}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Ottobrunn}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88503 Ottobrunn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,89}
+    \def\INSTuv{}
+    \def\INSTtel{66085328}
+    \def\INSTfax{60883326}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOP {
+    \def\INSTkrz{OP}
+    \def\INSTstandort{Oberpfaffenhofen}
+    \def\INSTstrasse{Oberpfaffenhofen}
+    \def\INSTort{82234 We{\ss}ling}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Oberpfaffenhofen}
+    \def\INSTfussZWEI{82234 We{\ss}ling}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,8153}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Oberpfaffenhofen}
+    \def\STDOurl{}}
+\newcommand\StandortPA {
+    \def\INSTkrz{PA}
+    \def\INSTstandort{Paris}
+    \def\INSTstrasse{17, Avenue de 'Saxe}
+    \def\INSTort{75007 Paris}
+    \def\INSTland{France}
+    \def\INSTfussEINS{Bureau de Paris}
+    \def\INSTfussZWEI{17, Avenue de 'Saxe}
+    \def\INSTfussDREI{75007 Paris}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+33\,1}
+    \def\INSTuv{}
+    \def\INSTtel{}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortST {
+    \def\INSTkrz{ST}
+    \def\INSTstandort{Stuttgart}
+    \def\INSTstrasse{Pfaffenwaldring 38-40}
+    \def\INSTort{70569 Stuttgart}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Pfaffenwaldring 38-40}
+    \def\INSTfussZWEI{70569 Stuttgart}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,711}
+    \def\INSTuv{6862-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 80\,03\,20}
+    \def\STDOurl{}}
+\newcommand\StandortTR {
+    \def\INSTkrz{TR}
+    \def\INSTstandort{Trauen}
+    \def\INSTstrasse{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTort{29328 Fa{\ss}berg}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{Trauen}
+    \def\INSTfussZWEI{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTfussDREI{29328 Fa{\ss}berg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,5055}
+    \def\INSTuv{596-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWA {
+    \def\INSTkrz{WA}
+    \def\INSTstandort{Washington}
+    \def\INSTstrasse{1627 Eye Street, N.W., Suite 540}
+    \def\INSTort{Washington, D.C. 20006-4020}
+    \def\INSTland{USA}
+    \def\INSTfussEINS{Washington Office}
+    \def\INSTfussZWEI{1627 Eye Street, N.W.}
+    \def\INSTfussDREI{Suite 540}
+    \def\INSTfussVIER{Washington, D.C. 20006-4020}
+    \def\INSTvorwahl{+1\,202}
+    \def\INSTuv{785-}
+    \def\INSTtel{}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWM {
+    \def\INSTkrz{WM}
+    \def\INSTstandort{Weilheim}
+    \def\INSTstrasse{Reichenbergstr. 8}
+    \def\INSTort{82362 Weilheim}
+    \def\INSTland{Allemagne}
+    \def\INSTfussEINS{DLR Bodenstation Weilheim}
+    \def\INSTfussZWEI{Reichenbergstr. 8}
+    \def\INSTfussDREI{82362 Weilheim}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,8809}
+    \def\INSTuv{14-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\fi
+
+%% Data generated from stdo-us.txt
+\ifx\use@english\undefined\else
+\newcommand\StandortAS {
+    \def\INSTkrz{AS}
+    \def\INSTstandort{Almeria}
+    \def\INSTstrasse{Ctra. de Senes s/n}
+    \def\INSTort{04200 Tabernas}
+    \def\INSTland{Spain}
+    \def\INSTfussEINS{Plataforma Solar de Almeria}
+    \def\INSTfussZWEI{Ctra. de Senes s/n}
+    \def\INSTfussDREI{04200 Tabernas}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+34\,950}
+    \def\INSTuv{}
+    \def\INSTtel{387900}
+    \def\INSTfax{365313}
+    \def\INSTpostadr{Apartado 39}
+    \def\STDOurl{}}
+\newcommand\StandortAU {
+    \def\INSTkrz{AU}
+    \def\INSTstandort{Augsburg}
+    \def\INSTstrasse{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTort{86153 Augsburg}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Franz-Josef-Strau{\ss} Stra{\ss}e 5}
+    \def\INSTfussZWEI{86153 Augsburg}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,821}
+    \def\INSTuv{505-}
+    \def\INSTtel{01}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 10\,22\,35}
+    \def\STDOurl{}}
+\newcommand\StandortAW {
+    \def\INSTkrz{AW}
+    \def\INSTstandort{Ahrweiler}
+    \def\INSTstrasse{Wilhelmstra{\ss}e 56}
+    \def\INSTort{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Wilhelmstra{\ss}e 56}
+    \def\INSTfussZWEI{53474 Bad Neuenahr - Ahrweiler}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,2641}
+    \def\INSTuv{9733-}
+    \def\INSTtel{00}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBA {
+    \def\INSTkrz{BA}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Rutherfordstra{\ss}e 2}
+    \def\INSTort{12489 Berlin}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Berlin-Adlershof}
+    \def\INSTfussZWEI{Rutherfordstra{\ss}e 2}
+    \def\INSTfussDREI{12489 Berlin}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{67055-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBC {
+    \def\INSTkrz{BC}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTort{10623 Berlin}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Inst. f. Antriebstechnik}
+    \def\INSTfussZWEI{Abt. Triebwerksakustik Charlottenburg}
+    \def\INSTfussDREI{M{\"u}ller-Breslau-Str. 8}
+    \def\INSTfussVIER{10623 Berlin}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{310006-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBM {
+    \def\INSTkrz{BM}
+    \def\INSTstandort{Berlin}
+    \def\INSTstrasse{Markgrafenstra{\ss}e 37}
+    \def\INSTort{10117 Berlin}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Markgrafenstra{\ss}e 37}
+    \def\INSTfussZWEI{10117 Berlin}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,30}
+    \def\INSTuv{67055-}
+    \def\INSTtel{470}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBO {
+    \def\INSTkrz{BO}
+    \def\INSTstandort{Bonn}
+    \def\INSTstrasse{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTort{53227 Bonn}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Bonn-Oberkassel}
+    \def\INSTfussZWEI{K{\"o}nigswinterer Str. 522-524}
+    \def\INSTfussDREI{53227 Bonn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,228}
+    \def\INSTuv{447-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 30\,03\,64}
+    \def\STDOurl{}}
+\newcommand\StandortBR {
+    \def\INSTkrz{BR}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{H{\"u}nefeldstr. 1-5}
+    \def\INSTort{28199 Bremen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Bremen}
+    \def\INSTfussZWEI{Raumfahrt Infrastruktur}
+    \def\INSTfussDREI{H{\"u}nefeldstr. 1-5}
+    \def\INSTfussVIER{28199 Bremen}
+    \def\INSTvorwahl{+49\,421}
+    \def\INSTuv{}
+    \def\INSTtel{5394548}
+    \def\INSTfax{552193}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBS {
+    \def\INSTkrz{BS}
+    \def\INSTstandort{Braunschweig}
+    \def\INSTstrasse{Lilienthalplatz 7}
+    \def\INSTort{38108 Braunschweig}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Lilienthalplatz 7}
+    \def\INSTfussZWEI{38108 Braunschweig}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,531}
+    \def\INSTuv{295-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortBX {
+    \def\INSTkrz{BX}
+    \def\INSTstandort{Brussels}
+    \def\INSTstrasse{98, Rue du Trône}
+    \def\INSTort{1050 Brussels}
+    \def\INSTland{Belgique}
+    \def\INSTfussEINS{Brussels Office}
+    \def\INSTfussZWEI{98, Rue du Trône}
+    \def\INSTfussDREI{1050 Brussels}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+32\,2}
+    \def\INSTuv{}
+    \def\INSTtel{5000841}
+    \def\INSTfax{5000840}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortEM {
+    \def\INSTkrz{EM}
+    \def\INSTstandort{Emmeloord}
+    \def\INSTstrasse{Postbus 175}
+    \def\INSTort{8300 Emmeloord}
+    \def\INSTland{Netherlands}
+    \def\INSTfussEINS{Postbus 175}
+    \def\INSTfussZWEI{8300 Emmeloord}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+31\,527}
+    \def\INSTuv{}
+    \def\INSTtel{248555}
+    \def\INSTfax{248582}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortFH {
+    \def\INSTkrz{FH}
+    \def\INSTstandort{Friedrichshafen}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88039 Friedrichshafen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Friedrichshafen}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88039 Friedrichshafen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,7545}
+    \def\INSTuv{8-}
+    \def\INSTtel{3205}
+    \def\INSTfax{5890}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortGO {
+    \def\INSTkrz{GO}
+    \def\INSTstandort{G{\"o}ttingen}
+    \def\INSTstrasse{Bunsenstr. 10}
+    \def\INSTort{37073 G{\"o}ttingen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Bunsenstr. 10}
+    \def\INSTfussZWEI{37073 G{\"o}ttingen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,551}
+    \def\INSTuv{709-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHA {
+    \def\INSTkrz{HA}
+    \def\INSTstandort{Hamburg-Harburg}
+    \def\INSTstrasse{Ei{\ss}endorfer Str. 38}
+    \def\INSTort{21073 Hamburg}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Technische Universit{\"a}t Hamburg-Harburg}
+    \def\INSTfussZWEI{Ei{\ss}endorfer Str. 38}
+    \def\INSTfussDREI{21073 Hamburg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,40}
+    \def\INSTuv{42878-}
+    \def\INSTtel{}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHB {
+    \def\INSTkrz{HB}
+    \def\INSTstandort{Bremen}
+    \def\INSTstrasse{Am Fallturm 1}
+    \def\INSTort{28359 Bremen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Institut f{\"u}r Raumfahrtsysteme}
+    \def\INSTfussZWEI{Am Fallturm 1}
+    \def\INSTfussDREI{28359 Bremen}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,421}
+    \def\INSTuv{24420-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortHH {
+    \def\INSTkrz{HH}
+    \def\INSTstandort{Hamburg}
+    \def\INSTstrasse{Sportallee 54a}
+    \def\INSTort{22335 Hamburg}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Inst. f. Luft- und Raumfahrtmedizin}
+    \def\INSTfussZWEI{Abt. Luft- und Raumfahrtpsychologie}
+    \def\INSTfussDREI{Sportallee 54a}
+    \def\INSTfussVIER{22335 Hamburg}
+    \def\INSTvorwahl{+49\,40}
+    \def\INSTuv{513096-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortKP {
+    \def\INSTkrz{KP}
+    \def\INSTstandort{K{\"o}ln}
+    \def\INSTstrasse{Linder H{\"o}he}
+    \def\INSTort{51147 K{\"o}ln}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Porz-Wahnheide}
+    \def\INSTfussZWEI{Linder H{\"o}he}
+    \def\INSTfussDREI{51147 K{\"o}ln}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,2203}
+    \def\INSTuv{601-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{51170 K{\"o}ln}
+    \def\STDOurl{}}
+\newcommand\StandortLA {
+    \def\INSTkrz{LA}
+    \def\INSTstandort{Lampoldshausen}
+    \def\INSTstrasse{Lampoldshausen}
+    \def\INSTort{74239 Hardthausen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Lampoldshausen}
+    \def\INSTfussZWEI{74239 Hardthausen}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,6298}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortMU {
+    \def\INSTkrz{MU}
+    \def\INSTstandort{M{\"u}nchen}
+    \def\INSTstrasse{Postfach 13\,47}
+    \def\INSTort{85751 M{\"u}nchen}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht M{\"u}nchen}
+    \def\INSTfussZWEI{c/o MAN Technologie AG}
+    \def\INSTfussDREI{Postfach 13\,47}
+    \def\INSTfussVIER{85751 M{\"u}nchen}
+    \def\INSTvorwahl{+49\,89}
+    \def\INSTuv{1580-}
+    \def\INSTtel{7916}
+    \def\INSTfax{7721}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortNZ {
+    \def\INSTkrz{NZ}
+    \def\INSTstandort{Neustrelitz}
+    \def\INSTstrasse{Kalkhorstweg 53}
+    \def\INSTort{17235 Neustrelitz}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Kalkhorstweg 53}
+    \def\INSTfussZWEI{17235 Neustrelitz}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,3981}
+    \def\INSTuv{480-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOB {
+    \def\INSTkrz{OB}
+    \def\INSTstandort{Ottobrunn}
+    \def\INSTstrasse{c/o Dornier GmbH}
+    \def\INSTort{88503 Ottobrunn}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{DLR-B{\"u}ro Bauaufsicht Ottobrunn}
+    \def\INSTfussZWEI{c/o Dornier GmbH}
+    \def\INSTfussDREI{88503 Ottobrunn}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,89}
+    \def\INSTuv{}
+    \def\INSTtel{66085328}
+    \def\INSTfax{60883326}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortOP {
+    \def\INSTkrz{OP}
+    \def\INSTstandort{Oberpfaffenhofen}
+    \def\INSTstrasse{Oberpfaffenhofen}
+    \def\INSTort{82234 We{\ss}ling}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Oberpfaffenhofen}
+    \def\INSTfussZWEI{82234 We{\ss}ling}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,8153}
+    \def\INSTuv{28-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Oberpfaffenhofen}
+    \def\STDOurl{}}
+\newcommand\StandortPA {
+    \def\INSTkrz{PA}
+    \def\INSTstandort{Paris}
+    \def\INSTstrasse{17 Avenue de Saxe}
+    \def\INSTort{F-75007 PARIS}
+    \def\INSTland{France}
+    \def\INSTfussEINS{Centre A{\'e}rospatial Allemand}
+    \def\INSTfussZWEI{Association Loi 1901}
+    \def\INSTfussDREI{17 Avenue de Saxe}
+    \def\INSTfussVIER{F-75007 PARIS}
+    \def\INSTvorwahl{+33\,1}
+    \def\INSTuv{4219-}
+    \def\INSTtel{9426}
+    \def\INSTfax{9629}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortST {
+    \def\INSTkrz{ST}
+    \def\INSTstandort{Stuttgart}
+    \def\INSTstrasse{Pfaffenwaldring 38-40}
+    \def\INSTort{70569 Stuttgart}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Pfaffenwaldring 38-40}
+    \def\INSTfussZWEI{70569 Stuttgart}
+    \def\INSTfussDREI{}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,711}
+    \def\INSTuv{6862-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{Postfach 80\,03\,20}
+    \def\STDOurl{}}
+\newcommand\StandortTR {
+    \def\INSTkrz{TR}
+    \def\INSTstandort{Trauen}
+    \def\INSTstrasse{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTort{29328 Fa{\ss}berg}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{Trauen}
+    \def\INSTfussZWEI{Eugen-S{\"a}nger-Str. 50}
+    \def\INSTfussDREI{29328 Fa{\ss}berg}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,5055}
+    \def\INSTuv{596-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWA {
+    \def\INSTkrz{WA}
+    \def\INSTstandort{Washington}
+    \def\INSTstrasse{1627 Eye Street, N.W., Suite 540}
+    \def\INSTort{Washington, D.C. 20006-4020}
+    \def\INSTland{USA}
+    \def\INSTfussEINS{Washington Office}
+    \def\INSTfussZWEI{1627 Eye Street, N.W.}
+    \def\INSTfussDREI{Suite 540}
+    \def\INSTfussVIER{Washington, D.C. 20006-4020}
+    \def\INSTvorwahl{+1\,202}
+    \def\INSTuv{}
+    \def\INSTtel{7854411}
+    \def\INSTfax{7854410}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\newcommand\StandortWM {
+    \def\INSTkrz{WM}
+    \def\INSTstandort{Weilheim}
+    \def\INSTstrasse{Reichenbergstr. 8}
+    \def\INSTort{82362 Weilheim}
+    \def\INSTland{Germany}
+    \def\INSTfussEINS{DLR Bodenstation Weilheim}
+    \def\INSTfussZWEI{Reichenbergstr. 8}
+    \def\INSTfussDREI{82362 Weilheim}
+    \def\INSTfussVIER{}
+    \def\INSTvorwahl{+49\,8809}
+    \def\INSTuv{14-}
+    \def\INSTtel{0}
+    \def\INSTfax{}
+    \def\INSTpostadr{}
+    \def\STDOurl{}}
+\fi

@@ -1,0 +1,1767 @@
+%% This file has been automatically generated.  Do not edit.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{DLRInstDE.clo}
+
+%% Data generated from inst-de.txt
+\gdef\selectINSTADAB {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AD-AB}
+    \gdef\INSTfenstertext{Personal und Recht}
+    \gdef\INSTorgeinheit{Personal und Recht / Arbeitsplatzbewertung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTADAU {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{AD-AU}
+    \gdef\INSTfenstertext{Ausbildung - Berufsakademie}
+    \gdef\INSTorgeinheit{Personal und Recht / Ausbildung - Berufsakademie}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTADOC {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AD-OC}
+    \gdef\INSTfenstertext{Organisation und CD}
+    \gdef\INSTorgeinheit{Organisation und CD}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTADPB {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AD-PB}
+    \gdef\INSTfenstertext{Personalentwicklung und Bildung}
+    \gdef\INSTorgeinheit{Personalentwicklung und Bildung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTADPE {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AD-PE}
+    \gdef\INSTfenstertext{Personaladministration}
+    \gdef\INSTorgeinheit{Personal und Recht / Personaladministration}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTADWO {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AD-WO}
+    \gdef\INSTfenstertext{Wirtschaftsinformatik und Unternehmensorganisation}
+    \gdef\INSTorgeinheit{Wirtschaftsinformatik und Unternehmensorganisation}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTAEFD {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{AE-FD}
+    \gdef\INSTfenstertext{Fahrzeug-Systemdynamik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Aeroelastik / Fahrzeug-Systemdynamik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTAE {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{AE}
+    \gdef\INSTfenstertext{Institut f{\"u}r Aeroelastik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Aeroelastik}
+    \gdef\INSTstandardfax{2862}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTAFCO {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{AF-CO}
+    \gdef\INSTfenstertext{Cluster Angewandte Fernerkundung - Controlling}
+    \gdef\INSTorgeinheit{Cluster Angewandte Fernerkundung / Controlling}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTAS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{AS}
+    \gdef\INSTfenstertext{Institut f{\"u}r Aerodynamik und Str{\"o}mungstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Aerodynamik und Str{\"o}mungstechnik}
+    \gdef\INSTstandardfax{2320}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTASGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{AS}
+    \gdef\INSTfenstertext{Institut f{\"u}r Aerodynamik und Str{\"o}mungstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Aerodynamik und Str{\"o}mungstechnik}
+    \gdef\INSTstandardfax{2889}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATBK {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-BK}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Brennkammer}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATBT {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-BT}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Brennkammertest}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATFV {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-FV}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Fan und Verdichter}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATNM {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-NM}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Numerische Methoden}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATTA {
+    % Select the right standort
+    \StandortBC
+    % define other needed fields
+    \gdef\INSTmnemo{AT-TA}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Triebwerksakustik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATTM {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-TM}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Triebwerksmesstechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATTU {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{AT-TU}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Turbine}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTATTW {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT-TW}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik / Triebwerk}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTAT {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{AT}
+    \gdef\INSTfenstertext{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Antriebstechnik}
+    \gdef\INSTstandardfax{*64395}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBK {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{BK}
+    \gdef\INSTfenstertext{Institut f{\"u}r Bauweisen- und Konstruktionsforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Bauweisen- und Konstruktionsforschung}
+    \gdef\INSTstandardfax{227}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Berlin-Adlershof}
+    \gdef\INSTorgeinheit{DLR Standort Berlin-Adlershof / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRBC {
+    % Select the right standort
+    \StandortBC
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Au{\ss}enstelle Berlin-Charlottenburg}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Berlin-Charlottenburg / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRBO {
+    % Select the right standort
+    \StandortBO
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Bonn-Oberkassel}
+    \gdef\INSTorgeinheit{DLR Standort Bonn-Oberkassel / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Braunschweig}
+    \gdef\INSTorgeinheit{DLR Standort Braunschweig / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort G{\"o}ttingen}
+    \gdef\INSTorgeinheit{DLR Standort G{\"o}ttingen / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRHH {
+    % Select the right standort
+    \StandortHH
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Au{\ss}enstelle Hamburg}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Hamburg / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRLA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR Standort Lampoldshausen / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRNZ {
+    % Select the right standort
+    \StandortNZ
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Au{\ss}enstelle Neustrelitz}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Neustrelitz / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBROP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{DLR Standort Oberpfaffenhofen / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Standort Stuttgart}
+    \gdef\INSTorgeinheit{DLR Standort Stuttgart / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRTR {
+    % Select the right standort
+    \StandortTR
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Au{\ss}enstelle Trauen}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Trauen / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBRWM {
+    % Select the right standort
+    \StandortWM
+    % define other needed fields
+    \gdef\INSTmnemo{BR}
+    \gdef\INSTfenstertext{Betriebsrat Au{\ss}enstelle Weilheim}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Weilheim / Betriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBTOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{BT}
+    \gdef\INSTfenstertext{Standort Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{DLR Standort Oberpfaffenhofen / Betriebstechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWETKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{BW-ET}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Elektrotechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWHTKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{BW-HT}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR-Standort K{\"o}ln-Porz / Haustechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWMVKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{BW-MV}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Medienversorgung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{BW}
+    \gdef\INSTfenstertext{Standort Braunschweig}
+    \gdef\INSTorgeinheit{DLR Standort Braunschweig / Bauwesen Nord}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{BW}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Bau- und Betriebswesen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWLA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{BW}
+    \gdef\INSTfenstertext{Standort Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR Standort Lampoldshausen / Bauwesen Lampoldshausen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{BW}
+    \gdef\INSTfenstertext{Standort Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{DLR Standort Oberpfaffenhofen / Bauwesen S{\"u}d}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTBWST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{BW}
+    \gdef\INSTfenstertext{Standort Stuttgart}
+    \gdef\INSTorgeinheit{DLR Standort Stuttgart / Bauwesen Stuttgart}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTDFDMM {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{DFD-MM}
+    \gdef\INSTfenstertext{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTorgeinheit{Deutsches Fernerkundungsdatenzentrum / Marketing und Medien}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTDFDKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{DFD}
+    \gdef\INSTfenstertext{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTorgeinheit{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTDFDNZ {
+    % Select the right standort
+    \StandortNZ
+    % define other needed fields
+    \gdef\INSTmnemo{DFD}
+    \gdef\INSTfenstertext{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTorgeinheit{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTDFDOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{DFD}
+    \gdef\INSTfenstertext{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTorgeinheit{Deutsches Fernerkundungsdatenzentrum}
+    \gdef\INSTstandardfax{1446}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTEB {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{EB}
+    \gdef\INSTfenstertext{Entwicklungsbetrieb}
+    \gdef\INSTorgeinheit{Entwicklungsbetrieb}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf Berlin Adlershof}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf Braunschweig}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf G{\"o}ttingen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSO {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOLA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf Lampoldshausen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf Oberpfaffenhofen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKSOST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{EK-SO}
+    \gdef\INSTfenstertext{Standort-Einkauf}
+    \gdef\INSTorgeinheit{Standort-Einkauf Stuttgart}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTEKST {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{EK-ST}
+    \gdef\INSTfenstertext{Einkauf}
+    \gdef\INSTorgeinheit{Strategischer Einkauf}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTELST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{EL}
+    \gdef\INSTfenstertext{Standort Stuttgart}
+    \gdef\INSTorgeinheit{DLR Standort Stuttgart / Gruppe Elektroniklabor}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFA {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FA}
+    \gdef\INSTfenstertext{Institut f{\"u}r Faserverbundleichtbau und Adaptronik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Faserverbundleichtbau und Adaptronik}
+    \gdef\INSTstandardfax{2875}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFBBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FB-BS}
+    \gdef\INSTfenstertext{Flugbetriebe}
+    \gdef\INSTorgeinheit{Flugbetriebe / Flugabteilung Braunschweig}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFBOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{FB-OP}
+    \gdef\INSTfenstertext{Flugbetriebe}
+    \gdef\INSTorgeinheit{Flugbetriebe / Flugabteilung Oberpfaffenhofen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFBPL {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{FB-PL}
+    \gdef\INSTfenstertext{Flugbetriebe}
+    \gdef\INSTorgeinheit{Flugbetriebe / Pr{\"u}fgruppe f{\"u}r Luftfahrtger{\"a}t}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFBTR {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FB-TR}
+    \gdef\INSTfenstertext{Forschungsflugzeug A320 (ATRA)}
+    \gdef\INSTorgeinheit{Flugbetriebe / Forschungsflugzeug A320 (ATRA)}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFB {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{FB}
+    \gdef\INSTfenstertext{Flugbetriebe}
+    \gdef\INSTorgeinheit{Flugbetriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFK {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{FK}
+    \gdef\INSTfenstertext{Institut f{\"u}r Fahrzeugkonzepte}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Fahrzeugkonzepte}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFL {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FL}
+    \gdef\INSTfenstertext{Institut f{\"u}r Flugf{\"u}hrung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Flugf{\"u}hrung}
+    \gdef\INSTstandardfax{2550}
+    \gdef\INSTbriefvorlage{t}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFSBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{FS}
+    \gdef\INSTfenstertext{Institut f{\"u}r Verkehrsf{\"u}hrung und Fahrzeugsteuerung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Verkehrsf{\"u}hrung und Fahrzeugsteuerung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{z}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FS}
+    \gdef\INSTfenstertext{Institut f{\"u}r Verkehrsf{\"u}hrung und Fahrzeugsteuerung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Verkehrsf{\"u}hrung und Fahrzeugsteuerung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{z}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFT {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FT}
+    \gdef\INSTfenstertext{Institut f{\"u}r Flugsystemtechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Flugsystemtechnik}
+    \gdef\INSTstandardfax{2864}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.DLR.de/flugsystemtechnik/}}
+\gdef\selectINSTFWBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{FW}
+    \gdef\INSTfenstertext{Flughafenwesen und Luftverkehr}
+    \gdef\INSTorgeinheit{Flughafenwesen und Luftverkehr / Flughafensimulation}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTFWKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{FW}
+    \gdef\INSTfenstertext{Flughafenwesen und Luftverkehr}
+    \gdef\INSTorgeinheit{Flughafenwesen und Luftverkehr}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGBRGS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{GBR-GS}
+    \gdef\INSTfenstertext{Gesamtbetriebsrat}
+    \gdef\INSTorgeinheit{Gesamtbetriebsrat / Gesch{\"a}ftsstelle}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGBR {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{GBR}
+    \gdef\INSTfenstertext{Gesamtbetriebsrat}
+    \gdef\INSTorgeinheit{Gesamtbetriebsrat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFBIBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{GF-BI}
+    \gdef\INSTfenstertext{Bibliothek Berlin-Adlershof}
+    \gdef\INSTorgeinheit{Bibliothek Berlin-Adlershof}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFBI {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{GF-BI}
+    \gdef\INSTfenstertext{Bibliothek Braunschweig}
+    \gdef\INSTorgeinheit{DLR-Bibliothek}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFBIST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{GF-BI}
+    \gdef\INSTfenstertext{Bibliothek Stuttgart}
+    \gdef\INSTorgeinheit{Bibliothek Stuttgart}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFBZKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{GF-BZ}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Betriebsschutz}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEABA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Berlin-Adlershof}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Berlin-Adlershof / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEABS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Braunschweig}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Braunschweig / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEAGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung G{\"o}ttingen}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR G{\"o}ttingen / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEALA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Lampoldshausen}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Lampoldshausen / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEAOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Oberpfaffenhofen / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEAST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}A}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Stuttgart}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Stuttgart / {\"O}ffentlichkeitsarbeit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFOEBBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{GF-{\"O}B}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Berlin-Adlershof}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung Berlin-Adlershof / {\"O}rtliche Bildungsbeauftragte}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTGFSEBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{GF-SE}
+    \gdef\INSTfenstertext{Gesch{\"a}ftsf{\"u}hrung Braunschweig}
+    \gdef\INSTorgeinheit{Gesch{\"a}ftsf{\"u}hrung DLR Braunschweig / Standortentwicklung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTHR {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{HR}
+    \gdef\INSTfenstertext{Institut f{\"u}r Hochfrequenztechnik und Radarsysteme}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Hochfrequenztechnik und Radarsysteme}
+    \gdef\INSTstandardfax{1135}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTIKM {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{IK-M}
+    \gdef\INSTfenstertext{Informations- und Kommunikationstechnik}
+    \gdef\INSTorgeinheit{Informations- und Kommunikationstechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTKNNZ {
+    % Select the right standort
+    \StandortNZ
+    % define other needed fields
+    \gdef\INSTmnemo{KN}
+    \gdef\INSTfenstertext{Institut f{\"u}r Kommunikation und Navigation}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Kommunikation und Navigation / Au{\ss}enstelle Neustrelitz}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTKN {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{KN}
+    \gdef\INSTfenstertext{Institut f{\"u}r Kommunikation und Navigation}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Kommunikation und Navigation}
+    \gdef\INSTstandardfax{1442}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTLKHA {
+    % Select the right standort
+    \StandortHA
+    % define other needed fields
+    \gdef\INSTmnemo{LK}
+    \gdef\INSTfenstertext{Forschungsgruppe Lufttransportkonzepte und Technologiebewertung}
+    \gdef\INSTorgeinheit{Forschungsgruppe Lufttransportkonzepte und Technologiebewertung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTME {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ME}
+    \gdef\INSTfenstertext{Institut f{\"u}r Luft- und Raumfahrtmedizin}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Luft- und Raumfahrtmedizin}
+    \gdef\INSTstandardfax{*695211}
+    \gdef\INSTbriefvorlage{m}
+    \gdef\INSTurl{}}
+\gdef\selectINSTMFGWBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{MF-GW}
+    \gdef\INSTfenstertext{Institut f{\"u}r Methodik der Fernerkundung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Methodik der Fernerkundung / Gew{\"a}sserfernerkundung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTMFGWOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{MF-GW}
+    \gdef\INSTfenstertext{Institut f{\"u}r Methodik der Fernerkundung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Methodik der Fernerkundung / Gew{\"a}sserfernerkundung}
+    \gdef\INSTstandardfax{1420}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTMF {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{MF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Methodik der Fernerkundung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Methodik der Fernerkundung}
+    \gdef\INSTstandardfax{1420}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{www.caf.DLR.de}}
+\gdef\selectINSTMP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{MP}
+    \gdef\INSTfenstertext{Institut f{\"u}r Materialphysik im Weltraum}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Materialphysik im Weltraum}
+    \gdef\INSTstandardfax{*61768}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTMUSC {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{MUSC}
+    \gdef\INSTfenstertext{Nutzerzentrum f{\"u}r Mikrogravitation}
+    \gdef\INSTorgeinheit{Nutzerzentrum f{\"u}r Mikrogravitation}
+    \gdef\INSTstandardfax{*61471}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPA {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{PA}
+    \gdef\INSTfenstertext{Institut f{\"u}r Physik der Atmosph{\"a}re}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Physik der Atmosph{\"a}re}
+    \gdef\INSTstandardfax{1841}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDEKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{PD-E}
+    \gdef\INSTfenstertext{Programmdirektion Energie}
+    \gdef\INSTorgeinheit{Programmdirektion Energie}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDLBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{PD-L}
+    \gdef\INSTfenstertext{Programmdirektion Luftfahrt}
+    \gdef\INSTorgeinheit{Programmdirektion Luftfahrt}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDLGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{PD-L}
+    \gdef\INSTfenstertext{Programmdirektion Luftfahrt}
+    \gdef\INSTorgeinheit{Programmdirektion Luftfahrt}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDLKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{PD-L}
+    \gdef\INSTfenstertext{Programmdirektion Luftfahrt}
+    \gdef\INSTorgeinheit{Programmdirektion Luftfahrt}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDLEKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{PD-L/E}
+    \gdef\INSTfenstertext{Programmdirektion Luftfahrt und Energie}
+    \gdef\INSTorgeinheit{Programmdirektion Luftfahrt und Energie}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDVKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{PD-V}
+    \gdef\INSTfenstertext{Programmdirektion Verkehr}
+    \gdef\INSTorgeinheit{Programmdirektion Verkehr}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDWBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{PD-W}
+    \gdef\INSTfenstertext{Programmdirektion Weltraum}
+    \gdef\INSTorgeinheit{Programmdirektion Weltraum}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPDWKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{PD-W}
+    \gdef\INSTfenstertext{Programmdirektion Weltraum}
+    \gdef\INSTorgeinheit{Programmdirektion Weltraum}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTPF {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{PF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Planetenforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Planetenforschung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPBAAU {
+    % Select the right standort
+    \StandortAU
+    % define other needed fields
+    \gdef\INSTmnemo{QP-BA}
+    \gdef\INSTfenstertext{Bauaufsicht ARIANE, c/o MAN Technologie AG}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Bauaufsicht ARIANE Augsburg}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPBABR {
+    % Select the right standort
+    \StandortBR
+    % define other needed fields
+    \gdef\INSTmnemo{QP-BA}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Bauaufsicht ARIANE Bremen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPBAKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{QP-BA}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Bauaufsicht ARIANE K{\"o}ln-Porz}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPBALA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{QP-BA}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Bauaufsicht ARIANE Lampoldshausen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPBAOB {
+    % Select the right standort
+    \StandortOB
+    % define other needed fields
+    \gdef\INSTmnemo{QP-BA}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Bauaufsicht ARIANE Ottobrunn}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPNB {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{QP-NB}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Normung und Bauteile}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPPSBO {
+    % Select the right standort
+    \StandortBO
+    % define other needed fields
+    \gdef\INSTmnemo{QP-PS}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Support Projekte}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQPQMKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{QP-QM}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung / Grundlagen Qualit{\"a}tsmanagement}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTQP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{QP}
+    \gdef\INSTfenstertext{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTorgeinheit{Qualit{\"a}ts- und Produktsicherung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRART {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{RA-RT}
+    \gdef\INSTfenstertext{Systemanalyse Raumtransport}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Raumfahrtantriebe / Systemanalyse Raumtransport}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{z}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{RA}
+    \gdef\INSTfenstertext{Institut f{\"u}r Raumfahrtantriebe}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Raumfahrtantriebe}
+    \gdef\INSTstandardfax{190}
+    \gdef\INSTbriefvorlage{z}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRMOS {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{RM-OS}
+    \gdef\INSTfenstertext{Optische Informationssysteme}
+    \gdef\INSTorgeinheit{Optische Informationssysteme}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRM {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{RM}
+    \gdef\INSTfenstertext{Institut f{\"u}r Robotik und Mechatronik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Robotik und Mechatronik}
+    \gdef\INSTstandardfax{1847}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRYSK {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{RY-SK}
+    \gdef\INSTfenstertext{Systemkonditionierung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Raumfahrtsysteme / Systemkonditionierung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTRYHB {
+    % Select the right standort
+    \StandortHB
+    % define other needed fields
+    \gdef\INSTmnemo{RY}
+    \gdef\INSTfenstertext{Institut f{\"u}r Raumfahrtsysteme}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Raumfahrtsysteme}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTSCBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{SC}
+    \gdef\INSTfenstertext{Simulations- und Softwaretechnik}
+    \gdef\INSTorgeinheit{Simulations- und Softwaretechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTSC {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{SC}
+    \gdef\INSTfenstertext{Simulations- und Softwaretechnik}
+    \gdef\INSTorgeinheit{Simulations- und Softwaretechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTSCOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{SC}
+    \gdef\INSTfenstertext{Simulations- und Softwaretechnik}
+    \gdef\INSTorgeinheit{Simulations- und Softwaretechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTSILA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{SI}
+    \gdef\INSTfenstertext{Standort Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR Standort Lampoldshausen / Sicherheit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort Braunschweig}
+    \gdef\INSTorgeinheit{DLR Standort Braunschweig / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort G{\"o}ttingen}
+    \gdef\INSTorgeinheit{DLR Standort G{\"o}ttingen / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBLA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR Standort Lampoldshausen / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{DLR Standort Oberpfaffenhofen / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTBST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{TB}
+    \gdef\INSTfenstertext{Standort Stuttgart}
+    \gdef\INSTorgeinheit{DLR Standort Stuttgart / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDBT {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD-BT}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Anlagen- und Betriebstechnik}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDBW {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD-BW}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Bauwesen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDGS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD-GS}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Gesch{\"a}ftsstelle}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDTB {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD-TB}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Technische Betriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDTR {
+    % Select the right standort
+    \StandortTR
+    % define other needed fields
+    \gdef\INSTmnemo{TD-TR}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Technische Betriebe Trauen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTDZS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD-ZS}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste / Zentrale Sicherheit}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTD {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TD}
+    \gdef\INSTfenstertext{Technische Dienste}
+    \gdef\INSTorgeinheit{Technische Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTP {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{TP}
+    \gdef\INSTfenstertext{Institut f{\"u}r Technische Physik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Technische Physik}
+    \gdef\INSTstandardfax{788}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTTSFAS {
+    % Select the right standort
+    \StandortAS
+    % define other needed fields
+    \gdef\INSTmnemo{TT-SF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTTSFKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{TT-SF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTTSFST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{TT-SF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Technische Thermodynamik / Solarforschung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTTT {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{TT}
+    \gdef\INSTfenstertext{Institut f{\"u}r Technische Thermodynamik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Technische Thermodynamik}
+    \gdef\INSTstandardfax{712}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVF {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{VF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Verkehrsforschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Verkehrsforschung}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOFS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-FS}
+    \gdef\INSTfenstertext{Fachstab Vorstand}
+    \gdef\INSTorgeinheit{Fachstab Vorstand}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOLA {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-L}
+    \gdef\INSTfenstertext{Vorstandsbereich Luftfahrt und Energie}
+    \gdef\INSTorgeinheit{Vorstandsbereich Luftfahrt und Energie / Vorstandsassistent}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOLS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-L}
+    \gdef\INSTfenstertext{Vorstandsbereich Luftfahrt und Energie}
+    \gdef\INSTorgeinheit{Vorstandsbereich Luftfahrt und Energie / Vorstandssekretariat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOPR {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-PR}
+    \gdef\INSTfenstertext{Unternehmenskommunikation}
+    \gdef\INSTorgeinheit{Unternehmenskommunikation}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVORA {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-R}
+    \gdef\INSTfenstertext{Vorstandsbereich Raumfahrt und Verkehr}
+    \gdef\INSTorgeinheit{Vorstandsbereich Raumfahrt und Verkehr / Vorstandsassistent}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVORS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-R}
+    \gdef\INSTfenstertext{Vorstandsbereich Raumfahrt und Verkehr}
+    \gdef\INSTorgeinheit{Vorstandsbereich Raumfahrt und Verkehr / Vorstandssekretariat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVORU {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-RU}
+    \gdef\INSTfenstertext{Revision und Unternehmensbeteiligungen}
+    \gdef\INSTorgeinheit{Revision und Unternehmensbeteiligungen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOSN {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-SN}
+    \gdef\INSTfenstertext{Standortentwicklung Neustrelitz}
+    \gdef\INSTorgeinheit{Standortentwicklung Neustrelitz}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOST {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-ST}
+    \gdef\INSTfenstertext{Unternehmensentwicklung und Au{\ss}enbeziehungen}
+    \gdef\INSTorgeinheit{Unternehmensentwicklung und Au{\ss}enbeziehungen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOVBBM {
+    % Select the right standort
+    \StandortBM
+    % define other needed fields
+    \gdef\INSTmnemo{VO-VB}
+    \gdef\INSTfenstertext{Repr{\"a}sentanz Berlin}
+    \gdef\INSTorgeinheit{Repr{\"a}sentanz Berlin}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVOVB {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{VO-VB}
+    \gdef\INSTfenstertext{Vorstandsb{\"u}ro}
+    \gdef\INSTorgeinheit{Vorstandsb{\"u}ro}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVS {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{VS}
+    \gdef\INSTfenstertext{Verkehrsstudien}
+    \gdef\INSTorgeinheit{Verkehrsstudien}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTVT {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{VT}
+    \gdef\INSTfenstertext{Institut f{\"u}r Verbrennungstechnik}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Verbrennungstechnik}
+    \gdef\INSTstandardfax{578}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTWF {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{WF}
+    \gdef\INSTfenstertext{Institut f{\"u}r Werkstoff-Forschung}
+    \gdef\INSTorgeinheit{Institut f{\"u}r Werkstoff-Forschung}
+    \gdef\INSTstandardfax{*68936}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTWTRGS {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{WTR-GS}
+    \gdef\INSTfenstertext{Wissenschaftlich-Technischer Rat}
+    \gdef\INSTorgeinheit{Wissenschaftlich- Technischer Rat / Gesch{\"a}ftsstelle}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTWTR {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{WTR}
+    \gdef\INSTfenstertext{Wissenschaftlich-Technischer Rat}
+    \gdef\INSTorgeinheit{Wissenschaftlich- Technischer Rat}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBIBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-BI}
+    \gdef\INSTfenstertext{Bibliothek Braunschweig}
+    \gdef\INSTorgeinheit{DLR-Bibliothek / Bibliothek Braunschweig}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBIGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-BI}
+    \gdef\INSTfenstertext{Bibliothek G{\"o}ttingen}
+    \gdef\INSTorgeinheit{DLR-Bibliothek / Bibliothek G{\"o}ttingen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBIKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-BI}
+    \gdef\INSTfenstertext{Bibliothek K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR-Bibliothek / Bibliothek K{\"o}ln-Porz}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBILA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-BI}
+    \gdef\INSTfenstertext{Bibliothek Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR-Bibliothek / Bibliothek Lampoldshausen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBIOP {
+    % Select the right standort
+    \StandortOP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-BI}
+    \gdef\INSTfenstertext{Bibliothek Oberpfaffenhofen}
+    \gdef\INSTorgeinheit{DLR-Bibliothek / Bibliothek Oberpfaffenhofen}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDDRKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-DR}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Druckerei}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDFOKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-FO}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Fotodienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDIDKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-ID}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Innere Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDWIKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD-WI}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Wirtschaftsbetriebe}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBA {
+    % Select the right standort
+    \StandortBA
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort Berlin-Adlershof}
+    \gdef\INSTorgeinheit{DLR Standort Berlin-Adlershof / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBO {
+    % Select the right standort
+    \StandortBO
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort Bonn-Oberkassel}
+    \gdef\INSTorgeinheit{DLR Standort Bonn-Oberkassel / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDBS {
+    % Select the right standort
+    \StandortBS
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort Braunschweig}
+    \gdef\INSTorgeinheit{DLR Standort Braunschweig / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDGO {
+    % Select the right standort
+    \StandortGO
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort G{\"o}ttingen}
+    \gdef\INSTorgeinheit{DLR Standort G{\"o}ttingen / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDKP {
+    % Select the right standort
+    \StandortKP
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort K{\"o}ln-Porz}
+    \gdef\INSTorgeinheit{DLR Standort K{\"o}ln-Porz / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDLA {
+    % Select the right standort
+    \StandortLA
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort Lampoldshausen}
+    \gdef\INSTorgeinheit{DLR Standort Lampoldshausen / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDNZ {
+    % Select the right standort
+    \StandortNZ
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Au{\ss}enstelle Neustrelitz}
+    \gdef\INSTorgeinheit{Au{\ss}enstelle Neustrelitz / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\gdef\selectINSTZDST {
+    % Select the right standort
+    \StandortST
+    % define other needed fields
+    \gdef\INSTmnemo{ZD}
+    \gdef\INSTfenstertext{Standort Stuttgart}
+    \gdef\INSTorgeinheit{DLR Standort Stuttgart / Zentrale Dienste}
+    \gdef\INSTstandardfax{}
+    \gdef\INSTbriefvorlage{}
+    \gdef\INSTurl{}}
+\endinput

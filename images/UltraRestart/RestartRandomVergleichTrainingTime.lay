@@ -1,0 +1,188 @@
+#!MC 1410
+$!VarSet |LFDSFN1| = '"TecplotDataBase_random.dat" "TecplotDataBase_ultrarestart.dat"'
+$!VarSet |LFDSVL1| = '"postionInDataBase" "memberNumber" "created" "ParetoRank" "distToRegOfInt" "fitness0" "fitness1" "flowparam0" "flowparam1" "flowparam2" "flowparam3" "flowparam4" "scaled_x0" "scaled_x1" "scaled_x2" "scaled_x3" "scaled_x4" "scaled_x5" "scaled_x6" "scaled_x7" "scaled_x8" "scaled_x9" "scaled_x10" "scaled_x11" "scaled_x12" "scaled_x13" "scaled_x14" "scaled_x15" "scaled_x16" "scaled_x17" "scaled_x18" "scaled_x19" "x0" "x1" "x2" "x3" "x4" "x5" "x6" "x7" "x8" "x9" "x10" "x11" "x12" "x13" "x14" "x15" "x16" "x17" "x18" "x19" "AreaGain" "MMexpImpr" "VarianceMMexpImpr" "MM_fit0" "MMdev_fit0" "MM_fit1" "MMdev_fit1" "MM_flowparam0" "MMdev_flowparam0" "MM_flowparam1" "MMdev_flowparam1" "probOfImpr" "probOfFullfillROI" "probOfImpROI" "expImpr2ROI" "VarianceExpImpr2ROI" "MEMBEROPTIMIZATIONFLAG" "NUOFMEMBEREXPIMPR" "secondsCreated6" "cpuSecondsCreated6" "MetaModel" "timeTraining" "numbMembCreatedOfBest" "timeOptiOnMMofBest" "fidelityCount0" "fidelityCount1" "percHighFidelity" "numberWhenCreated" "secondsUDP" "cpuSecondsUDP" "remainingProcesses" "timeOfProcess0" "timeOfProcess1" "AGdivTime" "TimeStamp" "AreaGain_currentObjectives" "cumulativeVolumeGain" "cumulativeVolumeGain_currentObjectives" "cumTimeTraining" "cumTimeOptiOnMM" "cumTimeUDP" "cumTimeOptiOnMMofBest"'
+$!SETSTYLEBASE FACTORY
+$!PLOTOPTIONS 
+  SUBDIVIDEALLCELLS = NO
+$!GLOBALPAPER 
+  PAPERSIZEINFO
+    {
+    LETTER
+      {
+      WIDTH = 8.5
+      HEIGHT = 11
+      LEFTHARDCLIPOFFSET = 0.125
+      RIGHTHARDCLIPOFFSET = 0.125
+      TOPHARDCLIPOFFSET = 0.125
+      BOTTOMHARDCLIPOFFSET = 0.125
+      }
+    }
+$!PAGE 
+  NAME = 'Untitled'
+  PAPERATTRIBUTES
+    {
+    BACKGROUNDCOLOR = WHITE
+    ISTRANSPARENT = YES
+    ORIENTPORTRAIT = NO
+    SHOWGRID = YES
+    SHOWRULER = NO
+    SHOWPAPER = NO
+    PAPERSIZE = LETTER
+    RULERSPACING = ONEINCH
+    PAPERGRIDSPACING = HALFINCH
+    REGIONINWORKAREA
+      {
+      X1 = 1
+      Y1 = 0.25
+      X2 = 10
+      Y2 = 8.25
+      }
+    }
+### Frame Number 1 ###
+$!READDATASET  '|LFDSFN1|'
+  INITIALPLOTTYPE = XYLINE
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  ASSIGNSTRANDIDS = YES
+  VARLOADMODE = BYNAME
+  VARNAMELIST = '|LFDSVL1|'
+$!REMOVEVAR |LFDSVL1|
+$!REMOVEVAR |LFDSFN1|
+$!FRAMELAYOUT 
+  SHOWHEADER = NO
+  HEADERCOLOR = RED
+  XYPOS
+    {
+    X = 1
+    Y = 0.25
+    }
+  WIDTH = 9
+  HEIGHT = 8
+$!THREEDAXIS 
+  ASPECTRATIOLIMIT = 25
+  BOXASPECTRATIOLIMIT = 25
+$!PLOTTYPE  = XYLINE
+$!FRAMENAME  = 'Frame 001'
+$!GLOBALTIME 
+  SOLUTIONTIME = 0
+$!DELETELINEMAPS 
+$!ACTIVELINEMAPS  =  [1-2]
+$!GLOBALLINEPLOT 
+  DATALABELS
+    {
+    DISTANCESKIP = 5
+    }
+  LEGEND
+    {
+    SHOW = YES
+    BOX
+      {
+      MARGIN = 7
+      }
+    XYPOS
+      {
+      X = 30.281
+      Y = 99.678
+      }
+    }
+$!LINEMAP  [1]
+  NAME = 'Random'
+  ASSIGN
+    {
+    ZONE = 1
+    XAXISVAR = 2
+    YAXISVAR = 74
+    }
+  LINES
+    {
+    COLOR = BLUE
+    LINETHICKNESS = 0.4
+    }
+  SYMBOLS
+    {
+    COLOR = RED
+    FILLCOLOR = RED
+    }
+  BARCHARTS
+    {
+    COLOR = RED
+    FILLCOLOR = RED
+    }
+  ERRORBARS
+    {
+    COLOR = RED
+    }
+$!LINEMAP  [2]
+  NAME = 'Restart'
+  ASSIGN
+    {
+    ZONE = 2
+    XAXISVAR = 2
+    YAXISVAR = 74
+    }
+  LINES
+    {
+    COLOR = RED
+    LINETHICKNESS = 0.4
+    }
+  SYMBOLS
+    {
+    COLOR = RED
+    FILLCOLOR = RED
+    }
+  BARCHARTS
+    {
+    COLOR = RED
+    FILLCOLOR = RED
+    }
+  ERRORBARS
+    {
+    COLOR = RED
+    }
+$!XYLINEAXIS 
+  DEPXTOYRATIO = 1
+$!XYLINEAXIS 
+  XDETAIL 1
+    {
+    RANGEMIN = 6.3092184297587348141
+    RANGEMAX = 371.34571842975873324
+    GRSPACING = 100
+    GRIDLINES
+      {
+      SHOW = YES
+      }
+    MINORGRIDLINES
+      {
+      SHOW = YES
+      }
+    TITLE
+      {
+      TITLEMODE = USETEXT
+      TEXT = 'Optimierungs Iteration'
+      OFFSET = 5
+      }
+    }
+$!XYLINEAXIS 
+  YDETAIL 1
+    {
+    RANGEMIN = -4.6376436785762802373
+    RANGEMAX = 290.80190098389948616
+    GRSPACING = 50
+    GRIDLINES
+      {
+      SHOW = YES
+      }
+    MINORGRIDLINES
+      {
+      SHOW = YES
+      }
+    TITLE
+      {
+      TITLEMODE = USETEXT
+      TEXT = 'Trainingszeit'
+      OFFSET = 8
+      }
+    }
+$!FRAMECONTROL ACTIVATEBYNUMBER
+  FRAME = 1
+$!SETSTYLEBASE CONFIG

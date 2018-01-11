@@ -1,0 +1,83 @@
+\newcommand\IhrSchreibenName {Ihr Schreiben}
+\newcommand\IhrZeichenName {Ihr Zeichen}
+\newcommand\UnsZeichenName {Unser Zeichen}
+\newcommand\IhrPartnerName {Ihr Gespr{\"a}chspartner}
+\newcommand\IhrPartnerInName {Ihr/e Gespr{\"a}chspartner/in}
+\newcommand\TelName {Telefon}
+\newcommand\FaxName {Telefax}
+\newcommand\TelZWEIName {}
+\newcommand\TlxName {Telex}
+\newcommand\EMailName {E-Mail}
+\newcommand\WWWName {Internet}
+\newcommand\PostAdrName {Postadresse}
+\newcommand\HausAdrName {Hausadresse}
+\newcommand\BesucherAdrName {Besucheradresse}
+\newcommand\AnName {an}
+\newcommand\NrName {Nr.}
+\newcommand\VonName {von}
+\newcommand\DatumName {Datum}
+\newcommand\SeiteName {Seite}
+\newcommand\SeitenName {Seiten}
+\newcommand\Deckblatt {(inkl. Deckblatt)}
+\newcommand\Internet {www.DLR.de}
+\newcommand\Firma {Deutsches Zentrum f{\"u}r Luft- und Raumfahrt \@formten e.V.}
+\newcommand\FirmaZusatz {in der Helmholtz-Gemeinschaft}
+\newcommand\FirmaEINS {Deutsches Zentrum}
+\newcommand\FirmaZWEI {f{\"u}r Luft- und Raumfahrt \@formten e.V.}
+\newcommand\FirmaName {}
+\newcommand\FirmaNameZusatz {}
+\newcommand\FirmaNameEINS {}
+\newcommand\FirmaNameZWEI {}
+\newcommand\GTextEINS {Gesetzlicher Vertreter des DLR ist der Vorstand. Er kann}
+\newcommand\GTextZWEI {auch durch von ihm erm{\"a}chtigte Personen vertreten}
+\newcommand\GTextDREI {werden. Ausk{\"u}nfte {\"u}ber den Umfang der Erm{\"a}chtigung}
+\newcommand\GTextVIER {erteilt der Leiter Allgemeine Rechtsangelegenheiten }
+\newcommand\GTextFUENF {des DLR, 51170 K{\"o}ln.}
+\newcommand\GACHTTextEINS {Gesetzlicher Vertreter des DLR ist der Vorstand.}
+\newcommand\GACHTTextZWEI {Er kann auch durch von ihm erm{\"a}chtigte Personen}
+\newcommand\GACHTTextDREI {vertreten werden. Ausk{\"u}nfte {\"u}ber den Umfang}
+\newcommand\GACHTTextVIER {der Erm{\"a}chtigung erteilt der Leiter Allgemeine }
+\newcommand\GACHTTextFUENF {Rechtsangelegenheiten des DLR, 51170 K{\"o}ln.}
+\newcommand\BTextEINS {Dresdner Bank AG K{\"o}ln (BLZ 370\,800\,40) 980\,87\,47}
+\newcommand\BTextZWEI {IBAN: DE87370800400980874700 BIC: DRESDEFF 370}
+\newcommand\BTextDREI {Commerzbank AG K{\"o}ln (BLZ 370\,400\,44) 500\,11\,69}
+\newcommand\BTextVIER {IBAN: DE77370400440500116900 BIC: COBADEFF 370}
+\newcommand\BACHTTextEINS {Dresdner Bank AG K{\"o}ln, Kto: 980\,87\,47}
+\newcommand\BACHTTextZWEI {BIC: DRESDEFF 370, BLZ: 370\,800\,40}
+\newcommand\BACHTTextDREI {IBAN: DE87370800400980874700}
+\newcommand\BACHTTextVIER {Commerzbank AG K{\"o}ln, Kto: 500\,11\,69}
+\newcommand\BACHTTextFUENF {BIC: COBADEFF 370, BLZ: 370\,400\,44}
+\newcommand\BACHTTextSECHS {IBAN: DE77370400440500116900}
+\newcommand\Zertifizierung {Zertifiziert nach ISO}
+\newcommand\MedCert {und ISO 13485:2003}
+\newcommand\SitzName {Sitz}
+\newcommand\VOSitzEINS {Sitz des Vorstandes}
+\newcommand\VOSitzZWEI {DLR Standort K{\"o}ln-Porz}
+\newcommand\VOSitzDREI {}
+\newcommand\VOTel {0}
+\newcommand\VOFax {*64190}
+\newcommand\Anrede {Sehr geehrte Damen, sehr geehrte Herren}
+\newcommand\Gruss {Mit freundlichen Gr{\"u}{\ss}en}
+\newcommand\VerName {Vermerk/Mitteilung}
+\newcommand\ProName {Protokoll}
+\newcommand\ProNr {Protokoll-Nr.}
+\newcommand\ProKurz {Sitzung}
+\newcommand\ProOrg {Org.-Einh.}
+\newcommand\ProTagung {Tagungs-}
+\newcommand\ProOrt {Ort}
+\newcommand\ProThema {Arbeitssitzung / Besprechungsthema}
+\newcommand\ProBeginn {Beginn}
+\newcommand\ProEnde {Ende}
+\newcommand\ProLeiter {Sitzungsleiter}
+\newcommand\ProLeitung {Sitzungsleitung}
+\newcommand\ProFuehrer {Protokollf{\"u}hrer}
+\newcommand\ProFuehrung {Protokollf{\"u}hrung}
+\newcommand\ProTelNr {Telefon-Nr.}
+\newcommand\ProEinlad {Einladung und Tagesordnung vom}
+\newcommand\ProTeilne {Sitzungsteilnehmer}
+\newcommand\ProTeilneIn {SitzungsteilnehmerInnen}
+\newcommand\ProVerteil {Zus{\"a}tzlicher Verteiler}
+\newcommand\ProErgeb {Ergebnis}
+\newcommand\ProHinweis {Hinweis / Veranlassung}
+\newcommand\Tagesordnung {Tagesordnung}
+\newcommand\PTName {Projekttr{\"a}ger im DLR}

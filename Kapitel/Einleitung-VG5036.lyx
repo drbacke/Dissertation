@@ -1,0 +1,262 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Einleitung
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+Der Luftverkehr im Fracht- und Passagierbereich ist in den letzten Jahren
+ sehr stark angestiegen.
+ Gleichzeitig steigt auch der weltweite Energieverbrauch 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BPp.l.c.2016"
+
+\end_inset
+
+.
+ Beides führt zu stark erhöhten technischen Anforderungen an Turbomaschinen.
+ Einerseits steht die wirtschaftliche Rentabilität im Vordergrund und anderersei
+ts umwelttechnische Aspekte.
+ Das Thema Klimaschutz ist zunehmend in den Vordergrund gerückt.
+ Die Politik stellt hier sehr hohe Anforderungen, welche bei der Auslegung
+ von Turbomaschinen mit berücksichtigt werden müssen.
+ Außerdem herrscht ein ein sehr hoher Konkurrenz- und Preisdruck unter den
+ Triebwerks- und den Energiemaschinenherstellern.
+ All diese Punkte machen die Auslegung von Turbomaschinen zu einer sehr
+ großen Herausforderung für Forschung und die Industrie.
+ Um all diese Punkte erfüllen zu können, muss ein besonderes Augenmerk auf
+ Emissionen, Effizienz, Betriebs- und Wartungskosten gelegt werden.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein weiterer wichtiger Punkt ist der bereits relativ hohe Stand der Forschung
+ im Turbomaschinenbereich.
+ Der technische Aufwand um z.B.
+ weitere Effizienzsteigerungen zu erreichen ist deutlich gestiegen.
+ Eine wesentliche Weiterentwicklung stellt hier die Verwendung von Rechner
+ dar, welche es erlauben die komplexen Strömungsvorgänge in Turbomaschinen
+ vorherzusagen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Das Mittel der Wahl zur Verbesserung von Turbomaschinen sind zunehmend numerisch
+e Verfahren, welche es erlauben diese Maschinen am Rechner zu simulieren
+ und zu optimieren.
+ Im Gegensatz dazu stehen experimentelle Untersuchungen an Triebwerkskomponenten
+, welche allerdings extrem kostspielig sind und daher seltener zu Forschungszwec
+ken verwendet werden.
+ Die numerischen Simulations- und Optimierungsverfahren wurden ebenfalls
+ weiterentwickelt um komplexere technische Sachverhalte darstellen zu können.
+ Dies führt zu einem steigenden numerischen Aufwand der durch stärkere Rechner
+ allein nicht mehr zu bewältigen ist.
+ Um diesem Problem zu begegnen sind hocheffiziente Simulations- und Optimierungs
+verfahren notwendig.
+ Darin liegt auch die Motivation dieser Arbeit.
+ Im Speziellen soll ein modernes Optimierungsverfahren vorgestellt werden,
+ welches sehr stark auf die Anforderungen im Turbomaschinenbereich angepasst
+ worden ist.
+ 
+\end_layout
+
+\begin_layout Section
+Stand der Technik
+\end_layout
+
+\begin_layout Standard
+Bisher hauptsächlich nur einzelne Komponenten (Verdichter) simuliert.
+ Instationär und kein RANS sind immer noch sehr schwierig in einer Optimierung
+ zu verwenden.
+ Die Rechnerkapazizät ist auch noch in absehbarer Zeit nicht ausreichend
+ um hochauflösende Modelle von vielen zusammengesetzten Komponenten zu optimiere
+n.
+ 
+\end_layout
+
+\begin_layout Standard
+Optimierungen jetzt, wie laufen diese meistens (Paper und beuspiele nennen)
+ einige Turbomaschinenanwendungen nennen mit typischen Zielfunktions parameter
+ und Nebenbeindungensaznahl, RANS z.B.
+ typisch aber immer öfter auch instationäre Simulationen gewünscht.
+ Auch mechanische Kriterien werden immer wichtiger, Flattern usw.
+ Anzahl der Betriebspunkte.
+ Beschleunigung über Ersatzmodelle in Optimierungen bereits sehr etabliert.
+ 
+\end_layout
+
+\begin_layout Standard
+Bisherige Implementierungen des Krigings sind meist durch die Rechenkapazität
+ begrenzt auf relativ kleine Parameteranzahlen und Sampleanzahl.
+ Durch GEK und CO kriging wird das Kriging aber immer mehr zu einem Falschenhals.
+\end_layout
+
+\begin_layout Standard
+- Mit zunehmenden Forschungsgrad und mit steigender Rechnerleistung werden
+ auch immer komplexere Problemstellungen optimiert.
+ Die Anforderungen an die Rechnerleistung sind im Turbomaschinenbereich
+ allerdings so hoch, dass sie selbst mit sehr großen HPC-Clustern nicht
+ erfüllt werden können.
+ 
+\end_layout
+
+\begin_layout Standard
+AG Turbo Abschlussbericht von Christian zitieren, besonders den Stand der
+ Technik:
+\end_layout
+
+\begin_layout Standard
+Kurzen Abriß über stochastische Optimierungsverfahren und warum sie hier
+ verwendet werden
+\end_layout
+
+\begin_layout Standard
+Kurzen Abriß über verschiedene Ersatzmodelle und deren Vor- und Nachteile
+\end_layout
+
+\begin_layout Standard
+Kurzen Abriß über die Kriging Verfahren und deren Erweiterungen
+\end_layout
+
+\begin_layout Standard
+Kurzen Abriß über den steigenden Aufwand der Kriging Verfahren und der bisher
+ erreichten Größenordnungen
+\end_layout
+
+\begin_layout Section
+Zielsetzung
+\end_layout
+
+\begin_layout Standard
+Fidelities nutzen Bei der Netzauswahl bspw.
+ muss ein Kompromiss gefunden werden zwischen Genauigkeit und Geschwindigkeit.
+ Das ist schwer bis nahezu unmöglich für den gesamten Optimierungsraum.
+ Unterschiede zieltich in den Fidelities MF Optimierung zur Beschleunigung
+ der Optimierung, durch Nutzung von mehreren Fidelities.
+ Maximal möglicher Zeitgewinn ist der Faktor zwischen Low und High Fdeiltiy.
+ Außerdem wird gehofft, dass die MF Optimierung durch eine breitere Samplem
+ Abdeckung bessere Ergebnisse findet.
+ (globales Minimum) Benutzerfreundlich, ohne viel Eingaben Da das Training
+ sehr aufwendig werden kann, sollen zudem moderne Beschleunigungsverfahren
+ entwickelt werden.
+ Das Training soll asynchron parallelisiert werden und durch unterschiedliche
+ Prozessoren auch im Mixbetrieb beschleunigt werden können.
+ Zudem soll das Training über eine 1:1 Verbindung ausgelagert werden können
+ auf einen leisteungsstarken Rechner außerhalb unseres Clusters, da dort
+ keine GPUs vorhanden sind.
+ Also GPU/CPU z.B.
+ Die Software soll zudem Objektorientiert aufgebaut werden, so dass auch
+ andere Ersatzmodelle integriert werden können.
+ Bspw.
+ Supporting Vector Machines oder GEK.
+ GEK +Adjoint kurz erwähnen, wurde ebenfalls integriert, aber die Diss bezieht
+ sich eher auf das MF.
+ 
+\end_layout
+
+\begin_layout Standard
+Problematik: 1.
+ Viele Hyperparameter -> hoher Aufwand bei der Aufstellung der Korrelationsmatri
+zen und deren Ableitungen -> 1:n Verbindung wünschenswert
+\end_layout
+
+\begin_layout Standard
+2.
+ Viele Samples: Sehr hoher Aufwand bei den Matrixoperationen welche für
+ das Training verwendet werden.
+ -> 1:1 Verbindung zu einem extrem leistungsstarken Rechner außerhalb des
+ Clusters
+\end_layout
+
+\begin_layout Standard
+
+\size huge
+Anwendung in der Turbomaschinen Optimierung
+\end_layout
+
+\end_body
+\end_document
