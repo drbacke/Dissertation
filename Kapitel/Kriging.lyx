@@ -3961,109 +3961,49 @@ Eine gebräuchliche Methode um die Konditionszahl zu verbessern, ist es die
 \begin_inset Formula $\lambda\in\mathbb{R}$
 \end_inset
 
- zu erhöhen.
+ (folgend Diagonalaufschlag) zu erhöhen.
  Dieses Vorgehen entspricht einer Tikhonov Regularisierung, wie sie häufig
- für Least Squares Verfahren eingesetzt wird
-\color red
- 
+ für Least Squares Verfahren eingesetzt wird (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tikhonov1991,Hoerl1970,Sacks2007a"
 
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-c\left(\vec{x}_{i},\vec{x}_{j}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}+e^{\lambda}\delta_{i,j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Es stellt sich allerdings die Frage, wie groß dieser Diagonalaufschlag im
- Einzelfall sein muss und inwiefern dieser das Ergebnis beeinflusst bzw.
- die Kondition verbessert.
- Grundsätzlich sollte dieser so klein wie möglich gewählt werden, um die
- Ursprungsmatrix so wenig wie möglich zu verändern.
- Um einen optimalen Wert zu ermitteln, gibt es zwei verschiedene Möglichkeiten.
+).
  
 \end_layout
 
 \begin_layout Standard
-Die erste Möglichkeit wäre, die Likelihood Funktion (siehe Gleichung 
+Der Diagonalaufschlag sollte so klein wie möglich gehalten werden, da die
+ Größe des einen starken Einfluss auf die Vorhersagen hat.
+ Das resultierende Verhalten wird im nächsten Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Likelihood Funktion"
+reference "subsec:Approximation"
 
 \end_inset
 
-) nach dem Diagonalaufschlag zu differenzieren.
- Die Ableitung ist in diesem Fall sehr simpel, da alles außer dem Diagonalaufsch
-lag wegfällt:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial c\left(\vec{x}_{i},\vec{x}_{j}\right)}{\partial\lambda} & =e^{\lambda}\delta_{i,j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Ableitung der Korrelationsmatrix nach dem Diagonalaufschlag ergibt also
- eine Einheitsmatrix multipliziert mit dem Diagonalaufschlag:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\mathbf{\frac{\partial R}{\partial\lambda}} & =e^{\lambda}\mathbf{E}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Damit ergibt sich die Ableitung der Likelihood Funktion nach dem Diagonalaufschl
-ag zu:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L}{\partial\lambda} & =\frac{e^{\lambda}}{2}\left[\textrm{Spur}\left(\mathbf{R}^{-1}\right)-\frac{1}{\sigma^{2}}(\vec{y}_{s}-\beta*\overrightarrow{F})^{T}\mathbf{R}^{-1}\mathbf{R}^{-1}(\vec{y}_{s}-\beta*\overrightarrow{F})\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Mit dieser Formel wäre es nun möglich, den Diagonalaufschlag einfach als
- zusätzlichen Hyperparameter zu minimieren.
- Allerdings bedeutet dies natürlich einen zusätzlicher Aufwand.
- Es soll daher nach einer einfacheren Methode gesucht werden.
+ behandelt.
  
 \end_layout
 
 \begin_layout Standard
-Ein anderer möglicher Ansatz ist die Konditionszahl der Matrix.
- Diese ist definiert als Quotient aus maximalem und minimalem Eigenwert
- der Korrelationsmatrix:
+Um einen geeigneten Wert festzulegen ist es sinnvoll sich die Konditionszahl
+ 
+\begin_inset Formula $\kappa$
+\end_inset
+
+ der Kovarianzmatrix näher zu betrachten.
+ Diese ist definiert als Quotient aus maximalem 
+\begin_inset Formula $\Xi_{max}$
+\end_inset
+
+ und minimalem Eigenwert 
+\begin_inset Formula $\Xi_{min}$
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
@@ -4078,22 +4018,51 @@ Ein anderer möglicher Ansatz ist die Konditionszahl der Matrix.
 \end_layout
 
 \begin_layout Standard
-Überlegt man sich nun, welche Korrelationsmatrix am schlechtesten konditioniert
- wäre, kommt man auf die Einsmatrix:
+Geht man weiterhin von einer Ordinary-Kriging Kovarianzmatrix aus, so kann
+ die Varianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ aus der Matrix ausgeklammert werden und die Korrelationsmatrix 
+\begin_inset Formula $\mathbf{R}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ bleibt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mathbf{Cov}=\sigma^{2}\mathbf{R}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Korrelationen innerhalb der Korrelationsmatrix 
+\begin_inset Formula $\mathbf{R\in\mathbb{R}^{n\times n}}$
+\end_inset
+
+ können einen maximalen Wert von 1 annehmen.
+ Daraus lässt sich ein schlechtmöglichster Fall 
+\begin_inset Formula $\mathbf{\widetilde{R}}\in\mathbb{R}^{n\times n}$
+\end_inset
+
+ für die Konditionierung der Matrix ableiten, dieser entspricht einer reinen
+ Einsmatrix.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathbf{Cov} & =\left[\begin{array}{ccc}
-\sigma^{2} & ... & \sigma^{2}\\
-... & ... & ...\\
-\sigma^{2} & ... & \sigma^{2}
-\end{array}\right]=\sigma^{2}\left[\begin{array}{ccc}
+\mathbf{Cov} & =\sigma^{2}\left[\begin{array}{ccc}
 1 & ... & 1\\
 ... & ... & ...\\
 1 & ... & 1
-\end{array}\right]
+\end{array}\right]=\mathbf{\sigma^{2}\widetilde{R}}
 \end{align*}
 
 \end_inset
@@ -4136,14 +4105,29 @@ Dies würde einer unendlichen Konditionszahl entsprechen:
 \end_layout
 
 \begin_layout Standard
-Addiert man nun den Diagonalaufschlag, bekommt man folgende Korrelationsmatrix:
+Addiert man nun den Diagonalaufschlag, bekommt man folgende Kovariazmatrix:
  
 \begin_inset Formula 
 \begin{align*}
-\mathbf{R} & =\left[\begin{array}{ccc}
+\mathbf{\mathbf{Cov}} & =\left[\begin{array}{ccc}
 \sigma^{2}+\lambda & ... & \sigma^{2}\\
 ... & ... & ...\\
 \sigma^{2} & ... & \sigma^{2}+\lambda
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{\mathbf{Cov}} & =\sigma^{2}\left[\begin{array}{ccc}
+1+\frac{\lambda}{\sigma^{2}} & ... & 1\\
+... & ... & ...\\
+1 & ... & 1++\frac{\lambda}{\sigma^{2}}
 \end{array}\right]
 \end{align*}
 
@@ -4159,7 +4143,7 @@ Daraus ergeben sich die folgenden neuen maximalen und minimalen Eigenwerte:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\Xi_{min}\left(\mathbf{R}\right) & =\lambda
+\Xi_{min}\left(\mathbf{\mathbf{Cov}}\right) & =\lambda
 \end{align*}
 
 \end_inset
@@ -4170,7 +4154,7 @@ Daraus ergeben sich die folgenden neuen maximalen und minimalen Eigenwerte:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\Xi_{max}\left(\mathbf{R}\right) & =\lambda+\sigma^{2}n
+\Xi_{max}\left(\mathbf{Cov}\right) & =\sigma^{2}\left(n+\frac{\lambda}{\sigma^{2}}\right)=\lambda+\sigma^{2}n
 \end{align*}
 
 \end_inset
@@ -4254,7 +4238,7 @@ en Fall anzunehmen.
 Nachteilig ist, dass die untere Grenze für den Diagonalaufschlag während
  des Trainings permanent angepasst werden muss.
  In der praktischen Anwendung haben sich allerdings bisher noch keinerlei
- Probleme gezeigt, da der Wert verhältnismäßig sehr klein ist.
+ Probleme gezeigt, da der Wert verhältnismäßig klein ist.
  
 \end_layout
 
@@ -4274,10 +4258,6 @@ Eine geeignete Grenze für die obere Grenze der Konditionszahl ist aus der
  betragen und es ist davon auszugehen, dass dieser so gut wie keinen Einfluss
  auf das Endergebnis haben sollte.
  
-\begin_inset Formula $ $
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4289,6 +4269,13 @@ Diese Art der Berechnung des Diagonalaufschlags wird momentan im Code verwendet.
 
 \begin_layout Subsection
 Behandlung verrauschter Funktionen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Approximation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4511,6 +4498,83 @@ Die Regularisierung ist über ein Minimum des Diagonalaufschlags geregelt.
 
 \begin_layout Standard
 Semivariogramm zeigen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+c\left(\vec{x}_{i},\vec{x}_{j}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}+e^{\lambda}\delta_{i,j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es stellt sich allerdings die Frage, wie groß dieser Diagonalaufschlag im
+ Einzelfall sein muss und inwiefern dieser das Ergebnis beeinflusst bzw.
+ die Kondition verbessert.
+ Grundsätzlich sollte dieser so klein wie möglich gewählt werden, um die
+ Ursprungsmatrix so wenig wie möglich zu verändern.
+ Um einen optimalen Wert zu ermitteln, gibt es zwei verschiedene Möglichkeiten.
+ 
+\end_layout
+
+\begin_layout Standard
+Die erste Möglichkeit wäre, die Likelihood Funktion (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Likelihood Funktion"
+
+\end_inset
+
+) nach dem Diagonalaufschlag zu differenzieren.
+ Die Ableitung ist in diesem Fall sehr simpel, da alles außer dem Diagonalaufsch
+lag wegfällt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial c\left(\vec{x}_{i},\vec{x}_{j}\right)}{\partial\lambda} & =e^{\lambda}\delta_{i,j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Ableitung der Korrelationsmatrix nach dem Diagonalaufschlag ergibt also
+ eine Einheitsmatrix multipliziert mit dem Diagonalaufschlag:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\mathbf{\frac{\partial R}{\partial\lambda}} & =e^{\lambda}\mathbf{E}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit ergibt sich die Ableitung der Likelihood Funktion nach dem Diagonalaufschl
+ag zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L}{\partial\lambda} & =\frac{e^{\lambda}}{2}\left[\textrm{Spur}\left(\mathbf{R}^{-1}\right)-\frac{1}{\sigma^{2}}(\vec{y}_{s}-\beta*\overrightarrow{F})^{T}\mathbf{R}^{-1}\mathbf{R}^{-1}(\vec{y}_{s}-\beta*\overrightarrow{F})\right]
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
