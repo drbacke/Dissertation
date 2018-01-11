@@ -4243,28 +4243,26 @@ Nachteilig ist, dass die untere Grenze für den Diagonalaufschlag während
 \end_layout
 
 \begin_layout Standard
-Eine geeignete Grenze für die obere Grenze der Konditionszahl ist aus der
- Erfahrung bekannt und liegt bei ca.
- 
-\begin_inset Formula $10^{9}$
+Ein geeigneter Wert für die obere Grenze der Konditionszahl liegt erfahrungsgemä
+ß bei 
+\begin_inset Formula $\sim10^{9}$
 \end_inset
 
 , dieser Wert kann im Einzelfall natürlich angepasst werden.
- Der daraus resultierende Diagonalaufschlag würde bei einer üblichen Matrixgröße
- von 5000x5000, 
+ Der daraus resultierende Diagonalaufschlag würde bei 
+\begin_inset Formula $\sigma_{max}^{2}=1$
+\end_inset
+
+ und einer Matrixgröße von 5000x5000 einen Wert von 
 \begin_inset Formula $5*10^{-6}$
 \end_inset
 
- betragen und es ist davon auszugehen, dass dieser so gut wie keinen Einfluss
- auf das Endergebnis haben sollte.
- 
+ betragen, welcher vernachlässigbar ist.
 \end_layout
 
 \begin_layout Standard
 Diese Art der Berechnung des Diagonalaufschlags wird momentan im Code verwendet.
- Die entsprechende Ableitung der Likelihood Funktion ist im Code bereits
- umgesetzt, wird momentan allerdings nicht verwendet, da bisherige Tests
- dafür noch keine Notwendigkeit zeigten.
+ 
 \end_layout
 
 \begin_layout Subsection
