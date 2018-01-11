@@ -3923,6 +3923,13 @@ Zwei weitere wichtige Punkte der verschiedenen Kriging-Verfahren, sind die
 
 \begin_layout Subsection
 Regularisierung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Regularisierung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4277,8 +4284,92 @@ name "subsec:Approximation"
 \end_layout
 
 \begin_layout Standard
-Konstante Funktion + Normalv.
- Rauschen
+Das Kriging-Verfahren in seiner normalen Form ist ein rein interpolierendes
+ Verfahren.
+ In einigen Fällen ist allerdings kein interpolierendes sondern approximierendes
+ Verhalten gewünscht, bspw.
+ bei der Regression von verrauschten Funktionen.
+ Prinzipiell entspricht der 
+\begin_inset Quotes gld
+\end_inset
+
+Nugget-Effekt
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Variogramm"
+
+\end_inset
+
+) genau einem solchen Rauschterm.
+ Die praktische Umsetzung innerhalb des Kriging Verfahren ist letztlich
+ dieselbe wie beim dem im Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Regularisierung"
+
+\end_inset
+
+ beschriebenen Regularisierungsterm.
+ Mit dem Unterschied, dass der Diagonalaufschlag 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ deutlich größer werden kann, da es sich in diesem Fall um eine Varianz
+ handelt.
+ Zudem ist der Diagonalaufschlag für diesen Fall als Hyperparameter der
+ Verteilung zu behandeln und muss daher mit trainiert werden.
+ Die Umsetzung soll folgend direkt anhand des CO-Kriging Verfahrens gezeigt
+ werden, da diese die allgemeinste Form darstellt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{Cov}=\left[\begin{array}{c|cc}
+ & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
+\hline y_{0}\left(\vec{x}_{1}\right) & \lambda_{h}+\left(a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{1}\right)+\sigma_{d}^{2}c_{d}\left(\vec{x}_{1},\vec{x}_{1}\right)\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{2}\right)\\
+y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1}\right) & \lambda_{l}+\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{2}\right)
+\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{\frac{\partial Cov}{\partial\lambda_{h}}}=\left[\begin{array}{c|cc}
+ & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
+\hline y_{0}\left(\vec{x}_{1}\right) & 1 & 0\\
+y_{1}\left(\vec{x}_{2}\right) & 0 & 0
+\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathbf{\frac{\partial Cov}{\partial\lambda_{l}}}=\left[\begin{array}{c|cc}
+ & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
+\hline y_{0}\left(\vec{x}_{1}\right) & 0 & 0\\
+y_{1}\left(\vec{x}_{2}\right) & 0 & 1
+\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1-1}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4298,6 +4389,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Kriging_RauschFunktion"
+
+\end_inset
+
 Konstante Funktion mit normalverteiltem Rauschen
 \end_layout
 
@@ -4384,51 +4481,6 @@ status open
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\mathbf{Cov}=\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & \lambda_{h}+\left(a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{1}\right)+\sigma_{d}^{2}c_{d}\left(\vec{x}_{1},\vec{x}_{1}\right)\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{2}\right)\\
-y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1}\right) & \lambda_{l}+\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{2}\right)
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\mathbf{\frac{\partial Cov}{\partial\lambda_{h}}}=\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & 1 & 0\\
-y_{1}\left(\vec{x}_{2}\right) & 0 & 0
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\mathbf{\frac{\partial Cov}{\partial\lambda_{l}}}=\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & 0 & 0\\
-y_{1}\left(\vec{x}_{2}\right) & 0 & 1
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Wofür?
 \end_layout
 
@@ -4457,36 +4509,7 @@ Nugget z.B.
 \begin_inset Newline newline
 \end_inset
 
-Mutliplikativ oder Additiv?
-\end_layout
 
-\begin_layout Standard
-Beides ist prinzipiell möglich
-\end_layout
-
-\begin_layout Standard
-Bei einem einfachen Beispiel constanten 0 Funktion + Rauschen würde Multiplikati
-v nicht gehen, da die Varianz dann 0 ist.
- Allerdings ist der Wertebereich komplizierter, da er der vollen Varianz
- entsricht
-\end_layout
-
-\begin_layout Standard
-Multiplikativ hat den Vorteil, dass der Wertebereich einfacher ist und auch
- die Ableitung des Likelihoods ist einfacher.
-\end_layout
-
-\begin_layout Standard
-Warum Multiplikativ?
-\end_layout
-
-\begin_layout Standard
-Weil wir den Term erst am Ende draufmultiplizieren, also auf die gesammte
- Kovarianz.
- Viele addieren einen Term auf die Korrelation.
- Die korrektere Betrachtung ist allerdings eine Erhöhung der Varianz selbst.
- Da die Kovarianz aber beliebig große Werte annehmen kann, ist es sinnvoller
- zu multiplizieren.
 \end_layout
 
 \begin_layout Standard
@@ -4573,6 +4596,43 @@ ag zu:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Multiplikativ oder Additiv?
+\end_layout
+
+\begin_layout Standard
+Mutliplikativ oder Additiv?
+\end_layout
+
+\begin_layout Standard
+Beides ist prinzipiell möglich
+\end_layout
+
+\begin_layout Standard
+Bei einem einfachen Beispiel constanten 0 Funktion + Rauschen würde Multiplikati
+v nicht gehen, da die Varianz dann 0 ist.
+ Allerdings ist der Wertebereich komplizierter, da er der vollen Varianz
+ entsricht
+\end_layout
+
+\begin_layout Standard
+Multiplikativ hat den Vorteil, dass der Wertebereich einfacher ist und auch
+ die Ableitung des Likelihoods ist einfacher.
+\end_layout
+
+\begin_layout Standard
+Warum Multiplikativ?
+\end_layout
+
+\begin_layout Standard
+Weil wir den Term erst am Ende draufmultiplizieren, also auf die gesammte
+ Kovarianz.
+ Viele addieren einen Term auf die Korrelation.
+ Die korrektere Betrachtung ist allerdings eine Erhöhung der Varianz selbst.
+ Da die Kovarianz aber beliebig große Werte annehmen kann, ist es sinnvoller
+ zu multiplizieren.
 \end_layout
 
 \begin_layout Subsection
