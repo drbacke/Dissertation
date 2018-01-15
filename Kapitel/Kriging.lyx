@@ -3170,6 +3170,13 @@ s Verhalten bei sehr kleinen Hyperparametern.
 
 \begin_layout Subsection
 Kovarianzfunktion CO-Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4286,10 +4293,8 @@ name "subsec:Approximation"
 \begin_layout Standard
 Das Kriging-Verfahren in seiner normalen Form ist ein rein interpolierendes
  Verfahren.
- In einigen Fällen ist allerdings kein interpolierendes sondern approximierendes
- Verhalten gewünscht, bspw.
- bei der Regression von verrauschten Funktionen.
- Prinzipiell entspricht der 
+ In einigen Fällen ist allerdings ein approximierendes Verhalten gewünscht.
+ Im Grunde lässt sich das gewünschte Verhalten durch den 
 \begin_inset Quotes gld
 \end_inset
 
@@ -4304,7 +4309,7 @@ reference "sec:Variogramm"
 
 \end_inset
 
-) genau einem solchen Rauschterm.
+) realisieren.
  Die praktische Umsetzung innerhalb des Kriging Verfahren ist letztlich
  dieselbe wie beim dem im Kapitel 
 \begin_inset CommandInset ref
@@ -4322,24 +4327,69 @@ reference "subsec:Regularisierung"
  handelt.
  Zudem ist der Diagonalaufschlag für diesen Fall als Hyperparameter der
  Verteilung zu behandeln und muss daher mit trainiert werden.
- Die Umsetzung soll folgend direkt anhand des CO-Kriging Verfahrens gezeigt
- werden, da diese die allgemeinste Form darstellt.
- 
-\end_layout
+ Die Umsetzung soll folgend anhand des CO-Kriging Verfahrens gezeigt werden.
+ Wie in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzfunktion-CO-Kriging"
 
-\begin_layout Standard
+\end_inset
+
+ beschrieben, werden die Kovarianzfunktionen für zwei beliebige Punkte 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ mit den zwei möglichen Gütestufen 
+\begin_inset Formula $\left\{ high,low\right\} $
+\end_inset
+
+ aus jeweils zwei Korrelationsfunktionen 
+\begin_inset Formula $c_{low}\left(\ldots\right),c_{diff}\left(\ldots\right)$
+\end_inset
+
+ zusammengesetzt.
+ Zusätzlich wird für jeden Gütestufe ein Rauschterm 
+\begin_inset Formula $\lambda_{h}$
+\end_inset
+
+,
+\begin_inset Formula $\lambda_{l}$
+\end_inset
+
+ eingeführt, diese Rauschterme entsprechen dem in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Variogramm"
+
+\end_inset
+
+ beschriebenen Nugget, wobei für jede Gütestufe ein solcher Rauschterm vorgesehe
+n ist.
+ Um den konkreten Aufbau zu verdeutlichen, wird folgend ein simples Beispiel
+ einer resultierenden Kovarianzmatrix mit zwei Stützstellen gezeigt:
 \begin_inset Formula 
 \begin{equation}
 \mathbf{Cov}=\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & \lambda_{h}+\left(a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{1}\right)+\sigma_{d}^{2}c_{d}\left(\vec{x}_{1},\vec{x}_{1}\right)\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{2}\right)\\
-y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1}\right) & \lambda_{l}+\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{2}\right)
+ & high & low\\
+\hline high & \lambda_{h}+\left(a^{2}\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)\right) & a\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)\\
+low & a\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right) & \lambda_{l}+\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)
 \end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1}
 \end{equation}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Wie man sieht, wird der entsprechende Rauschterm einfach auf die Hauptdiagonale
+ der Matrix addiert.
+ Die Größe dieses Rauschterms wird durch das Training eingestellt und sollte
+ im Idealfall der Varianz des Rauschens selbst entsprechen.
+ Um die Rauschterme während des Trainings nutzen zu können, sind noch die
+ Ableitungen der Kovarianzmatrix nach den Rauschtermen notwendig.
+ Die Ableitungen der Kovarianzmatrix würden bei dem obigen Beispiel folgendermaß
+en aussehen:
 \end_layout
 
 \begin_layout Standard
@@ -4373,6 +4423,52 @@ y_{1}\left(\vec{x}_{2}\right) & 0 & 1
 \end_layout
 
 \begin_layout Standard
+Mit diesen Ableitungen ist das Maximum Likelihood Verfahren (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:COKrigingTraining"
+
+\end_inset
+
+ und Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+) direkt anwendbar.
+ Bei einer niedrigen Datenlage oder sehr komplexen (z.B.
+ hochfrequenten) Funktionsverläufen kann es allerdings auch zu einer Überschätzu
+ng des Rauschterms kommen.
+ Um dies zu verdeutlichen wird in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Kriging_RauschFunktion"
+
+\end_inset
+
+ ein einfaches Beispiel gezeigt.
+ Es handelt sich um eine konstante Null-Funktion mit einem Normalverteilten
+ Rauschen, welche den Erwartungswert Null hat und die Standardabweichung
+ Eins: 
+\begin_inset Formula $f\left(x\right)=\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+ Jeder eingezeichnete Punkt entspricht einer Stützstelle, wobei jede Stützstelle
+ an einem anderen Ort ist.
+ Mit Hilfe dieser Stützstellen wird dann ein Ordinary-Kriging trainiert
+ und dann für den Wertebereich 
+\begin_inset Formula $1-2$
+\end_inset
+
+ Vorhersagen getroffen.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -4396,6 +4492,299 @@ name "fig:Kriging_RauschFunktion"
 \end_inset
 
 Konstante Funktion mit normalverteiltem Rauschen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Die folgende Abbildung zeigt zwei mögliche Ergebnisse der Vorhersagen, beide
+ entstammen demselben Training und werden durch den Likelihood Term gleichermaße
+n gut bewertet, sind also als völlig gleichwertig anzusehen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die schwarze Linie entspricht dem vorhergesagten Erwartungswert und die
+ Fehlerbalken der vorhergesagten Standardabweichung.
+ Auf dem linken Bild zeigt das trainierte Kriging eine approximierendes
+ Verhalten und auf dem rechten Bild ein interpolierendes Verhalten.
+ Auf dem rechten Bild wird jeder der Stützstellen exakt wiedergegeben und
+ die vorhersagte Standardabweichung ist an diesen Stellen exakt Null.
+ Der Diagonalaufschlag ist bei dieser Lösung ebenfalls auf Null gestellt
+ worden.
+ 
+\end_layout
+
+\begin_layout Standard
+Auf dem linken Bild wird der Diagonalaufschlag auf den Wert Eins gesetzt,
+ was genau der Varianz des Rauschterms entspricht.
+ Im Extrapolationsbereich zeigen die Vorhersagen exakt dieselben Ergebnisse.
+ Diese Doppeldeutigkeit kann auf die Einstellungen der Hyperparameter zurückgefü
+hrt werden, die wesentlichen Hyperparameter sind die Prozessvarianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+, der Diagonalaufschlag 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ und die Korrelationslänge 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:KrigingRauschBspEinstellungn"
+
+\end_inset
+
+ zeigt die Einstellungen der beiden Lösungen.
+ Die interpolierenden Variante besitzt eine Varianz von 
+\begin_inset Formula $\sigma^{2}=1$
+\end_inset
+
+.
+ Diese Varianz entspricht dann dem 
+\begin_inset Quotes gld
+\end_inset
+
+Sill
+\begin_inset Quotes grd
+\end_inset
+
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Variogramm"
+
+\end_inset
+
+, also der Varianz bei großem Abstand zu einem bekannten Punkt.
+ Der Abstand wird durch die Korrelationslänge 
+\begin_inset Formula $\theta$
+\end_inset
+
+ beeinflusst.
+ Wobei ein großer 
+\begin_inset Formula $\theta$
+\end_inset
+
+ Wert auf einen räumlich sehr kleinen Einfluss deutet.
+ Diese Lösung würde also einem sehr steilen Variogramm entsprechen, welches
+ bei kleinstem Abstand sofort auf den 
+\begin_inset Quotes gld
+\end_inset
+
+Sill
+\begin_inset Quotes grd
+\end_inset
+
+ springt.
+ Ein Rauschterm ist in dieser Lösung nicht vorhanden, dieser würde dem 
+\begin_inset Quotes gld
+\end_inset
+
+Nugget
+\begin_inset Quotes grd
+\end_inset
+
+ entsprechen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die approximierende Variante hat eine sehr kleine Korrelationslänge 
+\begin_inset Formula $\theta=-50$
+\end_inset
+
+ und eine Varianz von 
+\begin_inset Formula $\sigma^{2}=0$
+\end_inset
+
+, was einer konstanten Funktion ohne Unsicherheit entspricht.
+ Durch den Rauschterm 
+\begin_inset Formula $\lambda=1$
+\end_inset
+
+ wird dem Modell eine grundlegende Unsicherheit aufaddiert, welche dem 
+\begin_inset Quotes gld
+\end_inset
+
+Nugget
+\begin_inset Quotes grd
+\end_inset
+
+ entspricht.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Interpolierend
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Approximierend
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\theta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-50
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:KrigingRauschBspEinstellungn"
+
+\end_inset
+
+Einstellungen der verschiedenen Kriging-Lösungen
 \end_layout
 
 \end_inset
@@ -4440,9 +4829,7 @@ Normalverteiltes Rauschen und zwei mögliche Kriging Modelle.
 \end_layout
 
 \begin_layout Standard
-Typisch in der Literatur ist ein Diagonalaufschlag.
- Daraus entsteht eine Art von Doppeldeutigkeit, zum einen Das GEK soll hier
- nicht behandelt werden.
+asd
 \end_layout
 
 \begin_layout Standard
