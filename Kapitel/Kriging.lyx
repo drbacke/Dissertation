@@ -4506,9 +4506,16 @@ Konstante Funktion mit normalverteiltem Rauschen
 
 \begin_layout Standard
 \noindent
-Die folgende Abbildung zeigt zwei mögliche Ergebnisse der Vorhersagen, beide
- entstammen demselben Training und werden durch den Likelihood Term gleichermaße
-n gut bewertet, sind also als völlig gleichwertig anzusehen.
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RauschenBeispiel"
+
+\end_inset
+
+ zeigt zwei mögliche Ergebnisse der Vorhersagen, beide entstammen demselben
+ Training und werden durch den Likelihood Term gleichermaßen gut bewertet,
+ sind also als völlig gleichwertig anzusehen.
  
 \end_layout
 
@@ -4542,6 +4549,16 @@ hrt werden, die wesentlichen Hyperparameter sind die Prozessvarianz
 \end_inset
 
 .
+ Die Korrelationslängen werden wie in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Negative-Hyperparameter-1"
+
+\end_inset
+
+ über eine Exponentialfunktion beschrieben.
+ Grundlegend gilt aber, dass große Korrelationslängen einen weiten Einfluss
+ und kleine Korrelationslängen einen sehr kleinen lokaleren Einfluss darstellen.
  Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4605,7 +4622,7 @@ Nugget
 
 \begin_layout Standard
 Die approximierende Variante hat eine sehr kleine Korrelationslänge 
-\begin_inset Formula $\theta=-50$
+\begin_inset Formula $\theta=e^{-50}$
 \end_inset
 
  und eine Varianz von 
@@ -4752,7 +4769,10 @@ Approximierend
 \begin_inset Text
 
 \begin_layout Plain Layout
-15
+\begin_inset Formula $e^{15}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4761,7 +4781,10 @@ Approximierend
 \begin_inset Text
 
 \begin_layout Plain Layout
--50
+\begin_inset Formula $e^{-50}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4814,6 +4837,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RauschenBeispiel"
+
+\end_inset
+
 Normalverteiltes Rauschen und zwei mögliche Kriging Modelle.
  Die Fehlerbalken stellen die vorhergesagte Standardabweichung dar
 \end_layout
@@ -4829,7 +4858,81 @@ Normalverteiltes Rauschen und zwei mögliche Kriging Modelle.
 \end_layout
 
 \begin_layout Standard
-asd
+Die beiden gezeigt Lösungen haben denselben Likelihood Wert, werden vom
+ Trainingsverfahren also als gleichwertig angesehen.
+ Welche Lösung letztlich vom Training gewählt wird, hängt sehr stark von
+ der gewählten Initialisierung ab.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+ werden verschiedene Möglichkeiten der Initialisierung beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Qualitativ würde man in diesem Fall eher zu der approximierenden Variante
+ tendieren, da diese auch dem ursprünglichen Sample-Prozess entspricht.
+ Ist der Ursprungsprozess allerdings nicht bekannt, so wie es in einer realen
+ Optimierung der Fall ist und ist der Raum zudem noch deutlich niedriger
+ aufgelöst, so wäre man auch nicht mehr in der Lage zu entscheiden, ob es
+ sich um eine hochfrequente oder um eine verrauschte Funktion handelt.
+ Eine Möglichkeit dies zu erfahren ist es, denselben Ort mehrfach zu berechnen.
+ Ist der resultierende Funktionswert immer reproduzierbar, spricht dies
+ für eine glatte Funktion.
+ 
+\end_layout
+
+\begin_layout Standard
+Folgend soll untersucht werden, inwiefern auch Zwischenlösungen möglich
+ sind.
+ Hierfür wurde der Diagonalaufschlag auf einen festen Wert gesetzt und dann
+ das Training gestartet.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RauschBeiespielDiagonalaufschlagVarianz"
+
+\end_inset
+
+ zeigt die verschiedene Diagonalaufschläge und den resultierenden Likelihood-Wer
+t für das Normalverteilte Rauschen.
+ Das Ergebnis zeigt, dass der Likelihood-Wert ein breites Minimum einnimmt
+ und zwar mit einem Diagonalaufschlag im Bereich von 
+\begin_inset Formula $0-1$
+\end_inset
+
+, darüber wird der Likelihood-Wert dann deutlich größer.
+ Da die Varianz des Normalverteilten Rauschen bei 1 liegt, ist dies nicht
+ weiter verwunderlich.
+ Dennoch sind die Bereiche zwischen 
+\begin_inset Formula $0-1$
+\end_inset
+
+ interessant.
+ Um das Verhalten zu verstehen, wird in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RauschBeispielVarianzDiag"
+
+\end_inset
+
+ die eingestellte Varianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ und der Diagonalaufschlag für den Bereich des optimalen Likelihood-Wertes
+ gezeigt.
+ Das Ergebnis ist auch hier äußerst plausibel, denn in der Summe ergeben
+ die beiden Werte immer den Wert 
+\begin_inset Formula $\sigma^{2}+\lambda=1$
+\end_inset
+
+, was dann wiederum der Varianz des Normalverteilten Rauschens entspricht.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4845,16 +4948,55 @@ status open
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RauschBeiespielDiagonalaufschlagVarianz"
+
+\end_inset
+
+Diagonalaufschlag und Varianz und resultierender Likelihood Wert 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/KrigingKapitel/DiagonalVarianz.eps
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RauschBeispielVarianzDiag"
 
+\end_inset
+
+Bereich des optimalen Likelihood-Wertes und Entwicklung des Diagonalaufschlag
+ und der Varianz 
 \end_layout
 
 \end_inset
@@ -4864,125 +5006,14 @@ status open
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Wofür?
-\end_layout
-
-\begin_layout Standard
-1.
- Als Regularisierung -> Konditionszahlen zeigen -> CoKriging?
-\end_layout
-
-\begin_layout Standard
-2.
- Als 
-\begin_inset Quotes gld
-\end_inset
-
-Nugget z.B.
- bei einer verrauschten Funktion.
-\end_layout
-
-\begin_layout Standard
--> Fragestellung: Kann man das sinnvoll über den Likelihood einschätzen?
- oder nicht?
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Regularisierung ist über ein Minimum des Diagonalaufschlags geregelt.
+Das hier gezeigte Verhalten entspricht prinzipiell genau den Erwartungen
+ und damit auch der Theorie, allerdings kann dies bei einer geringeren Datenlage
+ und komplexeren Funktionen durchaus dazu führen, dass der Diagonalaufschlag
+ deutlich überschätzt wird.
+ Die praktische Erfahrung zeigt auch genau ein solches Verhalten.
+ Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
+ Funktion des Trainings verfügbar sein.
  
-\end_layout
-
-\begin_layout Standard
-Semivariogramm zeigen
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-c\left(\vec{x}_{i},\vec{x}_{j}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}+e^{\lambda}\delta_{i,j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Es stellt sich allerdings die Frage, wie groß dieser Diagonalaufschlag im
- Einzelfall sein muss und inwiefern dieser das Ergebnis beeinflusst bzw.
- die Kondition verbessert.
- Grundsätzlich sollte dieser so klein wie möglich gewählt werden, um die
- Ursprungsmatrix so wenig wie möglich zu verändern.
- Um einen optimalen Wert zu ermitteln, gibt es zwei verschiedene Möglichkeiten.
- 
-\end_layout
-
-\begin_layout Standard
-Die erste Möglichkeit wäre, die Likelihood Funktion (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Likelihood Funktion"
-
-\end_inset
-
-) nach dem Diagonalaufschlag zu differenzieren.
- Die Ableitung ist in diesem Fall sehr simpel, da alles außer dem Diagonalaufsch
-lag wegfällt:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial c\left(\vec{x}_{i},\vec{x}_{j}\right)}{\partial\lambda} & =e^{\lambda}\delta_{i,j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Ableitung der Korrelationsmatrix nach dem Diagonalaufschlag ergibt also
- eine Einheitsmatrix multipliziert mit dem Diagonalaufschlag:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\mathbf{\frac{\partial R}{\partial\lambda}} & =e^{\lambda}\mathbf{E}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Damit ergibt sich die Ableitung der Likelihood Funktion nach dem Diagonalaufschl
-ag zu:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L}{\partial\lambda} & =\frac{e^{\lambda}}{2}\left[\textrm{Spur}\left(\mathbf{R}^{-1}\right)-\frac{1}{\sigma^{2}}(\vec{y}_{s}-\beta*\overrightarrow{F})^{T}\mathbf{R}^{-1}\mathbf{R}^{-1}(\vec{y}_{s}-\beta*\overrightarrow{F})\right]
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -5042,6 +5073,18 @@ Vergleiche zu anderen CO-Kriging Modellen
 LatexCommand label
 name "sec:VergleicheCoKrigingAndere"
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Kovarianzmatrix direkt 
+\end_layout
+
+\begin_layout Standard
+Diagonalaufschlag dadurch einfach als normaler Hyperparameter handhabbar
+\begin_inset Newline newline
 \end_inset
 
 
@@ -5412,14 +5455,6 @@ Die Formulierung in O'Hagan ist etwas anders, da dort das Beta2 dem Erwartungswe
 rt der Differenzfunktion entspricht.
  In diesem Fall entsprich das Beta2 dem HF Erwartungswert, am Ergebnis ändert
  dies allerdings nichts.
-\end_layout
-
-\begin_layout Section
-Vorhersagen Beispiele 
-\end_layout
-
-\begin_layout Standard
-Verweisen auf Benchmark Kapitel
 \end_layout
 
 \end_body
