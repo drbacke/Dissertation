@@ -3559,6 +3559,13 @@ reference "subsec:AnhangLikelihoodCOKrigingBsp"
 
 \begin_layout Subsection
 Analytische Bestimmung der Erwartungswerte
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5150,213 +5157,95 @@ name "sec:VergleicheCoKrigingAndere"
 \end_layout
 
 \begin_layout Standard
-Der grundlegende Aufbau des CO-Krigings ist dem dem CO-Kriging Verfahren
- beschrieben in 
+In diesem Abschnitt sollen die Unterschiede und Gemeinsamkeiten zu einigen
+ ausgewählten Co-Kriging Verfahren herausgestellt werden.
+ Eine sehr grundlegende Arbeit in diesem Bereich wird in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
 
 \end_inset
 
- in vielen Punkten ähnlich.
+ beschrieben.
+ Das dort beschriebene Modell ist dem in dieser Arbeit in sehr vielen Punkten
+ ähnlich.
+ Beispielsweise der grundlegende Ansatz des zusammengesetzten Kovarianzmodells
+ ist derselbe wie in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COKrigingKovarianzmodell"
+
+\end_inset
+
+ beschrieben.
+ Damit gleichen sich auch der Aufbau der Kovarianzmatrix 
+\begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
+\end_inset
+
+ und auch die analytische Bestimmung des Erwartungswertvektors 
+\begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+ ähnelt der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
+
+\end_inset
+
+.
+ Allerdings entspricht bei 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ die Formulierung des Erwartungswerts der niedrigeren Gütestufe dem Erwartungswe
+rt der Differenzfunktion (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ Gleichung 4 und 5).
+ In der hier verwendeten Formulierung entspricht dieser dem Erwartungswert
+ der niedrigen Gütestufe selbst.
+ Dieser Unterschied ist aber nur unwesentlich, da das Ergebnis davon unberührt
+ bleibt.
  
 \end_layout
 
 \begin_layout Standard
+Größere Unterschiede zeigen sich erst im Trainingsverfahren und zwar gilt
+ bei 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Han2010,han2012alternative"
+key "Kennedy2000"
 
 \end_inset
 
- werden drei verschiedene Kovarianzmodelle eingeführt, dies ist praktisch
- allerdings nicht anwendbar, da dabei keine stabilen Matrizen entstehen.
- Die vorgeschlagene Lösung wurde in ....
- beschrieben und liegt darin, die Hyperparameter gleichzusetzen.
- Dies würde allerdings eher einem Simple-Kriging entsprechen und die Vorteile
- des CO-Krigings gehen mit solch einer Lösung größtenteils verloren.
- Um die Kovarianzmatrix des CO-Kriging aufzustellen, sollte berücksichtigt
- werden, dass die Kovarianzfunktionen zwischen den verschiedenen Fidelities
- nicht völlig unabhängig voneinander sind.
- Beachtet man dies nicht, können die Kovarianzmatrizen nicht positiv definit
- werden und damit zu numerischen Problemen führen.
+ die Bedingung, dass an jeder Stützstelle hoher Güte auch eine Stützstelle
+ niedriger Güte bekannt sein muss.
+ Dies resultiert aus der Annahme, dass die Daten und damit die Hyperparameter
+ niedrigerer Güte unabhängig von den Daten hoher Güte trainiert werden können.
+ Damit wäre es praktisch möglich, zuerst ein Ordinary-Kriging Modell auf
+ die Daten niedrigerer Güte zu trainieren und darauf aufbauend das Co-Kriging
+ Modell aufzustellen.
  
 \end_layout
 
 \begin_layout Standard
-In 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2012alternative"
-
-\end_inset
-
- wird ein Kriging Modell mit drei verschiedenen Korrelations- / Kovarianzfunktio
-nen mit jeweils eigenen Hyperparametern trainiert.
- Dies führt zu erheblichen numerischen Problemen.
+In dem hier beschrieben Verfahren werden alle Hyperparameter gleichzeitig
+ trainiert, dadurch können die Stützstellen beliebig verteilt sein.
+ Es müssen also nicht an jedem Punkt hoher Güte auch ein Punkt niedriger
+ Güte vorhanden sein.
+ Der numerische Aufwand steigt dadurch allerdings, da die gesamte Kovarianzmatri
+x zerlegt werden muss und auch alle Hyperparameter gleichzeitig trainiert
+ werden müssen.
  In 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2009improving"
-
-\end_inset
-
- wurde vorgeschlagen, nur ein Hyperparametersatz für alle Kovarianzfunktionen
- zu trainieren.
- Vergleicht man dieses Modell mit einem Ordinary Kriging welches alle Fidelity
- Samples beinhaltet, besteht der einzige Unterschied nur noch in einem getrennte
-n Erwartungswert/Varianz für die verschiedenen Fidelities.
- Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
- dar.
- 
-\end_layout
-
-\begin_layout Standard
-Das eigentliche Problem hierbei besteht in der Abhängigkeit der Kovarianzfunktio
-nen untereinander.
- Sprich, hat man zwei Kovarianzfunktionen festgelegt, kann die dritte nicht
- mehr frei gewählt werden, sondern wird durch die anderen beiden bestimmt.
- 
-\end_layout
-
-\begin_layout Standard
-Bei den braunschweigern, wird keine Normalverteilungsannahme getroffen.
- Das Modell ist dadurch in unserem enthalten, aber ....
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Low Fidelity Daten beinhalten bereits einen Großteil der Information und
- die High-Fidelity Daten beinhalten Zusatzinformationen.
- Die LF Funktion wird als 
-\begin_inset Quotes gld
-\end_inset
-
-glatter
-\begin_inset Quotes grd
-\end_inset
-
- oder simplere Funktion angenommen.
- Eine komplexe LF Funktion und eine simplere HF Funktion sind für das hier
- verwendete Modell schwieriger zu trainieren.
- 
-\end_layout
-
-\begin_layout Standard
-Die Braunschweiger nutzen auch den MSE statt ....
-\end_layout
-
-\begin_layout Standard
-Keane verletzt die Unabhänbgigkeitsbedinung aus O'Hagan
-\end_layout
-
-\begin_layout Standard
-O'Hagan benötigt an jedem HF Punkt ien LF Sample zum Aufstellen der Differenz
- Kovarianzfunktion.
- Wir nicht
-\end_layout
-
-\begin_layout Standard
-Gratiet ebenfalls ein eigener Ansatz, dieser soll hier aber nicht weiter
- diskutiert werden.
- 
-\end_layout
-
-\begin_layout Standard
-Erwartungstreue noch durch 
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:SummeGewichteCOKriging"
-
-\end_inset
-
-Die Formulierung in O'Hagan ist etwas anders, da dort das Beta2 dem Erwartungswe
-rt der Differenzfunktion entspricht.
- In diesem Fall entsprich das Beta2 dem HF Erwartungswert, am Ergebnis ändert
- dies allerdings nichts.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VarianzMinimierungFormelCOKriging"
-
-\end_inset
-
- anders als bei den Braunschweigern, hier wurde der MSE der Vorhersage der
- HF Daten minimiert
-\end_layout
-
-\begin_layout Standard
--Braunschweiger 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zimmermann2009"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2012alternative"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Han2010"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-- Bei O'Hagan ist es zwingend, dass an jeder HF Stelle auch ein LF Sample
- existiert.
- Darin sehe ich einen relativ wichtigen Unterschied zu unserer Arbeit.
- (Nachzulesen am Ende von 2.2, die Definition der DesignPoints) - Dass die
- Likelihood Funktion mit einer vollständigen Matrix und den Varianzen als
- Hyperparameter dasselbe Minimum haben soll, wie die Definition der beiden
- einzelnen und unabhängigen Likelihood Funktionen bei O'Hagan, fällt mir
- nur schwer zu glauben.
- Zudem es bei uns auch keine direkten Schätzer für die Sigmas gibt.
- SigmaLF und SigmaHF können in unserem Fall durchaus von den jeweils anderen
- Samples beeinflusst werden und das passiert auch.
- Was das angeht bin ich mir allerdings nicht sicher, ob das überhaupt in
- Ordnung ist.
-\end_layout
-
-\begin_layout Standard
-- Bei Keane werden die Vorhersagen aus dem reinen LoFi Modell verwendet
- um die Differenz-Kovarianzfunktion aufzustellen.
- Wenn ich mich nicht täusche, verletzt er damit die Bedingung von O'Hagan
- p(z|N) = p(z2|z1,s1,h2,sigma2)*p(z1|h1,sigma1), da p(z2|z1,s1,h2,sigma2)
- dadurch von h1,sigma1 und beta1 abhängt.
- Zudem bin ich mir nicht sicher, inwiefern man die Vorhersagen ohne Beachtung
- der Unsicherheiten einsetzen sollte.
- Das wird wahrscheinlich schon funktionieren, mir geht es aber wie gesagt
- um die Unterschiede zu meiner Arbeit und auch darin sehe ich einen.
- 
-\end_layout
-
-\begin_layout Standard
-In 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
@@ -5428,89 +5317,149 @@ Diese Annahme soll in dem Modell dieser Arbeit allerdings nicht getroffen
 \end_inset
 
 auftrennt und damit mögliche Lösungen für die Hyperparameter ausschließt.
- Um dies zu verdeutlichen soll ein Beispiel herangezogen werden:
 \end_layout
 
 \begin_layout Standard
-
-\size huge
-\color red
-Zusammengesetzte Kovarianzfunktion zeigen, vielleicht zusätzlich ein Beispiel
- suchen welches mit dem anderen Modell nicht möglich wäre !!!!
-\end_layout
-
-\begin_layout Standard
-Die Vorteile bei der Wahl dieser Methode liegen bei:
-\end_layout
-
-\begin_layout Itemize
-Mehr 
-\begin_inset Quotes gld
-\end_inset
-
-Lösungswege
-\begin_inset Quotes grd
-\end_inset
-
- für das Training durch einen größeren Hyperparameterraum 
-\end_layout
-
-\begin_layout Itemize
-Unabhängigkeit der Daten ist in den meisten Fällen nicht gegeben
-\end_layout
-
-\begin_layout Itemize
-Nur eine Kovarianzmatrix und ein Training, softwaretechnisch besser umsetzbar
-\end_layout
-
-\begin_layout Itemize
-Höherwertigeres Modell
-\end_layout
-
-\begin_layout Itemize
-An High Fidelity Punkten müssen keine Low-Fidelity Samples bekannt sein
-\end_layout
-
-\begin_layout Itemize
-An High-Fidelity Punkten können Low-Fidelity Samples liegen
-\end_layout
-
-\begin_layout Standard
-Die Nachteile bei der Wahl dieser Methode liegen bei:
-\end_layout
-
-\begin_layout Itemize
-Numerisch aufwendiger
-\end_layout
-
-\begin_layout Itemize
-Kein analytischer Likelihood Schätzer für 
-\begin_inset Formula $\sigma_{i}^{2}$
-\end_inset
-
- mit 
-\begin_inset Formula $i=1...m_{f}$
-\end_inset
-
- gefunden
-\end_layout
-
-\begin_layout Standard
-Welches Beta man einsetzt jängt davon ab, was man vorhersagen möchte.
- Möchte ich, dass mein 
-\begin_inset Formula $E\left[Z\left(\vec{x}_{0}\right)\right]$
-\end_inset
-
- dem HF Erwartungswert entsprich,.
- so muss dieser eingesetzt werden.
+Das hier beschriebene CO-Kriging Verfahren ist dem in beschriebenen Modell
+ in vielen Punkten ähnlich.
  
 \end_layout
 
 \begin_layout Standard
-Die Formulierung in O'Hagan ist etwas anders, da dort das Beta2 dem Erwartungswe
-rt der Differenzfunktion entspricht.
- In diesem Fall entsprich das Beta2 dem HF Erwartungswert, am Ergebnis ändert
- dies allerdings nichts.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Han2010,han2012alternative"
+
+\end_inset
+
+ werden drei verschiedene Kovarianzmodelle eingeführt, dies ist praktisch
+ allerdings nicht anwendbar, da dabei keine stabilen Matrizen entstehen.
+ Die vorgeschlagene Lösung wurde in ....
+ beschrieben und liegt darin, die Hyperparameter gleichzusetzen.
+ Dies würde allerdings eher einem Simple-Kriging entsprechen und die Vorteile
+ des CO-Krigings gehen mit solch einer Lösung größtenteils verloren.
+ Um die Kovarianzmatrix des CO-Kriging aufzustellen, sollte berücksichtigt
+ werden, dass die Kovarianzfunktionen zwischen den verschiedenen Fidelities
+ nicht völlig unabhängig voneinander sind.
+ Beachtet man dies nicht, können die Kovarianzmatrizen nicht positiv definit
+ werden und damit zu numerischen Problemen führen.
+ 
+\end_layout
+
+\begin_layout Standard
+Aufbauend auf der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+, schlägt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+ vor, ein Ordinary-Kriging Modell auf die Daten niedrigerer Güte aufzustellen
+ und die Vorhersagen aus dem Modell zu verwenden, um die Differenz-Kovarianzfunk
+tion und damit das Co-Kriging Modell aufzustellen.
+ Grundlegend ist dies zwar eine praktikable Lösung, allerdings wird damit
+ die Bedingung von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ 
+\begin_inset Formula $p\left(z|\phi\right)=p\left(z_{high}|z_{low},\rho,\beta_{high},\sigma_{high}^{2}\right)p\left(z_{low}|\beta_{low},\sigma_{low}^{2}\right)$
+\end_inset
+
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ Gleichung 8) grundlegend verletzt.
+ Diese besagt, das die Schätzung der Parameter der Verteilungsfunktion hoher
+ Güte 
+\begin_inset Formula $\rho,\beta_{high},\sigma_{high}^{2}$
+\end_inset
+
+ unabhängig von den Parametern niedrigerer Güte 
+\begin_inset Formula $\beta_{low},\sigma_{low}^{2}$
+\end_inset
+
+ erfolgen kann.
+ Da die Daten niedrigerer Güte nun aber aus einer Kriging-Vorhersage stammen,
+ sind 
+\begin_inset Formula $z_{low},\rho,\beta_{high},\sigma_{high}^{2}$
+\end_inset
+
+ nicht mehr unabhängig von 
+\begin_inset Formula $\beta_{low},\sigma_{low}^{2}$
+\end_inset
+
+.
+ Weiterhin sind diese Vorhersagen mit einer Unsicherheit behaftet, stellen
+ also selbst Verteilungen dar.
+ Inwiefern dieser Umstand beachtet werden sollte, wurde hier allerdings
+ nicht mehr weiter untersucht.
+ Trotz der hier genannten Punkte sollte erwähnt werden, dass das Verfahren
+ in der Praxis ausreichend gut funktioniert.
+ Inwiefern die dadurch entstehenden Ungenauigkeiten eine reale Optimierung
+ beeinflussen können, ist allerdings ungeklärt.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
+
+\end_inset
+
+ wird ein Kriging-Modell mit drei verschiedenen und völlig unabhängigen
+ Kovarianzfunktionen, also mit jeweils eigenen Hyperparametern trainiert.
+ Dies führt zu erheblichen numerischen Problemen.
+ Der Grund hierfür liegt darin, dass die positive Definitheit der Kovarianzmatri
+x nicht mehr gesichert ist.
+ Um dieses Problem zu umgehen, wurde in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2009improving"
+
+\end_inset
+
+ vorgeschlagen, für alle Kovarianzfunktionen denselben Hyperparametersatz
+ zu trainieren.
+ Vergleicht man dieses Modell mit einem Ordinary Kriging welches alle Fidelity
+ Samples beinhaltet, besteht der einzige Unterschied nur noch in einem getrennte
+n Erwartungswert/Varianz für die verschiedenen Fidelities.
+ Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
+ dar.
+ 
+\end_layout
+
+\begin_layout Standard
+Das eigentliche Problem hierbei besteht in der Abhängigkeit der Kovarianzfunktio
+nen untereinander.
+ Sprich, hat man zwei Kovarianzfunktionen festgelegt, kann die dritte nicht
+ mehr frei gewählt werden, sondern wird durch die anderen beiden bestimmt.
+ 
 \end_layout
 
 \end_body
