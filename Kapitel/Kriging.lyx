@@ -4608,6 +4608,14 @@ Sill
 \end_inset
 
  springt.
+ Das Variogramm wird qualitativ in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:VarioApproxInter"
+
+\end_inset
+
+ dargestellt und entspricht dem rechten Variogramm.
  Ein Rauschterm ist in dieser Lösung nicht vorhanden, dieser würde dem 
 \begin_inset Quotes gld
 \end_inset
@@ -4643,6 +4651,15 @@ Nugget
 \end_inset
 
  entspricht.
+ Das entsprechende Variogramm wäre unabhängig von der Distanz und entspräche
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:VarioApproxInter"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -4832,7 +4849,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/KrigingKapitel/semiSteep.eps
+	filename ../images/KrigingKapitel/semiSteep.eps
 
 \end_inset
 
@@ -5049,10 +5066,10 @@ Bereich des optimalen Likelihood-Wertes und Entwicklung des Diagonalaufschlag
 
 \end_inset
 
-Das hier gezeigte Verhalten entspricht prinzipiell genau den Erwartungen
- und damit auch der Theorie, allerdings kann dies bei einer geringeren Datenlage
- und komplexeren Funktionen durchaus dazu führen, dass der Diagonalaufschlag
- deutlich überschätzt wird.
+Das hier gezeigte Verhalten entspricht den Erwartungen und damit auch der
+ Theorie, allerdings kann dies bei einer geringeren Datenlage und komplexeren
+ Funktionen durchaus dazu führen, dass der Diagonalaufschlag deutlich überschätz
+t wird.
  Die praktische Erfahrung zeigt auch genau ein solches Verhalten.
  Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
  Funktion des Trainings verfügbar sein.
@@ -5060,54 +5077,65 @@ Das hier gezeigte Verhalten entspricht prinzipiell genau den Erwartungen
 \end_layout
 
 \begin_layout Subsection
-Multiplikativ oder Additiv?
-\end_layout
-
-\begin_layout Standard
-Mutliplikativ oder Additiv?
-\end_layout
-
-\begin_layout Standard
-Beides ist prinzipiell möglich
-\end_layout
-
-\begin_layout Standard
-Bei einem einfachen Beispiel constanten 0 Funktion + Rauschen würde Multiplikati
-v nicht gehen, da die Varianz dann 0 ist.
- Allerdings ist der Wertebereich komplizierter, da er der vollen Varianz
- entsricht
-\end_layout
-
-\begin_layout Standard
-Multiplikativ hat den Vorteil, dass der Wertebereich einfacher ist und auch
- die Ableitung des Likelihoods ist einfacher.
-\end_layout
-
-\begin_layout Standard
-Warum Multiplikativ?
-\end_layout
-
-\begin_layout Standard
-Weil wir den Term erst am Ende draufmultiplizieren, also auf die gesammte
- Kovarianz.
- Viele addieren einen Term auf die Korrelation.
- Die korrektere Betrachtung ist allerdings eine Erhöhung der Varianz selbst.
- Da die Kovarianz aber beliebig große Werte annehmen kann, ist es sinnvoller
- zu multiplizieren.
-\end_layout
-
-\begin_layout Subsection
 Gleichzeitige Behandlung 
 \end_layout
 
 \begin_layout Standard
-Um nicht für den Regularisierungsterm und den Nugget jeweils einen eigenen
- Wert zu verwenden, kann man den Regularisierungsterm als Minimum annehmen.
- Das Nugget kann das normal trainiert werden.
- Vorteil dabei ist, dass bei dieser Betrachtungsweise für die Ableitung
- des Likelihoods nach dem Nugget kein SigmaQuadrat in der Ableitung der
- Cov MAtrix erscheint und auch in allen anderen Ableitungen nach Theta fällt
- dieser Term einfach weg.
+In den Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Regularisierung"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Approximation"
+
+\end_inset
+
+ wurden zur Regularisierung und zur Approximation ein Diagonalaufschlag
+ verwendet.
+ Formell werden beide Terme gleich verwendet.
+ Unterschiede ergeben sich allerdings in der Größe der Werte und in der
+ Bestimmung während des Trainings.
+ Auf der einen Seite steht der Regularisierungsterm, welcher nur für die
+ numerische Stabilität sorgen soll.
+ Dieser soll die Vorhersage möglichst nicht beeinflussen und muss daher
+ sehr klein gewählt werden.
+ Zudem ist dieser nicht als Hyperparameter anzusehen und daher keine zu
+ trainierende Größe.
+ 
+\end_layout
+
+\begin_layout Standard
+Auf der anderen Seite steht der Rauschterm oder auch Nugget, dieser soll
+ die Vorhersage beeinflussen und für ein approximierende Verhalten sorgen.
+ Zudem wird dieser Parameter innerhalb des Trainingsverfahrens geschätzt.
+ 
+\end_layout
+
+\begin_layout Standard
+Um nicht für den Regularisierungsterm und den Rauschterm jeweils einen eigenen
+ Wert zu verwenden, kann man den Regularisierungsterm einfach als minimalen
+\end_layout
+
+\begin_layout Standard
+Grenze annehmen.
+ Wird der Wert kleiner als diese festgelegte Grenze, so ist die numerische
+ Stabilität gefährdet.
+ Der Rauschterm kann dann wie beschrieben trainiert werden, besitzt dann
+ nur einer untere Schranke.
+ Die Größe der Schranke lässt sich wie in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Regularisierung"
+
+\end_inset
+
+ beschrieben festlegen.
+ 
 \end_layout
 
 \begin_layout Section
@@ -5122,76 +5150,32 @@ name "sec:VergleicheCoKrigingAndere"
 \end_layout
 
 \begin_layout Standard
-Kovarianzmatrix direkt 
-\end_layout
+Der grundlegende Aufbau des CO-Krigings ist dem dem CO-Kriging Verfahren
+ beschrieben in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
 
-\begin_layout Standard
-Diagonalaufschlag dadurch einfach als normaler Hyperparameter handhabbar
-\begin_inset Newline newline
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Unabhängig unsinnig -> Verweisen auf Han
-\end_layout
-
-\begin_layout Standard
-Verschiedene Ansätze das zu modellieren: 
-\end_layout
-
-\begin_layout Standard
-- Gratiert
-\end_layout
-
-\begin_layout Standard
-- Toal
-\end_layout
-
-\begin_layout Standard
-Bei beiden an jeder High auch Low gerechnet werden muss
-\end_layout
-
-\begin_layout Standard
-Ähnlich wie Kennedy und OHagang hier muss an jedem Hoigh auch Low
-\end_layout
-
-\begin_layout Standard
-Keane setzt die Vorhersage an den unbekannten Stellen ein.
-\end_layout
-
-\begin_layout Standard
-Wir trainieren alles in einem
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Low Fidelity Daten beinhalten bereits einen Großteil der Information und
- die High-Fidelity Daten beinhalten Zusatzinformationen.
- Die LF Funktion wird als 
-\begin_inset Quotes gld
-\end_inset
-
-glatter
-\begin_inset Quotes grd
-\end_inset
-
- oder simplere Funktion angenommen.
- Eine komplexe LF Funktion und eine simplere HF Funktion sind für das hier
- verwendete Modell schwieriger zu trainieren.
+ in vielen Punkten ähnlich.
  
 \end_layout
 
 \begin_layout Standard
-Um die Kovarianzmatrix des CO-Kriging aufzustellen, sollte berücksichtigt
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Han2010,han2012alternative"
+
+\end_inset
+
+ werden drei verschiedene Kovarianzmodelle eingeführt, dies ist praktisch
+ allerdings nicht anwendbar, da dabei keine stabilen Matrizen entstehen.
+ Die vorgeschlagene Lösung wurde in ....
+ beschrieben und liegt darin, die Hyperparameter gleichzusetzen.
+ Dies würde allerdings eher einem Simple-Kriging entsprechen und die Vorteile
+ des CO-Krigings gehen mit solch einer Lösung größtenteils verloren.
+ Um die Kovarianzmatrix des CO-Kriging aufzustellen, sollte berücksichtigt
  werden, dass die Kovarianzfunktionen zwischen den verschiedenen Fidelities
  nicht völlig unabhängig voneinander sind.
  Beachtet man dies nicht, können die Kovarianzmatrizen nicht positiv definit
@@ -5238,6 +5222,35 @@ nen untereinander.
 \begin_layout Standard
 Bei den braunschweigern, wird keine Normalverteilungsannahme getroffen.
  Das Modell ist dadurch in unserem enthalten, aber ....
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Low Fidelity Daten beinhalten bereits einen Großteil der Information und
+ die High-Fidelity Daten beinhalten Zusatzinformationen.
+ Die LF Funktion wird als 
+\begin_inset Quotes gld
+\end_inset
+
+glatter
+\begin_inset Quotes grd
+\end_inset
+
+ oder simplere Funktion angenommen.
+ Eine komplexe LF Funktion und eine simplere HF Funktion sind für das hier
+ verwendete Modell schwieriger zu trainieren.
+ 
 \end_layout
 
 \begin_layout Standard
