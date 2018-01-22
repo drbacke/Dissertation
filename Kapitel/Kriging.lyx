@@ -83,19 +83,6 @@ name "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Den allgemeinsten Ansatz in dieser Arbeit stellt das CO-Kriging dar, das
-  Simple-, Ordinary- und Gradient-Enhanced-Kriging können als Spezialfall
- es des CO-Krigings mit einer Fidelity angesehen werden.
- Berücksichtigt man diesen Umstand in der Herleitung der Verfahren, so kann
- man sich dies in der Planung der Softwarestruktur zu nutze machen und alle
- Verfahren effizient in einem Code unterbringen.
- Aus diesem Grund wird im ersten Abschnitt dieses Kapitels das CO-Kriging
- behandelt und in den darauffolgenden Abschnitten folgen die Herleitungen
- der anderen Kriging Verfahren auf Basis des CO-Krigings.
- 
-\end_layout
-
-\begin_layout Standard
 Da die in dieser Arbeit entwickelte Kriging-Software einen sehr hohen Anwendungs
 bezug hat und auch industriell eingesetzt werden soll, wurde bei der mathematisc
 hen Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnisc
@@ -107,60 +94,12 @@ t.
 \end_layout
 
 \begin_layout Standard
-Zusätzlich zu den Herleitungen soll ein Abschnitt auch die Verbindung des
- Simple-Kriging und einer Bedingten Normalverteilung herstellen, dieses
- Kapitel dient insbesondere zum besseren Verständnis aller Verfahren.
-\end_layout
-
-\begin_layout Standard
-Der letzte Abschnitt behandelt einen Regularisierungsterms, welcher neben
- der numerischen Stabilisierung ebenfalls das Approximationsverhalten der
- Kriging Verfahren verändert.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\color red
-CO-Kriging Formulierungen, welche auf einem Differenzmodell beruhen (z.B.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "j2011efficient"
-
-\end_inset
-
-) haben den Nachteil, dass jeder Member mit der Low-Fidelity Prozesskette
- berechnet werden muss.
- Eine Entscheidungsfunktion müsste in diesem Fall nur noch entscheiden,
- ob ein Member nach der Low-Fidelity Berechnung noch die High-Fidelity Prozesske
-tte durchlaufen soll oder nicht.
- Dieser Ansatz lohnt sich insbesondere dann, wenn man auf Basis des Low-Fidelity
- Members, die High-Fidelity Prozesskette fortsetzen kann.
- Beispielsweise könnte man eine Strömungslösung nicht auskonvergieren lassen
- und diese Lösung als Low-Fidelity Member verwenden.
- Möchte man diesen Member dann noch mit der High-Fidelity Prozesskette berechnen
-, so kann man die bereits vorhandene Low-Fidelity Lösung einfach auskonvergieren
- lassen und verliert so keine zusätzliche Zeit.
- Um eine Entscheidung zu treffen, wann ein Member mit der High-Fidelity
- Prozesskette berechnet werden soll, kann man den erhaltenen Low-Fidelity
- Member dem Ersatzmodell hinzufügen und dann eine High-Fidelity Vorhersage
- mit dem neuen Ersatzmodell treffen.
- Anhand dieser Vorhersage kann dann eine sinnvolle Entscheidung getroffen
- werden, ob der entsprechende Member zusätzlich noch mit der High-Fidelity
- Prozesskette berechnet werden soll oder nicht.
+Im ersten Abschnitt wird die Herleitung des Co-Kriging Verfahrens beschrieben
+ und ein kurzer Überblick über die anderen Kriging-Verfahren gegeben.
+ Darauf folgend wird das Kovarianzmodell, die Bildung der Kovarianzmatrix
+ und das angewendete Trainingsverfahren erläutert.
+ Abschließend werden dann die Behandlung verrauschter Funktionen und die
+ numerische Stabilität behandelt.
  
 \end_layout
 
@@ -5158,19 +5097,19 @@ name "sec:VergleicheCoKrigingAndere"
 
 \begin_layout Standard
 In diesem Abschnitt sollen die Unterschiede und Gemeinsamkeiten zu einigen
- ausgewählten Co-Kriging Verfahren herausgestellt werden.
- Eine sehr grundlegende Arbeit in diesem Bereich wird in 
+ anderen Co-Kriging Verfahren herausgestellt werden.
+ Eine sehr grundlegende Arbeit in diesem Bereich stellt die Veröffentlichung
+ von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
 
 \end_inset
 
- beschrieben.
+ dar.
  Das dort beschriebene Modell ist dem in dieser Arbeit in sehr vielen Punkten
  ähnlich.
- Beispielsweise der grundlegende Ansatz des zusammengesetzten Kovarianzmodells
- ist derselbe wie in Kapitel 
+ Beispielsweise ist das Kovarianzmodell dasselbe wie in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:COKrigingKovarianzmodell"
@@ -5178,15 +5117,15 @@ reference "subsec:COKrigingKovarianzmodell"
 \end_inset
 
  beschrieben.
- Damit gleichen sich auch der Aufbau der Kovarianzmatrix 
+ Damit gleichen sich der Aufbau der Kovarianzmatrix 
 \begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
 \end_inset
 
- und auch die analytische Bestimmung des Erwartungswertvektors 
+ und ebenfalls die analytische Bestimmung des Erwartungswertvektors 
 \begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
 
- ähnelt der aus Kapitel 
+ ähnelt der Bestimmung aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
@@ -5194,15 +5133,15 @@ reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
 \end_inset
 
 .
- Allerdings entspricht bei 
+ Allerdings beinhaltet der Erwartungswertvektor bei 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
 
 \end_inset
 
- die Formulierung des Erwartungswerts der niedrigeren Gütestufe dem Erwartungswe
-rt der Differenzfunktion (vgl.
+ die Erwartungswerte der höchsten Gütestufe und die der Differenzfunktion
+ (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5211,16 +5150,16 @@ key "Kennedy2000"
 \end_inset
 
  Gleichung 4 und 5).
- In der hier verwendeten Formulierung entspricht dieser dem Erwartungswert
- der niedrigen Gütestufe selbst.
+ In der hier verwendeten Formulierung entspricht der Differenzerwartungswert
+ dem Erwartungswert der niedrigen Gütestufe selbst.
  Dieser Unterschied ist aber nur unwesentlich, da das Ergebnis davon unberührt
  bleibt.
  
 \end_layout
 
 \begin_layout Standard
-Größere Unterschiede zeigen sich erst im Trainingsverfahren und zwar gilt
- bei 
+Größere Unterschiede zeigen sich im Trainingsverfahren und zwar gilt bei
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
@@ -5229,43 +5168,14 @@ key "Kennedy2000"
 
  die Bedingung, dass an jeder Stützstelle hoher Güte auch eine Stützstelle
  niedriger Güte bekannt sein muss.
- Dies resultiert aus der Annahme, dass die Daten und damit die Hyperparameter
- niedrigerer Güte unabhängig von den Daten hoher Güte trainiert werden können.
- Damit wäre es praktisch möglich, zuerst ein Ordinary-Kriging Modell auf
- die Daten niedrigerer Güte zu trainieren und darauf aufbauend das Co-Kriging
- Modell aufzustellen.
+ Dies resultiert aus der Annahme, dass die Daten und damit auch die Hyperparamet
+er niedrigerer Güte, unabhängig von den Daten hoher Güte trainierbar sind.
  
 \end_layout
 
 \begin_layout Standard
-In dem hier beschrieben Verfahren werden alle Hyperparameter gleichzeitig
- trainiert, dadurch können die Stützstellen beliebig verteilt sein.
- Es müssen also nicht an jedem Punkt hoher Güte auch ein Punkt niedriger
- Güte vorhanden sein.
- Der numerische Aufwand steigt dadurch allerdings, da die gesamte Kovarianzmatri
-x zerlegt werden muss und auch alle Hyperparameter gleichzeitig trainiert
- werden müssen.
- In 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- werden die verschiedenen Daten als unabhängig angesehen (siehe Seite.
- Zudem können dadurch Likelihood Schätzer für die Erwartungswerte und Varianzen
- des Kriging Modells 
-\begin_inset Formula $\beta_{i},\sigma_{i}^{2}$
-\end_inset
-
- mit 
-\begin_inset Formula $i=1...m_{f}$
-\end_inset
-
- bestimmt werden.
- Durch diese Annahme kann man die Hyperparameter für das die Datensätze
- unabhängig voneinander bestimmen und im Nachhinein als gesamte Kovarianzfunktio
-n zusammensetzen.
+Durch diese Annahme kann man die Hyperparameter für die Gütestufen hierarchisch
+ (Bottom-Top) bestimmen.
  Das Training der Hyperparameter wird dadurch vereinfacht und auch der numerisch
 e Aufwand sinkt dadurch.
  Dies kommt daher, da man zwei unabhängige Trainings durchführt mit jeweils
@@ -5288,8 +5198,8 @@ e Aufwand sinkt dadurch.
 \end_inset
 
 durchgeführt werden.
- Jedes dieser Trainings hat in etwa eine Komplexität von 
-\begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
+ Die Komplexität läge dann bei etwa 
+\begin_inset Formula $\mathcal{O}\left(n_{high}^{3}\right)+\mathcal{O}\left(n_{low}^{3}\right)$
 \end_inset
 
 .
@@ -5297,10 +5207,28 @@ durchgeführt werden.
 \end_layout
 
 \begin_layout Standard
-Diese Annahme soll in dem Modell dieser Arbeit allerdings nicht getroffen
+In dem hier beschrieben Verfahren werden alle Hyperparameter gleichzeitig
+ trainiert, wodurch die Stützstellen der unterschiedlichen Gütestufen beliebig
+ verteilt sein können.
+ Es muss also nicht an jedem Punkt hoher Güte auch ein Punkt niedriger Güte
+ vorhanden sein.
+ Der numerische Aufwand steigt dadurch allerdings, da die gesamte Kovarianzmatri
+x zerlegt werden muss und auch alle Hyperparameter gleichzeitig trainiert
  werden.
- Der Grund dafür liegt darin, dass man den möglichen Raum der Hyperparameter
- (wobei 
+ Die Komplexität liegt dann bei 
+\begin_inset Formula $\mathcal{O}\left(\left(n_{high}+n_{low}\right)^{3}\right)$
+\end_inset
+
+.
+ Dennoch wird dies als zeitlicher Vorteil erachtet, da der Zeitaufwand für
+ die Bestimmung der zusätzlichen Stützstellen deutlich größer ist als der
+ zusätzliche Trainingsaufwand, insbesondere bei Turbomaschinenanwendungen.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin wird auch der mögliche Lösungsraum für die Hyperparameter größer.
+ Der Grund liegt darin, dass man den Raum der Hyperparameter (wobei 
 \begin_inset Formula $o$
 \end_inset
 
@@ -5316,34 +5244,7 @@ Diese Annahme soll in dem Modell dieser Arbeit allerdings nicht getroffen
 \begin_inset Formula $\mathbb{R^{\mathrm{o_{high}}}}$
 \end_inset
 
-auftrennt und damit mögliche Lösungen für die Hyperparameter ausschließt.
-\end_layout
-
-\begin_layout Standard
-Das hier beschriebene CO-Kriging Verfahren ist dem in beschriebenen Modell
- in vielen Punkten ähnlich.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Han2010,han2012alternative"
-
-\end_inset
-
- werden drei verschiedene Kovarianzmodelle eingeführt, dies ist praktisch
- allerdings nicht anwendbar, da dabei keine stabilen Matrizen entstehen.
- Die vorgeschlagene Lösung wurde in ....
- beschrieben und liegt darin, die Hyperparameter gleichzusetzen.
- Dies würde allerdings eher einem Simple-Kriging entsprechen und die Vorteile
- des CO-Krigings gehen mit solch einer Lösung größtenteils verloren.
- Um die Kovarianzmatrix des CO-Kriging aufzustellen, sollte berücksichtigt
- werden, dass die Kovarianzfunktionen zwischen den verschiedenen Fidelities
- nicht völlig unabhängig voneinander sind.
- Beachtet man dies nicht, können die Kovarianzmatrizen nicht positiv definit
- werden und damit zu numerischen Problemen führen.
- 
+ auftrennt und damit mögliche Lösungen für die Hyperparameter ausschließt.
 \end_layout
 
 \begin_layout Standard
@@ -5361,9 +5262,10 @@ key "forrester2007multi"
 
 \end_inset
 
- vor, ein Ordinary-Kriging Modell auf die Daten niedrigerer Güte aufzustellen
- und die Vorhersagen aus dem Modell zu verwenden, um die Differenz-Kovarianzfunk
-tion und damit das Co-Kriging Modell aufzustellen.
+ ein weiteres Modell vor.
+ In diesem wird ein Ordinary-Kriging auf die Daten niedrigerer Güte aufgestellt
+ und die Vorhersagen aus dem Modell dazu verwendet, die Differenz-Kovarianzfunkt
+ion und damit das resultierende Co-Kriging Modell aufzustellen.
  Grundlegend ist dies zwar eine praktikable Lösung, allerdings wird damit
  die Bedingung von 
 \begin_inset CommandInset citation
@@ -5409,34 +5311,26 @@ key "Kennedy2000"
  also selbst Verteilungen dar.
  Inwiefern dieser Umstand beachtet werden sollte, wurde hier allerdings
  nicht mehr weiter untersucht.
- Trotz der hier genannten Punkte sollte erwähnt werden, dass das Verfahren
- in der Praxis ausreichend gut funktioniert.
- Inwiefern die dadurch entstehenden Ungenauigkeiten eine reale Optimierung
- beeinflussen können, ist allerdings ungeklärt.
  
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-In 
+Eine weitere Herangehensweise kann in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "han2012alternative"
 
 \end_inset
 
- wird ein Kriging-Modell mit drei verschiedenen und völlig unabhängigen
- Kovarianzfunktionen, also mit jeweils eigenen Hyperparametern trainiert.
- Dies führt zu erheblichen numerischen Problemen.
- Der Grund hierfür liegt darin, dass die positive Definitheit der Kovarianzmatri
-x nicht mehr gesichert ist.
+ gefunden werden.
+ In dieser Arbeit wird ein Co-Kriging-Modell mit drei unabhängigen Kovarianzfunk
+tionen beschrieben.
+ Die bedeutet, dass drei verschiedene Hyperparametersätze gleichzeitig trainiert
+ werden.
+ Dies führt allerdings zu erheblichen numerischen Problemen.
+ Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
+ nicht mehr gesichert ist.
+ Praktisch ist das Verfahren damit nicht anwendbar.
  Um dieses Problem zu umgehen, wurde in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5444,22 +5338,15 @@ key "han2009improving"
 
 \end_inset
 
- vorgeschlagen, für alle Kovarianzfunktionen denselben Hyperparametersatz
- zu trainieren.
- Vergleicht man dieses Modell mit einem Ordinary Kriging welches alle Fidelity
- Samples beinhaltet, besteht der einzige Unterschied nur noch in einem getrennte
-n Erwartungswert/Varianz für die verschiedenen Fidelities.
+ vorgeschlagen, für alle drei Kovarianzfunktionen denselben Hyperparametersatz
+ zu verwenden.
+ Verglichen mit einem Ordinary-Kriging welches alle Fidelity Samples beinhaltet,
+ besteht der Unterschied dann nur noch in einer eigenen globalen Varianz
+ und einem eigenen globalen Erwartungswert für die verschiedenen Fidelities.
+ Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun
+g zwischen den Gütestufen dargestellt werden.
  Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
- dar.
- 
-\end_layout
-
-\begin_layout Standard
-Das eigentliche Problem hierbei besteht in der Abhängigkeit der Kovarianzfunktio
-nen untereinander.
- Sprich, hat man zwei Kovarianzfunktionen festgelegt, kann die dritte nicht
- mehr frei gewählt werden, sondern wird durch die anderen beiden bestimmt.
- 
+ dar und wird für industrielle Anwendungen nicht ausreichen.
 \end_layout
 
 \end_body
