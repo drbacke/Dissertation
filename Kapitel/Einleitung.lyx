@@ -104,14 +104,14 @@ s- und den Energiemaschinenherstellern.
 \end_layout
 
 \begin_layout Standard
-Um diesen Problemen zu begegnen, sind moderne CFD- und Optimierungsverfahren
- ein sehr wichtiges Werkzeug.
+Um diesen Problemen zu begegnen, sind moderne CFD-, CSM- und Optimierungsverfahr
+en ein sehr wichtiges Werkzeug.
  Sie erlauben es, die komplexen Strömungsvorgänge in Turbomaschinen am Computer
  zu simulieren und unter Berücksichtigung multipler Ziele und Nebenbedingungen
  zu optimieren.
  Diese noch relativ neuen Werkzeuge führen zu einer Verlagerung von sehr
  kostspieligen experimentellen Untersuchungen hin zu Simulationen am Computer
- durch CFD-Verfahren.
+ durch CSM- und CFD-Verfahren.
  Heutzutage werden experimentelle Untersuchungen vermehrt zur Validierung
  und Kalibrierung von CFD-Verfahren verwendet und finden zudem Anwendung
  im Bereich der Grundlagenforschung von Strömungsphänomenen.
@@ -120,17 +120,17 @@ Um diesen Problemen zu begegnen, sind moderne CFD- und Optimierungsverfahren
 \end_inset
 
 Durch die neuen numerischen Verfahren wurden die Auslegungszyklen im Turbomaschi
-nenbereich in den letzten Jahren massiv beschleunigt.
+nenbereich in den letzten Jahren nicht nur beschleunigt, sondern auch robuster.
  Allerdings sind die genutzten Verfahren mit einem so hohen numerischen
  Aufwand verbunden, dass vereinfachte CFD-Modelle verwendet werden.
  Durch diese Vereinfachungen können diese Modelle allerdings nicht alle
- physikalischen Phänomene auflösen und sind numerisch immer noch sehr aufwendig.
- 
+ physikalischen Phänomene auflösen.
 \end_layout
 
 \begin_layout Standard
-Zur Bewältigung dieses Problems, werden zunehmend sehr große HPC-Cluster
- eingesetzt um die benötigte Rechenleistung zur Verfügung zu stellen.
+Zur Verwendung von genaueren und damit auch komplexeren Modellen, werden
+ zunehmend sehr große HPC-Cluster eingesetzt um die benötigte Rechenleistung
+ zur Verfügung zu stellen.
  Solch ein Cluster ist allerdings sehr kostspielig und die Optimierungs-
  und CFD-Verfahren müssen auf die sehr spezielle Hardware von solchen Clustern
  angepasst werden.
@@ -148,19 +148,17 @@ eig entwickelt hat.
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-In der beschriebenen Problemstellung liegt auch die Motivation dieser Arbeit.
- Es soll ein industriell nutzbares Optimierungsverfahren vorgestellt werden,
- welches es ermöglichen soll, höherwertigere CFD-Verfahren innerhalb der
- Auslegung von Gasturbinen zu verwenden.
- Hierfür wird ein effizientes Optimierungsverfahren entwickelt und getestet,
- wobei ein besonderes Augenmerk auf die industrielle HPC-Hardwareumgebung
- und eine hohe numerische Effizienz gelegt wird.
- Durch dieses Verfahren soll es in Zukunft ermöglicht werden, deutlich komplexer
-e numerische Simulationen innerhalb von automatisierten Optimierungen zu
- verwenden.
+\begin_layout Standard
+Die wissenschaftliche Herausforderung liegt also in der Anwendung und Weiterentw
+icklung von Optimierungsstrategien und der entsprechenden Methoden, welche
+ industrielle Anforderungen erfüllen.
+ So soll es möglich werden kompletten Komponenten bzw.
+ Subsysteme von Gasturbinen auszulegen und zu optimieren.
+ Zu diesem Zweck wird ein effizientes Optimierungsverfahren entwickelt und
+ getestet, wobei ein besonderes Augenmerk auf die industrielle HPC-Hardwareumgeb
+ung und eine hohe numerische Effizienz gelegt wird.
  
 \end_layout
 
@@ -175,26 +173,26 @@ Industriell genutzte Optimierungsverfahren für den Turbomaschinenbereich
  Eine vollständige Übersicht der vorhandenen Literatur ist daher nahezu
  unmöglich.
  Dennoch soll dem Leser ein kurzer Überblick über einige aktuelle Forschungsarbe
-iten im Bereich der Turbomaschinenoptimierung geboten werden.
+iten im Bereich der Turbomaschinenoptimierung gegeben werden.
  
 \end_layout
 
 \begin_layout Standard
 Bei Optimierungen im Turbomaschinenbereich handelt es sich meist um nichtlineare
- mehrdimensionale multidisziplinäre Mehrziel-Optimierungsprobleme mit Nebenbedin
-gungen.
+ mehrdimensionale multidisziplinäre Mehrziel-Optimierungsprobleme mit einer
+ hohen Zahl an Nebenbedingungen.
  Es werden oftmals Geometrien für Turbomaschinenkomponenten gesucht, welche
  einen besonders hohen Wirkungsgrad aufweisen.
  In der Regel unter Einhaltung aerodynamischer, mechanischer, akustischer
  oder anderer Restriktionen.
  Aufgrund der Komplexität der hier beschriebenen Optimierungsprobleme sind
- in den letzten Jahren zahlreiche Optimierungsverfahren für die Turbomaschinenau
-slegung entwickelt worden.
+ in den letzten Jahren zahlreiche Optimierungsverfahren entwickelt und erfolgrei
+ch für die Turbomaschinenauslegung eingesetzt worden.
  Innerhalb dieses Abschnitts sollen die in der Turbomaschinenforschung aktuell
  verwendeten Verfahren kurz beschrieben und mit Literatur belegt werden.
- Zu diesem Zweck wird zu jedem Verfahren zuerst allgemeine Übersichtsliteratur
- vorgestellt und anschließend folgen einige Veröffentlichungen von industrienahe
-n Anwendungen dieser Verfahren aus den letzten sieben Jahren.
+ Zu diesem Zweck wird zu jedem Verfahren zuerst eine allgemeine Übersichtslitera
+tur vorgestellt und anschließend folgen einige Veröffentlichungen zu industriena
+hen Anwendungen dieser Verfahren aus den letzten sieben Jahren.
  
 \end_layout
 
@@ -272,17 +270,15 @@ key "Sozio2013"
 
 \end_inset
 
- stellt ein aktuelles und industrienahes Beispiel dar und soll daher kurz
- beschrieben werden.
+ stellt ein aktuelles und industrienahes Beispiel dar.
  Innerhalb dieser Arbeit wird ein Auslegungsprozess für gegenläufige Axialturbin
 en auf Basis eines evolutionären Algorithmus vorgestellt.
- Der beschriebene Auslegungsprozess soll ausgehend von eindimensionalen
- Kenngrößen eine dreidimensionale aerodynamisch optimierte Geometrie erzeugen.
+ Der beschriebene Auslegungsprozess, erzeugt ausgehend von eindimensionalen
+ Kenngrößen eine dreidimensionale aerodynamisch optimierte Geometrie.
  Um dies zu erreichen, verwendet der beschriebene Auslegungsprozess mehrere
  nacheinander durchgeführte evolutionäre Optimierungen.
- Sozio testete den entwickelten Auslegungsprozess an einer gegenläufigen
- Axialturbine und konnte damit eine aerodynamisch sinnvolle dreidimensionale
- Geometrie einer mehrstufigen Axialturbine erzeugen.
+ Sozio konnte mit seinem Auslegungsprozess eine dreidimensionale aerodynamisch
+ sinnvolle Geometrie einer mehrstufigen Axialturbine erzeugen.
  
 \end_layout
 
@@ -300,13 +296,11 @@ Beschleunigung von Optimierungen mit Ersatzmodellen:
 Bei Ersatzmodellen handelt es sich um Interpolations- oder Approximationsverfahr
 en, welche während einer Optimierung verwendet werden, um Vorhersagen über
  unbekannte Parametersätze zu machen und damit besonders vielversprechende
- Parametersätze zu finden und somit die Optimierung zu beschleunigen.
- Da sich eine Vielzahl an aktuellen Arbeiten mit diesem sehr komplexen Themengeb
-iet befassen, soll es dem Leser zuerst ermöglicht werden einen Überblick
- über dieses Themengebiet zu bekommen.
- Hierfür werden folgend einige interessante Übersichtsbeiträge für diesen
- speziellen Bereich der Turbomaschinenoptimierung genannt.
- Als erstes soll ein sehr umfassender Übersichtsbeitrag von Queipo et al.
+ Parametersätze schneller als bei der Verwendung einer reinen Evolutionsstrategi
+e zu finden.
+ Im ersten Teil wird dem Leser ein aktueller Überblick über dieses Themengebiet
+ gegeben.
+ Als erstes wird der umfassende Übersichtsbeitrag von Queipo et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -314,7 +308,7 @@ key "Queipo2005"
 
 \end_inset
 
- erwähnt werden.
+ erwähnt.
  Dieser befasst sich unter anderem mit initialen Sampling-Prozessen, der
  Auswahl richtiger Ersatzmodelle für verschiedene Anwendungen und deren
  Verwendung innerhalb von multidisziplinären Optimierungen.
@@ -369,9 +363,7 @@ key "forrester2009recent"
 \end_layout
 
 \begin_layout Standard
-Im Folgenden sollen einige aktuelle Anwendungen von ersatzmodellbeschleunigten
- Optimierungen aus dem Turbomaschinenbereich genannt werden.
- Verstraete et al.
+Verstraete et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -383,8 +375,8 @@ key "Verstraete2014"
  eines Diffusors einer Niederdruckdampfturbine.
  Die durchgeführte Optimierung sollte zum einen den Wirkungsgrad erhöhen
  und zum anderen den Betriebsbereich der Maschine erweitern.
- Weiterhin soll die Frage beantwortet werden, inwiefern die Verwendung von
- mehreren Betriebspunkten eine solche Optimierung beeinflusst.
+ Weiterhin wurde die Frage behandelt, inwiefern die Verwendung von mehreren
+ Betriebspunkten eine solche Optimierung beeinflusst.
   Das verwendete Optimierungsverfahren wird im Von-Karman-Institut in Belgien
  entwickelt und in den Arbeiten von Pierret 
 \begin_inset CommandInset citation
@@ -402,8 +394,9 @@ key "Verstraete2008"
 \end_inset
 
  beschrieben.
- Verstraete kommt in seiner Arbeit zu dem Schluss, dass eine substantielle
- Verbesserung (vgl.
+ Verstraete kommt in seiner Arbeit zu dem Schluss, dass die Berücksichtigung
+ mehrerer Betriebspunkte in einer verbesserten Charakteristik des Betriebsverhal
+tens (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -411,16 +404,7 @@ key "Verstraete2014"
 
 \end_inset
 
-, Seite 9) erreicht werden konnte und die Berücksichtigung mehrerer Betriebspunk
-te in einer verbesserten Charakteristik des Betriebsverhaltens (vgl.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Verstraete2014"
-
-\end_inset
-
-, Seite 9) resultiert.
+, Seite 9) resultiert, bei gleichzeitig gesteigertem Wirkungsgrad.
  
 \end_layout
 
@@ -448,8 +432,8 @@ rt voraus, sondern eine statistische Verteilung dessen.
  gemacht werden kann.
  Diese Information kann in einem Optimierungsverfahren gewinnbringend eingesetzt
  werden und wird oft mit EGO für Efficient Global Optimization abgekürzt.
- Wichtige theoretische Beiträge zu diesem Verfahren liefern die Arbeiten
- von Jones et al.
+ Wichtige theoretische Beiträge zu diesem Verfahren und dessen Verwendung
+ liefern die Arbeiten von Jones et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -482,8 +466,8 @@ key "Voss2014"
 \end_inset
 
 .
- In diesem Beitrag wird eine aeromechanische Optimierung eines bereits ausgelegt
-en transsonischen Radialverdichters beschrieben.
+ In diesem Beitrag wird eine aeromechanische Optimierung eines existierenden
+ transsonischen Radialverdichterlaufrades beschrieben.
  Die durchgeführte Optimierung übertrifft den Wirkungsgrad der ursprünglichen
  Geometrie um ca.
  2% und auch der Sperrmassenstrom ist um ca.
@@ -501,8 +485,8 @@ key "Elfert2016"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Anwendung des EGO-Algorithmus wird in der Arbeit von Lepot
- et al.
+Eine weitere erwähnenswerte Anwendung des EGO-Algorithmus wird in der Arbeit
+ von Lepot et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -533,7 +517,11 @@ ilung von Machzahl und Druckverhältnis.
  und Druckverhältnis auffinden.
  So konnten innerhalb dieser Arbeit allgemeingültige Vergleiche über die
  Effizienz einer solchen Fanstufe angestellt werden.
- In der Arbeit von Baert et al.
+ 
+\end_layout
+
+\begin_layout Standard
+In der Arbeit von Baert et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -544,8 +532,8 @@ key "Baert2015"
  wird ein Verfahren zur Optimierung von kontinuierlichen und nicht kontinuierlic
 hen Designparametern auf Basis von Ersatzmodellen vorgestellt und an einem
  Bypass Kanal getestet.
- Wobei mit nicht kontinuierliche Designparameter, z.B.
- ganzzahlige Parameter wie Schaufelzahlen, gemeint sind.
+ Nicht kontinuierliche Designparameter, sind z.B.
+ ganzzahlige Parameter wie Schaufelzahlen.
  Baert kommt zu dem Schluss, dass diese Art von Ansatz wichtige Design-Entscheid
 ungen in die Optimierung integriert (vgl.
  
@@ -579,8 +567,8 @@ len zur Beschleunigung von evolutionären Optimierungsverfahren als besonders
  effizientes Verfahren gilt.
  Es gilt aber zu beachten, dass die Effizienz Neuronaler Netzwerke äußerst
  abhängig von deren Aufbau und Struktur ist.
- Dies ist auch Gegenstand zahlreicher aktueller Forschungsarbeiten im Bereich
- des maschinellen Lernens, bspw.
+ Dies ist Gegenstand zahlreicher aktueller Forschungsarbeiten im Bereich
+ des maschinellen Lernens, siehe z.B.
  die Arbeit von Silver et al.
  
 \begin_inset CommandInset citation
@@ -600,6 +588,9 @@ key "Silver2016"
  deutlich erhöht.
  Dies erfordert in der Regel einen erfahrenen Anwender zur Überwachung solcher
  Optimierungen.
+ Innerhalb dieser Arbeit werden Möglichkeiten der Automatisierung und auch
+ der Analyse gezeigt, die diese Verfahren auch einem breiterem Anwenderbereich
+ zugänglich machen sollen.
 \end_layout
 
 \begin_layout Paragraph*
@@ -607,12 +598,12 @@ Gradienteninformation in Optimierungen:
 \end_layout
 
 \begin_layout Standard
-Weiterhin beschäftigt sich ein ein großer Teil der aktuellen Forschungsbeiträge
- mit der Verwendung von Gradienteninformation in Optimierungen.
+Weiterhin beschäftigen sich viele aktuelle Forschungsbeiträge mit der Verwendung
+ von Gradienteninformation in Optimierungen.
  Moderne Strömungslöser und die dazugehörige Software, wie z.B.
- Rechennetzgeneratoren, bieten immer häufiger die Berechnung partieller
+ Rechennetzgeneratoren, gestatten immer häufiger die Berechnung partieller
  Ableitungen von Funktionalen, wie z.B.
- Wirkungsgrad nach geometrischer Deformation an.
+ Wirkungsgrad nach geometrischer Deformation.
  Die numerischen Kosten für die Bestimmung mehrerer partieller Ableitungen
  befinden sich hierbei in einer ähnlichen Größenordnung wie die Strömungslösung
  selbst.
@@ -624,8 +615,8 @@ Weiterhin beschäftigt sich ein ein großer Teil der aktuellen Forschungsbeiträ
  Einige Ersatzmodelle können die vorhandene Gradienteninformation zur Verbesseru
 ng der Vorhersagen heranziehen und bieten den Vorteil, dass keine vollständige
  Gradienteninformation vorhanden sein muss.
- Dies ist wichtig, da in den meisten Turbomaschinenoptimierungen für einige
- Funktionale keine Gradienteninformation verfügbar ist.
+ Dies ist wichtig, da in den meisten Optimierungen für einige Funktionale
+ keine Gradienteninformation verfügbar ist.
 \end_layout
 
 \begin_layout Standard
@@ -668,13 +659,14 @@ key "Tang2016"
  angestellt.
  Verglichen wird eine ersatzmodellgestützte Optimierung mit einem Gradientenabst
 iegsverfahren.
- Das verwendete Ersatzmodell (Radiale-Basisfunktionen) die vorhandene Gradienten
-information verarbeiten kann.
+ Das verwendete Ersatzmodell sind Radiale-Basisfunktionen, welche vorhandene
+ Gradienteninformation verarbeiten können.
  Tang kommt in seiner Arbeit zu dem Schluss, dass das reine Abstiegsverfahren
  sehr schnell ein lokales Minimum findet und sich nicht sehr weit von der
  initialen Geometrie wegbewegt.
  Das ersatzmodellgestützte Verfahren konnte in derselben Zeit die Region
- des globalen Optimums auffinden (vgl 
+ des globalen Optimums auffinden (vgl.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tang2016"
@@ -685,8 +677,8 @@ key "Tang2016"
 \end_layout
 
 \begin_layout Standard
-Erwähnenswert sind innerhalb der Verfahren der gradientenbasierten Turbomaschine
-noptimierung auch die sogenannten One-Shot-Verfahren.
+Erwähnenswert sind innerhalb der Verfahren der gradientenbasierten Optimierung
+ auch die sogenannten One-Shot-Verfahren.
  Im Gegensatz zu den klassischen Optimierungsverfahren wird hier innerhalb
  des Iterationsverfahrens einer Strömungssimulation eine optimale Geometrie
  gesucht.
@@ -708,7 +700,7 @@ konventionellen
 
  Optimierung.
  Für eine aktuelle und umfassende Übersicht in dem Bereich der One-Shot-Verfahre
-n sei hier auf die Disseration von Ozkaya 
+n sei hier auf die Disseration von Özkaya 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ozkaya2014"
@@ -724,14 +716,14 @@ Multifidelity Verfahren:
 \end_layout
 
 \begin_layout Standard
-Innerhalb dieser Arbeit soll ebenfalls ein ersatzmodellgestütztes Multifidelity-
-Verfahren entwickelt werden.
- Dieses Verfahren soll in der Lage sein, während einer Optimierung verschiedene
+Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
+ entwickelt.
+ Dieses Verfahren ist in der Lage, während einer Optimierung verschiedene
  Gütestufen von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
- Eine mögliche Gütestufen ist z.B.
+ Mögliche Gütestufen sind z.B.
  die örtliche Diskretisierung eines zu simulierenden Strömungskanals in
  der Form eines Rechengitters.
- Je nach Anzahl der Zellen dieses Netzes werden einige Strömungsphänome
+ Mit steigender Anzahl der Zellen eines Rechengitters werden Strömungsphänome
  besser aufgelöst, was allerdings mit einer erheblich gesteigerten Rechenzeit
  bezahlt werden muss.
  Der Anwender muss also vor einer Optimierung immer einen Kompromiss, zwischen
@@ -742,9 +734,9 @@ Verfahren entwickelt werden.
 \begin_layout Standard
 In der Regel sind die Gütestufen stark korreliert, oftmals aber verzerrt,
  verschoben oder skaliert.
- Es ist also ein Ersatzmodell notwendig, welches diese verschiedenen Gütestufen
- verarbeiten kann und die Transferfunktion zwischen den Gütestufen automatisch
- auffindet.
+ Es ist also ein Ersatzmodell notwendig, welches die Ergebnisse der verschiedene
+n Gütestufen verarbeiten kann und die Transferfunktion zwischen den Gütestufen
+ automatisch auffindet.
  Die einfachste Möglichkeit eines solchen Ersatzmodells stellen sogenannte
  Brückenfunktionen dar.
  Eine solche Brückenfunktion wird aus zwei Ersatzmodellen gebildet, wobei
@@ -792,7 +784,7 @@ Efficient Global Optimization
 \end_inset
 
  Verfahren verwenden.
- Es gibt zahlreiche Umsetzungen des CO-Kriging Verfahrens, wobei die Meisten
+ Es gibt bereits Umsetzungen des CO-Kriging Verfahrens, wobei die Meisten
  auf der Arbeit von Kennedy und O'Hagan 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -801,11 +793,10 @@ key "Kennedy2000"
 \end_inset
 
  beruhen.
- Für das CO-Kriging Modell von Kennedy und O'Hagan muss allerdings an jeden
- bekannten Ort der höchsten Gütestufe auch die niedrigere Gütestufe berechnet
- werden.
- Innerhalb dieser Arbeit soll eine CO-Kriging Variation vorgestellt werden,
- die dies nicht benötigt.
+ Für das CO-Kriging Modell von Kennedy und O'Hagan muss an jeden bekannten
+ Ort der höchsten Gütestufe auch die niedrigere Gütestufe berechnet werden.
+ Innerhalb dieser Arbeit wird eine CO-Kriging-Variation vorgestellt, die
+ dies nicht benötigt.
  Weitere interessante CO-Kriging Ansätze bietet zum einen die Arbeit von
  Le Gratiet 
 \begin_inset CommandInset citation
@@ -830,13 +821,13 @@ key "han2012alternative,Han2010"
 Neben der technischen Umsetzung des CO-Kriging-Verfahrens ist auch die Verwendun
 g eines solchen Modells innerhalb einer Multifidelity-Optimierung ein sehr
  wichtiger Punkt.
- Dabei sind die Entscheidung wann welche Gütestufe berechnet wird oder die
- Daten- und Prozesskettenverwaltung die wesentlichen Herausforderungen.
+ Dabei sind die Entscheidung, wann welche Gütestufe berechnet wird, sowie
+ die Daten- und Prozesskettenverwaltung die wesentlichen Herausforderungen.
  
 \end_layout
 
 \begin_layout Standard
-Leider existieren zu dieser Thematik nur sehr wenige Forschungsbeiträge.
+Leider existieren zu dieser Thematik nur wenige Forschungsbeiträge.
  Eine akademische Anwendung bietet hier die Arbeit von Brooks 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -844,7 +835,8 @@ key "Brooks"
 
 \end_inset
 
- dieser stellt einen Vergleich zwischen einer Multifidelity-Optimierung
+.
+ Dieser stellt einen Vergleich zwischen einer Multifidelity-Optimierung
  und einer konventionellen Ordinary-Kriging-Optimierung an.
  Brooks optimierte für diesen Zweck den bekannten NASA-Rotor 37 
 \begin_inset CommandInset citation
@@ -881,14 +873,14 @@ Anforderungen und Zielsetzung
 \end_layout
 
 \begin_layout Standard
-Im Rahmen dieser Arbeit soll ein industriell einsetzbares und erweiterbares
- Multifidelity-Optimierungsverfahren entwickelt und getestet werden.
- Das Verfahren soll in die bereits bestehende Optimierungssoftware AutoOpti
- integriert werden und dabei die speziellen Anforderungen im Bereich der
- Turbomaschinenentwicklung berücksichtigen.
- In diesem Abschnitt sollen zuerst die Anforderungen an das entwickelte
- Verfahren herausgearbeitet und daraus folgend eine konkrete Zielsetzung
- bestimmt werden.
+Im Rahmen dieser Arbeit wird ein industriell einsetzbares und erweiterbares
+ Multifidelity-Optimierungsverfahren entwickelt und getestet.
+ Das Verfahren wird in die bereits bestehende Optimierungssoftware AutoOpti
+ integriert und die speziellen Anforderungen im Bereich der Turbomaschinenentwic
+klung berücksichtigt.
+ In diesem Abschnitt werden zuerst die Anforderungen an das entwickelte
+ Verfahren herausgearbeitet und daraus folgend eine detaillierte Zielsetzung
+ bestimmt.
 \end_layout
 
 \begin_layout Standard
@@ -914,15 +906,15 @@ sst werden zu folgenden Punkten:
 \end_layout
 
 \begin_layout Itemize
-Mehrere Zielfunktionen
+Mehrere Zielfunktionen und physikalische Disziplinen
 \end_layout
 
 \begin_layout Itemize
-Viele Restriktionen 
+Mehrere Restriktionen 
 \end_layout
 
 \begin_layout Itemize
-Unterschiedliche physikalische Disziplinen
+Partielle Gradienteninformationen
 \end_layout
 
 \begin_layout Itemize
@@ -930,18 +922,20 @@ Hochdimensionale Suchräume
 \end_layout
 
 \begin_layout Itemize
-Numerisch sehr aufwendige Prozessketten
+Lange Prozesskettenzeiten
+\end_layout
+
+\begin_layout Itemize
+Prozessketten liefern nicht immer Ergebnisse
 \end_layout
 
 \begin_layout Standard
-Grundsätzlich werden alle Punkte bereits durch die Optimierungssoftware
- AutoOpti unterstützt.
- Da die Anforderungen an die Turbomaschinenindustrie und damit auch an die
+Da die Anforderungen an die Turbomaschinenindustrie und damit auch an die
  entsprechenden Optimierungen stetig steigen, werden zukünftig leistungsfähigere
  Optimierungsverfahren benötigt.
  Durch das Multifidelity-Verfahren sollen insbesondere die hochdimensionalen
  Suchräume effizienter abgetastet werden können und dadurch auch der Aufwand
- durch die numerisch aufwendigen Prozessketten reduziert werden.
+ durch die numerisch aufwendigen Prozessketten akzeptabel werden.
  
 \end_layout
 
@@ -975,7 +969,14 @@ Hohe Effizienz des Optimierungsverfahrens, insbesondere des Ersatzmodells
 Die Software AutoOpti ist vollständig in der Programmiersprache C99 geschrieben.
  Zusammen mit der Forderung nach einer objektorientierten Softwarelösung
  wurde für die Entwicklung des neuen Verfahrens die Programmiersprache C++
- inklusive der Verwendung der umfangreichen Boost Bibliothek gewählt.
+ inklusive der Verwendung der umfangreichen Boost Bibliothek 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Karlsson2006"
+
+\end_inset
+
+ gewählt.
  Der Vorteil liegt darin, denselben Compiler verwenden zu können und den
  AutoOpti-Entwicklern eine verwandte Sprachumgebung anzubieten.
  
