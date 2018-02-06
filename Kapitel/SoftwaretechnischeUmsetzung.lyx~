@@ -72,7 +72,7 @@
 \begin_body
 
 \begin_layout Chapter
-Effiziente Implementierung der DLR-Kriging-Verfahren 
+Implementierung der DLR-Kriging-Verfahren 
 \end_layout
 
 \begin_layout Standard
@@ -7970,7 +7970,7 @@ Wie erwartet sind die Zeiten vom ersten und vom vierten Schritt nahezu identisch
 \end_layout
 
 \begin_layout Section
-Verwendung von GPGPU
+Verwendung von GPGPU 
 \end_layout
 
 \begin_layout Standard

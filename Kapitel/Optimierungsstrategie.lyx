@@ -72,7 +72,7 @@
 \begin_body
 
 \begin_layout Chapter
-Optimierungsstrategie Turbomaschine
+Optimierungsstrategie für Turbomaschinen
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Optimierungsstrategie"
@@ -86,8 +86,8 @@ name "chap:Optimierungsstrategie"
 In diesem Kapitel erfolgt eine erste Einführung in die Turbomaschinenoptimierung.
  Hierfür werden im ersten Teil allgemeine Grundlagen und Begrifflichkeiten
  erklärt, wobei ein Grundwissen über Optimierung vorausgesetzt wird.
- Im zweiten Teil sollen die Besonderheiten und damit verbundenen Schwierigkeiten
- der Optimierung von Turbomaschinen erläutert werden.
+ Im zweiten Teil werden die Besonderheiten und damit verbundenen Schwierigkeiten
+ der Optimierung von Turbomaschinen erläutert.
  Darauf aufbauend wird im dritten Teil dieses Kapitels die bisher im DLR
  umgesetzte Optimierungsstrategie beschrieben.
  
@@ -102,10 +102,10 @@ Die Auslegung und Optimierung von Turbomaschinen ist eine multidisziplinäre
  Aufgabe, für die verschiedenste Anforderungen aus einer Vielzahl von physikalis
 chen Disziplinen gegeneinander abgewogen und bewertet werden müssen.
  Diese Disziplinen sind für einen sicheren, effizienten und umweltverträglichen
- Betrieb verantwortlich.
- Zum besseren Verständnis der Komplexität dieser Aufgabenstellung sollen
- nachfolgend die wesentlichen Fachdisziplinen aufgelistet und mit Beispielen
- hinterlegt werden.
+ Betrieb notwendig.
+ Zum besseren Verständnis der Komplexität dieser Aufgabenstellung werden
+ nachfolgend die wesentlichen Fachdisziplinen aufgelistet und anhand von
+ Beispielen erläutert.
 \end_layout
 
 \begin_layout Subsection
@@ -126,7 +126,7 @@ Aerodynamik
 \begin_layout Standard
 Die Aerodynamik von Turbomaschinen kann sich auf verschiedene Baugruppen
  einer Turbomaschine beziehen, bspw.
- den Fan, Verdichter, Brennkammer oder die Turbine.
+ den Fan, Verdichter oder die Turbine.
  Ein häufiges Ziel ist z.B.
  das Auffinden einer Geometrie für eine oder mehrere Schaufelreihen, welche
  den Wirkungsgrad (Verhältnis von genutzter Energie zu zugeführter Energie)
@@ -153,23 +153,14 @@ Strukturmechanik
 \begin_layout Standard
 Die Strukturmechanik von Turbomaschinen beschäftigt sich mit der Bestimmung
  der mechanischen Belastung der verwendeten Bauteile.
- Hierzu gehören z.B.
- die Berechnung der auftretenden Spannungen in den Schaufelreihen durch
- die Fliehkraft- und Druckbelastung.
+ Hierzu gehören die Berechnung der auftretenden Spannungen in den Schaufeln
+ und weiteren Bauteilen (z.B.
+ der Scheibe) durch die Fliehkraft- und Druckbelastung.
  Zudem müssen dynamische Problemstellungen beachtet werden.
  Beispielsweise müssen im gesamten Betriebsbereich der Turbomaschine resonante
  Schaufelschwingungen vermieden werden.
  Um dies zu realisieren werden für verschiedene Drehzahlen die Eigenfrequenzen
  und Eigenformen der Schaufelreihen mit modernen CSM-Verfahren berechnet.
- 
-\end_layout
-
-\begin_layout Standard
-Oftmals können resonante Bereiche aber nicht vollständig vermieden werden
- und müssen daher in der Triebwerksregelung Berücksichtigung finden.
- So können ggf.
- kritische Drehzahlbereiche schnell durchlaufen und dadurch Schaufelanregungen
- vermieden werden.
  
 \end_layout
 
@@ -184,8 +175,8 @@ anik angesehen werden.
  Hierbei handelt es sich um eine aeroelastische Instabilität, die durch
  die Wechselwirkung einer Schaufelschwingung mit den dadurch hervorgerufenen,
  instationären Druckverteilungen auf den Schaufeln verursacht wird.
- Je nach Phasenlage der instationären aerodynamischen Druckverteilungen
- können sie die auslösende Schwingung dämpfen oder anfachen.
+ Diese instationären aerodynamischen Druckverteilungen können die auslösende
+ Schwingung entweder dämpfen oder anfachen.
  Im letzten Fall treten selbsterregte Schwingungen auf (Eigenschwingungen)
  und die Schaufel wird aerodynamisch instabil.
  Die hierfür notwendigen Berechnungen sind allerdings mit so hohem numerischem
@@ -238,7 +229,7 @@ Die hier aufgelisteten Fachdisziplinen stellen nur die wesentlichen Disziplinen
 \end_layout
 
 \begin_layout Subsection
-Allgemeine Begrifflichkeiten zu Optimierungen
+Begriffserläuterungen zu Optimierungen
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:OptimierungsBegriffe"
@@ -249,15 +240,14 @@ name "subsec:OptimierungsBegriffe"
 \end_layout
 
 \begin_layout Standard
-Im Folgenden sollen einige Begrifflichkeiten bezüglich Optimierungsverfahren
- eingeführt werden.
- Zum besseren Verständnis werden auch einige Beispiele aus dem Bereich der
- Turbomaschinenauslegung genannt.
+Im Folgenden werden wichtige Begrifflichkeiten bezüglich Optimierungsverfahren
+ eingeführt und zum besseren Verständnis einige Beispiele aus dem Bereich
+ der Turbomaschinenauslegung erläutert.
  
 \end_layout
 
 \begin_layout Paragraph*
-Zielfunktion 
+Zielfunktion oder Fitness
 \end_layout
 
 \begin_layout Standard
@@ -276,7 +266,7 @@ Nebenbedingung
 \begin_layout Standard
 Nebenbedingungen werden oftmals als Gültigkeitsintervalle festgelegt in
  denen die berechneten Größen liegen sollen.
- Beispielhafte Nebenbedingungen sind die maximale mechanische Spannung einer
+ Beispiele für Nebenbedingungen sind die maximale mechanische Spannung einer
  durch Fliehkraft belasteten Schaufel oder die Einhaltung eines gewissen
  Massenstrombereichs im aerodynamischen Designpunkt.
 \end_layout
@@ -286,7 +276,7 @@ Region Of Interest (ROI)
 \end_layout
 
 \begin_layout Standard
-Ein für jede Zielfunktion festgelegtes Gültigkeitsintervall.
+Ein für eine Zielfunktion festgelegtes Gültigkeitsintervall.
  Dies kann sinnvoll sein, wenn nur ein kleiner Bereich des Zielfunktionsraums
  von Interesse für den Anwender ist.
  Durch die Festlegung eines solchen Intervalls, kann das Optimierungsverfahren
@@ -299,10 +289,10 @@ Freie Variablen / freie Parameter
 
 \begin_layout Standard
 Um die Zielfunktion(en) zu optimieren, kann der Optimierungsalgorithmus
- eine bestimmte Anzahl von freien Variablen oder auch Design Variablen innerhalb
- ihres Gültigkeitsintervalls verändern.
- Bei einem Verdichter wären das typischerweise Parameter, welche die Schaufelgeo
-metrien beschreiben.
+ eine bestimmte Anzahl von freien Variablen, hier auch Design Variablen
+ genannt, innerhalb eines festgelegten Intervalls verändern.
+ Bei einem Verdichter sind das typischerweise Parameter, welche die Schaufelgeom
+etrien beschreiben.
  Beispielsweise die Länge oder Dicke einer Schaufel für eine bestimmte radiale
  Höhe.
  Nach jetzigem Stand sind Optimierungen in der Größenordnung von bis zu
@@ -319,7 +309,15 @@ key "AULICH"
 \end_layout
 
 \begin_layout Paragraph*
+Strömungsgröße (auch 
+\begin_inset Quotes gld
+\end_inset
+
 Flowparameter
+\begin_inset Quotes grd
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -343,7 +341,7 @@ Wird mit einem Satz freier Parameter beispielsweise eine Verdichtergeometrie
  erzeugt und diese im Anschluss dann mit einem Strömungslöser berechnet,
  so entstehen durch das nachfolgende Post-Processing eine Vielzahl von Ergebnisg
 rößen.
- Oftmals werden hier hunderte bis tausende an Ergebnissgrößen pro Simulation
+ Oftmals werden hier hunderte bis tausende an Ergebnisgrößen pro Simulation
  erzeugt.
  Als Flowparameter bezeichnet man alle Ergebnisgrößen, welche von den genutzten
  numerischen Verfahren erzeugt und im Optimierungsprozess abgespeichert
@@ -354,10 +352,20 @@ rößen.
  einer laufenden Turbomaschinenoptimierung mehrfach geändert und angepasst.
  Aus diesem Grund ist es wichtig, möglichst alle wesentlichen Ergebnisgrößen
  zu speichern.
+ Dies stellt auch die Möglichkeit eines Neustarts oder Wiederaufnehmens
+ einer Optimierung sicher.
 \end_layout
 
 \begin_layout Paragraph*
-Member / Sample oder Stützstelle
+Stützstelle (auch 
+\begin_inset Quotes gld
+\end_inset
+
+Member
+\begin_inset Quotes grd
+\end_inset
+
+ / Sample)
 \end_layout
 
 \begin_layout Standard
@@ -380,7 +388,7 @@ Ein Tupel freier Parameter
 \end_layout
 
 \begin_layout Paragraph*
-Formulierung Optimierungsproblem
+Optimierungsproblem
 \end_layout
 
 \begin_layout Standard
@@ -390,9 +398,9 @@ Ein Optimierungsproblem lässt sich mit den vorhergehenden Bezeichnungen
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 \underset{x_{i}\in\left[a_{i},b_{i}\right]\forall i\in\left\{ 1,...,k\right\} }{\min}\left\{ \left.\left\Vert \vec{y}\left(\vec{x}\right)\right\Vert \right|w_{j}\left(\vec{x}\right)\in\left[c_{j};d_{j}\right]\forall j\in\left\{ 1,...,c\right\} \right\} 
-\end{align*}
+\end{align}
 
 \end_inset
 
@@ -420,9 +428,8 @@ Aus der Formulierung wird ersichtlich, dass dieser Ansatz die Möglichkeit
  Diese hat aber den Nachteil, dass nur derjenige Punkt im Zielfunktionsraum
  mit der niedrigsten Norm das Optimum darstellt.
  Um dieses Problem zu umgehen wird in der Regel ein Paretorang-Gütekriterium
- verwendet, welches zwar nicht die Kriterien einer Norm erfüllt, dafür jedoch
- die Möglichkeit bietet, mehrere Ziele gleichzeitig zu optimieren ohne diese
- gegeneinander zu gewichten.
+ verwendet, dieses Konzept bietet die Möglichkeit, mehrere Ziele gleichzeitig
+ zu optimieren ohne diese gegeneinander zu gewichten.
  Der Paretorang soll im folgenden erläutert werden.
 \end_layout
 
@@ -488,9 +495,9 @@ Ein dominanter Member
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 P\left(M\right)\coloneqq\#\left\{ \left.\hat{M}\in M_{all}\right|\hat{M}\prec M\right\} +1
-\]
+\end{equation}
 
 \end_inset
 
@@ -603,15 +610,15 @@ key "Reimer2016"
 \end_layout
 
 \begin_layout Standard
-Nach dem Abschluss der Optimierung muss der/die verantwortlichen Designer
- aus der Menge aller optimalen Lösungen (in diesem Fall der Paretofront)
- eine Konfiguration als Kompromiss zwischen den unterschiedlichen Zielen
+Nach dem Abschluss der Optimierung muss und kann der/die verantwortlichen
+ Designer aus der Menge aller optimalen Lösungen (in diesem Fall der Paretofront
+) eine Konfiguration als Kompromiss zwischen den unterschiedlichen Zielen
  auswählen.
  
 \end_layout
 
 \begin_layout Section
-Herausforderungen der Turbomaschinenoptimierung
+Besondere Herausforderungen bei Turbomaschinenoptimierungen
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Besonderheiten-Turbomaschine"

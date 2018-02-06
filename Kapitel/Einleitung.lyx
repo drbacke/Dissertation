@@ -988,11 +988,25 @@ Weiterhin werden Optimierungen im Turbomaschinendesign aufgrund der komplexen
  Die innerhalb dieser Arbeit entwickelte Software muss in einer solchen
  Umgebung lauffähig sein.
  In den letzten Jahren ist besonders im HPC-Bereich die Verwendung von GPUs
- für komplexe Rechenaufgaben ein sehr wichtiges Thema geworden.
+ ( graphics processing unit, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Verwendung-von-GPGPU"
+
+\end_inset
+
+ ) für komplexe Rechenaufgaben ein sehr wichtiges Thema geworden.
  Diese Zusatzkarten bieten eine im Vergleich zu herkömmlichen CPUs eine
  größere Rechenleistung bei vergleichsweise niedrigem Energieverbrauch.
- Allerdings benötigen diese GPUs stark parallelisierte SIMD-Algorithmen,
- was den Entwicklungsaufwand erhöht.
+ Allerdings benötigen diese GPUs stark parallelisierte SIMD-Algorithmen
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Streaming-SIMD-Extensions"
+
+\end_inset
+
+), was den Entwicklungsaufwand erhöht.
  Da das in dieser Arbeit entwickelte Optimierungsverfahren selbst sehr aufwendig
  ist und eventuelle Rechenzeiten den Optimierungsverlauf empfindlich stören
  könnten, soll die in dieser Arbeit entwickelte Software durch aktuelle
@@ -1013,11 +1027,14 @@ Zielsetzung
 \end_layout
 
 \begin_layout Standard
-Die aus den Anforderungen resultierende Zielsetzung soll folgend beschrieben
- werden.
+Die aus den Anforderungen resultierende Zielsetzung wird folgend beschrieben.
  Hierfür werden in der folgenden Auflistung die wichtigsten Ziele dieser
  Arbeit zusammengefasst und im darauffolgenden Text genauer beschrieben.
  
+\end_layout
+
+\begin_layout Paragraph*
+Entwicklung eines Multifidelity-Optimierungsverfahrens
 \end_layout
 
 \begin_layout Enumerate
@@ -1085,22 +1102,25 @@ odells für die AutoOpti-Umgebung.
  Das Ersatzmodell soll in einer objektorientierten Sprache programmiert
  werden, wie bereits erwähnt wurde die Sprache C++ gewählt.
  Die Erweiterbarkeit des Verfahrens spielt ebenfalls eine sehr große Rolle,
- zum einen sollen hier alle Kriging Verfahren (Ordinary-, Gradient-Enhanced-,CO-
-Kriging) in einer Softwarestruktur untergebracht werden und zum anderen
- sollen auch Klassifikatoren wie z.B.
- Supporting-Vector-Machines in die Software implementiert werden.
- Weitergehend soll die Software über eine prozessinterne synchrone Parallelisier
+ zum einen werden alle Kriging Verfahren (Ordinary-, Gradient-Enhanced-,CO-Krigi
+ng) in einer Softwarestruktur untergebracht und zum anderen werden auch
+ Klassifikatoren wie z.B.
+ Supporting-Vector-Machines in die Software implementiert.
+ Weitergehend wird die Software über eine prozessinterne synchrone Parallelisier
 ung durch Threads verfügen und auch moderne Befehlssatzerweiterungen wie
  SSE unterstützen.
  Eine weitere Möglichkeit der Beschleunigung ist die prozessweite Parallelisieru
 ng, damit sollen die notwendigen Berechnungen auch über Rechnergrenzen hinaus
  (bspw.
  auf einem Rechencluster) parallelisierbar sein.
- Dies soll durch ein eigen entwickeltes Client/Server System erfolgen.
+ Hierfür wurde im Rahmen dieser Arbeit ein asynchrones Client/Server System
+ entwickelt, welches die Nutzung verschiedener Hardware-Architekturen über
+ Rechnergrenzen hinweg erlaubt.
  Zudem soll die praktische Anwendbarkeit und der Nutzen eines solchen Verfahrens
  überprüft werden.
- Weiterhin soll die Verwendung von GPUs möglich sein, womit die notwendigen
- Berechnungen für das Ersatzmodell beschleunigt werden sollen.
+ Weiterhin soll die Verwendung von GPUs (Graphics Processing Unit) möglich
+ sein, womit die notwendigen Berechnungen für das Ersatzmodell beschleunigt
+ werden sollen.
  
 \end_layout
 
@@ -1109,12 +1129,15 @@ Der zweite Punkt umfasst die Erweiterung der bestehen Optimierungssoftware
  AutoOpti.
  Grundsätzlich müssen allgemeine Schnittstellen zwischen Optimierer und
  Ersatzmodellen definiert und umgesetzt werden.
- Zudem muss eine automatisierte Strategie entwickelt werden, um während
- einer laufenden Optimierung zu bestimmen, welche Güte in der nächsten Evaluieru
-ng verwendet werden soll.
- Die Optimierungssoftware muss außerdem die Daten verschiedener Güte speichern
- und auswerten können und zudem die Verwaltung von unterschiedlichen Prozesskett
-en für die jeweiligen Gütestufen übernehmen.
+ Eine automatisierte Strategie ist zu entwickeln, um während einer laufenden
+ Optimierung zu bestimmen, welche Güte in der nächsten Evaluierung verwendet
+ werden soll.
+ Hierfür muss der aktuelle Stand der Optimierung und Ersatzmodelle automatisiert
+ beobachtet und analysiert werden, um die entsprechende Entscheidung treffen
+ zu können.
+ Die Optimierungssoftware muss außerdem die Daten verschiedener Güte speichern,
+ auswerten können und zudem die Verwaltung von unterschiedlichen Prozessketten
+ für die jeweiligen Gütestufen übernehmen.
  
 \end_layout
 
@@ -1126,13 +1149,11 @@ Der dritte Punkt umfasst erste analytische Tests, in denen einzelne Komponenten
 \end_layout
 
 \begin_layout Standard
-Der vierte und letzte Punkt soll die Anwendung des gesamten Verfahrens in
- einer umfangreichen industriellen Turbomaschinenoptimierung darstellen.
- Wobei eine Anwendung mit sehr hohen Prozesskettenlaufzeiten und großen
- Parameterraum gewählt werden soll.
- Die Komplexität soll möglichst hoch sein, sodass man diese Optimierung
- in dieser Form nicht mit einer reinen Single-Fidelity-Optimierung durchführen
- würde.
+Der vierte und letzte Punkt ist die Beschreibung einiger bereits durchgeführten
+ Anwendungen des gesamten Verfahrens in umfangreichen industriehnahen Turbomasch
+inenoptimierungen.
+ Es sollen insbesondere die Eignung von Multifidelity-Optimierungen für
+ verschiedenen Anwendungen verglichen werden.
  
 \end_layout
 

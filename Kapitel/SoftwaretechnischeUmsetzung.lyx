@@ -7970,7 +7970,14 @@ Wie erwartet sind die Zeiten vom ersten und vom vierten Schritt nahezu identisch
 \end_layout
 
 \begin_layout Section
-Verwendung von GPGPU
+Verwendung von GPGPU 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Verwendung-von-GPGPU"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
