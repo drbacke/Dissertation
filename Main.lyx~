@@ -1,0 +1,1074 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass dlrreport
+\begin_preamble
+
+\usepackage{nomencl}
+\makenomenclature
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+%\usepackage{subfigure}
+
+\usepackage{verbatim}
+\usepackage{ifthen}
+\usepackage{ifpdf} 
+
+\usepackage{lscape}     %% supplies a landscape environment 
+
+% Tabellen
+\usepackage{tabularx}
+\usepackage{rotating} %benoetigt fuer tabellen quer
+\usepackage{booktabs} %Schoenere trennlinien in tabellen
+
+
+\usepackage{colortbl}
+\usepackage{transparent}
+\usepackage{framed} 
+\usepackage{amsmath}  %spezielle mathematikzeichen wie doppelintegral
+\usepackage{amssymb} 
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{bibgerm}
+%\usepackage{harvard} 
+%\renewcommand{\harvardand}{und}
+%\usepackage[authoryear]{natbib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{setspace}
+%\onehalfspacing
+\spacing{1.2}
+
+%%%%%%%%%%%% Definitionen %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\nomname}{Nomenklatur}
+\renewcommand{\nomgroup}[1]{%
+
+\ifthenelse{\equal{#1}{L}}{\item[\textbf{Formelzeichen}]}{%
+\ifthenelse{\equal{#1}{G}}{\item[\textbf{Griechische Symbole}]}{%
+\ifthenelse{\equal{#1}{A}}{\item[\textbf{Abkürzungen}]}{%
+\ifthenelse{\equal{#1}{S}}{\item[\textbf{Strömungstechnische Bezeichnungen}]}{}}}}}
+\def\pagedeclaration#1{\dotfill\nobreakspace#1 }
+
+
+\makeatletter % @in Befehlen auf code 11 setzen
+\newcommand\Kurzfassungname{Kurzfassung}
+\newenvironment{Kurzfassung}{%
+\titlepage
+    \@beginparpenalty\@lowpenalty
+     \begin{center}%
+       \bfseries \Kurzfassungname
+       \@endparpenalty\@M
+      \end{center}}%
+     {\par\endtitlepage\global\no@Kurzfassungfassungfalse}
+\defineasbibitem{\bibitem}
+\makeatother % @ wieder auf code 12 zurücksetzen
+
+\definecolor{hellgrau}{gray}{0.8}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%% Einstellungen + Extras %%%%%%%%%%%%%%%
+\sloppy  % Silbentrennung - keine Trennung bevorzugt auch bei größeren Abständen zwischen den Worten
+\makeglossary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%  Titel, Autor, etc. %%%%%%%%%%%%%%%%%
+\title{Multifidelity-Optimierungsverfahren für Turbomaschinen \vspace{0.5cm}    \vspace{0.5cm}  \bf}
+\runningtitle{Rachete}
+\trname{Dissertation}
+\author{Andreas Schmitz}
+\date{Oktober 2018}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%  Schalter %%%%%%%%%%%%%%%%%
+\newif\ifcomments
+%\commentstrue % comment out to hide comments
+
+%%%%%%%%%%%%% Seitenzahlen Header alternierend %%%%%%%%%%%%%%% 
+\end_preamble
+\options AT, texfonts
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package auto
+\inputencoding utf8
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format pdf2
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\topmargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size huge
+Sicher:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Abkürzungen:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size largest
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SSE"
+description "Streaming SIMD Extensions, eine Befehlssatzerweiterung für Prozessoren."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "AVX"
+description "Advanced Vector Extensions, eine Befehlssatzerweiterung für Prozessoren. Nachfolger der SSE Architektur."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "SIMD"
+description "Single Instruction Multiple Data, eine Architektur welche es erlaubt dieselbe Operation parallel auf einen sich verändernden Datenstrom anzuwenden. "
+
+\end_inset
+
+
+\series default
+\size default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "Member"
+description "Ein Satz freier Variablen mit dazugehörigen Funktionswerten. Beispielsweise ein Satz geometrischer Parameter mit berechneten mechanischen und aerodynamischen Größen."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "HPC"
+description "High-Performance-Computing"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "MO"
+description "Multi-Objective"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "ROI"
+description "Region of Interest. Ein für die Zielfunktionen festgelegtes Gültigkeitsintervall. "
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "Freie Variable"
+description "Parameter, welche der Optimierungsalgorithmus variieren darf. Meistens Geometrische Parameter wie z.B. die Länge oder Dicke einer Schaufel."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "CSM"
+description "Computational Structure Mechanics"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "EVG"
+description "Erwarteter Volumenzugewinn oder auch Expected Volume Gain"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "EGO"
+description "Efficient Global Optimization. Ein Optimierungsverfahren, welches die Unsicherheiten in einer Ersatzmodellvorhersage miteinbezieht"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GPU"
+description "Abkürzung für Graphics Processing Unit. Grafikbeschleuniger in der Regel als Zusatzkarte in einem Rechner"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "A"
+symbol "GPGPU"
+description "General Purpose Computation on Graphics Processing Unit. Beschreibt die Verwendung von GPUs über den ursprünglichen Einsatz hinaus. Meist für die Verwendung von massiv parallelen rechenintensiven Algorithmen."
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Formelzeichen:
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{\\beta}$"
+description "Beta Vektor, beinhaltet alle Erwartungswerte des Modells."
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$m_{f}$"
+description "Anzahl der verwendenten Fidelities bei Multifidelity Verfahren"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\sigma^{2}$"
+description "Varianz"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{r}$"
+description "Korrelationsvektor"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{y}_{s}$"
+description "Vektor, welcher alle bekannten Stützstellen enthält"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{\\theta}$"
+description "Hyperparameter einer Korrelationsfunktion, ohne Varianzen oder Regularisierungsterme"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\textrm{var}(X)$"
+description "Varianz der Zufallsvariable X"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\textrm{cov}(X,Y)$"
+description "Kovarianzfunktion zwischen den Zufallsvariablen X und Y"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\textrm{cov}(\\vec{x},\\vec{y})$"
+description "Ortsabhängige Kovarianzfunktion zwischen den Ortsvektoren x und y"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\mathbf{R}$"
+description "Korrelationsmatrix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$c(X,Y)$"
+description "Korrelationsfunktion zwischen den Zufallsvariablen X und Y"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$y^{*}\\left(\\vec{x}\\right)$"
+description "Geschätzter Funktionswert an der Stelle $\\vec{x}$"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$y\\left(\\vec{x}\\right)$"
+description "Bekannter Funktionswert oder Stützstelle an der Stelle $\\vec{x}$"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$F\\left(\\vec{x}\\right)$"
+description "Fehlerfunktion an der Stelle $\\vec{x}$"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\mathbf{Cov}$"
+description "Kovarianzmatrix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\kappa$"
+description "Konditionszahl"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\omega$"
+description "Druckverlustbeiwert"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\Xi$"
+description "Eigenwert einer Matrix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\delta$"
+description "Kronecker Delta"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\lambda$"
+description "Diagonalaufschlag"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$E[X]$"
+description "Erwartungswert der Zufallsvariable X"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$f_{dec}(...)$"
+description "Entscheidungsfunktion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{c}$"
+description "Kovarianzvektor"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{x}$"
+description "Ortsvektor"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$\\vec{w}$"
+description "Gewichte eines Kriging Modells"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "L"
+description "Likelihood Funktion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "N"
+description "Multivariate Normalverteilung"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "a"
+description "Skalierungsfaktor für das CO-Kriging Kovarianzmodel"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "t"
+description "Zeit"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "P"
+description "Wahrscheinlichkeit"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "k"
+description "Anzahl der freien Variablen eines Members"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "z"
+description "Anzahl der Zielfunktionen einer Optimierung"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "c"
+description "Anzahl der Nebenbedingungen"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "s"
+description "Anzahl der verschiedenen Gütestufen bei einem Mutlifidelty Modell"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "I"
+description "Informationsgehalt"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "n"
+description "Anzahl der beprobten Stützstellen, auch Member oder Samples genannt"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "o"
+description "Anzahl der Hyperparameter"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "m"
+description "Anzahl der gegebenen partiellen Ableitungen"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "h"
+description "Allgemeiner Hyperparameter "
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "p"
+description "Druck"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "q"
+description "Anzahl der verwendeten Ersatzmodelle innerhalb einer Optimierung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size largest
+Noch einbaue n: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeGratiet"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "box1958note"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Eifinger2013"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2009recent"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gibbs1997efficient"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gill1981practical,gill2007numerical"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sacks2007a"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jones1998"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keane2006statistical"
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jones2001"
+
+\end_inset
+
+(10dimensions Samples minimum) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jin2001"
+
+\end_inset
+
+(3dimensions Samples minimum in vielen Fällen)
+\end_layout
+
+\begin_layout Chapter*
+
+\size normal
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Kurzfassung 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Kurzfassung}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+abstract 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Abstract}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Vorwort.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+set_width "auto"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Einleitung.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Optimierungsstrategie.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/OptimierungsstrategieErweiterung.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Kriging.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/SoftwaretechnischeUmsetzung.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Benchmarks.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/RealeTurbomaschinenOptimierung.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/AusblickFazit.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Anhang.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/OrdinaryKriging.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/GradientEnhancedKriging.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/COKriging.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "lib"
+options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
