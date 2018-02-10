@@ -631,7 +631,7 @@ name "subsec:Besonderheiten-Turbomaschine"
 \begin_layout Standard
 Die Auslegung und damit auch Optimierung von Turbomaschinen stellt eine
  besondere Herausforderung dar, welche speziell angepasste Optimierungsverfahren
- notwendig macht.
+ erfordert.
  In diesem Abschnitt sollen diese Besonderheiten kurz aufgelistet und erläutert
  werden.
 \end_layout
@@ -641,12 +641,14 @@ Mehrere Disziplinen
 \end_layout
 
 \begin_layout Standard
-Wie bereits im vorherigen Abschnitt gezeigt, ist die Anzahl und Komplexität
- der benötigten physikalischen Disziplinen sehr hoch.
- Jede Disziplin benötigt meist eigene Software/Simulationsverfahren und
- verlangt vom Anwender großes Fachwissen.
- Aus diesem Grund sind meist mehrere Fachabteilungen an einer Optimierung
- beteiligt.
+Die Anzahl und Komplexität der benötigten physikalischen Disziplinen ist
+ sehr hoch.
+ Jede Disziplin benötigt in der Regel eigene Software, welche aus unterschiedlic
+hen Quellen stammt.
+ Um diese in einer Prozesskette verbinden zu können, müssen oft Anpassungen
+ an der Software vorgenommen und Schnittstellen definiert werden.
+ Dies erschwert die notwendige Fehlerbehandlung einer Prozesskette erheblich
+ und verlangt ein großes Maß an interdiziplinärem Fachwissen.
  
 \end_layout
 
@@ -657,18 +659,22 @@ Mehrere Zielfunktionen und Nebenbedingungen
 \begin_layout Standard
 In der Regel gibt es mehrere Zielfunktionen welche wiederum aus mehreren
  physikalischen Größen zusammengesetzt werden.
- Ein typisches Beispiel wäre hier ein über mehrere Betriebspunkte gemittelter
- Wirkungsgrad.
- Die unterschiedlichen Zielfunktionen sind meist negativ korreliert.
- Hier muss also ein Kompromiss gefunden werden.
- Zusätzlich existiert eine große Anzahl relevanter Nebenbedingungen.
- Bei Start einer Optimierung werden diese Nebenbedingungen meistens von
- keinem Member vollständig erfüllt und oftmals ist es auch nicht sicher,
- ob die Nebenbedingungen überhaupt alle erfüllbar sind.
+ Ein typisches Beispiel ist der Wirkungsgrad 
+\begin_inset Formula $\eta_{is}=f\left(P_{t,ein},P_{t,aus},T_{t,ein},T_{t,aus}\right)$
+\end_inset
+
+, insbesondere wenn dieser über mehrere Betriebspunkte gemittelt wird.
+ Hinzu kommt, dass die unterschiedlichen Zielfunktionen sind meist negativ
+ korreliert sind und eine große Anzahl relevanter Nebenbedingungen existiert.
+ Bei Start einer Optimierung werden diese Nebenbedingungen häufig von keinem
+ Member vollständig erfüllt und oftmals ist es auch nicht sicher, ob die
+ Nebenbedingungen überhaupt alle erfüllbar sind.
  
 \end_layout
 
 \begin_layout Standard
+
+\shape italic
 Diese Punkte führen dazu, dass eine Optimierung anfangs nur sehr grob definiert
  werden kann und die Ziele und Nebenbedingungen während der laufenden Optimierun
 g umformuliert oder angepasst werden müssen.
@@ -682,7 +688,7 @@ Gradienteninformation
 
 \begin_layout Standard
 Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
- Damit sind die partiellen Ableitungen der Zielfunktion 
+ Das sind die partiellen Ableitungen der Zielfunktion 
 \begin_inset Formula $\frac{\partial y_{i}}{\partial x_{j}};i\in\left\{ 1,...,z\right\} $
 \end_inset
 
@@ -694,22 +700,23 @@ Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
 \begin_inset Formula $x_{j};j\in\left\{ 1,...,k\right\} $
 \end_inset
 
- gemeint.
+.
  Allerdings sind viele der verwendeten Programme und Simulationverfahren
  sehr komplex und oftmals ist kein Quellcode verfügbar.
- Dies bedeutet, dass man keine vollständige Gradienteninformationen ohne
- zusätzliche Simulationen erhalten kann.
- Einige Programme bieten allerdings die Berechnung der benötigten Gradienten.
- In diesem Fall sind also zumindest einige partielle Ableitungen verfügbar.
- Das verwendete Optimierungsverfahren muss also auch unvollständige Gradientenin
-formationen verarbeiten können.
+ Dadurch wird es schwer alle partiellen Ableitungen zu erhalten, meist sind
+ aber einige partielle Ableitungen verfügbar.
+ Weiterhin sind einige der Funktionen nicht differenzierbar.
+ Ein häufig verwendetes Beispiel ist die maximale mechanische Spannung einer
+ Verdichterschaufel.
  
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind einige der Funktionen oft nicht differenzierbar.
- Ein häufig verwendetes Beispiel ist die maximale mechanische Spannung einer
- Verdichterschaufel.
+
+\shape italic
+Das alles führt dazu, dass das verwendete Optimierungsverfahren also auch
+ unvollständige Gradienteninformationen verarbeiten können muss.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -717,16 +724,23 @@ Konvergenz der verwendeten Programme
 \end_layout
 
 \begin_layout Standard
-Während einer Optimierung werden zahlreiche Geometrien/Rechennetze erzeugt
- und danach bspw.
- mit einem Strömungs- und/oder Strutkur-Löser bewertet.
- Bei dieser Vielzahl an Geometrien, Rechennetzen und auch Simulationsverfahren
- können unsinnige Geometrien, schlechte Rechennetze oder aerodynamisch instabile
- Konfigurationen entstehen.
- Teils treten auch numerische Probleme auf, die der Anwender nicht direkt
- nachvollziehen kann.
+Während einer Optimierung werden zahlreiche Geometrien erzeugt.
+ Diese Geometrien werden dann in der Prozesskette (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:OptiStandardProcess"
+
+\end_inset
+
+) bewertet.
+ Die Prozessketten enthalten eine Vielzahl von Rechenschritten, wie z.B.
+ die Netzerzeugung und die darauf basierenden aeromechanischen Simulationen.
+ Dabei können unsinnige Geometrien oder schlechte Rechennetze entstehen.
+ Teils treten auch numerische Probleme oder Programmabbrüche auf, die der
+ Anwender nicht direkt analysieren und nachvollziehen kann.
  In vielen Fällen benötigen diese Rechnungen dennoch sehr viel Zeit und
- liefern dann letztlich keine neue Information.
+ liefern dann letztlich keine oder nur partielle Informationen.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -736,9 +750,7 @@ Lange Prozesskettenzeiten
 \begin_layout Standard
 Dieser Punkt ist im Bereich der Turbomaschinenoptimierung sehr entscheidend,
  denn besonders im Bereich der Aerodynamik sind die Simulationsverfahren
- numerisch sehr aufwendig.
- Dies gilt besonders bei Optimierungen, da sehr viele dieser komplexen Berechnun
-gen notwendig sind.
+ sehr aufwendig.
  
 \end_layout
 
@@ -749,22 +761,16 @@ Trotz der steigenden Rechnerkapazität ist in diesem Punkt keine Besserung
  verwendet werden und die steigenden Rechenkapazitäten eher für aufwendigere
  Verfahren eingesetzt werden, um komplexere Strömungsvorgänge simulieren
  zu können.
- Beispielsweise die zeitliche Auflösung von Strömungsvorgängen, bessere
- Modellierung von turbulenten Wirbeln oder größere Teile von Turbomaschinen
- auf einmal zu simulieren.
- Die Berechnungsverfahren bieten hier also noch erhebliches Potenzial, welches
- aufgrund mangelnder Rechnerkapazitäten nicht verwendet werden kann.
  
 \end_layout
 
 \begin_layout Standard
 Ein Optimierungsverfahren sollte also mit so wenig Berechnungen wie möglich
- zu einem gewünschten Optimum finden.
- Es ist also sinnvoll sehr hochwertige Optimierungsverfahren anzuwenden,
- auch wenn diese selbst viel Zeit in Anspruch nehmen.
- Meist steht genügend Zeit für diese hochwertigen Verfahren zur Verfügung,
- da durch die aufwendigen Prozessketten viele Leerlaufphasen entstehen,
- welche genutzt werden können.
+ zu einem gewünschten Ergebnis führen.
+ Durch die langen Prozesskettenzeiten ist also möglich und auch sinnvoll
+ sehr hochwertige Optimierungsverfahren anzuwenden, auch wenn diese selbst
+ viel Zeit in Anspruch nehmen.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -788,8 +794,13 @@ key "Bellman1972"
 
 \end_inset
 
-.
- Die Dimension des Suchraums ist im Bereich der Turbomaschinenoptimierung
+ und beschreibt die massive Zunahme des mathematischen Raumvolumens beim
+ weiteren Hinzufügen von Dimensionen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Dimension des Suchraums ist im Bereich der Turbomaschinenoptimierung
  sehr hoch.
  Typische Parameterzahlen findet man bspw.
  in der Arbeit von Voss mit 50 Parametern 
@@ -820,7 +831,7 @@ key "Siller2009"
 
 .
  Einen Suchraum dieser Größe ausreichend zu samplen, ist bei den vorhandenen
- Prozesskettenzeiten nahezu unmöglich.
+ Prozesskettenzeiten unmöglich.
  Der Optimierungsprozess muss aus diesem Grund speziell für eine so große
  Parameteranzahl ausgelegt sein, um ausgehend von einer Initialisierung
  möglichst schnell Verbesserungen zu finden.
@@ -862,11 +873,11 @@ reference "eq:Dominanz"
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\\
- & \left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\\
- & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]
-\end{align*}
+\begin{align}
+M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\nonumber \\
+ & \left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\label{eq:DominanzNebenbedidungn}\\
+ & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
+\end{align}
 
 \end_inset
 
@@ -892,27 +903,29 @@ reference "eq:Dominanz"
 \end_inset
 
 ) erfüllt wird.
- Durch diese zusätzlichen Bedingungen ist die Erfüllung der Nebenbedingungen
- das wichtigste Kriterium für die Bestimmung des Paretoranges.
- 
-\begin_inset Newline newline
+ Mit der Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DominanzNebenbedidungn"
+
 \end_inset
 
-
+ hat die Erfüllung der Nebenbedingungen Vorrang vor den Zilefunktionswerten
+ bei der Bestimmung des Paretorangs.
 \end_layout
 
 \begin_layout Standard
-Diese hier aufgelisteten Probleme, machen die Optimierung von Turbomaschinen
- zu einer großen Herausforderung und schränken auch die Wahl der Optimierungsver
-fahren stark ein.
+Diese hier aufgelisteten Themen, stellen hohe Anforderungen an die Optimierung
+ von Turbomaschinen und schränken die Wahl der Optimierungsverfahren stark
+ ein.
  Deterministische Verfahren wie z.B.
- Gradientenverfahren sind in den meisten Turbomaschinenoptimierungen nicht
- anwendbar, da keine oder nur ein Teil der benötigten Gradienteninformation
- zur Verfügung steht.
- Es gibt zwar auch gradientenfreie deterministische Verfahren, allerdings
- sind diese in hochdimensionalen Räumen sehr ineffizient.
- Zudem gestaltet sich die parallele Berechnung mehrerer Member bei diesen
- Verfahren schwieriger.
+ Gradientenverfahren sind nicht anwendbar, da keine oder nur ein Teil der
+ benötigten Gradienteninformation zur Verfügung steht und die existierenden
+ gradientenfreien deterministische Verfahren sind in hochdimensionalen Räumen
+ sehr ineffizient.
+ Weiterhin kann diese Art der Optimierungsverfahren die Möglichkeiten modernen
+ Supercomputer nur eingeschränkt nutzen, da nur ein sehr geringer Parallelisieru
+ngsgrad besteht.
  Im Gegensatz dazu stehen stochastische Verfahren wie z.B.
  evolutionäre Algorithmen.
  Diese benötigen nur die Zielfunktionswerte und bieten einen sehr hohen
@@ -921,10 +934,7 @@ fahren stark ein.
 \end_layout
 
 \begin_layout Standard
-Da in der vorliegenden Arbeit ein bestehendes Optimierungsverfahren erweitert
- wird, soll auf eine detaillierte Betrachtung der verschiedenen Verfahren
- verzichtet werden.
- Für weitere Informationen bieten folgende Literaturstellen einen umfassenden
+Für weitere Informationen bieten folgende Literaturstellen einen umfassenden
  Vergleich verschiedenster Optimierungsverfahren im Bereich der Turbomaschinen:
   
 \begin_inset CommandInset citation
@@ -948,12 +958,19 @@ name "sec:Automatisierte-Optimierung-imDLR"
 \end_layout
 
 \begin_layout Standard
-In diesem Abschnitt soll die bisher im DLR verwendete Optimierungsstrategie
- erklärt werden.
- Der erste Teil erläutert den grundlegenden Ablauf einer Optimierung mit
+Auf die Optimierungssoftware AutoOpti wurde bereits mehrfach Bezug genommen
+ und in diesem Abschnitt soll der bisherige Stand von AutoOpti dokumentiert
+ und erläutert werden.
+ Dieser bildet die Basis für die in dieser Arbeit entwickelten Methoden.
+ 
+\end_layout
+
+\begin_layout Standard
+Der erste Teil erläutert den grundlegenden Ablauf einer Optimierung mit
  AutoOpti.
- Im darauffolgenden zweiten Teil wird dann die eingesetzte Ersatzmodellbeschleun
-igung beschrieben.
+ Im darauffolgenden zweiten Teil wird dann die Verwendung von Ersatzmodellen
+ innerhalb von AutoOpti beschrieben.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -969,7 +986,7 @@ name "subsec:Grundlegender-Optimierungsprozes"
 
 \begin_layout Standard
 Eine automatisierte Optimierung, wie sie im DLR ausgeführt wird, basiert
- grundsätzlich auf einer Evolutionsstrategie 
+ grundsätzlich auf der Evolutionsstrategie 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rechenberg1973"
@@ -977,9 +994,9 @@ key "Rechenberg1973"
 \end_inset
 
 .
- Die Evolutionsstrategie ist ein stochastisches Optimierungsverfahren welches
- kaum Voraussetzungen an die Zielfunktion stellt.
- Diese muss weder stetig noch differenzierbar sein.
+ Diese ist ein stochastisches Optimierungsverfahren welches kaum Voraussetzungen
+ (z.B.
+ Differenzierbarkeit oder Stetigkeit) an die Zielfunktion stellt.
  Die Abstiegsrichtung wird durch zufällige Tastschritte in der näheren Umgebung
  bekannter Member bestimmt.
  
@@ -1006,7 +1023,7 @@ reference "fig:OptiStandardProcess"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -1040,8 +1057,8 @@ Prozesskette des genetischen Algorithmus in AutoOpti
 \end_layout
 
 \begin_layout Standard
-Dies bedeutet, dass die Berechnung der Prozesskette und die Verwaltung der
- Datenbank sowie die Erzeugung neuer Member unabhängig voneinander agieren.
+Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwal
+tung, sowie die Erzeugung neuer Member unabhängig voneinander agieren.
  Um solch ein asynchrones Verfahren umzusetzen bedient sich AutoOpti eines
  Master/Slave Ansatzes.
  Hierfür sind grundlegend zwei verschiedene Arten von Prozessen vorgesehen:
@@ -1058,7 +1075,7 @@ Die Slave-Prozesse dienen zur Berechnung der Prozesskette und werden vom
  Root-Prozess gestartet und gesteuert.
  Meist wird innerhalb einer Prozesskette eine Geometrie erzeugt und diese
  dann mit den numerischen Simulationsverfahren bewertet.
- Damit übernehmen die Slave-Prozesse den numerisch aufwendigeren Teil der
+ Damit übernehmen die Slave-Prozesse den numerisch aufwendigen Teil der
  Optimierung.
  
 \end_layout
@@ -1093,9 +1110,9 @@ reference "fig:OptiStandardProcess"
  beschreibt.
  Während dieser Initialisierungsphase spielt die Minimierung der Zielfunktion
  noch keine Rolle.
- Ziel ist es vielmehr ein möglichst breites Spektrum an sinnvollen Membern
+ Ziel ist es vielmehr ein möglichst breites Spektrum an konvergenten Membern
  zu erzeugen und damit einen möglichst großen Parameterbereich abzudecken.
- Um dies zu bewerkstelligen bietet AutoOpti diverse Verfahren an:
+ Hierfür bietet AutoOpti diverse Verfahren an:
 \end_layout
 
 \begin_layout Itemize
@@ -1103,7 +1120,15 @@ Zufällige Variation der freien Variablen
 \end_layout
 
 \begin_layout Itemize
-Latin Hypercube Sampling 
+Latin Hypercube Sampling (siehe McKay et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McKay1979"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Itemize
@@ -1119,16 +1144,8 @@ Das erste Verfahren erzeugt zufällige gleichverteilte Parametersätze, wobei
 \end_layout
 
 \begin_layout Standard
-Das Latin-Hypercube-Verfahren (siehe McKay et al.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "McKay1979"
-
-\end_inset
-
-) versucht den gegebenen Parameterraum möglichst raumfüllend abzutasten
- und ist auch in hochdimensionalen Räumen anwendbar.
+Das Latin-Hypercube-Verfahren versucht den gegebenen Parameterraum möglichst
+ raumfüllend abzutasten und ist auch in hochdimensionalen Räumen anwendbar.
  
 \end_layout
 
@@ -1145,9 +1162,9 @@ Beide Verfahren erscheinen allerdings nur dann sinnvoll, wenn zumindest
 Eine mögliche Lösung bietet das dritte Verfahren.
  Für dieses Verfahren muss ein initialer Member bekannt sein, welcher die
  Prozesskette erfolgreich durchläuft.
- Dieser initiale Parametersatz wird dann immer wieder mutiert und evaluiert
- und da sich diese Art der Suche nur lokal um den initialen Parametersatz
- bewegt, kann meist eine hohe Quote von erfolgreichen Prozesskettendurchläufen
+ Dieser initiale Parametersatz wird dann immer wieder mutiert und evaluiert.
+ Da sich diese Art der Suche nur lokal um den initialen Parametersatz bewegt,
+ kann meist eine ausreichende Quote von erfolgreichen Prozesskettendurchläufen
  erreicht werden.
  
 \end_layout
@@ -1156,7 +1173,7 @@ Eine mögliche Lösung bietet das dritte Verfahren.
 Die Auswahl der hier beschriebenen Verfahren und auch die Anzahl der zu
  erzeugenden Member, muss der jeweilige Anwender treffen.
  Erfahrungsgemäß ist es sinnvoll zuerst ein raumfüllendes Verfahren zu wählen
- und nur bei zu niedriger Erfolgsquote auf ein lokales Verfahren zu wechseln.
+ und nur bei zu niedriger Erfolgsquote auf das lokale Verfahren zu wechseln.
  
 \end_layout
 
@@ -1208,12 +1225,14 @@ Nachdem der Root Prozess einen vielversprechenden Parametersatz generiert
 \end_layout
 
 \begin_layout Standard
-Nachdem der Root-Prozess die neuen Parametersätze an die noch freien Slave-Proze
-sse verschickt hat, können diese die Prozesskette durchlaufen.
+Nachdem der Root-Prozess die neuen Parametersätze an die Slave-Prozesse
+ verschickt hat, können diese die Prozesskette durchlaufen.
  Bei erfolgreicher Ausführung der Prozesskette müssen alle relevanten Ergebnisse
  in einer Datei bereit gestellt werden.
  Die gesammelten Ergebnisse werden vom Slave-Prozess eingelesen und als
  Flowparameter abgespeichert.
+ Bei nicht erfolgreichen Prozessen, werden diese in der Datenbank markiert
+ und die bis dahin erzeugten Ergebnisse abgespeichert.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1236,9 +1255,11 @@ Die Slave-Prozesse schicken die berechneten Flowparameter zurück an den
 \begin_layout Standard
 Aus den vom Slave bereitgestellten Flowparametern, berechnet der Root Prozess
  nun die Zielfunktionen, Nebenbedingungen und daraus auch das Gütekriterium.
- Die Definition der Zielfunktionen und Nebenbedingungen ist in einer Konfigurati
-onsdatei festgelegt und kann vom Anwender jederzeit angepasst werden.
- Ein möglicher Gütewert wäre hier der Paretorang (siehe Kapitel 
+ 
+\end_layout
+
+\begin_layout Standard
+Ein möglicher Gütewert wäre hier der Paretorang (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:OptimierungsBegriffe"
@@ -1275,13 +1296,12 @@ Im vorhergehenden Abschnitt wurde der grundlegende Ablauf einer Optimierung
  sind z.B.
  Mutation oder Kreuzung von Membern.
  Dies führt jedoch dazu, dass die erreichten Verbesserungen eher klein sind.
- Um größere Fortschritte zu erreichen, sind dafür sehr viele Tastschritte
- und damit Funktionsauswertungen (z.B.
- Strömungslösungen) notwendig.
+ Um größere Fortschritte zu erreichen, sind meist sehr viele Tastschritte
+ und damit Funktionsauswertungen notwendig.
  In der Kombination mit den großen Parameterräumen und langen Prozesskettenzeite
 n wäre eine solche Optimierung nicht mehr rentabel.
- Um den Prozess zu beschleunigen, versucht man die Membererzeugung des Root
- Prozesses (siehe Abbildung 
+ Um den Gesamtprozess zu beschleunigen, versucht man die Membererzeugung
+ im Root Prozess (siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:OptiStandardProcess"
@@ -1289,42 +1309,29 @@ reference "fig:OptiStandardProcess"
 \end_inset
 
 ) zu verbessern.
- Insbesondere versucht man Member zu erzeugen, die eine möglichst große
- Verbesserung der Zielfunktionen aufweisen und die zusätzlich alle Nebenbedingun
-gen erfüllen.
+ Es sollen zielgerichtet neue Member erzeugt werden, die eine möglichst
+ große Verbesserung der Zielfunktionen aufweisen und zusätzlich alle Nebenbeding
+ungen erfüllen.
  
 \end_layout
 
 \begin_layout Standard
-Ein weit verbreitetes Mittel hierfür sind Ersatzmodelle oder auch Metamodelle.
- Ersatzmodelle wie z.B.
- das Kriging Verfahren approximieren oder interpolieren vorhandene Daten.
- Die Ersatzmodelle werden innerhalb einer Optimierung dafür verwendet, Vorhersag
-en der Zielfunktionen und Nebenbedingungen durchzuführen und damit besonders
+Ein weit verbreitetes Mittel hierfür sind Ersatzmodelle oder auch Metamodelle,
+ diese approximieren oder interpolieren vorhandene Daten.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Ersatzmodelle werden innerhalb einer Optimierung dafür verwendet, Vorhersage
+n der Zielfunktionen und Nebenbedingungen durchzuführen und damit besonders
  aussichtsreiche Parametersätze zu finden.
- Um ein solches Ersatzmodell verwenden zu können, muss zuerst ein Training
- mit den vorhandenen Daten durchgeführt werden.
- Während eines solchen Trainings werden meistens ersatzmodellspezifische
- Parameter iterativ bestimmt.
- Dies ist in der Regel auch der zeitaufwendigste Teil bei der Verwendung
- von Ersatzmodellen.
- Nach dem Training können Funktionswerte an beliebigen Stellen vorhergesagt
- werden.
- Wobei die Vorhersage von Funktionswerten durch ein Ersatzmodell ist meist
- um einige Größenordnungen schneller als eine Funktionsauswertung durch
- die Prozesskette.
- 
-\end_layout
-
-\begin_layout Standard
-Die trainierten Ersatzmodelle werden dann herangezogen, um mit den Vorhersagen
- neue Member zu erzeugen.
  Die Erzeugung kann dann z.B.
  durch eine kleine Optimierung auf den Ersatzmodellen erfolgen.
  Der aussichtsreichste Member wird anschließend mit der echten Prozesskette
- nachgerechnet und dann in die Optimierungsdatenbank eingetragen.
- Durch dieses Verfahren lässt sich der Optimierungsfortschritt stark beschleunig
-en.
+ nachgerechnet und dann in die Optimierungsdatenbank eingetragen und dem
+ Ersatzmodell hinzugefügt.
+ Dieses Verfahren bietet die Möglichkeit den Optimierungsfortschritt stark
+ zu beschleunigen.
  Wie stark, hängt von der Güte und Leistungsfähigkeit des verwendeten Modells
  ab.
  Mithilfe von Abbildung 
@@ -1382,60 +1389,6 @@ Nutzung von Ersatzmodellen im Optimierungsprozess
 \end_layout
 
 \begin_layout Standard
-Die in AutoOpti verwendeten Ersatzmodelle müssen vor der Verwendung trainiert
- werden.
- Das Training wird oftmals auch als Lernverfahren bezeichnet.
- Dieses dient zur Bestimmung von ersatzmodellspezifischen Parametern, dabei
- kann es sich z.B.
- um Korrelationslängen oder Gewichtungen handeln.
- Die Ersatzmodellparameter werden dann mithilfe der vorhandenen Daten eingestell
-t.
- Es werden in AutoOpti für jede Zielfunktion und jede Nebenbedingung jeweils
- ein Ersatzmodell trainiert.
- Bei zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion
- verwendeten Flowparameter ebenfalls ein Ersatzmodell trainiert.
-\end_layout
-
-\begin_layout Standard
-Meistens sind diese Trainingsverfahren aufwendig und benötigen je nach Typ
- des Ersatzmodells und der Anzahl an Stützstellen viel Zeit.
- Nach dem Training können die Ersatzmodelle für Vorhersagen der trainierten
- Funktion verwendet werden, wobei die Vorhersagen erfahrungsgemäß sehr viel
- schneller sind als das Training.
- 
-\end_layout
-
-\begin_layout Standard
-Wie oft ein Ersatzmodell während einer Optimierung trainiert werden muss,
- hängt stark vom verwendeten Ersatzmodell ab.
- Bei dem in AutoOpti hauptsächlich verwendeten Kriging-Verfahren kann man
- jedoch sagen, dass bei ausreichender Datenlage irgendwann kein Training
- mehr vonnöten ist.
- 
-\end_layout
-
-\begin_layout Standard
-Das Training kann entweder synchron durch den Root-Prozess geschehen oder
- asynchron durch einen eigenen Prozess.
- Bei der synchronen Variante trainiert der Root-Prozess die Ersatzmodelle
- und ist in dieser Zeit blockiert.
- Wird in dieser Zeit ein Slave-Prozess frei, so muss dieser warten bis das
- Training beendet ist.
-\end_layout
-
-\begin_layout Standard
-Bei der asynchronen Variante wird das Training in einem externen Prozess
- gestartet und der Root-Prozess verwendet für die benötigten Vorhersagen
- dann immer die jeweils letzten trainierten Modelle.
- Die asynchrone Variante stellt die schnellere Methode dar und bietet auch
- eine höhere Stabilität, da der Root-Prozess durch fehlerhafte Trainings
- nicht beeinflusst wird.
- Allerdings ist der Verwaltungsaufwand etwas höher und der externe Trainingsproz
-ess muss permanent überwacht werden, da der Root-Prozess keine auftretenden
- Fehler bemerkt.
-\end_layout
-
-\begin_layout Standard
 Die in AutoOpti verwendeten Ersatzmodelle sind bayesisch trainierte Neuronale
  Netzwerke 
 \begin_inset CommandInset citation
@@ -1452,7 +1405,65 @@ reference "chap:Die-Kriging-Verfahren"
 \end_inset
 
 ).
+ Die Kriging-Verfahren haben sich als Standard in AutoOpti etabliert, da
+ diese robust zuverlässige Vorhersagen liefern.
  
+\end_layout
+
+\begin_layout Standard
+Jedes dieser Verfahren benötigt ein Training, dieses Training wird oftmals
+ auch als Lernverfahren bezeichnet.
+ Es dient zur Bestimmung von ersatzmodellspezifischen Parametern, dabei
+ kann es sich z.B.
+ um Korrelationslängen, Gewichtungen, Skalierungsfaktoren usw.
+ handeln.
+ Die Ersatzmodellparameter werden dann mithilfe der vorhandenen Daten eingestell
+t, um möglichst gute Vorhersagen zu erlangen.
+ Meistens sind diese Trainingsverfahren sehr aufwendig und benötigen je
+ nach Typ des Ersatzmodells und der Anzahl an Stützstellen viel Zeit.
+ Nach dem Training können die Ersatzmodelle für Vorhersagen der trainierten
+ Funktion verwendet werden, wobei die Vorhersagen erfahrungsgemäß sehr viel
+ schneller sind als das Training und auch die Prozesskette.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin werden in AutoOpti für jede Zielfunktion und Nebenbedingung jeweils
+ ein Ersatzmodell trainiert.
+ Bei zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion
+ verwendeten Flowparameter ebenfalls ein Ersatzmodell trainiert.
+ 
+\end_layout
+
+\begin_layout Standard
+Wie oft ein Ersatzmodell während einer Optimierung trainiert werden muss,
+ hängt stark vom verwendeten Ersatzmodell ab.
+ Bei dem in AutoOpti hauptsächlich verwendeten Kriging-Verfahren kann man
+ jedoch sagen, dass bei ausreichender Datenlage irgendwann kein Training
+ mehr vonnöten ist, da sich die Ersatzmodellparameter bei ausreichender
+ Datenlage nicht mehr ändern.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Training kann entweder synchron durch den Root-Prozess geschehen oder
+ asynchron durch einen eigenen Prozess.
+ Bei der synchronen Variante trainiert der Root-Prozess die Ersatzmodelle
+ und ist in dieser Zeit blockiert.
+ Wird in dieser Zeit ein Slave-Prozess frei, so muss dieser warten bis das
+ Training beendet ist.
+\end_layout
+
+\begin_layout Standard
+Bei der asynchronen Variante wird das Training in einem externen Prozess
+ gestartet und der Root-Prozess verwendet für die benötigten Vorhersagen
+ dann immer die jeweils vorliegenden Modelle.
+ Die asynchrone Variante stellt die schnellere Methode dar und bietet auch
+ eine höhere Stabilität, da der Root-Prozess durch fehlerhafte Trainings
+ nicht beeinflusst wird.
+ Allerdings ist der Verwaltungsaufwand etwas höher und der externe Trainingsproz
+ess muss permanent überwacht werden, da der Root-Prozess keine auftretenden
+ Fehler bemerkt.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1462,23 +1473,22 @@ reference "chap:Die-Kriging-Verfahren"
 
 \begin_layout Standard
 Ist das Training abgeschlossen, wird eine eigene Optimierung auf den Ersatzmodel
-len gestartet, wobei die Ersatzmodelle den Teil der echten Prozesskette
- durch Vorhersagen ersetzen.
- Da die Funktionsauswertungen auf den Ersatzmodellen deutlich schneller
- sind, als die Prozesskette selbst, geht dieser Schritt relativ schnell.
- Ziel dieser Optimierung auf den Ersatzmodellen ist es, einen vielversprechenden
+len gestartet, wobei die Ersatzmodelle die Prozesskette ersetzen.
+ Da die Funktionsauswertungen auf den Ersatzmodellen um Größenordnungen
+ schneller sind, als die Prozesskette selbst, geht dieser Schritt relativ
+ schnell.
+ Ziel der Optimierung auf den Ersatzmodellen ist es, einen vielversprechenden
  Parametersatz zu finden, welcher die Zielfunktionen möglichst stark verbessert
  und zudem eine hohe Wahrscheinlichkeit besitzt alle Nebenbedingungen einzuhalte
 n.
  Für die Optimierung auf den Ersatzmodellen, bietet AutoOpti mehrere Verfahren
  an.
- Aufgrund der sehr schnellen Vorhersagen der Ersatzmodelle, haben sich evolution
-äre Algorithmen als besonders robust und effizient erwiesen und finden daher
- hauptsächlich Anwendung.
+ Aufgrund der sehr schnellen Vorhersagen der Ersatzmodelle, haben sich hier
+ evolutionäre Algorithmen als besonders robust und effizient erwiesen.
  Da die Ersatzmodelle selbst differenzierbar sind, bietet AutoOpti auch
  die Option gradientenbasierte Optimierungsverfahren anzuwenden.
- Allerdings bieten diese keine wirklichen Vorteile, da der Geschwindigkeitsvorte
-il bei den schnellen Ersatzmodellvorhersagen praktisch nicht ins Gewicht
+ Allerdings bieten diese keine wesentlichen Vorteile, da der Geschwindigkeitsvor
+teil bei den schnellen Ersatzmodellvorhersagen praktisch nicht ins Gewicht
  fällt und ein evolutionärer Algorithmus eine 
 \begin_inset Quotes gld
 \end_inset
@@ -1505,7 +1515,7 @@ Meistens werden in Turbomaschinenoptimierungen mehrere Zielfunktionen und
  Parametersätze mit dem Paretorang Eins erzeugt werden und könnten untereinander
  nicht weiter gewichtet werden.
  Es ist also ein Gütekriterium nötig, welches mehrere Zielfunktionen und
- Nebenbedingungen vereinen und auch den zu erwartenden Optimierungsfortschritt
+ Nebenbedingungen vereint und auch den zu erwartenden Optimierungsfortschritt
  zu einer bestehenden Paretofront genauer quantifizieren kann.
  In AutoOpti findet der 
 \begin_inset Quotes gld
@@ -1518,8 +1528,8 @@ Volumenzugewinn
  als Gütekriterium Anwendung und wird im nächsten Abschnitt vorgestellt.
  Der Root-Prozess wählt nun den vielversprechendsten Member aus und schickt
  diesen zur Berechnung an einen freien Slave Prozess.
- Der Slave Prozess berechnet dann die echte Zielfunktion, sodass diese dann
- auch mit der Vorhersage des Ersatzmodells verglichen werden kann.
+ Der Slave Prozess berechnet dann die echte Zielfunktion.
+ Danach ist ein Vergleich mit den Vorhersagen der Ersatzmodelle möglich.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1538,7 +1548,7 @@ Wie bereits erwähnt, ist für die Optimierung auf den Ersatzmodellen ein
  Gütekriterium nötig, welches den Optimierungsfortschritt für Mehrzieloptimierun
 gen genauer quantifizieren kann als bspw.
  der Paretorang.
- Das in AutoOpti verwendete Kriterium ist der Volumenzugewinn oder auch
+ Das in AutoOpti verwendete Kriterium ist der Volumenzugewinn (englisch:
  
 \begin_inset Quotes gld
 \end_inset
@@ -1547,7 +1557,7 @@ Volume-Gain
 \begin_inset Quotes grd
 \end_inset
 
-.
+).
  
 \end_layout
 
@@ -1608,17 +1618,15 @@ nen.
  Gezeigt wird eine Paretofront, dargestellt durch die blauen Punkte.
  Die zwei grünen Punkte beschreiben neu hinzugekommene Member, auf die das
  Gütekriterium angewandt werden soll.
- Beide würden Paretorang Eins bekommen und wären damit gleichwertig.
+ Beide würden Paretorang Eins bekommen und sind damit gleichwertig.
  Betrachtet man nun die in grau dargestellte Fläche zwischen der aktuellen
- Paretofront und den neu hinzugekommenen Membern, so beschreibt diese den
- Volumenzugewinn.
+ Paretofront und den neu hinzugekommenen Membern, beschreibt diese den Volumenzu
+gewinn.
  Das Kriterium lässt sich auch für einen höherdimensionalen Zielfunktionsraum
  anwenden und quantifiziert so den Optimierungsfortschritt für eine Mehrzielopti
 mierung im Bezug auf eine bestehende Paretofront.
  Der Volumenzugewinn kann auch in einer Optimierung auf den Ersatzmodellen
- angewendet werden, wobei für die Berechnung die Vorhersagen der Ersatzmodelle
- herangezogen werden.
- 
+ angewendet werden.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1633,7 +1641,7 @@ AutoOpti verwendet statistische Ersatzmodelle.
  Dies trifft in einigen Fällen zwar nicht zu, stellt in der Regel aber eine
  vernünftige Annahme dar und ist vom numerischen Aufwand noch im vertretbarem
  Rahmen.
- Die Ersatzmodelle sagen also für einen unbekannten Ort 
+ Die Ersatzmodelle sagen also für einen unbeprobten Ort 
 \begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
 \end_inset
 
@@ -1646,8 +1654,8 @@ AutoOpti verwendet statistische Ersatzmodelle.
 \end_inset
 
  der jeweiligen Funktion voraus.
- Die Berechnung des Volumenzugewinns für einen vorhergesagten Member muss
- also in diesem Fall die Verteilung berücksichtigen.
+ Die Berechnung des Volumenzugewinns für einen vorhergesagten Member sollte
+ also die Verteilung berücksichtigen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1699,6 +1707,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ExpectedVolumeGain.eps
+	lyxscale 200
 
 \end_inset
 
@@ -1736,18 +1745,12 @@ key "Reimer2016"
 
 \begin_layout Standard
 Bei einer Optimierung auf den Ersatzmodellen, wie sie in diesem Kapitel
- beschrieben wurde, wird versucht dieses Kriterium zu maximieren.
- 
-\begin_inset Newline newline
+ beschrieben wurde, wird versucht das Kriterium 
+\begin_inset Formula $EVG\left(M\right)$
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\color red
-Ein großer Vorteil bei Berücksichtigung der Unsicherheiten der Vorhersage
+zu maximieren.
+ Ein großer Vorteil bei Berücksichtigung der Unsicherheiten der Vorhersage
  ist das daraus resultierende explorative Verhalten der Optimierung.
  Ein Optimierungsalgorithmus, welcher nur die Vorhersage des Funktionswert
  berücksichtigt, besitzt in der Regel ein rein exploitatives Verhalten.
@@ -1759,14 +1762,13 @@ key "Forrester2008"
 
 \end_inset
 
-)Der EVG Algorithmus bietet hier einen sehr guten Kompromiss zwischen explorativ
+).
+ Der EVG Algorithmus bietet hier einen sehr guten Kompromiss zwischen explorativ
 en und expoitativen Verhalten.
  
-\color inherit
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
-
+\begin_layout Standard
 Auf die genaue mathematische Herleitung und auch die Behandlung von Nebenbedingu
 ngen soll in dieser Arbeit nicht weiter eingegangen werden.
  Es sei hierfür auf 
