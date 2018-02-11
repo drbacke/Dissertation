@@ -72,7 +72,7 @@
 \begin_body
 
 \begin_layout Chapter
-Herleitung der DLR-Kriging-Verfahren 
+Die DLR-Kriging-Verfahren: Analytische Herleitung 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Die-Kriging-Verfahren"
@@ -118,9 +118,9 @@ name "chap:Grundlagen-Kriging-1"
 Unter Kriging versteht man spezielle statistische Verfahren zur Interpolation
  oder Approximation von Werten an unbeprobten Orten.
  Der Name des Verfahrens stammt von dem südafrikanischen Bergbauingenieur
- Daniel Krige (1951), dieser versuchte eine optimale Interpolationsmethode
- für den Bergbau zu entwickeln, die auf der räumlichen Abhängigkeit von
- Messpunkten 
+ Daniel Krige (1951).
+ Dieser versuchte eine optimale Interpolationsmethode für den Bergbau zu
+ entwickeln, die auf der räumlichen Abhängigkeit von Messpunkten 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "kbiqb1953statistical"
@@ -143,7 +143,8 @@ key "matheron1963principles"
 \end_layout
 
 \begin_layout Standard
-Die Vorteile von Kriging gegenüber anderer Methoden, wie z.B.
+Die Vorteile von Kriging gegenüber anderen Interpolations- oder Approximationsme
+thoden, wie z.B.
  Inverser Distanzwichtung 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -162,31 +163,28 @@ Die Initialisierung ist sehr einfach, d.h.
  muss vor dem Training die Netztopologie, also die Anzahl der Gewichte und
  die Struktur des Netzes angegeben werden.
  Werden diese Parameter ungünstig gewählt, liefert das Neuronale Netz schlechte
- oder keine Ergebnisse.
+ Ergebnisse.
  
 \end_layout
 
 \begin_layout Itemize
-Das Extrapolationsverhalten ist bei einer Optimierung sehr vorteilhaft.
- Da es bei einer Optimierung häufig vorkommt, dass das Ersatzmodell extrapoliere
-n muss, sollte das Extrapolationsverhalten möglichst robust sein.
- Bei einer Extrapolation, liefert das Kriging-Verfahren einen globalen Erwartung
-swert zurück.
- Die meisten Neuronales Netzwerk bspw.
+Das Extrapolationsverhalten ist bei einer Optimierung sehr vorteilhaft,
+ da das Kriging-Verfahren in diesem Fall einen globalen Erwartungswert liefert.
+ Die meisten Neuronalen Netzwerke bspw.
  würden ein unbestimmtes Verhalten zeigen, dies könnte bei einer Optimierung
  zu Schwierigkeiten führen.
  
 \end_layout
 
 \begin_layout Itemize
-Kriging ist ein BLUE Schätzer 
+Kriging ist ein BLUE (Best Linear Unbiased Estimator) Schätzer 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "plackett1950some"
 
 \end_inset
 
-, Best Linear Unbiased Estimator.
+.
  Also ein linearer erwartungstreuer Schätzer minimaler Varianz.
  Im nächsten Abschnitt wird dies genauer erläutert.
 \end_layout
@@ -215,10 +213,10 @@ key "Krueger2013"
 \end_layout
 
 \begin_layout Itemize
-Statistische Verfahren wie das Kriging können zusätzlich zur Vorhersage
- des eigentlichen Funktionswertes auch eine Unsicherheit vorhersagen.
+Statistische Verfahren wie das Kriging können zusätzlich zum Funktionswert
+ auch eine Unsicherheit vorhersagen.
  Dies kann innerhalb einer Optimierung ausgenutzt werden.
- Weitere Erläuterungen dazu sind in den Kapiteln 
+ Weitere Erläuterungen dazu können in den Kapiteln 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Optimierungsstrategie"
@@ -259,7 +257,14 @@ Der in diesem Kapitel vorgestellte Kriging Ansatz ist angelehnt an die Arbeiten
  von 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Han2010,han2012alternative"
+key "Han2010"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
 
 \end_inset
 
@@ -315,12 +320,13 @@ Angenommen es existiert ein Programm (bspw.
 \begin_inset Formula $i\in\left\{ 1,...,s\right\} $
 \end_inset
 
- definiert und der bei steigender Gütezahl sinkt 
+ definiert, der bei steigender Gütezahl sinkt 
 \begin_inset Formula $I_{i}>I_{i+1},i\in\left\{ 1,...,s-1\right\} $
 \end_inset
 
-, die erste Gütestufe ist somit die hochwertigste.
- Ebenfalls wird die Annahme gestellt, dass eine hochwertigere Gütestufe
+.
+ Die erste Gütestufe ist somit die hochwertigste.
+ Ebenfalls wird die Annahme getroffen, dass eine hochwertigere Gütestufe
  eine höhere Zeit 
 \begin_inset Formula $t_{i},i\in\left\{ 1,...,s\right\} $
 \end_inset
@@ -329,7 +335,8 @@ Angenommen es existiert ein Programm (bspw.
 \begin_inset Formula $y_{i},i\in\left\{ 1,...,s\right\} $
 \end_inset
 
- benötigt, es gilt also 
+ benötigt.
+ Es gilt also 
 \begin_inset Formula $t_{i}>t_{i+1},i\in\left\{ 1,...,s-1\right\} $
 \end_inset
 
@@ -350,12 +357,10 @@ Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
  angesehen.
  Desweiteren sollen die Zufallsprozesse der einzelnen Gütestufen stationär
  sein, also einen konstanten Erwartungswert 
-\begin_inset Formula $E\left[Z_{i}\right]=const.$
+\begin_inset Formula $E\left[Z_{i}\right]=const$
 \end_inset
 
  besitzen.
- Annahmen über die Verteilung der Zufallsprozesse sollen an dieser Stelle
- noch nicht getroffen werden, diese folgen im späteren Verlauf des Kapitels.
  
 \end_layout
 
@@ -364,15 +369,19 @@ Das Kriging Verfahren soll an einer unbekannten Stelle
 \begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
 \end_inset
 
- eine Schätzung über den Funktionswert 
+ eine Schätzung 
 \begin_inset Formula $y_{i}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ über den Funktionswert 
+\begin_inset Formula $y_{i}\left(\vec{x}\right)$
 \end_inset
 
  einer bestimmten Gütestufe 
 \begin_inset Formula $i\in\left\{ 1,...,s\right\} $
 \end_inset
 
- anstellen.
+ vorhersagen.
  Die grundlegende Annahme dabei ist, dass der zu schätzende Wert 
 \begin_inset Formula $y_{i}^{*}\left(\vec{x}\right)$
 \end_inset
@@ -462,9 +471,7 @@ Bestimmung der Gewichte
 \begin_layout Standard
 \paragraph_spacing single
 \noindent
-In diesem Abschnitt sollen einige grundlegende Annahmen getroffen werden,
- über diese und weitere Annahmen können dann die gesuchten Gewichte bestimmt
- werden.
+In diesem Abschnitt sollen die gesuchten Gewichte bestimmt werden.
  
 \begin_inset Formula $F$
 \end_inset
@@ -492,11 +499,6 @@ F\left(\vec{x}\right) & =Z_{k}\left(\vec{x}\right)-Z_{k}^{*}\left(\vec{x}\right)
 \begin_layout Standard
 Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
  Erwartungswert des Schätzfehlers 0 ist.
- Wobei 
-\begin_inset Formula $E\left[.\right]$
-\end_inset
-
- den Erwartungswert darstellt.
  
 \end_layout
 
@@ -510,7 +512,7 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 \Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]=0\nonumber \\
 \Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]=0\nonumber \\
 \Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}=0\nonumber 
+\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}=0\label{eq:ErwartungswertZXCoKriging}
 \end{align}
 
 \end_inset
@@ -521,6 +523,17 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 \begin_layout Standard
 Aufgrund der Stationarität soll gelten 
 \begin_inset Formula $E\left[Z_{i}\left(\vec{x}_{j}\right)\right]=E\left[Z_{i}\left(\vec{x}_{k}\right)\right]=\beta_{i},\forall j,k\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ und 
+\begin_inset Formula $E\left[Z_{k}\left(\vec{x}\right)\right]=\beta_{k}$
+\end_inset
+
+, somit folgt aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ErwartungswertZXCoKriging"
+
 \end_inset
 
 :
@@ -538,24 +551,12 @@ Aufgrund der Stationarität soll gelten
 \end_layout
 
 \begin_layout Standard
-Eine weitere Nebenbedingung des Kriging Verfahrens ist die geforderte minimale
- Varianz des Schätzfehlers:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\textrm{var}\left[F\left(\vec{x}\right)\right] & =\min_{w_{1},...,w_{n}}\textrm{var}\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\label{eq:VarianzMinimierungFormelCOKriging}
-\end{align}
-
+Eine weitere Bedingung an das Kriging Verfahren ist die minimale Varianz
+ des Schätzfehlers, welche mit Hilfe des Verschiebungssatz 
+\begin_inset Formula $\textrm{var}\left[X\right]=E\left[X^{2}\right]-E\left[X\right]^{2}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die Varianz des Schätzfehlers kann mit Hilfe des Verschiebungssatz aus der
- Statistik folgendermaßen umformuliert werden:
+ aus der Statistik folgendermaßen umformuliert werden kann:
 \end_layout
 
 \begin_layout Standard
@@ -616,6 +617,16 @@ reference "sec:Anhang-1-1"
 \end_inset
 
 Damit lässt sich folgende Minimierungsaufgabe mit Nebenbedingung stellen:
+\end_layout
+
+\begin_layout Standard
+
+\size giant
+\color red
+KORREKTUR
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \begin{cases}
@@ -665,7 +676,14 @@ key "bronteijn2008taschenbuch"
 
 \end_inset
 
-Daraus lässt sich das folgende Gleichungssystem ableiten:
+Unter Berücksichtigung von Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzSchaetzfehlerGewichte"
+
+\end_inset
+
+ das folgende Gleichungssystem ableiten:
 \begin_inset Formula 
 \begin{align}
 \nabla_{w}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0\label{eq:MinimierungMitKovarianz-1-2}\\
