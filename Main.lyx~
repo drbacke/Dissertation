@@ -1063,7 +1063,7 @@ filename "Kapitel/COKriging.lyx"
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "library"
-options "plainnat"
+options "alpha"
 
 \end_inset
 

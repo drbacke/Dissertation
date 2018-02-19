@@ -91,6 +91,169 @@ appendix
 Anhang
 \end_layout
 
+\begin_layout Section
+Herleitung der Kriging-Gewichte
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Herleitung-der-Kriging-Gewichte"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Damit ergibt sich:
+\begin_inset Formula 
+\begin{align*}
+\nabla_{w}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{w}\left(\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right) & =\vec{0}\\
+\wedge\,\,\nabla_{\lambda}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{\lambda}\left(\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right) & =0
+\end{align*}
+
+\end_inset
+
+Aufgelöst:
+\begin_inset Formula 
+\begin{align*}
+-2\nabla_{w}\left(\overrightarrow{\textrm{c}}^{T}\vec{w}\right)+\nabla_{w}\left(\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{w}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{w}\lambda\beta_{k} & =\vec{0}\\
+\wedge\,\,-2\nabla_{\lambda}\left(\overrightarrow{\textrm{c}}^{T}\vec{w}\right)+\nabla_{\lambda}\left(\vec{w}^{T}*\mathbf{Cov}*\vec{w}\right)+\nabla_{\lambda}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{\lambda}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+Zwischenschritt:
+\begin_inset Formula 
+\begin{align*}
+-2\overrightarrow{\textrm{c}}+2\mathbf{Cov}*\vec{w}+\nabla_{w}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{w}\lambda\beta_{k} & =\vec{0}\\
+\wedge\,\,\nabla_{\lambda}\lambda\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\nabla_{\lambda}\lambda\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+Zwischenschritt:
+\begin_inset Formula 
+\begin{align*}
+-2\overrightarrow{\textrm{c}}+2\mathbf{Cov}*\vec{w}+\lambda\nabla_{w}\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j} & =\vec{0}\\
+\wedge\,\,\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k} & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zwischenschritt:
+\begin_inset Formula 
+\begin{align*}
+-2\overrightarrow{\textrm{c}}+2\mathbf{Cov}*\vec{w}+\lambda\vec{F} & =\vec{0}\\
+\wedge\,\,\vec{F}^{T}\vec{w} & =\beta_{k}
+\end{align*}
+
+\end_inset
+
+Umgeformt:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{Cov}*\vec{w}+\frac{\lambda\vec{F}}{2} & =\vec{c}\\
+\wedge\,\,\vec{F}^{T}\vec{w} & =\beta_{k}
+\end{align*}
+
+\end_inset
+
+In Matrix Schreibweise:
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)\left(\begin{array}{c}
+\vec{w}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{c}
+\vec{c}\\
+\beta_{k}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\Leftrightarrow\left(\begin{array}{c}
+\vec{w}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)^{-1}\left(\begin{array}{c}
+\vec{c}\\
+\beta_{k}
+\end{array}\right)\label{eq:MatrixKrigingInverse-1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Inverse der Blockmatrix ergibt sich nach 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BlockMatrix"
+
+\end_inset
+
+ zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{cc}
+\mathbf{Cov} & \vec{F}\\
+\vec{F}^{T} & 0
+\end{array}\right)^{-1} & =\left(\begin{array}{cc}
+\mathbf{Cov}^{-1}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\\
+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}F} & -\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eingesetzt in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MatrixKrigingInverse-1-1"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+\left(\begin{array}{c}
+\vec{w}\\
+\frac{\lambda}{2}
+\end{array}\right) & =\left(\begin{array}{cc}
+\mathbf{Cov}^{-1}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}} & \;\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}F} & -\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{array}\right)\left(\begin{array}{c}
+\vec{c}\\
+\beta_{k}
+\end{array}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Beispiel einer einfachen Dichtefunktion für ein CO-Kriging Model 
 \begin_inset CommandInset label
@@ -869,144 +1032,6 @@ Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
 \end_layout
 
 \begin_layout Section
-Zusammenhang Kovarianz und Fehler Varianz
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:AnhangZusammenhang-Kovarianz-undFehlerVarianz"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{var}\left[Z_{k}^{*}\left(\vec{x}\right)\right]=cov\left(Z_{k}^{*}\left(\vec{x}\right),Z_{k}^{*}\left(\vec{x}\right)\right)=\vec{w}^{T}\mathbf{Cov}\vec{w}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Fehlervarianz setzt sich wie folgt zusammen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}\mathbf{Cov}\vec{w}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Der letzte Term kann durch die Kovarianzformel 
-\begin_inset Formula $cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)$
-\end_inset
-
- ersetzt werden:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+cov\left(Z_{k}^{*}\left(\vec{x}\right),Z_{k}^{*}\left(\vec{x}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Formuliert man die Gewichte und Kovarianz vollständig aus:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\vec{c}^{T}\left(\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)\\
-+\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
-+\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}-\frac{\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}-2\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c}-2\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}\beta_{k}+\beta_{k}^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\textrm{var}\left[Z\left(\vec{x}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{k}^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Dieses Ergebnis entspricht der Formel für 
-\begin_inset Formula $\textrm{var}\left[F\left(\vec{x}\right)\right]$
-\end_inset
-
- vollständig und damit ist der Zusammenhang zwischen Kovarianz und Fehler
- Varianz hergestellt.
- 
-\end_layout
-
-\begin_layout Section
 Likelihood Schätzer Varianzen im CO-Kriging
 \end_layout
 
@@ -1414,11 +1439,19 @@ Der Vektor
 \begin_inset Formula $\vec{F}\in\mathbb{R^{\mathrm{n\times1}}}$
 \end_inset
 
- lässt sich auch umformulieren zu, wobei 
+ lässt sich folgendermaßen umformulieren, wobei die Definition der Matrix
+ 
 \begin_inset Formula $G\in\mathbb{R^{\mathrm{n\times m_{f}}}}$
 \end_inset
 
-:
+ in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DefinitionG"
+
+\end_inset
+
+ zu finden ist.
 \end_layout
 
 \begin_layout Standard

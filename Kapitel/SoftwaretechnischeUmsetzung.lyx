@@ -244,6 +244,962 @@ status open
 \end_layout
 
 \begin_layout Section
+Modellierung der Kovarianz- und Korrelationsfunktion 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianzmatrix"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Übergang von COV(Z,Z) zu Sigma*corr(x,x2) muss klarer werden
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Und auch die Unterschiede sder Modellierung Ordinary und Co-Kriging, vielleicht
+ doch als Klasse mit Attributen beschrieben
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Übergang vom Variogramm zum lokalen Korrelationsmodell ist nicht klar genug
+\end_layout
+
+\begin_layout Standard
+Um die für das Kriging-Verfahren benötigte Kovarianzmatrix aufstellen zu
+ können, muss ein geeignetes Kovarianzmodell gefunden werden.
+ Da die wahre Kovarianzfunktion nicht bekannt ist, behilft man sich mit
+ Modellfunktionen.
+ Diese Funktionen müssen für jedes mögliche Punktepaar eine Kovarianz zuordnen.
+ Weiterhin muss die daraus resultierende Matrix positiv Definit und symmetrisch
+ sein, was die Wahl einer geeigneten Funktion erschwert.
+ Daher wird im ersten Teil dieses Kapitels der Begriff des Variogramms eingeführ
+t, dieser Begriff soll es dem Leser ermöglichen die grundlegende Idee hinter
+ der Bildung eines Kovarianzmodells zu verstehen.
+ Im zweiten Teil dieses Abschnittes wird dann die konkrete Umsetzung zum
+ Aufstellen einer Kovarianzmatrix gezeigt und auch auf einige Probleme bei
+ der Umsetzung aufmerksam gemacht.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Da in einem realen CO-Kriging Modell ortsabhängige Stützstellen approximiert
+ werden sollen und die reale Kovarianzfunktion nicht bekannt ist, wird die
+ Kovarianzfunktion durch ortsabhängige Korrelationsfunktionen modelliert.
+ Diese Korrelationsfunktionen werden im Folgenden mit 
+\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)$
+\end_inset
+
+ bezeichnet, wobei 
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ;j,k\in\left\{ 1,...,n_{i}\right\} $
+\end_inset
+
+ die jeweilige Stützstelle an dem Ort 
+\begin_inset Formula $\vec{x}$
+\end_inset
+
+ darstellt.
+ Weiterhin sind diese Korrelationsfunktionen nicht von der
+\color inherit
+ der absoluten Lage im Raum abhängig, sondern nur noch von dem Abstand der
+ Punkte zueinander 
+\color magenta
+
+\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)=c\left(\left|\vec{x}_{j}-\vec{x}_{k}\right|\right)$
+\end_inset
+
+
+\color inherit
+.
+ Erst mit diesen Modellen ist es möglich eine Kovarianzmatrix aufzustellen
+ und damit ein gültiges Kriging-Modell zu generieren.
+ Um diesen Zusammmenhang zu erläutern, wird im ersten Kapitel der Begriff
+ des Variogramms erklärt.
+ Daraufhin wird ausgehend von diesem Variogramm die für das Kriging notwendige
+ Kovarianzfunktion hergeleitet.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Der Zusammenhang zwischen den Korrelationsfunktionen und den Kovarianzen
+ ist der Folgende 
+\begin_inset Formula $c_{d}\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma_{d}^{2}}cov\left(Z_{diff}\left(\vec{x}_{j}\right),Z_{diff}\left(\vec{x}_{k}\right)\right)$
+\end_inset
+
+ und analog 
+\begin_inset Formula $c_{l}\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma_{l}^{2}}cov\left(Z_{1}\left(\vec{x}_{j}\right),Z_{1}\left(\vec{x}_{k}\right)\right)$
+\end_inset
+
+.
+ Damit ist es möglich eine Kovarianzmatrix aufzustellen.
+ Das folgende Beispiel stellt eine Kovarianzmatrix für zwei verschiedene
+ Samples aus jeweils zwei Gütestufen dar:
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+\begin_inset Formula 
+\begin{equation}
+\mathbf{Cov}=\left[\begin{array}{c|cc}
+ & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
+\hline y_{0}\left(\vec{x}_{1}\right) & a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{1}\right)+\sigma_{d}^{2}c_{d}\left(\vec{x}_{1},\vec{x}_{1}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{2}\right)\\
+y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1}\right) & \sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{2}\right)
+\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Variogramm
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Variogramm"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt soll der Leser über die Formulierung des Variogramms
+ zu der für das Kriging benötigten Kovarianzfunktion Der Begriff 
+\begin_inset Quotes gld
+\end_inset
+
+Variogramm
+\begin_inset Quotes grd
+\end_inset
+
+ wurde zuerst in der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "matheron1963principles"
+
+\end_inset
+
+ erwähnt und beschreibt die Varianz der Differenz der Zufallsvariablen 
+\begin_inset Formula $Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)$
+\end_inset
+
+ an den Orten 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ des Zufallsfeldes 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+ Einfacher formuliert beschreibt das Variogramm die räumlichen Abhängigkeit
+ eines Punktes zu Nachbarpunkten.
+ Das Variogramm ist definiert als 
+\begin_inset Formula $2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ und das Semivariogramm 
+\begin_inset Formula $\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ bezeichnet und ist wie folgt beschrieben:
+\begin_inset Formula 
+\begin{align*}
+\gamma\left(\vec{x}_{1},\vec{x}_{2}\right) & =\frac{1}{2}var\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right)-E\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\right)^{2}\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)-\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+Trifft man die Annahme, dass das Zufallsfeld schwach stationär ist, dann
+ gilt (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ozkaya2014"
+
+\end_inset
+
+): 
+\begin_inset Formula 
+\begin{align*}
+E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k}}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+weiterhin gilt, dass die Kovarianz nur abhängig von der Verschiebung 
+\begin_inset Formula $\vec{h}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ ist:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}+\vec{h}\right)\right) & =cov\left(\vec{h}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mit dieser Annahme ist das Variogramm dann nur noch abhängig vom Abstand
+ der Punkte zueinander 
+\begin_inset Formula $\gamma\left(\vec{d}\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Subparagraph*
+Beweis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+2\gamma\left(0,0+\vec{h}\right) & =\frac{1}{2}var\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)-E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\right)^{2}\right]\\
+ & =\frac{1}{2}E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]+E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)+\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}\right]\\
+ & =E\left[Z\left(0+\vec{h}\right)^{2}-2Z\left(0+\vec{h}\right)Z\left(0\right)+Z\left(0\right)^{2}\right]\\
+ & =E\left[Z\left(0+\vec{h}\right)^{2}\right]-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+E\left[Z\left(0\right)^{2}\right]\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+2\mu^{2}+cov\left(Z\left(0\right),Z\left(0\right)\right)-2\mu^{2}\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+cov\left(Z\left(0\right),Z\left(0\right)\right)\\
+ & =cov\left(\vec{h}\right)-2cov\left(\vec{h}\right)+var\left(Z\left(0\right)\right)\\
+ & =var\left(Z\left(0\right)\right)-cov\left(\vec{h}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
+= & E\left[Z\left(0\right)^{2}-2E\left[Z\left(0\right)\right]Z\left(0\right)+E\left[Z\left(0\right)\right]^{2}\right]\\
+= & E\left[Z\left(0\right)^{2}-2\mu Z\left(0\right)+\mu^{2}\right]\\
+= & E\left[Z\left(0\right)^{2}\right]-2\mu^{2}+\mu^{2}\\
+cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}= & E\left[Z\left(0\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+analog gilt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}= & E\left[Z\left(0+\vec{h}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+und
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0+\vec{h}\right)-E\left[Z\left(0+\vec{h}\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
+= & E\left[\left(Z\left(0+\vec{h}\right)-\mu\right)\left(Z\left(0\right)-\mu\right)\right]\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)-Z\left(0+\vec{h}\right)\mu-\mu Z\left(0\right)+\mu^{2}\right]\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu E\left[Z\left(0+\vec{h}\right)\right]-\mu E\left[Z\left(0\right)\right]+\mu^{2}\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu^{2}\\
+cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+\mu^{2}= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dies lässt sich auch ausdrücken durch 
+\begin_inset Formula $\gamma\left(0,0+\vec{h}\right)$
+\end_inset
+
+, wobei 
+\begin_inset Formula $\vec{h}=\vec{x}_{2}-\vec{x}_{1}$
+\end_inset
+
+ die Differenz der Punkte darstellt.
+ Das Semivariogramm ist so also nicht mehr von der absoluten Lage im Raum
+ abhängig, sondern nur noch von dem Abstand der Punkte zueinander.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/KrigingKapitel/semiClean.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Einfaches Beispiel eines Semivariogramms mit Schwelle und Nugget.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:SemiVarioEinfach"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:SemiVarioEinfach"
+
+\end_inset
+
+ zeigt ein vereinfachtes Beispiel eines solchen Variogramms.
+ Auf der X-Achse ist die Distanz des betrachteten Punktes zu einem beliebigen
+ anderen Punkt aufgetragen und auf der Y-Achse ist die Semivarianz aufgetragen.
+ Ist die Semivarianz bei einer Nulldistanz größer als Null, so spricht man
+ von einem 
+\begin_inset Quotes gld
+\end_inset
+
+Nugget
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Dieser 
+\begin_inset Quotes gld
+\end_inset
+
+Nugget
+\begin_inset Quotes grd
+\end_inset
+
+ kann mit einem zufälligen Rauschen an dem betrachteten Ort verglichen werden.
+ Beispielsweise ein Rauschen bei einer mehrfach hintereinander durchgeführten
+ Messung.
+ Den eingezeichnete Schwellwert bezeichnet man auch als 
+\begin_inset Quotes gld
+\end_inset
+
+Sill
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Dieser Wert ist gleichzusetzen mit der Varianz des stochastischen Prozesses
+ selbst:
+\begin_inset Formula 
+\[
+\lim_{h\rightarrow\infty}\gamma\left(h\right)=var\left(Z\left(\vec{x}\right)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für ein Verfahren wie das Kriging, muss das Variogramm aus praktischen Gründen
+ angenähert werden.
+ Eine Möglichkeit besteht in der Erzeugung eines empirischen Variogramms
+ (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cressie1993"
+
+\end_inset
+
+), dieses Verfahren liefert für die Abstände bekannter Stützstellen den
+ entsprechenden räumlichen Zusammenhang.
+ Da allerdings eine vollständige Variogrammfunktion 
+\begin_inset Formula $\gamma\left(h\right)$
+\end_inset
+
+ benötigt wird, greift man typischerweise auf parametrisierte Modellfunktionen
+ zurück, welche an die vorhandenen Stützstellen bestmöglich angepasst werden.
+ Diese Funktionen müssen per Definition konditional bedingt negativ semidifinit
+ sein (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cressie1993,Krueger2013"
+
+\end_inset
+
+), da dieser Nachweis sehr schwierig ist, beschränkt man sich bekannte Modellfun
+ktionen für die der Nachweis schon erbracht worden ist.
+ Dazu zählt z.B.
+ das Gauß'sche Modell:
+\begin_inset Formula 
+\begin{equation}
+\gamma_{a,b}\left(h\right)=b\left(1-\exp\left(-3\left(\frac{h}{a}\right)^{2}\right)\right)\label{eq:VariogrammFunktionGauss}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispielhafte-Gaußsche-Semivari"
+
+\end_inset
+
+ zeigt die möglichen Formen einer solchen Modellfunktion bei unterschiedlicher
+ Parametrisierung.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/KrigingKapitel/semi.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispielhafte Gaußsche Semivariogrammfunktion mit verschiedenen Aussageweiten
+ a und Grenzwerten b.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispielhafte-Gaußsche-Semivari"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Kovarianzmodellierung 
+\end_layout
+
+\begin_layout Standard
+Übergang von Variogramm zur Kovarianzmodellierung!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!
+\end_layout
+
+\begin_layout Standard
+
+\color red
+Ebenfalls gibt es so nur noch eine stationäre Varianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ und somit auch nur noch eine ortsabhängige Korrelationsfunktion 
+\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma^{2}}cov\left(Z\left(\vec{x}_{j}\right),Z\left(\vec{x}_{k}\right)\right)$
+\end_inset
+
+.
+ Die benötigte Kovarianzmatrix vereinfacht sich somit zu:
+\end_layout
+
+\begin_layout Standard
+
+\color red
+\begin_inset Formula 
+\begin{equation}
+\mathbf{Cov}=\left[\begin{array}{c|cc}
+ & y\left(\vec{x}_{1}\right) & y\left(\vec{x}_{2}\right)\\
+\hline y\left(\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{1},\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{1},\vec{x}_{2}\right)\\
+y\left(\vec{x}_{2}\right) & \sigma^{2}c\left(\vec{x}_{2},\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{2},\vec{x}_{2}\right)
+\end{array}\right]\label{eq:KovarianzMatrixOrdinaryKriging}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um die Kovarianzmatrix aufzustellen, ist es nötig, einen Korrelationswert
+ zwischen allen bekannten Stützstellen und im Falle des Gradient-Enhanced-Krigin
+g, auch den partiellen Ableitungen zu berechnen.
+ Die benötigte Korrelationsfunktion, um die räumlichen Abstände zu beschreiben,
+ wird durch die entsprechende Umformung der Variogrammfunktion (siehe Gleichung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VariogrammFunktionGauss"
+
+\end_inset
+
+) ersetzt (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Isaaks1990"
+
+\end_inset
+
+).
+ Die Gleichung sieht dann wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)\right)\coloneqq c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|x_{1,l}-x_{2,l}\right|^{2}\right)},c\in\left[0,1\right]\label{eq:GaussCorrelationFunction-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Die Vektoren 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ stellen die Ortsvektoren der Stützstellen dar.
+ Der Vektor 
+\begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ legt fest, wie stark die Korrelation mit steigendem Abstand der Stützstellen
+ zueinander abfällt, wobei ein hoher Wert einen stärkeren Abfall bewirkt.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispiel-einer-Gauss-1"
+
+\end_inset
+
+ ist eine beispielhafte Korrelationsfunktion mit zwei verschiedenen 
+\begin_inset Formula $\theta$
+\end_inset
+
+ Werten zu sehen.
+ Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
+ zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
+swert.
+ Die rote durchgezogene Kurve zeigt die Korrelationsfunktion mit 
+\begin_inset Formula $\theta=0.01$
+\end_inset
+
+ und die grüne gestrichelte Kurve 
+\begin_inset Formula $\theta=0.1$
+\end_inset
+
+.
+ Nimmt man eine Differenz der beiden Stützstellen von 
+\begin_inset Formula $\Delta x=-5$
+\end_inset
+
+ an, dann ergeben sich für einen Hyperparameter von 
+\begin_inset Formula $\theta=0.01$
+\end_inset
+
+ ein Korrelationswert von 0.53 und für 
+\begin_inset Formula $\theta=0.1$
+\end_inset
+
+ ein Korrelationswert von 0.08.
+ In dem einen Fall wird also eine stärkere Abhängigkeit der beiden Stützstellen
+ angenommen und im anderen Fall eine schwächere Abhängigkeit.
+ Die Bestimmung des 
+\begin_inset Formula $\vec{\theta}$
+\end_inset
+
+ Vektors ist die Aufgabe des Trainingsverfahrens.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/CorrelatoinFunction.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-einer-Gauss-1"
+
+\end_inset
+
+Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
+ zwei unterschiedlichen 
+\begin_inset Formula $\theta$
+\end_inset
+
+ Einstellungen und deren Einfluss auf den Korrelationswert 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da allerdings die Kovarianz und nicht die Korrelation benötigt wird, muss
+ die Gleichung noch erweitert werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+cov\left(\vec{x}_{1},\vec{x}_{2}\right) & =\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)}+\lambda\delta\label{eq:GaussCovFunction-1-1}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\delta=\begin{cases}
+1 & falls\,\vec{x}_{1}=\vec{x}_{2}\\
+0 & falls\,\vec{x}_{1}\neq\vec{x}_{2}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Varianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ des stationären Kriging Prozesses wird an die Korrelation multipliziert
+ und weiterhin noch ein Rauschterm in Form einer zusätzlichen Varianzerhöhung
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ hinzugefügt.
+ Diese Varianzerhöhung entspricht dem Nugget aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Variogramm"
+
+\end_inset
+
+.
+ Damit ist die Kovarianzfunktion für das Ordinary-Kriging vollständig.
+ Die Verwendung des Rauschterms 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RegularisierungUndRauschen"
+
+\end_inset
+
+ erklärt.
+ Die Variablen 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+,
+\begin_inset Formula $\theta$
+\end_inset
+
+,
+\begin_inset Formula $\lambda$
+\end_inset
+
+ werden auch Hyperparameter genannt und müssen durch das Training bestimmt
+ werden.
+ Das Traingingsverfahren wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+ behandelt und die effiziente softwaretechnische Verwendung dieser Kovarianzmode
+lle wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:SoftwaretechnKorrelationsfunktionen"
+
+\end_inset
+
+ beschrieben.
+\end_layout
+
+\begin_layout Paragraph*
+Hyperparameter Wertebereich
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Negative-Hyperparameter-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Während des Trainingsverfahrens kann es dazu kommen, dass die Hyperparameter
+ negative Werte annehmen können.
+ Bei der Gauss Korrelationsfunktion würde dies dazu führen, dass die Korrelation
+en auch Werte größer Eins erhalten können.
+ Die liegt außerhalb des gültigen Wertebereichs und führt bei der Invertierung
+ der Kovarianzmatrix zu numerischen Problemen.
+ Daher sind negative Hyperparameter zwingend zu vermeiden.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine einfache Möglichkeit dies zu tun, wäre eine feste Begrenzung der Hyperparam
+eter.
+ Da die Hyperparameter während des Trainings durch gradientenbasierte Optimierun
+gsverfahren eingestellt werden, kann eine 
+\begin_inset Quotes gld
+\end_inset
+
+harte Grenze
+\begin_inset Quotes grd
+\end_inset
+
+ zum Stillstand eines solchen Verfahrens führen und damit zu schlechten
+ Resultaten.
+ Für ein solches Verfahren ist es also wünschenswert, dass der gesamte Bereich
+ der reellen Zahlen nutzbar ist.
+ Eine simple Möglichkeit dies zu erreichen ist z.B.
+ die Quadratur der Hyperparameter, dadurch sind keine negativen Werte mehr
+ möglich:
+\begin_inset Formula 
+\begin{align*}
+c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(\theta_{l}^{2}\left|x_{1l}-x_{2l}\right|^{2}\right)}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Formulierung kann zu einem Stillstand des Trainings führen, da innerhalb
+ des Trainings die Ableitung der Korrelationsfunktion nach den Hyperparametern
+ eine wesentliche Rolle spielt:
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial c}{\partial\theta_{l}} & =c\left(\vec{x}_{1},\vec{x}_{2}\right)\left(-\theta_{l}\left|x_{1l}-x_{2l}\right|^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Problem bei dieser Formulierung ist, dass wenn ein Hyperparameter während
+ der Optimierung gegen Null geht, auch die entsprechende partielle Ableitung
+ gegen Null läuft.
+ Bei einem gradientenbasierten Minimierungsverfahrens kann es also passieren,
+ dass die partiellen Ableitungen der Hyperparameter sehr kleine Werte annehmen
+ und die Minimierung dadurch keine Fortschritte mehr macht.
+ Um dieses Problem zu vermeiden, wurde die Exponentialfunktion verwendet:
+\begin_inset Formula 
+\begin{align*}
+c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)}\\
+\frac{\partial c}{\partial\theta_{l}} & =c\left(\vec{x}_{1},\vec{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Formulierung der Gauss-Korrelationsfunktion hat sich bisher als sehr
+ vorteilhaft herausgestellt, da der gesamte Raum der reellen Zahlen verwendet
+ werden kann.
+ Zudem ist die Funktion stetig, differenzierbar und zeigt auch kein unerwünschte
+s Verhalten bei sehr kleinen Hyperparametern.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Kovarianzfunktion CO-Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Kovarianzfunktion für das CO-Kriging wird aus mehreren Korrelationsfunktione
+n zusammengesetzt und daher werden keine neuen Modelle benötigt, es werden
+ allerdings deutlich mehr Hyperparameter verwendet.
+ Für zwei beliebige Punkte 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ mit den zwei möglichen Gütestufen 
+\begin_inset Formula $\left\{ high,low\right\} $
+\end_inset
+
+ setzen sich die Kovarianzfunktionen aus jeweils zwei Korrelationsfunktionen
+ 
+\begin_inset Formula $c_{low}\left(\vec{x}_{1},\vec{x}_{2}\right),c_{diff}\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ zusammen.
+ Wobei die Korrelationsfunktionen jeweils einen eigenen Hyperparametersatz
+ 
+\begin_inset Formula $\vec{\theta}_{low},\vec{\theta}_{diff}$
+\end_inset
+
+ haben und dafür dieselben Modellfunktionen wie bspw.
+ in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GaussCorrelationFunction-1"
+
+\end_inset
+
+ verwendet werden können.
+ Die Zusammensetzung der Kovarianzfunktionen erfolgt hierbei nach den Gleichunge
+n 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzFunktionenalleDrei"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+cov\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)= & a^{2}\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)\label{eq:KovarianzKorrelationsModell}\\
+\mathrm{cov\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)}= & a\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)\\
+cov\left(\vec{x}_{1,low},\vec{x}_{2,low}\right)= & \sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mit diesen Zusammenhängen lässt sich mit einer geeigneten Modellfunktion
+ wie z.B.
+ dem Gauss'schen Korrelationsmodell (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GaussCorrelationFunction-1"
+
+\end_inset
+
+) eine vollständige Kovarianzmatrix aufstellen.
+ Allerdings steigt die Anzahl der Hyperparameter und damit auch der Trainingsauf
+wand deutlich.
+ 
+\end_layout
+
+\begin_layout Section
 Softwaredesign
 \end_layout
 
@@ -716,7 +1672,7 @@ reference "fig:UMLMatrix"
 \end_layout
 
 \begin_layout Subsection
-Korrelationsfunktionen
+Effiziente Berechnung der Korrelationsfunktion
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:SoftwaretechnKorrelationsfunktionen"
@@ -724,6 +1680,27 @@ name "sec:SoftwaretechnKorrelationsfunktionen"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Enumerate
+Korrelationsfunktion wird extrem oft aufgereufen, jeder gesparte Befehl
+ wirkt sich stark aus
+\end_layout
+
+\begin_layout Enumerate
+Thetas im Vorraus berechnen
+\end_layout
+
+\begin_layout Enumerate
+Corr Buffer verwenden, um Ableitungen schneller berechnen zu können
+\end_layout
+
+\begin_layout Enumerate
+Exponentialfunktion durch schnellere ersetzen
+\end_layout
+
+\begin_layout Enumerate
+SSE verwenden
 \end_layout
 
 \begin_layout Standard
