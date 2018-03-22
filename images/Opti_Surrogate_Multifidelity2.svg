@@ -14,7 +14,7 @@
    height="1052.3622047"
    id="svg3026"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="Opti_Surrogate_Multifidelity2.svg">
   <defs
      id="defs3028">
@@ -622,15 +622,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="199.47478"
+     inkscape:cx="200.90335"
      inkscape:cy="427.94762"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1005"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-width="2560"
+     inkscape:window-height="1364"
+     inkscape:window-x="2558"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1"
      showborder="false"
      inkscape:showpageshadow="false" />
@@ -685,27 +685,26 @@
     <text
        xml:space="preserve"
        style="font-size:29.73986053px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="268.74982"
-       y="715.17871"
+       x="266.7901"
+       y="713.13763"
        id="text7247"
        sodipodi:linespacing="125%"
        transform="scale(1.0205519,0.97986197)"><tspan
          sodipodi:role="line"
          id="tspan7249"
-         x="268.74982"
-         y="715.17871"
-         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">Gütebestimmung</tspan><tspan
+         x="269.1571"
+         y="713.13763"
+         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">Bewertung </tspan><tspan
          sodipodi:role="line"
-         x="268.74982"
-         y="733.76611"
+         x="269.1571"
+         y="731.72504"
+         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+         id="tspan3399">Member </tspan><tspan
+         sodipodi:role="line"
+         x="266.7901"
+         y="750.31244"
          id="tspan7251"
          style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans" /></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.48699307;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart);marker-mid:none;marker-end:none"
-       d="m 268.94573,707.43151 0,10.20952"
-       id="path6598-0-8-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:29.73986053000000140px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;text-anchor:middle;fill:#cb0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"

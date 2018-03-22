@@ -629,7 +629,7 @@
      showgrid="false"
      inkscape:window-width="2560"
      inkscape:window-height="1364"
-     inkscape:window-x="1022"
+     inkscape:window-x="2558"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
      showborder="false"
@@ -642,7 +642,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -694,18 +694,17 @@
          id="tspan7249"
          x="268.74982"
          y="704.97333"
-         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">Gütebestimmung</tspan><tspan
+         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans">Member</tspan><tspan
          sodipodi:role="line"
          x="268.74982"
          y="723.56073"
+         style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+         id="tspan3820">Bewertung</tspan><tspan
+         sodipodi:role="line"
+         x="268.74982"
+         y="742.14813"
          id="tspan7251"
          style="font-size:14.86993027px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans" /></text>
-    <path
-       style="fill:none;stroke:#000000;stroke-width:1.48699307;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow1Mstart);marker-mid:none;marker-end:none"
-       d="m 268.94573,703.43151 0,10.20952"
-       id="path6598-0-8-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:29.73986053px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
