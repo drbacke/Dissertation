@@ -92,6 +92,104 @@ Anhang
 \end_layout
 
 \begin_layout Section
+Differentiation der Likelihood-Funktion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Differentiation-der-Likelihood-Funktion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Da im Co-Kriging die Prozessvarianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ nicht mehr durch einen Maximum Likelihood Schätzer bestimmt werden kann,
+ muss dies in der Ableitung der Likelihoodfunktion berücksichtigt werden.
+ Also geht man davon aus, dass die Kovarianzmatrix von einem beliebigen
+ Hyperparameter 
+\begin_inset Formula $h$
+\end_inset
+
+ abhängt, so kann man die Ableitung wie folgt bilden:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\frac{\partial}{\partial h_{l}}\left(\log\left(\det(\mathbf{\mathbf{Cov}})\right)\right)-\frac{\partial}{\partial h_{l}}\left(\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\frac{1}{\det(\mathbf{\mathbf{Cov}})}\frac{\partial}{\partial h_{l}}\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{\partial}{\partial h_{l}}\left(\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es gilt Allgemein: 
+\begin_inset Formula $\frac{\partial\det(\mathbf{\mathbf{\mathbf{Cov}}})}{\partial h_{l}}=\det(\mathbf{\mathbf{\mathbf{Cov}}})\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)$
+\end_inset
+
+ 
+\begin_inset space ~
+\end_inset
+
+und
+\begin_inset space ~
+\end_inset
+
+ 
+\begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}^{-1}}{\partial h_{l}}=-\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Daraus folgt:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\frac{\det(\mathbf{\mathbf{\mathbf{Cov}}})}{\det(\mathbf{\mathbf{Cov}})}\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Herleitung der Kriging-Gewichte
 \begin_inset CommandInset label
 LatexCommand label
