@@ -1478,7 +1478,12 @@ reference "subsec:COKrigingKovarianzmodell"
 \begin_inset Formula $cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}^{'}\right)\right)$
 \end_inset
 
- für das gesamte Modell benötigt.
+ für das gesamte Modell benötigt und der Skalierungsfaktor wird für diesen
+ Fall konstant auf Eins gesetzt: 
+\begin_inset Formula $a=1$
+\end_inset
+
+.
  
 \end_layout
 

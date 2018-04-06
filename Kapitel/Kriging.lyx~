@@ -1079,7 +1079,7 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Umsetzung der Kriging-Unterverfahren 
 \begin_inset CommandInset label
 LatexCommand label
@@ -1478,7 +1478,12 @@ reference "subsec:COKrigingKovarianzmodell"
 \begin_inset Formula $cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}^{'}\right)\right)$
 \end_inset
 
- für das gesamte Modell benötigt.
+ für das gesamte Modell benötigt und der Skalierungsfaktor wird für diesen
+ Fall konstant auf Eins gesetzt 
+\begin_inset Formula $a=1$
+\end_inset
+
+.
  
 \end_layout
 
@@ -1719,7 +1724,7 @@ m\,Eintr\ddot{a}ge\\
 
 \begin_layout Standard
 Die effiziente Verwendung dieses Verfahrens innerhalb von Turbmaschinenoptimieru
-ngen stellt ein aktuelles Forschungsthema.
+ngen stellt ein aktuelles Forschungsthema dar.
  Grundlegend kann für diese Verfahren gesagt werden, dass eine effiziente
  Erzeugung der partiellen Ableitungen notwendig ist, um diese gewinnbringend
  einsetzen zu können.
