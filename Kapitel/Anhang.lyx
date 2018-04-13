@@ -92,6 +92,122 @@ Anhang
 \end_layout
 
 \begin_layout Section
+Beweis: Variogramm Abhängigkeit von Distanz
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Beweis:-Variogramm-Abhängigkeit"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Beweis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+2\gamma\left(0,0+\vec{h}\right) & =\frac{1}{2}var\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)-E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\right)^{2}\right]\\
+ & =\frac{1}{2}E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]+E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)+\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
+ & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}\right]\\
+ & =E\left[Z\left(0+\vec{h}\right)^{2}-2Z\left(0+\vec{h}\right)Z\left(0\right)+Z\left(0\right)^{2}\right]\\
+ & =E\left[Z\left(0+\vec{h}\right)^{2}\right]-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+E\left[Z\left(0\right)^{2}\right]\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+2\mu^{2}+cov\left(Z\left(0\right),Z\left(0\right)\right)-2\mu^{2}\\
+ & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+cov\left(Z\left(0\right),Z\left(0\right)\right)\\
+ & =cov\left(\vec{h}\right)-2cov\left(\vec{h}\right)+cov\left(Z\left(0\right),Z\left(0\right)\right)\\
+ & =cov\left(Z\left(0\right),Z\left(0\right)\right)-cov\left(\vec{h}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
+= & E\left[Z\left(0\right)^{2}-2E\left[Z\left(0\right)\right]Z\left(0\right)+E\left[Z\left(0\right)\right]^{2}\right]\\
+= & E\left[Z\left(0\right)^{2}-2\mu Z\left(0\right)+\mu^{2}\right]\\
+= & E\left[Z\left(0\right)^{2}\right]-2\mu^{2}+\mu^{2}\\
+cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}= & E\left[Z\left(0\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+analog gilt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}= & E\left[Z\left(0+\vec{h}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+und
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0+\vec{h}\right)-E\left[Z\left(0+\vec{h}\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
+= & E\left[\left(Z\left(0+\vec{h}\right)-\mu\right)\left(Z\left(0\right)-\mu\right)\right]\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)-Z\left(0+\vec{h}\right)\mu-\mu Z\left(0\right)+\mu^{2}\right]\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu E\left[Z\left(0+\vec{h}\right)\right]-\mu E\left[Z\left(0\right)\right]+\mu^{2}\\
+= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu^{2}\\
+cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+\mu^{2}= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dies lässt sich auch ausdrücken durch 
+\begin_inset Formula $\gamma\left(0,0+\vec{h}\right)$
+\end_inset
+
+, wobei 
+\begin_inset Formula $\vec{h}=\vec{x}_{2}-\vec{x}_{1}$
+\end_inset
+
+ die Differenz der Punkte darstellt.
+ Das Semivariogramm ist so also nicht mehr von der absoluten Lage im Raum
+ abhängig, sondern nur noch von dem Abstand der Punkte zueinander.
+ 
+\end_layout
+
+\begin_layout Section
+Analytische CO-Kriging Beispiele
+\end_layout
+
+\begin_layout Standard
+Was passiert, wenn Low und High nichts miteinander zu tun haben, oder wenn
+ Low und High identisch sind
+\end_layout
+
+\begin_layout Standard
+Vielleicht
+\end_layout
+
+\begin_layout Section
 Differentiation der Likelihood-Funktion
 \begin_inset CommandInset label
 LatexCommand label

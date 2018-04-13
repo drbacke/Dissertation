@@ -745,7 +745,7 @@ Verlustpolaren für zwei verschiedene Vorderkantenradien
 \end_layout
 
 \begin_layout Subsection
-Verschiedene Simulationsverfahren
+Beispiel für verschiedene Simulationsverfahren
 \end_layout
 
 \begin_layout Standard
@@ -972,10 +972,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/Opti_Surrogate_Multifidelity2.pdf
-	scale 70
-	BoundingBox 0bp 150bp 595bp 550bp
-	clip
+	filename ../images/Opti_Surrogate_Multifidelity2.eps
 
 \end_inset
 
@@ -1103,46 +1100,39 @@ tschritt nehmen, indem sie das Ersatzmodell verbessern und den weiteren
 \end_layout
 
 \begin_layout Paragraph*
+Optimierung auf den Ersatzmodellen
+\end_layout
+
+\begin_layout Standard
+Wie auch bei einer Optimierung mit nur einer Gütestufe, wird nach erfolgreichem
+ Training eine eigene Optimierung auf den Ersatzmodellen gestartet.
+ An diesem Punkt ändert sich prinzipiell nichts, das Ersatzmodell bildet
+ nur die höchste Gütestufe ab.
+ Diese Strategie bietet außerdem den Vorteil, dass an der Optimierung auf
+ dem Ersatzmodell praktisch keine Änderungen vorgenommen werden müssen und
+ dennoch die Informationen der niedrigeren Gütestufen mit einfließen.
+\end_layout
+
+\begin_layout Paragraph*
 Entscheidungsfunktion
 \end_layout
 
 \begin_layout Standard
-Wurde nach der Optimierung auf dem Ersatzmodell ein vielversprechender Member
- erzeugt und soll nun mittels Prozesskette bewertet werden, so stellt sich
- die Frage, mit welcher Gütestufe der Member berechnet werden soll.
- Die Entscheidung sollte so ausfallen, dass der weitere Optimierungsfortschritt
- günstig beeinflusst wird.
- Dieses Themengebiet ist allerdings recht umfangreich und soll daher im
- folgenden Abschnitt 
+Bevor ein neuer Member mittels Prozesskette bewertet wird, muss entschieden
+ werden mit welcher Gütestufe der Member berechnet werden soll.
+ Dies wird durch die Entscheidungsfunktion festgelegt und hat eine fundamentale
+ Bedeutung für Optimierungsbeschleunigung und die effektive Nutzung der
+ neuen Ersatzmodelle.
+ Aus der Literatur lassen sich nur wenige Anhaltspunkte für diese Wahl entnehmen.
+ Der Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Entscheidungsfunktion"
 
 \end_inset
 
- näher erläutert werden.
+ widmet sich ausführlich mit diesem Themengebiet.
  
-\end_layout
-
-\begin_layout Paragraph*
-Änderungen an der Optimierung auf den Ersatzmodellen
-\end_layout
-
-\begin_layout Standard
-Wie auch bei einer Optimierung mit nur einer Gütestufe, wird nach erfolgreichem
- Training eine eigene Optimierung auf den Ersatzmodellen gestartet, wobei
- die Ersatzmodelle den Teil der echten Prozesskette durch Vorhersagen ersetzen.
- An diesem Punkt ändert sich prinzipiell nichts.
- Allerdings stellt sich dabei natürlich die Frage, wie die verschiedenen
- Gütestufen in die Optimierung auf dem Ersatzmodell integriert werden können.
- Im Normalfall soll nur die Zielfunktion der höchsten Güte optimiert werden
- und die Daten niedrigerer Güte dienen lediglich zur Beschleunigung.
- Durch das verwendete Ersatzmodell lässt sich eine solche Strategie relativ
- einfach umsetzen: Die Optimierung auf dem Ersatzmodell trifft nur Vorhersagen
- der höchsten Gütestufe, welche aber verbessert werden durch die bereits
- vorhandenen Daten der niedrigeren Stufen.
- Diese Strategie bietet außerdem den Vorteil, dass an der Optimierung auf
- dem Ersatzmodell praktisch keine Änderungen vorgenommen werden müssen.
 \end_layout
 
 \begin_layout Subsection
@@ -1157,7 +1147,7 @@ name "subsec:Entscheidungsfunktion"
 \end_layout
 
 \begin_layout Standard
-Ein großes Problem bei der Durchführung einer Multi-Fidelity-Optimierung
+Ein entscheidender Punkt bei der Durchführung einer Multi-Fidelity-Optimierung
  besteht darin zu entscheiden, mit welcher Prozesskette und damit Gütestufe
  ein neu erzeugter Member berechnet werden soll.
  Folgend sollen zwei beispielhafte Gütestufen betrachtet werden.
@@ -1171,8 +1161,8 @@ Ein großes Problem bei der Durchführung einer Multi-Fidelity-Optimierung
 \end_inset
 
  bezeichnet wird.
- Grundlegend wird davon ausgegangen, dass alle Gütestufen aus einem Simulationsp
-rozess stammen und somit die Realität nicht fehlerfrei wiedergeben.
+ Da alle Gütestufen aus einem Simulationsprozess stammen, geben sie die
+ Realität nicht fehlerfrei wieder.
  Jeder dieser Prozesse hat also einen mittleren Fehler 
 \begin_inset Formula $F$
 \end_inset
@@ -1190,11 +1180,12 @@ gt werden.
 \end_inset
 
  als eine höhere Gütestufe benötigen.
- Auf der anderen Seite aber einen größeren mittleren Fehler 
+ Auf der anderen Seite kann angenommen werden, dass für die mittleren Fehler
+ gilt 
 \begin_inset Formula $F_{low}\geq F_{high}$
 \end_inset
 
- haben als ein Member mit höherer Gütestufe.
+.
  
 \end_layout
 
@@ -1206,9 +1197,8 @@ Während einer laufenden Multifidelity-Optimierung muss also permanent eine
 \begin_inset Formula $f$
 \end_inset
 
- die diese Entscheidung während einer laufenden Optimierung vornimmt.
- Zudem ist natürlich eine Entscheidungsfunktion wünschenswert, die den Optimieru
-ngsverlauf möglichst günstig beeinflusst.
+ die diese Entscheidung während einer laufenden Optimierung vornimmt und
+ den Optimierungsverlauf möglichst günstig beeinflusst.
  Eine Entscheidungsfunktion zu finden, die einen optimalen Verlauf findet
  ist allerdings unrealistisch, da hierfür jeder mögliche Verlauf der gesamten
  Optimierung bekannt sein müsste.
@@ -1225,7 +1215,7 @@ reference "fig:Mglichkeiten-der-Membererzeugun"
 
 \end_inset
 
- sind einige Möglichkeiten der Membererzeugung kategorisiert und sollen
+ sind einige Möglichkeiten der Entscheidungsfindung kategorisiert und sollen
  folgend beschrieben werden.
 \end_layout
 
@@ -1265,32 +1255,20 @@ Möglichkeiten der Membererzeugung mit mehreren Fidelities
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsubsection*
 Benutzergesteuerte Entscheidungsfunktionen
 \end_layout
 
 \begin_layout Standard
-Die einfachste Variante wäre es, den Informationszugewinn nicht zu modellieren.
- In diesem Fall würde man die Auswahl der Fidelity bei der Membererzeugung
- in irgendeiner Form vorgeben, ohne die benötigte Zeit oder den Informationszuge
-winn zu berücksichtigen.
- Sinnvoll wäre hier z.B.
- am Anfang relativ viele Low-Fidelity Member zu erzeugen, um den groben
- Funktionsverlauf darzustellen und dann gegen Ende der Optimierung nur noch
- High-Fidelity Member zu erzeugen.
- 
-\end_layout
-
-\begin_layout Standard
-Eine weitere und auch häufig verwendete Methode ist es, vor dem Beginn der
- eigentlichen Optimierung einen festen Datensatz an Low-Fidelity Membern
- zu erzeugen und diese dem Ersatzmodelltraining hinzuzufügen.
+Eine häufig verwendete Methode ist es, vor dem Beginn der eigentlichen Optimieru
+ng einen festen Datensatz an Low-Fidelity Membern zu erzeugen und diese
+ dem Ersatzmodelltraining hinzuzufügen.
  Während der Optimierung wird dann nur noch die High-Fidelity Prozesskette
  verwendet.
- Durch die anfangs hinzugefügten Low-Fidelity Member sollte sich das Ersatzmodel
-l verbessern und dies wiederum die eigentliche Optimierung beschleunigen.
- Diese Methode ist sehr einfach umzusetzen, sollte aber nur am Anfang der
- Optimierung einen Zugewinn bringen.
+ Durch die anfangs hinzugefügten Low-Fidelity Member kann das Ersatzmodell
+ verbessert werden und dies wiederum die eigentliche Optimierung beschleunigen.
+ Diese Methode ist sehr einfach umzusetzen, wird aber nur am Anfang der
+ Optimierung einen signifikanten Zugewinn bringen.
  Zudem muss die Beschleunigung der Optimierung größer sein als die anfangs
  investierte Arbeit für die Erzeugung der Low-Fidelity Member.
  In einem sehr ungünstigen Fall kann diese Methodik also sogar zu einer
@@ -1298,29 +1276,60 @@ l verbessern und dies wiederum die eigentliche Optimierung beschleunigen.
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+Die einfachste Variante einer Entscheidungsfunktion ist die feste Vorgabe
+ der Reihenfolge der zu verwendenden Prozesskette.
+ Hier wird der Verlauf der Optimierung bzw.
+ die vorhandenen Informationen über die Güte des Ersatzmodells nicht berücksicht
+igt.
+ Sinnvoll erscheint hier am Anfang einer Optimierung relativ viele Low-Fidelity
+ Member zu erzeugen, um den groben Funktionsverlauf darzustellen und dann
+ gegen Ende nur noch High-Fidelity Member zu erzeugen.
+ Hierbei ist es zu berücksichtigen, dass auch am Anfang einer Optimierung
+ eine minimale Anzahl von High- und Low-Fidelity Member erforderlich ist,
+ um ein initiales Ersatzmodell zu trainieren.
+ Weiterhin bietet AutoOpti die Möglichkeit diese Vorgaben während der Laufzeit
+ zu verändern, sodass ein erfahrener Anwender jederzeit diese Funktion nachjusti
+eren kann.
+ Die praktische Umsetzung erfolgt dann über die Vorgabe der gewünschten
+ Wahrscheinlichkeit einen Member niedriger Güte zu erzeugen in Abhängigkeit
+ des Optimierungsfortschritts (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Entscheidungsfunktion"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Subsubsection*
 Ersatzmodellgesteuerte Entscheidungsfunktionen
 \end_layout
 
 \begin_layout Standard
-In diesem Abschnitt sollen einige mögliche ersatzmodellbasierte Entscheidungsfun
-ktionen vorgestellt werden.
- Der Fokus liegt allerdings bei den Entscheidungsfunktionen, welche nach
- der Optimierung auf dem Ersatzmodell durchgeführt werden.
- Dennoch soll kurz auf die Möglichkeit der Entscheidung während der Optimierung
- auf dem Ersatzmodell eingegangen werden.
+In diesem Abschnitt werden Entscheidungsfunktionen vorgestellt, die die
+ Möglichkeit bieten die vorhandenen Informationen über Ersatzmodelle einfließen
+ zu lassen.
+ Der Fokus liegt bei den Entscheidungsfunktionen, welche nach der Optimierung
+ auf dem Ersatzmodell durchgeführt werden.
+ Nur kurz wird auf die Möglichkeit der Entscheidung während der Optimierung
+ auf dem Ersatzmodell eingegangen.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Während der Optimierung auf dem Ersatzmodell
 \end_layout
 
 \begin_layout Standard
-Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Ort
+Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
+ freier Parameter 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
+\end_inset
+
  für einen vielversprechenden Member vor.
- Dieser Ort wird über die Ersatzmodellvorhersagen der Zielfunktionen und
- Nebenbedingungen bestimmt.
- Innerhalb von AutoOpti ist die Maximierung des 
+ Innerhalb von AutoOpti erfolgt das durch die Maximierung des 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1328,10 +1337,10 @@ Expected Volume Gain
 \begin_inset Quotes grd
 \end_inset
 
- das Mittel der Wahl.
- Es ist in diesem Zusammenhang denkbar diese Optimierung zusätzlich von
- den vorhandenen Gütestufen abhängig zu machen, indem versucht wird neben
- der Maximierung des 
+.
+ Es ist in diesem Zusammenhang denkbar die Optimierung auf dem Ersatzmodell
+ zusätzlich von den vorhandenen Gütestufen abhängig zu machen, indem versucht
+ wird neben der Maximierung des 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1343,8 +1352,8 @@ Expected Volume Gain
  Dieser Fall würde dann einer Mehrzieloptimierung entsprechen und ließe
  letztlich immer noch die Frage offen, welcher Member dieser so erzeugten
  Paretofront verwendet werden soll.
- Zudem wäre der numerische Aufwand mit jetziger Prozessorleistung nur schwer
- handhabbar.
+ Bei dieser Vorgehensweise würde der Rechenaufwand um Größenordnungen steigen.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1385,34 +1394,28 @@ Expected Volume Gain
  kann allerdings nur schwer abgeschätzt werden.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Nach der Optimierung auf dem Ersatzmodell
 \end_layout
 
 \begin_layout Standard
-Für diese Art der Entscheidungsfunktion wird von der Optimierung auf dem
- Ersatzmodell ein fester Ort 
+Von der Optimierung auf dem Ersatzmodell wird ein fester Ort 
 \begin_inset Formula $\vec{x}\in\mathbb{R}^{k}\,wobei\,EVG\left(\vec{x}\right)\geq EVG\left(\vec{y}\right)\forall\vec{y}\in\mathbb{R}^{k}$
 \end_inset
 
- 
-\begin_inset space ~
-\end_inset
-
-übergeben und dann entschieden welche Prozesskette ausgeführt wird.
+ übergeben und nachfolgend entschieden, welche Prozesskette ausgeführt wird.
  
 \end_layout
 
 \begin_layout Standard
-Wie bereits beschrieben, ist ein Maß für den Zugewinn an Information durch
- ein Sample notwendig.
- Daher wird eine abstrakte Größe 
+Hierfür ist ein Maß für den Zugewinn an Information durch ein Sample notwendig.
+ Daher wird eine Größe 
 \begin_inset Formula $I\in\left\{ I_{low},I_{high}\right\} $
 \end_inset
 
  definiert, welche diesen Informationszugewinn durch einen Member beschreibt.
- Der Informationszugewinn der niedrigeren Gütestufe soll kleiner oder gleich
- dem Informationszugewinn der höheren Stufe sein 
+ Der Informationszugewinn der niedrigeren Gütestufe ist kleiner oder gleich
+ dem Informationszugewinn der höheren Stufe 
 \begin_inset Formula $I_{low}\leq I_{high}$
 \end_inset
 
@@ -1488,8 +1491,8 @@ high & ,\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}<1
 \end_layout
 
 \begin_layout Standard
-Die Entscheidungsfunktion bewertet nur zwei mögliche Gütestufen anhand des
- Informationsgewinns pro Zeit.
+Diese Entscheidungsfunktion bewertet nur zwei mögliche Gütestufen anhand
+ des Informationsgewinns pro Zeit.
  Bei einer größeren Anzahl an Gütestufen kann die Funktion aber öfter angewendet
  werden und somit eine Rangliste erzeugt werden.
 \end_layout
@@ -1512,7 +1515,7 @@ Ein sehr wichtiger Punkt ist die Modellierung des Informationszugewinns.
  Sample hinzu, so sollte die vorhersagte Standardabweichung dort reduziert
  werden.
  Oftmals wird angenommen, dass die Unsicherheit auf Null reduziert wird,
- wenn an einer Stelle ein Sample hoher Güte bekannt ist.
+ wenn an dieser Stelle ein Sample hoher Güte bekannt ist.
  
 \end_layout
 
@@ -1570,9 +1573,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.pdf
+	filename /home/schm_ad/Diss/images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
 	scale 50
-	BoundingBox 0bp 150bp 770bp 662bp
+	BoundingBox 60bp 130bp 796bp 663bp
 	clip
 
 \end_inset
@@ -1659,7 +1662,8 @@ Die Vorhersage der Standardabweichung der höchsten Gütestufe an einer Stelle
 
 \begin_layout Standard
 \noindent
-Der Informationszugewinn für eine unbekannte Stelle 
+Es wird weiterhin aber nicht von einem rein interpolierenden Modell ausgegangen.
+ Der Informationszugewinn für eine unbekannte Stelle 
 \begin_inset Formula $x_{0}$
 \end_inset
 
@@ -1680,13 +1684,6 @@ I_{high}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hh}
 \end_layout
 
 \begin_layout Standard
-
-\size giant
-\color red
-0 WEG !!!!!!
-\end_layout
-
-\begin_layout Standard
 \noindent
 Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
  eines neuen Members 
@@ -1694,28 +1691,21 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
 \end_inset
 
 .
- Der grundlegende Ablauf einer Erzeugung wird in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:MufiProzess"
-
-\end_inset
-
- beschrieben und setzt sich im Wesentlichen aus drei Schritten zusammen.
- Der erste Schritt umfasst das Training der Ersatzmodelle und benötigt die
+ Diese Zeiten setzen sich im Wesentlichen aus drei Teilen zusammen.
+ Der erste Teil umfasst das Training der Ersatzmodelle und benötigt die
  Zeit 
 \begin_inset Formula $t_{train}\in\mathbb{R}$
 \end_inset
 
 .
- Der zweite Schritt besteht aus der Optimierung auf dem Ersatzmodell und
- benötigt die Zeit 
+ Der zweite Teil besteht aus der Optimierung auf dem Ersatzmodell und benötigt
+ die Zeit 
 \begin_inset Formula $t_{opti}\in\mathbb{R}$
 \end_inset
 
 .
- Der dritte und damit letzte Schritt beinhaltet die Berechnung der Prozesskette.
- Für diesen Schritt benötigen die Gütestufen auch jeweils unterschiedliche
+ Der dritte und damit letzte Teil beinhaltet die Berechnung der Prozesskette.
+ Für diesen Teil benötigen die Gütestufen auch jeweils unterschiedliche
  Zeiten welche mit 
 \begin_inset Formula $t_{prl}\in\mathbb{R}$
 \end_inset
@@ -1731,10 +1721,10 @@ reference "fig:MufiProzess"
 \begin_layout Standard
 \noindent
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 t_{low}= & t_{train}+t_{opti}+t_{prl}\\
 t_{high}= & t_{train}+t_{opti}+t_{prh}
-\end{align*}
+\end{align}
 
 \end_inset
 
@@ -1756,9 +1746,9 @@ reference "eq:Entscheidungsfunktion"
 
 
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 \frac{I_{low}}{t_{low}} & =\frac{\sigma_{h}-\sigma_{hl}}{t_{train}+t_{opti}+t_{prl}}
-\end{align*}
+\end{align}
 
 \end_inset
 
@@ -1768,9 +1758,9 @@ reference "eq:Entscheidungsfunktion"
 \begin_layout Standard
 \noindent
 \begin_inset Formula 
-\begin{align*}
-\frac{I_{high}}{t_{high}} & =\frac{\sigma_{h}}{t_{train}+t_{opti}+t_{prh}}
-\end{align*}
+\begin{align}
+\frac{I_{high}}{t_{high}} & =\frac{\sigma_{h}-\sigma_{hh}}{t_{train}+t_{opti}+t_{prh}}
+\end{align}
 
 \end_inset
 
@@ -1786,7 +1776,7 @@ n an.
 \end_inset
 
  bezeichnet.
- Weiterhin wird davon ausgegangen, dass für jede der 
+ Für jede der 
 \begin_inset Formula $z\in\mathbb{N}$
 \end_inset
 
@@ -1794,14 +1784,14 @@ n an.
 \begin_inset Formula $c\in\mathbb{N}$
 \end_inset
 
- Nebenbedingungen jeweils ein Ersatzmodell existiert.
+ Nebenbedingungen existiert ein Ersatzmodell.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 \frac{I}{t}=\sum_{i}^{c+z}\frac{w_{i}}{\sum_{i}^{c+z}w_{i}} & \frac{I_{i}}{t_{i}}
-\end{align*}
+\end{align}
 
 \end_inset
 
@@ -1850,13 +1840,14 @@ reference "eq:Entscheidungsfunktion"
 \end_layout
 
 \begin_layout Paragraph*
-Gewichtete Ersatzmodellunsicherheit pro Prozesskettenzeit minimieren 
+Zusätzliche Gewichtung der Ersatzmodelle
 \end_layout
 
 \begin_layout Standard
 Bei der vorgestellten Entscheidungsfunktion, werden die verschiedenen Ersatzmode
-lle alle gleich gewichtet .
- Diese Annahme trifft in der Regel allerdings nicht zu.
+lle alle gleich gewichtet.
+ Sinnvoller ist eine gezielte Gewichtung der einzelnen Ersatzmodelle die
+ nachfolgend vorgestellt wird.
  Um dies näher zu erläutern werden die Ersatzmodelle in zwei unterschiedliche
  Gruppen eingeteilt.
  
@@ -1881,9 +1872,8 @@ reference "par:Behandlung-von-Nebenbedingungen"
 \end_inset
 
  beschrieben, ist die Erfüllung der Nebenbedingungen das wichtigste Kriterium.
- Dies führt dazu, dass das Optimierungsverfahren als erstes versucht die
- Nebenbedingungen zu erfüllen und die eigentlichen Zielfunktionen nur zweitrangi
-g behandelt, zumindest bis die Nebenbedingungen erfüllt worden sind.
+ Die eigentlichen Zielfunktionen werden nur zweitrangig behandelt, bis die
+ Nebenbedingungen erfüllt sind.
  
 \end_layout
 
@@ -1910,8 +1900,7 @@ nen sehr gut darstellen.
  Null bedeutet also die Erfüllung aller Restriktionen und ein Wert größer
  Null die Nichterfüllung mindestens einer Nebenbedingung.
  Die rote Kurve beschreibt den kummulierten Volumenzugewinn und kann somit
- als eine Art Optimierungsfortschritt bezogen auf die Zielfunktionen angesehen
- werden.
+ als Optimierungsfortschritt bezogen auf die Zielfunktionen angesehen werden.
  
 \end_layout
 
@@ -1922,6 +1911,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename ../images/MultifidelityKapitel/HF_Restrictions_cumTime.eps
 	scale 70
@@ -1954,11 +1944,13 @@ ionen
 
 \begin_layout Standard
 Die Abbildung zeigt sehr deutlich, wie im Verlauf der Optimierung ein Wechsel
- von den Nebenbedingungen hin zu den Zielfunktionen stattfindet.
+ von den Nebenbedingungen hin zu einer Konzentration auf Zielfunktionen
+ stattfindet.
+ Die Ersatzmodelle für die Nebenbedingungen werden selbstverständlich weiterhin
+ gepflegt und sind immer Bestandteil der ersatzmodellgestützten Optimierung.
  Sobald der Optimierungsalgorithmus die Nebenbedingungen einmal erfüllt
- hat, ist die Wahrscheinlichkeit diese weiterhin zu erfüllen erheblich größer.
- Dies sollte innerhalb der Entscheidungsfunktion natürlich berücksichtigt
- werden.
+ hat, ist die Wahrscheinlichkeit diese weiterhin zu erfüllen aber erheblich
+ größer.
  
 \end_layout
 
@@ -1966,25 +1958,25 @@ Die Abbildung zeigt sehr deutlich, wie im Verlauf der Optimierung ein Wechsel
 Weiterhin sind die verschiedenen Nebenbedingungen auch unterschiedlich schwer
  zu erfüllen und sollten daher ebenfalls unterschiedlich stark gewichtet
  werden.
- 
-\end_layout
-
-\begin_layout Standard
-Als geeignete Gewichtung für die Nebenbedingungen kann die Wahrscheinlichkeit
+ Als geeignete Gewichtung für die Nebenbedingungen kann die Wahrscheinlichkeit
  
 \begin_inset Formula $P_{i}\in\mathbb{R}$
 \end_inset
 
  für die Erfüllung der jeweiligen Nebenbedingungen verwendet werden.
- Je höher die Wahrscheinlichkeit die Nebenbedingung zu Erfüllen, desto niedriger
+ Je höher die Wahrscheinlichkeit die Nebenbedingung zu erfüllen, desto niedriger
  das Gewicht der Nebenbedingung.
  Wenn z.B.
  die Wahrscheinlichkeit bei 100% liegt, so ist diese Nebenbedingung für
  die Entscheidung unerheblich, da diese unabhängig von der Entscheidung
  erfüllt wird.
- Die Zielfunktionen untereinander werden gleich gewichtet.
- Letztlich bleibt dann nur noch die Frage offen, wie Zielfunktionen und
- Nebenbedingungen zueinander gewichtet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Zielfunktionen untereinander werden gleich gewichtet.
+ Letztlich bleibt dann noch die Frage offen, wie Zielfunktionen und Nebenbedingu
+ngen zueinander gewichtet werden.
  Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung der Nebenbeding
 ungen an.
  Geht man davon aus, dass diese unabhängig sind, so lässt sich die Gesamtwahrsch
@@ -2023,9 +2015,13 @@ Die bisher vorgestellten Kriterien beziehen sich alle auf einen lokalen
 \end_inset
 
 .
- Grundlegend ist es natürlich auch möglich den Einfluss der Entscheidung
- auf den gesamten Parameterraum zu schätzen oder zumindest auf die unmittelbare
- Umgebung.
+ Grundlegend ist es auch möglich den Einfluss der Entscheidung auf den gesamten
+ Parameterraum zu schätzen oder zumindest auf die unmittelbare Umgebung
+ von 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
+\end_inset
+
+.
  Um dies zu erreichen muss die Formulierung aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2114,9 +2110,13 @@ Die mögliche lokale Änderungen der Gewichtungen
 \end_inset
 
  soll an dieser Stelle allerdings unberücksichtigt bleiben.
- Da die lokale Varianzreduktion naturgemäß den größten Beitrag liefert,
- ist anzunehmen, dass diese Art des Kriteriums in den meisten Fällen zu
- keiner anderen Entscheidung führen wird.
+ 
+\end_layout
+
+\begin_layout Standard
+Die lokale Varianzreduktion liefert naturgemäß den größten Beitrag, daher
+ ist anzunehmen, dass das Kriterium in den meisten Fällen zu keiner anderen
+ Entscheidung führen wird.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2153,27 +2153,33 @@ Eine weitere Schwierigkeit bei der praktischen Umsetzung dieser Formulierung
 \end_layout
 
 \begin_layout Paragraph
-Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
+Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf:
 \end_layout
 
 \begin_layout Standard
-Abschließend muss die Frage gestellt werden, inwiefern die gewählte Entscheidung
-sfunktion überhaupt einen Einfluss auf die Optimierungszeit hat und wie
- stark dieser ist.
+Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
+ gewählten Entscheidungsfunktion auf die Optimierungszeit und das Ergebnis
+ ist.
  Um eine Idee davon zu bekommen, sollen hier mehrere Testoptimierungen mit
  verschiedenen Entscheidungsverläufen miteinander verglichen werden.
- Es handelt sich hierbei um die 3D-CFD Optimierungen aus Kapitel 
+ Im Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Trace-Erich"
 
 \end_inset
 
-.
+ werden die Optimierungen detailliert behandelt und ausgewertet.
+ Es ist eine 3D-aeromechanische-Optimierung einer Fanstufe.
+ Als Gütestufen werden verschiedene Netzauflösungen verwendet.
  Diese Optimierungen eignen sich für einen Vergleich, da viele verschiedene
  Entscheidungsverläufe getestet wurden und es sich zudem bereits um eine
  realitätsnahe aeromechanische Optimierung handelt.
- Abbildung 
+ 
+\end_layout
+
+\begin_layout Standard
+Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:OptimierungenEntscheidungsfVerläfe"
@@ -2229,8 +2235,8 @@ en
 \end_layout
 
 \begin_layout Standard
-Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte in diesem
- Fall eine deutliche Beschleunigung bewirkt.
+Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte einen
+ deutlich höheren Volumenzugewinn bewirkt.
  Die Prozesskette niedriger Güte muss also bereits einen sehr hohen Informations
 gehalt besitzen.
  Die Streuung der einzelnen Optimierungen kommt durch einige Zufälligkeiten
