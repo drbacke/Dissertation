@@ -8895,64 +8895,53 @@ Rechts sind die 100 gefilterte Samples, von der ursprünglichen Verteilung
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "extendedchars=true"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-	// How many Samples and PartDers should be deleted 	if(sampleSize+partDerSize
- > cfg.maxMatrixSize){ 		if(sampleSize<=cfg.maxMatrixSize){ 			killPartDer
- = sampleSize+partDerSize - cfg.maxMatrixSize; 		} 		else{ 			killPartDer
- = partDerSize; 			killSamples = (sampleSize-cfg.maxMatrixSize); 		} 	} 	BOOST_LO
-G_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): NumSamples:"<<sampleSiz
-e<<" NumPartDer:"<<partDerSize; 	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCrea
-teMatPositions(): MaxMatrixSize: "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sam
-pleSize+partDerSize<<" killPartDer:"<<killPartDer<<" killSamples:"<<killSamples;
+	// How many Samples and PartDers should be deleted
 \end_layout
 
 \begin_layout Plain Layout
 
-	size_t killedPartDer = 0; 	//Reduce PartDers 	while(killedPartDer < killPartDer
-){ 		int randPoint = rand() % points.size(); 		int randPartDer = rand() %
- cfg.numFreeVars; 		if(points[randPoint].getAllPartDervsRef().count(randPartDer)
- >0){ 			points[randPoint].deletePartialDerivative(randPartDer); 			killedPartDer
-++; 		} 	}
+	if(sampleSize+partDerSize > cfg.maxMatrixSize){
 \end_layout
 
 \begin_layout Plain Layout
 
-	if(cfg.initType != ultrarestart or init==true){ 		//Reduce Samples 		vector<int>
- deleteIndices = global::createUniqueRandomIntegers(0, points.size(), killSamples
-); 	} 	else{ 		typedef map< B, pair<int,int> > m; 		m corrs; 		typename
- m::reverse_iterator it;
+		if(sampleSize<=cfg.maxMatrixSize){
 \end_layout
 
 \begin_layout Plain Layout
 
-		BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): UltraRestart
- filter nearest Samples"; 		//#pragma omp parallel for schedule(dynamic)
- 		for(size_t i=0; i<points.size(); i++){ 			for(size_t j=i+1; j<points.size();
- j++){ 				B corr = correlationMap(points[i].getType(),points[j].getType())->calcS
-impleCorrelation(points[j],points[i]); 				corrs[corr] =pair<int,int>(i,j);
+			killPartDer = sampleSize+partDerSize - cfg.maxMatrixSize;
 \end_layout
 
 \begin_layout Plain Layout
 
-				//correlationMatrix[matrixPositions[i]][matrixPositions[j]] *= scaleFactorMa
-p[points[i].getType()][points[j].getType()]; 				//correlationMatrix[matrixPositio
-ns[i]][matrixPositions[j]] += diagonalAddition[points[i].getType()]; 				//rVec[0
-][matrixPositions[i]]*= scaleFactorMap[points[i].getType()][p.getType()];
- 			} 		} 		for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<kill
-Samples; it++) { 			bool firstInside =  std::find(deleteIndices.begin(),
- deleteIndices.end(), it->second.first)==deleteIndices.end() ?  false:true;
- 			bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
- it->second.second)==deleteIndices.end() ?  false:true; 			// Keiner drin
- -> Random //			cout <<it->first<<" "<<it->second.first<<" "<<it->second.second<<e
-ndl; 			if(!(firstInside or secondInside)) 				if(rand()%2==0)deleteIndices.push_
-back(it->second.first ); 				else deleteIndices.push_back(it->second.second
- ); //			else if (firstInside and ! secondInside) //				deleteIndices.push_back(i
-t->second.second ); //			else if (!firstInside and secondInside) //				deleteIndi
-ces.push_back(it->second.first ); 			else 				continue; 		}
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			killPartDer = partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+			killSamples = (sampleSize-cfg.maxMatrixSize);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
 \end_layout
 
 \begin_layout Plain Layout
@@ -8962,36 +8951,405 @@ ces.push_back(it->second.first ); 			else 				continue; 		}
 
 \begin_layout Plain Layout
 
-	std::sort (deleteIndices.rbegin(), deleteIndices.rend()); 	vector<Point<T,B>
- > newPoints;
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): NumSamples:"<<
+sampleSize<<" NumPartDer:"<<partDerSize;
 \end_layout
 
 \begin_layout Plain Layout
 
-	for(size_t i=0; i<points.size(); i++){ 		if(std::find(deleteIndices.begin(),
- deleteIndices.end(), (int)i) != deleteIndices.end()) 			continue; 		newPoints.push
-_back(points[i]); 	}
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): MaxMatrixSize:
+ "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+partDerSize<<" killPartD
+er:"<<killPartDer<<" killSamples:"<<killSamples;
 \end_layout
 
 \begin_layout Plain Layout
 
-	points = newPoints; 	//Count Samples and PartDer 	sampleSize=0; 	partDerSize=0;
- 	for(size_t i=0; i<points.size(); i++){ 		sampleSize++; 		partDerSize+=points[i].
-getNumPartDerivatives(); 	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	size_t killedPartDer = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Reduce PartDers
+\end_layout
+
+\begin_layout Plain Layout
+
+	while(killedPartDer < killPartDer){
+\end_layout
+
+\begin_layout Plain Layout
+
+		int randPoint = rand() % points.size();
+\end_layout
+
+\begin_layout Plain Layout
+
+		int randPartDer = rand() % cfg.numFreeVars;
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(points[randPoint].getAllPartDervsRef().count(randPartDer) >0){
+\end_layout
+
+\begin_layout Plain Layout
+
+			points[randPoint].deletePartialDerivative(randPartDer);
+\end_layout
+
+\begin_layout Plain Layout
+
+			killedPartDer++;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(cfg.initType != ultrarestart or init==true){
+\end_layout
+
+\begin_layout Plain Layout
+
+		//Reduce Samples
+\end_layout
+
+\begin_layout Plain Layout
+
+		vector<int> deleteIndices = global::createUniqueRandomIntegers(0, points.size()
+, killSamples);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else{
+\end_layout
+
+\begin_layout Plain Layout
+
+		typedef map< B, pair<int,int> > m;
+\end_layout
+
+\begin_layout Plain Layout
+
+		m corrs;
+\end_layout
+
+\begin_layout Plain Layout
+
+		typename m::reverse_iterator it;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): UltraRestart
+ filter nearest Samples";
+\end_layout
+
+\begin_layout Plain Layout
+
+		//#pragma omp parallel for schedule(dynamic)
+\end_layout
+
+\begin_layout Plain Layout
+
+		for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(size_t j=i+1; j<points.size(); j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				B corr = correlationMap(points[i].getType(),points[j].getType())->calcSimpleCo
+rrelation(points[j],points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+				corrs[corr] =pair<int,int>(i,j);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+				//correlationMatrix[matrixPositions[i]][matrixPositions[j]] *= scaleFactorMa
+p[points[i].getType()][points[j].getType()];
+\end_layout
+
+\begin_layout Plain Layout
+
+				//correlationMatrix[matrixPositions[i]][matrixPositions[j]] += diagonalAddit
+ion[points[i].getType()];
+\end_layout
+
+\begin_layout Plain Layout
+
+				//rVec[0][matrixPositions[i]]*= scaleFactorMap[points[i].getType()][p.getType(
+)];
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<killSamples;
+ it++) {
+\end_layout
+
+\begin_layout Plain Layout
+
+			bool firstInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.first)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+			bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.second)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+			// Keiner drin -> Random
+\end_layout
+
+\begin_layout Plain Layout
+
+//			cout <<it->first<<" "<<it->second.first<<" "<<it->second.second<<endl;
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(!(firstInside or secondInside))
+\end_layout
+
+\begin_layout Plain Layout
+
+				if(rand()%2==0)deleteIndices.push_back(it->second.first );
+\end_layout
+
+\begin_layout Plain Layout
+
+				else deleteIndices.push_back(it->second.second );
+\end_layout
+
+\begin_layout Plain Layout
+
+//			else if (firstInside and ! secondInside)
+\end_layout
+
+\begin_layout Plain Layout
+
+//				deleteIndices.push_back(it->second.second );
+\end_layout
+
+\begin_layout Plain Layout
+
+//			else if (!firstInside and secondInside)
+\end_layout
+
+\begin_layout Plain Layout
+
+//				deleteIndices.push_back(it->second.first );
+\end_layout
+
+\begin_layout Plain Layout
+
+			else
+\end_layout
+
+\begin_layout Plain Layout
+
+				continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::sort (deleteIndices.rbegin(), deleteIndices.rend());
+\end_layout
+
+\begin_layout Plain Layout
+
+	vector<Point<T,B> > newPoints;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(std::find(deleteIndices.begin(), deleteIndices.end(), (int)i) != deleteIndice
+s.end())
+\end_layout
+
+\begin_layout Plain Layout
+
+			continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		newPoints.push_back(points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	points = newPoints;
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Count Samples and PartDer
+\end_layout
+
+\begin_layout Plain Layout
+
+	sampleSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	partDerSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+		sampleSize++;
+\end_layout
+
+\begin_layout Plain Layout
+
+		partDerSize+=points[i].getNumPartDerivatives();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
 
 	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
- Delete: NumSamples:"<<sampleSize<<" NumPartDer:"<<partDerSize; 	BOOST_LOG_TRIVI
-AL(debug) <<"reducePointsAndCreateMatPositions(): after Delete: MaxMatrixSize:
- "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+partDerSize;
+ Delete: NumSamples:"<<sampleSize<<" NumPartDer:"<<partDerSize;
 \end_layout
 
 \begin_layout Plain Layout
 
-	cfg.numDerivatives = partDerSize; 	cfg.numSamples	   = sampleSize; 	cfg.numSamples
-Derivatives = partDerSize+sampleSize;
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
+ Delete: MaxMatrixSize: "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+p
+artDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numDerivatives = partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numSamples	   = sampleSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numSamplesDerivatives = partDerSize+sampleSize;
 \end_layout
 
 \end_inset
