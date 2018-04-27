@@ -687,6 +687,32 @@
   Url                      = {http://elib.dlr.de/1338/}
 }
 
+@Other{kueppers2016,
+  Title                    = {Entwicklung und Aufbau eines verteilten Systems zur Reduktion der Rechenzeit f{\"u}r Gradienten basierte Ersatzmodell Algorithmen},
+  Abstract                 = {Zur Entwicklung neuer Konzepte f{\"u}r Turbomaschinen sind moderne Simulations- und Optimierungsverfahren, wie sie im Institut f{\"u}r Antriebstechnik des DLR verwendet werden, unerl{\"a}sslich. Innerhalb dieser Optimierungsprozesse werden verschiedene so genannte Ersatzmodelle verwendet, die im Rahmen dieses Prozesses kontinuierlich verbessert bzw. trainiert werden. F{\"u}r das Training solcher Ersatzmodelle sind allerdings diverse Matrizenoperationen notwendig, die je nach Problemgr{\"o}{\ss}e {\"a}u{\ss}erst aufwendig zu berechnen sind. Werden f{\"u}r dieses
+Training zus{\"a}tzlich Gradienteninformationen aus vorangegangen Rechnungen mit einbezogen, vergr{\"o}{\ss}ern sich die zugrunde liegenden Matrizen noch einmal erheblich, sodass die Rechenzeit des gesamten Optimierungsprozesses darunter leidet.
+Es soll im Rahmen dieser Arbeit daher erm{\"o}glicht werden, einerseits diese Matrizenoperationen in geeignetem Ma{\ss}e auf einen leistungsstarken Rechner auszulagern, der mit einer GPU zu Rechenzwecken ausgestattet ist, und andererseits parallel ausf{\"u}hrbare Teile des zugrunde liegenden Quellcodes des Ersatzmodelltrainings zu identifiziert und auf mehrere
+Recheneinheiten zu verteilen.
+Die Auslagerung bzw. Verteilung von Rechenoperationen konnte durch Erweiterung und Optimierung von bestehender Software erreicht werden, indem wichtige Teile des Ersatzmodelltrainings mithilfe eines Clients als Schnittstelle an ein geeignetes Netzwerk mit beliebig vielen Servern angebunden wurde. Je nach Problemstellung sind so Verbindungen in einer 1:1 Beziehung zu nur einem Server und 1:n zu vielen Servern m{\"o}glich. Die Ausf{\"u}hrungsdauer eines Ersatzmodelltrainings und somit die des gesamten Optimierungsprozesses konnte so durch eine bessere Auslastung von bereits zur Verf{\"u}gung stehenden Ressourcen deutlich gesenkt werden.},
+  Author                   = {Fabian K{\"u}ppers},
+  Keywords                 = {Verteiltes System, GPU, Grafikkarte, Cluster, Optimierung, Ersatzmodell, Matrizen, Matrix, Rechenoperationen, Cholesky-Zerlegung, Invertierung, IT, Algorithmen, Rechenzeit, Reduktion},
+  Month                    = {September},
+  Type                     = {Bachelorarbeit},
+  Url                      = {http://elib.dlr.de/106692/},
+  Year                     = {2016}
+}
+
+@InProceedings{kueppers2016b,
+  Title                    = {Ersatzmodelltraining f{\"u}r Turbomaschinenoptimierungen: Entwicklung eines verteilten Systems zur Auslagerung rechenintensiver Algorithmen auf GPUs},
+  Author                   = {Fabian K{\"u}ppers and Andreas Schmitz},
+  Booktitle                = {Deutscher Luft- und Raumfahrtkongress 2016},
+  Year                     = {2016},
+
+  Abstract                 = {Eine gro{\ss}e Rolle in der Entwicklung und dem Design neuer Konzepte f{\"u}r Turbomaschinen spielen moderne Optimierungs- und Simulationsverfahren. Das Institut f{\"u}r Antriebstechnik des DLR verwendet in diesem Rahmen Multifidelity- und Gradient-Enhanced-Kriging-Ersatzmodelle, welche ein aufw{\"a}ndiges Training ben{\"o}tigen. In solch einem Training sind verschiedene Matrizenoperationen der Komplexit{\"a}t O(n³) notwendig. Bei aufw{\"a}ndigen Problemstellungen kann das Kriging-Training allerdings zum Flaschenhals einer Optimierung werden. Mittelfristiges Ziel ist es, solch ein Training auch f{\"u}r sehr gro{\ss}e Matrizen ({\texttt{\char126}}20.000²) in annehmbarer Zeit umzusetzen. F{\"u}r Optimierungen wird im Institut f{\"u}r Antriebstechnik des DLR meistens ein eigenes Rechencluster mit zahlreichen Knoten verwendet. Das Kriging-Training l{\"a}sst sich aber nur teilweise auf mehrere Knoten verteilen. Die h{\"o}chste Rechenleistung bei gleichzeitig bestem Preis-/Leistungsverh{\"a}ltnis bieten derzeit GPGPUs (General Purpose Computation on Graphics Processing Unit, nachfolgend GPU). Diese sind allerdings auf dem Rechencluster derzeit nicht vorhanden. Aus diesem Grund wurde f{\"u}r das Kriging-Training ein externer Server zur Verf{\"u}gung gestellt, der solch eine GPU verwendet. Zur Auslagerung der wichtigsten Matrix-operationen in einer 1:1 Client-Server-Verbindung war dar{\"u}ber hinaus die Entwicklung einer geeigneten Netz-werkschnittstelle notwendig. Bei derzeitiger Infrastruktur konnte so ein Speedup um den Faktor 2 erreicht werden. Die gleiche Netzwerkschnittstelle wurde in einem zweiten Schritt dazu verwendet, um die parallelisierbaren Berechnungen des Kriging-Trainings unabh{\"a}ngig von der Verwendung einer GPU auf verschiedene Cluster-knoten zu verteilen. Mit solch einer Verteilung konnte ein Speedup erreicht werden, der in begrenztem Ma{\ss}e beinahe linear mit der Anzahl an Clusterknoten w{\"a}chst.},
+  Keywords                 = {Verteiltes System, GPU, Grafikkarte, Cluster, Optimierung, Ersatzmodell, Matrizen, Matrix, Rechenoperationen, Cholesky-Zerlegung, Invertierung, IT, Algorithmen, Rechenzeit, Reduktion},
+  Url                      = {http://elib.dlr.de/108417/}
+}
+
 @Book{Karlsson2006,
   Title                    = {Beyond the C++ Standard Library: An Introduction to Boost},
   Author                   = {Karlsson, B.},
@@ -1250,6 +1276,53 @@ potential effect of downstream blade rows.},
 
   Owner                    = {schm_ad},
   Timestamp                = {2018.04.05}
+}
+
+@TechReport{schmitz2013,
+  Title                    = {Entwicklung eines objektorientierten und
+parallelisierten Gradient Enhanced
+Kriging Ersatzmodells},
+  Author                   = {Andreas Schmitz},
+  Institution              = {Fernuniversit{\"a}t Hagen},
+  Year                     = {2013},
+  Month                    = {September},
+
+  Abstract                 = {Zur Erf{\"u}llung der im europ{\"a}ischen Strategiedokument {"`}Flightpath 2050{"'} definierten
+Ziele in Hinblick auf die Reduzierung des Treibstoffverbrauchs und der CO2-
+Emission ist eine weitere Steigerung desWirkungsgrades von Verdichtern als zentrale
+Triebwerkskomponente erforderlich. Das Ziel ist die Auslegung und das Design von
+effizienten Verdichternmit verbesserten und neuen Auslegungstechniken sowie Simulationsverfahren.
+Diese sind elementar mit der Qualit{\"a}t der Auslegung und der Zertifizierung
+verkn{\"u}pft. Gerade durch das immer st{\"a}rkere Ausloten und Ausnutzen der
+technischen Grenzen und Detailgestaltungen steigen die Anforderungen an die Auslegungswerkzeuge
+und die rechnerische Simulation erheblich an. Insbesondere die automatisierte
+Mehrzieloptimierung der Verdichterkomponenten erm{\"o}glicht dabei das
+Auffinden der optimalen Geometrien unter Ber{\"u}cksichtigung aller wesentlichen Auslegungskriterien.
+Am Institut f{\"u}r Antriebstechnik wird daher ein solcher Optimierer namens AutoOpti
+entwickelt. Um eine Optimierung m{\"o}glichst effizient zu gestalten, werden Ersatzmodelle
+verwendet, welche die Zielfunktion modellieren und damit den Optimierungsprozess
+beschleunigen. Eines der am h{\"a}ufigsten verwendeten Ersatzmodelle ist
+das Kriging Verfahren, welches beim Institut f{\"u}r Antriebstechnik bereits zum Einsatz
+kommt. Da dieses Verfahren immer mehr an Bedeutung gewonnen hat, sollte es innerhalb
+des Rahmens dieser Arbeit komplett neu entwickelt werden. Ziel dieser Neuentwicklung
+war es, den Code zu modularisieren, um das Verfahren schnell erweitern
+und ver{\"a}ndern zu k{\"o}nnen. Zudem war es ein wichtiges Ziel, das Verfahren zu beschleunigen.
+Um den Code f{\"u}r zuk{\"u}nftige Anwendungen modularer zu gestalten, wurde das gesamte
+Programm objektorientiert in C++ geschrieben. Au{\ss}erdem wurde die Boost Bibliothek
+verwendet um mehr M{\"o}glichkeiten bei der Programmierung zu haben, beispielsweise
+bietet diese Bibliothek sehr flexible Funktionsobjekte. Durch Einsatz dieser
+Mittel und moderner Software Engineering Methoden war es m{\"o}glich, den neuen Code
+so weit zumodularisieren, dass nahezu alle Teile des Programms austauschbar und
+einfach erweiterbar sind.
+Der Code konnte um den Faktor 2 beschleunigt werden, dies wurde durch Minimierung
+der Speicherzugriffe und durch Nutzung effizienter CPU-Befehle erreicht. Zudem
+war es m{\"o}glich, ein neues Trainingsverfahren h{\"o}herer Ordnung zu implementieren.
+Die Verwendung dieses Trainingsverfahrens beschleunigte den Code nochmals
+um den Faktor 3.
+Umdie Ergebnisse zu validieren,wurde ein Test und Benchmark durchgef{\"u}hrt, in dem
+die Ergebnisse und auch der Geschwindigkeitszuwachs best{\"a}tigt werden konnten.},
+  Keywords                 = {Kriging, Gradient Enhanced Kriging, Ersatzmodelle, Surrogate Models, Optimization, Optimierung, AutoOpti},
+  Url                      = {http://elib.dlr.de/85734/}
 }
 
 @Article{schmitzasme2011,

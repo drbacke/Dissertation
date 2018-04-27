@@ -1158,9 +1158,9 @@ Der erste Schritt besteht darin, die notwendigen Kovarianzfunktionen zu
 folgende Kovarianzfunktionen zu modellieren:
 \begin_inset Formula 
 \begin{align}
-\textrm{cov\left(Z_{i-1}\left(\vec{x}\right),Z_{i-1}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighHighBeschreibung-1}\\
-\textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i-1}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighLowBeschreibung}\\
-\textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovLowLowBeschreibung}
+\textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighHighBeschreibung-1}\\
+\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighLowBeschreibung}\\
+\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i+1}\left(\vec{x}^{'}\right)\right)}\label{eq:CovLowLowBeschreibung}
 \end{align}
 
 \end_inset
@@ -1171,18 +1171,18 @@ folgende Kovarianzfunktionen zu modellieren:
 \begin_layout Standard
 Im Folgenden sollen zwei verschiedene Gütestufen betrachtet werden, wobei
  
-\begin_inset Formula $0$
+\begin_inset Formula $1$
 \end_inset
 
  die höhere Güte beschreibt und 
-\begin_inset Formula $1$
+\begin_inset Formula $2$
 \end_inset
 
  die niedrigere Gütestufe.
  Ein häufig gewählter Ansatz für ein Kovarianzmodell ist der Folgende:
 \begin_inset Formula 
 \begin{align}
-Z_{0}\left(\vec{x}\right)=aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\label{eq:DifferenzprozessAllgemein}
+Z_{1}\left(\vec{x}\right)=aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\label{eq:DifferenzprozessAllgemein}
 \end{align}
 
 \end_inset
@@ -1192,11 +1192,11 @@ Z_{0}\left(\vec{x}\right)=aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right
 
 \begin_layout Standard
 Der Prozess hoher Güte 
-\begin_inset Formula $Z_{0}$
+\begin_inset Formula $Z_{1}$
 \end_inset
 
  wird also modelliert aus einem skalierten Prozess niedrigerer Güte 
-\begin_inset Formula $Z_{1}$
+\begin_inset Formula $Z_{2}$
 \end_inset
 
 , wobei 
@@ -1218,7 +1218,7 @@ reference "eq:CovHighHighBeschreibung-1"
  ein:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),aZ_{1}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1229,8 +1229,8 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\l
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(\left(aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
- & \left.\left(\left(aZ_{1}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)-E\left[aZ_{1}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
+ & \left.\left(\left(aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)-E\left[aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
 \end{align*}
 
 \end_inset
@@ -1241,8 +1241,8 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\l
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(\left(aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
- & \left.\left(aZ_{1}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]+Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
+ & \left.\left(aZ_{2}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]+Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
 \end{align*}
 
 \end_inset
@@ -1253,8 +1253,8 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\l
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(\left(aZ_{1}\left(\vec{x}\right)-aE\left[Z_{1}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\right.\\
- & \left.\left(\left(aZ_{1}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right)\right]
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)-aE\left[Z_{1}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\right.\\
+ & \left.\left(\left(aZ_{2}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right)\right]
 \end{align*}
 
 \end_inset
@@ -1265,9 +1265,9 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\l
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-= & E\left[a^{2}\left(Z_{1}\left(\vec{x}\right)-E\left[Z_{1}\left(\vec{x}\right)\right]\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[a\left(Z_{1}\left(\vec{x}\right)-E\left[Z_{1}\left(\vec{x}\right)\right]\right)\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[a\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]\\
+= & E\left[a^{2}\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
+ & +E\left[a\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]\\
+ & +E\left[a\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
  & +E\left(\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right)
 \end{align*}
 
@@ -1279,8 +1279,8 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right) & =cov\l
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-= & a^{2}cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)+acov\left(Z_{1}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
- & +acov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
+= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+acov\left(Z_{2}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
+ & +acov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1294,14 +1294,14 @@ Nimmt man ferner an, dass der Differenzprozess
 \end_inset
 
  und der Prozess 
-\begin_inset Formula $Z_{1}\left(\vec{x}\right)$
+\begin_inset Formula $Z_{2}\left(\vec{x}\right)$
 \end_inset
 
  unkorreliert sind, so gilt:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right) & =0\\
-cov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =0
+cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right) & =0\\
+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =0
 \end{align*}
 
 \end_inset
@@ -1313,7 +1313,7 @@ cov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =0
 daraus folgt:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1324,13 +1324,13 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right)= & a^{2}
 \begin_layout Standard
 \noindent
 Modelliert man nun 
-\begin_inset Formula $cov\left(Z_{i}\left(\vec{x}\right),Z_{i-1}\left(\vec{x}^{'}\right)\right)$
+\begin_inset Formula $cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)$
 \end_inset
 
  nach demselben Schema, ergibt sich:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1338,7 +1338,7 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\l
 
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(\left(aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{1}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
 \end{align*}
 
 \end_inset
@@ -1346,7 +1346,7 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\l
 
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(\left(aZ_{1}\left(\vec{x}\right)-E\left[aZ_{1}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
 \end{align*}
 
 \end_inset
@@ -1354,8 +1354,8 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\l
 
 \begin_inset Formula 
 \begin{align*}
-= & E\left[\left(aZ_{1}\left(\vec{x}\right)-E\left[aZ_{1}\left(\vec{x}\right)\right]\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{1}\left(\vec{x}^{'}\right)-E\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)\right]
+= & E\left[\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
+ & +E\left[\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
 \end{align*}
 
 \end_inset
@@ -1363,7 +1363,7 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\l
 
 \begin_inset Formula 
 \begin{align*}
-= & acov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)
+= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1371,7 +1371,7 @@ cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\l
 Es gilt wieder:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =0
+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =0
 \end{align*}
 
 \end_inset
@@ -1384,7 +1384,7 @@ cov\left(Z_{diff}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =0
 Daraus ergibt sich:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1407,7 +1407,7 @@ reference "eq:CovHighHighBeschreibung-1"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)=cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)
+cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)=cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
 \]
 
 \end_inset
@@ -1421,9 +1421,9 @@ Durch diese Umformungen ergibt sich letztlich für die drei notwendigen Kovarian
 funktionen:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{0}\left(\vec{x}\right),Z_{0}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
-cov\left(Z_{0}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)\\
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)\mathrm{=} & cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)\label{eq:KovarianzFunktionenalleDrei}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\\
+cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\mathrm{=} & cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\label{eq:KovarianzFunktionenalleDrei}
 \end{align}
 
 \end_inset
