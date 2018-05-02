@@ -2650,6 +2650,333 @@ Dies ist nun exakt dasselbe Ergebnis der symbolischen Differenzierung.
 \end_layout
 
 \begin_layout Section
+Iterative Varianzbestimmung innerhalb des Co-Kriging Trainignsverfahrens
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Iterative-VarianzbestimmungTraining"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Durch die Umformulierung der Korrelationsmatrix zur Kovarianzmatrix, muss
+ der Maximum Likelihood Schätzer der globalen Varianz 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ für eine multivariate Normalverteilung umformuliert werden:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\frac{1}{\sigma_{k}^{2}}\mathbf{Corr}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei 
+\begin_inset Formula $k$
+\end_inset
+
+ den aktuellen Iterationsschritt angibt.
+ 
+\end_layout
+
+\begin_layout Standard
+Hierbei gibt es allerdings einen Nachteil.
+ Es ist notwendig bei der ersten Iteration einen Startwert für 
+\begin_inset Formula $\sigma_{k}^{2}$
+\end_inset
+
+ zu bestimmen.
+ Mit diesem Startwert wird nun 
+\begin_inset Formula $\mathbf{Cov}^{-1}$
+\end_inset
+
+ bestimmt.
+ Nachdem 
+\begin_inset Formula $\mathbf{Cov}^{-1}$
+\end_inset
+
+ bestimmt wurde, wird der Likelihood Schätzer für 
+\begin_inset Formula $\sigma_{k+1}^{2}$
+\end_inset
+
+ berechnet und damit ist das korrekte 
+\begin_inset Formula $\sigma_{k+1}^{2}$
+\end_inset
+
+ bekannt.
+ Die Kovarianzmatrix wurde allerdings noch mit dem 
+\begin_inset Formula $\sigma_{k}^{2}$
+\end_inset
+
+ aufgestellt und ist somit ungültig.
+ Es wäre an dieser Stelle also nötig die Kovarianzmatrix neu aufzustellen
+ und alle Schritte ein zweites Mal zu durchlaufen.
+\end_layout
+
+\begin_layout Standard
+Bei einem Minimierungsverfahren ist das meist nicht notwendig, da die Schätzunge
+n sich nicht sehr stark verändern.
+ Bei einer zufälligen Initialisierung kann dies allerdings zu Problemen
+ führen, die Update Schritte sollten in diesem Fall öfter wiederholt werden.
+ 
+\end_layout
+
+\begin_layout Section
+Renormalisierung der Hyperparameter 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Renormalisierung-der-Hyperparame"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Möchte man mit bestehenden Hyperparametern, aber einer neuen oder erweiterten
+ Datenbasis Vorhersagen treffen, so ändern sich die Erwartungswerte der
+ zu trainierenden Funktion und deren Parametern.
+ Da das alte Training und damit auch die Daten des Trainings mit den alten
+ Erwartungswerten und Standartabweichungen normalisiert worden sind, müssen
+ die Hyperparameter ebenfalls renormalisiert werden.
+ Ansonsten würde man für die Kovarianz zwischen 2 Membern unterschiedliche
+ Werte bekommen.
+\end_layout
+
+\begin_layout Standard
+Daraus ergibt sich folgende notwendige Bedingung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+cov\left(\vec{x}_{1alt},\vec{x}_{2alt}\right) & =cov\left(\vec{x}_{1neu},\vec{x}_{2neu}\right)\label{eq:RenormCovBedingung}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei 
+\begin_inset Formula $x_{real}$
+\end_inset
+
+ den unnormierten Parameter darstellt, 
+\begin_inset Formula $\mu_{alt}$
+\end_inset
+
+ und 
+\begin_inset Formula $\sigma_{alt}$
+\end_inset
+
+ stellen den alten Erwartungswert sowie die Standartabweichung der Parameter
+ dar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\vec{x}_{1alt} & =\left[\begin{array}{c}
+\frac{x_{1,1real}-\mu_{1alt}}{\sigma_{1alt}}\\
+\vdots\\
+\frac{x_{1,nreal}-\mu_{nalt}}{\sigma_{nalt}}
+\end{array}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für 
+\begin_inset Formula $\vec{x}_{2alt}$
+\end_inset
+
+, sowies 
+\begin_inset Formula $\vec{x}_{1neu}$
+\end_inset
+
+ gilt analoges.
+\end_layout
+
+\begin_layout Standard
+Die Bedingung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RenormCovBedingung"
+
+\end_inset
+
+ soll anhand eines Beispiels erläutert werden, es wird hierfür eine Gauss
+ Korrelationsfunktion mit einem Hyperparameter verwendet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\left|\frac{x_{1real}-\mu_{alt}}{\sigma_{alt}}-\frac{x_{2real}-\mu_{alt}}{\sigma_{alt}}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\left|\frac{x_{1real}-\mu_{neu}}{\sigma_{neu}}-\frac{x_{2real}-\mu_{neu}}{\sigma_{neu}}\right|^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Geht man nun davon aus, dass die Kriging Varianz sich nicht ändert:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\sigma_{KriAlt}^{2} & =\sigma_{KriNeu}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wobei diese Bedingung im Code unbedingt erfüllt sein muss.
+ Im Code ist es so umgesetzt, dass zuerst die Kovarianzmatrix mit der alten
+ Krigingvarianz erzeugt wird und danach der Likelihood Schätzer für die
+ Krigingvarianz aufgerufen wird, siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:sSqrLikelihoodOrdinary"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dieser Schätzer sollte im Normalfall allerdings auf eine neue Krigingvarianz
+ kommen, wodurch es im weiteren Verlauf zu großen Problemen kommen kann.
+ Insbesondere bei der Vorhersage, wo für den Kovarianzvektor 
+\begin_inset Formula $\vec{c}$
+\end_inset
+
+ (siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KoKrigingKovarianzVorhersage"
+
+\end_inset
+
+) dann die neue Krigingvarianz verwendet werden würde.
+ Kovarianzmatrix und Vektor würden dann nicht mehr zusammen passen.
+\end_layout
+
+\begin_layout Standard
+Die Formel lässt sich damit weiterhin vereinfachen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}=e^{\theta_{neu}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & \log\left(e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & \theta_{alt}+\log\left(\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Wann würde eine globales Varianzkriterium zu einer anderen Entscheidung
  führen als das lokale?
 \begin_inset CommandInset label
@@ -3143,7 +3470,7 @@ In diesem Fall würden das lokale und globale Kriterium zu einer anderen
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 R-Matrix Bildungsvorschrift, mit 2 Ableitungen pro Punkt

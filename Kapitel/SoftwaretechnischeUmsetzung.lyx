@@ -2393,10 +2393,6 @@ reference "eq:FVektor"
 
 ).
  
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathcal{N}= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{Cov^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}
@@ -2405,10 +2401,6 @@ reference "eq:FVektor"
 \end_inset
 
 Logarithmiert man diese Gleichung, ergibt sich:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \log(\mathcal{N})= & \log(1)-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{1}{2}\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
@@ -2418,10 +2410,6 @@ Logarithmiert man diese Gleichung, ergibt sich:
 
 Da das Maximum der Funktion gesucht ist, können die Konstanten ignoriert
  werden:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align}
 \log(\mathcal{N})= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
@@ -2441,10 +2429,6 @@ reference "sec:Differentiation-der-Likelihood-Funktion"
 \end_inset
 
  zu finden:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align}
 \frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
@@ -2545,9 +2529,6 @@ Führt man eine Matrix
 \end_inset
 
  ein in der Form:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \mathbf{G}=\left[\begin{array}{ccc}
@@ -2602,8 +2583,6 @@ mit symmetrischer Matrix
 
 \begin_inset Formula 
 \begin{align*}
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\frac{\partial}{\partial\vec{\tilde{\beta}}}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\\
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(-\mathbf{G}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\\
 \vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
 \end{align*}
 
@@ -2614,14 +2593,9 @@ Da nur
 \end_inset
 
  zu 0 werden kann:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
-\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}-\left(\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
-\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{\tilde{F}}^{T}\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\\
 \left(\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)\left(\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)^{-1} & =\vec{\tilde{F}}^{T}
 \end{align*}
 
@@ -2639,86 +2613,21 @@ Varianz
 \end_layout
 
 \begin_layout Standard
-Durch die Umformulierung der Korrelationsmatrix zur Kovarianzmatrix, muss
- der Maximum Likelihood Schätzer der globalen Varianz 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
- für eine multivariate Normalverteilung umformuliert werden:
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
-\end{align*}
+Die direkte analytische Bestimmung der Varianz im Falle des Co-Kriging Verfahren
+s ist mit der hier gewählten Formulierung nicht möglich.
+ Es ist allerdings eine iterative Bestimmung möglich, diese Art der Bestimmung
+ wird in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Iterative-VarianzbestimmungTraining"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\frac{1}{\sigma_{k}^{2}}\mathbf{Corr}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei 
-\begin_inset Formula $k$
-\end_inset
-
- den aktuellen Iterationsschritt angibt.
- 
-\end_layout
-
-\begin_layout Standard
-Hierbei gibt es allerdings einen Nachteil.
- Es ist notwendig bei der ersten Iteration einen Startwert für 
-\begin_inset Formula $\sigma_{k}^{2}$
-\end_inset
-
- zu bestimmen.
- Mit diesem Startwert wird nun 
-\begin_inset Formula $\mathbf{Cov}^{-1}$
-\end_inset
-
+ beschrieben und bringt allerdings viele numerische Probleme mit sich und
+ wurde aus diesem Grund nicht verwendet.
+ Innerhalb dieses Verfahrens wurden die Varianzen als zusätzlicher Hyperparamete
+r innerhalb des Trainings freigegeben und werden dann über das Training
  bestimmt.
- Nachdem 
-\begin_inset Formula $\mathbf{Cov}^{-1}$
-\end_inset
-
- bestimmt wurde, wird der Likelihood Schätzer für 
-\begin_inset Formula $\sigma_{k+1}^{2}$
-\end_inset
-
- berechnet und damit ist das korrekte 
-\begin_inset Formula $\sigma_{k+1}^{2}$
-\end_inset
-
- bekannt.
- Die Kovarianzmatrix wurde allerdings noch mit dem 
-\begin_inset Formula $\sigma_{k}^{2}$
-\end_inset
-
- aufgestellt und ist somit ungültig.
- Es wäre an dieser Stelle also nötig die Kovarianzmatrix neu aufzustellen
- und alle Schritte ein zweites Mal zu durchlaufen.
-\end_layout
-
-\begin_layout Standard
-Bei einem Minimierungsverfahren ist das meist nicht notwendig, da die Schätzunge
-n sich nicht sehr stark verändern.
- Bei einer zufälligen Initialisierung kann dies allerdings zu Problemen
- führen, die Update Schritte sollten in diesem Fall öfter wiederholt werden.
  
 \end_layout
 
@@ -2766,9 +2675,6 @@ Eine sehr einfache und schnelle Möglichkeit die Hyperparameter für eine
 \end_inset
 
  liegen.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 c_{erw} & =\frac{1}{n^{2}}\underset{i=1}{\overset{i<n}{\sum}}\underset{j=1}{\overset{j<n}{\sum}}e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
@@ -2782,9 +2688,6 @@ c_{erw} & =\frac{1}{n^{2}}\underset{i=1}{\overset{i<n}{\sum}}\underset{j=1}{\ove
 \begin_layout Standard
 Nimmt man weiterhin an, dass die einzelnen Korrelationswerte nahezu identisch
  sind:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
@@ -2793,9 +2696,6 @@ c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)
@@ -2803,18 +2703,11 @@ c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Nimmt man ferner an, dass 
 \begin_inset Formula $x$
 \end_inset
 
  eine Realisierung einer Zufallsvariablen ist und bildet den Erwartungswert:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =E\left[-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)\right]
@@ -2822,10 +2715,6 @@ Nimmt man ferner an, dass
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Als weitere Vereinfachung sollen alle Hyperparameter den gleichen Wert haben:
 \end_layout
 
@@ -2837,15 +2726,8 @@ Als weitere Vereinfachung sollen alle Hyperparameter den gleichen Wert haben:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
  wird aufgrund des Quadrats vernachlässigt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}E\left[\underset{l=1}{\overset{l<k}{\sum}}\left(x_{i,l}-x_{j,l}\right)^{2}\right]
@@ -2854,9 +2736,6 @@ Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]-E\left[2x_{i,l}x_{j,l}\right]+E\left[x_{j,l}^{2}\right]\right)
@@ -2864,18 +2743,11 @@ Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Nimmt man nun an, dass die Zufallsvariablen unabhängig sind, gilt 
 \begin_inset Formula $E\left[2x_{i,l}x_{j,l}\right]=0$
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]+E\left[x_{j,l}^{2}\right]\right)
@@ -2883,10 +2755,6 @@ Nimmt man nun an, dass die Zufallsvariablen unabhängig sind, gilt
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die Varianz einer Zufallsvariable 
 \begin_inset Formula $X$
 \end_inset
@@ -2898,9 +2766,6 @@ Die Varianz einer Zufallsvariable
 .
  Die im Modell verwendeten Daten werden grundsätzlich auf einen Erwartungswert
  von Null und eine Standardabweichung von Eins normiert.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 E\left[X\right] & =0
@@ -2931,10 +2796,6 @@ Daraus ergibt sich folgende Formel für das verwendete Modell für die Varianz
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Also
 \end_layout
 
@@ -2946,14 +2807,7 @@ E\left[x_{i,l}^{2}\right] & =\textrm{var}\left[x_{i,l}^{2}\right]=1
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 und analog dazu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 E\left[x_{j,l}^{2}\right] & =\textrm{var}\left[x_{j,l}^{2}\right]=1
@@ -2961,14 +2815,7 @@ E\left[x_{j,l}^{2}\right] & =\textrm{var}\left[x_{j,l}^{2}\right]=1
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Daraus folgt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(1+1\right)
@@ -2977,9 +2824,6 @@ Daraus folgt:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}2k
@@ -2988,9 +2832,6 @@ Daraus folgt:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \log\left(-\frac{\log\left(c_{erw}\right)}{k}\right) & =\theta\label{eq:ConstThetaSchatzung}
@@ -2998,10 +2839,6 @@ Daraus folgt:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Mit dieser Formel hat man nun eine Möglichkeit die Hyperparameter zu schätzen.
  Aufgrund der vielen Annahmen und Vereinfachungen ist dieses Verfahren als
  heuristisch einzustufen.
@@ -3228,7 +3065,24 @@ Das Kriging Modell wird in der Regel innerhalb einer Optimierung verwendet.
  Als einfacher Ansatz wäre es z.B.
  möglich einfach immer die Hyperparameter aus dem letzten Training zu Initialisi
 erung zu verwenden.
- In folgenden Fällen, kann dies allerdings zu Problemen führen:
+ Diese Art der Wiederverwendung von alten Trainings ist für das Kriging
+ Verfahren ohne Probleme möglich.
+ Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisi
+erungskonstanten, so müssen die Hyperparameter renormalisiert werden, in
+ Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Renormalisierung-der-Hyperparame"
+
+\end_inset
+
+ wird eine solche Renormalisierung beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei der Wiederverwendung alter Hyperparametersätz müssen jedoch zwei Problemstel
+lungen beachtet werden:
 \end_layout
 
 \begin_layout Enumerate
@@ -3243,8 +3097,8 @@ t
 
 \begin_layout Standard
 Im ersten Fall besteht die Gefahr, dass das Training durch die ungünstige
- Initialisierung im lokalen Minimum bleibt und so nicht die optimalen Hyperparam
-eter findet.
+ Initialisierung in einem lokalen Minimum bleibt und so nicht die optimalen
+ Hyperparameter findet.
  Das wiederum führt zu schlechten Vorhersagen.
  Im Extremfall kann es sogar passieren, dass das lokale Minimum während
  der gesamten Optimierung nicht mehr verlassen wird.
@@ -3465,7 +3319,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/UltraRestart/Vergleich.png
-	scale 25
+	scale 15
 
 \end_inset
 
@@ -3476,43 +3330,6 @@ status collapsed
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:RestartRandomLikelihood"
-
-\end_inset
-
-Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
- eine Testoptimierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/UltraRestart/VergleichTrainingsZeit.png
-	scale 25
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RestartRandomTrainingTime"
 
 \end_inset
 
@@ -3731,6 +3548,9 @@ d Funktion berechnet werden und zum anderen die partiellen Ableitungen nach
 
  partielle Ableitungen gebildet werden, aus diesem Grund kann der numerische
  Aufwand stark variieren.
+ Besonders im Co-Kriging ist dieser Punkt wichtig, da die Anzahl der Hyperparame
+ter größer ist, als bei einem Ordinary-Kriging.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4372,231 +4192,6 @@ key "press2007numerical,gill1981practical,gill2007numerical"
 \end_inset
 
  gefunden werden.
-\end_layout
-
-\begin_layout Subsection
-Renormalisierung der Hyperparameter -> ANhang und in Ultra Restart erwähnen
-\end_layout
-
-\begin_layout Standard
-Möchte man mit bestehenden Hyperparametern, aber einer neuen oder erweiterten
- Datenbasis Vorhersagen treffen, so ändern sich die Erwartungswerte der
- zu trainierenden Funktion und deren Parametern.
- Da das alte Training und damit auch die Daten des Trainings mit den alten
- Erwartungswerten und Standartabweichungen normalisiert worden sind, müssen
- die Hyperparameter ebenfalls renormalisiert werden.
- Ansonsten würde man für die Kovarianz zwischen 2 Membern unterschiedliche
- Werte bekommen.
-\end_layout
-
-\begin_layout Standard
-Daraus ergibt sich folgende notwendige Bedingung:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-cov\left(\vec{x}_{1alt},\vec{x}_{2alt}\right) & =cov\left(\vec{x}_{1neu},\vec{x}_{2neu}\right)\label{eq:RenormCovBedingung}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei 
-\begin_inset Formula $x_{real}$
-\end_inset
-
- den unnormierten Parameter darstellt, 
-\begin_inset Formula $\mu_{alt}$
-\end_inset
-
- und 
-\begin_inset Formula $\sigma_{alt}$
-\end_inset
-
- stellen den alten Erwartungswert sowie die Standartabweichung der Parameter
- dar.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\vec{x}_{1alt} & =\left[\begin{array}{c}
-\frac{x_{1,1real}-\mu_{1alt}}{\sigma_{1alt}}\\
-\vdots\\
-\frac{x_{1,nreal}-\mu_{nalt}}{\sigma_{nalt}}
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Für 
-\begin_inset Formula $\vec{x}_{2alt}$
-\end_inset
-
-, sowies 
-\begin_inset Formula $\vec{x}_{1neu}$
-\end_inset
-
- gilt analoges.
-\end_layout
-
-\begin_layout Standard
-Die Bedingung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:RenormCovBedingung"
-
-\end_inset
-
- soll anhand eines Beispiels erläutert werden, es wird hierfür eine Gauss
- Korrelationsfunktion mit einem Hyperparameter verwendet:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\left|\frac{x_{1real}-\mu_{alt}}{\sigma_{alt}}-\frac{x_{2real}-\mu_{alt}}{\sigma_{alt}}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\left|\frac{x_{1real}-\mu_{neu}}{\sigma_{neu}}-\frac{x_{2real}-\mu_{neu}}{\sigma_{neu}}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Geht man nun davon aus, dass die Kriging Varianz sich nicht ändert:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\sigma_{KriAlt}^{2} & =\sigma_{KriNeu}^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei diese Bedingung im Code unbedingt erfüllt sein muss.
- Im Code ist es so umgesetzt, dass zuerst die Kovarianzmatrix mit der alten
- Krigingvarianz erzeugt wird und danach der Likelihood Schätzer für die
- Krigingvarianz aufgerufen wird, siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:sSqrLikelihoodOrdinary"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Dieser Schätzer sollte im Normalfall allerdings auf eine neue Krigingvarianz
- kommen, wodurch es im weiteren Verlauf zu großen Problemen kommen kann.
- Insbesondere bei der Vorhersage, wo für den Kovarianzvektor 
-\begin_inset Formula $\vec{c}$
-\end_inset
-
- (siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KoKrigingKovarianzVorhersage"
-
-\end_inset
-
-) dann die neue Krigingvarianz verwendet werden würde.
- Kovarianzmatrix und Vektor würden dann nicht mehr zusammen passen.
-\end_layout
-
-\begin_layout Standard
-Die Formel lässt sich damit weiterhin vereinfachen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}=e^{\theta_{neu}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \log\left(e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \theta_{alt}+\log\left(\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
