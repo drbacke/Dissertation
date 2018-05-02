@@ -2561,51 +2561,36 @@ Und einen Vektor
 Daraus folgt:
 \begin_inset Formula 
 \begin{align*}
-MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
-\vec{0} & =\frac{\partial}{\partial\vec{\tilde{F}}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\frac{\partial}{\partial\vec{\tilde{F}}}\left(-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
+MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)
 \end{align*}
 
 \end_inset
 
-Die Ableitung der quadratischen Form 
-\series medium
-mit symmetrischer Matrix 
-\begin_inset Formula $A$
+Mit dieser Gleichung lässt sich der gesuchte Erwartungswertvektor 
+\begin_inset Formula $\vec{\tilde{F}}$
 \end_inset
 
- lautet 
-\begin_inset Formula $\frac{\partial}{\partial x}g\left(x\right)^{T}\mathbf{A}g\left(x\right)=g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}+\frac{\partial g\left(x\right)}{\partial x}^{T}\mathbf{A}g\left(x\right)=2g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}$
+ des Kriging Prozesses innerhalb des Trainings analytisch bestimmen.
+ Die Lösung sieht wie folgt aus, wobei der komplette Lösungsweg in Anhang
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Likelihood-Schätzer-Erwartungswe"
+
 \end_inset
 
+ zu finden ist:
+\end_layout
 
-\series default
-
+\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
-\end{align*}
-
-\end_inset
-
-Da nur 
-\begin_inset Formula $\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}$
-\end_inset
-
- zu 0 werden kann:
-\begin_inset Formula 
-\begin{align*}
-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
 \left(\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)\left(\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)^{-1} & =\vec{\tilde{F}}^{T}
 \end{align*}
 
 \end_inset
 
-Mit dieser Gleichung lässt sich der Erwartungswertvektor 
-\begin_inset Formula $\vec{\tilde{F}}$
-\end_inset
 
- des Kriging Prozesses innerhalb des Trainings analytisch bestimmen.
 \end_layout
 
 \begin_layout Paragraph*

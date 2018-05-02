@@ -1158,7 +1158,7 @@ Der erste Schritt besteht darin, die notwendigen Kovarianzfunktionen zu
 folgende Kovarianzfunktionen zu modellieren:
 \begin_inset Formula 
 \begin{align}
-\textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighHighBeschreibung-1}\\
+\textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}(\vec{x}^{'})\right)}\label{eq:CovHighHighBeschreibung-1}\\
 \textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighLowBeschreibung}\\
 \textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i+1}\left(\vec{x}^{'}\right)\right)}\label{eq:CovLowLowBeschreibung}
 \end{align}

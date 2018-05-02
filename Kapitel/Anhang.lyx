@@ -91,6 +91,63 @@ appendix
 Anhang
 \end_layout
 
+\begin_layout Subsection
+Likelihood Schätzer Erwartungswerte und Varianz 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Likelihood-Schätzer-Erwartungswe"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
+\vec{0} & =\frac{\partial}{\partial\vec{\tilde{F}}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
+\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\frac{\partial}{\partial\vec{\tilde{F}}}\left(-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
+\end{align*}
+
+\end_inset
+
+Die Ableitung der quadratischen Form 
+\series medium
+mit symmetrischer Matrix 
+\begin_inset Formula $A$
+\end_inset
+
+ lautet 
+\begin_inset Formula $\frac{\partial}{\partial x}g\left(x\right)^{T}\mathbf{A}g\left(x\right)=g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}+\frac{\partial g\left(x\right)}{\partial x}^{T}\mathbf{A}g\left(x\right)=2g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}$
+\end_inset
+
+
+\series default
+
+\begin_inset Formula 
+\begin{align*}
+\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
+\end{align*}
+
+\end_inset
+
+Da nur 
+\begin_inset Formula $\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}$
+\end_inset
+
+ zu 0 werden kann:
+\begin_inset Formula 
+\begin{align*}
+\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
+\left(\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)\left(\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)^{-1} & =\vec{\tilde{F}}^{T}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Beweis: Variogramm Abhängigkeit von Distanz
 \begin_inset CommandInset label
