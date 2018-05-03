@@ -278,22 +278,30 @@ reference "chap:Die-Kriging-Verfahren"
  wurden die verschiedenen Kriging-Verfahren beschrieben.
  Innerhalb dieses Kapitels wurden die Begriffe der Kovarianzmatrix und des
  Kovarianzvektors verwendet.
- muss ein geeignetes Kovarianzmodell gefunden werden.
- In Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Allgemeine-Kriging-Vorhersage"
-
+ Um diese aufstellen zu können, ist eine Kovarianzfunktion in der Form 
+\begin_inset Formula $cov\left(Z(\vec{x}_{1}),Z(\vec{x_{2}})\right)$
 \end_inset
 
- werden die statistischen Kovarianzmodelle für die einzelnen Kriging Verfahren
- aufgestellt, diese beziehen sich allerdings nicht auf konkrete Stützstellen
- und Orte.
- Aus diesem Grund, muss noch ein ortsabhängiges Modell für die Kovarianzfunktion
-en gefunden werden.
- Da die wahre Kovarianzfunktion nicht bekannt ist, behilft man sich mit
- Modellfunktionen.
- Diese Funktionen müssen für jedes mögliche Punktepaar eine Kovarianz zuordnen.
+ nötig, wobei 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}$
+\end_inset
+
+ die Orte von bekannten Stützstellen beschreiben.
+ Da in der praktischen Anwendung der reale Zufallsprozess 
+\begin_inset Formula $Z(\vec{x})$
+\end_inset
+
+ nicht bekannt ist und damit auch nicht die Kovarianzfunktion, bedient man
+ sich parametrisierten Kovarianzmodellen in der Form 
+\begin_inset Formula $cov\left(\vec{x}_{1},\vec{x_{2}}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Diese Funktionen müssen für jedes mögliche Punktepaar eine Kovarianz zuordnen.
  Weiterhin muss die daraus resultierende Matrix positiv Definit und symmetrisch
  sein, was die Wahl einer geeigneten Funktion erschwert.
  Das folgende Beispiel zeigt eine beispielhafte Kovarianzmatrix 
@@ -322,19 +330,42 @@ y_{1}\left(\vec{x}_{4}\right) & cov\left(\vec{x}_{4},\vec{x}_{1}\right) & cov\le
 
 \end_inset
 
+Um ein solches parametrisiertes Modell praktisch nutzbar zu machen, müssen
+ drei verschiedene Problemstellungen behandelt werden:
+\end_layout
 
+\begin_layout Enumerate
+Die Kovarianzfunktion darf nicht durch die absolute Lage im Raum 
+\begin_inset Formula $cov\left(\vec{x}_{1},\vec{x_{2}}\right)$
+\end_inset
+
+, sondern muss durch den Verbindungsvektor 
+\begin_inset Formula $\vec{h}=\vec{x}_{1}-\vec{x_{2}}$
+\end_inset
+
+ beschrieben werden: 
+\begin_inset Formula $cov\left(\vec{h}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Es wird ein berechenbares und parametrisiertes Modell für die Kovarianzfunktion
+ benötigt, welches zu einer positiv definiten und symmetrischen Matrix führt.
+\end_layout
+
+\begin_layout Enumerate
+Die darin verwendeten Parameter, im Folgenden Hyperparameter genannt, müssen
+ in einem gradientenbasierten Trainingsverfahren nutzbar sein.
 \end_layout
 
 \begin_layout Standard
-Die Herleitung einer solchen ortsabhängigen Kovarianzfunktion lässt sich
- gut über den Begriff des Variogramms erläutern, dieser Begriff soll es
- dem Leser ermöglichen die grundlegende Idee hinter der Bildung eines Kovarianzm
-odells zu verstehen.
- 
+Diese Problemstellungen werden in den folgenden drei Abschnitten behandelt.
 \end_layout
 
 \begin_layout Subsection
-Kovarianzfunktion Modellierung
+Ortsabhängigkeit Kovarianzfunktion 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Variogramm"
@@ -364,31 +395,27 @@ key "matheron1963principles"
 \begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
 \end_inset
 
-, so gilt für das Variogramm 
+, so ist das Variogramm 
 \begin_inset Formula $2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
-:
+ definiert über:
 \begin_inset Formula 
 \begin{align}
-2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right) & =var\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\\
+2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right) & \coloneqq var\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\\
  & =E\left[\left(\left(Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right)-E\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\right)^{2}\right]\nonumber \\
  & =E\left[\left(\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)-\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right)^{2}\right]\nonumber 
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Weiterhin gilt für das Kovariogramm:
+Weiterhin wird das Kovariogramm wie folgt definiert:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(\vec{x}_{1},\vec{x}_{2}\right)=\frac{1}{2}var\left[Z\left(\vec{x_{1}}\right)\right]+\frac{1}{2}var\left[Z\left(\vec{x_{2}}\right)\right]-\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)
+cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{x_{1}}\right)\right]+\frac{1}{2}var\left[Z\left(\vec{x_{2}}\right)\right]-\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)
 \end{equation}
 
 \end_inset
@@ -403,8 +430,9 @@ Einfacher formuliert beschreibt das Variogramm und auch das Kovariogramm
 \begin_inset Formula $\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
- wird als Semivariogramm bezeichnet.Trifft man die Annahme, dass das Zufallsfeld
- schwach stationär ist, dann gilt (siehe 
+ wird als Semivariogramm bezeichnet.
+ Trifft man die Annahme, dass das Zufallsfeld schwach stationär ist, dann
+ gilt (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ozkaya2014"
@@ -419,41 +447,20 @@ E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-weiterhin gilt dann, dass die Kovarianz nur abhängig von der Verschiebung
- 
+Weiterhin gilt dann, dass die Kovarianz nur noch abhängig von dem Verschiebevekt
+or 
 \begin_inset Formula $\vec{h}\in\mathbb{R^{\textrm{k}}};\vec{h}=\vec{x}_{1}-\vec{x}_{2}$
 \end_inset
 
  ist:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}+\vec{h}\right)\right) & =cov\left(\vec{h}\right)
+cov\left(\vec{x},\vec{x}+\vec{h}\right) & =cov\left(\vec{h}\right)
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Mit dieser Annahme ist das Variogramm und auch das Kovariogramm dann nur
- noch abhängig vom Abstand der Punkte zueinander 
-\begin_inset Formula $\gamma\left(\vec{h}\right)$
-\end_inset
-
-, der Beweis ist in Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Beweis:-Variogramm-Abhängigkeit"
-
-\end_inset
-
- zu finden).
- Für das Kovariogramm folgt daraus:
+Damit folgt dann für die gesuchte Kovarianzfunktion: 
 \begin_inset Formula 
 \begin{equation}
 cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\label{eq:KovariogrammGrundformel}
@@ -461,11 +468,45 @@ cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\labe
 
 \end_inset
 
+Der Term 
+\begin_inset Formula $cov\left(\vec{0}\right)$
+\end_inset
 
+ entspricht der stationären Varianz des Prozesses 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+) und die Modellierung von 
+\begin_inset Formula $\gamma\left(\vec{h}\right)$
+\end_inset
+
+ wird in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-parametrisiertes-Model"
+
+\end_inset
+
+ behandelt.
+ 
 \end_layout
 
-\begin_layout Subsection*
-Kovariogramm Modellierung
+\begin_layout Subsection
+Kovarianz parametrisiertes Modell
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianz-parametrisiertes-Model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -506,7 +547,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/KrigingKapitel/KoVariogramm.eps
+	filename ../images/KrigingKapitel/KoVariogramm.eps
 	scale 40
 
 \end_inset
@@ -962,8 +1003,8 @@ Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
 
 \end_layout
 
-\begin_layout Paragraph*
-Hyperparameter Wertebereich
+\begin_layout Subsection
+Nutzbarkeit innerhalb eines gradientenbasierten Trainingsverfahrens
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Negative-Hyperparameter-1"

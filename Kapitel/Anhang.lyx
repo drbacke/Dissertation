@@ -159,17 +159,31 @@ name "sec:Beweis:-Variogramm-Abhängigkeit"
 
 \end_layout
 
-\begin_layout Subparagraph*
+\begin_layout Paragraph*
+Behauptung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
 Beweis:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-2\gamma\left(0,0+\vec{h}\right) & =\frac{1}{2}var\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\\
+2\gamma\left(\vec{0},\vec{0}+\vec{h}\right) & =\frac{1}{2}var\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\\
  & =\frac{1}{2}E\left[\left(\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)-E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\right)^{2}\right]\\
  & =\frac{1}{2}E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]+E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]^{2}\right]\\
- & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)+\left(E\left[Z\left(0+\vec{h}\right)\right]-E\left[Z\left(0\right)\right]\right)^{2}\right]\\
  & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
  & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}\right]\\
  & =E\left[Z\left(0+\vec{h}\right)^{2}-2Z\left(0+\vec{h}\right)Z\left(0\right)+Z\left(0\right)^{2}\right]\\
@@ -183,6 +197,10 @@ Beweis:
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
