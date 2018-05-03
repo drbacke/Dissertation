@@ -1070,9 +1070,9 @@ reference "sec:AnhangKovarianz-zwischen-Vorhersagen"
 
  zu finden ist.
 \begin_inset Formula 
-\begin{align*}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
-\end{align*}
+\begin{align}
+cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:KovarianzPredictor}
+\end{align}
 
 \end_inset
 
@@ -1159,8 +1159,8 @@ folgende Kovarianzfunktionen zu modellieren:
 \begin_inset Formula 
 \begin{align}
 \textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}(\vec{x}^{'})\right)}\label{eq:CovHighHighBeschreibung-1}\\
-\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i}\left(\vec{x}^{'}\right)\right)}\label{eq:CovHighLowBeschreibung}\\
-\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i+1}\left(\vec{x}^{'}\right)\right)}\label{eq:CovLowLowBeschreibung}
+\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i}(\vec{x}^{'})\right)}\label{eq:CovHighLowBeschreibung}\\
+\textrm{cov\left(Z_{i+1}\left(\vec{x}\right),Z_{i+1}(\vec{x}^{'})\right)}\label{eq:CovLowLowBeschreibung}
 \end{align}
 
 \end_inset

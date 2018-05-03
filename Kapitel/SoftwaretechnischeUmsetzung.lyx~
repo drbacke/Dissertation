@@ -268,109 +268,56 @@ name "subsec:Kovarianzmatrix"
 \end_layout
 
 \begin_layout Standard
+In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
 
-\color red
-Übergang von COV(Z,Z) zu Sigma*corr(x,x2) muss klarer werden
-\end_layout
+\end_inset
 
-\begin_layout Standard
+ wurden die verschiedenen Kriging-Verfahren beschrieben.
+ Innerhalb dieses Kapitels wurden die Begriffe der Kovarianzmatrix und des
+ Kovarianzvektors verwendet.
+ muss ein geeignetes Kovarianzmodell gefunden werden.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Allgemeine-Kriging-Vorhersage"
 
-\color red
-Und auch die Unterschiede sder Modellierung Ordinary und Co-Kriging, vielleicht
- doch als Klasse mit Attributen beschrieben
-\end_layout
+\end_inset
 
-\begin_layout Standard
-
-\color red
-Übergang vom Variogramm zum lokalen Korrelationsmodell ist nicht klar genug
-\end_layout
-
-\begin_layout Standard
-Um die für das Kriging-Verfahren benötigte Kovarianzmatrix aufstellen zu
- können, muss ein geeignetes Kovarianzmodell gefunden werden.
+ werden die statistischen Kovarianzmodelle für die einzelnen Kriging Verfahren
+ aufgestellt, diese beziehen sich allerdings nicht auf konkrete Stützstellen
+ und Orte.
+ Aus diesem Grund, muss noch ein ortsabhängiges Modell für die Kovarianzfunktion
+en gefunden werden.
  Da die wahre Kovarianzfunktion nicht bekannt ist, behilft man sich mit
  Modellfunktionen.
  Diese Funktionen müssen für jedes mögliche Punktepaar eine Kovarianz zuordnen.
  Weiterhin muss die daraus resultierende Matrix positiv Definit und symmetrisch
  sein, was die Wahl einer geeigneten Funktion erschwert.
- Daher wird im ersten Teil dieses Kapitels der Begriff des Variogramms eingeführ
-t, dieser Begriff soll es dem Leser ermöglichen die grundlegende Idee hinter
- der Bildung eines Kovarianzmodells zu verstehen.
- Im zweiten Teil dieses Abschnittes wird dann die konkrete Umsetzung zum
- Aufstellen einer Kovarianzmatrix gezeigt und auch auf einige Probleme bei
- der Umsetzung aufmerksam gemacht.
- 
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Da in einem realen CO-Kriging Modell ortsabhängige Stützstellen approximiert
- werden sollen und die reale Kovarianzfunktion nicht bekannt ist, wird die
- Kovarianzfunktion durch ortsabhängige Korrelationsfunktionen modelliert.
- Diese Korrelationsfunktionen werden im Folgenden mit 
-\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)$
+ Das folgende Beispiel zeigt eine beispielhafte Kovarianzmatrix 
+\begin_inset Formula $\mathbf{\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}}$
 \end_inset
 
- bezeichnet, wobei 
-\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ;j,k\in\left\{ 1,...,n_{i}\right\} $
+ für vier verschiedene Samples 
+\begin_inset Formula $y_{i}\left(\vec{x}\right)$
 \end_inset
 
- die jeweilige Stützstelle an dem Ort 
-\begin_inset Formula $\vec{x}$
+ der jeweiligen Gütestufe 
+\begin_inset Formula $i\in\left\{ 1,...,s\right\} $
 \end_inset
 
- darstellt.
- Weiterhin sind diese Korrelationsfunktionen nicht von der
-\color inherit
- der absoluten Lage im Raum abhängig, sondern nur noch von dem Abstand der
- Punkte zueinander 
-\color magenta
-
-\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)=c\left(\left|\vec{x}_{j}-\vec{x}_{k}\right|\right)$
-\end_inset
-
-
-\color inherit
-.
- Erst mit diesen Modellen ist es möglich eine Kovarianzmatrix aufzustellen
- und damit ein gültiges Kriging-Modell zu generieren.
- Um diesen Zusammmenhang zu erläutern, wird im ersten Kapitel der Begriff
- des Variogramms erklärt.
- Daraufhin wird ausgehend von diesem Variogramm die für das Kriging notwendige
- Kovarianzfunktion hergeleitet.
- 
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Der Zusammenhang zwischen den Korrelationsfunktionen und den Kovarianzen
- ist der Folgende 
-\begin_inset Formula $c_{d}\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma_{d}^{2}}cov\left(Z_{diff}\left(\vec{x}_{j}\right),Z_{diff}\left(\vec{x}_{k}\right)\right)$
-\end_inset
-
- und analog 
-\begin_inset Formula $c_{l}\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma_{l}^{2}}cov\left(Z_{1}\left(\vec{x}_{j}\right),Z_{1}\left(\vec{x}_{k}\right)\right)$
-\end_inset
-
-.
- Damit ist es möglich eine Kovarianzmatrix aufzustellen.
- Das folgende Beispiel stellt eine Kovarianzmatrix für zwei verschiedene
- Samples aus jeweils zwei Gütestufen dar:
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
+ :
 \begin_inset Formula 
 \begin{equation}
-\mathbf{Cov}=\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{1}\right)+\sigma_{d}^{2}c_{d}\left(\vec{x}_{1},\vec{x}_{1}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1},\vec{x}_{2}\right)\\
-y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1}\right) & \sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{2}\right)
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1}
+\mathbf{Cov}=\left[\begin{array}{c|cccc}
+ & y_{0}\left(\vec{x}_{1}\right) & y_{0}\left(\vec{x}_{2}\right) & y_{1}\left(\vec{x}_{3}\right) & y_{1}\left(\vec{x}_{4}\right)\\
+\hline y_{0}\left(\vec{x}_{1}\right) & cov\left(\vec{x}_{1},\vec{x}_{1}\right) & cov\left(\vec{x}_{1},\vec{x}_{2}\right) & cov\left(\vec{x}_{1},\vec{x}_{3}\right) & cov\left(\vec{x}_{1},\vec{x}_{4}\right)\\
+y_{0}\left(\vec{x}_{2}\right) & cov\left(\vec{x}_{2},\vec{x}_{1}\right) & cov\left(\vec{x}_{2},\vec{x}_{2}\right) & cov\left(\vec{x}_{2},\vec{x}_{3}\right) & cov\left(\vec{x}_{2},\vec{x}_{4}\right)\\
+y_{1}\left(\vec{x}_{3}\right) & cov\left(\vec{x}_{3},\vec{x}_{1}\right) & cov\left(\vec{x}_{3},\vec{x}_{2}\right) & cov\left(\vec{x}_{3},\vec{x}_{3}\right) & cov\left(\vec{x}_{3},\vec{x}_{4}\right)\\
+y_{1}\left(\vec{x}_{4}\right) & cov\left(\vec{x}_{4},\vec{x}_{1}\right) & cov\left(\vec{x}_{4},\vec{x}_{2}\right) & cov\left(\vec{x}_{4},\vec{x}_{3}\right) & cov\left(\vec{x}_{4},\vec{x}_{4}\right)
+\end{array}\right]\label{eq:KovarianzmatrixBeispiel}
 \end{equation}
 
 \end_inset
@@ -378,8 +325,16 @@ y_{1}\left(\vec{x}_{2}\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{2},\vec{x}_{1
 
 \end_layout
 
+\begin_layout Standard
+Die Herleitung einer solchen ortsabhängigen Kovarianzfunktion lässt sich
+ gut über den Begriff des Variogramms erläutern, dieser Begriff soll es
+ dem Leser ermöglichen die grundlegende Idee hinter der Bildung eines Kovarianzm
+odells zu verstehen.
+ 
+\end_layout
+
 \begin_layout Subsection
-Variogramm
+Kovarianzfunktion Modellierung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Variogramm"
@@ -414,9 +369,6 @@ key "matheron1963principles"
 \end_inset
 
 :
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right) & =var\left[Z\left(\vec{x}_{1}\right)-Z\left(\vec{x}_{2}\right)\right]\\
@@ -473,13 +425,10 @@ E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k
 \begin_layout Standard
 weiterhin gilt dann, dass die Kovarianz nur abhängig von der Verschiebung
  
-\begin_inset Formula $\vec{h}\in\mathbb{R^{\textrm{k}}}$
+\begin_inset Formula $\vec{h}\in\mathbb{R^{\textrm{k}}};\vec{h}=\vec{x}_{1}-\vec{x}_{2}$
 \end_inset
 
  ist:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}+\vec{h}\right)\right) & =cov\left(\vec{h}\right)
@@ -505,9 +454,6 @@ reference "sec:Beweis:-Variogramm-Abhängigkeit"
 
  zu finden).
  Für das Kovariogramm folgt daraus:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\label{eq:KovariogrammGrundformel}
@@ -523,7 +469,7 @@ Kovariogramm Modellierung
 \end_layout
 
 \begin_layout Standard
-Wie bereits beschrieben, wird für das Kriging Verfahren wird eine parametrisches
+Wie bereits beschrieben, wird für das Kriging Verfahren ein parametrisches
  Kovarianz-Modell benötigt.
  Gleichung 
 \begin_inset CommandInset ref
@@ -558,9 +504,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename /home/schm_ad/Diss/images/KrigingKapitel/KoVariogramm.eps
-	scale 30
+	scale 40
 
 \end_inset
 
@@ -585,8 +532,8 @@ name "fig:Beispielhaftes-VarioKovariogramm"
 
 \end_inset
 
-Auf der X-Achse ist die räumliche Distanz aufgetragen und auf der Y-Achse
- ist die Semikovarianz 
+Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Semikovarianz
+ 
 \begin_inset Formula $cov\left(\vec{h}\right)$
 \end_inset
 
@@ -613,23 +560,14 @@ Nugget
 \end_inset
 
  bezeichnet und entspricht einem ortsunabhängigen Rauschen.
- Der räumliche Zusammenhang ist per Definition bei 
-\begin_inset Formula $\vec{h}=0$
-\end_inset
-
- am höchsten, springt dann aber direkt um 
-\begin_inset Formula $\lambda\in\mathbb{R}$
-\end_inset
-
- nach unten.
  Um dies zu modellieren, wird eine eine Sprungfunktion 
-\begin_inset Formula $\delta_{0}$
+\begin_inset Formula $\delta$
 \end_inset
 
  definiert:
 \begin_inset Formula 
 \[
-\delta_{0}\left(\vec{h}\right)=\begin{cases}
+\delta\left(\vec{h}\right)=\begin{cases}
 1 & falls\,\vec{h}=\vec{0}\\
 0 & sonst
 \end{cases}
@@ -667,15 +605,7 @@ partial Sill
 \end_inset
 
  bezeichnet.
- Um nun den 
-\begin_inset Quotes gld
-\end_inset
-
-Nugget-Effekt
-\begin_inset Quotes grd
-\end_inset
-
- zu modellieren wird Gleichung 
+ Damit lässt sich Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:KovariogrammGrundformel"
@@ -688,7 +618,7 @@ reference "eq:KovariogrammGrundformel"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(\vec{h}\right)=\sigma^{2}+\lambda\delta_{0}\left(\vec{h}\right)-2\gamma\left(\vec{h}\right)
+cov\left(\vec{h}\right)=\sigma^{2}+\lambda\delta\left(\vec{h}\right)-2\gamma\left(\vec{h}\right)\label{eq:KovarianzmodellAllgemein}
 \end{equation}
 
 \end_inset
@@ -709,9 +639,9 @@ Die Bestimmung der Varianz
 \begin_inset Formula $\lambda$
 \end_inset
 
- innerhalb des Kriging Modells, werden mithilfe des Trainingsverfahrens
- bestimmt.
- Diese wird in Kapitel 
+ innerhalb des Kriging Modells, werden mithilfe eines Trainingsverfahrens
+ geschätzt.
+ Diese werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:MinimierungsverfahrenTraining"
@@ -738,9 +668,23 @@ key "Cressie1993"
 ), dieses Verfahren liefert für die Abstände bekannter Stützstellen den
  entsprechenden räumlichen Zusammenhang und ist als nicht parametrisches
  Verfahren einzuordnen.
- Typischerweise greift man aber auf parametrisierte Modellfunktionen zurück,
+ Diese Art von Verfahren benötigen aber eine sehr große Anzahl an Stützstellen,
+ um plausible Variogramme zu liefern.
+ Dafür benötigen diese keinerlei Annahmen über den Verlauf des Variogramms
+ über der Distanz.
+ 
+\end_layout
+
+\begin_layout Standard
+Typischerweise greift man aber auf parametrisierte Modellfunktionen zurück,
  welche an die vorhandenen Stützstellen bestmöglich angepasst werden.
- Diese Funktionen müssen positiv semidefinit sein (vgl.
+ Für diese parametrisierten Modellfunktionen wird ein typischer Verlauf
+ einer Variogrammfunktion angenommen und die Parameter so gewählt, dass
+ die Funktion bestmöglich an die vorhanden Stützstellen angepasst wird.
+ Dadurch kommt diese Art des Verfahrens mit weniger Stützstellen aus, als
+ eine empirische Schätzung, ist dafür allerdings eingeschränkter was die
+ Form der Funktion angeht.
+ Diese Funktionen müssen allerdings positiv semidefinit sein (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -750,158 +694,18 @@ key "Cressie1993,Krueger2013,Schmid2012"
 
 ).
  Da dieser Nachweis sehr schwierig ist, beschränkt man sich bekannte Modellfunkt
-ionen für die der Nachweis schon erbracht worden ist.
- Dazu zählt z.B.
- das Gauß'sche Modell:
-\begin_inset Newline newline
-\end_inset
-
-Hier weitermachen
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\gamma_{a,b}\left(h\right)=b\left(1-\exp\left(-3\left(\frac{h}{a}\right)^{2}\right)\right)\label{eq:VariogrammFunktionGauss}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beispielhafte-Gaußsche-Semivari"
-
-\end_inset
-
- zeigt die möglichen Formen einer solchen Modellfunktion bei unterschiedlicher
- Parametrisierung.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/KrigingKapitel/semi.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Beispielhafte Gaußsche Semivariogrammfunktion mit verschiedenen Aussageweiten
- a und Grenzwerten b.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beispielhafte-Gaußsche-Semivari"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-cov\left(\vec{x}_{1},\vec{x}_{2}\right)=\left(\sigma^{2}+\lambda\delta_{0}\left(\vec{x}_{1},\vec{x}_{2}\right)\right)-2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|x_{1,l}-x_{2,l}\right|^{2}\right)}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Kovarianzmodellierung 
-\end_layout
-
-\begin_layout Standard
-Übergang von Variogramm zur Kovarianzmodellierung!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!
-\end_layout
-
-\begin_layout Standard
-
-\color red
-Ebenfalls gibt es so nur noch eine stationäre Varianz 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
- und somit auch nur noch eine ortsabhängige Korrelationsfunktion 
-\begin_inset Formula $c\left(\vec{x}_{j},\vec{x}_{k}\right)=\frac{1}{\sigma^{2}}cov\left(Z\left(\vec{x}_{j}\right),Z\left(\vec{x}_{k}\right)\right)$
-\end_inset
-
-.
- Die benötigte Kovarianzmatrix vereinfacht sich somit zu:
-\end_layout
-
-\begin_layout Standard
-
-\color red
-\begin_inset Formula 
-\begin{equation}
-\mathbf{Cov}=\left[\begin{array}{c|cc}
- & y\left(\vec{x}_{1}\right) & y\left(\vec{x}_{2}\right)\\
-\hline y\left(\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{1},\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{1},\vec{x}_{2}\right)\\
-y\left(\vec{x}_{2}\right) & \sigma^{2}c\left(\vec{x}_{2},\vec{x}_{1}\right) & \sigma^{2}c\left(\vec{x}_{2},\vec{x}_{2}\right)
-\end{array}\right]\label{eq:KovarianzMatrixOrdinaryKriging}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Um die Kovarianzmatrix aufzustellen, ist es nötig, einen Korrelationswert
- zwischen allen bekannten Stützstellen und im Falle des Gradient-Enhanced-Krigin
-g, auch den partiellen Ableitungen zu berechnen.
- Die benötigte Korrelationsfunktion, um die räumlichen Abstände zu beschreiben,
- wird durch die entsprechende Umformung der Variogrammfunktion (siehe Gleichung
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VariogrammFunktionGauss"
-
-\end_inset
-
-) ersetzt (vgl.
- 
+ionen für die der Nachweis bereits erbracht worden ist.
+ Hier ist insbesondere ein Modell zu erwähnen 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Isaaks1990"
+key "lophaven2002aspects,Sacks2007"
 
 \end_inset
 
-).
- Die Gleichung sieht dann wie folgt aus:
-\end_layout
-
-\begin_layout Standard
+:
 \begin_inset Formula 
 \begin{align}
-c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)\right)\coloneqq c\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq c\left(\vec{x}_{1}-\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|x_{1,l}-x_{2,l}\right|^{2}\right)},c\in\left[0,1\right]\label{eq:GaussCorrelationFunction-1}
+2\gamma\left(\vec{h}\right)= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion}
 \end{align}
 
 \end_inset
@@ -910,37 +714,168 @@ c\left(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right)\right)\coloneqq c\lef
 \end_layout
 
 \begin_layout Standard
+Wobei 
+\begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
 
-\size huge
-\color red
-e^Theta Kkurz erwähnen und auf nächstes Kapitel vverweisen !!!!!
+ als Hyperparametervektor bezeichnet wird und eine Korrelationslänge für
+ den entsprechenden Parameter 
+\begin_inset Formula $l$
+\end_inset
+
+ darstellt.
+ Die Wahl eines sinnvollen Hyperparametervektors ist Aufgabe des Trainingsverfah
+rens (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Für den Fall 
+\begin_inset Formula $p=2$
+\end_inset
+
+ spricht man auch von einer Gauss'schen Korrelationsfunktion, welche in
+ der hier beschriebenen Software auch als Standard gewählt wird.
+ Der Vorteil dieser Korrelationsfunktion liegt in der schnellen Berechnung
+ und damit in der schnellen Erzeugung der benötigten Kovarianzmatrix.
+ 
+\end_layout
+
+\begin_layout Standard
+Neben diesen Korrelationsfunktionen wird häufig ein parametrisierter kubischer
+ Spline verwendet, der interessierte Leser sei hierfür auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lophaven2002aspects"
+
+\end_inset
+
+ verwiesen.
+ Innerhalb der hier entwickelten Kriging-Software sind diese drei Korrelationsfu
+nktionen implementiert und frei wählbar.
+ 
+\end_layout
+
+\begin_layout Standard
+Setzt man bspw.
+ die Kovarianzfunktion aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ExpoKorrelationsfunktion"
+
+\end_inset
+
+ in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzmodellAllgemein"
+
+\end_inset
+
+ ein, dann folgt daraus die resultierende Kovarianzfunktion:
+\begin_inset Formula 
+\begin{align}
+cov\left(\vec{h}\right) & =\sigma^{2}+\lambda\delta\left(\vec{h}\right)-\sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKovarianzfunktion}\\
+ & =\lambda\delta\left(\vec{h}\right)+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dies stellt somit ein berechenbares Modell dar und kann innerhalb eines
+ Kriging Verfahren verwendet werden.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Kovarianzfunktion CO-Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Kovarianzfunktion für das CO-Kriging wird aus mehreren Korrelationsfunktione
+n zusammengesetzt, daher werden keine neuen Modelle benötigt.
+ Es werden allerdings für jede Gütestufe ein zusätzlicher Hyperparametervektor
+ 
+\begin_inset Formula $\vec{\theta}_{2},\vec{\theta}_{diff}$
+\end_inset
+
+ verwendet.
+ Geht man von den Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzFunktionenalleDrei"
+
+\end_inset
+
+ aus und setzt das entsprechende Kovarianzmodell aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ExpoKovarianzfunktion"
+
+\end_inset
+
+ ein, wobei 
+\begin_inset Formula $c_{2}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,2}}\left|h_{l}\right|^{p}\right)}$
+\end_inset
+
+ und 
+\begin_inset Formula $c_{diff}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,diff}}\left|h_{l}\right|^{p}\right)}$
+\end_inset
+
+, so erhält man:
+\begin_inset Formula 
+\begin{align}
+cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)= & a^{2}\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber \\
+ & +\lambda_{diff}\delta\left(\vec{h}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{h}\right)\nonumber \\
+cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & a\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\label{eq:KovarianzfunktionenCoKrigingGauss}\\
+cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & \lambda_{2}\delta\left(\vec{h}\right)+\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Beispiel Gauss Korrelationsfunktion
 \end_layout
 
 \begin_layout Standard
 \noindent
-Die Vektoren 
-\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
-\end_inset
-
- stellen die Ortsvektoren der Stützstellen dar.
- Der Vektor 
-\begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
-\end_inset
-
- legt fest, wie stark die Korrelation mit steigendem Abstand der Stützstellen
- zueinander abfällt, wobei ein hoher Wert einen stärkeren Abfall bewirkt.
- In Abbildung 
+In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Beispiel-einer-Gauss-1"
 
 \end_inset
 
- ist eine beispielhafte Korrelationsfunktion mit zwei verschiedenen 
+ ist eine beispielhafte Kovarianzfunktion mit zwei verschiedenen 
 \begin_inset Formula $\theta$
 \end_inset
 
  Werten zu sehen.
+ Die Varianz und der Nugget wurden 
+\begin_inset Formula $\sigma^{2}=1,\lambda=0$
+\end_inset
+
+ angenommen.
  Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
  zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
 swert.
@@ -968,11 +903,20 @@ swert.
  ein Korrelationswert von 0.08.
  In dem einen Fall wird also eine stärkere Abhängigkeit der beiden Stützstellen
  angenommen und im anderen Fall eine schwächere Abhängigkeit.
- Die Bestimmung des 
-\begin_inset Formula $\vec{\theta}$
-\end_inset
+ 
+\end_layout
 
- Vektors ist die Aufgabe des Trainingsverfahrens.
+\begin_layout Standard
+\noindent
+
+\shape italic
+Falls einer der Parameter keine Korrelation mit der zu trainierenden Funktion
+ besitzt, so kann das Trainingsverfahren auch sehr kleine Hyperparameter
+ wählen.
+ Dies führt praktisch dazu, dass dieser Parameter keinerlei Einfluss auf
+ die Vorhersage mehr hat.
+ Dies kann innerhalb einer Optimierung sehr wichtig sein, da so eine Art
+ von Dimensionsreduktion erreicht wird.
  
 \end_layout
 
@@ -986,7 +930,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../images/CorrelatoinFunction.eps
-	scale 45
+	scale 40
 
 \end_inset
 
@@ -1016,112 +960,6 @@ Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\size huge
-\color red
-Zusammenhang zur Semivarianz
-\end_layout
-
-\begin_layout Standard
-Da allerdings die Kovarianz und nicht die Korrelation benötigt wird, muss
- die Gleichung noch erweitert werden:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-cov\left(\vec{x}_{1},\vec{x}_{2}\right)=cov\left(\vec{x}_{1}-\vec{x}_{2}\right) & =\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)}+\lambda\delta\label{eq:GaussCovFunction-1-1}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\delta=\begin{cases}
-1 & falls\,\vec{x}_{1}=\vec{x}_{2}\\
-0 & falls\,\vec{x}_{1}\neq\vec{x}_{2}
-\end{cases}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Varianz 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
- des stationären Kriging Prozesses wird an die Korrelation multipliziert
- und weiterhin noch ein Rauschterm in Form einer zusätzlichen Varianzerhöhung
- 
-\begin_inset Formula $\lambda$
-\end_inset
-
- hinzugefügt.
- Diese Varianzerhöhung entspricht dem Nugget aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Variogramm"
-
-\end_inset
-
-.
- Damit ist die Kovarianzfunktion für das Ordinary-Kriging vollständig.
- Die Verwendung des Rauschterms 
-\begin_inset Formula $\lambda$
-\end_inset
-
- wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:RegularisierungUndRauschen"
-
-\end_inset
-
- erklärt.
- Die Variablen 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
-,
-\begin_inset Formula $\theta$
-\end_inset
-
-,
-\begin_inset Formula $\lambda$
-\end_inset
-
- werden auch Hyperparameter genannt und müssen durch das Training bestimmt
- werden.
- Das Traingingsverfahren wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:MinimierungsverfahrenTraining"
-
-\end_inset
-
- behandelt und die effiziente softwaretechnische Verwendung dieser Kovarianzmode
-lle wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SoftwaretechnKorrelationsfunktionen"
-
-\end_inset
-
- beschrieben.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1214,86 +1052,6 @@ Diese Formulierung der Gauss-Korrelationsfunktion hat sich bisher als sehr
  werden kann.
  Zudem ist die Funktion stetig, differenzierbar und zeigt auch kein unerwünschte
 s Verhalten bei sehr kleinen Hyperparametern.
- 
-\end_layout
-
-\begin_layout Subsubsection*
-Kovarianzfunktion CO-Kriging
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Kovarianzfunktion-CO-Kriging"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Kovarianzfunktion für das CO-Kriging wird aus mehreren Korrelationsfunktione
-n zusammengesetzt und daher werden keine neuen Modelle benötigt, es werden
- allerdings deutlich mehr Hyperparameter verwendet.
- Für zwei beliebige Punkte 
-\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
-\end_inset
-
- mit den zwei möglichen Gütestufen 
-\begin_inset Formula $\left\{ high,low\right\} $
-\end_inset
-
- setzen sich die Kovarianzfunktionen aus jeweils zwei Korrelationsfunktionen
- 
-\begin_inset Formula $c_{low}\left(\vec{x}_{1},\vec{x}_{2}\right),c_{diff}\left(\vec{x}_{1},\vec{x}_{2}\right)$
-\end_inset
-
- zusammen.
- Wobei die Korrelationsfunktionen jeweils einen eigenen Hyperparametersatz
- 
-\begin_inset Formula $\vec{\theta}_{low},\vec{\theta}_{diff}$
-\end_inset
-
- haben und dafür dieselben Modellfunktionen wie bspw.
- in Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:GaussCorrelationFunction-1"
-
-\end_inset
-
- verwendet werden können.
- Die Zusammensetzung der Kovarianzfunktionen erfolgt hierbei nach den Gleichunge
-n 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovarianzFunktionenalleDrei"
-
-\end_inset
-
-:
-\begin_inset Formula 
-\begin{align}
-cov\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)= & a^{2}\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{x}_{1,high},\vec{x}_{2,high}\right)\label{eq:KovarianzKorrelationsModell}\\
-\mathrm{cov\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)}= & a\sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)\\
-cov\left(\vec{x}_{1,low},\vec{x}_{2,low}\right)= & \sigma_{low}^{2}c_{low}\left(\vec{x}_{1,low},\vec{x}_{2,high}\right)
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Mit diesen Zusammenhängen lässt sich mit einer geeigneten Modellfunktion
- wie z.B.
- dem Gauss'schen Korrelationsmodell (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:GaussCorrelationFunction-1"
-
-\end_inset
-
-) eine vollständige Kovarianzmatrix aufstellen.
- Allerdings steigt die Anzahl der Hyperparameter und damit auch der Trainingsauf
-wand deutlich.
  
 \end_layout
 
@@ -1547,34 +1305,7 @@ CO-Kriging
 \begin_layout Standard
 Im Falle des CO-Krigings ist, bedingt durch die unterschiedlichen Gütestufen,
  die Kovarianzmatrix partitioniert.
- Die Kovarianzmatrix sieht in diesem Fall wie folgt aus, wobei 
-\begin_inset Formula $\mathbf{C}_{l}\in\mathbb{R}^{n_{l}\times n_{l}}$
-\end_inset
-
- und 
-\begin_inset Formula $\mathbf{C}_{diff}\in\mathbb{R}^{n_{h}\times n_{h}}$
-\end_inset
-
- die jeweiligen Korrelationsmatrizen der Gütestufen und 
-\begin_inset Formula $I_{diff}\in\mathbb{R}^{n_{h}\times n_{h}},I_{l}\in\mathbb{R}^{n_{h}\times n_{h}}$
-\end_inset
-
- die Einheitsmatrizen darstellen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\mathbf{\mathbf{Cov}} & =\left[\begin{array}{ccc}
-\lambda I_{diff}+a^{2}\sigma_{l}^{2}\mathbf{C}_{l}+\sigma_{diff}^{2}\mathbf{C}_{diff} & ... & a\sigma_{l}^{2}\mathbf{C}_{l}\\
-... & ... & ...\\
-a\sigma_{l}^{2}\mathbf{C}_{l} & ... & \lambda I_{l}+\sigma_{l}^{2}\mathbf{C}_{l}
-\end{array}\right]
-\end{align}
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1604,13 +1335,22 @@ Der Ansatz aus dem Ordinary-Kriging ist mit dieser partitionierten Matrix
 \end_layout
 
 \begin_layout Standard
-Die Spur der Matrix ergibt sich aus der Summe der Diagonaleinträge:
+Geht man von zusammengesetzten Kovarianzfunktion wie sie in den Gleichungen
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzfunktionenCoKrigingGauss"
+
+\end_inset
+
+ gezeigt wurde aus, so ergibt sich die Spur als Summe der Diagonaleinträge
+ wie folgt:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{diff}}\left(a^{2}\sigma_{l}^{2}\mathbf{C}_{l,i,i}+\sigma_{diff}^{2}\mathbf{C}_{diff,i,i}+\lambda\right)+\sum_{i=1}^{n_{l}}\left(\sigma_{l}^{2}\mathbf{C}_{l,i,i}+\lambda\right)
+spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{0}\right)+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\lambda_{2}\right)
 \end{align}
 
 \end_inset
@@ -1619,22 +1359,22 @@ spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{diff}}\left(a^{2}\sigma_{l}^{2}\
 \end_layout
 
 \begin_layout Standard
-Da die Korrelationen maximal den Wert Eins besitzen,
-\begin_inset Formula $\mathbf{C}_{l,i,i}\leq1$
+Da die Korrelationen der Diagonalen den Wert Eins besitzen,
+\begin_inset Formula $c_{2}\left(\vec{0}\right)=1$
 \end_inset
 
  und 
-\begin_inset Formula $\mathbf{C}_{diff,i,i}\leq1$
+\begin_inset Formula $c_{diff}\left(\vec{0}\right)=1$
 \end_inset
 
-, gilt für die Spur der Matrix:
+, gilt für das Maximum der Spur der Matrix:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-spur\left(\mathbf{Cov}\right) & \leq\sum_{i=1}^{n_{diff}}\left(a^{2}\sigma_{l}^{2}1+\sigma_{diff}^{2}1+\lambda\right)+\sum_{i=1}^{n_{l}}\left(\sigma_{l}^{2}1+\lambda\right)\\
-spur\left(\mathbf{Cov}\right) & \leq n_{diff}\left(a^{2}\sigma_{l}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{l}\left(\sigma_{l}^{2}+\lambda\right)
+spur\left(\mathbf{Cov}\right) & \leq\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}1+\sigma_{diff}^{2}1+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}1+\lambda_{2}\right)\\
+spur\left(\mathbf{Cov}\right) & \leq n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
 \end{align}
 
 \end_inset
@@ -1656,7 +1396,7 @@ reference "eq:SpurEqSummeEigenwerte"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\sum_{i=1}^{n_{all}}\Xi_{i} & \leq n_{diff}\left(a^{2}\sigma_{l}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{l}\left(\sigma_{l}^{2}+\lambda\right)
+\sum_{i=1}^{n_{all}}\Xi_{i} & \leq n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
 \end{align}
 
 \end_inset
@@ -1665,7 +1405,12 @@ reference "eq:SpurEqSummeEigenwerte"
 \end_layout
 
 \begin_layout Standard
-Damit gilt für den maximalen und minimalen Eigenwert 
+Geht man weiterhin von nur einem Regularisierungsterm 
+\begin_inset Formula $\lambda_{diff}=\lambda_{2}=\lambda$
+\end_inset
+
+ für alle Gütestufen aus, gilt für den maximalen und minimalen Eigenwert
+ 
 \begin_inset Formula $\Xi_{max},\Xi_{min}$
 \end_inset
 
@@ -1675,7 +1420,7 @@ Damit gilt für den maximalen und minimalen Eigenwert
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\Xi_{max} & \leq n_{diff}\left(a^{2}\sigma_{l}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{l}\left(\sigma_{l}^{2}+\lambda\right)\\
+\Xi_{max} & \leq n_{diff}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)\\
 \Xi_{min} & =\lambda
 \end{align}
 
@@ -1695,7 +1440,7 @@ Für die Konditionszahl
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\kappa & \leq\frac{n_{diff}\left(a^{2}\sigma_{l}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{l}\left(\sigma_{l}^{2}+\lambda\right)}{\lambda}
+\kappa & \leq\frac{n_{diff}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)}{\lambda}
 \end{align}
 
 \end_inset
@@ -1708,28 +1453,13 @@ Legt man nun für die Konditionszahl einen maximalen Wert
 \begin_inset Formula $\kappa_{max}$
 \end_inset
 
- fest, so gilt:
+ fest, ergibt sich als Schätzung für den Diagonalaufschlag:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\kappa_{max} & \geq\frac{n_{diff}a^{2}\sigma_{l}^{2}+n_{diff}\sigma_{diff}^{2}+n_{l}\sigma_{l}^{2}+\lambda\left(n_{l}+n_{diff}\right)}{\lambda}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-und damit ergibt sich die Schätzung für den Diagonalaufschlag:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-\lambda & \geq\frac{n_{diff}a^{2}\sigma_{l}^{2}+n_{diff}\sigma_{diff}^{2}+n_{l}\sigma_{l}^{2}}{\left(\kappa_{max}-\left(n_{l}+n_{diff}\right)\right)}
+\lambda & \geq\frac{n_{diff}a^{2}\sigma_{2}^{2}+n_{diff}\sigma_{diff}^{2}+n_{2}\sigma_{2}^{2}}{\left(\kappa_{max}-\left(n_{2}+n_{diff}\right)\right)}
 \end{align}
 
 \end_inset
@@ -1741,8 +1471,8 @@ und damit ergibt sich die Schätzung für den Diagonalaufschlag:
 Nachteilig ist, dass die untere Grenze für den Diagonalaufschlag während
  des Trainings permanent angepasst werden müsste.
  Dies würde allerdings zu numerischen Problemen führen, da die Ableitung
- des Likelihood Terms nach dem Diagonalaufschlag dann abhängig wäre von
- den Varianzen und dem Skalierungsfaktor.
+ des Likelihood Terms nach dem Diagonalaufschlag dann abhängig von den Varianzen
+ und dem Skalierungsfaktor wäre.
  Aus diesem Grund wird die untere Grenze nur initial eingestellt und dann
  nicht mehr verändert, es sei denn es treten numerische Probleme während
  des Trainings auf.
@@ -1811,82 +1541,41 @@ ags
  Verteilung zu behandeln und muss daher mit trainiert werden.
  Die Umsetzung soll folgend gezeigt werden.
  
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-Wie in Kapitel 
+\begin_layout Standard
+Die Bildung der Kovarianzfunktion ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Kovarianzfunktion-CO-Kriging"
 
 \end_inset
 
- beschrieben, werden die Kovarianzfunktionen für zwei beliebige Punkte 
-\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\mathrm{k}}}$
-\end_inset
-
- mit den zwei möglichen Gütestufen 
-\begin_inset Formula $\left\{ high,low\right\} $
-\end_inset
-
- aus jeweils zwei Korrelationsfunktionen 
-\begin_inset Formula $c_{l}\left(\ldots\right),c_{diff}\left(\ldots\right)$
-\end_inset
-
- zusammengesetzt.
- Zusätzlich wird für jede Gütestufe ein Rauschterm 
-\begin_inset Formula $\lambda_{h}$
-\end_inset
-
-,
-\begin_inset Formula $\lambda_{l}$
-\end_inset
-
- eingeführt.
- Diese Rauschterme entsprechen dem in Kapitel 
+ beschrieben, um den Rauschterm innerhalb eines gradientenbasierten Trainingsver
+fahrens (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sec:Variogramm"
+reference "chap:MinimierungsverfahrenTraining"
 
 \end_inset
 
- beschriebenen Nugget.
- Um den konkreten Aufbau zu verdeutlichen, wird folgend ein simples Beispiel
- einer resultierenden Kovarianzmatrix mit zwei Stützstellen gezeigt:
-\begin_inset Formula 
-\begin{equation}
-\mathbf{Cov}=\left[\begin{array}{c|cc}
- & high & low\\
-\hline high & \lambda_{h}+\left(a^{2}\sigma_{l}^{2}c_{l}\left(\vec{x}_{1,h},\vec{x}_{2,h}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{x}_{1,h},\vec{x}_{2,h}\right)\right) & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1,l},\vec{x}_{2,h}\right)\\
-low & a\sigma_{l}^{2}c_{l}\left(\vec{x}_{1,l},\vec{x}_{2,h}\right) & \lambda_{l}+\sigma_{l}^{2}c_{l}\left(\vec{x}_{1,l},\vec{x}_{2,h}\right)
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1}
-\end{equation}
-
+) zu verwenden, müssen noch die Ableitungen der Kovarianzfunktionen nach
+ den Rauschtermen gebildet werden.
+ Im Fall des Co-Krigings mit den zwei Rauschtermen 
+\begin_inset Formula $\lambda_{diff},\lambda_{2}\in\mathbb{R}$
 \end_inset
 
-
+ sehen die partiellen Ableitungen wie folgt aus: 
 \end_layout
 
 \begin_layout Standard
-Wie man sieht, wird der entsprechende Rauschterm auf die Hauptdiagonale
- der Matrix addiert.
- Die Größe dieses Rauschterms wird durch das Training eingestellt und sollte
- im Idealfall der Varianz des Rauschens selbst entsprechen.
- Um die Rauschterme während des Trainings nutzen zu können, werden die Ableitung
-en der Kovarianzmatrix nach den Rauschtermen benötigt.
- Diese würden bei dem obigen Beispiel folgendermaßen aussehen:
 \begin_inset Formula 
 \begin{align}
-\mathbf{\frac{\partial Cov}{\partial\lambda_{h}}} & =\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & 1 & 0\\
-y_{1}\left(\vec{x}_{2}\right) & 0 & 0
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1}\\
-\mathbf{\frac{\partial Cov}{\partial\lambda_{l}}} & =\left[\begin{array}{c|cc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & 0 & 0\\
-y_{1}\left(\vec{x}_{2}\right) & 0 & 1
-\end{array}\right]\label{eq:KovarianzMatrixCOKriging-1-1-1-1-1}
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 1\nonumber \\
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\\
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}=\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\label{eq:KovarianzfunktionenCoKrigingAbleitungDiag}\\
+\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 0\nonumber \\
+\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 1
 \end{align}
 
 \end_inset
@@ -1914,6 +1603,10 @@ reference "chap:MinimierungsverfahrenTraining"
  
 \end_layout
 
+\begin_layout Paragraph*
+Rauschterm Beispiel
+\end_layout
+
 \begin_layout Standard
 In Abbildung 
 \begin_inset CommandInset ref
@@ -1922,7 +1615,8 @@ reference "fig:Kriging_RauschFunktion"
 
 \end_inset
 
- wird ein einfaches Beispiel zur Verdeutlichung gezeigt.
+ wird ein einfaches Beispiel gezeigt, es soll die Wirkung von unterschiedlichen
+ Rauschtermen auf die Vorhersage beispielhaft erläutert werden.
  Es handelt sich um eine konstante Null-Funktion mit einem normalverteilten
  Rauschen, welche den Erwartungswert Null und die Standardabweichung Eins
  besitzt: 
@@ -2708,10 +2402,6 @@ reference "eq:FVektor"
 
 ).
  
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathcal{N}= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{Cov^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}
@@ -2720,10 +2410,6 @@ reference "eq:FVektor"
 \end_inset
 
 Logarithmiert man diese Gleichung, ergibt sich:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \log(\mathcal{N})= & \log(1)-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{1}{2}\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
@@ -2733,10 +2419,6 @@ Logarithmiert man diese Gleichung, ergibt sich:
 
 Da das Maximum der Funktion gesucht ist, können die Konstanten ignoriert
  werden:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align}
 \log(\mathcal{N})= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
@@ -2756,10 +2438,6 @@ reference "sec:Differentiation-der-Likelihood-Funktion"
 \end_inset
 
  zu finden:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align}
 \frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
@@ -2860,9 +2538,6 @@ Führt man eine Matrix
 \end_inset
 
  ein in der Form:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \mathbf{G}=\left[\begin{array}{ccc}
@@ -2895,58 +2570,36 @@ Und einen Vektor
 Daraus folgt:
 \begin_inset Formula 
 \begin{align*}
-MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
-\vec{0} & =\frac{\partial}{\partial\vec{\tilde{F}}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\frac{\partial}{\partial\vec{\tilde{F}}}\left(-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
+MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)
 \end{align*}
 
 \end_inset
 
-Die Ableitung der quadratischen Form 
-\series medium
-mit symmetrischer Matrix 
-\begin_inset Formula $A$
+Mit dieser Gleichung lässt sich der gesuchte Erwartungswertvektor 
+\begin_inset Formula $\vec{\tilde{F}}$
 \end_inset
 
- lautet 
-\begin_inset Formula $\frac{\partial}{\partial x}g\left(x\right)^{T}\mathbf{A}g\left(x\right)=g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}+\frac{\partial g\left(x\right)}{\partial x}^{T}\mathbf{A}g\left(x\right)=2g\left(x\right)^{T}\mathbf{A}\frac{\partial g\left(x\right)}{\partial x}$
-\end_inset
-
-
-\series default
-
-\begin_inset Formula 
-\begin{align*}
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\frac{\partial}{\partial\vec{\tilde{\beta}}}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\\
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(-\mathbf{G}\right)\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\\
-\vec{0} & =\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}\left(\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}
-\end{align*}
+ des Kriging Prozesses innerhalb des Trainings analytisch bestimmen.
+ Die Lösung sieht wie folgt aus, wobei der komplette Lösungsweg in Anhang
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Likelihood-Schätzer-Erwartungswe"
 
 \end_inset
 
-Da nur 
-\begin_inset Formula $\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G}$
-\end_inset
-
- zu 0 werden kann:
+ zu finden ist:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
-\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}-\left(\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{0}\\
-\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G} & =\vec{\tilde{F}}^{T}\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\\
 \left(\overrightarrow{y}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)\left(\mathbf{G}^{T}\mathbf{Cov}^{-1}\mathbf{G}\right)^{-1} & =\vec{\tilde{F}}^{T}
 \end{align*}
 
 \end_inset
 
-Mit dieser Gleichung lässt sich der Erwartungswertvektor 
-\begin_inset Formula $\vec{\tilde{F}}$
-\end_inset
 
- des Kriging Prozesses innerhalb des Trainings analytisch bestimmen.
 \end_layout
 
 \begin_layout Paragraph*
@@ -2954,86 +2607,21 @@ Varianz
 \end_layout
 
 \begin_layout Standard
-Durch die Umformulierung der Korrelationsmatrix zur Kovarianzmatrix, muss
- der Maximum Likelihood Schätzer der globalen Varianz 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
- für eine multivariate Normalverteilung umformuliert werden:
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
-\end{align*}
+Die direkte analytische Bestimmung der Varianz im Falle des Co-Kriging Verfahren
+s ist mit der hier gewählten Formulierung nicht möglich.
+ Es ist allerdings eine iterative Bestimmung möglich, diese Art der Bestimmung
+ wird in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Iterative-VarianzbestimmungTraining"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\sigma_{k+1}^{2}= & \frac{1}{n}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\sigma_{k}^{2}\frac{1}{\sigma_{k}^{2}}\mathbf{Corr}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei 
-\begin_inset Formula $k$
-\end_inset
-
- den aktuellen Iterationsschritt angibt.
- 
-\end_layout
-
-\begin_layout Standard
-Hierbei gibt es allerdings einen Nachteil.
- Es ist notwendig bei der ersten Iteration einen Startwert für 
-\begin_inset Formula $\sigma_{k}^{2}$
-\end_inset
-
- zu bestimmen.
- Mit diesem Startwert wird nun 
-\begin_inset Formula $\mathbf{Cov}^{-1}$
-\end_inset
-
+ beschrieben und bringt allerdings viele numerische Probleme mit sich und
+ wurde aus diesem Grund nicht verwendet.
+ Innerhalb dieses Verfahrens wurden die Varianzen als zusätzlicher Hyperparamete
+r innerhalb des Trainings freigegeben und werden dann über das Training
  bestimmt.
- Nachdem 
-\begin_inset Formula $\mathbf{Cov}^{-1}$
-\end_inset
-
- bestimmt wurde, wird der Likelihood Schätzer für 
-\begin_inset Formula $\sigma_{k+1}^{2}$
-\end_inset
-
- berechnet und damit ist das korrekte 
-\begin_inset Formula $\sigma_{k+1}^{2}$
-\end_inset
-
- bekannt.
- Die Kovarianzmatrix wurde allerdings noch mit dem 
-\begin_inset Formula $\sigma_{k}^{2}$
-\end_inset
-
- aufgestellt und ist somit ungültig.
- Es wäre an dieser Stelle also nötig die Kovarianzmatrix neu aufzustellen
- und alle Schritte ein zweites Mal zu durchlaufen.
-\end_layout
-
-\begin_layout Standard
-Bei einem Minimierungsverfahren ist das meist nicht notwendig, da die Schätzunge
-n sich nicht sehr stark verändern.
- Bei einer zufälligen Initialisierung kann dies allerdings zu Problemen
- führen, die Update Schritte sollten in diesem Fall öfter wiederholt werden.
  
 \end_layout
 
@@ -3081,9 +2669,6 @@ Eine sehr einfache und schnelle Möglichkeit die Hyperparameter für eine
 \end_inset
 
  liegen.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 c_{erw} & =\frac{1}{n^{2}}\underset{i=1}{\overset{i<n}{\sum}}\underset{j=1}{\overset{j<n}{\sum}}e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
@@ -3097,9 +2682,6 @@ c_{erw} & =\frac{1}{n^{2}}\underset{i=1}{\overset{i<n}{\sum}}\underset{j=1}{\ove
 \begin_layout Standard
 Nimmt man weiterhin an, dass die einzelnen Korrelationswerte nahezu identisch
  sind:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
@@ -3108,9 +2690,6 @@ c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)
@@ -3118,18 +2697,11 @@ c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Nimmt man ferner an, dass 
 \begin_inset Formula $x$
 \end_inset
 
  eine Realisierung einer Zufallsvariablen ist und bildet den Erwartungswert:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =E\left[-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)\right]
@@ -3137,10 +2709,6 @@ Nimmt man ferner an, dass
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Als weitere Vereinfachung sollen alle Hyperparameter den gleichen Wert haben:
 \end_layout
 
@@ -3152,15 +2720,8 @@ Als weitere Vereinfachung sollen alle Hyperparameter den gleichen Wert haben:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
  wird aufgrund des Quadrats vernachlässigt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}E\left[\underset{l=1}{\overset{l<k}{\sum}}\left(x_{i,l}-x_{j,l}\right)^{2}\right]
@@ -3169,9 +2730,6 @@ Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]-E\left[2x_{i,l}x_{j,l}\right]+E\left[x_{j,l}^{2}\right]\right)
@@ -3179,18 +2737,11 @@ Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Nimmt man nun an, dass die Zufallsvariablen unabhängig sind, gilt 
 \begin_inset Formula $E\left[2x_{i,l}x_{j,l}\right]=0$
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]+E\left[x_{j,l}^{2}\right]\right)
@@ -3198,10 +2749,6 @@ Nimmt man nun an, dass die Zufallsvariablen unabhängig sind, gilt
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die Varianz einer Zufallsvariable 
 \begin_inset Formula $X$
 \end_inset
@@ -3213,9 +2760,6 @@ Die Varianz einer Zufallsvariable
 .
  Die im Modell verwendeten Daten werden grundsätzlich auf einen Erwartungswert
  von Null und eine Standardabweichung von Eins normiert.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 E\left[X\right] & =0
@@ -3246,10 +2790,6 @@ Daraus ergibt sich folgende Formel für das verwendete Modell für die Varianz
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Also
 \end_layout
 
@@ -3261,14 +2801,7 @@ E\left[x_{i,l}^{2}\right] & =\textrm{var}\left[x_{i,l}^{2}\right]=1
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 und analog dazu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 E\left[x_{j,l}^{2}\right] & =\textrm{var}\left[x_{j,l}^{2}\right]=1
@@ -3276,14 +2809,7 @@ E\left[x_{j,l}^{2}\right] & =\textrm{var}\left[x_{j,l}^{2}\right]=1
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Daraus folgt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(1+1\right)
@@ -3292,9 +2818,6 @@ Daraus folgt:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}2k
@@ -3303,9 +2826,6 @@ Daraus folgt:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \log\left(-\frac{\log\left(c_{erw}\right)}{k}\right) & =\theta\label{eq:ConstThetaSchatzung}
@@ -3313,10 +2833,6 @@ Daraus folgt:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Mit dieser Formel hat man nun eine Möglichkeit die Hyperparameter zu schätzen.
  Aufgrund der vielen Annahmen und Vereinfachungen ist dieses Verfahren als
  heuristisch einzustufen.
@@ -3543,7 +3059,24 @@ Das Kriging Modell wird in der Regel innerhalb einer Optimierung verwendet.
  Als einfacher Ansatz wäre es z.B.
  möglich einfach immer die Hyperparameter aus dem letzten Training zu Initialisi
 erung zu verwenden.
- In folgenden Fällen, kann dies allerdings zu Problemen führen:
+ Diese Art der Wiederverwendung von alten Trainings ist für das Kriging
+ Verfahren ohne Probleme möglich.
+ Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisi
+erungskonstanten, so müssen die Hyperparameter renormalisiert werden, in
+ Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Renormalisierung-der-Hyperparame"
+
+\end_inset
+
+ wird eine solche Renormalisierung beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei der Wiederverwendung alter Hyperparametersätz müssen jedoch zwei Problemstel
+lungen beachtet werden:
 \end_layout
 
 \begin_layout Enumerate
@@ -3558,8 +3091,8 @@ t
 
 \begin_layout Standard
 Im ersten Fall besteht die Gefahr, dass das Training durch die ungünstige
- Initialisierung im lokalen Minimum bleibt und so nicht die optimalen Hyperparam
-eter findet.
+ Initialisierung in einem lokalen Minimum bleibt und so nicht die optimalen
+ Hyperparameter findet.
  Das wiederum führt zu schlechten Vorhersagen.
  Im Extremfall kann es sogar passieren, dass das lokale Minimum während
  der gesamten Optimierung nicht mehr verlassen wird.
@@ -3780,7 +3313,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/UltraRestart/Vergleich.png
-	scale 25
+	scale 15
 
 \end_inset
 
@@ -3791,43 +3324,6 @@ status collapsed
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:RestartRandomLikelihood"
-
-\end_inset
-
-Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
- eine Testoptimierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/UltraRestart/VergleichTrainingsZeit.png
-	scale 25
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RestartRandomTrainingTime"
 
 \end_inset
 
@@ -4046,6 +3542,9 @@ d Funktion berechnet werden und zum anderen die partiellen Ableitungen nach
 
  partielle Ableitungen gebildet werden, aus diesem Grund kann der numerische
  Aufwand stark variieren.
+ Besonders im Co-Kriging ist dieser Punkt wichtig, da die Anzahl der Hyperparame
+ter größer ist, als bei einem Ordinary-Kriging.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4689,301 +4188,6 @@ key "press2007numerical,gill1981practical,gill2007numerical"
  gefunden werden.
 \end_layout
 
-\begin_layout Subsection
-Renormalisierung der Hyperparameter 
-\end_layout
-
-\begin_layout Standard
-Möchte man mit bestehenden Hyperparametern, aber einer neuen oder erweiterten
- Datenbasis Vorhersagen treffen, so ändern sich die Erwartungswerte der
- zu trainierenden Funktion und deren Parametern.
- Da das alte Training und damit auch die Daten des Trainings mit den alten
- Erwartungswerten und Standartabweichungen normalisiert worden sind, müssen
- die Hyperparameter ebenfalls renormalisiert werden.
- Ansonsten würde man für die Kovarianz zwischen 2 lMembern unterschiedliche
- Werte bekommen.
-\end_layout
-
-\begin_layout Standard
-Daraus ergibt sich folgende notwendige Bedingung:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-cov\left(\vec{x}_{1alt},\vec{x}_{2alt}\right) & =cov\left(\vec{x}_{1neu},\vec{x}_{2neu}\right)\label{eq:RenormCovBedingung}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei 
-\begin_inset Formula $x_{real}$
-\end_inset
-
- den unnormierten Parameter darstellt, 
-\begin_inset Formula $\mu_{alt}$
-\end_inset
-
- und 
-\begin_inset Formula $\sigma_{alt}$
-\end_inset
-
- stellen den alten Erwartungswert sowie die Standartabweichung der Parameter
- dar.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\vec{x}_{1alt} & =\left[\begin{array}{c}
-\frac{x_{1,1real}-\mu_{1alt}}{\sigma_{1alt}}\\
-\vdots\\
-\frac{x_{1,nreal}-\mu_{nalt}}{\sigma_{nalt}}
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Für 
-\begin_inset Formula $\vec{x}_{2alt}$
-\end_inset
-
-, sowies 
-\begin_inset Formula $\vec{x}_{1neu}$
-\end_inset
-
- gilt analoges.
-\end_layout
-
-\begin_layout Standard
-Die Bedingung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:RenormCovBedingung"
-
-\end_inset
-
- soll anhand eines Beispiels erläutert werden, es wird hierfür eine Gauss
- Korrelationsfunktion mit einem Hyperparameter verwendet:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\left|\frac{x_{1real}-\mu_{alt}}{\sigma_{alt}}-\frac{x_{2real}-\mu_{alt}}{\sigma_{alt}}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\left|\frac{x_{1real}-\mu_{neu}}{\sigma_{neu}}-\frac{x_{2real}-\mu_{neu}}{\sigma_{neu}}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \sigma_{KriAlt}^{2}e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=\sigma_{KriNeu}^{2}e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Geht man nun davon aus, dass die Kriging Varianz sich nicht ändert:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\sigma_{KriAlt}^{2} & =\sigma_{KriNeu}^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wobei diese Bedingung im Code unbedingt erfüllt sein muss.
- Im Code ist es so umgesetzt, dass zuerst die Kovarianzmatrix mit der alten
- Krigingvarianz erzeugt wird und danach der Likelihood Schätzer für die
- Krigingvarianz aufgerufen wird, siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:sSqrLikelihoodOrdinary"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Dieser Schätzer sollte im Normalfall allerdings auf eine neue Krigingvarianz
- kommen, wodurch es im weiteren Verlauf zu großen Problemen kommen kann.
- Insbesondere bei der Vorhersage, wo für den Kovarianzvektor 
-\begin_inset Formula $\vec{c}$
-\end_inset
-
- (siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KoKrigingKovarianzVorhersage"
-
-\end_inset
-
-) dann die neue Krigingvarianz verwendet werden würde.
- Kovarianzmatrix und Vektor würden dann nicht mehr zusammen passen.
-\end_layout
-
-\begin_layout Standard
-Die Formel lässt sich damit weiterhin vereinfachen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{-\frac{1}{2}e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}=e^{-\frac{1}{2}e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}\left|x_{1real}-x_{2real}\right|^{2}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}\left|x_{1real}-x_{2real}\right|^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{1}{\sigma_{alt}^{2}}=e^{\theta_{neu}}\frac{1}{\sigma_{neu}^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}=e^{\theta_{neu}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \log\left(e^{\theta_{alt}}\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & \theta_{alt}+\log\left(\frac{\sigma_{neu}^{2}}{\sigma_{alt}^{2}}\right)=\theta_{neu}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Konvergenzkriterium für das Kriging Training
-\end_layout
-
-\begin_layout Subsection
-Konvergenz von globalen und lokalen Hyperparametern im Bezug auf die Entscheidun
-gsfunktionen
-\end_layout
-
-\begin_layout Standard
-In diesem Abschnitt soll versucht werden das Konvergenzverhalten von lokalen
- und globalen Hyperparametern für das CO-Kriging während einer Optimierung
- einzuschätzen.
- Dafür sollen einige analytische wie auch reale Testfälle herangezogen werden.
- Eine Entscheidungsfunktion wie in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:EntscheidungsfunktionErsatzmodell"
-
-\end_inset
-
- beschrieben, kann nur vernünftig funktionieren, wenn die dafür verwendeten
- Ersatzmodelle bereits gute Schätzungen für die Hyperparameter besitzen.
- Globale Hyperparameter sind 
-\begin_inset Formula $\sigma,a,\beta$
-\end_inset
-
- und lokale sind die 
-\begin_inset Formula $\theta$
-\end_inset
-
-.
- Grundlegend müssen für das CO-Kriging in der hier beschriebenen Form zwei
- verschiedene Parametersätze bestimmt werden.
- Einer für die Low-Fidelity Kovarianzfunktion und ein Satz für die Fehler-
- oder Differenz-Kovarianzfunktion.
- 
-\end_layout
-
-\begin_layout Standard
-Eine grundlegende Annahme ist, dass dem Ersatzmodell deutlich mehr LF Samples
- als HF Samples zur Verfügung stehen.
- Das bedeutet, dass die LF Kovarianzfunktion schneller bestimmt werden kann
- als die Differenzfunktion.
- 
-\end_layout
-
-\begin_layout Standard
-Eine These ist es, dass die globalen Parameter der Differenzfunktion allerdings
- schon sehr früh gut geschätzt werden können, die lokalen aber mehr Samples
- benötigen.
- Um den Optimierungsfortschritt voranzutreiben, ist aber die Abschätzung
- der globalen Parameter die wichtigere.
- Beispiele finden.
-\end_layout
-
-\begin_layout Standard
-Dennoch kann eine Entscheidungsfunktion erst dann sinnvolle Entscheidungen
- treffen, wenn die lokalen und globalen Hyperparameter der LF Funktion gut
- geschätzt worden sind und zumindest die globalen Hyperparameter der Differenzfu
-nktion.
- 
-\end_layout
-
-\begin_layout Standard
-Eine große Schwierigkeit besteht darin einschätzen zu können, wann welche
- Hyperparameter ausreichend gut eingeschätzt worden sind.
- Es gibt Arbeiten, die eine Mindestanzahl an 
-\end_layout
-
 \begin_layout Section
 Vergleiche zu anderen CO-Kriging Modellen
 \begin_inset CommandInset label
@@ -5284,6 +4488,17 @@ z.B.
 \begin_layout Standard
 Umgebung usw.
  C++ mit Boost usw.
+\end_layout
+
+\begin_layout Standard
+In dem im Rahmen dieser Arbeit entstandenen Abschlussarbeiten 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schmitz2013,kueppers2016,kueppers2016b"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -9024,7 +8239,9 @@ Paar finden über Max Korrelation
 \end_layout
 
 \begin_layout Standard
-das Paar dann wieder die Max Korrelation und das Sample entfernen.
+Dann wird es etwas schwierig, da die maximale Korrelations ja minimal werden
+ soll.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -9037,6 +8254,484 @@ Kriging schreibt neue dataBasePost raus
 
 \begin_layout Standard
 Nur mit UltraRestart !!!!
+\end_layout
+
+\begin_layout Standard
+Grundlegend soll die maximale Korrelation minimal werden! 
+\end_layout
+
+\begin_layout Standard
+ZDT3, siehe Gl.
+\end_layout
+
+\begin_layout Standard
+Links sind gleichverteilt 500 Samples + 500 in der Mitte Normalverteilt
+ mit einer Standardabweichung von 10% der Raumgröße (1x1)
+\end_layout
+
+\begin_layout Standard
+Rechts sind die 100 gefilterte Samples, von der ursprünglichen Verteilung
+ in der Mitte ist nichts mehr zu sehen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "extendedchars=true"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	// How many Samples and PartDers should be deleted
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(sampleSize+partDerSize > cfg.maxMatrixSize){
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(sampleSize<=cfg.maxMatrixSize){
+\end_layout
+
+\begin_layout Plain Layout
+
+			killPartDer = sampleSize+partDerSize - cfg.maxMatrixSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			killPartDer = partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+			killSamples = (sampleSize-cfg.maxMatrixSize);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): NumSamples:"<<
+sampleSize<<" NumPartDer:"<<partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): MaxMatrixSize:
+ "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+partDerSize<<" killPartD
+er:"<<killPartDer<<" killSamples:"<<killSamples;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	size_t killedPartDer = 0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Reduce PartDers
+\end_layout
+
+\begin_layout Plain Layout
+
+	while(killedPartDer < killPartDer){
+\end_layout
+
+\begin_layout Plain Layout
+
+		int randPoint = rand() % points.size();
+\end_layout
+
+\begin_layout Plain Layout
+
+		int randPartDer = rand() % cfg.numFreeVars;
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(points[randPoint].getAllPartDervsRef().count(randPartDer) >0){
+\end_layout
+
+\begin_layout Plain Layout
+
+			points[randPoint].deletePartialDerivative(randPartDer);
+\end_layout
+
+\begin_layout Plain Layout
+
+			killedPartDer++;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(cfg.initType != ultrarestart or init==true){
+\end_layout
+
+\begin_layout Plain Layout
+
+		//Reduce Samples
+\end_layout
+
+\begin_layout Plain Layout
+
+		vector<int> deleteIndices = global::createUniqueRandomIntegers(0, points.size()
+, killSamples);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	else{
+\end_layout
+
+\begin_layout Plain Layout
+
+		typedef map< B, pair<int,int> > m;
+\end_layout
+
+\begin_layout Plain Layout
+
+		m corrs;
+\end_layout
+
+\begin_layout Plain Layout
+
+		typename m::reverse_iterator it;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): UltraRestart
+ filter nearest Samples";
+\end_layout
+
+\begin_layout Plain Layout
+
+		//#pragma omp parallel for schedule(dynamic)
+\end_layout
+
+\begin_layout Plain Layout
+
+		for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+			for(size_t j=i+1; j<points.size(); j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+				B corr = correlationMap(points[i].getType(),points[j].getType())->calcSimpleCo
+rrelation(points[j],points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+				corrs[corr] =pair<int,int>(i,j);
+\end_layout
+
+\begin_layout Plain Layout
+
+			}
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<killSamples;
+ it++) {
+\end_layout
+
+\begin_layout Plain Layout
+
+			bool firstInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.first)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+			bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.second)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+			// Keiner drin -> Random
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(!(firstInside or secondInside))
+\end_layout
+
+\begin_layout Plain Layout
+
+				if(rand()%2==0)deleteIndices.push_back(it->second.first );
+\end_layout
+
+\begin_layout Plain Layout
+
+				else deleteIndices.push_back(it->second.second );
+\end_layout
+
+\begin_layout Plain Layout
+
+			else
+\end_layout
+
+\begin_layout Plain Layout
+
+				continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::sort (deleteIndices.rbegin(), deleteIndices.rend());
+\end_layout
+
+\begin_layout Plain Layout
+
+	vector<Point<T,B> > newPoints;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(std::find(deleteIndices.begin(), deleteIndices.end(), (int)i) != deleteIndice
+s.end())
+\end_layout
+
+\begin_layout Plain Layout
+
+			continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+		newPoints.push_back(points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	points = newPoints;
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Count Samples and PartDer
+\end_layout
+
+\begin_layout Plain Layout
+
+	sampleSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	partDerSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+		sampleSize++;
+\end_layout
+
+\begin_layout Plain Layout
+
+		partDerSize+=points[i].getNumPartDerivatives();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
+ Delete: NumSamples:"<<sampleSize<<" NumPartDer:"<<partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
+ Delete: MaxMatrixSize: "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+p
+artDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numDerivatives = partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numSamples	   = sampleSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+	cfg.numSamplesDerivatives = partDerSize+sampleSize;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_All.eps
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_Filtered.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

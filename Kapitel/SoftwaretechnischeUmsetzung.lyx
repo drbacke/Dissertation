@@ -268,8 +268,17 @@ name "subsec:Kovarianzmatrix"
 \end_layout
 
 \begin_layout Standard
-Um die für das Kriging-Verfahren benötigte Kovarianzmatrix aufstellen zu
- können, muss ein geeignetes Kovarianzmodell gefunden werden.
+In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
+
+\end_inset
+
+ wurden die verschiedenen Kriging-Verfahren beschrieben.
+ Innerhalb dieses Kapitels wurden die Begriffe der Kovarianzmatrix und des
+ Kovarianzvektors verwendet.
+ muss ein geeignetes Kovarianzmodell gefunden werden.
  In Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -497,7 +506,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/KrigingKapitel/KoVariogramm.eps
+	filename ../images/KrigingKapitel/KoVariogramm.eps
 	scale 40
 
 \end_inset

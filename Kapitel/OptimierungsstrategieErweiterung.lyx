@@ -973,6 +973,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/Opti_Surrogate_Multifidelity2.eps
+	scale 60
 
 \end_inset
 
@@ -1573,10 +1574,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
+	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
 	scale 50
-	BoundingBox 60bp 130bp 796bp 663bp
-	clip
 
 \end_inset
 
