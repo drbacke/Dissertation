@@ -91,7 +91,7 @@ appendix
 Anhang
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Likelihood Schätzer Erwartungswerte und Varianz 
 \begin_inset CommandInset label
 LatexCommand label
@@ -103,6 +103,13 @@ name "subsec:Likelihood-Schätzer-Erwartungswe"
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Beweis:-Variogramm-Abhängigkeit"
+
+\end_inset
+
+
 \begin_inset Formula 
 \begin{align*}
 MLE\left(\vec{\tilde{F}}\right) & =max\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}|\mathbf{Cov}|^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)^{T}\mathbf{Cov}^{-1}\left(\overrightarrow{y}-\mathbf{G}\vec{\tilde{F}}\right)}\right)\\
@@ -164,10 +171,82 @@ Behauptung:
 \end_layout
 
 \begin_layout Standard
+Sei 
+\begin_inset Formula $Z\left(X\right)$
+\end_inset
+
+ ein schwach stationärer räumlicher Zufallsprozess, so gilt:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
-\[
-cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)
-\]
+\begin{equation}
+cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\label{eq:DistanzabhängigkeitBehauptung}
+\end{equation}
+
+\end_inset
+
+Weiterhin wird benötigt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E\left[Z(\vec{0}){}^{2}\right]=cov\left(Z(\vec{0}),Z(\vec{0})\right)-\mu^{2}
+\end{equation}
+
+\end_inset
+
+Beweis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z(\vec{0}),Z(\vec{0})\right)= & E\left[\left(Z(\vec{0})-E\left[Z(\vec{0})\right]\right)\left(Z(\vec{0})-E\left[Z(\vec{0})\right]\right)\right]\\
+= & E\left[Z(\vec{0}){}^{2}-2E\left[Z(\vec{0})\right]Z(\vec{0})+E\left[Z(\vec{0})\right]^{2}\right]\\
+= & E\left[Z(\vec{0}){}^{2}-2\mu Z(\vec{0})+\mu^{2}\right]\\
+= & E\left[Z(\vec{0}){}^{2}\right]-2\mu^{2}+\mu^{2}\\
+cov\left(Z(\vec{0}),Z(\vec{0})\right)-\mu^{2}= & E\left[Z(\vec{0}){}^{2}\right]
+\end{align*}
+
+\end_inset
+
+Daraus ergibt sich die notwendige Umformung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-\mu^{2}= & E\left[Z(\vec{0}+\vec{h})^{2}\right]
+\end{align}
+
+\end_inset
+
+Außerdem wird folgende Umformung nötig:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]=cov\left(Z\left(\vec{0}+\vec{h}\right),Z(\vec{0})\right)+\mu^{2}
+\end{equation}
+
+\end_inset
+
+Beweis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)= & E\left[\left(Z(\vec{0}+\vec{h})-E\left[Z(\vec{0}+\vec{h})\right]\right)\left(Z(\vec{0})-E\left[Z(\vec{0})\right]\right)\right]\\
+= & E\left[\left(Z(\vec{0}+\vec{h})-\mu\right)\left(Z(\vec{0})-\mu\right)\right]\\
+= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})-Z(\vec{0}+\vec{h})\mu-\mu Z(\vec{0})+\mu^{2}\right]\\
+= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]-\mu E\left[Z(\vec{0}+\vec{h})\right]-\mu E\left[Z(\vec{0})\right]+\mu^{2}\\
+= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]-\mu^{2}\\
+cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+\mu^{2}= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]
+\end{align*}
 
 \end_inset
 
@@ -175,98 +254,36 @@ cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)
 \end_layout
 
 \begin_layout Paragraph*
-Beweis:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-2\gamma\left(\vec{0},\vec{0}+\vec{h}\right) & =\frac{1}{2}var\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\\
- & =\frac{1}{2}E\left[\left(\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)-E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]\right)^{2}\right]\\
- & =\frac{1}{2}E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]+E\left[Z\left(0+\vec{h}\right)-Z\left(0\right)\right]^{2}\right]\\
- & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}-2\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
- & =E\left[\left(Z\left(0+\vec{h}\right)-Z\left(0\right)\right)^{2}\right]\\
- & =E\left[Z\left(0+\vec{h}\right)^{2}-2Z\left(0+\vec{h}\right)Z\left(0\right)+Z\left(0\right)^{2}\right]\\
- & =E\left[Z\left(0+\vec{h}\right)^{2}\right]-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+E\left[Z\left(0\right)^{2}\right]\\
- & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}-2E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]+cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}\\
- & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+2\mu^{2}+cov\left(Z\left(0\right),Z\left(0\right)\right)-2\mu^{2}\\
- & =cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-2cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+cov\left(Z\left(0\right),Z\left(0\right)\right)\\
- & =cov\left(\vec{h}\right)-2cov\left(\vec{h}\right)+cov\left(Z\left(0\right),Z\left(0\right)\right)\\
- & =cov\left(Z\left(0\right),Z\left(0\right)\right)-cov\left(\vec{h}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z\left(0\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
-= & E\left[Z\left(0\right)^{2}-2E\left[Z\left(0\right)\right]Z\left(0\right)+E\left[Z\left(0\right)\right]^{2}\right]\\
-= & E\left[Z\left(0\right)^{2}-2\mu Z\left(0\right)+\mu^{2}\right]\\
-= & E\left[Z\left(0\right)^{2}\right]-2\mu^{2}+\mu^{2}\\
-cov\left(Z\left(0\right),Z\left(0\right)\right)-\mu^{2}= & E\left[Z\left(0\right)^{2}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-analog gilt
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z\left(0+\vec{h}\right),Z\left(0+\vec{h}\right)\right)-\mu^{2}= & E\left[Z\left(0+\vec{h}\right)^{2}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-und
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)= & E\left[\left(Z\left(0+\vec{h}\right)-E\left[Z\left(0+\vec{h}\right)\right]\right)\left(Z\left(0\right)-E\left[Z\left(0\right)\right]\right)\right]\\
-= & E\left[\left(Z\left(0+\vec{h}\right)-\mu\right)\left(Z\left(0\right)-\mu\right)\right]\\
-= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)-Z\left(0+\vec{h}\right)\mu-\mu Z\left(0\right)+\mu^{2}\right]\\
-= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu E\left[Z\left(0+\vec{h}\right)\right]-\mu E\left[Z\left(0\right)\right]+\mu^{2}\\
-= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]-\mu^{2}\\
-cov\left(Z\left(0+\vec{h}\right),Z\left(0\right)\right)+\mu^{2}= & E\left[Z\left(0+\vec{h}\right)Z\left(0\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Dies lässt sich auch ausdrücken durch 
-\begin_inset Formula $\gamma\left(0,0+\vec{h}\right)$
-\end_inset
-
-, wobei 
-\begin_inset Formula $\vec{h}=\vec{x}_{2}-\vec{x}_{1}$
-\end_inset
-
- die Differenz der Punkte darstellt.
- Das Semivariogramm ist so also nicht mehr von der absoluten Lage im Raum
- abhängig, sondern nur noch von dem Abstand der Punkte zueinander.
+Beweis Gl.
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DistanzabhängigkeitBehauptung"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+2\gamma\left(\vec{0},\vec{0}+\vec{h}\right) & =\frac{1}{2}var\left[Z(\vec{0}+\vec{h})-Z(\vec{0})\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)-E\left[Z(\vec{0}+\vec{h})-Z(\vec{0})\right]\right)^{2}\right]\\
+ & =E\left[\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)^{2}-2\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
+ & =E\left[\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)^{2}\right]\\
+ & =E\left[Z(\vec{0}+\vec{h})^{2}-2Z(\vec{0}+\vec{h})Z(\vec{0})+Z(\vec{0}){}^{2}\right]\\
+ & =E\left[Z(\vec{0}+\vec{h})^{2}\right]-2E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]+E\left[Z(\vec{0}){}^{2}\right]\\
+ & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-\mu^{2}-2E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]+cov\left(Z(\vec{0}),Z(\vec{0})\right)-\mu^{2}\\
+ & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-2cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+2\mu^{2}+cov\left(Z(\vec{0}),Z(\vec{0})\right)-2\mu^{2}\\
+ & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-2cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
+ & =cov\left(\vec{h}\right)-2cov\left(\vec{h}\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
+ & =cov\left(Z(\vec{0}),Z(\vec{0})\right)-cov\left(\vec{h}\right)
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

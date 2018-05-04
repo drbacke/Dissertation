@@ -301,7 +301,7 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Diese Funktionen müssen für jedes mögliche Punktepaar eine Kovarianz zuordnen.
+Diese Funktionen müssen jedem möglichen Punktepaar eine Kovarianz zuordnen.
  Weiterhin muss die daraus resultierende Matrix positiv Definit und symmetrisch
  sein, was die Wahl einer geeigneten Funktion erschwert.
  Das folgende Beispiel zeigt eine beispielhafte Kovarianzmatrix 
@@ -330,29 +330,25 @@ y_{1}\left(\vec{x}_{4}\right) & cov\left(\vec{x}_{4},\vec{x}_{1}\right) & cov\le
 
 \end_inset
 
-Um ein solches parametrisiertes Modell praktisch nutzbar zu machen, müssen
- drei verschiedene Problemstellungen behandelt werden:
+Um ein solches Modell praktisch nutzbar zu machen, müssen drei verschiedene
+ Problemstellungen behandelt werden:
 \end_layout
 
 \begin_layout Enumerate
 Die Kovarianzfunktion darf nicht durch die absolute Lage im Raum 
-\begin_inset Formula $cov\left(\vec{x}_{1},\vec{x_{2}}\right)$
+\begin_inset Formula $\left(\vec{x}_{1},\vec{x_{2}}\right)$
 \end_inset
 
 , sondern muss durch den Verbindungsvektor 
 \begin_inset Formula $\vec{h}=\vec{x}_{1}-\vec{x_{2}}$
 \end_inset
 
- beschrieben werden: 
-\begin_inset Formula $cov\left(\vec{h}\right)$
-\end_inset
-
-
+ beschrieben werden
 \end_layout
 
 \begin_layout Enumerate
-Es wird ein berechenbares und parametrisiertes Modell für die Kovarianzfunktion
- benötigt, welches zu einer positiv definiten und symmetrischen Matrix führt.
+Es wird ein parametrisiertes Modell für die Kovarianzfunktion benötigt,
+ welches zu einer positiv definiten und symmetrischen Matrix führt.
 \end_layout
 
 \begin_layout Enumerate
@@ -391,12 +387,12 @@ key "matheron1963principles"
 \begin_inset Formula $Z\left(\vec{x}\right)$
 \end_inset
 
- ein räumlicher Prozess an dem Ort 
-\begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
+ ein räumlicher Zufallsprozess, so ist das Variogramm 
+\begin_inset Formula $2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
-, so ist das Variogramm 
-\begin_inset Formula $2\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
+, 
+\begin_inset Formula $\vec{x}_{1},\vec{x}_{2}\in\mathbb{R^{\textrm{k}}}$
 \end_inset
 
  definiert über:
@@ -420,12 +416,8 @@ cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Einfacher formuliert beschreibt das Variogramm und auch das Kovariogramm
- die räumlichen Abhängigkeit eines Punktes zu Nachbarpunkten.
+ die räumliche Abhängigkeit eines Punktes zu Nachbarpunkten.
  
 \begin_inset Formula $\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
@@ -442,7 +434,7 @@ key "Ozkaya2014"
 ): 
 \begin_inset Formula 
 \begin{align}
-E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k}}}
+E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k}}}\label{eq:OrtsAbhKovStationärE}
 \end{align}
 
 \end_inset
@@ -455,35 +447,58 @@ or
  ist:
 \begin_inset Formula 
 \begin{align}
-cov\left(\vec{x},\vec{x}+\vec{h}\right) & =cov\left(\vec{h}\right)
+cov\left(\vec{h}\right) & \coloneqq cov\left(\vec{x},\vec{x}+\vec{h}\right)\label{eq:OrtsAbhKovStationärcov}
 \end{align}
 
 \end_inset
 
-Damit folgt dann für die gesuchte Kovarianzfunktion: 
+Unter Berücksichtigung von Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:OrtsAbhKovStationärE"
+
+\end_inset
+
+ und Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:OrtsAbhKovStationärcov"
+
+\end_inset
+
+ folgt dann für die gesuchte Kovarianzfunktion: 
 \begin_inset Formula 
 \begin{equation}
-cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\label{eq:KovariogrammGrundformel}
+cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)=\sigma^{2}-2\gamma\left(\vec{h}\right)\label{eq:KovariogrammGrundformel}
 \end{equation}
 
 \end_inset
 
-Der Term 
-\begin_inset Formula $cov\left(\vec{0}\right)$
+
+\end_layout
+
+\begin_layout Standard
+Wobei 
+\begin_inset Formula $cov\left(\vec{0}\right)=\sigma^{2}$
 \end_inset
 
- entspricht der stationären Varianz des Prozesses 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
- (siehe Kapitel 
+ der stationären Varianz des Prozesses (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:MinimierungsverfahrenTraining"
 
 \end_inset
 
-) und die Modellierung von 
+) entspricht.
+ Der Beweis für Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovariogrammGrundformel"
+
+\end_inset
+
+ ist in Anhang zu finden.
+ Die Modellierung von 
 \begin_inset Formula $\gamma\left(\vec{h}\right)$
 \end_inset
 
@@ -540,6 +555,7 @@ reference "fig:Beispielhaftes-VarioKovariogramm"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -573,7 +589,7 @@ name "fig:Beispielhaftes-VarioKovariogramm"
 
 \end_inset
 
-Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Semikovarianz
+Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Kovarianz
  
 \begin_inset Formula $cov\left(\vec{h}\right)$
 \end_inset
@@ -759,8 +775,11 @@ Wobei
 \begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
 \end_inset
 
- als Hyperparametervektor bezeichnet wird und eine Korrelationslänge für
- den entsprechenden Parameter 
+ als Hyperparametervektor bezeichnet wird und jeder Eintrag 
+\begin_inset Formula $\theta_{l}$
+\end_inset
+
+ eine Korrelationslänge für den entsprechenden Parameter 
 \begin_inset Formula $l$
 \end_inset
 
@@ -774,7 +793,18 @@ reference "chap:MinimierungsverfahrenTraining"
 \end_inset
 
 ).
- 
+ Die Benutzung der Exponentialfunktion 
+\begin_inset Formula $e^{\theta_{l}}$
+\end_inset
+
+ dient der Stabilität des Trainingsverfahrens und wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Negative-Hyperparameter-1"
+
+\end_inset
+
+ beschrieben.
 \end_layout
 
 \begin_layout Standard
@@ -832,68 +862,6 @@ cov\left(\vec{h}\right) & =\sigma^{2}+\lambda\delta\left(\vec{h}\right)-\sigma^{
 
 \end_layout
 
-\begin_layout Standard
-Dies stellt somit ein berechenbares Modell dar und kann innerhalb eines
- Kriging Verfahren verwendet werden.
- 
-\end_layout
-
-\begin_layout Subsubsection*
-Kovarianzfunktion CO-Kriging
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Kovarianzfunktion-CO-Kriging"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Kovarianzfunktion für das CO-Kriging wird aus mehreren Korrelationsfunktione
-n zusammengesetzt, daher werden keine neuen Modelle benötigt.
- Es werden allerdings für jede Gütestufe ein zusätzlicher Hyperparametervektor
- 
-\begin_inset Formula $\vec{\theta}_{2},\vec{\theta}_{diff}$
-\end_inset
-
- verwendet.
- Geht man von den Gleichungen 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovarianzFunktionenalleDrei"
-
-\end_inset
-
- aus und setzt das entsprechende Kovarianzmodell aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:ExpoKovarianzfunktion"
-
-\end_inset
-
- ein, wobei 
-\begin_inset Formula $c_{2}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,2}}\left|h_{l}\right|^{p}\right)}$
-\end_inset
-
- und 
-\begin_inset Formula $c_{diff}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,diff}}\left|h_{l}\right|^{p}\right)}$
-\end_inset
-
-, so erhält man:
-\begin_inset Formula 
-\begin{align}
-cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)= & a^{2}\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber \\
- & +\lambda_{diff}\delta\left(\vec{h}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{h}\right)\nonumber \\
-cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & a\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\label{eq:KovarianzfunktionenCoKrigingGauss}\\
-cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & \lambda_{2}\delta\left(\vec{h}\right)+\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber 
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Paragraph*
 Beispiel Gauss Korrelationsfunktion
 \end_layout
@@ -916,7 +884,7 @@ reference "fig:Beispiel-einer-Gauss-1"
 \begin_inset Formula $\sigma^{2}=1,\lambda=0$
 \end_inset
 
- angenommen.
+ angenommen, dadurch sind Kovarianz und Korrelation in diesem Fall identisch.
  Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
  zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
 swert.
@@ -965,7 +933,7 @@ Falls einer der Parameter keine Korrelation mit der zu trainierenden Funktion
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -997,6 +965,62 @@ Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Kovarianzfunktion CO-Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Kovarianzfunktion für das CO-Kriging wird aus mehreren Kovarianzfunktionen
+ zusammengesetzt, daher werden keine neuen Modelle benötigt.
+ Es werden allerdings für jede Gütestufe ein zusätzlicher Hyperparametervektor
+ 
+\begin_inset Formula $\vec{\theta}_{2},\vec{\theta}_{diff}$
+\end_inset
+
+ verwendet.
+ Geht man von den Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzFunktionenalleDrei"
+
+\end_inset
+
+ aus und setzt das entsprechende Kovarianzmodell aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ExpoKovarianzfunktion"
+
+\end_inset
+
+ ein, wobei 
+\begin_inset Formula $c_{2}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,2}}\left|h_{l}\right|^{p}\right)}$
+\end_inset
+
+ und 
+\begin_inset Formula $c_{diff}\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,diff}}\left|h_{l}\right|^{p}\right)}$
+\end_inset
+
+, so erhält man:
+\begin_inset Formula 
+\begin{align}
+cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)= & a^{2}\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber \\
+ & +\lambda_{diff}\delta\left(\vec{h}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{h}\right)\nonumber \\
+cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & a\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\label{eq:KovarianzfunktionenCoKrigingGauss}\\
+cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & \lambda_{2}\delta\left(\vec{h}\right)+\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber 
+\end{align}
 
 \end_inset
 
@@ -1088,9 +1112,9 @@ c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{
 \end_layout
 
 \begin_layout Standard
-Diese Formulierung der Gauss-Korrelationsfunktion hat sich bisher als sehr
- vorteilhaft herausgestellt, da der gesamte Raum der reellen Zahlen verwendet
- werden kann.
+Diese Formulierung der Gauss-Korrelationsfunktion hat sich als sehr vorteilhaft
+ herausgestellt, da der gesamte Raum der reellen Zahlen verwendet werden
+ kann.
  Zudem ist die Funktion stetig, differenzierbar und zeigt auch kein unerwünschte
 s Verhalten bei sehr kleinen Hyperparametern.
  
@@ -1112,7 +1136,7 @@ Zwei weitere wichtige Punkte der verschiedenen Kriging-Verfahren, sind die
  Berücksichtigungen von schlecht konditionierten Kovarianzmatrizen und der
  Umgang mit verrauschten Funktionen.
  Da die praktische Behandlung beider Problematiken sehr ähnlich ist, werden
- innerhalb dieses Abschnittes beide Probleme gemeinsam beschrieben.
+ innerhalb dieses Kapitels beide Probleme gemeinsam beschrieben.
 \end_layout
 
 \begin_layout Subsection
@@ -1168,7 +1192,7 @@ Eine gebräuchliche Methode um die Konditionszahl zu verbessern, ist es die
  für Least Squares Verfahren eingesetzt wird (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Tikhonov1991,Hoerl1970,Sacks2007a"
+key "Sacks2007a,tikhonov2013numerical,hoerl2000"
 
 \end_inset
 
@@ -1301,7 +1325,7 @@ Addiert man nun den Diagonalaufschlag, bekommt man folgende Kovarianzmatrix:
 \mathbf{\mathbf{Cov}} & =\sigma^{2}\left[\begin{array}{ccc}
 1+\frac{\lambda}{\sigma^{2}} & ... & 1\\
 ... & ... & ...\\
-1 & ... & 1++\frac{\lambda}{\sigma^{2}}
+1 & ... & 1+\frac{\lambda}{\sigma^{2}}
 \end{array}\right]
 \end{align}
 
@@ -1408,14 +1432,14 @@ Da die Korrelationen der Diagonalen den Wert Eins besitzen,
 \begin_inset Formula $c_{diff}\left(\vec{0}\right)=1$
 \end_inset
 
-, gilt für das Maximum der Spur der Matrix:
+, gilt für die Spur der Matrix:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-spur\left(\mathbf{Cov}\right) & \leq\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}1+\sigma_{diff}^{2}1+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}1+\lambda_{2}\right)\\
-spur\left(\mathbf{Cov}\right) & \leq n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
+spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}1+\sigma_{diff}^{2}1+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}1+\lambda_{2}\right)\\
+ & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
 \end{align}
 
 \end_inset
@@ -1437,7 +1461,7 @@ reference "eq:SpurEqSummeEigenwerte"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\sum_{i=1}^{n_{all}}\Xi_{i} & \leq n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
+\sum_{i=1}^{n_{all}}\Xi_{i} & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)\geq n_{1}\lambda_{diff}+n_{2}\lambda_{2}\label{eq:EigenwertBedSpur}
 \end{align}
 
 \end_inset
@@ -1461,8 +1485,8 @@ Geht man weiterhin von nur einem Regularisierungsterm
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\Xi_{max} & \leq n_{diff}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)\\
-\Xi_{min} & =\lambda
+\Xi_{max} & \leq n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)\\
+\Xi_{min} & \geq\lambda;falls\,\Xi_{i}=\Xi_{min}\forall i\label{eq:EigenwertMinGrLambda}
 \end{align}
 
 \end_inset
@@ -1471,7 +1495,21 @@ Geht man weiterhin von nur einem Regularisierungsterm
 \end_layout
 
 \begin_layout Standard
-Für die Konditionszahl 
+Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:EigenwertMinGrLambda"
+
+\end_inset
+
+ folgt aus 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:EigenwertBedSpur"
+
+\end_inset
+
+ Für die Konditionszahl 
 \begin_inset Formula $\kappa$
 \end_inset
 
@@ -1481,7 +1519,7 @@ Für die Konditionszahl
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\kappa & \leq\frac{n_{diff}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)}{\lambda}
+\kappa & \leq\frac{n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda\right)+n_{2}\left(\sigma_{2}^{2}+\lambda\right)}{\lambda}
 \end{align}
 
 \end_inset
@@ -1500,7 +1538,7 @@ Legt man nun für die Konditionszahl einen maximalen Wert
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\lambda & \geq\frac{n_{diff}a^{2}\sigma_{2}^{2}+n_{diff}\sigma_{diff}^{2}+n_{2}\sigma_{2}^{2}}{\left(\kappa_{max}-\left(n_{2}+n_{diff}\right)\right)}
+\lambda & \geq\frac{n_{1}a^{2}\sigma_{2}^{2}+n_{1}\sigma_{diff}^{2}+n_{2}\sigma_{2}^{2}}{\left(\kappa_{max}-\left(n_{2}+n_{1}\right)\right)}
 \end{align}
 
 \end_inset

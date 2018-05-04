@@ -560,7 +560,7 @@ $!XYLineAxis
     {
     RangeMin = 0
     RangeMax = 0.2999999999999999889
-    GRSpacing = 0.2
+    GRSpacing = 0.05
     TickLabel
       {
       ShowOnAxisLine = No
@@ -580,7 +580,7 @@ $!XYLineAxis
     Title
       {
       TitleMode = UseText
-      Text = 'Semivarianz'
+      Text = 'Kovarianz'
       TextShape
         {
         Height = 4.6
@@ -633,6 +633,17 @@ $!AttachText
     BoxType = Filled
     }
   Text = 'Kovariogramm'
+$!AttachText 
+  AnchorPos
+    {
+    X = 18.46920285167432
+    Y = 6.888649729878482
+    }
+  TextShape
+    {
+    IsBold = No
+    }
+  Text = '0'
 $!AttachGeom 
   AnchorPos
     {
