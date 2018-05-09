@@ -1538,7 +1538,7 @@ Legt man nun für die Konditionszahl einen maximalen Wert
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\lambda & \geq\frac{n_{1}a^{2}\sigma_{2}^{2}+n_{1}\sigma_{diff}^{2}+n_{2}\sigma_{2}^{2}}{\left(\kappa_{max}-\left(n_{2}+n_{1}\right)\right)}
+\lambda_{min} & \geq\frac{n_{1}a^{2}\sigma_{2}^{2}+n_{1}\sigma_{diff}^{2}+n_{2}\sigma_{2}^{2}}{\left(\kappa_{max}-\left(n_{2}+n_{1}\right)\right)}\label{eq:DiagonalSchätzungCoKriging}
 \end{align}
 
 \end_inset
@@ -1547,16 +1547,79 @@ Legt man nun für die Konditionszahl einen maximalen Wert
 \end_layout
 
 \begin_layout Standard
-Nachteilig ist, dass die untere Grenze für den Diagonalaufschlag während
- des Trainings permanent angepasst werden müsste.
- Dies würde allerdings zu numerischen Problemen führen, da die Ableitung
- des Likelihood Terms nach dem Diagonalaufschlag dann abhängig von den Varianzen
- und dem Skalierungsfaktor wäre.
- Aus diesem Grund wird die untere Grenze nur initial eingestellt und dann
- nicht mehr verändert, es sei denn es treten numerische Probleme während
- des Trainings auf.
- In diesem Fall wird der letzte Iterationsschritt wiederholt und der Diagonalauf
-schlag so lange erhöht, bis die numerischen Probleme verschwinden.
+Die Werte 
+\begin_inset Formula $\sigma_{2}^{2},\sigma_{diff}^{2},a$
+\end_inset
+
+ werden während des Trainings oftmals verändert, dadurch ändert sich natürlich
+ auch die untere Grenze des Diagonalaufschlags 
+\begin_inset Formula $\lambda_{min}$
+\end_inset
+
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DiagonalSchätzungCoKriging"
+
+\end_inset
+
+) permanent.
+ Prinzipiell sind zwei Lösungen möglich:
+\end_layout
+
+\begin_layout Enumerate
+Die untere Grenze für 
+\begin_inset Formula $\lambda_{min}$
+\end_inset
+
+ in jedem Trainingsschritt neu bestimmen und bei Unterschreitung auf den
+ Grenzwert setzen.
+\end_layout
+
+\begin_layout Enumerate
+Die untere Grenze für 
+\begin_inset Formula $\lambda_{min}$
+\end_inset
+
+ nur beim Start des Trainings bestimmen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die erste Lösung kann dazu führen, dass sich der Grenzwert 
+\begin_inset Formula $\lambda_{min}$
+\end_inset
+
+ während des Training ändert und der aktuelle Wert 
+\begin_inset Formula $\lambda<\lambda_{min}$
+\end_inset
+
+ die Grenze unterschreitet.
+ Da der Diagonalaufschlag dann bei Unterschreitung der Grenze abhängig von
+ den Variablen 
+\begin_inset Formula $\sigma_{2}^{2},\sigma_{diff}^{2},a$
+\end_inset
+
+ wird, muss dies bei der Ableitung des Likelihoods (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:COKrigingTraining"
+
+\end_inset
+
+) Berücksichtigung finden.
+ 
+\end_layout
+
+\begin_layout Standard
+Aus diesem Grund wird die zweite Variante gewählt, also die untere Grenze
+ nur initial eingestellt und dann nicht mehr verändert.
+ Es sei denn es treten numerische Probleme während des Trainings auf, dann
+ wird in der Software eine entsprechende Exception geworfen und in der Software
+ abgefangen.
+ Daraufhin wird der letzte Iterationsschritt wiederholt und der Diagonalaufschla
+g so lange erhöht, bis die numerischen Probleme verschwinden.
+ Gelingt selbst dies nicht, wird ein Fehler ausgegeben und abgebrochen.
  
 \end_layout
 
@@ -1582,8 +1645,11 @@ name "subsec:Approximation"
 \end_layout
 
 \begin_layout Standard
-Das bisher beschriebene Kriging-Verfahren ist ein rein interpolierendes
- Verfahren.
+Bei Vernachlässigung des Diagonalaufschlags 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, ist das bisher beschriebene Kriging-Verfahren rein interpolierend.
  In einigen Fällen ist allerdings ein approximierendes Verhalten gewünscht.
  Ein solches Verhalten entspricht dem in Kapitel 
 \begin_inset CommandInset ref
@@ -1615,9 +1681,18 @@ ags
 \begin_inset Formula $\lambda$
 \end_inset
 
- und in dessen Bedeutung, da es sich in diesem Fall um eine Varianz handelt.
- Zudem ist der Diagonalaufschlag für diesen Fall als Hyperparameter der
- Verteilung zu behandeln und muss daher mit trainiert werden.
+ und in dessen Bedeutung.
+ Da es sich bei dem Diagonalaufschlag in diesem Fall um eine Varianz handelt
+ die einem zufälligen Rauschen entspricht, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-parametrisiertes-Model"
+
+\end_inset
+
+.
+ Zudem ist der Diagonalaufschlag für diesen Fall als Hyperparameter zu behandeln
+ und muss daher mit trainiert werden.
  Die Umsetzung soll folgend gezeigt werden.
  
 \end_layout
@@ -1630,8 +1705,9 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
 
 \end_inset
 
- beschrieben, um den Rauschterm innerhalb eines gradientenbasierten Trainingsver
-fahrens (siehe Kapitel 
+ beschrieben.
+ Um den Rauschterm innerhalb eines gradientenbasierten Trainingsverfahrens
+ (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:MinimierungsverfahrenTraining"
@@ -1797,7 +1873,18 @@ reference "tab:KrigingRauschBspEinstellungn"
 \end_inset
 
  zeigt die Einstellungen der beiden Lösungen.
- Die interpolierenden Variante besitzt eine Varianz von 
+ Für das Training der beiden Kriging-Modelle wurde der Diagonalaufschlag
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ vorher festgelegt und die anderen Größen durch das Training automatisch
+ bestimmt.
+ 
+\end_layout
+
+\begin_layout Standard
+Die interpolierenden Variante besitzt eine Varianz von 
 \begin_inset Formula $\sigma^{2}=1$
 \end_inset
 
@@ -2158,8 +2245,8 @@ reference "fig:RauschBeiespielDiagonalaufschlagVarianz"
 
 \end_inset
 
- zeigt die verschiedene Diagonalaufschläge und den resultierenden Likelihood-Wer
-t für das Beispiel.
+ zeigt für verschiedene Diagonalaufschläge den resultierenden Likelihood-Wert,
+ wobei hier ein kleiner Likelihood ein besseres Ergebnis darstellt.
  Das Ergebnis zeigt, dass der Likelihood-Wert für einem Diagonalaufschlag
  im Bereich von 
 \begin_inset Formula $\lambda>0\land\lambda<1$
@@ -2273,7 +2360,6 @@ reference "subsec:Approximation"
 
  wird ein Diagonalaufschlag verwendet, um eine Regularisierung der Matrix
  zu erreichen und auch um ein approximierendes Verhalten herbeizuführen.
- Formell werden beide Terme gleich verwendet.
  Praktische Unterschiede ergeben sich nur in der Größe der Werte und in
  der Bestimmung während des Trainings.
  Auf der einen Seite steht der Regularisierungsterm, welcher für die numerische
@@ -2290,7 +2376,7 @@ reference "subsec:Approximation"
  eigenen Wert zu verwenden, ist es möglich den Regularisierungsterm als
  minimale Grenze anzunehmen.
  Der Rauschterm kann dann wie beschrieben trainiert werden, besitzt dann
- allerdings eine untere Schranke, sich wie in Kapitel 
+ allerdings eine untere Schranke, die sich wie in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Regularisierung"

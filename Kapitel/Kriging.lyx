@@ -253,9 +253,13 @@ name "sec:Co-Kriging"
 
 \end_layout
 
+\begin_layout Subsection
+Allgemeine Vorbemerkungen und Definitionen
+\end_layout
+
 \begin_layout Standard
 Angenommen es existiert ein Programm (bspw.
- einen Strömungslöser), welches in 
+ ein Strömungslöser), welches in 
 \begin_inset Formula $s$
 \end_inset
 
@@ -313,6 +317,15 @@ Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
 \end_inset
 
  angesehen.
+ Der Krige-Schätzer für die Gütestufe 
+\begin_inset Formula $g\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ wird mit 
+\begin_inset Formula $Z_{g}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ bezeichnet.
  Desweiteren sollen die Zufallsprozesse der einzelnen Gütestufen stationär
  sein, also einen konstanten Erwartungswert 
 \begin_inset Formula $E\left[Z_{i}\right]=const$
@@ -322,7 +335,7 @@ Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Bedingung für die Nutzung innerhalb einer AutoOpti Optimierung
 \begin_inset CommandInset label
 LatexCommand label
@@ -359,11 +372,11 @@ reference "sec:Multifidelity-OptimierungsstrateAutoOpti"
 
 \begin_layout Enumerate
 Den Erwartungswert 
-\begin_inset Formula $E\left[Z_{k}^{*}\left(\vec{x}\right)\right]$
+\begin_inset Formula $E\left[Z_{g}^{*}\left(\vec{x}\right)\right]$
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $k\in\left\{ 1,...,s\right\} $
+\begin_inset Formula $g$
 \end_inset
 
  
@@ -371,7 +384,7 @@ Den Erwartungswert
 
 \begin_layout Enumerate
 Die Unsicherheit der Vorhersage in Form einer Varianz: 
-\begin_inset Formula $var\left[Z_{k}\left(\vec{x}\right)-Z_{k}^{*}\left(\vec{x}\right)\right]$
+\begin_inset Formula $var\left[Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right]$
 \end_inset
 
  
@@ -379,7 +392,7 @@ Die Unsicherheit der Vorhersage in Form einer Varianz:
 
 \begin_layout Enumerate
 Die Kovarianzen 
-\begin_inset Formula $cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)$
+\begin_inset Formula $cov\left(Z_{g}^{*}\left(\vec{x_{1}}\right),Z_{g}^{*}\left(\vec{x_{2}}\right)\right)$
 \end_inset
 
  zwischen den Vorhersagen der unbeprobten Orte 
@@ -397,8 +410,8 @@ Im Folgenden soll diese drei Schätzer hergeleitet werden.
  
 \end_layout
 
-\begin_layout Subsection*
-Herleitung 
+\begin_layout Subsection
+Herleitung Krige Schätzer
 \end_layout
 
 \begin_layout Standard
@@ -472,26 +485,30 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 
  durch eine gewichtete Summe bestimmt werden kann.
  Diese Summe wird aus den bekannten Stützstellen 
-\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right)$
 \end_inset
 
  und den noch zu bestimmenden Gewichten 
-\begin_inset Formula $w_{i,j},i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $w_{i,j}(g),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
- gebildet.
+ gebildet, wobei die Gewichte von der vorherzusagenden Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
+ abhängen.
  Der Einfachheit halber werden die Stützstellen wie auch die Gewichte zukünftig
  durch die folgenden Vektoren beschrieben 
 \begin_inset Formula $\vec{y}_{i}=\left(y_{i}\left(\vec{x}_{1}\right),...,y_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} $
 \end_inset
 
  und 
-\begin_inset Formula $\vec{w}_{i}=\left(w_{i,1},...,w_{i,n_{i}}\right)^{T},i\in\left\{ 1,...,s\right\} $
+\begin_inset Formula $\vec{w}_{i}(g)=\left(w_{i,1}(g),...,w_{i,n_{i}}(g)\right)^{T},i\in\left\{ 1,...,s\right\} $
 \end_inset
 
 .
  Daraus folgt die Gleichung für die Vorhersage der Gütestufe 
-\begin_inset Formula $k\in\left\{ 1,...,s\right\} $
+\begin_inset Formula $g\in\left\{ 1,...,s\right\} $
 \end_inset
 
 :
@@ -500,7 +517,7 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-y_{k}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{y}_{i}^{T}\vec{w}_{i}\label{eq:GewichtetSummeCOKriging}
+y_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{y}_{i}^{T}\vec{w}_{i}(g)\label{eq:GewichtetSummeCOKriging}
 \end{align}
 
 \end_inset
@@ -527,17 +544,17 @@ Da die Stützstellen
 
 .
  Der Krige Schätzer 
-\begin_inset Formula $Z_{k}^{*}\left(\vec{x}\right)$
+\begin_inset Formula $Z_{g}^{*}\left(\vec{x}\right)$
 \end_inset
 
  für die Gütestufe 
-\begin_inset Formula $k$
+\begin_inset Formula $g$
 \end_inset
 
  wird damit zu:
 \begin_inset Formula 
 \begin{align}
-Z_{k}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\label{eq:GewichtetSummeCOKrigingZufallsVektor}
+Z_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g)\label{eq:GewichtetSummeCOKrigingZufallsVektor}
 \end{align}
 
 \end_inset
@@ -554,18 +571,18 @@ In diesem Abschnitt sollen die gesuchten Gewichte bestimmt werden.
 \end_inset
 
  sei der Schätzfehler, 
-\begin_inset Formula $Z_{k}\left(\vec{x}\right)$
+\begin_inset Formula $Z_{g}\left(\vec{x}\right)$
 \end_inset
 
  sei der reale stochastische Prozess der vorherzusagenden Gütestufe 
-\begin_inset Formula $k$
+\begin_inset Formula $g$
 \end_inset
 
 .
  
 \begin_inset Formula 
 \begin{align*}
-F\left(\vec{x}\right) & =Z_{k}\left(\vec{x}\right)-Z_{k}^{*}\left(\vec{x}\right)=Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}
+F_{g}\left(\vec{x}\right) & =Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)=Z_{g}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g)
 \end{align*}
 
 \end_inset
@@ -583,13 +600,12 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 \paragraph_spacing single
 \begin_inset Formula 
 \begin{align}
- & E\left[F\left(\vec{x}\right)\right]=0\label{eq:ErwartungSchatzfehlerNull-1-2}\\
+ & E\left[F_{g}\left(\vec{x}\right)\right]=0\label{eq:ErwartungSchatzfehlerNull-1-2}\\
 \nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[Z_{k}^{*}\left(\vec{x}\right)\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}\left(\vec{x}_{j}\right)w_{i,j}\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{k}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}\left(\vec{x}_{j}\right)\right]w_{i,j}=0\label{eq:ErwartungswertZXCoKriging}
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[Z_{g}^{*}\left(\vec{x}\right)\right]=0\nonumber \\
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g)\right]=0\nonumber \\
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}(\vec{x}_{j})w_{i,j}(g)\right]=0\nonumber \\
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}(\vec{x}_{j})\right]w_{i,j}(g)=0\label{eq:ErwartungswertZXCoKriging}
 \end{align}
 
 \end_inset
@@ -599,11 +615,11 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 
 \begin_layout Standard
 Aufgrund der Stationarität soll gelten 
-\begin_inset Formula $E\left[Z_{i}\left(\vec{x}_{j}\right)\right]=E\left[Z_{i}\left(\vec{x}_{k}\right)\right]=\beta_{i},\forall j,k\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $E\left[Z_{i}(\vec{x}_{j})\right]=E\left[Z_{i}(\vec{x}_{l})\right]=\beta_{i},\forall j,l\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
  und 
-\begin_inset Formula $E\left[Z_{k}\left(\vec{x}\right)\right]=\beta_{k}$
+\begin_inset Formula $E\left[Z_{g}\left(\vec{x}\right)\right]=\beta_{g}$
 \end_inset
 
 , somit folgt aus Gleichung 
@@ -619,7 +635,7 @@ reference "eq:ErwartungswertZXCoKriging"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j} & =\beta_{k}\label{eq:SummeGewichteCOKriging}
+\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g) & =\beta_{g}\label{eq:SummeGewichteCOKriging}
 \end{align}
 
 \end_inset
@@ -636,53 +652,8 @@ Eine weitere Bedingung an das Kriging Verfahren ist die minimale Varianz
  aus der Statistik folgendermaßen umformuliert werden kann:
 \begin_inset Formula 
 \[
-\textrm{var}\left[F\left(\vec{x}\right)\right]=\textrm{var}\left[Z\left(\vec{x}_{0}\right)-Z^{*}\left(\vec{x}_{0}\right)\right]=E\left[\left(\left(Z\left(\vec{x}\right)-Z^{*}\left(\vec{x}\right)\right)-E\left[Z\left(\vec{x}\right)-Z^{*}\left(\vec{x}\right)\right]\right)^{2}\right]
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right]=\textrm{var}\left[Z_{g}(\vec{x})-Z_{g}^{*}(\vec{x})\right]=E\left[\left(\left(Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right)-E\left[Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right]\right)^{2}\right]
 \]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Im Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Anhang-1-1"
-
-\end_inset
-
- ist die vollständige Herleitung zu finden.
- Im Weiteren wird der Begriff der Kovarianz 
-\begin_inset Formula $cov$
-\end_inset
-
- verwendet, diese beschreibt ein monotones Zusammenhangsmaß zweier Zufallsvariab
-len und ist definiert als:
-\begin_inset Formula 
-\begin{align}
-\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\label{eq:DefinitionKovarianz-1-1}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Weiterhin wird die Korrelation 
-\begin_inset Formula $corr$
-\end_inset
-
- eingeführt.
- Diese beschreibt ebenfalls ein Zusammenhangsmaß, wird aber mit den Varianzen
- normiert und bewegt sich damit im Wertebereich von -1 bis +1 und kann damit
- einfacher interpretiert werden als die Kovarianz.
- 
-\begin_inset Formula 
-\begin{align}
-\textrm{corr}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & \frac{\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))}{\textrm{var}\left[Z\left(\vec{x}_{1}\right)\right]\textrm{var}\left[Z\left(\vec{x}_{2}\right)\right]}\label{eq:DefinitionKorrelation}
-\end{align}
 
 \end_inset
 
@@ -699,15 +670,15 @@ Die folgende Formulierung stellt bereits das Ergebnis dar, wobei
 \end_inset
 
  die Kovarianzmatrix und 
-\begin_inset Formula $\overrightarrow{c}\mathbf{\in\mathbb{R^{\mathrm{n_{all}}}};}$
+\begin_inset Formula $\overrightarrow{c}(g)\mathbf{\in\mathbb{R^{\mathrm{n_{all}}}};}$
 \end_inset
 
  
-\begin_inset Formula $\overrightarrow{c}=\left(cov\left(Z_{i}\left(\vec{x}_{j}\right),Z\left(\vec{x}\right)\right),...,cov\left(Z_{s}\left(\vec{x}_{n_{s}}\right),Z\left(\vec{x}\right)\right)\right)^{T},i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $\overrightarrow{c}(g)=\left(cov\left(Z_{i}(\vec{x}_{j}),Z_{g}\left(\vec{x}\right)\right),...,cov\left(Z_{s}(\vec{x}_{n_{s}}),Z_{g}\left(\vec{x}\right)\right)\right)^{T},i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
  den Kovarianzvektor zwischen 
-\begin_inset Formula $Z_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $Z_{i}(\vec{x}_{j}),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
  und 
@@ -722,7 +693,7 @@ Die folgende Formulierung stellt bereits das Ergebnis dar, wobei
  beschreibt die Anzahl aller Stützstellen der verschiedenen Gütestufen:
 \begin_inset Formula 
 \begin{align}
-\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}\label{eq:VarianzSchaetzfehlerGewichte}
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g)^{T}\vec{w}(g)+\vec{w}(g)^{T}*\mathbf{Cov}*\vec{w}(g)\label{eq:VarianzSchaetzfehlerGewichte}
 \end{align}
 
 \end_inset
@@ -731,8 +702,8 @@ Damit lässt sich folgende Minimierungsaufgabe mit Nebenbedingung stellen:
 \begin_inset Formula 
 \begin{align}
 \begin{cases}
-\min_{w_{1},...,w_{n}}\textrm{var}\left[Z_{k}\left(\vec{x}\right)-\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}\right]\\
-\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k} & =0
+\min_{w_{1},...,w_{n}}\left(\textrm{var}[Z_{g}\left(\vec{x}\right)]-2\overrightarrow{\textrm{c}}(g)^{T}\vec{w}(g)+\vec{w}(g)^{T}*\mathbf{Cov}*\vec{w}(g)\right)\\
+\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g)-\beta_{k} & =0
 \end{cases}\label{eq:Minimierungsaufgabe-1-2}
 \end{align}
 
@@ -764,7 +735,7 @@ key "bronteijn2008taschenbuch"
  ergibt sich:
 \begin_inset Formula 
 \[
-\Lambda\left(w,\lambda\right):=\textrm{var}\left[F\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)
+\Lambda\left(w,\lambda\right):=\textrm{var}\left[F_{g}\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g)-\beta_{g}\right)
 \]
 
 \end_inset
@@ -772,7 +743,7 @@ key "bronteijn2008taschenbuch"
 
 \begin_inset Formula 
 \[
-\nabla_{\lambda,w}\left(\textrm{var}\left[F\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0
+\nabla_{\lambda,w}\left(\textrm{var}\left[F_{g}\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g)-\beta_{g}\right)\right)=0
 \]
 
 \end_inset
@@ -791,8 +762,8 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 :
 \begin_inset Formula 
 \begin{align}
-\nabla_{w}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=\vec{0}\label{eq:MinimierungMitKovarianz-1-2}\\
-\wedge\,\,\nabla_{\lambda}\left(\textrm{var}\left[Z\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}^{T}\vec{w}+\vec{w}^{T}*\mathbf{Cov}*\vec{w}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}-\beta_{k}\right)\right)=0\nonumber 
+\nabla_{w}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g)^{T}\vec{w}(g)+\vec{w}(g)^{T}*\mathbf{Cov}*\vec{w(g)}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g)-\beta_{g}\right)\right)=\vec{0}\label{eq:MinimierungMitKovarianz-1-2}\\
+\wedge\,\,\nabla_{\lambda}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g)^{T}\vec{w}(g)+\vec{w}(g)^{T}*\mathbf{Cov}*\vec{w}(g)+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g)-\beta_{g}\right)\right)=0\nonumber 
 \end{align}
 
 \end_inset
@@ -814,7 +785,7 @@ reference "sec:Herleitung-der-Kriging-Gewichte"
  
 \begin_inset Formula 
 \begin{align}
-\vec{w} & =\mathbf{Cov}^{-1}\vec{c}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\label{eq:FormelGewichte-1-3-1}
+\vec{w}(g) & =\mathbf{Cov}^{-1}\vec{c}(g)-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c}(g)+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g}\label{eq:FormelGewichte-1-3-1}
 \end{align}
 
 \end_inset
@@ -860,35 +831,58 @@ n_{s}\,Eintr\ddot{a}ge\\
 
 \begin_layout Subsection
 Erwartungswert
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Erwartungswert"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Setzt man die Gewichte in Gleichung 
+Setzt man die Gewichte aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FormelGewichte-1-3-1"
+
+\end_inset
+
+ in Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:GewichtetSummeCOKrigingZufallsVektor"
 
 \end_inset
 
- ein, erhält man folgende Formulierung.
- Wobei die Vektoren die Gewichte und Stützstellen aller Gütestufen enthalten.
+ ein, erhält man folgende Formulierung, wobei die Vektoren die Gewichte
+ und Stützstellen aller Gütestufen enthalten.
  
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
+\begin{align*}
+E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g)^{T}\mathbf{Cov}^{-1}\vec{y}-\vec{c}(g)^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{y}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g}
+\end{align*}
+
+\end_inset
+
+Durch einsetzen von 
+\begin_inset Formula $\mu=\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}$
+\end_inset
+
+, ergibt sich:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
 \begin{align}
-E\left[Z_{k}^{*}\left(\vec{x}\right)\right] & =\vec{c}^{T}\mathbf{Cov}^{-1}\vec{y}-\vec{c}^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{y}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\nonumber \\
-\mu & =\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\nonumber \\
-E\left[Z_{k}^{*}\left(\vec{x}\right)\right] & =\vec{c}^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\mu\vec{F}\right)+\mu\beta_{k}\label{eq:KoKrigingKovarianzVorhersage-1}
+E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g)^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\mu\vec{F}\right)+\mu\beta_{g}\label{eq:KoKrigingKovarianzVorhersage-1-2}
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Verwendet man einen Likelihood Schätzer für die 
 \begin_inset Formula $\beta_{i},i\in\left\{ 1,...,s\right\} $
 \end_inset
@@ -912,10 +906,6 @@ reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Der entsprechende Beweis kann in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -927,21 +917,17 @@ reference "sec:Vereinfachung-der-Vorhersageglei"
  Daraus ergibt sich dann die letztendliche Formel für den Krige-Schätzer:
 \begin_inset Formula 
 \begin{align}
-E\left[Z_{k}^{*}\left(\vec{x}\right)\right] & =\vec{c}^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\vec{F}\right)+\beta_{k}\label{eq:KoKrigingKovarianzVorhersage-1-1}
+E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g)^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\vec{F}\right)+\beta_{g}\label{eq:KoKrigingKovarianzVorhersage-1-1}
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Da bei dieser Art der Formulierung der Vektor 
 \begin_inset Formula $\vec{F}$
 \end_inset
 
  und der Wert 
-\begin_inset Formula $\beta_{k}$
+\begin_inset Formula $\beta_{g}$
 \end_inset
 
  für alle Kriging Methoden gleich bleiben, bietet diese Art der Formulierung
@@ -952,6 +938,13 @@ Da bei dieser Art der Formulierung der Vektor
 
 \begin_layout Subsection
 Varianz des Schätzfehlers 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Varianz-des-Schätzfehlers"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -976,15 +969,11 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\textrm{var}\left[F\left(\vec{x}\right)\right] & =\textrm{var}\left[Z\left(\vec{x}_{0}\right)\right]-\vec{c}^{T}\mathbf{Cov}^{-1}\vec{c}+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{k}\right)^{2}\label{eq:VarianzVorhersage}
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}_{0}\right)\right]-\vec{c}(g)^{T}\mathbf{Cov}^{-1}\vec{c}(g)+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}\label{eq:VarianzVorhersage}
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die vollständige Herleitung ist in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -998,6 +987,13 @@ reference "sec:AnhangVarianz-des-Schätzfehlers"
 
 \begin_layout Subsection
 Kovarianz zwischen zwei Vorhersagen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianz-zwischen-zwei"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1007,21 +1003,26 @@ Oftmals wird auch die Kovarianz zwischen zwei unbekannten Orten
 
  unter Berücksichtigung der bereits bekannten Stützstellen benötigt.
  Dies entspricht der Kovarianz zwischen den zwei Vorhersagen 
-\begin_inset Formula $Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)$
+\begin_inset Formula $Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)$
 \end_inset
 
-, also gilt:
+, wobei 
+\begin_inset Formula $g_{1},g_{2}\in\left\{ 1,...,s\right\} $
+\end_inset
+
+ die jeweiligen vorherzusagenden Gütestufen angeben.
+ Es gilt folgende Formulierung, die Zwischenschritte sind in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-zwischen-Vorhersagen"
+
+\end_inset
+
+ zu finden:
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i},\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}\right)\\
- & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right]\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}\right]\right)\right)\\
- & \Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i},\vec{Z}_{j}^{T}\vec{w}_{2j}\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l},\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l},Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}w_{2j,m}cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1}),\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}(g_{1})w_{2j,m}(g_{2})cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1030,15 +1031,7 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 \end_layout
 
 \begin_layout Standard
-Die folgende Formulierung stellt das Ergebnis dar, wobei 
-\begin_inset Formula $\vec{w}\in\mathbb{R^{\mathrm{n_{all}}}}$
-\end_inset
-
- den Gewichtsvektor, 
-\begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
-\end_inset
-
- die Kovarianzmatrix darstellt.
+Die folgende Formulierung stellt das Ergebnis dar.
  Die Variable 
 \begin_inset Formula $n_{all}$
 \end_inset
@@ -1051,7 +1044,7 @@ Die folgende Formulierung stellt das Ergebnis dar, wobei
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}\label{eq:CovZweiVorhersagenGewichte}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}(g_{1})\mathbf{Cov}\vec{w}_{2}(g_{2})\label{eq:CovZweiVorhersagenGewichte}
 \end{equation}
 
 \end_inset
@@ -1071,7 +1064,8 @@ reference "sec:AnhangKovarianz-zwischen-Vorhersagen"
  zu finden ist.
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:KovarianzPredictor}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}(g_{1})^{T}\mathbf{Cov}^{-1}\vec{c_{2}}(g_{2})-\label{eq:KovarianzPredictor}\\
+ & \frac{\vec{c_{1}}(g_{1})^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}(g_{2})}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{g}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\nonumber 
 \end{align}
 
 \end_inset
@@ -1135,7 +1129,28 @@ key "forrester2007multi"
 
 \begin_layout Standard
 Der erste Schritt besteht darin, die notwendigen Kovarianzfunktionen zu
- definieren und dann eine geeignete Modellierung für diese zu finden.
+ definieren (siehe Abschnitte 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Erwartungswert"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Varianz-des-Schätzfehlers"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Varianz-des-Schätzfehlers"
+
+\end_inset
+
+) und dann eine geeignete Modellierung für diese zu finden.
  Geht man von dem stochastischen Prozess 
 \begin_inset Formula $Z_{i}$
 \end_inset
@@ -1145,17 +1160,16 @@ Der erste Schritt besteht darin, die notwendigen Kovarianzfunktionen zu
 \end_inset
 
  aus, wobei die höhere Gütestufe mit dem niedrigeren Index gekennzeichnet
- ist.
- So sind für die vollständige Beschreibung der Kovarianzmatrix an zwei Stellen
- 
+ ist, so sind für die vollständige Beschreibung der Kovarianzmatrix an zwei
+ Stellen 
 \begin_inset Formula $\vec{x}$
 \end_inset
 
  und 
-\begin_inset Formula $\vec{x}^{'}$
+\begin_inset Formula $\vec{x}$
 \end_inset
 
-folgende Kovarianzfunktionen zu modellieren:
+ folgende Kovarianzfunktionen zu modellieren:
 \begin_inset Formula 
 \begin{align}
 \textrm{cov\left(Z_{i}\left(\vec{x}\right),Z_{i}(\vec{x}^{'})\right)}\label{eq:CovHighHighBeschreibung-1}\\
@@ -1165,10 +1179,6 @@ folgende Kovarianzfunktionen zu modellieren:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Im Folgenden sollen zwei verschiedene Gütestufen betrachtet werden, wobei
  
 \begin_inset Formula $1$
@@ -1187,10 +1197,6 @@ Z_{1}\left(\vec{x}\right)=aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Der Prozess hoher Güte 
 \begin_inset Formula $Z_{1}$
 \end_inset
@@ -1208,88 +1214,7 @@ Der Prozess hoher Güte
 \end_inset
 
 .
- Setzt man dieses Modell nun in die Kovarianzfunktion aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:CovHighHighBeschreibung-1"
-
-\end_inset
-
- ein:
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
- & \left.\left(\left(aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right)-E\left[aZ_{2}\left(\vec{x}^{'}\right)+Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\right.\\
- & \left.\left(aZ_{2}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]+Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)-aE\left[Z_{1}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\right.\\
- & \left.\left(\left(aZ_{2}\left(\vec{x}^{'}\right)-aE\left[Z_{1}\left(\vec{x}^{'}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-= & E\left[a^{2}\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[a\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[a\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left(\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{diff}\left(\vec{x}^{'}\right)-E\left[Z_{diff}\left(\vec{x}^{'}\right)\right]\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+acov\left(Z_{2}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
- & +acov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Nimmt man ferner an, dass der Differenzprozess 
+ Weiterhin wird angenommen, dass der Differenzprozess 
 \begin_inset Formula $Z_{diff}\left(\vec{x}\right)$
 \end_inset
 
@@ -1297,143 +1222,59 @@ Nimmt man ferner an, dass der Differenzprozess
 \begin_inset Formula $Z_{2}\left(\vec{x}\right)$
 \end_inset
 
- unkorreliert sind, so gilt:
+ unkorreliert sind, also gilt:
 \begin_inset Formula 
-\begin{align*}
-cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right) & =0\\
-cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =0
-\end{align*}
+\begin{align}
+cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right) & =0\nonumber \\
+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0\label{eq:KovarianzUnkorreliert}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-daraus folgt:
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)
-\end{align*}
+Setzt man nun Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DifferenzprozessAllgemein"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-Modelliert man nun 
-\begin_inset Formula $cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)$
-\end_inset
-
- nach demselben Schema, ergibt sich:
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
-\end{align*}
+ und Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzUnkorreliert"
 
 \end_inset
 
-
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-= & E\left[\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]\\
- & +E\left[\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}\left(\vec{x}^{'}\right)\right]\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
-\end{align*}
-
-\end_inset
-
-Es gilt wieder:
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-Daraus ergibt sich:
-\begin_inset Formula 
-\begin{align*}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-Analog gilt für die letzte Kovarianzfunktion (siehe Gleichung 
+ in die Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:CovHighHighBeschreibung-1"
 
 \end_inset
 
-):
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)=cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)
-\]
+ ein, so ergeben sich letztlich für die drei notwendigen Kovarianzfunktionen,
+ wobei die Zwischenschritte in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Co-Kriging-KovarianzfunktionHerleitung"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-Durch diese Umformungen ergibt sich letztlich für die drei notwendigen Kovarianz
-funktionen:
+ zu finden sind:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}\left(\vec{x}^{'}\right)\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}\left(\vec{x}^{'}\right)\right)\\
-cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\\
-cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\mathrm{=} & cov\left(Z_{2}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)\label{eq:KovarianzFunktionenalleDrei}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}(\vec{x}^{'})\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)\\
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\\
+cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\mathrm{=} & cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\label{eq:KovarianzFunktionenalleDrei}
 \end{align}
 
 \end_inset
 
+So sind innerhalb der Software nur noch zwei Kovarianzfunktionen 
+\begin_inset Formula $cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right),cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-So sind innerhaĺb der Software nur noch zwei Kovarianzfunktionen zu modellieren,
- alle anderen Abhängigkeiten ergeben sich durch diese beiden Funktionen.
+ zu modellieren.
  Die konkrete Modellierung und Verwendung dieser Kovarianzfunktion innerhalb
  des Kriging-Verfahrens wird in Kapitel 
 \begin_inset CommandInset ref
@@ -1550,17 +1391,10 @@ reference "subsec:Kovarianzmatrix"
 \end_layout
 
 \begin_layout Standard
-Per Definition der Kovarianz (siehe Gleichung 
+Per Definition der Kovarianz ergibt sich für Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:DefinitionKovarianz-1-1"
-
-\end_inset
-
-) ergibt sich für Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovGrad1-1"
+reference "eq:KovGrad2-1"
 
 \end_inset
 
@@ -1572,10 +1406,6 @@ reference "eq:KovGrad1-1"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Im Folgenden soll gezeigt werden, dass sich die Kovarianzfunktion 
 \begin_inset Formula $\textrm{cov}(\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{p}},Z\left(\vec{x}_{2}\right))$
 \end_inset
@@ -1613,10 +1443,6 @@ Es gilt
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Dieser Ausdruck entspricht Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1632,10 +1458,6 @@ reference "eq:CovAbleitungeingesetzt-1"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 für die Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1719,10 +1541,6 @@ m\,Eintr\ddot{a}ge\\
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die effiziente Verwendung dieses Verfahrens innerhalb von Turbmaschinenoptimieru
 ngen stellt ein aktuelles Forschungsthema dar.
  Grundlegend kann für diese Verfahren gesagt werden, dass eine effiziente
@@ -1737,15 +1555,14 @@ key "BACK12,Backhaus,Peter2010"
 
 \end_inset
 
- verwiesen.
- Eine detailliertere Herleitung kann in den Arbeiten 
+ und 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Krueger2013,han2009improving"
 
 \end_inset
 
- gefunden werden.
+ verwiesen.
  
 \end_layout
 
@@ -1755,8 +1572,8 @@ key "Krueger2013,han2009improving"
 
 \begin_layout Standard
 In der hier beschriebenen Kriging Herleitung steckt vorerst keinerlei statistisc
-he Verteilungsannahme, die Herleitung basiert auf einer gewichteten Summe
- von bekannten Stützstellen.
+he Verteilungsannahme.
+ Die Herleitung basiert auf einer gewichteten Summe von bekannten Stützstellen.
  Die Normalverteilungsannahme wird erst für das Likelihood-Verfahren getroffen.
  Dennoch lässt sich eine starke Ähnlichkeit der Kriging-Vorhersagen zu einem
  bedingten Gaußprozess feststellen.
@@ -1832,8 +1649,6 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 
  so sind die Ähnlichkeiten trotz der unterschiedlichen Herleitungen sehr
  groß.
- Innerhalb des Optimierungsverfahrens kann man sich diesen Umstand zunutze
- machen.
 \end_layout
 
 \end_body

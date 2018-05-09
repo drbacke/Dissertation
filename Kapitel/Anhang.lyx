@@ -300,6 +300,209 @@ Vielleicht
 \end_layout
 
 \begin_layout Section
+Co-Kriging Kovarianzfunktion Herleitung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Co-Kriging-KovarianzfunktionHerleitung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}(\vec{x})\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),aZ_{2}(\vec{x}^{'})+Z_{diff}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign*}
+ & =E\left[\left((aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right))-E[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)]\vphantom{\vec{x}^{'}}\right)\right.\\
+ & \left.\left((aZ_{2}(\vec{x})+Z_{diff}(\vec{x}^{'}))-E[aZ_{2}(\vec{x}^{'})+Z_{diff}(\vec{x}^{'})]\right)\right]
+\end{flalign*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\vphantom{\vec{x}^{'}}\right)\right.\\
+ & \left.\left(aZ_{2}(\vec{x}^{'})-aE[Z_{1}(\vec{x}^{'})]+Z_{diff}(\vec{x}^{'})-E[Z_{diff}(\vec{x}^{'})]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left((aZ_{2}\left(\vec{x}\right)-aE[Z_{1}\left(\vec{x}\right)])+(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right])\vphantom{\vec{x}^{'}}\right)\right.\\
+ & \left.\left((aZ_{2}(\vec{x}^{'})-aE[Z_{1}(\vec{x}^{'})])+(Z_{diff}(\vec{x}^{'})-E[Z_{diff}(\vec{x}^{'})])\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & E\left[a^{2}\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)(Z_{2}(\vec{x}^{'})-E[Z_{2}(\vec{x}^{'})])\right]\\
+ & +E\left[a\left(Z_{2}\left(\vec{x}\right)-E\left[Z_{2}\left(\vec{x}\right)\right]\right)(Z_{diff}(\vec{x}^{'})-E[Z_{diff}(\vec{x}^{'})])\right]\\
+ & +E\left[a\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)(Z_{2}(\vec{x}^{'})-E[Z_{2}(\vec{x}^{'})])\right]\\
+ & +E\left(\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)(Z_{diff}(\vec{x}^{'})-E[Z_{diff}(\vec{x}^{'})])\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+acov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)\\
+ & +acov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+Nimmt man ferner an, dass der Differenzprozess 
+\begin_inset Formula $Z_{diff}\left(\vec{x}\right)$
+\end_inset
+
+ und der Prozess 
+\begin_inset Formula $Z_{2}\left(\vec{x}\right)$
+\end_inset
+
+ unkorreliert sind, so gilt:
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right) & =0\\
+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0
+\end{align*}
+
+\end_inset
+
+daraus folgt:
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}(\vec{x}^{'})\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Modelliert man nun 
+\begin_inset Formula $cov\left(Z_{1}\left(\vec{x}\right),Z_{2}\left(\vec{x}^{'}\right)\right)$
+\end_inset
+
+ nach demselben Schema, ergibt sich:
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =cov\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right)-E\left[aZ_{2}\left(\vec{x}\right)+Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}(\vec{x}^{'})-E\left[Z_{2}(\vec{x}^{'})\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)+\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\right)\left(Z_{2}(\vec{x}^{'})-E\left[Z_{2}(\vec{x}^{'})\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+= & E\left[\left(aZ_{2}\left(\vec{x}\right)-E\left[aZ_{2}\left(\vec{x}\right)\right]\right)\left(Z_{2}(\vec{x}^{'})-E\left[Z_{2}(\vec{x}^{'})\right]\right)\right]\\
+ & +E\left[\left(Z_{diff}\left(\vec{x}\right)-E\left[Z_{diff}\left(\vec{x}\right)\right]\right)\left(Z_{2}\left(\vec{x}^{'}\right)-E\left[Z_{2}(\vec{x}^{'})\right]\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+Es gilt wieder:
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Daraus ergibt sich:
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{1}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Analog gilt für die letzte Kovarianzfunktion (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovHighHighBeschreibung-1"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)=cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Differentiation der Likelihood-Funktion
 \begin_inset CommandInset label
 LatexCommand label
@@ -975,6 +1178,36 @@ In Matrix-Schreibweise ergibt sich die folgende Formulierung, wobei
 
 \end_layout
 
+\begin_layout Subsection
+Kovarianz zwischen Vorhersagen Gewichtsformulierung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kovarianz-zwischen-Vorhersagen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1}),\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right)\\
+ & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
+ & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
+ & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right)\\
+ & \Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1}),\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1}),\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1}),Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}(g_{1})w_{2j,m}(g_{2})cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Kovarianz zwischen Vorhersagen
 \begin_inset CommandInset label
@@ -989,7 +1222,7 @@ name "sec:AnhangKovarianz-zwischen-Vorhersagen"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}\label{eq:AnhangCovZweiVorhersagen}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}(g_{1})\mathbf{Cov}\vec{w}_{2}(g_{2})\label{eq:AnhangCovZweiVorhersagen}
 \end{equation}
 
 \end_inset
@@ -1004,7 +1237,7 @@ Die Gewichtsvektoren sehen folgendermaßen aus:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{w_{1}} & =\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\vec{w_{1}}(g_{1}) & =\mathbf{Cov}^{-1}\vec{c_{1}}(g_{1})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}(g_{1})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}
 \end{align*}
 
 \end_inset
@@ -1015,12 +1248,24 @@ Die Gewichtsvektoren sehen folgendermaßen aus:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{w_{2}} & =\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}
+\vec{w_{2}}(g_{2}) & =\mathbf{Cov}^{-1}\vec{c_{2}}(g_{2})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}(g_{2})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}
 \end{align*}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Weiterhin werden folgende Abkürzungen einführt: 
+\begin_inset Formula $\vec{c_{2}}(g_{2})=\vec{c_{2}}$
+\end_inset
+
+ und 
+\begin_inset Formula $\vec{c_{1}}(g_{1})=\vec{c_{1}}$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1037,7 +1282,7 @@ reference "eq:AnhangCovZweiVorhersagen"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{w}_{1}^{T}\mathbf{Cov}\vec{w}_{2}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{w}_{1}^{T}(g_{1})\mathbf{Cov}\vec{w}_{2}(g_{2})
 \end{align*}
 
 \end_inset
@@ -1048,8 +1293,8 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}*\\
-\mathbf{Cov}\left(\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\right)^{T}*\\
+\mathbf{Cov}\left(\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}\right)
 \end{align*}
 
 \end_inset
@@ -1060,8 +1305,8 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)^{T}\\
-\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\Leftrightarrow\left(\mathbf{Cov}^{-1}\vec{c_{1}}-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\right)^{T}\\
+\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}\right)
 \end{align*}
 
 \end_inset
@@ -1073,8 +1318,8 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 \align right
 \begin_inset Formula 
 \begin{align*}
-\Leftrightarrow\left(\vec{c_{1}}^{T}\mathbf{Cov}^{-1}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)\\
-\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\right)
+\Leftrightarrow\left(\vec{c_{1}}^{T}\mathbf{Cov}^{-1}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\right)\\
+\left(\vec{c_{2}}-\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}+\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}\right)
 \end{align*}
 
 \end_inset
@@ -1082,22 +1327,9 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 
 \begin_inset Formula 
 \begin{align*}
-\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
-+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
-+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}\beta_{k}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
-+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}\\
-+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{k}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
++\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\\
++\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}\beta_{g_{2}}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\frac{\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\beta_{g_{2}}
 \end{align*}
 
 \end_inset
@@ -1108,7 +1340,20 @@ cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\rig
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{k}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{k}^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
+\Leftrightarrow\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
++\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}\\
++\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}-\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}+\frac{\beta_{g_{1}}\beta_{g_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}-\frac{\vec{c_{1}}^{T}\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}\vec{c_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}+\frac{\beta_{g_{1}}\beta_{g_{2}}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\\
 \end{align*}
 
 \end_inset
