@@ -762,7 +762,7 @@ key "lophaven2002aspects,Sacks2007"
 :
 \begin_inset Formula 
 \begin{align}
-2\gamma\left(\vec{h}\right)= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion}
+2\gamma\left(\vec{h}\right)= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(\theta_{l}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion}
 \end{align}
 
 \end_inset
@@ -793,18 +793,41 @@ reference "chap:MinimierungsverfahrenTraining"
 \end_inset
 
 ).
- Die Benutzung der Exponentialfunktion 
+ In dem hier implementierten Kriging-Verfahren wird eine abgeänderte Modellfunkt
+ion verwendet: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+2\gamma\left(\vec{h}\right)= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion-1}
+\end{align}
+
+\end_inset
+
+Die Benutzung der Exponentialfunktion 
 \begin_inset Formula $e^{\theta_{l}}$
 \end_inset
 
- dient der Stabilität des Trainingsverfahrens und wird in Kapitel 
+ dient der numerischen Stabilität des Trainingsverfahrens.
+ Da die Hyperparameter nicht negativ werden dürfen und somit für Formulierung
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Negative-Hyperparameter-1"
+reference "eq:ExpoKorrelationsfunktion"
 
 \end_inset
 
- beschrieben.
+ eine Nebenbedingung in der Form 
+\begin_inset Formula $\theta_{l}>0\forall l$
+\end_inset
+
+
+\begin_inset Formula $\in\left\{ 1,...,k\right\} $
+\end_inset
+
+ notwendig wäre.
+ Durch Verwendung der Exponentialfunktion ist dies nicht notwendig.
 \end_layout
 
 \begin_layout Standard
@@ -856,115 +879,6 @@ reference "eq:KovarianzmodellAllgemein"
 cov\left(\vec{h}\right) & =\sigma^{2}+\lambda\delta\left(\vec{h}\right)-\sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKovarianzfunktion}\\
  & =\lambda\delta\left(\vec{h}\right)+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}
 \end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Beispiel Gauss Korrelationsfunktion
-\end_layout
-
-\begin_layout Standard
-\noindent
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beispiel-einer-Gauss-1"
-
-\end_inset
-
- ist eine beispielhafte Kovarianzfunktion mit zwei verschiedenen 
-\begin_inset Formula $\theta$
-\end_inset
-
- Werten zu sehen.
- Die Varianz und der Nugget wurden 
-\begin_inset Formula $\sigma^{2}=1,\lambda=0$
-\end_inset
-
- angenommen, dadurch sind Kovarianz und Korrelation in diesem Fall identisch.
- Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
- zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
-swert.
- Die rote durchgezogene Kurve zeigt die Korrelationsfunktion mit 
-\begin_inset Formula $\theta=0.01$
-\end_inset
-
- und die grüne gestrichelte Kurve 
-\begin_inset Formula $\theta=0.1$
-\end_inset
-
-.
- Nimmt man eine Differenz der beiden Stützstellen von 
-\begin_inset Formula $\Delta x=5$
-\end_inset
-
- an, dann ergeben sich für einen Hyperparameter von 
-\begin_inset Formula $\theta=0.01$
-\end_inset
-
- ein Korrelationswert von 0.53 und für 
-\begin_inset Formula $\theta=0.1$
-\end_inset
-
- ein Korrelationswert von 0.08.
- In dem einen Fall wird also eine stärkere Abhängigkeit der beiden Stützstellen
- angenommen und im anderen Fall eine schwächere Abhängigkeit.
- 
-\end_layout
-
-\begin_layout Standard
-\noindent
-
-\shape italic
-Falls einer der Parameter keine Korrelation mit der zu trainierenden Funktion
- besitzt, so kann das Trainingsverfahren auch sehr kleine Hyperparameter
- wählen.
- Dies führt praktisch dazu, dass dieser Parameter keinerlei Einfluss auf
- die Vorhersage mehr hat.
- Dies kann innerhalb einer Optimierung sehr wichtig sein, da so eine Art
- von Dimensionsreduktion erreicht wird.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/CorrelatoinFunction.eps
-	scale 40
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beispiel-einer-Gauss-1"
-
-\end_inset
-
-Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
- zwei unterschiedlichen 
-\begin_inset Formula $\theta$
-\end_inset
-
- Einstellungen und deren Einfluss auf den Korrelationswert 
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -1025,99 +939,6 @@ cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & \
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Nutzbarkeit innerhalb eines gradientenbasierten Trainingsverfahrens
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Negative-Hyperparameter-1"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Während des Trainingsverfahrens kann es dazu kommen, dass die Hyperparameter
- negative Werte annehmen können.
- Bei der Gauss Korrelationsfunktion würde dies dazu führen, dass die Korrelation
-en auch Werte größer Eins erhalten können.
- Die liegt außerhalb des gültigen Wertebereichs und führt bei der Invertierung
- der Kovarianzmatrix zu numerischen Problemen.
- Daher sind negative Hyperparameter zwingend zu vermeiden.
- 
-\end_layout
-
-\begin_layout Standard
-Eine einfache Möglichkeit dies zu tun, wäre eine feste Begrenzung der Hyperparam
-eter.
- Da die Hyperparameter während des Trainings durch gradientenbasierte Optimierun
-gsverfahren eingestellt werden, kann eine 
-\begin_inset Quotes gld
-\end_inset
-
-harte Grenze
-\begin_inset Quotes grd
-\end_inset
-
- zum Stillstand eines solchen Verfahrens führen und damit zu schlechten
- Resultaten.
- Für ein solches Verfahren ist es also wünschenswert, dass der gesamte Bereich
- der reellen Zahlen nutzbar ist.
- Eine simple Möglichkeit dies zu erreichen ist z.B.
- die Quadratur der Hyperparameter, dadurch sind keine negativen Werte mehr
- möglich:
-\begin_inset Formula 
-\begin{align*}
-c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(\theta_{l}^{2}\left|x_{1l}-x_{2l}\right|^{2}\right)}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Diese Formulierung kann zu einem Stillstand des Trainings führen, da innerhalb
- des Trainings die Ableitung der Korrelationsfunktion nach den Hyperparametern
- eine wesentliche Rolle spielt:
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial c}{\partial\theta_{l}} & =c\left(\vec{x}_{1},\vec{x}_{2}\right)\left(-\theta_{l}\left|x_{1l}-x_{2l}\right|^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Das Problem bei dieser Formulierung ist, dass wenn ein Hyperparameter während
- der Optimierung gegen Null geht, auch die entsprechende partielle Ableitung
- gegen Null läuft.
- Bei einem gradientenbasierten Minimierungsverfahrens kann es also passieren,
- dass die partiellen Ableitungen der Hyperparameter sehr kleine Werte annehmen
- und die Minimierung dadurch keine Fortschritte mehr macht.
- Um dieses Problem zu vermeiden, wurde die Exponentialfunktion verwendet:
-\begin_inset Formula 
-\begin{align*}
-c\left(\vec{x}_{1},\vec{x}_{2}\right) & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)}\\
-\frac{\partial c}{\partial\theta_{l}} & =c\left(\vec{x}_{1},\vec{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{l}}\left|x_{1l}-x_{2l}\right|^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Diese Formulierung der Gauss-Korrelationsfunktion hat sich als sehr vorteilhaft
- herausgestellt, da der gesamte Raum der reellen Zahlen verwendet werden
- kann.
- Zudem ist die Funktion stetig, differenzierbar und zeigt auch kein unerwünschte
-s Verhalten bei sehr kleinen Hyperparametern.
- 
 \end_layout
 
 \begin_layout Section
@@ -2399,46 +2220,30 @@ name "chap:MinimierungsverfahrenTraining"
 \end_layout
 
 \begin_layout Standard
-Im Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Maximum-Likelihood-für"
-
-\end_inset
-
- wurde die Maximum Likelihood Methode vorgestellt.
- Als Ergebnis dieses Kapitels erhielt man zwei Gleichungen zur Berechnung
- des Likelihood Terms und der dazugehörigen Ableitung.
- Ziel ist es, für den Likelihood Term die optimalen Hyperparameter zu finden.
- Dieser Vorgang ist das eigentliche Training des Modells.
- Zu diesem Zweck werden zwei numerische Minimierungsverfahren vorgestellt.
- Beide Minimierungsverfahren waren bereits in einer institutseigenen Bibliothek
- vorhanden.
- Die entwickelte Minimierungsklasse sollte beide Verfahren nutzen können.
- Hierfür wurde ein spezielles Klassenmodell unter Benutzung von Boost Funktionso
-bjekten entwickelt.
-\end_layout
-
-\begin_layout Standard
-Das Training bringt einige zusätzliche Probleme mit sich, z.B.
- müssen die Hyperparameter anfangs initialisiert werden.
- Zudem kann die Korrelationsmatrix schlecht konditioniert sein, für beide
- Probleme wurden Lösungsansätze entwickelt, welche hier vorgestellt werden.
+In diesem Kapitel wird das Trainingsverfahren für alle Kriging-Modelle beschrieb
+en.
+ Dafür wird im ersten Teil das Maximum-Likelihood Verfahren vorgestellt,
+ dieses liefert ein Maß für die Güte des Modells unter Berücksichtigung
+ der eingestellten Hyperparameter.
  
 \end_layout
 
 \begin_layout Standard
+Ziel des Trainingsverfahrens ist es, die optimalen Hyperparameter zu finden
+ die diesen Term maximieren.
+ Zu diesem Zweck werden diverse numerische Minimierungsverfahren und auch
+ mögliche Initialisierungsverfahren vorgestellt.
+ 
+\end_layout
 
-\color red
-In Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:AnhangLikelihoodCOKrigingBsp"
-
-\end_inset
-
- ist ein Beispiel einer Likelihood Funktion eines CO-Kriging Modells gezeigt.
- Hier ist die Komplexität der zu optimierenden Funktion ersichtlich.
+\begin_layout Standard
+Da einige der Minimierungsverfahren bereits vor der Entwicklung des hier
+ vorgestellten Programms vorhanden waren, diese allerdings noch in der Programmi
+ersprache C entwickelt wurden, musste eine flexible Software-Schnittstelle
+ entwickelt werden.
+ Hierfür wurde ein spezielles Klassenmodell unter Benutzung von Boost-Funktionso
+bjekten entwickelt, welches am Ende des Kapitels kurz beschrieben wird.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -2453,87 +2258,27 @@ name "sec:COKrigingTraining"
 \end_layout
 
 \begin_layout Standard
-Um ein Kriging-Modell vollständig aufzustellen, ist es nötig sinnvolle Werte
- für die Hyperparameter zu finden.
- Ein sehr häufig verwendetes Verfahren ist die Maximum Likelihood Methode.
- Diese Methode soll in diesem Abschnitt anhand eines einfachen Beispiels
- erläutert werden.
- Grundsätzlich ist die Maximum Likelihood Methode ein parametrisches Schätzverfa
-hren in der Statistik.
- Es werden Werte für Hyperparameter gewählt, gemäß derer die Realisierung
- der bereits bekannten Daten am plausibelsten erscheint.
+Um ein Kriging-Modell vollständig aufzustellen, müssen sinnvolle Werte für
+ die benötigten Hyperparameter der Kovarianz-Modellfunktion (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+) gefunden werden.
+ Für diesen Zweck wird sehr häufig die Maximum-Likelihood-Methode angewandt,
+ welche in diesem Abschnitt erläutert wird.
  
 \end_layout
 
 \begin_layout Standard
-Es wird von einer Zufallsvariablen 
-\begin_inset Formula $Z$
-\end_inset
-
- ausgegangen, die Dichtefunktion 
-\begin_inset Formula $f$
-\end_inset
-
- dieser Zufallsvariablen hängt von einem oder mehreren Parametern ab.
- Die könnten z.B.
- bei einer Normalverteilung der Erwartungswert und die Standardabweichung
- sein.
- Der Einfachheit halber wird im folgenden ein Parameter 
-\begin_inset Formula $p$
-\end_inset
-
- verwendet.
- Liegt nun eine Stichprobe mit 
-\begin_inset Formula $n$
-\end_inset
-
- Messwerten 
-\begin_inset Formula $x_{1}..x_{n}$
-\end_inset
-
- vor, ist eine Faktorisierung möglich, wenn diese unabhängig sind und die
- dabei entstehende Funktion 
-\begin_inset Formula $L$
-\end_inset
-
- wird Likelihood Funktion genannt (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Otterbach2014"
-
-\end_inset
-
-):
-\begin_inset Formula 
-\begin{align}
-L\left(p\right) & =\underset{i=1}{\prod}f\left(x_{i},q\right)\label{eq:Likelihood Funktion-1}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-Wird diese Funktion nun in Abhängigkeit von 
-\begin_inset Formula $q$
-\end_inset
-
- maximiert, erhält man die Maximum-Likelihood-Schätzung für 
-\begin_inset Formula $q$
-\end_inset
-
-.
- Man erhält also die Dichtefunktion bei der die Werte 
-\begin_inset Formula $x_{1}..x_{n}$
-\end_inset
-
- die größte Dichte in Abhängigkeit von 
-\begin_inset Formula $q$
-\end_inset
-
- haben und welche damit auch am plausibelsten erscheint.
+Die Maximum-Likelihood-Methode ist ein Schätzverfahren in der Statistik,
+ um (Hyper)parameter einer angenommenen Verteilungsfunktion bei gegebenen
+ Realisierungen zu schätzen.
+ Es werden Werte für Hyperparameter gewählt, gemäß derer die Realisierung
+ der bereits bekannten Daten am plausibelsten erscheint.
  
 \end_layout
 
@@ -2541,15 +2286,19 @@ Wird diese Funktion nun in Abhängigkeit von
 Um diesen Ansatz bei einem Verfahren wie dem Kriging anzuwenden, werden
  die bekannten Funktionswerte als Realisierung einer multivariaten Normalverteil
 ung 
-\begin_inset Formula $\mathcal{N}\left(\vec{F},\mathbf{Cov}\right)$
+\begin_inset Formula $\mathcal{N}\left(\vec{F},\mathbf{Cov}\mathrm{(\vec{h})}\right)$
 \end_inset
 
  angenommen.
  Wobei 
-\begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
+\begin_inset Formula $\mathbf{Cov}\mathrm{(\vec{h})}\mathbf{\mathbb{\in R^{\mathrm{n_{all}\times n_{all}}}}}$
 \end_inset
 
- die jeweilige Kovarianzmatrix, 
+ die jeweilige Kovarianzmatrix in Abhängigkeit der Hyperparameter 
+\begin_inset Formula $\vec{h}\in\mathbb{R}{}^{o}$
+\end_inset
+
+ und 
 \begin_inset Formula $\vec{y}_{s}$
 \end_inset
 
@@ -2566,24 +2315,95 @@ reference "eq:FVektor"
 \end_inset
 
 ).
+ Daraus ergibt sich die folgende Dichtefunktion der multivariaten Normalverteilu
+ng 
+\begin_inset Formula $\mathcal{N}\left(\vec{F},\mathbf{Cov}\mathrm{(\vec{h})}\right)$
+\end_inset
+
+, diese wird oft auch als Likelihood-Funktion bezeichnet:
+\begin_inset Formula 
+\begin{align}
+\mathcal{N}= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}\label{eq:LikelihoodMultivariateNorm}
+\end{align}
+
+\end_inset
+
+
+\shape italic
+Es gilt: Die Hyperparameter 
+\begin_inset Formula $\vec{h}$
+\end_inset
+
+ sind dann am plausibelsten, wenn der Dichtefunktionswert der Verteilung
  
+\begin_inset Formula $\mathcal{N}\left(\vec{F},\mathbf{Cov}(\vec{h})\right)$
+\end_inset
+
+ maximal wird.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Training muss also die folgende Maximierungsaufgabe lösen:
 \begin_inset Formula 
-\begin{align*}
-\mathcal{N}= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{Cov^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}
-\end{align*}
+\begin{equation}
+\max_{h_{1},...,h_{o}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}\right)
+\end{equation}
 
 \end_inset
 
-Logarithmiert man diese Gleichung, ergibt sich:
+
+\end_layout
+
+\begin_layout Standard
+Numerisch ist diese Formulierung ungünstig, da die Exponentialfunktion im
+ Zähler sehr kleine Werte annehmen kann und die Determinante im Nenner sehr
+ große.
+ Eine gebräuchliche Lösung ist die Verwendung der logarithmierten Dichtefunktion
+ (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "viertl2013einfuhrung"
+
+\end_inset
+
+):
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 \log(\mathcal{N})= & \log(1)-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{1}{2}\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
-\end{align*}
+\end{align}
 
 \end_inset
 
-Da das Maximum der Funktion gesucht ist, können die Konstanten ignoriert
- werden:
+
+\end_layout
+
+\begin_layout Standard
+Da der Logarithmus eine streng monoton wachsende Funktion ist, ist jedes
+ Minimum der logarithmierten Dichtefunktion (Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LikelihoodMultivariateNorm"
+
+\end_inset
+
+) auch ein Minimum der Dichtefunktion (Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LikelihoodMultivariateNorm"
+
+\end_inset
+
+) selbst.
+ Ebenso ist jedes Maximum der logarithmierten Dichtefunktion auch ein Maximum
+ der Dichtefunktion.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Konstanten können ignoriert werden, da diese für das Maximum keine Rolle
+ spielen, daraus folgt: 
 \begin_inset Formula 
 \begin{align}
 \log(\mathcal{N})= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
@@ -2605,7 +2425,7 @@ reference "sec:Differentiation-der-Likelihood-Funktion"
  zu finden:
 \begin_inset Formula 
 \begin{align}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)\label{eq:AbleitungLikelihood-1}
 \end{align}
 
 \end_inset
@@ -2626,10 +2446,11 @@ reference "subsec:Minimierungsverfahren"
 \end_inset
 
  beschrieben.
+ 
 \end_layout
 
 \begin_layout Standard
-Um eine Vorstellung von der Form einer solchen Likelihood Funktion für das
+Um eine Vorstellung von der Form einer solchen Likelihood-Funktion für das
  CO-Kriging Verfahren zu bekommen, wird in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2704,19 +2525,39 @@ Führt man eine Matrix
 
  ein in der Form:
 \begin_inset Formula 
-\begin{equation}
-\mathbf{G}=\left[\begin{array}{ccc}
-1 &  & 0\\
-\vdots & \cdots & \vdots\\
-1_{n_{1}} &  & 0_{n_{1}}\\
-0 & 1 & 0\\
-\vdots & \ddots & \vdots\\
-0_{n_{k}} & 1 & 0_{n_{k}}\\
-0 &  & 1\\
-\vdots & \cdots & \vdots\\
-0_{n_{s}} &  & 1_{n_{s}}
-\end{array}\right]\label{eq:DefinitionG}
-\end{equation}
+\begin{align}
+\mathbf{G}= & \overset{s\,Einträge}{\underset{\overbrace{Spalte\,k}}{\overbrace{\left[\begin{array}{ccccc}
+1 & \cdots & 0 & \cdots & 0\\
+\vdots &  & \vdots &  & \vdots\\
+1 & \cdots & 0 & \cdots & 0\\
+\vdots &  & \vdots &  & \vdots\\
+0 & \cdots & 1 & \cdots & 0\\
+\vdots &  & \vdots &  & \vdots\\
+0 & \cdots & 1 & \cdots & 0\\
+\vdots &  & \vdots &  & \vdots\\
+0 & \cdots & 0 & \cdots & 1\\
+\vdots &  & \vdots &  & \vdots\\
+0 & \cdots & 0 & \cdots & 1
+\end{array}\right]}}}\begin{array}{c}
+\left\} \begin{array}{c}
+\\
+n_{1}\,Eintr\ddot{a}ge\\
+\\
+\end{array}\right.\\
+\vdots\\
+\left\} \begin{array}{c}
+\\
+n_{k}\,Eintr\ddot{a}ge\\
+\\
+\end{array}\right.\\
+\vdots\\
+\left\} \begin{array}{c}
+\\
+n_{s}\,Eintr\ddot{a}ge\\
+\\
+\end{array}\right.
+\end{array}
+\end{align}
 
 \end_inset
 
@@ -2787,7 +2628,14 @@ reference "sec:Iterative-VarianzbestimmungTraining"
  Innerhalb dieses Verfahrens wurden die Varianzen als zusätzlicher Hyperparamete
 r innerhalb des Trainings freigegeben und werden dann über das Training
  bestimmt.
- 
+ Die Ableitung des Likelihood-Terms aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AbleitungLikelihood-1"
+
+\end_inset
+
+ besitzt auch für die Varianz Gültigkeit.
 \end_layout
 
 \begin_layout Subsection
@@ -2811,6 +2659,60 @@ ierung der Hyperparameter von großer Bedeutung.
  
 \end_layout
 
+\begin_layout Standard
+Weiterhin sollte beachtet werden, dass die innerhalb dieser Arbeit entwickelte
+ Software intern eine Normalisierung der Daten vornimmt.
+ Dabei werden die Funktionswerte 
+\begin_inset Formula $\overrightarrow{y}_{s}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+ als auch die Parameter 
+\begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ standardnormalverteilt normalisiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+E[\overrightarrow{y}_{s}] & =0\nonumber \\
+var[\overrightarrow{y}_{s}] & =1
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\begin{array}{c}
+E[x_{i}]=0\\
+var[x_{i}]=1
+\end{array} & \forall x_{i},i\in\{1,...,k\}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisie
+rungskonstanten, so müssen die Hyperparameter renormalisiert werden, in
+ Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Renormalisierung-der-Hyperparame"
+
+\end_inset
+
+ wird eine solche Renormalisierung beschrieben.
+ 
+\end_layout
+
 \begin_layout Subsection*
 Abschätzung konstanter Hyperparameter 
 \begin_inset CommandInset label
@@ -2823,307 +2725,20 @@ name "subsec:Const"
 \end_layout
 
 \begin_layout Standard
-Eine sehr einfache und schnelle Möglichkeit die Hyperparameter für eine
- Gauss Verteilung zu schätzen, wäre einen Erwartungswert für die Einträge
- in der Korrelationsmatrix zu wählen.
- Da die Korrelation grundlegend zwischen Eins und Null liegen sollte, ist
- dies recht einfach.
- Angenommen der Mittelwert der Korrelationsfunktion soll bei einem Wert
- von 
-\begin_inset Formula $c_{erw}=\left\{ c_{erw}\in\mathbb{R}|0\leq c_{erw}\leq1\right\} $
-\end_inset
-
- liegen.
-\begin_inset Formula 
-\begin{align*}
-c_{erw} & =\frac{1}{n^{2}}\underset{i=1}{\overset{i<n}{\sum}}\underset{j=1}{\overset{j<n}{\sum}}e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
-\end{align*}
+Eine einfache und schnelle Methode eine Initialisierung für die Hyperparameter
+ zu wählen, ist in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schmitz2013"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Nimmt man weiterhin an, dass die einzelnen Korrelationswerte nahezu identisch
- sind:
-\begin_inset Formula 
-\begin{align*}
-c_{erw} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)
-\end{align*}
-
-\end_inset
-
-Nimmt man ferner an, dass 
-\begin_inset Formula $x$
-\end_inset
-
- eine Realisierung einer Zufallsvariablen ist und bildet den Erwartungswert:
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =E\left[-\frac{1}{2}\underset{l=1}{\overset{l<k}{\sum}}\left(e^{\theta_{l}}\left|x_{i,l}-x_{j,l}\right|^{2}\right)\right]
-\end{align*}
-
-\end_inset
-
-Als weitere Vereinfachung sollen alle Hyperparameter den gleichen Wert haben:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\left(\vec{x}_{i},\vec{x}_{j}\right)\right) & =-\frac{1}{2}e^{\theta}E\left[\underset{l=1}{\overset{l<k}{\sum}}\left(\left|x_{i,l}-x_{j,l}\right|^{2}\right)\right]
-\end{align*}
-
-\end_inset
-
-Die beiden Variablen werden als Zufallsvariablen angenommen und der Betrag
- wird aufgrund des Quadrats vernachlässigt:
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}E\left[\underset{l=1}{\overset{l<k}{\sum}}\left(x_{i,l}-x_{j,l}\right)^{2}\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]-E\left[2x_{i,l}x_{j,l}\right]+E\left[x_{j,l}^{2}\right]\right)
-\end{align*}
-
-\end_inset
-
-Nimmt man nun an, dass die Zufallsvariablen unabhängig sind, gilt 
-\begin_inset Formula $E\left[2x_{i,l}x_{j,l}\right]=0$
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(E\left[x_{i,l}^{2}\right]+E\left[x_{j,l}^{2}\right]\right)
-\end{align*}
-
-\end_inset
-
-Die Varianz einer Zufallsvariable 
-\begin_inset Formula $X$
-\end_inset
-
- ist definiert durch 
-\begin_inset Formula $\textrm{var}\left(X\right)=E\left[X^{2}\right]-E\left[X\right]^{2}$
-\end_inset
-
-.
- Die im Modell verwendeten Daten werden grundsätzlich auf einen Erwartungswert
- von Null und eine Standardabweichung von Eins normiert.
-\begin_inset Formula 
-\begin{align*}
-E\left[X\right] & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{var}\left[X\right] & =1
-\end{align*}
-
-\end_inset
-
-Daraus ergibt sich folgende Formel für das verwendete Modell für die Varianz
- der Stützstellen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{var}\left[X\right]=E\left[X^{2}\right]
-\end{align*}
-
-\end_inset
-
-Also
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-E\left[x_{i,l}^{2}\right] & =\textrm{var}\left[x_{i,l}^{2}\right]=1
-\end{align*}
-
-\end_inset
-
-und analog dazu:
-\begin_inset Formula 
-\begin{align*}
-E\left[x_{j,l}^{2}\right] & =\textrm{var}\left[x_{j,l}^{2}\right]=1
-\end{align*}
-
-\end_inset
-
-Daraus folgt:
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}\underset{l=1}{\overset{l<k}{\sum}}\left(1+1\right)
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\log\left(c_{erw}\right) & =-\frac{1}{2}e^{\theta}2k
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align}
-\log\left(-\frac{\log\left(c_{erw}\right)}{k}\right) & =\theta\label{eq:ConstThetaSchatzung}
-\end{align}
-
-\end_inset
-
-Mit dieser Formel hat man nun eine Möglichkeit die Hyperparameter zu schätzen.
- Aufgrund der vielen Annahmen und Vereinfachungen ist dieses Verfahren als
- heuristisch einzustufen.
- Die Hyperparameter haben dann allerdings alle denselben Initialwert.
- Zudem ist der erwartete Korrelationswert 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
-\begin_inset Formula $c_{erw}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang ngerman
- unbekannt, dies kann leicht durch einfaches Ausprobieren gelöst werden,
- da der Wertebereich bekannt ist.
- Man würde also 
-\begin_inset Formula $c_{erw}$
-\end_inset
-
- von 0 bis 1 variieren, damit einen Hyperparameter erhalten und mit diesem
- Hyperparameter die Likelihood Funktion berechnen.
- Letztlich wählt man den Hyperparameter, welcher den besten Likelihood Wert
- aufweist.
- 
-\end_layout
-
-\begin_layout Subsection*
-Zufällige Initialisierung der Hyperparameter
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Reduktion-der-Stützstellen"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Eine weitere Möglichkeit eine Initialisierung für die Hyperparameter zu
- finden ist, diese zufällig zu Erzeugen und die entsprechende Likelihood
- Funktion zu berechnen.
- Es würden die Hyperparameter gewählt, welche die beste Likelihood Funktion
- haben.
- Die zufällige Erzeugung ist extrem zeitaufwendig, da für jeden Satz zufälliger
- Hyperparameter die Likelihood Funktion ausgewertet werden muss.
- Um diesen Aufwand zu reduzieren, kann man einfach Stützstellen weglassen.
- Die Likelihood Funktion sollte sich im Vergleich zumindest ähnlich verhalten.
- Statt einer zufälligen Veränderung der Hyperparameter kann man auch ein
- Minimierungsverfahren mit reduzierter Stützstellenzahl verwenden.
- Dies wurde im Code auch umgesetzt.
- Die möglichen Minimierungsverfahren sind dieselben wie sie für das eigentliche
- Training verwendet werden und werden im nächsten Abschnitt beschrieben.
- 
-\end_layout
-
-\begin_layout Standard
-Reduziert man die Anzahl der Stützstellen wird die Korrelationsmatrix dementspre
-chend kleiner.
- Dadurch sinkt der Aufwand für die Invertierung und die Matrix Multiplikationen
- erheblich.
- Tests zeigten, dass die Initialisierung durch solch ein Verfahren zwar
- langsamer ist, allerdings konvergiert das Minimierungsverfahren durch die
- bessere Initialisierung deutlich schneller.
- Da bei dem Minimierungsverfahren wieder die volle Anzahl der Stützstellen
- notwendig ist und zusätzlich noch die Ableitungen der Korrelationsmatrix
- berechnet werden müssen, bietet dieses Verfahren durch die bessere Initialisier
-ung für das gesamte Training betrachtet eine deutliche Beschleunigung.
- 
-\end_layout
-
-\begin_layout Standard
-Allerdings konnte auch beobachtet werden, dass die Initialisierung häufiger
- zu lokalen Minima führt.
- Eine Begründung für dieses Verhalten wurde noch nicht gefunden und sollte
- weitergehend untersucht werden.
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ein geeignetes Initialisierungverfahren für Ordinary-, Gradient Enhanced-
- und CO-Kriging zu finden ist keine leichte Aufgabe, dennoch kann eine Initialis
-ierung das Trainingsergebnis enorm beeinflussen.
- Dies ist insbesondere von großer Bedeutung bei der Verwendung von gradientenbas
-ierten Trainingsverfahren wie dem Quasi-Newton.
- Das CO-Kriging stellt hier die größte Herausforderung dar, da bei diesem
- Verfahren nicht nur die Hyperparameter der Korrelationsfunktionen bestimmt
- werden müssen, sondern auch die Prozessvarianz für jede Fidelity des Krigingmod
-ells und die Diagonalaufschläge ebenfalls für jede Fidelity.
- 
-\end_layout
-
-\begin_layout Standard
-Eine zufällige Initialisierung der Hyperparameter ist sicherlich ein gutes
- Verfahren zur Initialisierung.
- Der Vorteil bei diesem Verfahren liegt darin, dass während einer Optimierung
- Variation in die Modelle gelangt.
- Dies ist wünschenswert, daes bei einem konstanten Initialisierungsverfahren
- durchaus passieren kann, dass man durchgängig schlechte Modelle hat.
- Dies passiert insbesondere bei hochdimensionalen Parameterräumen.
- Für eine zufällige Initialisierung müssen allerdings Grenzen für die Hyperparam
-eter gewählt werden, um den Suchraum zu verkleinern.
- 
+ beschrieben.
+ Dafür wird für die Hyperparameter nur ein konstanter Wert verwendet und
+ obere und untere Grenzen bestimmt.
+ Danach werden zwischen diesen Grenzen einige Werte ausprobiert und der
+ Likelihood Term berechnet und letztlich der Satz mit dem besten Likelihood-Term
+ verwendet.
 \end_layout
 
 \begin_layout Standard
@@ -3182,10 +2797,10 @@ Die maximale Grenze bedarf einer kleinen Änderung, da man in diesem Fall
 \end_layout
 
 \begin_layout Subsection*
-Genetisch/Zufällige Initialisierung der Hyperparameter 
+Zufällige Initialisierung der Hyperparameter
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Reduktion-der-Stützstellen-1"
+name "subsec:Reduktion-der-Stützstellen"
 
 \end_inset
 
@@ -3193,22 +2808,21 @@ name "subsec:Reduktion-der-Stützstellen-1"
 \end_layout
 
 \begin_layout Standard
-Random 2 beschreiben 
-\end_layout
-
-\begin_layout Standard
-Reduktion der zu bestimmenden Parameter auf 5 beim CO-Kriging 2 Thetas,
- 2 Varianzen und 1 Scale Faktor
-\end_layout
-
-\begin_layout Standard
-Wiederverwendung des besten bisher gefundenen und normalverteilt um diesen
- variieren
-\end_layout
-
-\begin_layout Standard
-Birgt die Gefahr in ein lokales Minimum zu kommen, durch die Zufälligkeit
- ist diese Gefahr allerdings eher klein
+Eine weitere Möglichkeit eine Initialisierung für die Hyperparameter zu
+ finden ist, diese zufällig zu Erzeugen und die entsprechende Likelihood-Funktio
+n zu berechnen.
+ Es würden die Hyperparameter gewählt, welche die beste Likelihood Funktion
+ haben.
+ Die zufällige Erzeugung ist extrem zeitaufwendig, da für jeden Satz zufälliger
+ Hyperparameter die Likelihood Funktion ausgewertet werden muss.
+ Um diesen Aufwand zu reduzieren, kann man einfach Stützstellen weglassen.
+ Die Likelihood Funktion sollte sich im Vergleich zumindest ähnlich verhalten.
+ Statt einer zufälligen Veränderung der Hyperparameter kann man auch ein
+ Minimierungsverfahren mit reduzierter Stützstellenzahl verwenden.
+ Dies wurde im Code auch umgesetzt.
+ Die möglichen Minimierungsverfahren sind dieselben wie sie für das eigentliche
+ Training verwendet werden und werden im nächsten Abschnitt beschrieben.
+ 
 \end_layout
 
 \begin_layout Subsection*
@@ -3217,25 +2831,15 @@ Initialisierung auf Basis bereits vorhandener Kriging Modelle
 
 \begin_layout Standard
 Das Kriging Modell wird in der Regel innerhalb einer Optimierung verwendet.
- In der Regel wird mit jedem neuen konvergierten Member ein neues Training
- gestartet und so die Hyperparameter neu bestimmt.
- Grundsätzlich wäre es natürlich äußerst sinnvoll die Hyperparameter aus
- den letzten trainierten Modellen zur Initialisierung zu verwenden.
+ Dies bedeutet im Normalfall, dass mehrfach trainiert wird und so die Hyperparam
+eter neu bestimmt werden.
+ Grundsätzlich wäre es sinnvoll die Hyperparameter aus den letzten trainierten
+ Modellen zur Initialisierung zu verwenden.
  Als einfacher Ansatz wäre es z.B.
- möglich einfach immer die Hyperparameter aus dem letzten Training zu Initialisi
-erung zu verwenden.
+ möglich die Hyperparameter aus dem letzten Training zu Initialisierung
+ zu verwenden.
  Diese Art der Wiederverwendung von alten Trainings ist für das Kriging
  Verfahren ohne Probleme möglich.
- Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisi
-erungskonstanten, so müssen die Hyperparameter renormalisiert werden, in
- Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Renormalisierung-der-Hyperparame"
-
-\end_inset
-
- wird eine solche Renormalisierung beschrieben.
  
 \end_layout
 
@@ -4255,7 +3859,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/RPROP2/Vergleich.png
-	scale 25
+	scale 15
 
 \end_inset
 
@@ -4620,3072 +4224,6 @@ key "han2009improving"
 g zwischen den Gütestufen dargestellt werden.
  Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
  dar und für industrielle Anwendungen nicht ausreichend ist.
-\end_layout
-
-\begin_layout Section
-Softwaredesign
-\end_layout
-
-\begin_layout Subsection
-Grundlegendes
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Offenes-Softwaredesign"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Integration von Supporting Vector Machines und GEK, COKriging, Ordinary
- Kriging in einem Code usw.
- 
-\end_layout
-
-\begin_layout Standard
-z.B.
- Kovarianzmatrix statt Korrelationsmatrix verwenden.
- Dadurch gibt es allerdings neue Schwieirigkeiten in der Bestimmung von
- den Sigmas, das günstigste war es diese mitzutrainieren.
-\end_layout
-
-\begin_layout Standard
-Umgebung usw.
- C++ mit Boost usw.
-\end_layout
-
-\begin_layout Standard
-In dem im Rahmen dieser Arbeit entstandenen Abschlussarbeiten 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "schmitz2013,kueppers2016,kueppers2016b"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Schnittstelle zu AutoOpti
-\end_layout
-
-\begin_layout Standard
-Interface beschreiben + 
-\end_layout
-
-\begin_layout Subsection
-Softwaretechnische Umsetzung
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:MinimierungSoftwaretechnische-Umsetzung"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Klasse für die Steuerung des Trainings
-\end_layout
-
-\begin_layout Standard
-In diesem Abschnitt soll der Ablauf und die dazugehörige Klasse für ein
- Training eines Kriging Modells erklärt werden.
- Das UML Diagramm 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLTrainer"
-
-\end_inset
-
- zeigt die Klasse Trainer, welche das Training steuern und verwalten soll.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/UMLTrainer.PNG
-	scale 34
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UMLTrainer"
-
-\end_inset
-
-UML Diagramm der Trainer Klasse, welche das Training des Kriging Modells
- steuert
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Methoden und auch Attribute der Trainer Klassen sollen am Ablauf des
- Trainings erläutert werden.
- Ein Training besteht im Wesentlichen aus den folgenden Schritten:
-\end_layout
-
-\begin_layout Enumerate
-Der erste Schritt besteht aus der Erzeugung eines Trainer Objekts.
- Dem Konstruktor müssen drei Parameter übergeben werden: Der Name der Konfigurat
-ionsdatei (configFile), der Name der Datenbankdatei (DataBaseFile) und die
- zu trainierende Funktion.
- Der Parameter objectString gibt an, welcher der Funktionswerte aus der
- Datenbankdatei verwendet werden soll, diese kann zu einem Variablensatz
- mehrere verschiedene Funktionen beinhalten.
- Innerhalb des Konstruktors werden dann einige Schritte ausgeführt, um das
- Kriging Modell zu initialisieren.
- 
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Einlesen der Datenbankdatei.
-\end_layout
-
-\begin_layout Enumerate
-Einlesen der Konfigurationsdatei durch die Methode readConfig(), an dieser
- Stelle werden auch die zu verwendenden Korrelationsfunktionen gesetzt (Attribut
- correlationMap, siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SoftwaretechnKorrelationsfunktionen"
-
-\end_inset
-
- ).
- Zudem wird ein DensityFunktion Objekt erzeugt und in dem Attribut densityFuncti
-on gespeichert, siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Maximum-Likelihood-für"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Enumerate
-Normalisierung der Stützstellen und der dazugehörigen Funktionswerte (mit
- der Methode normalizeData())
-\end_layout
-
-\begin_layout Enumerate
-Initialisierung der Hyperparameter, siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
-.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Starten der train() Methode des Trainer Objekts.
- 
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Erzeugung eines Minimierer Objekts, je nach gewähltem Minimierer Typ.
- Die entsprechende Klassenstruktur wird im nächsten Abschnitt behandelt
-\end_layout
-
-\begin_layout Enumerate
-Starten des Minimierers
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Nach erfolgreichem Training wird eine XML Datei geschrieben, in der im Wesentlic
-hen alle Ergebnisse des Trainings stehen.
- Es werden die gefundenen Hyperparameter, die Korrelationsmatrix, einige
- Vektoren usw.
- gespeichert um bei einer späteren Vorhersage diese Werte nicht mehr berechnen
- zu müssen.
- Diese XML Datei beinhaltet also ein fertiges Kriging Modell.
-\end_layout
-
-\begin_layout Subsection*
-Klassenstruktur zur Steuerung der Minimierungsverfahren
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLMinimizer"
-
-\end_inset
-
- wird das UML Diagramm der Klassenstruktur für die Minimierungsverfahren
- gezeigt.
- Es gibt eine abstrakte Superklasse MinimizerInterface, welche hier als
- Interface zu verstehen ist.
- Diese schreibt die notwendigen Methoden für die Subklassen vor.
- Die Subklassen sollen dann die konkreten Minimierungsverfahren realisieren.
- Die einzige öffentliche Methode callMinimizer ist dazu da, um von außen
- den entsprechenden Minimierer aufzurufen und die Minimierung zu starten.
- In der Methode function muss die zu minimierende Funktion berechnet werden.
- Die Rückgabe des berechneten Funktionswertes wird über eine Referenz des
- Parameters functionValue gemacht, eine Referenz wird aus Performancegründen
- verwendet.
- Der Parameter variables vom Typ vector, soll die entsprechenden Variablen
- beinhalten.
- Zu diesen Variablen wird dann der Funktionswert berechnet.
- Wie die Berechnung vor sich geht und was genau berechnet wird, ist den
- einzelnen Subklassen überlassen, diese müssen sich nur an die Interface
- Spezifikation halten.
- 
-\end_layout
-
-\begin_layout Standard
-Die Methode functionDerivative soll den Gradienten des Funktionswertes abgeleite
-t nach den Variablen berechnen.
- Der Gradient wird über die Referenz auf den Parameter derivatives zurückgegeben.
- Zusätzlich soll es möglich sein, Nebenbedingungen für die Minimierung vorzugebe
-n.
- Dies wird über die Methode constraintFunction umgesetzt.
- Die Nebenbedingung muss so formuliert werden, dass diese bei einem Wert
- größer oder gleich Null eingehalten wird und unter Null nicht eingehalten
- wird.
- Zudem muss der Gradient der einzelnen Nebenbedingungsfunktionen bereitgestellt
- werden und zwar über die Methode constraintFunctionDerivative.
- 
-\end_layout
-
-\begin_layout Standard
-Um die Konvergenz des Verfahrens festzustellen, wird die Methode convergenceChec
-k verwendet.
- Der Methode müssen drei Parameter übergeben werden, der erste Parameter
- ist ein vector mit den Funktionswerten der bisher durchgeführten Iterationen.
- Der zweite Parameter ist ein mehrdimensionaler vector, welcher alle Variablenwe
-rte der bisherigen Iterationen beinhaltet und der letzte Parameter der Methode
- ist die Nummer der aktuellen Iteration.
- Das entsprechende Konvergenzkriterium muss dann innerhalb der Funktion
- umgesetzt werden.
- Beispielsweise könnte man das Verfahren als konvergiert ansehen, wenn die
- Funktions- und Parameterwerte sich seit einigen Iterationen nicht mehr
- verändert haben oder die Veränderung unterhalb einer bestimmten Schwelle
- liegt.
-\end_layout
-
-\begin_layout Standard
-Die Methode saveFunction stellt eine Art von Rettungsfunktion dar.
- Diese soll aufgerufen werden, wenn das Verfahren in irgendeiner Form numerisch
- instabil wird.
- Beispielsweise könnte eine einfache Maßnahme sein, die Funktionswerte zufällig
- zu verändern, in der Hoffnung auf ein anderes (globaleres) Minimum zu treffen.
-\end_layout
-
-\begin_layout Standard
-Die jeweiligen Subklassen implementieren in diesem Fall noch ein Attribut
- vom Typ DensityFunction, da diese die LikeliHood Funktion minimieren sollen
- und die Klasse DensityFunction alle nötigen Methoden für die Berechnung
- dieser liefert, siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Likelihood"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/UMLMinimizer.PNG
-	scale 34
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UMLMinimizer"
-
-\end_inset
-
-UML Diagramm der Klassenstruktur der Minimierungsalgorithmen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Das folgende Listing zeigt die Umsetzung der Methode function in der Subklasse
- MinimizerInterfaceRPROP.
- Die Methode ist in diesem Fall vereinfacht dargstellt, einige Ausgabefunktionen
- wurden aus Platzgründen entfernt.
- Die wichtigen Teile der Methode sind allerdings unverändert.
- Der Methodenkopf entspricht dem aus dem UML Diagramm.
- In Zeile 5 werden die aktuellen Variablen (in diesem Fall die Hyperparameter)
- dem Objekt densityFunction zu Berechnung der Likelihood Funktion übergeben.
- In den Zeilen 7-18 wird dann die eigentliche Likelihood Funktion innerhalb
- eines try-catch Blocks berechnet, um eventuelle Exceptions fangen zu können.
- Wird eine Exception geworfen, so wird eine Fehlermeldung ausgegeben und
- eine -1 als zurückgegeben.
- Zusätzlich kann wie in Zeile 15 die entsprechende Korrelationsmatrix bei
- Auftreten einer Exceptions ausgegeben werden, in diesem Fall wird die Matrix
- in eine Datei geschrieben.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-int MinimizerInterfaceRPROP<T,B>::function(	vector<double> &hyperparameter,
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-												double &likelihood, 
-\end_layout
-
-\begin_layout Plain Layout
-
-												size_t *iteration){
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	densityFunction->setAllHyperparameter(hyperparameter);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	try{
-\end_layout
-
-\begin_layout Plain Layout
-
-		likelihood = densityFunction->calcDensity();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	catch(InvCholNotIdentity &e){
-\end_layout
-
-\begin_layout Plain Layout
-
-		cout <<"RPROP Func (InvCholNotIdentity):"<<endl;
-\end_layout
-
-\begin_layout Plain Layout
-
-		return -1;
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	catch(ChodecNotPosDef &Exception){
-\end_layout
-
-\begin_layout Plain Layout
-
-		densityFunction->getCorrelationMatrixRef().saveAsAscii("CorrMatFailed_sav");
-\end_layout
-
-\begin_layout Plain Layout
-
-		cout <<"RPROP Func (ChodecNotPosDef):"<<endl;
-\end_layout
-
-\begin_layout Plain Layout
-
-		return -1;
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ein zusätzliches Problem bei der Implementierung der Minimierungsverfahren
- war, dass diese in einer externen Bibliothek in Form von C Funktionen vorlagen
- und diese Funktionen Funktionspointer als Parameter erwarten.
- Die zu übergebenden Funktionen entsprechen den Funktionen aus der MinimizerInte
-rface Klasse, also z.B.
- function oder functionDerivative.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-	quasiNewton(nrHyperparam,
-\end_layout
-
-\begin_layout Plain Layout
-
-				nrConstraints, 
-\end_layout
-
-\begin_layout Plain Layout
-
-				variables,
-\end_layout
-
-\begin_layout Plain Layout
-
-				function(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				functionDerivatives(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				constraintFunction(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				constrainFunctionDerivative(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				convergenceCheck())
-\end_layout
-
-\end_inset
-
-
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-	rprop(  	nrHyperparam,
-\end_layout
-
-\begin_layout Plain Layout
-
-				nrConstraints, 
-\end_layout
-
-\begin_layout Plain Layout
-
-				variables, 
-\end_layout
-
-\begin_layout Plain Layout
-
-				variablesLowerLimit,
-\end_layout
-
-\begin_layout Plain Layout
-
-				variablesUpperLimit,
-\end_layout
-
-\begin_layout Plain Layout
-
-				function(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				functionDerivatives(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				constraintFunction(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				constrainFunctionDerivative(),
-\end_layout
-
-\begin_layout Plain Layout
-
-				convergenceCheck())
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Schwierigkeit ergibt sich in diesem Fall dadurch, dass die Funktionspointer
- in C++ eine Zuordnung zu dem entsprechenden Objekt zu dem die Funktionen
- gehören, benötigen.
- Das folgende Listing soll das Problem verdeutlichen: 
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-MinimizerInterfaceRPROP testObject;
-\end_layout
-
-\begin_layout Plain Layout
-
-int (MinimizerInterfaceRPROP::*ptr2)(vector<double> &, double &, size_t
- *) = 
-\end_layout
-
-\begin_layout Plain Layout
-
-											&MinimizerInterfaceRPROP::function;
-\end_layout
-
-\begin_layout Plain Layout
-
-(testObject.*ptr2)(variables, functionValue, iteration);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In Zeile 1 wird ein Test Objekt vom Typ MinimizerInterfaceRPROP erzeugt
- (der Konstruktoraufruf wurde hier absichtlich vereinfacht).
- In den Zeilen 2-3 wird ein Funktionspointer namens ptr2 erzeugt, dieser
- zeigt auf eine Methode der Klasse MinimizerInterfaceRPROP mit den entprechenden
- Parametern der Methode function.
- Zusätzlich erfolgt in diesen Zeilen eine Zuweisung des Pointers der Methode
- durch 
-\shape italic
-
-\begin_inset Quotes eld
-\end_inset
-
-&MinimizerInterfaceRPROP::function
-\shape default
-
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-In Zeile 4 wird ein beispielhafter Aufruf des Funktionspointers auf dem
- Objekt testObject gemacht.
- Dieses Beispiel würde so funktionieren.
- Das eigentliche Problem besteht aber nun darin, dass man in Zeile 2 statt
- der Subklasse MinimizerInterfaceRPROP die abstrakte Klasse MinimizerInterface
- verwenden möchte.
- Da diese Funktionspointer Parameter einer Funktion darstellen, wäre dieses
- Verhalten sehr wichtig, weil so alle Methodenpointer der Subtypen von Minimizer
-Interface angenommen werden würden.
- Andernfalls müsste man die Funktion rprop oder quasiNewton für jeden Subtypen
- von MinimizerInterface neu implementieren.
- Leider sind die Möglichkeiten polymorpher Programmierung in C++ stark begrenzt
- und solch ein Konstrukt wird von der Sprache nicht unterstützt.
- 
-\end_layout
-
-\begin_layout Standard
-Um dieses Problem zu umgehen, werden Funktionsobjekte 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "boostfunction"
-
-\end_inset
-
- der Boost Bibliothek verwendet.
- Mit dieser Bibliothek ist es möglich, die entsprechenden Methoden als Objekt
- an die entsprechenden externen Funktionen (z.B.
- rprop und quasiNewton) zu übergeben.
- Das folgende Listing soll die prinzipielle Funktionsweise von Boost Funktionsob
-jekten erklären:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},language={C++},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-class X {
-\end_layout
-
-\begin_layout Plain Layout
-
-public:
-\end_layout
-
-\begin_layout Plain Layout
-
- int foo(int); 
-\end_layout
-
-\begin_layout Plain Layout
-
-};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-boost::function<int (X*, int)> f;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-X x;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-f = &X::foo;
-\end_layout
-
-\begin_layout Plain Layout
-
-f(&x, 10);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In diesem Beispiel soll ein Funktionsobjekt der Methode foo der Klasse X
- erzeugt werden.
- Zu diesem Zweck wird ein Funktionsobjekt in Zeile 6 initialisiert, wobei
- innerhalb der eckigen Klammern zuerst der Rückgabewert int und danach die
- Parameter der Funktion (X*, int) übergeben werden.
- Der Parameter X* muss vorhanden sein, da innerhalb C++ der erste Parameter
- einer Methode immer das Objekt selbst ist.
- Im Normalfall wird dies jedoch automatisch umgesetzt und ist daher unsichtbar
- für den Programmierer.
- Die Zuweisung der Methode auf das Funktionsobjekt erfolgt dann in Zeile
- 10.
- Der Aufruf des Funktionsobjekts erfolgt nach normaler C++ Syntax, siehe
- Zeile 11.
-\end_layout
-
-\begin_layout Standard
-Für die Klasse MinimizerInterfaceRPROP würde ein solches Funktionsobjekt
- wie folgt aussehen:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-boost::function<int (MinimizerInterfaceRPROP*, vector<double> &, double
- &, size_t *)> fPointer;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Das Problem dass das Funktionsobjekt unabhängig vom Subtyp der Klasse MinimizerI
-nterface sein soll, bleibt allerdings bestehen.
- Um dies nun zu umgehen, kann man boost::bind verwenden.
- Mit dieser Funktionalität ist es möglich, Parameter von Funktionen zu verändern.
- 
-\end_layout
-
-\begin_layout Standard
-Das nächste Listing soll dies verdeutlichen, es handelt sich hier um ein
- stark vereinfachtes Beispiel um die grundlegende Funktionalität zu erklären.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-void external_rprop(boost::function<int (vector<double> &, double &, size_t
- *)> fPointer){...}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-class MinimizerInterfaceRPROP: public MinimizerInterface{
-\end_layout
-
-\begin_layout Plain Layout
-
-public:
-\end_layout
-
-\begin_layout Plain Layout
-
-	void callMinimizer(){
-\end_layout
-
-\begin_layout Plain Layout
-
-		boost::function<int (vector<double> &, double &, size_t *)> fPointer;
-\end_layout
-
-\begin_layout Plain Layout
-
-		fPointer = boost::bind(&MinimizerInterfaceRPROP::function, (*this), _1,
- _2, _3);
-\end_layout
-
-\begin_layout Plain Layout
-
-		external_rprop(fPointer);
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-private:
-\end_layout
-
-\begin_layout Plain Layout
-
-	int function(vector<double> &vars, double &f, size_t *it) {...}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In Zeile 1 ist eine Funktion definiert, welche einer externen Bibliotheksfunktio
-n entspricht, beispielsweise einem externen RPROP Algorithmus.
- Dieser Algorithmus benötigt nun ein Funktionsobjekt, mit dem er die zu
- minimierende Funktion berechnen kann.
- Wie man sehen kann, benötigt das hier definierte Funktionsobjekt als ersten
- Parameter nicht mehr das aufrufende Objekt selbst.
- 
-\end_layout
-
-\begin_layout Standard
-Analog zum Originalcode wird als nächstes ist die Subklasse MinimizerInterfaceRP
-ROP definiert, welche Subklasse der abstrakten Klasse MinimizerInterface
- ist.
- Diese Klasse besitzt nun eine öffentliche Methode namens callMinimizer.
- Diese Methode soll von irgendeinem Clienten ausgeführt werden können, um
- den Minimierungsalgorithmus starten.
- 
-\end_layout
-
-\begin_layout Standard
-Der erste Schritt innerhalb der Methode callMinimizer ist die Erzeugung
- eines boost Funktionsobjekts, auch hier ist der erste Parameter nicht mehr
- das aufrufende Objekt selbst (also MinimizerInterfaceRPROP*).
- In Zeile 7, wird nun ein Funktionsobjekt mit boost bind erzeugt.
- Mit bind ist es Möglich, die Methodenparameter zu verändern.
- Dies wird dazu verwendet das Funktionsobjekt quasi unabhängig von der aufgerufe
-nen Klasse zu machen.
- Dem ersten Parameter für bind wird der Funktionspointer übergeben, der
- zweite Parameter ist das Objekt selbst.
- Mit boost bind ist es nun möglich, das Objekt einfach standardmäßig über
- den this Zeiger fest zu binden.
- Dieser taucht im kreierten Funktionsobjekt nicht mehr auf und man hat die
- gewünschte Unabhängigkeit erreicht.
- Die nächsten drei Parameter _1,_2,_3 sind Platzhalter für die später nötigen
- Parameter des Funktionsobjekts (also vector<double> &, double &, size_t
- *).
-\end_layout
-
-\begin_layout Standard
-In der nächsten Zeile wird das Funktionsobjekt an die externe Bibliotheksfunktio
-n übergeben und diese kann die Funktion nun nach belieben verwenden.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Subsection
-Algorithmus zur Bildung der Korrelationsmatrix für alle Kriging Verfahren
-\end_layout
-
-\begin_layout Plain Layout
-Beim Aufstellen der Korrelationsmatrix müssen alle Korrelationen zwischen
- Membern berechnet werden.
- Ein Member wird durch die Klasse Point beschrieben, in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLPoint"
-
-\end_inset
-
- ist das UML Diagramm der entsprechenden Klasse dargestellt.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/UML/point.eps
-	lyxscale 40
-	scale 17
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UMLPoint"
-
-\end_inset
-
-UML Diagramm der Klasse Point, welche einen Member/Stützstelle beschreibt
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "PointKlasseAnfang"
-
-\end_inset
-
-Die Klasse verwendet zwei Template Parameter.
- Zum einen den Parameter B, dieser gibt den verwendeten Fließkommazahlentyp
- an und zum anderen gibt es den Parameter T, welcher den verwendeten Matrix
- Typ darstellt.
- Der Matrix Typ muss ein Subtyp der Matrix Klasse aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Korrelationsmatrix"
-
-\end_inset
-
- sein.
- Die Point Klasse besteht aus vier Attributen und zwei öffentlichen Methoden.
- Das Attribut fit beschreibt den Funktionswert des Members.
- PartialDerivatives beinhaltet die vorgegebenen partiellen Ableitungen eines
- Members.
- Der Typ des Attributs ist eine map (Hashtabelle), wobei der Schlüssel die
- Nummer der Variable darstellt, nach der abgeleitet wurde.
- In vars werden die Variablenwerte des Members gespeichert, der Typ des
- Attributs ist eine Matrix.
- Eigentlich wird nur ein Vektor als Typ benötigt, da man aber gerne die
- Matrix Operationen nutzen möchte, wird vars als einspaltige Matrix verwendet,
- was letztlich wieder einem Vektor entspricht.
- Das Attribut type beinhaltet den Typ des Members, dies ist für Variable
- Fidelity Methods ( siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Andere-Kriging-Verfahren"
-
-\end_inset
-
- ) wichtig.
- In diesem Attribut wird dann über einen Identifier angegeben, ob es sich
- z.B.
- um einen Member handelt, welcher mit hoher Güte berechnet wurde oder niedriger.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Eine Korrelationsfunktion soll zwischen zwei solcher Point Objekte einen
- Korrelationswert bestimmen.
- Daher macht es Sinn, eine gemeinsame abstrakte Superklasse einzuführen,
- der Aufbau ist in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
- dargestellt.
- Da jedes Point Objekt auch die partiellen Ableitungen enthält ist es sinnvoll,
- dass die Korrelationsfunktion alle Korrelationen zwischen zwei Point Objekten
- zurück gibt, also auch die Korrelationen zwischen partiellen Ableitungen
- und Funktionswerten.
- Zu diesem Zweck wird die Korrelationsmatrix durch Zeilen- und Spaltentausch
- umsortiert, um die Korrelationen zwischen zwei Point Objekten direkt als
- Submatrix in die Gesamtmatrix einzufügen:
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset Formula 
-\begin{equation}
-\mathbf{R}=\left[\begin{array}{c|cccc}
- & Z\left(\vec{x}_{1}\right) & \frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & Z\left(\vec{x}_{2}\right) & \frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}}\\
-\hline Z\left(\vec{x}_{1}\right) & c\left(\vec{x}_{1},\vec{x}_{1}\right) & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & c\left(\vec{x}_{1},\vec{x}_{2}\right) & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{2}^{1}}\\
-\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}\\
-Z\left(\vec{x}_{2}\right) & c\left(\vec{x}_{2},\vec{x}_{1}\right) & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & c\left(\vec{x}_{2},\vec{x}_{2}\right) & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}}\\
-\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}}
-\end{array}\right]\label{eq:FinalCorrMat}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Durch diese Anordnung stehen alle Korrelationen zwischen zwei bestimmten
- Punkten immer zusammen, dies vereinfacht den Algorithmus zum Aufstellen
- der Matrix erheblich.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/home/andreas/documents/GoogleDrive/Promotion/Diss/images/UML/CorrelationFunction.eps
-	lyxscale 70
-	width 30cm
-	height 14cm
-	scaleBeforeRotation
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UMLCorrelation"
-
-\end_inset
-
-UML Diagramm der abstrakten Klasse CorrelationFunction mit zwei Subklassen,
- diese stellen spezifische Korrelationsfunktionen dar
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Die Methode CreateCorrelationMatrix
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Die-Methode-CreateCorrelationMat"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Das UML Diagramm in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
- zeigt die abstrakte Superklasse CorrelationFunction mit zwei Spezialisierungen
- namens CorrelationFunctionGauss und CorrelationsFunctionSpline.
- Die Spezialisierungen stellen jeweils verschiedene Korrelationsfunktionen
- dar.
- Die Umsetzung der Gauss Korrelationsfunktion wurde im Abschnitt 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SoftwaretechnKorrelationsfunktionen"
-
-\end_inset
-
- dargestellt, auf die Beschreibung der Spline Funktion wird hier verzichtet.
- Die Methode getAllCorrelation schreibt alle Korrelationswerte zwischen
- den Stützpunkten P1 und P2 in die ebenfalls übergebene Korrelationsmatrix
- corrMat.
- Da die Korrelationswerte zwischen zwei Stützstellen eine Submatrix der
- Korrelationsmatrix darstellen (siehe Formel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:FinalCorrMat"
-
-\end_inset
-
-), wird der Methode getAllCorrelation die entsprechende Stelle der Submatrix
- in der Korrelationsmatrix über die Indizes i und j mit angegebenen.
- Die beiden Parameter stellen hier die Position der ersten Zeile und Spalte
- der Submatrix in der Korrelationsmatrix dar.
- Es wird also im ersten Schritt die Korrelation zwischen den beiden Punkten
- bestimmt, dann die Korrelationen der partiellen Ableitungen, daraus wird
- dann die entsprechende Submatrix gebildet und diese in die Korrelationsmatrix
- eingefügt.
-\end_layout
-
-\begin_layout Plain Layout
-Das folgende Programmlisting zeigt die Funktion, welche unter Benutzung
- der abstrakten Klasse CorrelationFunktion, eine Korrelationsmatrix mit
- Werten befüllt.
- Der gezeigte Code ist der Originalcode in C++, auf Pseudocode wird hier
- verzichtet da einige Besonderheiten von C++ eine recht große Rolle in der
- Programmierung spielen.
- Einige Zeilenumbrüche wären in C++ in der Form nicht zulässig, aus Platzgründen
- ließen sich diese allerdings nicht vermeiden.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},language={C++},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-template <class T, class B> 
-\end_layout
-
-\begin_layout Plain Layout
-
-void createCorrelationMatrix(
-\end_layout
-
-\begin_layout Plain Layout
-
-					T &correlationMatrix,
-\end_layout
-
-\begin_layout Plain Layout
-
-					vector<Point<T,B> > &points, 
-\end_layout
-
-\begin_layout Plain Layout
-
-					map<string,map<string,CorrelationFunction<T,B>*>> correlationMap){
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	T tmp(config::numSamplesDerivatives, config::numSamplesDerivatives);
-\end_layout
-
-\begin_layout Plain Layout
-
-	correlationMatrix = tmp;
-\end_layout
-
-\begin_layout Plain Layout
-
-	#pragma omp parallel for schedule(dynamic) 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(size_t i=0; i<points.size(); i++){ 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(size_t j=i; j<points.size(); j++){
-\end_layout
-
-\begin_layout Plain Layout
-
-			if(i==j){ 				
-\end_layout
-
-\begin_layout Plain Layout
-
-				correlationMap[points[i].getType()][points[j].getType()]->getAllCorrelation(
-\end_layout
-
-\begin_layout Plain Layout
-
-						points[i],
-\end_layout
-
-\begin_layout Plain Layout
-
-						points[j],
-\end_layout
-
-\begin_layout Plain Layout
-
-						correlationMatrix,
-\end_layout
-
-\begin_layout Plain Layout
-
-						0.0,
-\end_layout
-
-\begin_layout Plain Layout
-
-						config::matrixPositions[i],
-\end_layout
-
-\begin_layout Plain Layout
-
-						config::matrixPositions[j], 
-\end_layout
-
-\begin_layout Plain Layout
-
-						true ); 								
-\end_layout
-
-\begin_layout Plain Layout
-
-				correlationMatrix[config::matrixPositions[i]][config::matrixPositions[j]]
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-								+= fmath::expd(config::diagonalAddition); 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			} 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			else{ 				
-\end_layout
-
-\begin_layout Plain Layout
-
-				correlationMap[points[i].getType()][points[j].getType()]->getAllCorrelation(
-\end_layout
-
-\begin_layout Plain Layout
-
-					points[i],
-\end_layout
-
-\begin_layout Plain Layout
-
-					points[j], 
-\end_layout
-
-\begin_layout Plain Layout
-
-					correlationMatrix, 
-\end_layout
-
-\begin_layout Plain Layout
-
-					0.0,
-\end_layout
-
-\begin_layout Plain Layout
-
-					config::matrixPositions[i],
-\end_layout
-
-\begin_layout Plain Layout
-
-					config::matrixPositions[j],
-\end_layout
-
-\begin_layout Plain Layout
-
-					false); 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			} 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		} 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\end_layout
-
-\begin_layout Plain Layout
-
-	#pragma omp parallel for 
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(int i=correlationMatrix.getColumnSize()-1; i>0; i--){ 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(int j=i-1; j>=0; j--){ 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			correlationMatrix[i][j] = correlationMatrix[j][i]; 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		} 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	} 
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Funktion createCorrelationMatrix hat genau drei Parameter.
- Der erste Parameter ist eine Referenz auf die eigentliche Korrelationsmatrix.
- Um unnötiges Kopieren zu vermeiden, wird eine Referenz verwendet, weil
- die Daten direkt in die Matrix geschrieben werden sollen.
- Da die Matrizen sehr groß werden können (20000x20000 sind keine Seltenheit)
- und während des Trainings sehr häufig gebildet werden müssen, können solche
- Überlegungen erhebliche Unterschiede in der Geschwindigkeit ausmachen.
-\end_layout
-
-\begin_layout Plain Layout
-Der Parameter Points vom Typ Point (Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLPoint"
-
-\end_inset
-
-) ist ein eindimensionaler Vektor, welcher alle Member/Stützstellen beinhaltet.
- 
-\end_layout
-
-\begin_layout Plain Layout
-CorrelationMap ist eine zweidimensionale Hashtabelle, die beiden Indizes
- sind Integer und beschreiben die Typen (vgl.
- Attribut type aus Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLPoint"
-
-\end_inset
-
-) der entsprechenden Stützstellen.
- Durch diese Hashtabelle ist es möglich, jedem Paar von Stützstellen verschieden
-e Korrelationsfunktionen zuzuordnen.
- Dies ist bei der weiteren Entwicklung des Verfahrens von großer Bedeutung,
- insbesondere für Variable Fidelity Models (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Andere-Kriging-Verfahren"
-
-\end_inset
-
-).
- Der Wert der Hashtabelle ist vom Typ CorrelationFunction (siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
-), dieser kann also durch jeden Subtyp der abstrakten Klasse CorrelationFunction
- überladen werden.
- Eine solche correlationMap könnte z.B.
- folgendermaßen aufgebaut sein:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Typ1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Typ2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-CorrelationFunction
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-correlationFunctionGauss
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-correlationFunctionSpline
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-correlationFunctionGauss
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Würde man mit dieser correlationMap z.B.
- folgenden Aufruf machen, so würde man die Methode getAllCorrelation des
- SubTyps CorrelationFunctionGauss (siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
-) aufrufen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\small},language={C++},tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-correlationMap[0][0]->getAllCorrelation(...);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Genau diesen Aufruf findet man in den Zeilen 13 und 25.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In Zeile 7 und 8 wird eine neue Matrix vom Template Typ T allokiert und
- der Parameter correlationMatrix damit überschrieben.
- Der Wert config::numSamplesDerivatives beschreibt hier die Anzahl der Stützstel
-len plus die Anzahl der gegebenen partiellen Ableitungen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In den Zeilen 9 bis 11 wird eine doppelte for Schleife über alle Stützstellen
- gestartet, um die Korrelationen von allen Stützstellen zu allen Stützstellen
- zu berechnen.
- Das 
-\begin_inset Quotes eld
-\end_inset
-
-#pragma omp parallel for
-\begin_inset Quotes erd
-\end_inset
-
- ist eine einfache Schleifenparallelisierung von OpenMP.
- Die Indizes werden automatisch in Bereiche eingeteilt und dann in einzelnen
- Threads abgearbeitet.
- Die Anzahl der maximalen Threads wird direkt zu Anfang über ein Parameterfile
- festgelegt.
- Der zusätzliche Befehl 
-\begin_inset Quotes eld
-\end_inset
-
-schedule(dynamic)
-\begin_inset Quotes erd
-\end_inset
-
- gibt an, wie der OpenMP Scheduler die Arbeit auf die Threads verteilt,
- es gibt prinzipiell drei Varianten:
-\end_layout
-
-\begin_layout Itemize
-
-\shape italic
-static
-\shape default
-: Jede Teilschleife besitzt eine feste Anzahl von Durchläufen, diese Durchläufe
- werden dann reihum an die Threads verteilt.
- Dieses Vorgehen ist, bei gleicher Lastverteilung der Teilschleifen optimal.
- Im Normalfall gibt es soviele Teilschleifen wie Anzahl Threads.
-\end_layout
-
-\begin_layout Itemize
-
-\shape italic
-dynamic
-\shape default
-: Hier werden die Teilschleifen dynamisch an die Threads verteilt, um das
- zu erreichen, werden die Teilschleifen kleiner gewählt als z.B.
- bei static.
- Dies ist sinnvoll, wenn die Last stark variiert, allerdings ist der Verwaltungs
-aufwand für die OpenMP Laufzeitumgebung höher.
-\end_layout
-
-\begin_layout Itemize
-
-\shape italic
-guided
-\shape default
-: Bei diesem Fall werden die Teilschleifen während der Laufzeit exponentiell
- von groß zu klein verändert.
- Dies ist ein Spezialfall von 
-\shape italic
-dynamic 
-\shape default
-und reduziert den Verwaltungsaufwand.
-\end_layout
-
-\begin_layout Plain Layout
-Welche der drei Varianten für einen Fall geeignet ist, lässt sich oftmals
- nur durch Testen gut bestimmen.
- Bei der Belegung der Korrelationsmatrix scheint zuerst die Option 
-\shape italic
-static
-\shape default
- sinnvoller zu sein, da der Aufwand für einen Schleifendurchlauf in etwa
- gleich bleibt.
- Allerdings war die Option 
-\shape italic
-dynamic
-\shape default
- in Tests ca.
- 10
-\begin_inset space ~
-\end_inset
-
-% schneller.
- Das könnte durch interne Compiler Optimierungen und die Verwendung des
- If- Else Blocks innerhalb der Schleife zu erklären sein.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Der If- Else Block ist dazu da, um zwischen der Berechnung der Korrelation
- zwischen zwei gleichen Stützpunkten und der Berechnung der Korrelation
- zwischen zwei verschiedenen Punkten zu unterscheiden.
- Dies ist sinnvoll, da sich die Korrelation zwischen zwei gleichen Stützpunkten
- durch Vereinfachungen der mathematischen Formulierung deutlich schneller
- berechnen lässt.
- Eine solche Vereinfachung wird im nächsten Abschnitt genauer beschrieben.
- Zusätzlich kann auf die Diagonalelemente der Matrix, ein Diagonalaufschlag
- addiert werden (Zeile 21-22).
- Dies wird verwendet um die Matrix für die Invertierung numerisch stabiler
- zu machen, in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
- wird der Diagonalaufschlag genauer erläutert.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Innerhalb des If- Else Blocks wird die Methode getAllCorrelation der entsprechen
-den Subklasse von CorrelationFunction (siehe Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
-) aufgerufen.
- Zwei wichtige Parameter dieses Methodenaufrufs sind 
-\begin_inset Quotes eld
-\end_inset
-
-
-\shape italic
-config::matrixPositions[i]
-\shape default
-
-\begin_inset Quotes erd
-\end_inset
-
- und 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Quotes eld
-\end_inset
-
-
-\shape italic
-config::matrixPositions[j]
-\shape default
-
-\begin_inset Quotes erd
-\end_inset
-
-, diese Arrays enthalten eine Tabelle, welche zu einer gegebenen Membernummer
- die entsprechende Position der Member in der Korrelationsmatrix zurückgeben
- soll.
- Da ein Member in der Korrelationsmatrix durch eine kleinere Submatrix beschrieb
-en wird, stellt die Position immer die erste Zeile bzw.
- Spalte der Submatrix in der Korrelationsmatrix dar.
- Die Methode getAllCorrelation wird im folgenden Abschnitt genauer erläutert.
-\end_layout
-
-\begin_layout Plain Layout
-Da die Korrelationsmatrix symmetrisch ist, wird nur die rechte obere Dreiecksmat
-rix belegt und in den Zeilen 37-43 wird diese dann auf die linke untere
- kopiert.
- Dadurch wird die Geschwindigkeit des Algorithmus nochmals erhöht.
-\end_layout
-
-\begin_layout Subsection*
-Die Methode getAllCorrelation
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Die-Methode-getAllCorrelation"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Methode getAllCorrelation, welche in Subklassen des Typs CorrelationFunction
- (siehe Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
-) definiert ist, soll alle Korrelationswerte zwischen zwei Stützstellen
- berechnen.
- Diese werden in die Korrelationsmatrix eingetragen und von der Funktion
- createCorrelationMatrix (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Die-Methode-CreateCorrelationMat"
-
-\end_inset
-
-) aufgerufen.
- Das folgende Listing zeigt den Originalcode in C++.
- 
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},language={C++},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-template <class T,class B>
-\end_layout
-
-\begin_layout Plain Layout
-
-inline void CorrelationFunctionGauss<T,B>::getAllCorrelation(
-\end_layout
-
-\begin_layout Plain Layout
-
-		Point<T,B> &point1,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		Point<T,B> &point2,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		T &corrMatrix,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		B diag,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		size_t iMatrix,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		size_t jMatrix,
-\end_layout
-
-\begin_layout Plain Layout
-
- 		bool equalMember){
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	typename map<size_t, B>::iterator derIt;
-\end_layout
-
-\begin_layout Plain Layout
-
-	typename map<size_t, B>::iterator derItCol;
-\end_layout
-
-\begin_layout Plain Layout
-
-	size_t freevarNr=0, freevarNr2=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(equalMember){
-\end_layout
-
-\begin_layout Plain Layout
-
-		 corrMatrix[iMatrix][jMatrix]= 1.0;
-\end_layout
-
-\begin_layout Plain Layout
-
-		 for(size_t i=0; i<point2.getNumPartDerivatives();i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-			freevarNr=i;
-\end_layout
-
-\begin_layout Plain Layout
-
-			corrMatrix[iMatrix+i+1][jMatrix+i+1] = fmath::expd(thetas[0][freevarNr]);
-\end_layout
-
-\begin_layout Plain Layout
-
-		 }
-\end_layout
-
-\begin_layout Plain Layout
-
-	}else{
-\end_layout
-
-\begin_layout Plain Layout
-
-		corrMatrix[iMatrix][jMatrix] = calcSimpleGauss(point1, point2);
-\end_layout
-
-\begin_layout Plain Layout
-
-		size_t i=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-		size_t j=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(derItCol=point2.getAllPartDervsRef().begin();
-\end_layout
-
-\begin_layout Plain Layout
-
-					derItCol!=point2.getAllPartDervsRef().end();derItCol++){
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-			freevarNr=derItCol->first;
-\end_layout
-
-\begin_layout Plain Layout
-
-			corrMatrix[iMatrix][jMatrix+i+1] = calcGEKPartialDerivative(point1, point2,
-\end_layout
-
-\begin_layout Plain Layout
-
- 											 		corrMatrix[iMatrix][jMatrix], freevarNr);
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-			i++;
-\end_layout
-
-\begin_layout Plain Layout
-
-		} 		 	
-\end_layout
-
-\begin_layout Plain Layout
-
-		if(corrMatrix.getRowSize()>1){
-\end_layout
-
-\begin_layout Plain Layout
-
-			i=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-			for(derItCol=point1.getAllPartDervsRef().begin();
-\end_layout
-
-\begin_layout Plain Layout
-
-						derItCol!=point1.getAllPartDervsRef().end();derItCol++){
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-				freevarNr=derItCol->first;
-\end_layout
-
-\begin_layout Plain Layout
-
-				corrMatrix[iMatrix+i+1][jMatrix] = -calcGEKPartialDerivative(point1,
- point2,
-\end_layout
-
-\begin_layout Plain Layout
-
-														corrMatrix[iMatrix][jMatrix], freevarNr);
-\end_layout
-
-\begin_layout Plain Layout
-
-				i++; 
-\end_layout
-
-\begin_layout Plain Layout
-
-			}
-\end_layout
-
-\begin_layout Plain Layout
-
-			i=0; 			 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			for(derItCol=point1.getAllPartDervsRef().begin();
-\end_layout
-
-\begin_layout Plain Layout
-
- 					derItCol!=point1.getAllPartDervsRef().end(); derItCol++){
-\end_layout
-
-\begin_layout Plain Layout
-
-				freevarNr=derItCol->first;
-\end_layout
-
-\begin_layout Plain Layout
-
-				j=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-				for(derIt=point2.getAllPartDervsRef().begin();
-\end_layout
-
-\begin_layout Plain Layout
-
-					derIt!=point2.getAllPartDervsRef().end();derIt++){ 					
-\end_layout
-
-\begin_layout Plain Layout
-
-							
-\end_layout
-
-\begin_layout Plain Layout
-
-					freevarNr2 = derIt->first;
-\end_layout
-
-\begin_layout Plain Layout
-
-					if(i==j) 						 						
-\end_layout
-
-\begin_layout Plain Layout
-
-						corrMatrix[iMatrix+i+1][jMatrix+j+1]=calcGEKPartialDerivative2(point1,
-\end_layout
-
-\begin_layout Plain Layout
-
-																point2,
-\end_layout
-
-\begin_layout Plain Layout
-
-																corrMatrix[iMatrix][jMatrix], 
-\end_layout
-
-\begin_layout Plain Layout
-
-																freevarNr);
-\end_layout
-
-\begin_layout Plain Layout
-
-					else
-\end_layout
-
-\begin_layout Plain Layout
-
-						corrMatrix[iMatrix+i+1][jMatrix+j+1] = calcGEKPartialDerivative2(point1,
-\end_layout
-
-\begin_layout Plain Layout
-
-																	point2,
-\end_layout
-
-\begin_layout Plain Layout
-
-																	corrMatrix[iMatrix][jMatrix],
-\end_layout
-
-\begin_layout Plain Layout
-
-																	freevarNr,   
-\end_layout
-
-\begin_layout Plain Layout
-
-																	freevarNr2);
-\end_layout
-
-\begin_layout Plain Layout
-
-					j++;
-\end_layout
-
-\begin_layout Plain Layout
-
-				}
-\end_layout
-
-\begin_layout Plain Layout
-
-				i++;
-\end_layout
-
-\begin_layout Plain Layout
-
-			}
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-} 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Methode wird mit sieben Parametern aufgerufen.
- Die ersten beiden Parameter sind Referenzen auf zwei Objekte vom Typ Point.
- Zwischen diesen beiden Stützstellen sollen alle entsprechenden Korrelationswert
-e berechnet werden.
- Der nächste Parameter corrMatrix ist eine Referenz auf die Korrelationsmatrix,
- in welche die entsprechenden Korrelationswerte geschrieben werden sollen.
- Wie bereits im vorherigen Abschnitt ist der Parameter diag, ein Diagonalaufschl
-ag für die Korrelationsmatrix.
- Dieser wird auf die Hauptdiagonale der Matrix addiert und kann für die
- numerische Stabilität der Invertierung von Bedeutung sein, in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
- wird der Diagonalaufschlag genauer erläutert.
- Die nächsten beiden Parameter iMatrix und jMatrix geben an, bei welchen
- Indizes in der Korrelationsmatrix die neuen Korrelationen eingefügt werden
- sollen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Der letzte Parameter equalMember ist ein bool'scher Wert und gibt an, ob
- es sich bei den beiden Stützstellen um dieselben Punkte handelt.
- Ist dies der Fall, kann die Berechnung der Korrelationswerte stark vereinfacht
- werden.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In den Zeilen 11-13 werden einige Variablen deklariert.
- Insbesondere zwei Iteratoren, welche zum iterieren über die partiellen
- Ableitungen der beiden Stützstellen dienen.
- Dies ist nötig, da die partiellen Ableitungen als map gespeichert sind
- und eine map in C++ nur über Iteratoren durchlaufen werden kann.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Die Zeilen 14-19 werden ausgeführt, wenn die beiden Stützstellen identisch
- sind.
- Dann vereinfachen sich die Korrelationswerte für eine Gauss Korrelation
- wie sie in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SoftwaretechnKorrelationsfunktionen"
-
-\end_inset
-
- beschrieben wurde zu:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-c\left(\vec{x}_{1},\vec{x}_{1}\right)=1
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{p}}=0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial c\left(\vec{x}_{1},\vec{x}_{1}\right)}{\partial x_{1}^{p}\partial x_{1}^{j}}=\begin{cases}
-0 & p\neq j\\
-e^{\theta_{k}} & p=j
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Übertragen auf das Beispiel aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:FinalCorrMat"
-
-\end_inset
-
-, vereinfacht sich die entsprechende Korrelationsmatrix dann zu:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-R=\left[\begin{array}{c|cccc}
- & Z\left(\vec{x}_{1}\right) & \frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & Z\left(\vec{x}_{2}\right) & \frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}}\\
-\hline Z\left(\vec{x}_{1}\right) & 1 & 0 & c\left(\vec{x}_{1},\vec{x}_{2}\right) & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{2}^{1}}\\
-\frac{\partial Z\left(\vec{x}_{1}\right)}{\partial x_{1}^{1}} & 0 & e^{\theta_{k}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}\\
-Z\left(\vec{x}_{2}\right) & c\left(\vec{x}_{2},\vec{x}_{1}\right) & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{1}^{1}} & 1 & 0\\
-\frac{\partial Z\left(\vec{x}_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial c\left(\vec{x}_{2},\vec{x}_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & 0 & e^{\theta_{k}}
-\end{array}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Diese Vereinfachung gilt nur für die Gauss Korrelationsfunktion, für andere
- Korrelationsfunktionen ergeben sich aber ähnliche Vereinfachungen.
-\end_layout
-
-\begin_layout Plain Layout
-Handelt es sich bei den beiden Stützstellen allerdings nicht um dieselben,
- wird der else-Fall ab Zeile 21 aufgerufen.
- In dieser Zeile wird dann der einfache Korrelationswert der Matrix gebildet
- und in die gesamte Korrelationsmatrix eingetragen.
- Der Code für die private Methode calcSimpleGauss ist identisch mit dem
- Code für die Gauss Korrelationsfunktion aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:SoftwaretechnKorrelationsfunktionen"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In den Zeilen 24-32 wird die Ableitung der Korrelationsfunktion zwischen
- den Stützstellen gebildet, abgeleitet wird nach den Parametern der zweiten
- Stützstelle.
- Die Schleife geht alle freien Variablen durch, an denen es eine partielle
- Ableitung gibt.
- Die eigentlichen Korrelationswerte werden in der privaten Methode calcGEKPartia
-lDerivative berechnet und danach in die gesamte Korrelationsmatrix geschrieben,
- in der oberen Beispielmatrix würde das dem Wert 
-\begin_inset Formula $\frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{2}^{1}}$
-\end_inset
-
- aus der rechten oberen Ecke entsprechen, da es in dem Beispiel nur eine
- freie Variable gibt.
- Der Methode calcGEKPartialDerivative werden anschließend die beide Punkte
- übergeben.
- Der genaue Funktionsablauf soll hier aus Platzgründen nicht weiter aufgeführt
- werden.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Die Abfrage in Zeile 33 prüft, ob es sich bei der Korrelationsmatrix um
- einen Vektor handelt.
- Ist dies der Fall, sind nachfolgenden Berechnungen nicht notwendig.
-\end_layout
-
-\begin_layout Plain Layout
-In den Zeilen 35-42 wird wie bereits in den Zeilen 24-32 die Ableitung der
- Korrelationsfunktion berechnet.
- In diesem Fall allerdings für die erste Stützstelle, dies würde in der
- Beispielmatrix dem Wert 
-\begin_inset Formula $\frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}}$
-\end_inset
-
- entsprechen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In den Zeilen 44-66 werden die zweiten Ableitungen der Korrelationsfunktion
- gebildet.
- Dafür muss über die freien Variablen von beiden Stützstellen iteriert werden,
- an denen sich partielle Ableitungen befinden.
- Die Berechnung der Ableitungen findet in der privaten Methode calcGEKpartialDer
-ivative2 statt.
- Es gibt zwei verschiedene Implementationen der Methode, einmal eine für
- den Fall, dass die freien Variablen, nach denen abgeleitet wird für beide
- Punkte gleich sind und einmal für den Fall, dass sich diese unterscheiden.
- In der Beispielmatrix würde die Ableitung dem Wert 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
-\begin_inset Formula $\frac{\partial c\left(\vec{x}_{1},\vec{x}_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}$
-\end_inset
-
-
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang ngerman
- entsprechen.
- Zudem besitzen die beiden Punkte jeweils nur eine freie Variable und auch
- nur jeweils eine partielle Ableitung.
- Daher ist die Nummer der freien Variablen nach denen abgeleitet wird, in
- beiden Fällen eins und damit würde die entsprechende Implementation aus
- den Zeilen 52-56 aufgerufen werden.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Diese Methode stellt einen recht allgemeingültigen Algorithmus auf, welcher
- alle notwendigen Korrelationswerte zwischen zwei Stützstellen in die korrekten
- Positionen einer Korrelationsmatrix einfügt.
- Im UML Diagramm 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLCorrelation"
-
-\end_inset
-
- wurde zusätzlich zur Methode getAllCorrelation eine Methode getAllCorrelationPa
-rtialDer gelistet.
- Diese soll die Ableitungen der Korrelationsfunktion nach den Hyperparametern
- zurückgeben.
- Dies ist für das Training, welches in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:MinimierungsverfahrenTraining"
-
-\end_inset
-
- erklärt wird, wichtig.
- Die eigentliche Methode ist der Methode getAllCorrelation allerdings relativ
- ähnlich und soll daher nicht näher dargestellt werden.
- 
-\end_layout
-
-\begin_layout Subsection
-Bestimmung der Korrelationen bei Verwendung der Kovarianzmatrix und Co-Kriging
-\end_layout
-
-\begin_layout Plain Layout
-Für einige Anwendungen ist es notwendig die reale Korrelation zwischen zwei
- beliebigen Samples zu kennen.
- Im Co-Kriging hat man natürlich das Problem, dass diese erst einmal unbekannt
- sind, da mit der Kovarianzmatrix 
-\end_layout
-
-\begin_layout Subsection
-Bestimmung der Hyperparameter durch die Maximum Likelihood Methode
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Likelihood-1"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Wie in den vorherigen Kapiteln gezeigt wurde, hängen die einzelnen Korrelationsw
-erte der Korrelationsmatrix maßgeblich von den verwendeten Hyperparametern
- ab und damit die Güte des Kriging Modells.
- Ziel eines Kriging Trainings ist es daher, die optimalen Hyperparameter
- zu finden.
- Um dies zu erreichen, wird die Maximum Likelihood Methode verwendet.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Im ersten Teil des Kapitels soll die Maximum Likelihood Methode anhand eines
- simplen Beispiels erklärt werden.
- Im Anschluss daran wird die Umsetzung dieser Methode für das hier verwendete
- Kriging Modell gezeigt.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Der letzte Abschnitt behandelt dann die softwaretechnische Umsetzung dieser
- Methode.
-\end_layout
-
-\begin_layout Subsection
-Likelihood
-\end_layout
-
-\begin_layout Plain Layout
-Um den Likelihood Term und seine partiellen Ableitungen zu bilden, wird
- eine eigene Klasse vorgesehen.
- Da mehrere Likelihood Funktionen denkbar wären, wird eine abstrakte Klasse
- namens DensityFunction eingeführt.
- Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLDensity"
-
-\end_inset
-
- zeigt die Umsetzung der Klasse als UML Diagramm, Getter und Setter Methoden
- wurden hier aus Platzgründen ausgelassen.
- Bisher ist nur die Likelihood Funktion umgesetzt (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Maximum-Likelihood-für"
-
-\end_inset
-
-).
- Der Likelihood Term (Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VereinfachterLikelihoodTerm"
-
-\end_inset
-
-) wird in der Methode calcDensity() berechnet und die entsprechende Ableitung
- (Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AbleitungLikelihood"
-
-\end_inset
-
-) in calcDensityDerivative().
- Denkbar wären allerdings auch andere Likelihood Funktionen, welche auf
- anderen Verteilungen basieren.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Ziel der Klassenstruktur ist es, die beiden Gleichungen 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VereinfachterLikelihoodTerm"
-
-\end_inset
-
- und 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:AbleitungLikelihood"
-
-\end_inset
-
- so effizient wie möglich zu lösen.
- Die dort verwendeten Matrizen sind in der Regel sehr groß und voll besetzt,
- was eine effiziente Berechnung sehr wichtig macht.
- Allerdings sind die Matrizen symmetrisch und positiv definit, was wiederum
- einige Optimierungen zulässt.
- Zur Vereinfachung werden einige Terme der Gleichungen zusammengefasst:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align}
-\vec{R}_{f} & =\mathbf{R}^{-1}\overrightarrow{F}\label{eq:Rf}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset Formula 
-\begin{align}
-f_{rf} & =\vec{F}^{T}\vec{R}_{f}\label{eq:frf}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset Formula 
-\begin{align}
-\overrightarrow{e} & =(\vec{y}_{s}-\beta*\overrightarrow{F})\label{eq:e}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang english
-\begin_inset Formula 
-\begin{equation}
-\overrightarrow{d}=\mathbf{R}^{-1}\overrightarrow{e}\label{eq:dvec}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Terme werden in diese Form auch in der entsprechenden Klasse (ReducedNormalD
-istribution) einmal berechnet und dann gespeichert.
- Da diese sehr häufig wiederverwendet werden, muss man diese Termen nur
- einmal berechnen und eine Änderung ist nur notwendig, wenn die Hyperparameter
- verändert wurden.
- Über die Attribute corrMatUpdate und vecUpdate wird festgelegt, ob die
- Matrizen und Vektoren neu berechnet werden müssen oder nicht.
- Sie werden nur dann neu berechnet, wenn die Hyperparameter verändert wurden.
- Da die Hyperparameter nur über Getter und Setter Methoden zugänglich sind,
- kann man bei jedem Setter Zugriff auf die Hyperparameter die Attribute
- corrMatUpdate und vecUpdate auf true setzen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Viele der Attributnamen entsprechen den hier verwendeten Bezeichnungen für
- die Vektoren/Matrizen, z.B.
- der Vektor 
-\begin_inset Formula $\vec{R}_{f}$
-\end_inset
-
- entspricht dem Attribut rf.
- Das Attribut logDeterminantR entspricht dem Logarithmus der Determinante
- der Korrelationsmatrix 
-\begin_inset Formula $\log\left(\det(\mathbf{R})\right)$
-\end_inset
-
-.
- Aufgrund dieser Ähnlichkeit werden daher nicht alle einzeln aufgeführt.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Wie bereits in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:MatrixKlasse"
-
-\end_inset
-
- beschrieben, lässt sich die Determinante durch eine Cholesky Zerlegung
- sehr effizient berechnen.
- Insbesondere da die Zerlegung ebenfalls für die Invertierung der Matrix
- sinnvoll ist.
- Die Korrelationsmatrix wird in der Methode createAndInvertCorrelmat aufgestellt
-, zerlegt und dann invertiert.
- Die zerlegte Matrix wird in decomposedMatrix gespeichert, die invertierte
- Matrix in inverseCorrMatrix.
- Die benötigten Vektoren werden in der Methode calcVectors() berechnet und
- in den Attributen der Klasse gespeichert.
- Die Methoden predict() und predictVariance() berechnen dann unter Vorgabe
- eines Ortsvektors eine Schätzung der gesuchten Funktion 
-\begin_inset Formula $y^{*}\left(\vec{x}_{0}\right)$
-\end_inset
-
- (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:GewichtetSumme"
-
-\end_inset
-
-) und der Varianz (Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KrigingVarianzSchätzung"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-Mittwoch
-\begin_inset Graphics
-	filename ../images/UMLDensityFunction.PNG
-	lyxscale 50
-	scale 40
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UMLDensity"
-
-\end_inset
-
-UML Diagramm der abstrakten Superklasse DensityFunction und der Subklasse
- ReducedNormalDistribution
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Schritte für die Berechnung eines Likelihood Terms:
-\end_layout
-
-\begin_layout Plain Layout
-In diesem Abschnitt soll die Methode zur Berechnung des Likelihood Terms
- (calcDensity()) nochmals genauer erklärt werden.
- Das folgende Listing zeigt die Methode im Originalcode:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},numbers=left,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-template <class T, class B> 
-\end_layout
-
-\begin_layout Plain Layout
-
-B ReducedNormalDistribution<T,B>::calcDensity(){
-\end_layout
-
-\begin_layout Plain Layout
-
-	try{ 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		if(this->corrMatUpdate){
-\end_layout
-
-\begin_layout Plain Layout
-
-			this->createAndInvertCorrelMat(); 			
-\end_layout
-
-\begin_layout Plain Layout
-
-			this->corrMatUpdate = false; 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		} 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		if(this->vecUpdate){
-\end_layout
-
-\begin_layout Plain Layout
-
-			this->calcVectors();
-\end_layout
-
-\begin_layout Plain Layout
-
-			this->vecUpdate = false;
-\end_layout
-
-\begin_layout Plain Layout
-
-		} 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	} 
-\end_layout
-
-\begin_layout Plain Layout
-
-	catch(ChodecNotPosDef& e){
-\end_layout
-
-\begin_layout Plain Layout
-
-		cout <<"calcDensity() MatrixExceptions:"<<e.what()<<endl;
-\end_layout
-
-\begin_layout Plain Layout
-
-		config::diagonalAddition = log(2.0*exp(config::diagonalAddition)); 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		
-\end_layout
-
-\begin_layout Plain Layout
-
-		this->getCorrelationMatrixRef().saveAsAscii("corrMatFailed"); 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		this->getInverseCorrelationMatrixRef().saveAsAscii("corrMatInverseFailed");
- 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		return  (config::numSamples*1000.0); 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	} 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	catch(...){ 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		cout <<"calcDensity() Exception"<<endl; 		
-\end_layout
-
-\begin_layout Plain Layout
-
-		cout <<"--------------------------------"<<endl;
-\end_layout
-
-\begin_layout Plain Layout
-
-		return  (config::numSamples*1000.0); 	
-\end_layout
-
-\begin_layout Plain Layout
-
-	}  		
-\end_layout
-
-\begin_layout Plain Layout
-
-	return 0.5*(log(sSqr)*config::numSamples + logDeterminantR + config::numSamples
- );
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-In Zeile 4 wird zuerst überprüft, ob die Korrelationsmatrix neu aufgestellt
- werden muss oder nicht.
- Dies geschieht, wie bereits beschrieben, mit dem Attribut corrMatUpdate-
- Ist dieses true, dann wird die Korrelationsmatrix wie in Zeile 5 über die
- Methode createAndInvertCorrMat() erzeugt, eine Cholesky Zerlegung durchgeführt
- und dann invertiert.
- Nach erfolgreichem Aufruf der Methode wird das Attribut corrMatUpdate wieder
- auf false gesetzt.
- Ansonsten werden die Matrizen im Puffer verwendet, also correlationMatrix,
- decomposedMatrix und inverseCorrMat.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Auf dieselbe Weise wird mit den Vektoren (Gleichungen 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Rf"
-
-\end_inset
-
--
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:dvec"
-
-\end_inset
-
-) in den Zeilen 8-10 verfahren.
- Diese werden durch die Methode calcVectors erzeugt und dann in den Attributen
- der Klasse gespeichert.
- Durch die verwendete Matrix Klasse ist die Berechnung der einzelnen Vektoren/Ma
-trizen sehr simpel.
- Das folgende Listing zeigt dies exemplarisch an der Methode zur Erzeugung
- von Vektor 
-\begin_inset Formula $\vec{d}$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\scriptsize},tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-template <class T, class B>
-\end_layout
-
-\begin_layout Plain Layout
-
-void ReducedNormalDistribution<T,B>::calcDVec(){
-\end_layout
-
-\begin_layout Plain Layout
-
-	dVec = inverseCorrelationMatrix.matrixMultiplicationTranspose(eVec); 	
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Die Methode ist Mitglied der Klasse ReducedNormalDistribution (siehe Abbildung
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:UMLDensity"
-
-\end_inset
-
-) und wird durch die Methode calcVectors() aufgerufen.
- Das Attribut inverseCorrelationMatrix ist vom Typ Matrix und beinhaltet
- die inverse Korrelationsmatrix.
- Diese wird mit dem transponierten Vektor 
-\lang english
-
-\begin_inset Formula $\overrightarrow{e}=(\vec{y}_{s}-\beta*\overrightarrow{F})$
-\end_inset
-
-
-\lang ngerman
- multipliziert, die Transposition wird innerhalb der Multiplikation vorgenommen.
- Die anderen Methoden zur Berechnung der Dichtefunktionswerte usw.
- beinhalten prinzipiell nur andere Matrix Operationen und werden daher nicht
- alle aufgeführt.
-\end_layout
-
-\begin_layout Plain Layout
-Die Methode InitAllThetas() der Klasse DensityFunction und deren Subklassen
- soll alle Hyperparameter mit möglichst sinnvollen Werten initialisieren.
- Die verschiedenen Intialisierungsmöglichkeiten und deren Umsetzung werden
- in Abschnitt 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
- noch genauer erläutert.
-\end_layout
-
-\begin_layout Plain Layout
-Da die Cholesky Zerlegung nur für positiv definite symmetrische Matrizen
- funktioniert, kann es bei der Zerlegung zu einer Exception vom Typ ChodecNotPos
-Def kommen, dies wird in Zeile 13 abgefangen.
- Ist diese Exception aufgetreten, wird der Diagonalaufschlag (siehe Kapitel
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
-) erhöht und ein sehr hoher Likelihood Wert zurückgegeben (Zeile 19), damit
- dieser in der Minimierung nicht mehr berücksichtigt wird.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Zusätzlich wird innerhalb der Matrix Klasse nach erfolgreicher Invertierung
- eine kurze Überprüfung der invertierten Matrix gemacht.
- Dies wird durch folgende Gleichung erreicht:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\textrm{Spur}\left(RR^{-1}\right) & =n
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Das Produkt der Inversen und der Korrelationsmatrix, ergibt die Einheitsmatrix.
- Da die Einheitsmatrix n Diagonalelemente besitzt, welche alle den Wert
- 1.0 haben, muss die Spur der multiplizierten Matrizen n ergeben.
- Gibt es numerische Ungenauigkeiten innerhalb der Invertierung, wird dieser
- Wert wahrscheinlich von n abweichen.
- Dies wird überprüft und bei Überschreitung eines Grenzwertes wird ebenfalls
- eine Exception geworfen.
- Diese wird mit allen anderen unbekannten Exceptions in Zeile 21 gefangen
- und als Reaktion ein sehr hoher Likelihood Wert zurückgegeben.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Nachdem alle Vektoren und Werte berechnet sind, wird in Zeile 26 die eigentliche
- Likelihood Funktion berechnet (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Likelihood Funktion"
-
-\end_inset
-
-) und zurückgegeben.
- 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -8441,153 +4979,28 @@ Rechts sind die 100 gefilterte Samples, von der ursprünglichen Verteilung
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "extendedchars=true"
+lstparams "basicstyle={\scriptsize},extendedchars=true"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-	// How many Samples and PartDers should be deleted
+// How many Samples and PartDers should be deleted
 \end_layout
 
 \begin_layout Plain Layout
 
-	if(sampleSize+partDerSize > cfg.maxMatrixSize){
+if(sampleSize+partDerSize > cfg.maxMatrixSize){
 \end_layout
 
 \begin_layout Plain Layout
 
-		if(sampleSize<=cfg.maxMatrixSize){
+	if(sampleSize<=cfg.maxMatrixSize){
 \end_layout
 
 \begin_layout Plain Layout
 
-			killPartDer = sampleSize+partDerSize - cfg.maxMatrixSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-		else{
-\end_layout
-
-\begin_layout Plain Layout
-
-			killPartDer = partDerSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-			killSamples = (sampleSize-cfg.maxMatrixSize);
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): NumSamples:"<<
-sampleSize<<" NumPartDer:"<<partDerSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): MaxMatrixSize:
- "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+partDerSize<<" killPartD
-er:"<<killPartDer<<" killSamples:"<<killSamples;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	size_t killedPartDer = 0;
-\end_layout
-
-\begin_layout Plain Layout
-
-	//Reduce PartDers
-\end_layout
-
-\begin_layout Plain Layout
-
-	while(killedPartDer < killPartDer){
-\end_layout
-
-\begin_layout Plain Layout
-
-		int randPoint = rand() % points.size();
-\end_layout
-
-\begin_layout Plain Layout
-
-		int randPartDer = rand() % cfg.numFreeVars;
-\end_layout
-
-\begin_layout Plain Layout
-
-		if(points[randPoint].getAllPartDervsRef().count(randPartDer) >0){
-\end_layout
-
-\begin_layout Plain Layout
-
-			points[randPoint].deletePartialDerivative(randPartDer);
-\end_layout
-
-\begin_layout Plain Layout
-
-			killedPartDer++;
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(cfg.initType != ultrarestart or init==true){
-\end_layout
-
-\begin_layout Plain Layout
-
-		//Reduce Samples
-\end_layout
-
-\begin_layout Plain Layout
-
-		vector<int> deleteIndices = global::createUniqueRandomIntegers(0, points.size()
-, killSamples);
+		killPartDer = sampleSize+partDerSize - cfg.maxMatrixSize;
 \end_layout
 
 \begin_layout Plain Layout
@@ -8602,120 +5015,12 @@ er:"<<killPartDer<<" killSamples:"<<killSamples;
 
 \begin_layout Plain Layout
 
-		typedef map< B, pair<int,int> > m;
+		killPartDer = partDerSize;
 \end_layout
 
 \begin_layout Plain Layout
 
-		m corrs;
-\end_layout
-
-\begin_layout Plain Layout
-
-		typename m::reverse_iterator it;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-		BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): UltraRestart
- filter nearest Samples";
-\end_layout
-
-\begin_layout Plain Layout
-
-		//#pragma omp parallel for schedule(dynamic)
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(size_t i=0; i<points.size(); i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-			for(size_t j=i+1; j<points.size(); j++){
-\end_layout
-
-\begin_layout Plain Layout
-
-				B corr = correlationMap(points[i].getType(),points[j].getType())->calcSimpleCo
-rrelation(points[j],points[i]);
-\end_layout
-
-\begin_layout Plain Layout
-
-				corrs[corr] =pair<int,int>(i,j);
-\end_layout
-
-\begin_layout Plain Layout
-
-			}
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<killSamples;
- it++) {
-\end_layout
-
-\begin_layout Plain Layout
-
-			bool firstInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
- it->second.first)==deleteIndices.end() ?  false:true;
-\end_layout
-
-\begin_layout Plain Layout
-
-			bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
- it->second.second)==deleteIndices.end() ?  false:true;
-\end_layout
-
-\begin_layout Plain Layout
-
-			// Keiner drin -> Random
-\end_layout
-
-\begin_layout Plain Layout
-
-			if(!(firstInside or secondInside))
-\end_layout
-
-\begin_layout Plain Layout
-
-				if(rand()%2==0)deleteIndices.push_back(it->second.first );
-\end_layout
-
-\begin_layout Plain Layout
-
-				else deleteIndices.push_back(it->second.second );
-\end_layout
-
-\begin_layout Plain Layout
-
-			else
-\end_layout
-
-\begin_layout Plain Layout
-
-				continue;
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
+		killSamples = (sampleSize-cfg.maxMatrixSize);
 \end_layout
 
 \begin_layout Plain Layout
@@ -8725,6 +5030,7 @@ rrelation(points[j],points[i]);
 
 \begin_layout Plain Layout
 
+}
 \end_layout
 
 \begin_layout Plain Layout
@@ -8733,16 +5039,110 @@ rrelation(points[j],points[i]);
 
 \begin_layout Plain Layout
 
-	std::sort (deleteIndices.rbegin(), deleteIndices.rend());
+size_t killedPartDer = 0;
 \end_layout
 
 \begin_layout Plain Layout
 
-	vector<Point<T,B> > newPoints;
+//Reduce PartDers
 \end_layout
 
 \begin_layout Plain Layout
 
+while(killedPartDer < killPartDer){
+\end_layout
+
+\begin_layout Plain Layout
+
+	int randPoint = rand() % points.size();
+\end_layout
+
+\begin_layout Plain Layout
+
+	int randPartDer = rand() % cfg.numFreeVars;
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(points[randPoint].getAllPartDervsRef().count(randPartDer) >0){
+\end_layout
+
+\begin_layout Plain Layout
+
+		points[randPoint].deletePartialDerivative(randPartDer);
+\end_layout
+
+\begin_layout Plain Layout
+
+		killedPartDer++;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+if(cfg.initType != ultrarestart or init==true){
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Reduce Samples
+\end_layout
+
+\begin_layout Plain Layout
+
+	vector<int> deleteIndices = global::createUniqueRandomIntegers(0, points.size(),
+ killSamples);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+else{
+\end_layout
+
+\begin_layout Plain Layout
+
+	typedef map< B, pair<int,int> > m;
+\end_layout
+
+\begin_layout Plain Layout
+
+	m corrs;
+\end_layout
+
+\begin_layout Plain Layout
+
+	typename m::reverse_iterator it;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	//#pragma omp parallel for schedule(dynamic)
 \end_layout
 
 \begin_layout Plain Layout
@@ -8752,8 +5152,71 @@ rrelation(points[j],points[i]);
 
 \begin_layout Plain Layout
 
-		if(std::find(deleteIndices.begin(), deleteIndices.end(), (int)i) != deleteIndice
-s.end())
+		for(size_t j=i+1; j<points.size(); j++){
+\end_layout
+
+\begin_layout Plain Layout
+
+			B corr = correlationMap(points[i].getType(),points[j].getType())->calcSimpleCor
+relation(points[j],points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+			corrs[corr] =pair<int,int>(i,j);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<killSamples;
+ it++) {
+\end_layout
+
+\begin_layout Plain Layout
+
+		bool firstInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.first)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+		bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
+ it->second.second)==deleteIndices.end() ?  false:true;
+\end_layout
+
+\begin_layout Plain Layout
+
+		// Keiner drin -> Random
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(!(firstInside or secondInside))
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(rand()%2==0)deleteIndices.push_back(it->second.first );
+\end_layout
+
+\begin_layout Plain Layout
+
+			else deleteIndices.push_back(it->second.second );
+\end_layout
+
+\begin_layout Plain Layout
+
+		else
 \end_layout
 
 \begin_layout Plain Layout
@@ -8763,11 +5226,6 @@ s.end())
 
 \begin_layout Plain Layout
 
-		newPoints.push_back(points[i]);
-\end_layout
-
-\begin_layout Plain Layout
-
 	}
 \end_layout
 
@@ -8777,42 +5235,7 @@ s.end())
 
 \begin_layout Plain Layout
 
-	points = newPoints;
-\end_layout
-
-\begin_layout Plain Layout
-
-	//Count Samples and PartDer
-\end_layout
-
-\begin_layout Plain Layout
-
-	sampleSize=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-	partDerSize=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(size_t i=0; i<points.size(); i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-		sampleSize++;
-\end_layout
-
-\begin_layout Plain Layout
-
-		partDerSize+=points[i].getNumPartDerivatives();
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
+}
 \end_layout
 
 \begin_layout Plain Layout
@@ -8821,15 +5244,16 @@ s.end())
 
 \begin_layout Plain Layout
 
-	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
- Delete: NumSamples:"<<sampleSize<<" NumPartDer:"<<partDerSize;
 \end_layout
 
 \begin_layout Plain Layout
 
-	BOOST_LOG_TRIVIAL(debug) <<"reducePointsAndCreateMatPositions(): after
- Delete: MaxMatrixSize: "<<cfg.maxMatrixSize<<" NumberSamples+Der="<<sampleSize+p
-artDerSize;
+std::sort (deleteIndices.rbegin(), deleteIndices.rend());
+\end_layout
+
+\begin_layout Plain Layout
+
+vector<Point<T,B> > newPoints;
 \end_layout
 
 \begin_layout Plain Layout
@@ -8838,17 +5262,91 @@ artDerSize;
 
 \begin_layout Plain Layout
 
-	cfg.numDerivatives = partDerSize;
+for(size_t i=0; i<points.size(); i++){
 \end_layout
 
 \begin_layout Plain Layout
 
-	cfg.numSamples	   = sampleSize;
+	if(std::find(deleteIndices.begin(), deleteIndices.end(), (int)i) != deleteIndices.
+end())
 \end_layout
 
 \begin_layout Plain Layout
 
-	cfg.numSamplesDerivatives = partDerSize+sampleSize;
+		continue;
+\end_layout
+
+\begin_layout Plain Layout
+
+	newPoints.push_back(points[i]);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+points = newPoints;
+\end_layout
+
+\begin_layout Plain Layout
+
+//Count Samples and PartDer
+\end_layout
+
+\begin_layout Plain Layout
+
+sampleSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+partDerSize=0;
+\end_layout
+
+\begin_layout Plain Layout
+
+for(size_t i=0; i<points.size(); i++){
+\end_layout
+
+\begin_layout Plain Layout
+
+	sampleSize++;
+\end_layout
+
+\begin_layout Plain Layout
+
+	partDerSize+=points[i].getNumPartDerivatives();
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+cfg.numDerivatives = partDerSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+cfg.numSamples	   = sampleSize;
+\end_layout
+
+\begin_layout Plain Layout
+
+cfg.numSamplesDerivatives = partDerSize+sampleSize;
 \end_layout
 
 \end_inset
@@ -8869,12 +5367,14 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_All.eps
+	scale 40
 
 \end_inset
 
 
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_Filtered.eps
+	scale 40
 
 \end_inset
 

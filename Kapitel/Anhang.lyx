@@ -513,6 +513,25 @@ name "sec:Differentiation-der-Likelihood-Funktion"
 
 \end_layout
 
+\begin_layout Paragraph*
+Behauptung:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Beweis:
+\end_layout
+
 \begin_layout Standard
 Da im Co-Kriging die Prozessvarianz 
 \begin_inset Formula $\sigma^{2}$
@@ -1192,15 +1211,15 @@ name "subsec:Kovarianz-zwischen-Vorhersagen"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1}),\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right)\\
- & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right]\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right]\right)\right)\\
- & \Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1}),\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2})\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1}),\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2})\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1}),Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2})\right)\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}(g_{1})w_{2j,m}(g_{2})cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}}),\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right)\\
+ & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
+ & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
+ & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right)\\
+ & \Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}}),\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1},\vec{x_{1}}),\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2},\vec{x_{2}})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1},\vec{x_{1}}),Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2},\vec{x_{2}})\right)\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}w_{1i,l}(g_{1},\vec{x_{1}})w_{2j,m}(g_{2},\vec{x_{2}})cov\left(Z_{i}\left(\vec{x_{l}}\right),Z_{j}\left(\vec{x_{m}}\right)\right)
 \end{align*}
 
 \end_inset
@@ -1222,7 +1241,7 @@ name "sec:AnhangKovarianz-zwischen-Vorhersagen"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}(g_{1})\mathbf{Cov}\vec{w}_{2}(g_{2})\label{eq:AnhangCovZweiVorhersagen}
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)=\vec{w}_{1}^{T}(g_{1},\vec{x_{1}})\mathbf{Cov}\vec{w}_{2}(g_{2},\vec{x_{2}})\label{eq:AnhangCovZweiVorhersagen}
 \end{equation}
 
 \end_inset
@@ -1237,7 +1256,7 @@ Die Gewichtsvektoren sehen folgendermaßen aus:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{w_{1}}(g_{1}) & =\mathbf{Cov}^{-1}\vec{c_{1}}(g_{1})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}(g_{1})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}
+\vec{w_{1}}(g_{1},\vec{x_{1}}) & =\mathbf{Cov}^{-1}\vec{c_{1}}(g_{1},\vec{x_{2}})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}(g_{1},\vec{x_{2}})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}
 \end{align*}
 
 \end_inset
@@ -1248,7 +1267,7 @@ Die Gewichtsvektoren sehen folgendermaßen aus:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{w_{2}}(g_{2}) & =\mathbf{Cov}^{-1}\vec{c_{2}}(g_{2})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}(g_{2})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}
+\vec{w_{2}}(g_{2},\vec{x_{2}}) & =\mathbf{Cov}^{-1}\vec{c_{2}}(g_{2},\vec{x_{2}})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{2}}(g_{2},\vec{x_{2}})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{2}}
 \end{align*}
 
 \end_inset
@@ -1258,11 +1277,11 @@ Die Gewichtsvektoren sehen folgendermaßen aus:
 
 \begin_layout Standard
 Weiterhin werden folgende Abkürzungen einführt: 
-\begin_inset Formula $\vec{c_{2}}(g_{2})=\vec{c_{2}}$
+\begin_inset Formula $\vec{c_{2}}(g_{2},\vec{x_{2}})=\vec{c_{2}}$
 \end_inset
 
  und 
-\begin_inset Formula $\vec{c_{1}}(g_{1})=\vec{c_{1}}$
+\begin_inset Formula $\vec{c_{1}}(g_{1},\vec{x_{1}})=\vec{c_{1}}$
 \end_inset
 
  
@@ -1282,7 +1301,7 @@ reference "eq:AnhangCovZweiVorhersagen"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{w}_{1}^{T}(g_{1})\mathbf{Cov}\vec{w}_{2}(g_{2})
+cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{k}^{*}\left(\vec{x_{2}}\right)\right)= & \vec{w}_{1}^{T}(g_{1},\vec{x_{1}})\mathbf{Cov}\vec{w}_{2}(g_{2},\vec{x_{2}})
 \end{align*}
 
 \end_inset
@@ -3796,6 +3815,124 @@ Original
 \begin_layout Standard
 In diesem Fall würden das lokale und globale Kriterium zu einer anderen
  Entscheidung führen.
+\end_layout
+
+\begin_layout Paragraph*
+\begin_inset Note Note
+status open
+
+\begin_layout Paragraph*
+Beispiel Gauss Korrelationsfunktion
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispiel-einer-Gauss-1"
+
+\end_inset
+
+ ist eine beispielhafte Kovarianzfunktion mit zwei verschiedenen 
+\begin_inset Formula $\theta$
+\end_inset
+
+ Werten zu sehen.
+ Die Varianz und der Nugget wurden 
+\begin_inset Formula $\sigma^{2}=1,\lambda=0$
+\end_inset
+
+ angenommen, dadurch sind Kovarianz und Korrelation in diesem Fall identisch.
+ Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
+ zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
+swert.
+ Die rote durchgezogene Kurve zeigt die Korrelationsfunktion mit 
+\begin_inset Formula $\theta=0.01$
+\end_inset
+
+ und die grüne gestrichelte Kurve 
+\begin_inset Formula $\theta=0.1$
+\end_inset
+
+.
+ Nimmt man eine Differenz der beiden Stützstellen von 
+\begin_inset Formula $\Delta x=5$
+\end_inset
+
+ an, dann ergeben sich für einen Hyperparameter von 
+\begin_inset Formula $\theta=0.01$
+\end_inset
+
+ ein Korrelationswert von 0.53 und für 
+\begin_inset Formula $\theta=0.1$
+\end_inset
+
+ ein Korrelationswert von 0.08.
+ In dem einen Fall wird also eine stärkere Abhängigkeit der beiden Stützstellen
+ angenommen und im anderen Fall eine schwächere Abhängigkeit.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+
+\shape italic
+Falls einer der Parameter keine Korrelation mit der zu trainierenden Funktion
+ besitzt, so kann das Trainingsverfahren auch sehr kleine Hyperparameter
+ wählen.
+ Dies führt praktisch dazu, dass dieser Parameter keinerlei Einfluss auf
+ die Vorhersage mehr hat.
+ Dies kann innerhalb einer Optimierung sehr wichtig sein, da so eine Art
+ von Dimensionsreduktion erreicht wird.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/CorrelatoinFunction.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispiel-einer-Gauss-1"
+
+\end_inset
+
+Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
+ zwei unterschiedlichen 
+\begin_inset Formula $\theta$
+\end_inset
+
+ Einstellungen und deren Einfluss auf den Korrelationswert 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

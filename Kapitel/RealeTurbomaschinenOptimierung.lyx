@@ -98,6 +98,14 @@ Alle Anwendungen die bisher gelaufen sind zeigen als Beiospiele und darauf
  fokussieren, welche Anwendungen sinn machen und welche nicht
 \end_layout
 
+\begin_layout Standard
+
+\shape italic
+\color magenta
+Weiterhin die vielen Anwendungsmöglichkeiten zeigen, wie Kopplung von mehreren
+ Ersatzmodellen oder die Restart Möglichkeiten !!!
+\end_layout
+
 \begin_layout Enumerate
 Lionel Akustik
 \end_layout
@@ -144,6 +152,10 @@ key "Zhang"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Enumerate
+RESTART Optionen
 \end_layout
 
 \begin_layout Standard
