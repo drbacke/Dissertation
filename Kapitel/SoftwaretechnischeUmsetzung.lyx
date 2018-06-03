@@ -2650,8 +2650,8 @@ name "sec:Initialisierung-der-Hyperparamet"
 \end_layout
 
 \begin_layout Standard
-Um einen Minimierungsalgorithmus starten zu können, ist eine geeignete Initialis
-ierung der Hyperparameter von großer Bedeutung.
+Um das Training starten zu können, ist eine geeignete Initialisierung der
+ Hyperparameter von großer Bedeutung.
  Diese kann die Konvergenz und auch die Stabilität der Minimierung stark
  beeinflussen.
  Innerhalb dieser Arbeit wurden mehrere Ansätze entwickelt, um eine geeignete
@@ -2659,9 +2659,17 @@ ierung der Hyperparameter von großer Bedeutung.
  
 \end_layout
 
+\begin_layout Subsubsection*
+Allgemeine Vorbemerkungen und Definitionen
+\end_layout
+
+\begin_layout Paragraph*
+Normalisierung der Daten
+\end_layout
+
 \begin_layout Standard
-Weiterhin sollte beachtet werden, dass die innerhalb dieser Arbeit entwickelte
- Software intern eine Normalisierung der Daten vornimmt.
+Die innerhalb dieser Arbeit entwickelte Software nimmt intern eine Normalisierun
+g der Daten vor.
  Dabei werden die Funktionswerte 
 \begin_inset Formula $\overrightarrow{y}_{s}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
@@ -2671,21 +2679,15 @@ Weiterhin sollte beachtet werden, dass die innerhalb dieser Arbeit entwickelte
 \end_inset
 
  standardnormalverteilt normalisiert.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 E[\overrightarrow{y}_{s}] & =0\nonumber \\
-var[\overrightarrow{y}_{s}] & =1
+var[\overrightarrow{y}_{s}] & =1\label{eq:NormalisierungYs}
 \end{align}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \begin{array}{c}
@@ -2696,10 +2698,6 @@ var[x_{i}]=1
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisie
 rungskonstanten, so müssen die Hyperparameter renormalisiert werden, in
  Anhang 
@@ -2713,7 +2711,262 @@ reference "sec:Renormalisierung-der-Hyperparame"
  
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Paragraph
+Aufteilung der Hyperparameter in Klassen
+\end_layout
+
+\begin_layout Standard
+Die in den vorhergehenden Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RegularisierungUndRauschen"
+
+\end_inset
+
+ beschriebenen Hyperparameter lassen sich in folgende Kategorien aufteilen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Formelzeichen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anzahl bei 
+\begin_inset Formula $s$
+\end_inset
+
+ Gütestufen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Korrelationslängen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{\theta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prozessvarianzen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Diagonalaufschläge
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Skalierungsfaktoren
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Kategorien von Hyperparametern 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Diese Einteilung ist für die Initialisierung sehr wichtig, da jede dieser
+ Gruppen anders initialisiert werden muss.
+ Für die Diagonalaufschläge 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ wird das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Regularisierung"
+
+\end_inset
+
+ beschriebene Verfahren verwendet und wird daher innerhalb dieses Abschnittes
+ nicht weiter beschrieben.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
 Abschätzung konstanter Hyperparameter 
 \begin_inset CommandInset label
 LatexCommand label
@@ -2735,23 +2988,34 @@ key "schmitz2013"
 
  beschrieben.
  Dafür wird für die Hyperparameter nur ein konstanter Wert verwendet und
- obere und untere Grenzen bestimmt.
- Danach werden zwischen diesen Grenzen einige Werte ausprobiert und der
- Likelihood Term berechnet und letztlich der Satz mit dem besten Likelihood-Term
- verwendet.
-\end_layout
+ obere und untere Grenzen 
+\begin_inset Formula $\theta_{min},\theta_{max}\in\mathbb{R}$
+\end_inset
 
-\begin_layout Standard
-Für die minimale Grenze der Hyperparameter eignet sich das in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
+ bestimmt.
+ 
+\begin_inset Formula 
+\begin{align}
+\theta & =\theta_{i}\forall i\in\{1,...,o\}\\
+\theta_{min} & \leq\theta\leq\theta_{max}\nonumber 
+\end{align}
 
 \end_inset
 
- vorgestellte Verfahren, für den Erwartungswert der Korrelationen sollte
- man hier einen hohen Wert wählen, bspw.
- 0.99 
+Danach werden zwischen diesen Grenzen einige Werte ausprobiert und der Likelihoo
+d Term berechnet und letztlich der Satz mit dem besten Likelihood-Term verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+Zur Bestimmung der minimalen und maximalen Grenze wird das in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schmitz2013"
+
+\end_inset
+
+ beschriebene Verfahren verwendet:
 \end_layout
 
 \begin_layout Standard
@@ -2766,26 +3030,6 @@ reference "sec:Initialisierung-der-Hyperparamet"
 \end_layout
 
 \begin_layout Standard
-Die maximale Grenze bedarf einer kleinen Änderung, da man in diesem Fall
- wissen möchte, wie groß ein dominierendes 
-\begin_inset Formula $\theta$
-\end_inset
-
- ist.
- Nimmt man einen geringen Erwartungswert für die Korrelation an von z.B.
- 0.01, so wäre der Schätzwert für ein dominierendes 
-\begin_inset Formula $\theta$
-\end_inset
-
- größer, als wenn man annimmt, alle 
-\begin_inset Formula $\theta$
-\end_inset
-
- seien gleich.
- Die Formel ändert sich dadurch zu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \log\left(-\log\left(0.01\right)\right) & =\theta_{max}\label{eq:ConstThetaSchatzung-1-1}
@@ -2796,11 +3040,11 @@ Die maximale Grenze bedarf einer kleinen Änderung, da man in diesem Fall
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 Zufällige Initialisierung der Hyperparameter
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:Reduktion-der-Stützstellen"
+name "subsec:RandomInit"
 
 \end_inset
 
@@ -2808,24 +3052,285 @@ name "subsec:Reduktion-der-Stützstellen"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Möglichkeit eine Initialisierung für die Hyperparameter zu
- finden ist, diese zufällig zu Erzeugen und die entsprechende Likelihood-Funktio
-n zu berechnen.
- Es würden die Hyperparameter gewählt, welche die beste Likelihood Funktion
- haben.
- Die zufällige Erzeugung ist extrem zeitaufwendig, da für jeden Satz zufälliger
- Hyperparameter die Likelihood Funktion ausgewertet werden muss.
- Um diesen Aufwand zu reduzieren, kann man einfach Stützstellen weglassen.
- Die Likelihood Funktion sollte sich im Vergleich zumindest ähnlich verhalten.
- Statt einer zufälligen Veränderung der Hyperparameter kann man auch ein
- Minimierungsverfahren mit reduzierter Stützstellenzahl verwenden.
- Dies wurde im Code auch umgesetzt.
- Die möglichen Minimierungsverfahren sind dieselben wie sie für das eigentliche
- Training verwendet werden und werden im nächsten Abschnitt beschrieben.
+Eine weitere Möglichkeit zur Initialisierung der Hyperparameter, liegt in
+ der zufälligen Erzeugung von Parametersätzen.
+ Hierfür werden eine gewisse Anzahl an zufälligen Hyperparametersätzen erzeugt
+ und mit der Likelihood-Funktion bewertet.
+ Die Grenzen für die Korrelationslängen sind dieselben wie in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Const"
+
+\end_inset
+
+.
  
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Standard
+Die Skalierungsfaktoren werden innerhalb folgender Grenzen variiert:
+\begin_inset Formula 
+\begin{align}
+0.75 & \leq a\leq1.5
+\end{align}
+
+\end_inset
+
+Die zufällige Variation wird mit einer Gleichverteilung realisiert.
+ Letztlich wir dann der Parametersatz gewählt, welcher die die beste Likelihood
+ Funktion aufweist.
+ Die Wahrscheinlichkeit einen sinnvollen Parametersatz zu finden, ist bei
+ diesem Verfahren allerdings sehr klein.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Zufällige Initialisierung der Hyperparameter mit Vererbung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:RandomInit2"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um das zufällige Initialisierungsverfahren zu beschleunigen, kann nur ein
+ Wert für die Korrelationslängen einer Gütestufe 
+\begin_inset Formula $k\in\{1,...,s\}$
+\end_inset
+
+ angenommen werden:
+\begin_inset Formula 
+\begin{equation}
+\theta_{k}=\theta_{i,k}\forall i\in\{1,...,o\}
+\end{equation}
+
+\end_inset
+
+Nachdem ein erster erfolgreicher Parametersatz 
+\begin_inset Formula $\theta_{k,best}$
+\end_inset
+
+ gefunden wurde, wird ausgehend von diesem Satz normalverteilt variiert.
+ Dadurch kann eine schnellere Konvergenz erreicht werden.
+\begin_inset Formula 
+\begin{equation}
+\theta_{k}=\mathcal{N}(\theta_{k,best},\sigma_{search})
+\end{equation}
+
+\end_inset
+
+Die Standardabweichung 
+\begin_inset Formula $\sigma_{search}$
+\end_inset
+
+ der Normalverteilung gibt in diesem Fall die Suchbreite an, je größer der
+ Wert, desto weiträumiger wird gesucht.
+ Der Skalierungsfaktor 
+\begin_inset Formula $a$
+\end_inset
+
+ und die Prozessvarianzen werden auf die selbe Art und Weise variiert.
+ Folgende Tabelle stellt die Suchweiten dar, wobei diese auf Erfahrungswerten
+ beruhen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Formelzeichen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma_{search}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Korrelationslängen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{\theta}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.05\left|\theta_{max}-\theta_{min}\right|$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prozessvarianzen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.25$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Skalierungsfaktoren
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $0.1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Kategorien von Hyperparametern 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Skalierungsfaktor und auch die Prozessvarianz werden bei der Initialisierung
+ mit 
+\begin_inset Formula $\sigma^{2}=1;a=1$
+\end_inset
+
+ belegt.
+ Die Initialisierung der Prozessvarianz folgt aufgrund der Normalisierung
+ aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:NormalisierungYs"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
 Initialisierung auf Basis bereits vorhandener Kriging Modelle
 \end_layout
 
@@ -3071,9 +3576,29 @@ ich zu schlechte Modelle zufällig initialisiert werden.
  zu schätzen.
  In diesem Fall ist eine zufällige Initialisierung ebenfalls günstiger.
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
+
+\begin_inset Newline newline
+\end_inset
+
+
+\size huge
+\color magenta
+Die Trainingszeiten ins Beispiel!!!!
+\size default
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+Dieses Verfahren wird in der hier vorgestellten Implementierung als Standard
+ verwendet und hat sich erfahrungsgemäß als sehr stabil und schnell erwiesen.
+ Folgende Abbildung zeigt das Verfahren in Anwendung einer Testoptimierung,
+ auf der Ordinate ist der erreichte Likelihoodterm (kleiner ist besser)
+ und auf der Abzisse der Optimierungsschritt.
+ 
 \begin_inset Float figure
 wide false
 sideways false
@@ -3082,6 +3607,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/UltraRestart/Vergleich.png
+	lyxscale 15
 	scale 15
 
 \end_inset
@@ -3130,7 +3656,7 @@ Innerhalb des Kriging Modells wurden zwei verschiedene mehrdimensionale
 \end_layout
 
 \begin_layout Subsection*
-Minimierungsverfahren angelehnt an Resilient Backpropagation
+Minimierungsverfahren angelehnt an Resilient Backpropagation (RPROP)
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:RPROP"
@@ -3283,7 +3809,7 @@ Bei sehr flachen Bereichen der zu minimierenden Funktion, wo die partiellen
 \end_layout
 
 \begin_layout Subsection*
-Verbessertes Minimierungsverfahren angelehnt an Resilient Backpropagation
+Erweiterung des RPROP-Verfahrens an sehr viele Hyperparameter
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:RPROP2"
@@ -3309,11 +3835,14 @@ d Funktion berechnet werden und zum anderen die partiellen Ableitungen nach
 \begin_inset Formula $o$
 \end_inset
 
- partielle Ableitungen gebildet werden, aus diesem Grund kann der numerische
- Aufwand stark variieren.
+ partielle Ableitungen gebildet werden, was bei einer großen Anzahl an Hyperpara
+metern zu einem hohem numerischen Aufwand führt.
+ Man kann sich innerhalb des RPROP-Verfahrens den Umstand zunutze machen,
+ dass die Bestimmung des Dichtefunktionswerts bei einer hohen Anzahl an
+ Hyperparametern vergleichsweise günstig ist.
  Besonders im Co-Kriging ist dieser Punkt wichtig, da die Anzahl der Hyperparame
-ter größer ist, als bei einem Ordinary-Kriging.
- 
+ter erheblich größer ist, als bei einem Ordinary-Kriging.
+ Folgend soll erläutert werden, wie sich dieser Umstand nutzen lässt:
 \end_layout
 
 \begin_layout Standard
@@ -3327,8 +3856,16 @@ chritten führt dies zu einem relativ langsamen Anpassen der Deltas
 \end_inset
 
 .
- Es wäre daher wünschenswert die Lernraten ebenfalls anzupassen.
- Eine gute Möglichkeit ist es verschiedene Lernraten einfach auszuprobieren.
+ Es wäre daher wünschenswert die Lernraten ebenfalls anzupassen und dadurch
+ eine schnellere Anpassung der Deltas 
+\begin_inset Formula $\gamma_{i}^{t}$
+\end_inset
+
+ zu erreichen.
+ Eine gute Möglichkeit ist es verschiedene Lernraten auszuprobieren, dadurch
+ müssen zwar mehr Dichtefunktionsauswertungen gemacht werden, im Gegenzug
+ werden aber weniger Iterationen benötigt und damit auch weniger Berechnungen
+ der partiellen Ableitungen.
  Der folgende Pseudo Programmcode zeigt die Umsetzung des neuen Verfahrens:
 \end_layout
 
@@ -3512,15 +4049,11 @@ In einem Iterationsschritt, wird dann zuerst der Dichtefunktionswert  mit
 \end_layout
 
 \begin_layout Standard
-Danach wird dann zuerst 
+Danach wird dann 
 \begin_inset Formula $\eta^{+}$
 \end_inset
 
- leicht erhöht oder verringert und überprüft, ob es im Bereich von 
-\begin_inset Formula $2.0>\eta^{+}>1.2$
-\end_inset
-
- liegt (diese Werte sind reine Erfahrungswerte).
+ leicht erhöht und auch verringert und der Dichtefunktionswert bestimmt.
  Sollte sich das neue 
 \begin_inset Formula $\eta^{+}$
 \end_inset
@@ -3881,9 +4414,9 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-Natürlich bleibt zu beachten, dass das Verfahren bei einer sehr geringen
- Anzahl von Hyperparametern auch durchaus langsamer sein kann.
- 
+Bei einem Verfahren wie dem Co-Kriging wo grundsätzlich eine hohe Anzahl
+ an Hyperparametern zu erwarten ist, ist es sinnvoll ein solches Verfahren
+ einzusetzen.
 \end_layout
 
 \begin_layout Subsection*
@@ -3955,6 +4488,10 @@ key "press2007numerical,gill1981practical,gill2007numerical"
 \end_inset
 
  gefunden werden.
+ Die Erfahrung zeigt allerdings, dass die Verwendung des RPROP-Verfahrens
+ erhebliche Vorteile bringt, da das Quasi-Newton Verfahren zu lokalen Minima
+ tendiert und somit zu schlechteren Ersatzmodellen führt.
+ 
 \end_layout
 
 \begin_layout Section

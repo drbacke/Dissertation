@@ -106,6 +106,10 @@ Weiterhin die vielen Anwendungsmöglichkeiten zeigen, wie Kopplung von mehreren
  Ersatzmodellen oder die Restart Möglichkeiten !!!
 \end_layout
 
+\begin_layout Subsection*
+Anwendungsmöglichkeiten
+\end_layout
+
 \begin_layout Enumerate
 Lionel Akustik
 \end_layout
@@ -155,7 +159,54 @@ key "Zhang"
 \end_layout
 
 \begin_layout Enumerate
-RESTART Optionen
+RESTART Optionen (kurz erläutern siehe Kapitel ...)
+\end_layout
+
+\begin_layout Enumerate
+Kopplung mehrerer Ersatzmodelle über ein Co-Kriging (siehe Kapitel ....)
+\end_layout
+
+\begin_layout Subsection*
+Dieses Verfahren fand bereits Anwendung in folgenden wissenschaftlichen
+ und industriellen Arbeiten
+\end_layout
+
+\begin_layout Itemize
+Wissenschaftliche Arbeiten
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Siemens Abschlussarbeit
+\end_layout
+
+\begin_layout Itemize
+Erich
+\end_layout
+
+\begin_layout Itemize
+Lionel
+\end_layout
+
+\begin_layout Itemize
+Georgios
+\end_layout
+
+\begin_layout Itemize
+MTU & Siemens fragen ob es bereits Anwendung fand
+\end_layout
+
+\begin_layout Itemize
+Stefan Mukoko
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Eionige davon etwas genauer beleuchten.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
