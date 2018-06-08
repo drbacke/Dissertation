@@ -882,6 +882,26 @@ cov\left(\vec{h}\right) & =\sigma^{2}+\lambda\delta\left(\vec{h}\right)-\sigma^{
 
 \end_inset
 
+Die für das Trainingsverfahren notwendigen Ableitungen sehen für die gauss'sche
+ Kovarianzfunktion wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial cov\left(\vec{h}\right)}{\partial\theta_{a}}=-\frac{1}{2}\sigma^{2}e^{\theta_{a}}\left|h_{a}\right|^{2}\left(e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\right)\label{eq:AbleitungKorrGauss}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial cov\left(\vec{h}\right)}{\partial\sigma^{2}}=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\label{eq:AbleitungsKorrGauss2}
+\end{equation}
+
+\end_inset
+
 
 \end_layout
 
@@ -2371,7 +2391,7 @@ key "viertl2013einfuhrung"
 ):
 \begin_inset Formula 
 \begin{align}
-\log(\mathcal{N})= & \log(1)-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{1}{2}\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
+\log(\mathcal{N})= & \log(1)-\frac{n}{2}\log(2\pi)-\frac{1}{2}\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\frac{1}{2}\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\label{eq:LogLikelihoodZwischen}
 \end{align}
 
 \end_inset
@@ -2406,7 +2426,7 @@ Die Konstanten können ignoriert werden, da diese für das Maximum keine Rolle
  spielen, daraus folgt: 
 \begin_inset Formula 
 \begin{align}
-\log(\mathcal{N})= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)
+\log(\mathcal{N})= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\label{eq:LogLikelihood}
 \end{align}
 
 \end_inset
@@ -2425,7 +2445,7 @@ reference "sec:Differentiation-der-Likelihood-Funktion"
  zu finden:
 \begin_inset Formula 
 \begin{align}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)\label{eq:AbleitungLikelihood-1}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)\label{eq:AbleitungLogLikelihood}
 \end{align}
 
 \end_inset
@@ -2631,7 +2651,7 @@ r innerhalb des Trainings freigegeben und werden dann über das Training
  Die Ableitung des Likelihood-Terms aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:AbleitungLikelihood-1"
+reference "eq:AbleitungLogLikelihood"
 
 \end_inset
 
@@ -3332,6 +3352,13 @@ reference "eq:NormalisierungYs"
 
 \begin_layout Subsubsection*
 Initialisierung auf Basis bereits vorhandener Kriging Modelle
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:UltraRestart"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3413,7 +3440,7 @@ Ausreißer
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "numbers=left,tabsize=4"
+lstparams "numbers=left,basicstyle={\footnotesize},tabsize=4"
 inline false
 status open
 
@@ -3579,20 +3606,6 @@ ich zu schlechte Modelle zufällig initialisiert werden.
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
-
-\size huge
-\color magenta
-Die Trainingszeiten ins Beispiel!!!!
-\size default
-\color inherit
-
-\begin_inset Newline newline
-\end_inset
-
 Dieses Verfahren wird in der hier vorgestellten Implementierung als Standard
  verwendet und hat sich erfahrungsgemäß als sehr stabil und schnell erwiesen.
  Folgende Abbildung zeigt das Verfahren in Anwendung einer Testoptimierung,
@@ -3602,11 +3615,19 @@ Dieses Verfahren wird in der hier vorgestellten Implementierung als Standard
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/UltraRestart/Vergleich.png
+	lyxscale 15
+	scale 15
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/UltraRestart/VergleichTrainingsZeit.eps
 	lyxscale 15
 	scale 15
 
@@ -3708,9 +3729,6 @@ Die Änderung der Hyperparameter
 \end_inset
 
  ab.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \theta_{i}^{t+1} & =\theta_{i}^{t}-\gamma_{i}^{t}\textrm{sgn}\left(\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t}\right)
@@ -3871,6 +3889,7 @@ chritten führt dies zu einem relativ langsamen Anpassen der Deltas
 
 \begin_layout Standard
 \begin_inset listings
+lstparams "basicstyle={\footnotesize}"
 inline false
 status open
 
@@ -3904,32 +3923,17 @@ for(eta_plusFact=0.9; eta_plusFact<=1.1; eta_plusFact+=0.2){
 
 \begin_layout Plain Layout
 
-	if(newEtaPlus<1.2)
+	if(newEtaPlus<1.2)newEtaPlus=1.2
 \end_layout
 
 \begin_layout Plain Layout
 
-				newEtaPlus=1.2
+	if(newEtaPlus>2.0)newEtaPlus=2.0
 \end_layout
 
 \begin_layout Plain Layout
 
-	if(newEtaPlus>2.0)
-\end_layout
-
-\begin_layout Plain Layout
-
-				newEtaPlus=2.0
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(eta_plus==newEtaPlus)
-\end_layout
-
-\begin_layout Plain Layout
-
-				continue
+	if(eta_plus==newEtaPlus)continue
 \end_layout
 
 \begin_layout Plain Layout
@@ -3944,12 +3948,7 @@ for(eta_plusFact=0.9; eta_plusFact<=1.1; eta_plusFact+=0.2){
 
 \begin_layout Plain Layout
 
-	if(newDensity<density)
-\end_layout
-
-\begin_layout Plain Layout
-
-		eta_plus=newEtaPlus
+	if(newDensity<density)eta_plus=newEtaPlus
 \end_layout
 
 \begin_layout Plain Layout
@@ -3982,32 +3981,17 @@ for(eta_minusFact=0.9; eta_minusFact<=1.1; eta_minusFact+=0.2){
 
 \begin_layout Plain Layout
 
-	if(newEtaMinus<0.4)
+	if(newEtaMinus<0.4)newEtaMinus=0.4
 \end_layout
 
 \begin_layout Plain Layout
 
-				newEtaMinus=0.4
+	if(newEtaMinus>0.7)newEtaMinus=0.7
 \end_layout
 
 \begin_layout Plain Layout
 
-	if(newEtaMinus>0.7)
-\end_layout
-
-\begin_layout Plain Layout
-
-				newEtaMinus=0.7
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(eta_minus==newEtaMinus)
-\end_layout
-
-\begin_layout Plain Layout
-
-				continue
+	if(eta_minus==newEtaMinus)continue
 \end_layout
 
 \begin_layout Plain Layout
@@ -4021,12 +4005,7 @@ for(eta_minusFact=0.9; eta_minusFact<=1.1; eta_minusFact+=0.2){
 
 \begin_layout Plain Layout
 
-	if(newDensity<density)
-\end_layout
-
-\begin_layout Plain Layout
-
-		eta_minus=newEtaMinus
+	if(newDensity<density)eta_minus=newEtaMinus
 \end_layout
 
 \begin_layout Plain Layout
@@ -4456,9 +4435,6 @@ f\left(\vec{\theta}\right) & \approx f\left(\vec{\theta}_{t}\right)+\left(\vec{\
 \begin_layout Standard
 Die entsprechende Ableitung dieser Funktion muss im Minimum oder Maximum
  der Funktion Null ergeben:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \nabla f\left(\vec{\theta}\right) & \approx\nabla f\left(\vec{\theta}_{t}\right)+\mathbf{H}\left(\vec{\theta}_{t}\right)\left(\vec{\theta}-\vec{\theta}_{t}\right)=0
@@ -4768,6 +4744,181 @@ Numerische Effizienz steigern
 \end_layout
 
 \begin_layout Subsection
+Matrixoperationen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Matrixoperationen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für die Vorhersage (siehe Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Erwartungswert"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Varianz-des-Schätzfehlers"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-zwischen-zwei"
+
+\end_inset
+
+) wie auch das Training (siehe Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AbleitungLogLikelihood"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LogLikelihood"
+
+\end_inset
+
+) eines Kriging-Modells sind viele komplexe Matrixoperationen notwendig.
+ Die Laufzeiten von Vorhersage und Training hängen hauptsächlich von diesen
+ Matrixoperationen ab.
+ Weiterhin werden diese Modelle innerhalb verschiedenster Hardware-Architekturen
+ verwendet, bspw.
+ AMD/Intel CPUs und NVidia GPUs.
+ Für jede dieser Hardwarearchitekturen gibt es verschiedene Implementierungen
+ der benötigten Matrix Operationen.
+ Jede dieser Implementierungen sind stark auf die jeweilige Architektur
+ optimiert und bringen enorme Geschwindigkeitsvorteile.
+ Eine einheitliche Softwareschnittstelle existiert hierfür leider nicht.
+ Aus diesem Grund wurde ein einheitliches Matrix-Interface entwickelt (siehe
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MatrixKlasseUML"
+
+\end_inset
+
+), alle Spezialisierungen müssen dieses Interface einbinden und bieten somit
+ dieselben Methoden an.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/Fabian/uml_net_matrix_implementations.pdf
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Aufbau der Matrix Klassen
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MatrixKlasseUML"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zur Berechnung der Matrix-Operationen wurden drei verschiedene Klassen entwickel
+t, welche jeweils das Interface 
+\shape italic
+Matrix
+\shape default
+ und 
+\shape italic
+SaveableOnServer
+\shape default
+ einbinden.
+ Die Klasse 
+\shape italic
+OpenMPMatrix
+\shape default
+ beeinhaltet eine SSE-beschleunigte und Thread-parallelisierte Implementierung
+ der Matrix Operationen, jedoch keine CPU-spezifischen Optimierungen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\shape italic
+MKLMatrix 
+\shape default
+bietet alle Optimierungen der Intel-MKL 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "INTEL"
+
+\end_inset
+
+ Bibliothek und ist somit nur für Intel-CPUs brauchbar.
+ Die Klasse 
+\shape italic
+CudaMatrix 
+\shape default
+bietet die Möglichkeit der Nutzung von Nvidia-GPUs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuda2018"
+
+\end_inset
+
+ zur Beschleunigung der Matrix Operationen.
+ Nähere Informationen zu der genauen Implementierung der Klassen sind in
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b,Kueppers2016c"
+
+\end_inset
+
+.
+ Weiterhin wird die praktische Verwendung von GPUs für die Beschleunigung
+ der Ersatzmodelle innerhalb einer Optimierungen in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Verwendung-von-GPGPU"
+
+\end_inset
+
+ diskutiert.
+ 
+\end_layout
+
+\begin_layout Subsection
 Verteiltes Rechnen 
 \begin_inset CommandInset label
 LatexCommand label
@@ -4775,37 +4926,115 @@ name "chap:Verteiltes-Rechnen-1"
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
-Kein MPI, Cluster unklar wie es weiter geht (Xeon Phi oder Nvidia ....) daher
- extern auf NVIDIA, bisher die besten Bibliotheken und Dokumentation) Rechner
- lokal sollen mitgenutzt werden können Verschiedene Architekturen sollen
- gekoppelt werden können (GPU/CPU etc.) - Notwendigkeit von GPUs Prozessweite
- asynchrone Parallelisierung
+Für das Training der Kriging-Modelle innerhalb einer Optimierung müssen
+ diverse Matrixoperationen durchgeführt werden und diese können je nach
+ Problemgröße sehr aufwendig werden.
+ Besonders bei einer Multifidelity-Optimierung oder einer gradientenunterstützte
+-Optimierung kann das Training zum Flaschenhals der ganzen Optimierung werden.
+ Prinzipiell sind hier zwei Fälle zu unterscheiden:
+\end_layout
+
+\begin_layout Enumerate
+Multifidelity-Optimierung mit Nutzung eines Co-Kriging: Anzahl an zu trainierend
+en Hyperparameter ist sehr hoch (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COKrigingKovarianzmodell"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Gradientenunterstützte Optimierung mit Nutzung eines Gradient-Enhanced-Kriging
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Gradient-Enhanced-Kriging"
+
+\end_inset
+
+): Die Kovarianzmatrix kann sehr groß werden, durch die zusätzlichen partiellen
+ Ableitungen.
+ 
 \end_layout
 
 \begin_layout Standard
-ZeroMQ: CUDA und ZeroMQ gekoppel:
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Cook2012"
+Für den ersten Fall bietet es sich an, die Berechnung der partiellen Ableitungen
+ 
+\begin_inset Formula $\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}$
+\end_inset
+
+ (vgl.
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:COKrigingTraining"
 
 \end_inset
 
-, CERN Paper mit ZeroMQ Empfehlung:
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Dworak2011"
+) auf mehrere Rechner zu verteilen.
+ 
+\end_layout
+
+\begin_layout Standard
+Für den zweiten Fall ist ein leistungsstarker Rechner günstiger, da sich
+ die aufwendigen numerischen Operationen schlechter aufteilen lassen.
+ Besonders die Verwendung von leistungsstarken GPUs hat sich für diesen
+ Fall als sehr effizient erwiesen und wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Verwendung-von-GPGPU"
 
 \end_inset
 
+ beschrieben.
+ Da die meisten Optimierungen auf einem Großrechner des DLR ausführt werden
+ und dieser keine GPU-Infrastruktur bietet, ist eine Auslagerung der Matrixopera
+tionen auf einen leistungsstarken externen Rechner in diesem Fall wünschenswert.
+\end_layout
 
+\begin_layout Standard
+Um diesen Anforderungen gerecht zu werden, wurde ein asynchrones Server-Client
+ System entwickelt (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b"
+
+\end_inset
+
+).
+ Als Messaging-Middleware wurde ZeroMQ (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZeroMQ,Dworak2011"
+
+\end_inset
+
+) verwendet und für die (De-)Serialisierung eine eigene Implementation entwickel
+t.
+ Die Schnittstelle wurde erfolgreich getestet und konnte im zweiten Fall
+ ab einer Matrixgröße von ca.
+ 3000x3000 gewinnbringend eingesetzt werden.
+ Für den zweiten Fall stieg die Beschleunigung nahezu linear mit der Anzahl
+ der Server.
+ Für weitere Informationen und die genaue Implementierung sei auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b"
+
+\end_inset
+
+ verwiesen.
 \end_layout
 
 \begin_layout Subsection
-Effiziente Berechnung der Korrelationsfunktion
+Effiziente Berechnung der Kovarianzfunktion
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:SoftwaretechnKorrelationsfunktionen"
@@ -4815,90 +5044,158 @@ name "sec:SoftwaretechnKorrelationsfunktionen"
 
 \end_layout
 
-\begin_layout Enumerate
-Korrelationsfunktion wird extrem oft aufgereufen, jeder gesparte Befehl
- wirkt sich stark aus
+\begin_layout Standard
+Die in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+ beschriebenen Kovarianzfunktionen müssen für jeden Eintrag in der Kovarianzmatr
+ix und auch deren Ableitung nach den Hyperparametern bestimmt werden.
+ Für jeden Trainingsschritt mit einem Dichtefunktionsaufruf und den dazugehörige
+n partiellen Ableitungen ergeben sich folgend Anzahl an Aufrufen der Kovarianzfu
+nktion:
 \end_layout
 
 \begin_layout Enumerate
-Thetas im Vorraus berechnen
+Berechnung der Dichtefunktion: 
+\begin_inset Formula $\frac{n\left(n+1\right)}{2}$
+\end_inset
+
+ Aufrufe der Kovarianzfunktion
 \end_layout
 
 \begin_layout Enumerate
-Corr Buffer verwenden, um Ableitungen schneller berechnen zu können
+Berechnung von 
+\begin_inset Formula $o$
+\end_inset
+
+ partiellen Ableitungen der Likelihood Funktion: 
+\begin_inset Formula $o\frac{n\left(n+1\right)}{2}$
+\end_inset
+
+ 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Geht man von einem üblichen Beispiel mit 1000 Stützstellen und 80 Hyperparameter
+n aus, so ergeben sich für die Dichtefunktion ca.
+ 500.000 Aufrufe und für die partiellen Ableitungen dann 80x500.000 Aufrufe.
+ Insgesamt sind dies ca.
+ 40.5 Millionen Aufrufe für eine Iteration.
+ Dies bedeutet, dass jeder gesparte Befehl innerhalb des Kovarianzfunktionsaufru
+fs sich sehr stark auf die Laufzeit auswirkt.
+ Folgend sind einige Möglichkeiten aufgelistet, wie man die Berechnung beschleun
+igen kann:
+\end_layout
+
+\begin_layout Itemize
+Exponentialfunktion der Hyperparameter 
+\begin_inset Formula $e^{\theta_{l}}$
+\end_inset
+
+ im Vorraus berechnen
+\end_layout
+
+\begin_layout Itemize
+Gauss Kovarianzfunktion: Puffern von Zwischenergebnissen
+\end_layout
+
+\begin_layout Itemize
 Exponentialfunktion durch schnellere ersetzen
 \end_layout
 
-\begin_layout Enumerate
-SSE verwenden
+\begin_layout Itemize
+CPU-Befehlssätze SSE/AVX verwenden
+\end_layout
+
+\begin_layout Subsubsection*
+Exponentialfunktion im Voraus berechnen
 \end_layout
 
 \begin_layout Standard
-Wie bereits in Kapitel 
+Da die Hyperparameter für eine Iteration konstant bleiben, ist es sinnvoll
+ die Berechnung von 
+\begin_inset Formula $e^{\theta_{l}}$
+\end_inset
+
+ (siehe Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Kovarianzmodelle"
+reference "eq:ExpoKorrelationsfunktion-1"
 
 \end_inset
 
- beschrieben, sind für die Aufstellung der Kovarianzmatrix verschiedene
- Kovarianzfunktionsmodelle notwendig.
- Da diese für eine große Anzahl an Samples sehr häufig berechnet werden
- müssen, sollte deswegen ein besonderes Augenmerk auf die Effizienz dieser
- Berechnung gelegt werden.
+) nur einmal zu Anfang der Iteration durchzuführen und dann abzuspeichern.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Puffern der Exponentialfunktion
 \end_layout
 
 \begin_layout Standard
-\noindent
-Die programmiertechnische Umsetzung ist sehr simpel und sieht wie folgt
- aus:
-\end_layout
+Da für die Aufstellung der Kovarianzmatrix der innere Teil 
+\begin_inset Formula $e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}$
+\end_inset
 
-\begin_layout Standard
-
-\size footnotesize
-\begin_inset listings
-lstparams "basicstyle={\scriptsize}"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-for(size_t i=0; i<point1.getNumVars() ; i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-    correl += fmath::exp(thetas[i]) * sqr(point1.getVarsRef(i) - point2.getVarsRef
-(i)); 
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-correl=fmath::exp(-0.5*correl);
-\end_layout
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ExpoKovarianzfunktion"
 
 \end_inset
 
+) in den Gleichungen für die partiellen Ableitungen der Kovarianzfunktion
+ nach den Hyperparametern (siehe Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AbleitungKorrGauss"
 
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AbleitungsKorrGauss2"
+
+\end_inset
+
+) derselbe ist, macht es Sinn diesen zu puffern und bei Bedarf wiederzuverwenden.
+ Da der Abruf aus dem RAM deutlich schneller ist, als die erneute Berechnung
+ der Exponentialfunktion, beschleunigt dies die Berechnung der Ableitungsmatrize
+n erheblich.
+\end_layout
+
+\begin_layout Subsubsection*
+Schnellere Exponentialfunktion 
 \end_layout
 
 \begin_layout Standard
-\noindent
-Da diese Funktion während eines Trainings sehr häufig aufgerufen wird, macht
- es Sinn, diese zu beschleunigen.
- Um dies zu erreichen, wurden SSE (Streaming SIMD Extensions) CPU Befehle
- verwendet.
- Die Lesbarkeit des Codes leidet zwar recht stark darunter, da sich diese
- Methode zukünftig aber kaum noch ändern wird, ist dies vertretbar.
+Da die Implementierung der Exponentialfunktion der GCC-Bibliothek (Stand
+ GCC v4.9) relativ langsam ist, diese Funktion aber mehrere Millionen Mal
+ aufgerufen wird, ist es sinnvoll eine schnellere Implementierung zu verwenden.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fmath2018"
+
+\end_inset
+
+ wird eine AVX beschleunigte Implementierung der Exponentialfunktion beschrieben
+, diese ist ca.
+ 5x schneller als die GCC-Version.
+ Der Fehler der berechneten Werte ist vergleichbar mit der GCC-Version.
+ 
 \end_layout
 
 \begin_layout Subsubsection*
@@ -4986,7 +5283,7 @@ key "AGN,INTEL"
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "language={C++},numbers=left,basicstyle={\scriptsize},tabsize=4"
+lstparams "language={C++},float,numbers=left,basicstyle={\footnotesize},tabsize=4"
 inline false
 status open
 
@@ -5093,8 +5390,7 @@ for(; i<point1.getNumVars() ; i++) 	{
 
 \begin_layout Plain Layout
 
-		correl += thetasExp[0][i] * (point1.getVar(i) - point2.getVar(i))*(point1.getVar(
-i) - point2.getVar(i));
+		correl += thetasExp[0][i] * (point1.getVar(i) - point2.getVar(i))^2;
 \end_layout
 
 \begin_layout Plain Layout
@@ -5108,7 +5404,7 @@ i) - point2.getVar(i));
 
 \begin_layout Plain Layout
 
-correl=fmath::expd(-0.5*corre);
+correl=fmath::expd(-0.5*correl);
 \end_layout
 
 \end_inset
@@ -5152,7 +5448,7 @@ nktion benötigt werden.
  Der Zähler wird hier immer um den Wert 2 erhöht, da mit den SSE Routinen
  2 double Werte gleichzeitig berechnet werden können.
  In den Zeilen 9-11 werden 128Bit aus den Arrays an der Stelle i in die
- SSE Register übertragen.
+ SSE-Register der CPU übertragen.
  Aus diesem Grund muss der Speicher zwingend 128Bit Speicherausrichtung
  besitzen.
  
@@ -5170,6 +5466,8 @@ name "par:Einschub-Speicherausrichtung"
 \end_layout
 
 \begin_layout Standard
+
+\shape italic
 In aktuellen C++ Compilern wird eine Speicherausrichtung von 128Bit im Normalfal
 l gewährleistet.
  Die folgende Tabelle soll die Speicherausrichtung und die damit entstehende
@@ -5178,6 +5476,7 @@ l gewährleistet.
 
 \begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
 status open
@@ -5403,66 +5702,36 @@ name "tab:128Bit-Speicherausrichtung"
 \end_layout
 
 \begin_layout Standard
+
+\shape italic
 Die erste Zeile der Tabelle beschreibt den Index eines normalen Arrays mit
  6 Einträgen und jeder Eintrag hat die Größe eines 64Bit (z.B.
  double) Werts.
  Der Compiler garantiert in diesem Fall einen zusammenhängenden Speicher
- von 128Bit, dargstellt durch die dritte Zeile.
+ von 128Bit, dargestellt durch die dritte Zeile.
  
 \end_layout
 
 \begin_layout Standard
-In Zeile 5 wird die Variable correlSSE mit der Funktion auf Null gesetzt.
- Da in einem Schritt immer zwei Befehle gleichzeitig ausgeführt werden,
- muss die Anzahl durch zwei teilbar sein.
- Ist dies nicht der Fall, muss der Rest mit normalen Befehlen durchgeführt
- werden.
- Zeile 7 setzt die Anzahl der Schleifendurchläufe auf die Anzahl der freien
- Variablen geteilt durch zwei.
- Ist die Anzahl der freien Variablen ungerade, wird eins subtrahiert und
- dann durch zwei geteilt.
- Die Zeilen 8-16 stellen die Summation aus der Gauss Formel dar.
- Zuerst wird in den Zeilen 9-10 zwei Werte der Stützstellen in die SSE Variablen
- geladen.
- Dies geschieht mit der Funktion _mm_loadu_pd().
- Als Parameter erwartet die Funktion eine Speicheradresse und transferiert
- dann 128
-\begin_inset space ~
+Die Zeilen 13-16 stellen dann die eigentliche Berechnung in den SSE-Registern
+ der CPU dar.
+ Durch die breiteren Register werden hier immer zwei Werte auf einmal verarbeite
+t.
+ 
+\begin_inset Newline newline
 \end_inset
 
-Bit ab dieser Adresse in die entsprechende SSE Variable.
- In den Zeilen 11-12 wird die Exponentialfunktion der Hyperparameter berechnet.
- Dies geschieht auf konventionelle Weise, da es keinen SSE Befehl für die
- Exponentialfunktion gibt.
- Die beiden berechneten Werte werden dann in Zeile 13 ebenfalls in eine
- SSE Variable geladen.
- Die Differenz der Stützstellenkomponenten wird anschließend in Zeile 14
- vorgenommen.
- Hier werden wie bereits erwähnt, direkt zwei Differenzen gleichzeitig berechnet.
- In Zeile 15 wird dann die Differenz quadriert, mit den Hyperparametern
- multipliziert und aufsummiert, alles mit SSE Befehlen.
+In Zeile 19 werden die beiden Werte in den Registern zusammenaddiert und
+ dann in Zeile 20 wieder zurück in den RAM kopiert.
  
 \end_layout
 
 \begin_layout Standard
-Ist der Schleifendurchlauf beendet, wird in Zeile 17 das Ergebnis in eine
- normale Variable zurück transferiert und in den restlichen Zeilen wird
- (falls die Anzahl der freien Variablen nicht durch zwei teilbar war) das
- letzte Element mit konventionellen Methoden berechnet.
- Die gemessenen Geschwindigkeitsvorteile lagen bei ca.
- 20
-\begin_inset space ~
-\end_inset
-
-%
-\begin_inset space ~
-\end_inset
-
--
-\begin_inset space ~
-\end_inset
-
-30
+Ist die Anzahl der Variablen nicht durch zwei teilbar, so bleibt ein Rest
+ bestehen.
+ Dieser wird in Zeile 21-23 auf konventionelle Weise berechnet.
+ Die gemessenen Geschwindigkeitsvorteile liegen bei ca.
+ 30
 \begin_inset space ~
 \end_inset
 
@@ -5475,89 +5744,89 @@ Filtern von unwichtigen Samples
 \end_layout
 
 \begin_layout Standard
-Paar finden über Max Korrelation
-\end_layout
+Während einer Optimierung können eine Vielzahl an Stützstellen erzeugt werden
+ und damit große Kovarianzmatrizen entstehen.
+ Aus diesem Grund ist es sinnvoll nur Stützstellen zu verwenden, welche
+ dem jeweiligen Ersatzmodell einen wirklichen Informationszugewinn bringen.
+ Eine gute Möglichkeit ist es, räumlich eng beieinander liegende Stützstellen
+ zu entfernen.
+ Als notwendige Metrik bietet sich die Verwendung der Korrelationsfunktion
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
 
-\begin_layout Standard
-Dann wird es etwas schwierig, da die maximale Korrelations ja minimal werden
- soll.
+\end_inset
+
+) an.
+ Stützstellen mit sehr hohen Korrelationen haben nur einen sehr kleinen
+ Abstand zueinander und sollten dem Ersatzmodell nur einen geringen Informations
+anteil liefern.
+ Solche Stützstellen könnten dann für das Training außer Acht gelassen werden.
+ Allerdings macht dieses Vorgehen nur Sinn, wenn die Korrelationslängen
+ des jeweiligen Kriging-Modells bereits gut geschätzt sind.
+ Um dies zu gewährleisten, wird die Reduktion der Stützstellen nur durchgeführt,
+ wenn die in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+ beschriebene Initialisierungsoption gewählt wurde.
+ Zusätzlich gilt die Bedingung, dass sich die Initialisierung bereits im
  
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+Restart
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+ Modus befinden muss.
 \end_layout
 
 \begin_layout Standard
-Als StartOption für das Kriging
-\end_layout
-
-\begin_layout Standard
-Kriging schreibt neue dataBasePost raus
-\end_layout
-
-\begin_layout Standard
-Nur mit UltraRestart !!!!
-\end_layout
-
-\begin_layout Standard
-Grundlegend soll die maximale Korrelation minimal werden! 
-\end_layout
-
-\begin_layout Standard
-ZDT3, siehe Gl.
-\end_layout
-
-\begin_layout Standard
-Links sind gleichverteilt 500 Samples + 500 in der Mitte Normalverteilt
- mit einer Standardabweichung von 10% der Raumgröße (1x1)
-\end_layout
-
-\begin_layout Standard
-Rechts sind die 100 gefilterte Samples, von der ursprünglichen Verteilung
- in der Mitte ist nichts mehr zu sehen.
+Folgend wird der verwendete Algorithmus vereinfacht dargestellt:
 \end_layout
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "basicstyle={\scriptsize},extendedchars=true"
+lstparams "float,numbers=left,basicstyle={\footnotesize},extendedchars=true"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-// How many Samples and PartDers should be deleted
+map <float, pair<int,int> > korrMap;
 \end_layout
 
 \begin_layout Plain Layout
 
-if(sampleSize+partDerSize > cfg.maxMatrixSize){
 \end_layout
 
 \begin_layout Plain Layout
 
-	if(sampleSize<=cfg.maxMatrixSize){
+for(p1 in points){
 \end_layout
 
 \begin_layout Plain Layout
 
-		killPartDer = sampleSize+partDerSize - cfg.maxMatrixSize;
+	for(p2=p1.next() in points){
 \end_layout
 
 \begin_layout Plain Layout
 
-	}
+		korrelation = correlation(p1,p2)
 \end_layout
 
 \begin_layout Plain Layout
 
-	else{
-\end_layout
-
-\begin_layout Plain Layout
-
-		killPartDer = partDerSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-		killSamples = (sampleSize-cfg.maxMatrixSize);
+		korrMap[korrelation] =pair(p1,p2)
 \end_layout
 
 \begin_layout Plain Layout
@@ -5576,47 +5845,27 @@ if(sampleSize+partDerSize > cfg.maxMatrixSize){
 
 \begin_layout Plain Layout
 
-size_t killedPartDer = 0;
+pointsToDelete=[]
 \end_layout
 
 \begin_layout Plain Layout
 
-//Reduce PartDers
+for(korrPair in korrMap) {
 \end_layout
 
 \begin_layout Plain Layout
 
-while(killedPartDer < killPartDer){
+	if(korrMap.p1 in pointsToDelete or korrMap.p2 in pointsToDelete)
 \end_layout
 
 \begin_layout Plain Layout
 
-	int randPoint = rand() % points.size();
+		continue
 \end_layout
 
 \begin_layout Plain Layout
 
-	int randPartDer = rand() % cfg.numFreeVars;
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(points[randPoint].getAllPartDervsRef().count(randPartDer) >0){
-\end_layout
-
-\begin_layout Plain Layout
-
-		points[randPoint].deletePartialDerivative(randPartDer);
-\end_layout
-
-\begin_layout Plain Layout
-
-		killedPartDer++;
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
+	deleteIndices.append(random(p1,p2))
 \end_layout
 
 \begin_layout Plain Layout
@@ -5630,265 +5879,75 @@ while(killedPartDer < killPartDer){
 
 \begin_layout Plain Layout
 
+for(deletePoint in deleteIndices)
 \end_layout
 
 \begin_layout Plain Layout
 
-if(cfg.initType != ultrarestart or init==true){
-\end_layout
-
-\begin_layout Plain Layout
-
-	//Reduce Samples
-\end_layout
-
-\begin_layout Plain Layout
-
-	vector<int> deleteIndices = global::createUniqueRandomIntegers(0, points.size(),
- killSamples);
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-else{
-\end_layout
-
-\begin_layout Plain Layout
-
-	typedef map< B, pair<int,int> > m;
-\end_layout
-
-\begin_layout Plain Layout
-
-	m corrs;
-\end_layout
-
-\begin_layout Plain Layout
-
-	typename m::reverse_iterator it;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	//#pragma omp parallel for schedule(dynamic)
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(size_t i=0; i<points.size(); i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-		for(size_t j=i+1; j<points.size(); j++){
-\end_layout
-
-\begin_layout Plain Layout
-
-			B corr = correlationMap(points[i].getType(),points[j].getType())->calcSimpleCor
-relation(points[j],points[i]);
-\end_layout
-
-\begin_layout Plain Layout
-
-			corrs[corr] =pair<int,int>(i,j);
-\end_layout
-
-\begin_layout Plain Layout
-
-		}
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(it = corrs.rbegin(); it!=corrs.rend() and deleteIndices.size()<killSamples;
- it++) {
-\end_layout
-
-\begin_layout Plain Layout
-
-		bool firstInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
- it->second.first)==deleteIndices.end() ?  false:true;
-\end_layout
-
-\begin_layout Plain Layout
-
-		bool secondInside =  std::find(deleteIndices.begin(), deleteIndices.end(),
- it->second.second)==deleteIndices.end() ?  false:true;
-\end_layout
-
-\begin_layout Plain Layout
-
-		// Keiner drin -> Random
-\end_layout
-
-\begin_layout Plain Layout
-
-		if(!(firstInside or secondInside))
-\end_layout
-
-\begin_layout Plain Layout
-
-			if(rand()%2==0)deleteIndices.push_back(it->second.first );
-\end_layout
-
-\begin_layout Plain Layout
-
-			else deleteIndices.push_back(it->second.second );
-\end_layout
-
-\begin_layout Plain Layout
-
-		else
-\end_layout
-
-\begin_layout Plain Layout
-
-			continue;
-\end_layout
-
-\begin_layout Plain Layout
-
-	}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-std::sort (deleteIndices.rbegin(), deleteIndices.rend());
-\end_layout
-
-\begin_layout Plain Layout
-
-vector<Point<T,B> > newPoints;
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-for(size_t i=0; i<points.size(); i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(std::find(deleteIndices.begin(), deleteIndices.end(), (int)i) != deleteIndices.
-end())
-\end_layout
-
-\begin_layout Plain Layout
-
-		continue;
-\end_layout
-
-\begin_layout Plain Layout
-
-	newPoints.push_back(points[i]);
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-points = newPoints;
-\end_layout
-
-\begin_layout Plain Layout
-
-//Count Samples and PartDer
-\end_layout
-
-\begin_layout Plain Layout
-
-sampleSize=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-partDerSize=0;
-\end_layout
-
-\begin_layout Plain Layout
-
-for(size_t i=0; i<points.size(); i++){
-\end_layout
-
-\begin_layout Plain Layout
-
-	sampleSize++;
-\end_layout
-
-\begin_layout Plain Layout
-
-	partDerSize+=points[i].getNumPartDerivatives();
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-cfg.numDerivatives = partDerSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-cfg.numSamples	   = sampleSize;
-\end_layout
-
-\begin_layout Plain Layout
-
-cfg.numSamplesDerivatives = partDerSize+sampleSize;
+	points.remove(deletePoint)
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In Zeile 3-8 werden die Korrelationen für alle möglichen Punktepaare berechnet
+ und innerhalb der Map direkt sortiert.
+ Die Schleife in Zeile 11-15 geht die sortierte Map durch, angefangen bei
+ dem Größten Korrelationswert.
+ Innerhalb der Schleife wird geprüft, ob einer der beiden Punkte bereits
+ zum Löschen markiert wurde oder nicht.
+ Wurde einer markiert, so wird nichts weiter unternommen.
+ Wurde kein Punkt markiert, so wird dieser zum Löschen eingetragen.
+ Auf diese Weise kann sichergestellt werden, dass nicht beide Punkte gelöscht
+ werden.
+ 
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PunkteFilterBeispiel"
+
+\end_inset
+
+ wird ein Beispiel für diesen Filter gezeigt.
+ Es wurde die ZDT3 Funktion mit 2 Variablen verwendet (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ZDT3"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Auf dem linken Bild wurden 500 gleichverteilte Stützstellen erzeugt und
+ nochmals 500 weitere Stützstellen normalverteilt um die Mitte des betrachteten
+ Bereichs gelegt (mit einer Standardabweichung von 10% der Raumgröße).
+ Damit soll eine lokale Anhäufung von Stützstellen simuliert werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Daraufhin wurde ein Ordinary-Kriging trainiert und der Filter angewandt,
+ wobei der Filter die Stützstellen auf 100 reduziert hat.
+ Das Ergebnis ist in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:PunkteFilterBeispiel"
+
+\end_inset
+
+ rechts zu sehen.
+ Die lokale Anhäufung in der Mitte ist praktisch nicht mehr vorhanden und
+ die Verteilung der Punkte ist sehr gleichmäßig.
+ Die Laufzeit des Filters ist im Vergleich zur restlichen Laufzeit zu vernachläs
+sigen.
 \end_layout
 
 \begin_layout Standard
@@ -5904,14 +5963,14 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_All.eps
-	scale 40
+	scale 30
 
 \end_inset
 
 
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_Filtered.eps
-	scale 40
+	scale 30
 
 \end_inset
 
@@ -5919,6 +5978,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PunkteFilterBeispiel"
+
+\end_inset
+
 
 \end_layout
 
@@ -5936,88 +6001,8 @@ status open
 
 \end_layout
 
-\begin_layout Standard
-Insbesondere beim Gradient-Enhanced-Kriging sind sehr hohe Matrixgrößen
- von über 10000x10000 schnell erreicht.
- Aus diesem Grund ist es sinnvoll nur Samples auszusuchen, welche der Optimierun
-g einen wirklichen Zugewinn bringen.
- Den Einfluss eines Samples auf den Optimierungsverlauf zu berechnen ist
- sehr schwierig, aus diesem Grund wäre es auch aktzeptabel die Samples herauszuf
-iltern, welche nur einen kleinen Einfluss auf das Ersatzmodell haben.
- Eine einfach Möglichkeit wäre die Korrelationsmatrix selbst, in dieser
- stehen die Korrelationen zwischen allen Samples untereinander.
- Samples mit sehr hohen Korrelationen haben folglich nur einen sehr kleinen
- Abstand zueinander.
- Der Abstand wird allerdings über die im Kriging verwendeten Modell-Korrelations
-funktionen bestimmt und diese sind sehr stark abhängig von den verwendeten
- Hyperparametern.
- Die Hyperparameter werden vom Training allerdings erst bei ausreichender
- Sample Anzahl vernünftig geschätzt.
- Dies kann im schlimmsten Fall dazu führen, dass man Samples aufgrund einer
- falsch geschätzten Metrik entfernt und den Optimierungsverlauf so empfindlich
- stört.
- 
-\end_layout
-
-\begin_layout Standard
-....
-\end_layout
-
-\begin_layout Standard
-....
-\begin_inset Newline newline
-\end_inset
-
-Wenn man die Thetas als Wirkweite der jeweiligen freien Variable interpretiert
- und zusätzlich davon ausgeht, dass das Training die korrekten Thetas bereits
- gefunden hat.
- So könnte man mehr partielle Ableitungen von freien Variablen mit hoher
- Wirkweite entfernen.
- Dies würde in etwa dem Gedanken entsprechen, dass bei einer komplexen bspw.
- hochfrequenten Funktion mehr partielle Ableitungen benötigt werden als
- bei einer sehr glatten simpleren Funktion.
- Allerdings würde man hier die Komplexität dann auf Parameterebene messen.
- Eine Möglichkeit wäre es, die Parameter nach Thetas zu sortieren, wobei
- kleine Thetas oben stehen sollten.
- Dann die partiellen Ableitungen mit dem kleinsten Abstand in der freien
- Variable aussortieren und jeweils einige entfernen.
- 
-\end_layout
-
-\begin_layout Standard
-Annahmen:
-\end_layout
-
-\begin_layout Itemize
-Thetas bereits gut geschätzt
-\end_layout
-
-\begin_layout Itemize
-Restart bereits im Gange
-\end_layout
-
-\begin_layout Itemize
-Mit dem besten Restart Modell dann anfangen und folgende Schritte durchführen
-\end_layout
-
-\begin_layout Standard
-Die niedrigsten Thetas raussortieren.
- Beim niedrigesten anfangen und dort die partiellen Ableitungen herauswerfen,
- welche den kürzesten Abstand in dieser freien Variable haben.
-\end_layout
-
-\begin_layout Standard
-Dann das nächste niedrigste Theta und dort die partiellen Ableitungen rauswerfen.
- Dies sollte für ein stabileres Training sorgen ohne wichtige Informationen
- zu verlieren.
-\end_layout
-
-\begin_layout Standard
-....
-\end_layout
-
 \begin_layout Subsection
-Inverse durch Gleichungssysteme ersetzen 
+Likelihood: Inverse durch Gleichungssysteme ersetzen 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Inverse-durch-Gleichungssysteme"
@@ -6028,17 +6013,17 @@ name "subsec:Inverse-durch-Gleichungssysteme"
 \end_layout
 
 \begin_layout Standard
-Mit Hilfe der Cholesky Zerlegung können lineare Gleichungssysteme sehr effizient
- gelöst werden.
- Dies kann man sich zunutze machen, um bei der Likelihood Berechnung auf
- die Bestimmung der Inversen verzichten.
- Die Methodik ist weit verbreitet und soll in dieser Arbeit daher nur kurz
- erläutert werden.
- 
-\end_layout
+Mit Hilfe der Cholesky-Zerlegung (siehe Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Cholesky-Zerlegung"
 
-\begin_layout Standard
-Der Likelihoodterm (siehe 
+\end_inset
+
+) können lineare Gleichungssysteme sehr effizient gelöst werden.
+ Dies kann man sich zunutze machen, um bei der Likelihood Berechnung auf
+ die direkte Bestimmung der Inversen verzichten.
+ Der Likelihoodterm (siehe 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Maximum-LikelihoodCovariance"
@@ -6052,7 +6037,7 @@ reference "sec:Maximum-LikelihoodCovariance"
 \noindent
 \begin_inset Formula 
 \begin{align*}
-\log(N)= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)
+\log(N)= & -\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-{}_{1}\overrightarrow{F}\right)
 \end{align*}
 
 \end_inset
@@ -6071,42 +6056,25 @@ reference "subsec:Cholesky-Zerlegung"
 
 ).
  Der quadratische Term 
-\begin_inset Formula $\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)$
+\begin_inset Formula $\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)$
 \end_inset
 
  beinhaltet allerdings noch die Inverse Kovarianzmatrix.
  Dieser kann mit Hilfe der Cholesky Zerlegung gewonnen werden, wir führen
- hierfür einen Hilfsvektor 
+ hierfür die Hilfsvektoren 
 \begin_inset Formula $\vec{e}$
 \end_inset
 
- ein:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)=\vec{e}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Zusätzlich noch einen Hilfsvektor 
+ und 
 \begin_inset Formula $\vec{d}$
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Standard
+ ein:
 \begin_inset Formula 
-\[
-\mathbf{\mathbf{Cov}}^{-1}\vec{e}=\vec{d}
-\]
+\begin{align*}
+\left(\vec{y}_{s}-\overrightarrow{F}\right) & =\vec{e}\\
+\mathbf{\mathbf{Cov}}^{-1}\vec{e} & =\vec{d}
+\end{align*}
 
 \end_inset
 
@@ -6125,10 +6093,6 @@ Bei der Cholesky Zerlegung wird die Matrix
 \end_inset
 
  gilt an dieser Stelle als bekannt:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathbf{L}\mathbf{L}^{T} & =\mathbf{\mathbf{Cov}}
@@ -6136,52 +6100,21 @@ Bei der Cholesky Zerlegung wird die Matrix
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Daraus folgt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\[
-\mathbf{\mathbf{\left(\mathbf{L}\mathbf{L}^{T}\right)}}^{-1}\vec{e}=\vec{d}
-\]
+\begin{align*}
+\mathbf{\mathbf{\left(\mathbf{L}\mathbf{L}^{T}\right)}}^{-1}\vec{e} & =\vec{d}\\
+\vec{e} & =\vec{d}\mathbf{\mathbf{\mathbf{L}\mathbf{L}^{T}}}
+\end{align*}
 
 \end_inset
 
-
-\begin_inset Formula 
-\[
-\vec{e}=\vec{d}\mathbf{\mathbf{\mathbf{L}\mathbf{L}^{T}}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Führt man nun folgende Substitution ein:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\[
-\vec{d_{tmp}}=\vec{d}\mathbf{\mathbf{\mathbf{L}}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\vec{e}=\vec{d_{tmp}}\mathbf{\mathbf{\mathbf{L}^{T}}}
-\]
+\begin{align*}
+\vec{d_{tmp}} & =\vec{d}\mathbf{\mathbf{\mathbf{L}}}\\
+\vec{e} & =\vec{d_{tmp}}\mathbf{\mathbf{\mathbf{L}^{T}}}
+\end{align*}
 
 \end_inset
 
@@ -6194,7 +6127,7 @@ So kann dieses Gleichungssystem durch eine einfache Rückwärtssubstitution
 \begin_inset Formula $\vec{d}_{tmp}$
 \end_inset
 
-gelöst werden.
+ gelöst werden.
  Danach kann direkt das folgende Gleichungssystem durch Vorwärtseinsetzen
  gelöst werden und der Vektor 
 \begin_inset Formula $\vec{d}$
@@ -6202,9 +6135,6 @@ gelöst werden.
 
  ist hiermit bekannt.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 \vec{d_{tmp}}=\vec{d}\mathbf{\mathbf{\mathbf{L}}}
@@ -6212,10 +6142,6 @@ gelöst werden.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Der Aufwand hierfür ist deutlich geringer als bei der Invertierung, da nur
  zwei Gleichungssysteme gelöst werden müssen anstatt 
 \begin_inset Formula $n$
@@ -6225,121 +6151,15 @@ Der Aufwand hierfür ist deutlich geringer als bei der Invertierung, da nur
 \end_layout
 
 \begin_layout Subsection
-Vollständiger Verzicht auf die Inverse durch Likelihood Partielle Ableitungen
- durch Approximation der Spur 
+Ableitung Likelihood: Verzicht auf Inverse - Rückwärtsdifferentiation der
+ Cholesky Zerlegung 
 \begin_inset CommandInset label
 LatexCommand label
-name "subsec:SpurApprox"
+name "subsec:Ableitung-LikelihoodRueckMode"
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Bei der Bestimmung der partiellen Ableitungen nach den Hyperparametern des
- Likelihood Terms ist es deutlich schwieriger auf die Invertierung zu verzichten.
- Dies liegt an der Bestimmung der Ableitung der Determinante nach den Hyperparam
-etern.
- 
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\frac{\partial}{\partial h_{l}}\left(\log\left(\det(\mathbf{\mathbf{Cov}})\right)\right)-\frac{\partial}{\partial h_{l}}\left(\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta\overrightarrow{F}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\frac{1}{\det(\mathbf{\mathbf{Cov}})}\frac{\partial}{\partial h_{l}}\left(\det(\mathbf{\mathbf{Cov}})\right)+\left(\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Spur schätzen 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Avron2011,hutchinson1989stochastic,MarkGibbs1997"
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-Spur\left(R\right)=E\left[\vec{d}^{T}R\vec{d}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-Spur\left(R\right)\approx\frac{1}{N}\sum\vec{d}^{T}R\vec{d}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\vec{d}=\left[\begin{array}{c}
-N\left(0,1\right)\\
-\vdots\\
-N\left(0,1\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Approximation benötigt leider einen sehr großen Zufallsvektor 
-\begin_inset Formula $\vec{d}$
-\end_inset
-
- um eine ausreichende Genauigkeit zu erhalten.
- Dies macht die Methode letztlich wieder ineffizient.
- Zudem bleibt immer eine Restunsicherheit in den partiellen Ableitungen
- die sich sehr negativ auf das Training auswirken kann.
- 
-\end_layout
-
-\begin_layout Subsection
-Vollständiger Verzicht auf die Inverse durch Rückwärtsdifferentiation der
- Cholesky Zerlegung
 \end_layout
 
 \begin_layout Standard
@@ -6504,31 +6324,13 @@ Der Hauptaufwand liegt also bei der Vorwärts- und Rückwärtssubstitution.
  Denkbar ist aber auch eine Parallelisierung auf Prozessebene, diese ließe
  sich nach demselben Schema aufteilen und die Teile dann natürlich auch
  über SIMD Befehle beschleunigen.
- Im Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Verteiltes-Rechnen"
-
-\end_inset
-
- wird eine mögliche Umsetzung der prozessweiten Parallelisierung aufgezeigt.
  
 \end_layout
 
 \begin_layout Standard
-Ein kompletter Verzicht auf die Vorwärts Rückwärtssubstitution wäre dennoch
- erstrebenswert, da diese den größten Teil des Aufwands ausmacht.
- In Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:SpurApprox"
-
-\end_inset
-
- wurde aufgezeigt, dass nur die Ableitung der Determinante der Kovarianzmatrix
- die Rückwärts- und Vorwärtssubstitution benötigt.
- Es gilt also eine andere Möglichkeit der analytischen Berechnung für diese
- Ableitung zu finden, die eine kürzere Laufzeit verspricht.
+Ein kompletter Verzicht auf die Vorwärts- und Rückwärtssubstitution wäre
+ dennoch erstrebenswert, da diese den größten Teil des Aufwands ausmacht.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -6550,8 +6352,6 @@ key "Mader2008,Griewank2008"
 
  verwiesen, welche einen sehr guten Überblick über die algorithmische Differenti
 ation bieten.
- Die grundlegende Idee in diesen Ansätzen ist es den gesamte Likelihood
- Term rückwärts zu differenzieren.
  Dieser Ansatz bietet die Möglichkeit auf die Vor- und Rückwärtssubstitution
  zu verzichten, allerdings werden rückwärtsdifferenzierte Algorithmen des
  Cholesky Algorithmus und auch der Vor- und Rückwärtssubstitution benötigt.
@@ -6580,185 +6380,89 @@ key "Toal2011"
  Die Vorwärts- und Rückwärtssubstitution muss dennoch durchgeführt werden.
  Diese stellt grundlegend auch den Hauptanteil bei der Berechnung des Likelihood
 s und der Ableitungen dar.
- 
+ Weiterhin müssen für jedes Kovarianzmodell eigene Algorithmen aufgestellt
+ werden, was den Enticklungsaufwand stark erhöht.
 \end_layout
 
 \begin_layout Standard
 Eine andere Möglichkeit bietet die alleinige Rückwärtsdifferentiation der
  Determinante der Kovarianzmatrix.
- Dieser Ansatz bietet einen grundsätzliches Geschwindigkeitsvorteil,wie
- sich im Weiteren herausstellen wird.
- Zudem bietet dieser Ansatz den Vorteil, dass der Quellcode sich nur minimal
- ändert und für alle Kriging-Verfahren und auch Korrelationsfunktionen gilt.
+ Dieser Ansatz bietet einen Geschwindigkeitsvorteil und zudem den Vorteil,
+ dass der Quellcode sich nur minimal ändert und damit für alle Kriging-Verfahren
+ und auch Kovarianzfunktionen gilt.
  Es wird allerdings eine rückwärtsdifferenzierte Version des Cholesky Algorithmu
 s benötigt.
- Für diese bestehen mittlerweile aber sehr effiziente BLAS-Implementierungen,
- diese werden im weiteren Verlauf vorgestellt.
+ Für diese bestehen mittlerweile aber sehr effiziente BLAS-Implementierungen.
  Der grundlegende Ansatz ist die Bestimmung der formellen Ableitung der
  gesuchten Ableitung:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
- & \frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}
-\end{align*}
+\begin{align}
+ & \frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}\label{eq:lnDetCovRuckmodus}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Wobei die Determinante das Produkt über alle quadrierten Diagonalelemente
  der Cholesky zerlegten Dreiecksmatrix 
 \begin_inset Formula $LL^{T}$
 \end_inset
 
  ist:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
-ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right) & =ln\left(\prod_{i}L_{i,i}^{2}\right)
-\end{align*}
+\begin{align}
+ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right) & =ln\left(\prod_{i}L_{i,i}^{2}\right)=2\sum ln\left(L_{i,i}\right)
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Wobei folgende Form in der Regel bevorzugt wird, da diese numerisch stabiler
- ist:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & =2\sum ln\left(L_{i,i}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Daraus ergibt sich die folgende Verkettung, welche die Cholesky Zerlegung
  berücksichtigt 
 \begin_inset Formula $f_{chol}$
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
  & \frac{\partial\left(ln\left(det\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)\right)}{\partial h_{l}}
-\end{align*}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die bestehenden Abbildungen sehen wie folgt aus;
-\end_layout
-
-\begin_layout Standard
+Die bestehenden Abbildungen sehen wie folgt aus:
 \begin_inset Formula 
-\begin{align*}
-\mathbf{\mathbf{\mathbf{Cov}}}:\mathbb{R}\longmapsto\mathbb{R}^{n^{2}}
-\end{align*}
+\begin{align}
+\mathbf{\mathbf{\mathbf{Cov}}}:\mathbb{R}\longmapsto\mathbb{R}^{n^{2}}\\
+f_{chol}:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}^{n^{2}}\nonumber \\
+det:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}\nonumber \\
+ln:\mathbb{R}\longmapsto\mathbb{R}\nonumber 
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f_{chol}:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}^{n^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-det:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-ln:\mathbb{R}\longmapsto\mathbb{R}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Der Logarithmus der Determinante wird als 
 \begin_inset Formula $f_{lndet}$
 \end_inset
 
  zusammengefasst
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
- & \frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}
-\end{align*}
+\begin{align}
+ & \frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}\\
+ & f_{lndet}:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}\nonumber 
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f_{lndet}:\mathbb{R}^{n^{2}}\longmapsto\mathbb{R}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 es gilt also
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 f_{lndet}\circ f_{chol}\circ\mathbf{\mathbf{\mathbf{Cov}}} & :\mathbb{R}\longmapsto\mathbb{R}
-\end{align*}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 daraus resultieren die Jacobi Matrizen 
 \begin_inset Formula $D_{cov}$
 \end_inset
@@ -6792,27 +6496,11 @@ daraus resultieren die Jacobi Matrizen
 \end_inset
 
  bedeutet.
-\end_layout
-
-\begin_layout Standard
-Damit wird die gesamte Ableitung zu:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}} & =D_{flndet}D_{chol}D_{cov}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+ Damit wird die gesamte Ableitung zu:
 \begin_inset Formula 
 \begin{align}
-\frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}} & =\sum_{i}\sum_{_{j<=i}}\sum_{k}\sum_{_{m<=k}}\frac{\partial f_{lndet}}{\partial\mathbf{\mathbf{\mathbf{L_{i,j}}}}}\frac{\partial\mathbf{\mathbf{\mathbf{L_{i,j}}}}}{\partial\mathbf{\mathbf{\mathbf{C_{k,m}}}}}\frac{\partial\mathbf{\mathbf{C_{k,m}}}}{\partial h_{l}}\label{eq:KettenregelCholesky}
+\frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}} & =D_{flndet}D_{chol}D_{cov}\label{eq:KettenregelCholesky}\\
+ & =\sum_{i}\sum_{_{j<=i}}\sum_{k}\sum_{_{m<=k}}\frac{\partial f_{lndet}}{\partial\mathbf{\mathbf{\mathbf{L_{i,j}}}}}\frac{\partial\mathbf{\mathbf{\mathbf{L_{i,j}}}}}{\partial\mathbf{\mathbf{\mathbf{C_{k,m}}}}}\frac{\partial\mathbf{\mathbf{C_{k,m}}}}{\partial h_{l}}
 \end{align}
 
 \end_inset
@@ -6852,11 +6540,8 @@ sionalen Kettenregel ohne große Matrizen berechnen kann.
 \end_inset
 
  kennt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 D_{flndet}^{T} & =\left(\begin{array}{c}
 \frac{\partial f_{lndet}}{\partial\mathbf{\mathbf{\mathbf{L_{1,1}}}}}\\
 \frac{\partial f_{lndet}}{\partial\mathbf{\mathbf{\mathbf{L_{2,1}}}}}\\
@@ -6876,36 +6561,24 @@ D_{flndet}^{T} & =\left(\begin{array}{c}
 0\\
 \frac{2}{L_{n,n}}
 \end{array}\right)
-\end{align*}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die Bestimmung dieses Vektors kann auch als Diagonalmatrix interpretiert
- werden welche sehr schnell aus der Cholesky zerlegten Matrix bestimmt werden
- kann.
+Die Bestimmung des Vektors kann auch als Diagonalmatrix interpretiert werden
+ welche sehr schnell aus der Cholesky zerlegten Matrix bestimmt werden kann.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\begin{align*}
+\begin{align}
 \bar{D}_{flndet}= & \left[\begin{array}{ccc}
 \frac{2}{L_{1,1}} & \cdots & 0\\
 \vdots & \ddots & \vdots\\
 0 & \cdots & \frac{2}{L_{n,n}}
 \end{array}\right]
-\end{align*}
+\end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Auffällig ist hierbei, das der Großteil des Jacobi Vektors aus 0 Einträgen
  besteht, mit dieser Information lässt sich Gleichung 
 \begin_inset CommandInset ref
@@ -6919,9 +6592,6 @@ reference "eq:KettenregelCholesky"
 \end_inset
 
  sind:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \frac{\partial\left(f_{lndet}\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}} & =\sum_{i}\sum_{k}\sum_{_{m<=k}}\frac{\partial f_{lndet}}{\partial\mathbf{\mathbf{\mathbf{L_{i,i}}}}}\frac{\partial\mathbf{\mathbf{\mathbf{L_{i,i}}}}}{\partial\mathbf{\mathbf{\mathbf{C_{k,m}}}}}\frac{\partial\mathbf{\mathbf{C_{k,m}}}}{\partial h_{l}}\label{eq:KettenregelCholeskyReduced}
@@ -6929,10 +6599,6 @@ reference "eq:KettenregelCholesky"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die Komplexität liegt somit nur noch bei 
 \begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
 \end_inset
@@ -6978,11 +6644,7 @@ Man geht von den Werten
 \begin_layout Standard
 Grundsätzlich sollten beide Vorgehensweise vom numerischen Aufwand gleichwertig
  sein.
- Da man allerdings für jeden der 
-\begin_inset Formula $o$
-\end_inset
-
--Hyperparameter 
+ Da man allerdings für jeden der Hyperparameter 
 \begin_inset Formula $h_{l}$
 \end_inset
 
@@ -7034,7 +6696,7 @@ reference "sec:Beschleunigter-BackChodec"
 \end_inset
 
  wird eine parallelisierte und SIMD-beschleunigte Variante des Algorithmus
- nach Smith-Algorithmus präsentiert.
+ nach Smith präsentiert.
  
 \end_layout
 
@@ -7051,286 +6713,8 @@ key "Murray2016,Sarkka2013"
  Diese stellen die effizientesten Methoden dar und werden folgend auch verwendet.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Subsection*
-Adjoint Matrix
-\end_layout
-
-\begin_layout Paragraph
-Level 3 BLAS Umsetzung
-\end_layout
-
-\begin_layout Paragraph
-Benchmarks
-\end_layout
-
-\begin_layout Plain Layout
-Einzelne Rückwärts Cholesky
-\end_layout
-
-\begin_layout Plain Layout
-Komplettes GTraining mit verschiedenen Matrixgrößen
-\end_layout
-
-\begin_layout Plain Layout
-
-\size larger
-Mehrere Korrelationsfunktionen GEK und CO-Kriging sind hier sehr problematisch
-\size default
- (SICHER?), da sich die Ableitung des Likelihood nach den Hyperparametern
- komplexer gestaltet und Softwaretechnisch nur noch schlecht zu lösen sind.
- 
-\end_layout
-
-\begin_layout Plain Layout
-- Rverse Vorwärts und Rückwärts und Reverse Choelsky muss durchlaufen werden,
- ansonsten sehr elegant und schneller als die normale Implmentierung
-\end_layout
-
-\begin_layout Plain Layout
-In 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Toal2011"
-
-\end_inset
-
- wird dieser Ansatz nochmals verändert und mithilfe der linearen Algebra
- Ansätze von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Giles2008"
-
-\end_inset
-
- auf eine Form gebracht, die auf die Rückwärtsdifferenzierung des Cholesky
- Algorithmus und der Vor- und Rückwärtssubstitution verzichtet.
- Allerdings wird hierfür die Inverse der Kovarianzmatrix benötigt, also
- auch die Vor- und Rückwärtssubstitution.
- Dieser Umstand wird in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Toal2011"
-
-\end_inset
-
- als Vorteil angesehen, da masn Standardbibliotheken für lineare Algebra
- ohne Probleme weiterverwenden kann und die Bestimmung der Likelihood Ableitunge
-n etwas .
- 
-\end_layout
-
-\begin_layout Plain Layout
-Eine andere Möglichkeit ist die Bestimmung ....
-\begin_inset Newline newline
-\end_inset
-
--Trugschluss da Reverse Cholesky nur 2x Aufwand von Cholesky also immer
- nopch viel schneller als Vor und R+ückwärts
-\end_layout
-
-\begin_layout Plain Layout
--Reverse Vor und Rück wird sowieso nicht benötigt, wenn nur die ableitung
- nach Determinante
-\end_layout
-
-\begin_layout Plain Layout
-- Reverse Cholesky wird nur eine effizienze Implementierung verwendet, hier
- wird eine aufgezeigt welche von 8sec auf 0.2sec bei 20 CPUs und SSE runter
- ist.
- in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Murray2016"
-
-\end_inset
-
- wird auch eine Implementierung gezeugt, welche die Verwendung von Standardblibi
-otheksunftionen ermöglicht.
- 
-\begin_inset Newline newline
-\end_inset
-
-– - - - - - - - - - - - - - - - – - - - - - - - - - - - - - - - – - - -
- - - - - - - - - - - - - – - - - - - - - - - - - - - - - 
-\end_layout
-
-\begin_layout Plain Layout
-– - - - - - - - - - - - - - - - – - - - - - - - - - - - - - - - – - - -
- - - - - - - - - - - - - – - - - - - - - - - - - - - - - 
-\end_layout
-
-\begin_layout Plain Layout
-– - - - - - - - - - - - - - - - – - - - - - - - - - - - - - - - – - - -
- - - - - - - - - - - - - – - - - - - - - - - - - - - - - 
-\end_layout
-
-\begin_layout Plain Layout
-In wird ein Verfahren dargestellt, welches die gesamte Likelihood Berechnung
- rückwärts differenziert.
- Für dieses Verfahren ist es allerdings notwendig die komplette Vor- und
- Rückwärtssubstitution zu durchlaufen, zudem muss dieses Verfahren für jede
- neue Korrelationsfunktion umgeschrieben werden, was es softwaretechnisch
- kompliziert macht.
- Der Aufwand der Vor- und Rückwärtssubstitution würde dadurch ebenfalls
- nicht wegfallen oder vermindert werden.
- Würde eine Beschleunigung in der Bestimmung der partiellen Ableitungen
- der Kovarianzmatrix bringen.
- Der Nachteil liegt jedoch darin, dass man eine Reverse Version der Cholesky
- Zerlegung und der Vorwärts- und Rückwärtssubstition benötigt.
- Dies würde eine Benutzung von Libraries wie CUDA oder der Intel MKL verhindern.
- Die Beschleunigung durch CUDA oder MKL wird von uns als deutlich höher
- eingeschätzt als der Zugewinn durch die adjungierte Kovarianzmatrix.
- Aus diesem Grund wird darauf verzichtet.
-\end_layout
-
-\begin_layout Plain Layout
-Grundlegend ist es nicht nötig die gesamte Likelihood Berechnung rückwärts
- zu differenzieren, denn der einzig wirklich problematische Term ist 
-\begin_inset Formula $\frac{\partial}{\partial h_{l}}\left(\log\left(\det(\mathbf{\mathbf{Cov}})\right)\right)$
-\end_inset
-
-.
- Für diesen Term ist es zwingend notwendig die Inverse der Kovarianzmatrix
- zu berechnen.
- Es ist also ausreichend, nur diesen Term rückwärts zu differenzieren.
- 
-\end_layout
-
-\begin_layout Plain Layout
-In wird die Cholesky Zerlegung rückwärts differenziert, mithilfe dieses
- Algorithmus ist es möglich die Ableitung der Determinante ohne vorherige
- Invertierung der Kovarianzmatrix zu erhalten.
- 
-\end_layout
-
-\begin_layout Plain Layout
-
-\size larger
-Code Optimierung vergleich, zwischen dem Originalcode und dem optimierten,
- Native & SSE !!!!!!
-\end_layout
-
-\begin_layout Plain Layout
-Der Code wird deutlich unleserlicher und schwerer zu pflegen, deswegen nur
- für feste Code Bestandteile sinnvoll
-\end_layout
-
-\begin_layout Plain Layout
-_mm_load_pd(*adress) ist aligned und daher extrem schnell (wenn ich auf
- einer geraden Anzahl bin vom Array)
-\end_layout
-
-\begin_layout Plain Layout
-_mm_loadu_pd(double,double) is unaligned und daher sehr langsam(wenn ich
- auf einer ungeraden Anzahl bin vom Array)
-\end_layout
-
-\begin_layout Plain Layout
-Benchmark: alte Version bereits mit SSE und Parallelisierung, Gleichungssysteme
- stattt Inverse benutzt, nur für RPunkt die Inverse
-\end_layout
-
-\begin_layout Plain Layout
-Nur die chodecReverse und invertierung verlgiehcen, da der Rest prinzipiell
- gleich ist
-\end_layout
-
-\begin_layout Plain Layout
-asd
-\end_layout
-
-\begin_layout Plain Layout
-Erklären wie SSE durch den Speicher geht, also Speicher in 4er Blöcken aligned
- und wenn man außerhalb davon zugreift, liest die CPU die nächsten 2 Adressen
- und die 2te ist dann woanders.
- Das führt danndazu, mdass das Betriebssystem meckert und dem Prozess nicht
- erlaubt den Bereich zu lesen-> Speicherzugriffsfehöer
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-	register int i; 
-\end_layout
-
-\begin_layout Plain Layout
-
-	int n = this->getColumnSize(); 
-\end_layout
-
-\begin_layout Plain Layout
-
-	if(this->getColumnSize() != this->getRowSize()){ 	  cout <<"Matrix nicht
- quadratisch!
-\backslash
-n"; 	  return false; 	} 	if(this->getColumnSize() <=0){ 	  cout <<"Matrix
- Größe <= 0!
-\backslash
-n"; 	  return false; 	} 
-\end_layout
-
-\begin_layout Plain Layout
-
-	adjointMat.setSymmetric(true);
-\end_layout
-
-\begin_layout Plain Layout
-
-        // Set Seed Matrix #pragma omp parallel for         for(int i=0;
- i<n; i++){             adjointMat[i][i] = 2.0/(*this)[i][i];         } 
-                          for(int k=n-1; k>=0; k--){             for(int
- j=k+1; j<n;j++){                 for(int i=j; i<n;i++){               
-          adjointMat[i][k]  -=  adjointMat[i][j]*(*this)[j][k];        
-                 adjointMat[j][k]  -=  adjointMat[i][j]*(*this)[i][k]; 
-                }             }                          for(int j=k+1;
- j<n;j++){                 adjointMat[j][k] /=  (*this)[k][k];         
-        adjointMat[k][k] -=  adjointMat[j][k]*(*this)[j][k];           
-  }             adjointMat[k][k]=0.5*adjointMat[k][k]/(*this)[k][k];    
-     }
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	adjointMat.setSymmetric(true); 
-\end_layout
-
-\begin_layout Plain Layout
-
-	return true;
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
-Vergleich zwischen der Invertierung und der Rückwärtsdifferenziereu
+Vergleich zwischen der Invertierung und der Rückwärtsdifferenzierung
 \end_layout
 
 \begin_layout Standard
@@ -7376,32 +6760,22 @@ n wie die Intel MKL oder ATLAS Bibliothek verwendet werden.
 \begin_layout Standard
 Betrachtet man den Teil der Berechnung zur Bestimmung der Ableitung des
  Likelihoods nach den Hyperparameter, in dem sich die beiden Verfahren untersche
-iden, so handelt es sich prinzipiell nur um einen Term:
-\end_layout
+iden, so handelt es sich prinzipiell nur um Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lnDetCovRuckmodus"
 
-\begin_layout Standard
+\end_inset
+
+.
+ Die analytische Ableitung ist wie folgt bestimmt:
 \begin_inset Formula 
-\begin{align*}
- & \frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}
-\end{align*}
+\begin{equation}
+\frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}=\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
+\end{equation}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die analytische Ableitung ist wie folgt bestimmt:
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Für beide Verfahren gilt die gleiche Ausgangssituation: Die nach den Hyperparame
 tern abgeleitete Kovarianzmatrix ist bekannt 
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
@@ -7412,16 +6786,11 @@ tern abgeleitete Kovarianzmatrix ist bekannt
 \end_inset
 
  ist bekannt.
- Ziel ist es die Ableitung nach den Hyperparametern des Terms 
-\begin_inset Formula $ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)$
-\end_inset
-
- zu bestimmen.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Paragraph
 \noindent
-Die Bestimmung der vorwärtsdifferenzierten Ableitung benötigt folgende Schritte:
+Ablauf Vorwärtsdifferentiation 
 \end_layout
 
 \begin_layout Enumerate
@@ -7459,7 +6828,7 @@ ion durchgeführt werden diese benötigt relativ genau
 
 \begin_layout Enumerate
 Die Bestimmung der quadratischen Form 
-\begin_inset Formula $\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)$
+\begin_inset Formula $\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)$
 \end_inset
 
 
@@ -7481,9 +6850,9 @@ Das Matrixprodukt
  
 \end_layout
 
-\begin_layout Standard
-Die Bestimmung der Rückwärtsdifferenzierten Ableitung benötigt folgende
- Schritte.
+\begin_layout Paragraph
+\noindent
+Ablauf Rückwärtsdifferentiation 
 \end_layout
 
 \begin_layout Enumerate
@@ -7528,7 +6897,7 @@ Die Bestimmung der Rückwärtsdifferenzierten Cholesky Zerlegung
 
 \begin_layout Enumerate
 Die Bestimmung der quadratischen Form 
-\begin_inset Formula $\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)$
+\begin_inset Formula $\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{Cov}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)$
 \end_inset
 
 
@@ -7547,29 +6916,24 @@ Die Bestimmung des Produkts der aus Punkt 2 berechneten Matrix und den Einträge
 
 \end_layout
 
-\begin_layout Standard
-Letztlich zählt für den Vergelcih haupütsächlich der Unterschied zwischen
- der Vorwärts- und Rückwärtssubstitution und der Rückwärtsdifferenzierten
- Cholesky Zerlegung.
- da beides über Intel MKL Routinen umgesetzt wurde, ist nicht bekannt wieviele
- Operationen wirklich gemacht werden.
- Daher wird folgend ein zeitlicher Vergleich über ein Benchmark angestellt.
- Erwartet wird ein konstanter Faktor zugunsten der Rückwärtsdifferenziereung.
+\begin_layout Paragraph
+Benchmark
 \end_layout
 
 \begin_layout Standard
-Als Benchmark dienten zufällig erzeugte Testdaten aus der ZDT3 Funktion
+Folgend wird ein zeitlicher Vergleich über ein Benchmark angestellt.
+ Als Benchmark dienten zufällig erzeugte Testdaten aus der ZDT3 Funktion
  (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "chap:Benchmarks"
+reference "sec:ZDT3"
 
 \end_inset
 
 ) mit jeweils 8 Parametern.
  Es wurden jeweils 10 Kriging Iterationen durchgeführt und die Zeiten für
  die Erzeugung der partiellen Ableitungen des Likelihoods gemessen.
- Berechnet wurde der Testfall dabei zwei Xeon E5 2640 v3 mit insgesamt 16
+ Berechnet wurde der Testfall auf zwei Xeon E5 2640 v3 mit insgesamt 16
  Threads.
  Für alle Berechnungen wurde die Intel MKL Bibliothek verwendet.
  
@@ -7584,11 +6948,8 @@ reference "fig:ForwarBackwardBenchmarkGesamtzeit"
 \end_inset
 
  zeigt die benötigte Zeit für die Erzeugung der partiellen Ableitungen.
- Der Rückwärtsmodus war in diesem Fall grundlegend schneller als der Vorwärtsmod
-us.
- Im Schnitt konnte ein konstanter Faktor zwischen den beiden Berechnungsmoden
- gefunden werden der bei ca.
- 0.68 lag.
+ Der Rückwärtsmodus war in diesem Fall ca.
+ 1.5x schneller als der Vorwärtsmodus.
 \end_layout
 
 \begin_layout Standard
@@ -7635,7 +6996,19 @@ name "fig:ForwarBackwardBenchmarkGesamtzeit"
 
 \begin_layout Standard
 Die folgenden Abbildungen zeigen die Zeiten der verschiedenen Schritte im
- Vergleich:
+ Vergleich.
+ Die Zeiten der Schritte 1 und 4 sind identisch und werden daher nicht gezeigt,
+ die Ergebnisse können aber im Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
+
+\end_inset
+
+ gefunden werden.
+ Unterschiede können in Schritt 2-3 und Schritt 5 gesehen werden, in beiden
+ Fällen ist der Rückwärtsmodus schneller.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -7646,24 +7019,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep1.eps
-	scale 70
-
-\end_inset
-
-
-\begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep2-3.eps
-	scale 70
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep4.eps
 	scale 70
 
 \end_inset
@@ -7682,7 +7038,490 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vergleich-der-Zeiten"
 
+\end_inset
+
+Vergleich der Zeiten der Berechnung der partiellen Ableitungen des Likelihood-Te
+rms
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Ableitung Likelihood: Verzicht auf Inverse - Approximation 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:SpurApprox"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie bereits beschrieben ist es bei der Bestimmung der partiellen Ableitungen
+ nach den Hyperparametern des Likelihood Terms deutlich schwieriger auf
+ die Invertierung zu verzichten.
+ Dies liegt an der Bestimmung der Ableitung der Determinante nach den Hyperparam
+etern.
+ 
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
+\end{align*}
+
+\end_inset
+
+Wie bereits Spur in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Ableitung-LikelihoodRueckMode"
+
+\end_inset
+
+ beschrieben, liegt die Schwierigkeit in der Berechnung der Spur.
+ Die Spur einer Matrix lässt sich laut 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Avron2011,hutchinson1989stochastic,MarkGibbs1997"
+
+\end_inset
+
+ statistisch schätzen:
+\begin_inset Formula 
+\[
+Spur\left(R\right)\approx E\left[\vec{d}^{T}R\vec{d}\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Spur\left(R\right)\approx\frac{1}{N}\sum\vec{d}^{T}R\vec{d}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\vec{d}=\left[\begin{array}{c}
+N\left(0,1\right)\\
+\vdots\\
+N\left(0,1\right)
+\end{array}\right]
+\]
+
+\end_inset
+
+Die Approximation benötigt leider einen sehr großen Zufallsvektor 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ um eine ausreichende Genauigkeit zu erhalten.
+ Dies macht die Methode letztlich wieder ineffizient.
+ Zudem bleibt immer eine Restunsicherheit in den partiellen Ableitungen
+ die sich negativ auf das Training auswirken kann.
+ 
+\end_layout
+
+\begin_layout Subsection
+Verwendung von GPUs 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Verwendung-von-GPGPU"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Verwendung von GPUs (Graphical Processing Unit) zur Beschleunigung von
+ intensiven Rechenoperationen findet innerhalb der wissenschaftlichen Gemeinde
+ immer größere Anwendung und Zuspruch (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cook2012"
+
+\end_inset
+
+
+\series bold
+)
+\series default
+.
+ Meistens werden solche GPUs als Zusatzkarten für Rechner angeboten und
+ verfügen oftmals über eigenen schnellen onboard-Speicher.
+ Der Unterschied zwischen einer konventionellen CPU und einer GPU besteht
+ hauptsächlich in der Architektur der Prozessoren.
+ Während CPUs bis zu ca.
+ 20 (nach heutigem Stand) hochgetaktete Kerne besitzen und komplexe (bis
+ zu 3-Schichtige) Cache Strukturen, so sind GPUs meist mit mehreren tausend
+ niedrig getakteten Kernen ausgestattet.
+ Auch die Cache Struktur fällt bei GPUs deutlich simpler aus.
+ Weiterhin ist die sehr direkte Anbindung des Speichers auf der Platine
+ der GPU selbst oftmals ein Vorteil.
+ Durch immer größer werdende SIMD (Single Instruction Multiple Data) Einheiten
+ in modernen CPUs (bspw.
+ AVX512 mit 512 breiten Registern) verschwindet der Unterschied allerdings
+ zusehends, wie die folgende Tabelle zeigt.
+ 
+\end_layout
+
+\begin_layout Standard
+Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:CoresCPUGPU"
+
+\end_inset
+
+ zeigt zwei verschiedene CPUs von Intel und eine aktuelle GPU von NVidia.
+ Vergleicht man die realen Recheneinheiten auf den CPUs, so hat diese sich
+ fast verzehnfacht.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Erscheinungsjahr
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SIMD Einheiten/Core
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cores
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FMA Einheiten
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gesamt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intel E7-8870
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+80
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intel Platinum 8180
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2017
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+896
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nvidia P100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2017
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3584
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:CoresCPUGPU"
+
+\end_inset
+
+Anzahl der Rechneneinheiten für verschiedene CPUs / GPUs
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auch auf programmiertechnischer Seite verschwindet der Unterschied zwischen
+ CPU und GPU.
+ So ist der Aufwand eine einfache Matrixoperation (wie z.B.
+ eine Matrixmultiplikation) zu programmieren, die die entsprechende Hardware
+ vollständig ausnutzt, zu einer Expertenaufgabe geworden.
+ Dieser Umstand gilt für CPUs und GPUs gleichermaßen.
+ Aus diesem Grund bieten sowohl Intel als auch NVidia zahlreiche hardwareoptimie
+rte Bibliotheken für alle Arten von Rechenoperationen an.
+\end_layout
+
+\begin_layout Standard
+Allerdings gibt es Unterschiede zwischen GPU und CPU bei dem Transfer von
+ Daten.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:BusSystem"
+
+\end_inset
+
+ zeigt den vereinfachten Aufbau eines Bus-Systems wie es auf aktuellen Mainboard
+s zu finden ist.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/MotherboardSchaubild.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BusSystem"
+
+\end_inset
+
+Typischer Aufbau eines Bus-Systems 
 \end_layout
 
 \end_inset
@@ -7696,56 +7535,388 @@ status open
 
 \end_inset
 
+Es soll folgend der Ablauf einer Matrix-Zerlegung auf der GPU und CPU beschriebe
+n werden:
+\end_layout
 
+\begin_layout Subparagraph
+CPU:
+\end_layout
+
+\begin_layout Enumerate
+CPU erzeugt und belegt Matrix A im RAM (typische Transferraten von 100GB/sec)
+\end_layout
+
+\begin_layout Enumerate
+CPU zerlegt Matrix A im RAM 
+\end_layout
+
+\begin_layout Subparagraph
+GPU:
+\end_layout
+
+\begin_layout Enumerate
+CPU erzeugt und belegt Matrix A im RAM (typische Transferraten von 100GB/sec)
+\end_layout
+
+\begin_layout Enumerate
+GPU kopiert Matrix A vom RAM in den GPU-RAM über den PCIe Bus (typische
+ Transferraten von 15GB/sec)
+\end_layout
+
+\begin_layout Enumerate
+GPU zerlegt Matrix A im GPU-RAM (typische Transferraten von 320GB/sec)
+\end_layout
+
+\begin_layout Enumerate
+GPU kopiert Matrix A zurück in den RAM (typische Transferraten von 15GB/sec)
 \end_layout
 
 \begin_layout Standard
-Wie erwartet sind die Zeiten vom ersten und vom vierten Schritt nahezu identisch
-, da die Berechnung letztlich auch dieselbe ist.
- Unterschiede können in Schritt 2-3 und Schritt 5 gesehen werden, in beiden
- Fällen ist der Rückwärtsmodus schneller.
+Wie man erkennt, kann der PCIe Bus mit 15GB/sec (Stand 2017) zum Flaschenhals
+ der Operation werden.
+ Die Beschleunigung der Rechnung auf der Karte selbst, muss den Overhead
+ des Transfers überwiegen.
+ Erst dann lohnt sich der Einsatz einer solchen GPU.
  
 \end_layout
 
-\begin_layout Subsection
-Verwendung von GPGPU 
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:Verwendung-von-GPGPU"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-In 
+Ob der praktische Einsatz für ein Kriging-Verfahren wie es in AutoOpti verwendet
+ wird sinnvoll ist, soll innerhalb dieses Abschnittes beleuchtet werden.
+ In 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Toal2016"
 
 \end_inset
 
- wird die Verwendung von GPUs innerhalb des Kriging Verfahren bereits als
- gewinnbringend beschrieben.
- Innerhalb dieses Kapitels soll eine konkrete Umsetzung gezeigt werden und
- zudem auch ein Vergleich verschiedenster aktueller GPUs und CPUs angestellt
- werden.
+ wird die Verwendung von GPUs innerhalb eines Kriging-Verfahren bereits
+ als gewinnbringend beschrieben.
+ Innerhalb dieser Arbeit wurden allerdings nur kleine Matrizen betrachtet
+ (n<1000), die verwendete Bibliothek nicht beschrieben, die Overhead-Anteile
+ nicht beschrieben und auch die Fließkommagenauigkeit wurde nicht angegeben.
+ Dies kann von Bedeutung sein, da eine höhere Genauigkeit (von 64Bit) bei
+ einigen GPUs zu massiven Leistungseinbrüchen führt.
+ Weiterhin stellt sich auch die Frage, ob es während einer Optimierung möglich
+ und sinnvoll ist, mehrere Trainings auf einer GPU durchzuführen.
+ Folgend sollen diese Fragestellungen betrachtet werden.
+\end_layout
+
+\begin_layout Paragraph
+Umgesetzte Algorithmen 
+\end_layout
+
+\begin_layout Standard
+Wie bereits erwähnt, ist es nicht sinnvoll alle Algorithmen als GPU-Version
+ umzusetzen, da diese durch den Transfer letztlich langsamer wären.
+ Aus diesem Grund sind in der 
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+CudaMatrix
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Matrixoperationen"
+
+\end_inset
+
+ ), nur die zeitkritischen Algorithmen implementiert.
+ Für alle anderen wird die 
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+OpenMPMatrix
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+-Klasse verwendet.
+ Die dort implementierten Algorithmen sind: 
+\end_layout
+
+\begin_layout Itemize
+Cholesky Zerlegung
+\end_layout
+
+\begin_layout Itemize
+Rückwärtsdifferenzierte Cholesky Zerlegung
+\end_layout
+
+\begin_layout Itemize
+Matrix Multiplikation, Addition, Subtraktion
+\end_layout
+
+\begin_layout Itemize
+Lösen eines Gleichungssystem mit zerlegter Matrix
+\end_layout
+
+\begin_layout Standard
+Die genaue Umsetzung ist in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b,Kueppers2016c"
+
+\end_inset
+
+ beschrieben.
  
 \end_layout
 
-\begin_layout Standard
-
-\size huge
-Institutsvortrag Erklärungen nehmen !!!
+\begin_layout Paragraph*
+Fließkommagenauigkeit
 \end_layout
 
 \begin_layout Standard
-General Purpose Computation on Graphics Processing Unit blablabla#
+Innerhalb eines Kriging Verfahrens ist es praktisch unerlässlich die numerischen
+ Berechnung mit doppelter Fließkommagenauigkeit (64Bit) durchzuführen.
+ Aus diesem Grund sollte die Leistung der einzelnen GPU-Architekturen berücksich
+tigt werden.
+ Folgend sind alle NVidia Architekturen der letzten Jahre gelistet.
 \end_layout
 
 \begin_layout Standard
-Blocked Algorithmus
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mikroarchitektur
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Erscheinungsdatum
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DP/SP Performance
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fermi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2010
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1/2x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kepler
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2012
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1/3x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Maxwell
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2014
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1/32x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pascal
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2016
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1/2x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Volta
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2017
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1/2x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich der Rechenleistung verschiedener NVidia Architekturen bei Double
+ Precision (64Bit) und Single Precision (32Bit)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Auffällig ist hier die Maxwell Architektur die eine deutlich niedrigere
+ Leistung bei doppelter Genauigkeit bringt.
+ Die Unterschiede liegen meist in der Prozessorarchitektur begründet, so
+ haben die Kepler GPUs der Tesla Reihe alle pro SP-Core einen zusätzlich
+ DP-Core.
+ Daher auch das Verhältnis von 1/3.
+ Die Maxwell Architektur verzichtet hingegen auf jegliche DP-Einheiten und
+ kann doppelte Genauigkeit nur 
+\begin_inset Quotes gld
+\end_inset
+
+emulieren
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Je nach Anwendung sollte dieser Umstand bedacht werden.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Wirtschaftliche Betrachtung
 \end_layout
 
 \begin_layout Standard
@@ -10061,7 +10232,74 @@ GFlops/Euro
 K80 = 2 GPUs erwähnen 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph*
+Benchmarks
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/Fabian/benchmarks/local_cpu_gpu_total_density_time.pdf
+	scale 40
+	BoundingBox 100bp 30bp 900bp 940bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Trainingszeit für verschiedene Matrixgrößen, CPU/GPU 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/GPUOverhead.png
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
 GPU Resourcenverteilung bei parallelen Trainings
 \end_layout
 
@@ -13003,7 +13241,11 @@ Analysesoftware von Krigingmodellen während der Laufzeit
 \end_layout
 
 \begin_layout Standard
-Khon.py beschreiben
+Hyperparam Matrix und praktische Anwendung
+\end_layout
+
+\begin_layout Standard
+Likelihood Plot und praktische Anwendung
 \end_layout
 
 \begin_layout Subsection
@@ -13102,312 +13344,8 @@ Die Annahmen klären Ersatzmodelle nicht neu trainieren jedesmal.
 \end_layout
 
 \begin_layout Subsubsection*
-Benutzergesteuerte Entscheidungsfunktionen
-\end_layout
-
-\begin_layout Standard
-Vorgabe einer Wahrscheinlichkeitsfunktion
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Subsection*
-Cholesky Zerlegung
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Cholesky-Zerlegung"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Die Methode chodec() stellt eine Cholesky Zerlegung für positiv definite
- und symmetrische Matrizen bereit, für die Matrix 
-\begin_inset Formula $\mathbf{R}$
-\end_inset
-
- muss also gelten:
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\mathbf{R}=\mathbf{R}^{T}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-und 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\mathbf{\overrightarrow{v}*R*\overrightarrow{v}}>0 & \,\,für\,alle\,Vektoren\,\overrightarrow{v}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Bei der Cholesky Zerlegung wird die Matrix 
-\begin_inset Formula $\mathbf{R}$
-\end_inset
-
- in ein Produkt aus einer unteren Dreicksmatrix und deren Transponierten
- zerlegt:
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\mathbf{L}\mathbf{L}^{T} & =\mathbf{R}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Die Zerlegung kann nun verwendet werden, um durch Vor- und Rückwärtseinsetzen
- lineare Gleichungssysteme in der Form 
-\begin_inset Formula $\mathbf{R}\overrightarrow{x}=b$
-\end_inset
-
- zu lösen.
- Hierfür wird zuerst vorwärts eingesetzt:
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\mathbf{L}\overrightarrow{y} & =\overrightarrow{b}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-und dann durch Rückwärtseinsetzen kann der gesuchte Vektor 
-\begin_inset Formula $\overrightarrow{x}$
-\end_inset
-
- erhalten werden: 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\mathbf{L}^{T}\overrightarrow{x} & =\overrightarrow{y}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\Longrightarrow & \mathbf{R}\overrightarrow{x}=\mathbf{L}\mathbf{L}^{T}\overrightarrow{x}=\mathbf{L}\overrightarrow{y}=\overrightarrow{b}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-ersetzt man nun 
-\begin_inset Formula $\overrightarrow{x}$
-\end_inset
-
- durch 
-\begin_inset Formula $\mathbf{R}^{-1}$
-\end_inset
-
- und 
-\begin_inset Formula $\overrightarrow{b}$
-\end_inset
-
- durch die Einheitsmatrix 
-\begin_inset Formula $\mathbf{E}$
-\end_inset
-
-, kann man mit der Zerlegung die Inverse der Matrix 
-\begin_inset Formula $\mathbf{R}$
-\end_inset
-
- berechnen.
- 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Nach diesem Schritt können die Vor- und Rückwärtssubstitutionen spaltenweise
- durchgeführt werden.
- Diese lassen sich sehr gut parallelisieren, da jede CPU einfach einen Vektor
- der Inversen berechnet.
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Ein weiterer Vorteil der Zerlegung ist, dass die Determinante der Matrix
- 
-\begin_inset Formula $\mathbf{R}$
-\end_inset
-
- mit der Zerlegung einfach durch Multiplikation der Diagonalelemente der
- zerlegten Matrix gewonnen werden kann:
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-det\left(\mathbf{R}\right) & =\overset{n}{\underset{i=1}{\prod}}L_{i,i}^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Der verwendete Algorithmus ist in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "press2007numerical,gill2007numerical"
-
-\end_inset
-
- nochmals detaillierter beschrieben.
-\end_layout
-
-\begin_layout Subsection*
-Quadratische Form
-\end_layout
-
-\begin_layout Plain Layout
-Da bei dem Training eines Kriging Modells häufig quadratische Formen 
-\begin_inset Formula $\vec{v^{T}}R\vec{v}$
-\end_inset
-
- berechnet werden müssen, lohnt es sich diese zu beschleunigen.
- Dies wird dadurch gemacht, dass die Multiplikationen nicht nacheinander
- durchgeführt werden, sondern beide Multiplikationen in einer doppel-Schleife
- behandelt werden.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\overset{n}{\underset{i=1}{\sum}}\left(v_{i}\overset{n}{\underset{j=1}{\sum}}R_{i,j}*v_{j}\right) & =\vec{v}^{T}R\vec{v}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-Der Algorithmus ist im folgenden Listing gezeigt:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset listings
-lstparams "basicstyle={\footnotesize}"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-#pragma omp parallel for reduction(+:ret)
-\end_layout
-
-\begin_layout Plain Layout
-
-for(size_t row=0; row < matrix->getRowSize(); row++){
-\end_layout
-
-\begin_layout Plain Layout
-
-	double sum=0.;
-\end_layout
-
-\begin_layout Plain Layout
-
-	for(size_t col=0; col < matrix->getColumnSize(); col++){
-\end_layout
-
-\begin_layout Plain Layout
-
-		sum += matrix[row][col] * vec[col];
-\end_layout
-
-\begin_layout Plain Layout
-
-	} 			
-\end_layout
-
-\begin_layout Plain Layout
-
-	sum *= vec[row];
-\end_layout
-
-\begin_layout Plain Layout
-
-	result +=sum;
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-In der ersten Zeile wird eine Schleifenparallelisierung über OpenMP initialisier
-t, wobei das Aufsummieren von result nicht parallelisiert werden darf.
- Dies würde sonst zu unvorhersehbaren Fehlern führen, da mehrere Threads
- gleichzeitig in die Variable result schreiben möchten.
- 
-\end_layout
-
-\end_inset
-
-
+In Kapitel 3 packen, nur die praktischen Probleme erwähnen und die gewählten
+ Lösungen
 \end_layout
 
 \end_body

@@ -2109,6 +2109,134 @@ Daraus folgt letztlich:
 \end_layout
 
 \begin_layout Section
+Testfunktion ZDT3
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ZDT3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hier dargestellt ist eine oft verwendete Testfunktion namens ZDT3 (siehe
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "zitzler2000comparison"
+
+\end_inset
+
+).
+ Die Testfunktion 
+\begin_inset Formula $f\left(\vec{x}\right)$
+\end_inset
+
+ mit der Variable 
+\begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ wird wie folgt berechnet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+f\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)\label{eq:Testfunktion}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+g\left(\vec{x}\right) & =\left(1+\frac{9}{k-1}\overset{k}{\underset{i=2}{\sum}}\left(x_{i}-0.5\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h\left(\vec{x}\right) & =\left(2-\sqrt{\frac{x_{1}}{g}}\right)-\frac{x_{1}}{g}\sin\left(10\pi x_{1}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ZDT3"
+
+\end_inset
+
+ ist die Testfunktion dargestellt, es wurden zwei Variablen 
+\begin_inset Formula $\vec{x}=\left\{ \vec{x}\in\mathbb{R}^{k}|k=2\right\} $
+\end_inset
+
+ verwendet.
+ Bei der Funktion handelt es sich um einen Paraboloid mit überlagerter Sinusschw
+ingung.
+ Diese Funktion hat einige lokale Minima und kann auf beliebig viele Dimensionen
+ angewandt werden und eignet sich daher für analytische Optimierungs-Tests.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ZDT3.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ZDT3"
+
+\end_inset
+
+Plot der Testfunktion mit zwei Variablen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Beschleunigter Rückwärtsdifferenzierter-Cholesky-Algorithmus nach Smith
 \begin_inset CommandInset label
 LatexCommand label
@@ -2900,113 +3028,7 @@ for(int k=n-1; k>=0; k--){
 \end_layout
 
 \begin_layout Section
-Alternative Herleitung der symbolischen Differenzierung
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}= & \textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\phi_{ij}^{L}\left(A\right)= & \begin{cases}
-A_{ij} & i>j\\
-0.5A_{ij} & i=j\\
-0 & i<j
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\phi_{ij}^{U}\left(A\right)= & \begin{cases}
-0 & i>j\\
-0.5A_{ij} & i=j\\
-A_{ij} & i<j
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right) & =\textrm{Spur}\left(\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)+\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & =\textrm{Spur}\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}+\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & =\textrm{Spur}\left(\phi^{U}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\textrm{Spur}\left(\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Da 
-\begin_inset Formula $\mathbf{\mathbf{Cov}}^{-1}$
-\end_inset
-
- und 
-\begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
-\end_inset
-
- symmetrisch sind gilt:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
- & =2\textrm{Spur}\left(\phi^{L}\left(\mathbf{\mathbf{Cov}}^{-1}\right)\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Dies ist nun exakt dasselbe Ergebnis der symbolischen Differenzierung.
- 
-\end_layout
-
-\begin_layout Section
-Iterative Varianzbestimmung innerhalb des Co-Kriging Trainignsverfahrens
+Iterative Varianzbestimmung innerhalb des Co-Kriging Trainingsverfahrens
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Iterative-VarianzbestimmungTraining"
@@ -3817,112 +3839,228 @@ In diesem Fall würden das lokale und globale Kriterium zu einer anderen
  Entscheidung führen.
 \end_layout
 
-\begin_layout Paragraph*
-\begin_inset Note Note
-status open
+\begin_layout Section
+Cholesky Zerlegung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Cholesky-Zerlegung"
 
-\begin_layout Paragraph*
-Beispiel Gauss Korrelationsfunktion
+\end_inset
+
+
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \noindent
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beispiel-einer-Gauss-1"
+Bei der Cholesky Zerlegung wird die symmetrische und positiv definite Matrix
+ 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ in ein Produkt aus einer unteren Dreicksmatrix und deren Transponierten
+ zerlegt:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\mathbf{L}\mathbf{L}^{T} & =\mathbf{R}
+\end{align*}
 
 \end_inset
 
- ist eine beispielhafte Kovarianzfunktion mit zwei verschiedenen 
-\begin_inset Formula $\theta$
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Die Zerlegung kann nun verwendet werden, um durch Vor- und Rückwärtseinsetzen
+ lineare Gleichungssysteme in der Form 
+\begin_inset Formula $\mathbf{R}\overrightarrow{x}=b$
 \end_inset
 
- Werten zu sehen.
- Die Varianz und der Nugget wurden 
-\begin_inset Formula $\sigma^{2}=1,\lambda=0$
+ zu lösen.
+ Hierfür wird zuerst vorwärts eingesetzt:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\mathbf{L}\overrightarrow{y} & =\overrightarrow{b}
+\end{align*}
+
 \end_inset
 
- angenommen, dadurch sind Kovarianz und Korrelation in diesem Fall identisch.
- Auf der X-Achse des Diagramms ist die Differenz der beiden Stützstellen
- zueinander aufgetragen und die Y-Achse beschreibt den entsprechende Korrelation
-swert.
- Die rote durchgezogene Kurve zeigt die Korrelationsfunktion mit 
-\begin_inset Formula $\theta=0.01$
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+und dann durch Rückwärtseinsetzen kann der gesuchte Vektor 
+\begin_inset Formula $\overrightarrow{x}$
 \end_inset
 
- und die grüne gestrichelte Kurve 
-\begin_inset Formula $\theta=0.1$
+ erhalten werden: 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align*}
+\mathbf{L}^{T}\overrightarrow{x} & =\overrightarrow{y}
+\end{align*}
+
 \end_inset
 
-.
- Nimmt man eine Differenz der beiden Stützstellen von 
-\begin_inset Formula $\Delta x=5$
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Longrightarrow & \mathbf{R}\overrightarrow{x}=\mathbf{L}\mathbf{L}^{T}\overrightarrow{x}=\mathbf{L}\overrightarrow{y}=\overrightarrow{b}
+\end{align*}
+
 \end_inset
 
- an, dann ergeben sich für einen Hyperparameter von 
-\begin_inset Formula $\theta=0.01$
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+ersetzt man nun 
+\begin_inset Formula $\overrightarrow{x}$
 \end_inset
 
- ein Korrelationswert von 0.53 und für 
-\begin_inset Formula $\theta=0.1$
+ durch 
+\begin_inset Formula $\mathbf{R}^{-1}$
 \end_inset
 
- ein Korrelationswert von 0.08.
- In dem einen Fall wird also eine stärkere Abhängigkeit der beiden Stützstellen
- angenommen und im anderen Fall eine schwächere Abhängigkeit.
+ und 
+\begin_inset Formula $\overrightarrow{b}$
+\end_inset
+
+ durch die Einheitsmatrix 
+\begin_inset Formula $\mathbf{E}$
+\end_inset
+
+, kann man mit der Zerlegung die Inverse der Matrix 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ berechnen.
  
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \noindent
-
-\shape italic
-Falls einer der Parameter keine Korrelation mit der zu trainierenden Funktion
- besitzt, so kann das Trainingsverfahren auch sehr kleine Hyperparameter
- wählen.
- Dies führt praktisch dazu, dass dieser Parameter keinerlei Einfluss auf
- die Vorhersage mehr hat.
- Dies kann innerhalb einer Optimierung sehr wichtig sein, da so eine Art
- von Dimensionsreduktion erreicht wird.
- 
+Nach diesem Schritt können die Vor- und Rückwärtssubstitutionen spaltenweise
+ durchgeführt werden.
+ Diese lassen sich sehr gut parallelisieren, da jede CPU einfach einen Vektor
+ der Inversen berechnet.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
+\noindent
+Ein weiterer Vorteil der Zerlegung ist, dass die Determinante der Matrix
+ 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+ mit der Zerlegung einfach durch Multiplikation der Diagonalelemente der
+ zerlegten Matrix gewonnen werden kann:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RueckDiffLikelihoodBenchmarkSingleTimes"
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+det\left(\mathbf{R}\right) & =\overset{n}{\underset{i=1}{\prod}}L_{i,i}^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Der verwendete Algorithmus ist in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "press2007numerical,gill2007numerical"
+
+\end_inset
+
+ nochmals detaillierter beschrieben.
+\end_layout
+
+\begin_layout Section
+Rückwärtsdifferenzierung des Likelihood-Terms - Benchmark Ergebnisse 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
-	filename ../images/CorrelatoinFunction.eps
-	scale 40
+	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep1.eps
+	scale 70
 
 \end_inset
 
 
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep2-3.eps
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep4.eps
+	scale 70
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/BackwardBenchPartDerTimeStep5.eps
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beispiel-einer-Gauss-1"
-
-\end_inset
-
-Beispiel einer Gauss Korrelationsfunktion mit einer freien Variable und
- zwei unterschiedlichen 
-\begin_inset Formula $\theta$
-\end_inset
-
- Einstellungen und deren Einfluss auf den Korrelationswert 
-\end_layout
-
-\end_inset
-
-
+Vergleich der Zeiten der Berechnung der partiellen Ableitungen des Likelihood-Te
+rms
 \end_layout
 
 \end_inset

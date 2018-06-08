@@ -1330,6 +1330,13 @@ reference "subsec:COKrigingKovarianzmodell"
 
 \begin_layout Subsection
 Gradient Enhanced Kriging
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Gradient-Enhanced-Kriging"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
