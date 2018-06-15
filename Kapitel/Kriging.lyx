@@ -512,9 +512,6 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \end_inset
 
 :
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 y_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{y}_{i}^{T}\vec{w}_{i}(g\vec{,x})\label{eq:GewichtetSummeCOKriging}
@@ -587,17 +584,9 @@ F_{g}\left(\vec{x}\right) & =Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\ri
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
  Erwartungswert des Schätzfehlers 0 ist.
  
-\end_layout
-
-\begin_layout Standard
-\paragraph_spacing single
 \begin_inset Formula 
 \begin{align}
  & E\left[F_{g}\left(\vec{x}\right)\right]=0\label{eq:ErwartungSchatzfehlerNull-1-2}\\
@@ -610,10 +599,6 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Aufgrund der Stationarität soll gelten 
 \begin_inset Formula $E\left[Z_{i}(\vec{x}_{j})\right]=E\left[Z_{i}(\vec{x}_{l})\right]=\beta_{i},\forall j,l\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
@@ -630,9 +615,6 @@ reference "eq:ErwartungswertZXCoKriging"
 \end_inset
 
 :
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x}) & =\beta_{g}\label{eq:SummeGewichteCOKriging}
@@ -640,10 +622,6 @@ reference "eq:ErwartungswertZXCoKriging"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Eine weitere Bedingung an das Kriging Verfahren ist die minimale Varianz
  des Schätzfehlers, welche mit Hilfe des Verschiebungssatz 
 \begin_inset Formula $\textrm{var}\left[X\right]=E\left[X^{2}\right]-E\left[X\right]^{2}$
@@ -657,10 +635,6 @@ Eine weitere Bedingung an das Kriging Verfahren ist die minimale Varianz
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die folgende Formulierung stellt bereits das Ergebnis dar, wobei 
 \begin_inset Formula $\vec{w}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
@@ -858,9 +832,6 @@ reference "eq:GewichtetSummeCOKrigingZufallsVektor"
  ein, erhält man folgende Formulierung, wobei die Vektoren die Gewichte
  und Stützstellen aller Gütestufen enthalten.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{y}-\vec{c}(g\vec{,x})^{T}\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{y}+\frac{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{y}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g}
@@ -873,9 +844,6 @@ Durch einsetzen von
 \end_inset
 
 , ergibt sich:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\left(\vec{y}-\mu\vec{F}\right)+\mu\beta_{g}\label{eq:KoKrigingKovarianzVorhersage-1-2}
@@ -964,12 +932,9 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 
  ein, so erhält man die Formel für die Vorhersage der Standardabweichung
  des Schätzfehlers:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}_{0}\right)\right]-\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{c}(g\vec{,x})+\frac{1}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}\label{eq:VarianzVorhersage}
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}_{0}\right)\right]-\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{c}(g\vec{,x})+\frac{\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:VarianzVorhersage}
 \end{align}
 
 \end_inset
@@ -1420,14 +1385,7 @@ Im Folgenden soll gezeigt werden, dass sich die Kovarianzfunktion
  auch durch äußeres Differenzieren dieser abbilden lässt.
 \begin_inset Formula 
 \begin{align*}
-\frac{\partial}{\partial x_{1}^{p}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & \frac{\partial}{\partial x_{1}^{p}}\left(E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\right)
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
+\frac{\partial}{\partial x_{1}^{p}}\textrm{cov}(Z\left(\vec{x}_{1}\right),Z\left(\vec{x}_{2}\right))= & \frac{\partial}{\partial x_{1}^{p}}\left(E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]\right)\\
 = & E\left[\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\right]\\
  & +E\left[\left(Z\left(\vec{x}_{1}\right)-E\left[Z\left(\vec{x}_{1}\right)\right]\right)\frac{\partial}{\partial x_{1}^{p}}\left(Z\left(\vec{x}_{2}\right)-E\left[Z\left(\vec{x}_{2}\right)\right]\right)\right]
 \end{align*}
@@ -1518,9 +1476,6 @@ ertvektor
 , wobei an jeder entprechenden Stelle einer partiellen Ableitung eine Null
  eingetragen werden muss.
  Damit ergibt sich der Erwartungswertvektor zu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \vec{F}= & \left[\begin{array}{c}

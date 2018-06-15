@@ -394,9 +394,6 @@ Optimierungsproblem
 \begin_layout Standard
 Ein Optimierungsproblem lässt sich mit den vorhergehenden Bezeichnungen
  wie folgt definieren:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \underset{x_{i}\in\left[a_{i},b_{i}\right]\forall i\in\left\{ 1,...,k\right\} }{\min}\left\{ \left.\left\Vert \vec{y}\left(\vec{x}\right)\right\Vert \right|w_{j}\left(\vec{x}\right)\in\left[c_{j};d_{j}\right]\forall j\in\left\{ 1,...,c\right\} \right\} 
@@ -462,9 +459,6 @@ key "Voss2008"
 
  dominiert , falls bzgl.
  aller Zielfunktionen gilt: 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 M_{1}\prec M_{2}\Longleftrightarrow y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\label{eq:Dominanz}
@@ -491,9 +485,6 @@ Ein dominanter Member
 \end_inset
 
  eines Members definieren:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 P\left(M\right)\coloneqq\#\left\{ \left.\hat{M}\in M_{all}\right|\hat{M}\prec M\right\} +1
@@ -501,19 +492,12 @@ P\left(M\right)\coloneqq\#\left\{ \left.\hat{M}\in M_{all}\right|\hat{M}\prec M\
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Der Operator 
 \begin_inset Formula $\#$
 \end_inset
 
  gibt die Anzahl einer endlichen Menge an.
-\end_layout
-
-\begin_layout Standard
-Die Paretofront 
+ Die Paretofront 
 \begin_inset Formula $PF$
 \end_inset
 
@@ -526,9 +510,7 @@ Die Paretofront
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \[
 PF\coloneqq\left\{ \left.\hat{M}\in M_{all}\right|P\left(\hat{M}\right)=1\right\} 
@@ -566,15 +548,20 @@ reference "fig:Paretorang-und-Paretofront"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement h
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement O
+overhang 0in
+width "50col%"
 status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/Erich/Grundlagen_Paretorang.pdf
+	filename ../images/Erich/Grundlagen_Paretorang.eps
 
 \end_inset
 
@@ -601,6 +588,10 @@ key "Reimer2016"
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -869,22 +860,14 @@ reference "eq:Dominanz"
 \end_inset
 
 ) muss daher erweitert werden zu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\nonumber \\
- & \left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\label{eq:DominanzNebenbedidungn}\\
+M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\\
  & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Ein Member 
 \begin_inset Formula $M_{1}$
 \end_inset
@@ -1018,18 +1001,17 @@ reference "fig:OptiStandardProcess"
 \end_layout
 
 \begin_layout Standard
-\align center
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
 status open
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Graphics
 	filename ../images/Opti.eps
-	width 50page%
+	width 40page%
 
 \end_inset
 
@@ -1051,14 +1033,14 @@ Prozesskette des genetischen Algorithmus in AutoOpti
 
 \end_layout
 
-\end_inset
-
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
-Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwal
-tung, sowie die Erzeugung neuer Member unabhängig voneinander agieren.
+\end_inset
+
+ Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwa
+ltung, sowie die Erzeugung neuer Member unabhängig voneinander agieren.
  Um solch ein asynchrones Verfahren umzusetzen bedient sich AutoOpti eines
  Master/Slave Ansatzes.
  Hierfür sind grundlegend zwei verschiedene Arten von Prozessen vorgesehen:
@@ -1343,10 +1325,6 @@ reference "fig:ErsatzmodellOpti"
 
  soll der in AutoOpti verwendete Prozess zur Nutzung von Ersatzmodellen
  genauer beschrieben werden.
-\end_layout
-
-\begin_layout Standard
-\align center
 \begin_inset Float figure
 wide false
 sideways false
@@ -1354,13 +1332,63 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "75col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
 	filename ../images/Opti_Surrogate2.eps
-	scale 70
+	scale 60
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace*{\fill}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "23col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1371,6 +1399,11 @@ name "fig:ErsatzmodellOpti"
 \end_inset
 
 Nutzung von Ersatzmodellen im Optimierungsprozess
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1530,46 +1563,17 @@ Volumenzugewinn
  diesen zur Berechnung an einen freien Slave Prozess.
  Der Slave Prozess berechnet dann die echte Zielfunktion.
  Danach ist ein Vergleich mit den Vorhersagen der Ersatzmodelle möglich.
-\end_layout
-
-\begin_layout Subsubsection*
-Volumenzugewinn 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Volumenzugewinn"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wie bereits erwähnt, ist für die Optimierung auf den Ersatzmodellen ein
- Gütekriterium nötig, welches den Optimierungsfortschritt für Mehrzieloptimierun
-gen genauer quantifizieren kann als bspw.
- der Paretorang.
- Das in AutoOpti verwendete Kriterium ist der Volumenzugewinn (englisch:
- 
-\begin_inset Quotes gld
-\end_inset
-
-Volume-Gain
-\begin_inset Quotes grd
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
+\begin_inset Wrap figure
+lines 19
+placement O
+overhang 0in
+width "50col%"
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/VolumeGain.eps
+	filename ../images/Erich/VolumeGain.eps
+	scale 90
 
 \end_inset
 
@@ -1605,8 +1609,33 @@ key "Reimer2016"
 
 \end_layout
 
+\begin_layout Subsubsection*
+Volumenzugewinn 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Volumenzugewinn"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-Abbildung 
+Wie bereits erwähnt, ist für die Optimierung auf den Ersatzmodellen ein
+ Gütekriterium nötig, welches den Optimierungsfortschritt für Mehrzieloptimierun
+gen genauer quantifizieren kann als bspw.
+ der Paretorang.
+ Das in AutoOpti verwendete Kriterium ist der Volumenzugewinn (englisch:
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Volume-Gain
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:VolumeGain"
@@ -1627,20 +1656,70 @@ gewinn.
 mierung im Bezug auf eine bestehende Paretofront.
  Der Volumenzugewinn kann auch in einer Optimierung auf den Ersatzmodellen
  angewendet werden.
+ 
+\begin_inset Wrap figure
+lines 20
+placement O
+overhang 0in
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/Erich/ExpectedVolumeGain.eps
+	scale 90
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ExpectedVolumeGain"
+
+\end_inset
+
+Exemplarische Darstellung des erwarteten Volumenzugewinns anhand einer Optimieru
+ng mit zwei Zielfunktionen und drei Ersatzmodellvorhersagen.
+ Quelle: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
 Erwarteter Volumenzugewinn
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:EVG"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-AutoOpti verwendet statistische Ersatzmodelle.
- Dies bedeutet, dass die Ersatzmodelle statt dem reinen Funktionswert eine
- statistische Verteilung vorhersagen.
+AutoOpti verwendet statistische Ersatzmodelle, die Ersatzmodelle sagen also
+ eine statistische Verteilung vorher.
  Als Verteilungsfunktion wird eine Normalverteilung angenommen.
- Dies trifft in einigen Fällen zwar nicht zu, stellt in der Regel aber eine
- vernünftige Annahme dar und ist vom numerischen Aufwand noch im vertretbarem
- Rahmen.
+ Dies stellt in der Regel eine vernünftige Annahme dar und ist vom numerischen
+ Aufwand noch im vertretbarem Rahmen.
  Die Ersatzmodelle sagen also für einen unbeprobten Ort 
 \begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
 \end_inset
@@ -1685,65 +1764,13 @@ g
 \end_inset
 
  beschreibt das Produkt aus beiden Werten:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
-\[
+\begin{equation}
 EVG\left(M\right)=P\left(M\right)*I\left(M\right)
-\]
+\end{equation}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ExpectedVolumeGain.eps
-	lyxscale 200
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ExpectedVolumeGain"
-
-\end_inset
-
-Exemplarische Darstellung des erwarteten Volumenzugewinns anhand einer Optimieru
-ng mit zwei Zielfunktionen und drei Ersatzmodellvorhersagen.
- Quelle: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Bei einer Optimierung auf den Ersatzmodellen, wie sie in diesem Kapitel
  beschrieben wurde, wird versucht das Kriterium 
 \begin_inset Formula $EVG\left(M\right)$
@@ -1765,12 +1792,8 @@ key "Forrester2008"
 ).
  Der EVG Algorithmus bietet hier einen sehr guten Kompromiss zwischen explorativ
 en und expoitativen Verhalten.
- 
-\end_layout
-
-\begin_layout Standard
-Auf die genaue mathematische Herleitung und auch die Behandlung von Nebenbedingu
-ngen soll in dieser Arbeit nicht weiter eingegangen werden.
+ Auf die genaue mathematische Herleitung und auch die Behandlung von Nebenbeding
+ungen soll in dieser Arbeit nicht weiter eingegangen werden.
  Es sei hierfür auf 
 \begin_inset CommandInset citation
 LatexCommand cite

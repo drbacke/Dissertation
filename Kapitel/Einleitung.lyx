@@ -896,36 +896,42 @@ Die Anforderungen lassen sich hierbei in zwei Kategorien unterteilen.
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph
 Anforderungen Turbomaschinenoptimierung
 \end_layout
 
 \begin_layout Standard
-Die speziellen Anforderungen von Turbomaschinenoptimierungen können zusammengefa
-sst werden zu folgenden Punkten:
+Die speziellen Anforderungen von Turbomaschinenoptimierungen können wie
+ folgt zusammengefasst werden:
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Mehrere Zielfunktionen und physikalische Disziplinen
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Mehrere Restriktionen 
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Partielle Gradienteninformationen
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Hochdimensionale Suchräume 
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Lange Prozesskettenzeiten
 \end_layout
 
 \begin_layout Itemize
+\noindent
 Prozessketten liefern nicht immer Ergebnisse
 \end_layout
 
@@ -939,7 +945,7 @@ Da die Anforderungen an die Turbomaschinenindustrie und damit auch an die
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Software- und hardwaretechnische Anforderungen
 \end_layout
 
@@ -1022,7 +1028,7 @@ Ein weiterer wichtiger Punkt ist die Forderung einer offenen objektorientierten
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Zielsetzung
 \end_layout
 
@@ -1031,10 +1037,6 @@ Die aus den Anforderungen resultierende Zielsetzung wird folgend beschrieben.
  Hierfür werden in der folgenden Auflistung die wichtigsten Ziele dieser
  Arbeit zusammengefasst und im darauffolgenden Text genauer beschrieben.
  
-\end_layout
-
-\begin_layout Paragraph*
-Entwicklung eines Multifidelity-Optimierungsverfahrens
 \end_layout
 
 \begin_layout Enumerate
@@ -1087,13 +1089,11 @@ Erweiterung des Optimierers auf verschiedene Prozessketten für die jeweiligen
 
 \end_deeper
 \begin_layout Enumerate
-Testen des entwickelten Verfahrens an analytischen und auch realitätsnahen
- Beispielen
+Testen des entwickelten Verfahrens 
 \end_layout
 
 \begin_layout Enumerate
-Praktische Anwendbarkeit an einer industriellen Turbomaschinenoptimierung
- zeigen
+Praktische Anwendbarkeit an industriellen Turbomaschinenoptimierung zeigen
 \end_layout
 
 \begin_layout Standard

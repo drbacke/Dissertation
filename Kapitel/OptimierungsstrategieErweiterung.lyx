@@ -291,6 +291,44 @@ Beispiel für verschiedene Gütestufen innerhalb eines Simulationsverfahrens
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 15
+placement O
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/MultifidelityKapitel/Profiles.eps
+	scale 55
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispielhafte-Geometrischen-Vari"
+
+\end_inset
+
+Beispielhafte Geometrischen Variationen des DCA ähnlichen Profils
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 Um einen Eindruck von den unterschiedlichen Gütestufen innerhalb aerodynamischer
  Simulationsverfahren zu bekommen, soll folgend ein einfaches aber aussagekräfti
 ges Beispiel gezeigt werden.
@@ -331,42 +369,7 @@ reference "fig:Beispielhafte-Geometrischen-Vari"
 \end_inset
 
  werden zwei dieser möglichen Variationen dargestellt.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Profiles.eps
-	scale 60
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beispielhafte-Geometrischen-Vari"
-
-\end_inset
-
-Beispielhafte Geometrischen Variationen des DCA ähnlichen Profils
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Innerhalb dieses Beispiels werden zwei verschiedene Netzauflösungen miteinander
+ Innerhalb dieses Beispiels werden zwei verschiedene Netzauflösungen miteinander
  verglichen.
  Ein grobes Netz mit ca.
  920 Zellen und ein feines Netz 16680 Zellen.
@@ -381,9 +384,6 @@ reference "fig:MisesTestcase_Netze"
 
  für eine mögliche Geometrie dargestellt.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -393,10 +393,10 @@ status open
 \begin_inset Graphics
 	filename ../images/LF_Mesh.eps
 	lyxscale 50
-	scale 35
+	scale 30
 	BoundingBox 0bp 0bp 500bp 550bp
 	clip
-	rotateAngle 260
+	rotateAngle 270
 
 \end_inset
 
@@ -404,10 +404,10 @@ status open
 \begin_inset Graphics
 	filename ../images/HF_Mesh.pdf
 	lyxscale 50
-	scale 35
+	scale 30
 	BoundingBox 0bp 0bp 500bp 550bp
 	clip
-	rotateAngle 260
+	rotateAngle 270
 
 \end_inset
 
@@ -434,10 +434,6 @@ Darstellung der untersuchten Rechengitterauflösungen
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die betrachtete Strömungsgröße ist der massenstromgemittelte Totaldruckverlustbe
 iwert 
 \begin_inset Formula $\omega$
@@ -451,11 +447,7 @@ reference "sec:AnhangAerodynamische-Größen"
 \end_inset
 
 ).
- 
-\end_layout
-
-\begin_layout Standard
-In Tabelle 
+ In Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:MisesTestRandbedingungen"
@@ -463,16 +455,22 @@ reference "tab:MisesTestRandbedingungen"
 \end_inset
 
  werden die wichtigsten Randbedingungen für den Testfall aufgelistet.
- 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status collapsed
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="3">
 <features tabularvalignment="middle">
@@ -493,7 +491,7 @@ Name
 \begin_inset Text
 
 \begin_layout Plain Layout
-Minimal
+Min.
 \end_layout
 
 \end_inset
@@ -502,7 +500,7 @@ Minimal
 \begin_inset Text
 
 \begin_layout Plain Layout
-Maximal
+Max.
 \end_layout
 
 \end_inset
@@ -571,7 +569,7 @@ Anströmwinkel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Stromröhrenkontraktion
+Kanalkontraktion
 \end_layout
 
 \end_inset
@@ -629,7 +627,7 @@ Staffelungswinkel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Vorderkantenradius
+VK-radius
 \end_layout
 
 \end_inset
@@ -658,9 +656,6 @@ Vorderkantenradius
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -678,13 +673,13 @@ Randbedingungen für den Testfall
 
 \end_layout
 
-\end_inset
-
+\begin_layout Plain Layout
 
 \end_layout
 
-\begin_layout Standard
-Abbildung 
+\end_inset
+
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:VerlustpolarenMisesMufi"
@@ -717,7 +712,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/MultifidelityKapitel/Differenzfunkion_HF_LF_Mises.pdf
-	scale 90
+	scale 80
 
 \end_inset
 
@@ -971,6 +966,28 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "72col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
 	filename ../images/Opti_Surrogate_Multifidelity2.eps
 	scale 60
@@ -978,6 +995,34 @@ status open
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace*{\fill}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "22col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -987,7 +1032,12 @@ name "fig:MufiProzess"
 
 \end_inset
 
-Mutlfidelity-Optimierungsprozess
+Darstellung des Multifidelity-Optimierungsprozess
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1188,39 +1238,6 @@ gt werden.
 
 .
  
-\end_layout
-
-\begin_layout Standard
-Während einer laufenden Multifidelity-Optimierung muss also permanent eine
- Entscheidung getroffen werden, welche Prozesskette als nächstes durchlaufen
- werden soll.
- Benötigt wird also eine Entscheidungsfunktion 
-\begin_inset Formula $f$
-\end_inset
-
- die diese Entscheidung während einer laufenden Optimierung vornimmt und
- den Optimierungsverlauf möglichst günstig beeinflusst.
- Eine Entscheidungsfunktion zu finden, die einen optimalen Verlauf findet
- ist allerdings unrealistisch, da hierfür jeder mögliche Verlauf der gesamten
- Optimierung bekannt sein müsste.
- Aus diesem Grund, müssen einige Vereinfachungen und Annahmen über die Entscheid
-ungsfunktion getroffen werden.
- 
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Mglichkeiten-der-Membererzeugun"
-
-\end_inset
-
- sind einige Möglichkeiten der Entscheidungsfindung kategorisiert und sollen
- folgend beschrieben werden.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -1253,7 +1270,29 @@ Möglichkeiten der Membererzeugung mit mehreren Fidelities
 
 \end_inset
 
+Während einer laufenden Multifidelity-Optimierung muss also permanent eine
+ Entscheidung getroffen werden, welche Prozesskette als nächstes durchlaufen
+ werden soll.
+ Benötigt wird also eine Entscheidungsfunktion 
+\begin_inset Formula $f$
+\end_inset
 
+ die diese Entscheidung während einer laufenden Optimierung vornimmt und
+ den Optimierungsverlauf möglichst günstig beeinflusst.
+ Eine Entscheidungsfunktion zu finden, die einen optimalen Verlauf findet
+ ist allerdings unrealistisch, da hierfür jeder mögliche Verlauf der gesamten
+ Optimierung bekannt sein müsste.
+ Aus diesem Grund, müssen einige Vereinfachungen und Annahmen über die Entscheid
+ungsfunktion getroffen werden.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mglichkeiten-der-Membererzeugun"
+
+\end_inset
+
+ sind einige Möglichkeiten der Entscheidungsfindung kategorisiert und sollen
+ folgend beschrieben werden.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1425,9 +1464,6 @@ Hierfür ist ein Maß für den Zugewinn an Information durch ein Sample notwendi
  jedoch viele Zielfunktionale und Nebenbedingungen.
  Zusätzlich benötigt man eine Funktion, welche den Ortsvektor auf den Informatio
 nsgewinn abbildet:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat*}{1}
 I:\mathbb{R}^{k} & \rightarrow\mathbb{R}^{2}\\
@@ -1439,15 +1475,8 @@ I_{high}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Die Entscheidungsfunktion selbst bildet den Informationsgewinn und die entsprech
 enden Zeiten auf eine Entscheidung ab:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
 f_{dec}:\mathbb{R}^{4} & \rightarrow\left\{ low,high\right\} \nonumber \\
@@ -1459,20 +1488,12 @@ t_{high}
 \end{array}\right)\,\, & \mapsto\begin{cases}
 low & ,\frac{I_{low}}{t_{low}}\geq\frac{I_{high}}{t_{high}}\\
 high & ,sonst
-\end{cases}\label{eq:Entscheidungsfunktion}\\
-\nonumber 
+\end{cases}\label{eq:Entscheidungsfunktion}
 \end{alignat}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Dies lässt sich auch umformulieren zu einem Kriterium:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \left(\begin{array}{c}
@@ -1567,15 +1588,23 @@ ch groß, wobei die niedrigeren Gütestufen eine größere Restunsicherheit
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0in
+width "57col%"
 status open
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
-	scale 50
+	scale 40
+	BoundingBox 60bp 50bp 714bp 535bp
+	clip
 
 \end_inset
 
@@ -1595,6 +1624,10 @@ Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1646,9 +1679,6 @@ Die Vorhersage der Standardabweichung der höchsten Gütestufe an einer Stelle
 
  bezeichnet.
  Im Falle eines Interpolierenden Modells gilt:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \sigma_{hh} & =0
@@ -1656,11 +1686,6 @@ Die Vorhersage der Standardabweichung der höchsten Gütestufe an einer Stelle
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 Es wird weiterhin aber nicht von einem rein interpolierenden Modell ausgegangen.
  Der Informationszugewinn für eine unbekannte Stelle 
 \begin_inset Formula $x_{0}$
@@ -1668,9 +1693,6 @@ Es wird weiterhin aber nicht von einem rein interpolierenden Modell ausgegangen.
 
  kann damit als Reduktion der vorhergesagten Standardabweichung modelliert
  werden:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 I_{low}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hl}\label{eq:Informationszugewinn}\\
@@ -1679,11 +1701,6 @@ I_{high}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hh}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
  eines neuen Members 
 \begin_inset Formula $t_{low},t_{high}\in\mathbb{R}$
@@ -1715,10 +1732,6 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
 
  für die höhere Gütestufe bezeichnet werden.
  Damit können die jeweiligen Erzeugungszeiten definiert werden:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align}
 t_{low}= & t_{train}+t_{opti}+t_{prl}\\
@@ -1727,11 +1740,6 @@ t_{high}= & t_{train}+t_{opti}+t_{prh}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 Mit dem Informationszugewinn und den Zeiten, kann man die in Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1740,33 +1748,14 @@ reference "eq:Entscheidungsfunktion"
 \end_inset
 
  definierten Verhältnisse von Informationszugewinn pro Zeit festlegen:
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Formula 
 \begin{align}
-\frac{I_{low}}{t_{low}} & =\frac{\sigma_{h}-\sigma_{hl}}{t_{train}+t_{opti}+t_{prl}}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset Formula 
-\begin{align}
+\frac{I_{low}}{t_{low}} & =\frac{\sigma_{h}-\sigma_{hl}}{t_{train}+t_{opti}+t_{prl}}\\
 \frac{I_{high}}{t_{high}} & =\frac{\sigma_{h}-\sigma_{hh}}{t_{train}+t_{opti}+t_{prh}}
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Diese Verhältnisse gelten für jeweils ein Ersatzmodell.
  Für mehrere Ersatzmodelle bietet sich eine gewichtete Summe aus den Einzelwerte
 n an.
@@ -1784,9 +1773,6 @@ n an.
 \end_inset
 
  Nebenbedingungen existiert ein Ersatzmodell.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \frac{I}{t}=\sum_{i}^{c+z}\frac{w_{i}}{\sum_{i}^{c+z}w_{i}} & \frac{I_{i}}{t_{i}}
@@ -1794,10 +1780,6 @@ n an.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Vorerst sollen die Gewichte vernachlässigt werden, daher wird im Folgenden
  von 
 \begin_inset Formula $w_{i}=1$
@@ -1814,9 +1796,6 @@ reference "eq:EntscheidungsfunktionKriterium"
 \end_inset
 
  vollständig definieren zu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 crit=\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\left[\sum_{i}^{c+z}\frac{1}{\sum_{j}^{c+z}1}\right]\sum_{i}^{c+z}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)
@@ -1824,10 +1803,6 @@ crit=\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}= & \frac{t_{train}+t_{opti
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Mit dieser Formulierung kann das Kriterium aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1861,6 +1836,41 @@ Ersatzmodelle für Nebenbedingungen
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 18
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/MultifidelityKapitel/HF_Restrictions_cumTime.eps
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Restriktion_VolumeGain_Verlauf"
+
+\end_inset
+
+Typischer Verlauf einer Optimierung im Bezug auf die Restriktionen und Zielfunkt
+ionen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Typischerweise gibt es in Turbomaschinenoptimierungen zahlreiche Nebenbedingunge
 n welche am Anfang der Optimierung nicht erfüllt werden.
  Wie in Kapitel 
@@ -1901,44 +1911,6 @@ nen sehr gut darstellen.
  Die rote Kurve beschreibt den kummulierten Volumenzugewinn und kann somit
  als Optimierungsfortschritt bezogen auf die Zielfunktionen angesehen werden.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/MultifidelityKapitel/HF_Restrictions_cumTime.eps
-	scale 70
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Restriktion_VolumeGain_Verlauf"
-
-\end_inset
-
-Typischer Verlauf einer Optimierung im Bezug auf die Restriktionen und Zielfunkt
-ionen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1988,15 +1960,49 @@ cheinlichkeiten darstellen
  Mit dieser Gesamtwahrscheinlichkeit lassen sich dann auch die Zielfunktionen
  und Nebenbedingungen zueinander gewichten.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-crit= & T*\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{\sigma_{j,h}-\sigma_{j,hl}}{\sigma_{j,h}-\sigma_{j,hh}}\right)\right]\label{eq:criteriumWeighted}\\
-w_{i}= & \left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \nonumber \\
-T= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\nonumber 
+crit= & T\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{\sigma_{j,h}-\sigma_{j,hl}}{\sigma_{j,h}-\sigma_{j,hh}}\right)\right]\label{eq:criteriumWeighted}\\
+w_{i}= & \left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \label{eq:GewichteCrit}\\
+T= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\label{eq:TimeCrit}
 \end{align}
+
+\end_inset
+
+Die Standardabweichung 
+\begin_inset Formula $\sigma_{hl}=\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)$
+\end_inset
+
+ kann mithilfe einer bedingten Normalverteilung berechnet werden.
+ Bestimmt man sich die Kovarianz 
+\begin_inset Formula $cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)$
+\end_inset
+
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzPredictor"
+
+\end_inset
+
+) zwischen den verschiedenen Gütestufen an dem Ort 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
+\end_inset
+
+, so gilt für 
+\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)$
+\end_inset
+
+ bei Annahme einer Multivariaten Normalverteilung und unter der Kenntniss
+ von 
+\begin_inset Formula $y_{l}\left(\vec{x}\right)$
+\end_inset
+
+ folgender Zusammenhang:
+\begin_inset Formula 
+\begin{equation}
+\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)=\sigma_{h}-cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)\frac{1}{\sigma_{l}}cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)\label{eq:BedingteNormalVertilung}
+\end{equation}
 
 \end_inset
 
@@ -2029,7 +2035,16 @@ reference "eq:Informationszugewinn"
 \end_inset
 
  zu einem räumlichen Integral erweitert werden.
- Die Formulierung 
+ 
+\begin_inset Formula 
+\begin{align}
+I_{high}\left(\vec{x_{0}}\right) & =\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}\\
+I_{low}\left(\vec{x_{0}}\right) & =\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}
+\end{align}
+
+\end_inset
+
+Die Formulierung 
 \begin_inset Formula $\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}_{0}\right)$
 \end_inset
 
@@ -2054,68 +2069,43 @@ reference "eq:Informationszugewinn"
 \end_inset
 
  bekannt ist.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-I_{high}\left(\vec{x_{0}}\right)=\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-I_{low}\left(\vec{x_{0}}\right)=\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Damit ändert sich Gleichung 
+ Damit ändert sich Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:criteriumWeighted"
 
 \end_inset
 
- zu:
-\end_layout
+ zu, die Gewichte und Zeiten bleiben wie in den Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GewichteCrit"
 
-\begin_layout Standard
+\end_inset
+
+ & 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:TimeCrit"
+
+\end_inset
+
+:
 \begin_inset Formula 
 \begin{align}
-crit= & T*\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{I_{low}}{I_{high}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{I_{low}}{I_{high}}\right)\right]\label{eq:criteriumWeighted-1}\\
-w_{i}= & \left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \nonumber \\
-T= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\nonumber 
+crit= & T*\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{I_{low}}{I_{high}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{I_{low}}{I_{high}}\right)\right]\label{eq:criteriumWeighted-1}
 \end{align}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die mögliche lokale Änderungen der Gewichtungen 
+Die lokale Änderungen der Gewichtungen 
 \begin_inset Formula $w_{i}\in\mathbb{R}$
 \end_inset
 
- soll an dieser Stelle allerdings unberücksichtigt bleiben.
- 
-\end_layout
-
-\begin_layout Standard
-Die lokale Varianzreduktion liefert naturgemäß den größten Beitrag, daher
- ist anzunehmen, dass das Kriterium in den meisten Fällen zu keiner anderen
- Entscheidung führen wird.
+ soll an dieser Stelle unberücksichtigt bleiben.
+ Die lokale Varianzreduktion liefert naturgemäß den größten Beitrag, daher
+ ist anzunehmen, dass das Kriterium meist zu keiner anderen Entscheidung
+ führt.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2124,23 +2114,14 @@ reference "sec:globalVarianzEntscheidungBsp"
 \end_inset
 
  wird ein Beispiel gezeigt, in dem eine solche Formulierung zu einer anderen
- Entscheidung führen würde, als die in Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:criteriumWeighted"
-
-\end_inset
-
- beschriebene.
- Die Konstruktion eines solchen Beispiels hat sich allerdings als äußerst
- schwierig erwiesen.
+ Entscheidung führen würde, allerdings war die Konstruktion eines solchen
+ Beispiels äußerst schwierig.
  
 \end_layout
 
 \begin_layout Standard
-Eine weitere Schwierigkeit bei der praktischen Umsetzung dieser Formulierung
- liegt in der numerischen Berechnung der Integrale, hierfür bietet sich
- eine Monte Carlo Integration an.
+Eine weitere Schwierigkeit liegt in der numerischen Berechnung der Integrale,
+ hierfür bietet sich eine Monte Carlo Integration an.
  Da die Dimension der Parameterräume und auch die Anzahl der Zielfunktionen
  und Nebenbedingungen bei typischen Turbomaschinenoptimierungen sehr hoch
  sind, ist die Berechnung eines solchen Integrals mit einem enormen Aufwand
@@ -2152,59 +2133,37 @@ Eine weitere Schwierigkeit bei der praktischen Umsetzung dieser Formulierung
 \end_layout
 
 \begin_layout Paragraph
-Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf:
+Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
 
 \begin_layout Standard
 Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
- gewählten Entscheidungsfunktion auf die Optimierungszeit und das Ergebnis
- ist.
- Um eine Idee davon zu bekommen, sollen hier mehrere Testoptimierungen mit
- verschiedenen Entscheidungsverläufen miteinander verglichen werden.
- Im Kapitel 
+ gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
+ Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschiede
+nen Entscheidungsverläufen miteinander verglichen.
+ In Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Trace-Erich"
 
 \end_inset
 
- werden die Optimierungen detailliert behandelt und ausgewertet.
- Es ist eine 3D-aeromechanische-Optimierung einer Fanstufe.
+ werden die Optimierungen detaillierter behandelt.
+ Es handelt sich um eine 3D-aeromechanische-Optimierung einer Fanstufe.
  Als Gütestufen werden verschiedene Netzauflösungen verwendet.
- Diese Optimierungen eignen sich für einen Vergleich, da viele verschiedene
- Entscheidungsverläufe getestet wurden und es sich zudem bereits um eine
- realitätsnahe aeromechanische Optimierung handelt.
  
-\end_layout
-
-\begin_layout Standard
-Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:OptimierungenEntscheidungsfVerläfe"
-
-\end_inset
-
- zeigt den Vergleich dieser Optimierungen.
- Jeder Punkt stellt eine Optimierung dar und jede dieser Optimierungen hatte
- dieselbe Laufzeit zur Verfügung.
- Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
- Samples hoher Güte und Samples niedriger Güte dargestellt.
- Auf der Ordinate wird der erreichte Volumenzugewinn gezeigt.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
+\begin_inset Wrap figure
+lines 18
+placement o
+overhang 0in
+width "45col%"
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/MultifidelityKapitel/EntscheidungsfunktionEinfluss.pdf
 	scale 60
-	BoundingBox 0bp 0bp 354bp 345bp
+	BoundingBox 0bp 0bp 354bp 310bp
 	clip
 
 \end_inset
@@ -2230,19 +2189,28 @@ en
 
 \end_inset
 
+ Diese Optimierungen eignen sich für einen Vergleich, da viele verschiedene
+ Entscheidungsverläufe getestet wurden und es sich zudem bereits um eine
+ realitätsnahe aeromechanische Optimierung handelt.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:OptimierungenEntscheidungsfVerläfe"
 
-\end_layout
+\end_inset
 
-\begin_layout Standard
-Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte einen
+ zeigt den Vergleich,wobei jeder Punkt eine Optimierung mit gleicher Laufzeit
+ darstellt.
+ Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
+ Samples hoher Güte und niedriger Güte dargestellt.
+ Auf der Ordinate wird der erreichte Volumenzugewinn gezeigt.
+ Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte einen
  deutlich höheren Volumenzugewinn bewirkt.
- Die Prozesskette niedriger Güte muss also bereits einen sehr hohen Informations
-gehalt besitzen.
+ Die Prozesskette niedriger Güte muss also bereits einen hohen Informationsgehal
+t besitzen.
  Die Streuung der einzelnen Optimierungen kommt durch einige Zufälligkeiten
- innerhalb des Optimierungsprozesses zustande.
- Diese Zufälligkeiten entstehen bei der Optimierung auf dem Ersatzmodell
- und auch bei der Initialisierung des Trainings der Ersatzmodelle.
- 
+ innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
+ und Optimierung auf den Ersatzmodellen) zustande.
 \end_layout
 
 \end_body

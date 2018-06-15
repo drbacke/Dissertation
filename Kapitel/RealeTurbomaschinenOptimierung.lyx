@@ -82,6 +82,1093 @@ name "chap:Reale-Turbomaschinen-Optimierung"
 
 \end_layout
 
+\begin_layout Section
+Analytische Tests Ersatzmodelle
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/HF_LF_RealFunctions_2.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/OrdinaryKriging.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/COKriging_HFNoLFSampling.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/COKriging_PaperExample/COKriging_ForresterSampling.eps
+	width 7cm
+	groupId COKriging
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Beispiele zeigen, wo A,B und C geändert werden und die Faktoren/Summanden
+ sich entsprechend anpassen.
+ (my, sigma und beta)
+\end_layout
+
+\begin_layout Standard
+Ordinary Kriging 
+\end_layout
+
+\begin_layout Standard
+GEK 
+\end_layout
+
+\begin_layout Standard
+COkriging
+\end_layout
+
+\begin_layout Standard
+Trainingszeit, Vorhersagegenauigkeit
+\end_layout
+
+\begin_layout Section
+Validierung CO-Kriging Testfunktion 1
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt soll das CO-Kriging validiert werden.
+ Für die Validierung benötigt man zwei verschiedene Arten von Testmustern,
+ einmal Muster hoher Güte (High Fidelity) und Muster von geringer Güte (Low
+ Fidelity).
+ In einer realistischen Anwendung wären dies bspw.
+ instationäre und stationäre Strömungslösungen oder Strömungslösungen mit
+ groben und feinen Netz.
+\end_layout
+
+\begin_layout Standard
+Als Testfunktion soll in diesem Fall wieder Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Testfunktion"
+
+\end_inset
+
+ dienen.
+ Um nun Daten von hoher und niedriger Güte zu gewinnen, wird die Testfunktion
+ mit einer Störung versehen und diese gestörten Daten als niedrige Güte
+ verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+Die hier getroffene Annahme für das CO-Kriging besteht darin, dass die Daten
+ hoher Güte sich aus den Daten niedriger Güte und einem normalverteilten
+ Fehler zusammensetzen (siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CO-Kriging-Ansatz"
+
+\end_inset
+
+).
+ Um diese Annahme zu prüfen, sollen verschiedene Störungsfunktionen getestet
+ werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Nur High Fidelity: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Gleichverteilte zufällige Verschiebung 
+\begin_inset Formula $U$
+\end_inset
+
+ des Funktionswertes, zwischen -1 und 1: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)+U\left(-1;1\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Verzerrung der Funktion: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)*v\left(x,y\right)$
+\end_inset
+
+; 
+\begin_inset Formula $x,y\in\mathbb{R};v\left(x,y\right)=0.5x+0.5y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Konstante Verschiebung des Funktionswertes: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)+10$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Verzerrung und konstante Verschiebung Funktion: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)*v\left(x,y\right)$
+\end_inset
+
+ + 10; 
+\begin_inset Formula $x,y\in\mathbb{R};v\left(x,y\right)=0.5x+0.5y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Low Fidelity Samples werden für jeden Testfall zufällig neu generiert,
+ die High Fidelity Daten werden jedoch beibehalten.
+ Die Trainingsaufwand für das CO-Kriging befindet in etwa bei 
+\begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
+\end_inset
+
+, was dem Ordinary Kriging entspricht.
+ Allerdings ist die Trainingszeit während einer Optimierung in der Regel
+ vernachlässigbar klein.
+ Zudem ist der Aufwand für die Erzeugung der Low Fidelity Samples meist
+ um einige Größenordnungen kleiner als für die Erzeugung der High Fidelity
+ Samples.
+ Eine sinnvolle Anwendung wäre beispielsweise eine Optimierung mit zeitgemittelt
+en Strömungslösungen (stationär) und zeitaufgelösten Strömungslösungen (instatio
+när).
+ Der zeitliche Unterschied zwischen beiden Lösungen ist meist enorm.
+ Daher wäre das CO-Kriging Verfahren für solch eine Optimierung geeignet,
+ da der grobe Funktionsverlauf bereits gut mit den stationären Daten dargestellt
+ wird.
+ Die größte Schwierigkeit in einer Optimierung ist allerdings die Entscheidung,
+ wann ein neues Sample mit hoher oder niedriger Güte berechnet werden soll.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+In der folgenden Tabelle sind die mittleren Fehler der entsprechenden Testfunkti
+onen dargestellt.
+ Der mittlere Fehler wurde wie folgt berechnet, wobei 
+\begin_inset Formula $z_{real}$
+\end_inset
+
+ den echten Funktionswert, 
+\begin_inset Formula $z_{predict}$
+\end_inset
+
+ den vom Kriging vorhergesagten Funktionswert und 
+\begin_inset Formula $n$
+\end_inset
+
+ die Anzahl an Testsamples darstellt.
+ Zudem wurde sichergestellt, dass die Testsamples nicht in der Trainingsdatenban
+k enthalten waren.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+E & =\frac{1}{n}\sum\left|z_{real}-z_{predict}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Funktion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Samples High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Samples Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittlerer Fehler
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ordinary Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.531559
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.079477
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.357601
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0872892
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.361622
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Der Fehler der CO-Kriging Modelle ist in allen vier Testfunktionen kleiner
+ als der des Ordinary Kriging.
+ Testfall 2 passt am besten zu der Annahme des CO-Krigings, dass die High
+ Fidelity Funktionswerte sich aus Low Fidelity Funktionswerten und einem
+ normalverteilten Fehler zusammensetzen.
+ Der Fehler ist hier auch am geringsten, was die Annahme bestätigt.
+ 
+\end_layout
+
+\begin_layout Standard
+Das CO-Kriging Modell besitzt für jede Fidelity einen eigenen Erwartungswert
+ 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+, wodurch eine konstante Verschiebung der Low Fidelity Daten (Testfall 4)
+ zu ähnlich guten Ergebnissen führt wie Testfall 2.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Testfälle, welche der allgemeinen Annahme im CO-Kriging am wenigsten
+ entsprechen sind Testfall 3 und Testfall 5.
+ Wobei die konstante Verschiebung bei Testfall 5 sich nur sehr wenig auf
+ den Fehler auswirken sollte.
+ Die Ergebnisse bestätigen diese Annahmen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-High.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Testfunktion und Ordinary Kriging mit 25 Samples (schwarze Kugeln)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Random.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 2 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Stretch.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 3 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In dieser Abbildung wurden die Low Fidelity Funktionswerte mit einer Funktion
+ multipliziert und dadurch verzerrt.
+ Bei 
+\begin_inset Formula $x=0;\,y=0$
+\end_inset
+
+ wird der Low Fidelity Funktionswert zu Null, bringt dem Gesamtmodell also
+ keine Information mehr.
+ Je größer die beiden Variablen werden, desto mehr Information beinhalten
+ die Low Fidelity Daten.
+ Die vorhergesagte Funktion sollte also an den entsprechenden Rändern deutlich
+ schlechter werden, sofern dort keine High Fidelity Informationen vorliegen.
+\end_layout
+
+\begin_layout Standard
+Die nächste Abbildung verdeutlicht dies, farbig dargestellt wird die absolute
+ Differenz zwischen der echten Funktion und der vorhergesagten.
+ Zudem sind die Low- und High-Fidelity Punkte eingetragen.
+ An dem Rand 
+\begin_inset Formula $y=0$
+\end_inset
+
+ sind nur sehr wenig High Fidelity Daten vorhanden und die Low Fidelity
+ Daten haben dort nur sehr wenig Informationsgehalt, daher ist der Fehler
+ dort auch deutlich höher.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Stretch_Error.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CO-Kriging Modell von Testfunktion 3, farbig dargestellt ist der absolute
+ Fehler.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Const.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 4 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/CO-Kriging-StretchShift.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 5 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Validierung CO-Kriging Testfunktion 2 / Low-Fidelity Vorhersage
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Validierung-CO-Kriging-Testfunkt2Low-Vorhersage"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für die Optimierung auf dem Ersatzmodell ist es nötig, eine Entscheidungsfunktio
+n zu definieren.
+ Diese Entscheidungsfunktion soll die Entscheidung treffen, ob der nächste
+ zu berechnende Member mit der Low- oder der High-Fidelity Prozesskette
+ berechnet werden soll.
+ Es gibt zahlreiche Möglichkeiten diese Entscheidungsfunktion umzusetzen.
+ Für einige dieser Möglichkeiten ist die vorhergesagte Varianz des CO-Kriging-Mo
+dells von großer Bedeutung.
+ Besonders wichtig ist hierbei, dass die vorhergesagte Varianz an beprobten
+ Orten kleiner werden soll.
+ Ist dieser bekannte Ort mit der High-Fidelity Prozesskette berechnet worden,
+ soll die vorhergesagte Varianz zu 0 werden und bei einem Low-Fidelity Punkt
+ muss eine Restunsicherheit bleiben.
+ Um dieses Verhalten zu testen, verwenden wir eine eindimensionalen Sinus
+ Funktion, wobei 
+\begin_inset Formula $x\in\mathbb{R}|x>-10\wedge x<10$
+\end_inset
+
+.
+ Die Low Fidelity Variante der Sinus Funktion, wird um einen gleichverteilten
+ zufälligen Wert im Bereich zwischen -0.2 und 0.2 gestört.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{high}\left(x\right) & =sin\left(x\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f_{low}\left(x\right) & =sin\left(x\right)+U\left(-0.2;0.2\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es wurden 3 High-Fidelity und 10 Low-Fidelity Punkte vorgegeben, wobei die
+ Verteilung der Punkte rein zufällig ist.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CO-Kriging1DSinus"
+
+\end_inset
+
+ zeigt die Ergebnisse des trainierten CO-Kriging Modells.
+ Im oberen Bild, stellt die rote (durchgezogene) Linie die Vorhersage des
+ CO-Krigin Modells und die gestrichelte blaue Kurve die reale Funktion dar.
+ Die roten Quadrate sind die verwendeten High-Fidelity Samples und die grünen
+ Dreiecke die Low-Fidelity Samples.
+ Es ist deutlich zu erkennen, dass die vorhergesagte Funktion exakt durch
+ die High-Fidelity Samples läuft und die Low-Fidelity Samples als 
+\begin_inset Quotes eld
+\end_inset
+
+Tendenzen
+\begin_inset Quotes erd
+\end_inset
+
+ mitgenommen werden.
+ Dies entspricht genau dem Verhalten, welches man von einem CO-Kriging Modell
+ erwartet.
+ Die untere Abbildung zeigt die vorhergesagte Standardabweichung des Modells.
+ Am Verlauf dieser Funktion ist deutlich zu erkennen, dass die Standardabweichun
+g bei High-Fidelity Samples auf den Wert Null geht und bei Low-Fidelity
+ Samples kleiner wird, allerdings immer noch eine 
+\begin_inset Quotes eld
+\end_inset
+
+Restunsicherheit
+\begin_inset Quotes erd
+\end_inset
+
+ bestehen bleibt.
+ Dies ist ebenfalls ein erwünschtes Verhalten, welches wir uns in den folgenden
+ Kapiteln zu nutze machen.
+\end_layout
+
+\begin_layout Standard
+ow-Fidelity Raum vorhergesagt werden.
+ Erwartet wird hierfür, dass die Low-Fidelity Punkte voll interpoliert werden
+ und die High-Fidelity Daten nicht.
+ Die High-Fidelity Daten sollten den Funktionsverlauf allerdings tendenziell
+ beeinflussen.
+ Die vorhergesagten Varianz sollte an Low-Fidelity Punkten auf 0 sinken.
+ Die folgende Abbildung zeigt das Ergebnis, welches sich wie erwartet verhält.
+ 
+\end_layout
+
+\begin_layout Subsection
+Initialisierungsverfahren im Vergleich
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt geht es darum, die verschiedenen Initialisierungsverfahren
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+) an einem analytischen Beispiel zu testen.
+ Als Testfunktion wurde eine 7-dimensionale 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k};k=5$
+\end_inset
+
+ Sinusfunktion genommen.
+ Die High-Fidelity Funktion besteht aus dem Low-Fidelity Ergebnis, welches
+ skaliert und verschoben wird, zusätzlich bringt die erste freie Variable
+ noch einen zusätzlichen funktionalen Zusammenhang in die Funktion.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+y_{low}\left(\vec{x}\right)= & \sum_{i=1}^{i<k}\sin\left(x_{i}*2\pi\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+y_{high}\left(\vec{x}\right)= & 2y_{low}\left(\vec{x}\right)+10+\sin\left(x_{0}*2\pi\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Funktionen bietet den Vorteil, dass man bereits ein erwartetes Trainingser
+gebnis hat und damit die Ergebnisse aus dem Kriging Training gut überprüfen
+ kann.
+ Erwartet werden:
+\end_layout
+
+\begin_layout Itemize
+Ein Skalierungsfaktor zwischen Low-Fidelity und High-Fidelity von 
+\begin_inset Formula $a=2$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Globaler Erwartungswert Low-Fidelity von 
+\begin_inset Formula $\beta_{low}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Globaler Erwartungswert High-Fidelity von 
+\begin_inset Formula $\beta_{high}=10$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Globale Standardabweichung Low-Fidelity Kovarianzfunktion von 
+\begin_inset Formula $\sigma_{low}=1.58$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Globale Standardabweichung Fehlerkovarianzfunktion von 
+\begin_inset Formula $\sigma_{err}=\frac{\sqrt{2}}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Alle Low-Fidelity Korrelations-Hyperparameter sollten den gleichen Wert
+ haben, 
+\begin_inset Formula $\forall\theta_{i,low}=const.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Korrelations-Hyperparameter der Fehlerfunktion sollten alle auf dem niedrigsten
+ Wert stehen, bis auf den ersten 
+\end_layout
+
+\begin_layout Section
+Analytische Tests Optimierung
+\end_layout
+
+\begin_layout Standard
+Testoptimierung
+\end_layout
+
+\begin_layout Standard
+Multifidelity 
+\end_layout
+
+\begin_layout Standard
+GEK
+\end_layout
+
+\begin_layout Standard
+Ordinary
+\end_layout
+
+\begin_layout Section
+Kopplung zwischen mehreren Ersatzmodellen durch ein CO-Kriging
+\end_layout
+
+\begin_layout Standard
+Potenzielle Anwendung ist die wiederverwendbarkeit von Daten aus alten Optimieru
+ngen.
+ Dieser Punkt ist für industrielle Anwendungen sehr interessant, da sich
+ während der Auslegung einer Turbomaschinen oftmals Randbedingungen und
+ sogar Parametrisierungen ändern.
+ Die Wiederverwendung von alten Optimierungsdaten ist in solch einem Fall
+ natürlich sehr sinnvoll und gewinnbringend.
+ Die Umsetzung ist allerdings recht kompliziert.
+ Eine Möglichkeit die hier kurz erwähnt werden soll, ist das Training eines
+ Ersatzmodells auf die alten Optimierungsdaten und die Verwendung dieses
+ Ersatzmodells innerhalb der neuen Multifidelity-Optimierung als Modell
+ niedriger Güte.
+ 
+\end_layout
+
+\begin_layout Section
+2 Mises Optimierung
+\end_layout
+
+\begin_layout Standard
+Ordinray / Multifidelity
+\end_layout
+
+\begin_layout Section
+Trace Erich
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Trace-Erich"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+asds
+\end_layout
+
+\begin_layout Standard
+Nur die wichtigsten Sachen
+\end_layout
+
+\begin_layout Standard
+Maximal 
+\end_layout
+
+\begin_layout Standard
+90-100 Seiten
+\end_layout
+
 \begin_layout Standard
 Eine sehr wichtige Fragestellung ist natürlich, bei welcher Art von Optimierung
  der Einsatz eines Multifildeity Verfahrens vielversprechend ist.
