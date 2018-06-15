@@ -40,9 +40,11 @@
 %\usepackage[authoryear]{natbib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \usepackage{setspace}
 %\onehalfspacing
-\spacing{1.2}
+\spacing{1.0}
 
 %%%%%%%%%%%% Definitionen %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -89,6 +91,12 @@
 \author{Andreas Schmitz}
 \date{Oktober 2018}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\usepackage{enumitem}
+\setlist[1]{itemsep=0pt}
+\setlist{nolistsep}
 
 
 
@@ -968,22 +976,9 @@ filename "Kapitel/Kriging.lyx"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
 filename "Kapitel/SoftwaretechnischeUmsetzung.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/Benchmarks.lyx"
 
 \end_inset
 
