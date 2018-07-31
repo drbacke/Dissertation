@@ -2129,8 +2129,12 @@ key "zitzler2000comparison"
 \end_inset
 
 ).
- Die Testfunktion 
-\begin_inset Formula $f\left(\vec{x}\right)$
+ Die Testfunktionen 
+\begin_inset Formula $f_{1}\left(\vec{x}\right)$
+\end_inset
+
+ und 
+\begin_inset Formula $f_{2}\left(\vec{x}\right)$
 \end_inset
 
  mit der Variable 
@@ -2143,7 +2147,8 @@ key "zitzler2000comparison"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-f\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)\label{eq:Testfunktion}
+f_{1}\left(\vec{x}\right) & =x_{0}\label{eq:Testfunktion}\\
+f_{2}\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)
 \end{align}
 
 \end_inset

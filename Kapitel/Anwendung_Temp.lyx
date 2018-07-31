@@ -1,0 +1,3267 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+
+\lang ngerman
+Anwendungen
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Reale-Turbomaschinen-Optimierung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Analytische Tests Ersatzmodelle
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Beispiele zeigen, wo A,B und C geändert werden und die Faktoren/Summanden
+ sich entsprechend anpassen.
+ (my, sigma und beta)
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Ordinary Kriging 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+GEK 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+COkriging
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Trainingszeit, Vorhersagegenauigkeit
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Validierung CO-Kriging Testfunktion 1
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+In diesem Abschnitt soll das CO-Kriging validiert werden.
+ Für die Validierung benötigt man zwei verschiedene Arten von Testmustern,
+ einmal Muster hoher Güte (High Fidelity) und Muster von geringer Güte (Low
+ Fidelity).
+ In einer realistischen Anwendung wären dies bspw.
+ instationäre und stationäre Strömungslösungen oder Strömungslösungen mit
+ groben und feinen Netz.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Als Testfunktion soll in diesem Fall wieder Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Testfunktion"
+
+\end_inset
+
+ dienen.
+ Um nun Daten von hoher und niedriger Güte zu gewinnen, wird die Testfunktion
+ mit einer Störung versehen und diese gestörten Daten als niedrige Güte
+ verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Die hier getroffene Annahme für das CO-Kriging besteht darin, dass die Daten
+ hoher Güte sich aus den Daten niedriger Güte und einem normalverteilten
+ Fehler zusammensetzen (siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:CO-Kriging-Ansatz"
+
+\end_inset
+
+).
+ Um diese Annahme zu prüfen, sollen verschiedene Störungsfunktionen getestet
+ werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Nur High Fidelity: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Gleichverteilte zufällige Verschiebung 
+\begin_inset Formula $U$
+\end_inset
+
+ des Funktionswertes, zwischen -1 und 1: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)+U\left(-1;1\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Verzerrung der Funktion: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)*v\left(x,y\right)$
+\end_inset
+
+; 
+\begin_inset Formula $x,y\in\mathbb{R};v\left(x,y\right)=0.5x+0.5y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Konstante Verschiebung des Funktionswertes: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)+10$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Verzerrung und konstante Verschiebung Funktion: 
+\begin_inset Formula $f_{low}\left(x,y\right)=f_{high}\left(x,y\right)*v\left(x,y\right)$
+\end_inset
+
+ + 10; 
+\begin_inset Formula $x,y\in\mathbb{R};v\left(x,y\right)=0.5x+0.5y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Die Low Fidelity Samples werden für jeden Testfall zufällig neu generiert,
+ die High Fidelity Daten werden jedoch beibehalten.
+ Die Trainingsaufwand für das CO-Kriging befindet in etwa bei 
+\begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
+\end_inset
+
+, was dem Ordinary Kriging entspricht.
+ Allerdings ist die Trainingszeit während einer Optimierung in der Regel
+ vernachlässigbar klein.
+ Zudem ist der Aufwand für die Erzeugung der Low Fidelity Samples meist
+ um einige Größenordnungen kleiner als für die Erzeugung der High Fidelity
+ Samples.
+ Eine sinnvolle Anwendung wäre beispielsweise eine Optimierung mit zeitgemittelt
+en Strömungslösungen (stationär) und zeitaufgelösten Strömungslösungen (instatio
+när).
+ Der zeitliche Unterschied zwischen beiden Lösungen ist meist enorm.
+ Daher wäre das CO-Kriging Verfahren für solch eine Optimierung geeignet,
+ da der grobe Funktionsverlauf bereits gut mit den stationären Daten dargestellt
+ wird.
+ Die größte Schwierigkeit in einer Optimierung ist allerdings die Entscheidung,
+ wann ein neues Sample mit hoher oder niedriger Güte berechnet werden soll.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+In der folgenden Tabelle sind die mittleren Fehler der entsprechenden Testfunkti
+onen dargestellt.
+ Der mittlere Fehler wurde wie folgt berechnet, wobei 
+\begin_inset Formula $z_{real}$
+\end_inset
+
+ den echten Funktionswert, 
+\begin_inset Formula $z_{predict}$
+\end_inset
+
+ den vom Kriging vorhergesagten Funktionswert und 
+\begin_inset Formula $n$
+\end_inset
+
+ die Anzahl an Testsamples darstellt.
+ Zudem wurde sichergestellt, dass die Testsamples nicht in der Trainingsdatenban
+k enthalten waren.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Formula 
+\begin{align*}
+E & =\frac{1}{n}\sum\left|z_{real}-z_{predict}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Funktion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Samples High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Samples Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Mittlerer Fehler
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Ordinary Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0.531559
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0.079477
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0.357601
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0.0872892
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+CO-Kriging
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+0.361622
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Der Fehler der CO-Kriging Modelle ist in allen vier Testfunktionen kleiner
+ als der des Ordinary Kriging.
+ Testfall 2 passt am besten zu der Annahme des CO-Krigings, dass die High
+ Fidelity Funktionswerte sich aus Low Fidelity Funktionswerten und einem
+ normalverteilten Fehler zusammensetzen.
+ Der Fehler ist hier auch am geringsten, was die Annahme bestätigt.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Das CO-Kriging Modell besitzt für jede Fidelity einen eigenen Erwartungswert
+ 
+\begin_inset Formula $\beta_{i}$
+\end_inset
+
+, wodurch eine konstante Verschiebung der Low Fidelity Daten (Testfall 4)
+ zu ähnlich guten Ergebnissen führt wie Testfall 2.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Die Testfälle, welche der allgemeinen Annahme im CO-Kriging am wenigsten
+ entsprechen sind Testfall 3 und Testfall 5.
+ Wobei die konstante Verschiebung bei Testfall 5 sich nur sehr wenig auf
+ den Fehler auswirken sollte.
+ Die Ergebnisse bestätigen diese Annahmen.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-High.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Vergleich Testfunktion und Ordinary Kriging mit 25 Samples (schwarze Kugeln)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Random.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 2 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Stretch.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 3 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+In dieser Abbildung wurden die Low Fidelity Funktionswerte mit einer Funktion
+ multipliziert und dadurch verzerrt.
+ Bei 
+\begin_inset Formula $x=0;\,y=0$
+\end_inset
+
+ wird der Low Fidelity Funktionswert zu Null, bringt dem Gesamtmodell also
+ keine Information mehr.
+ Je größer die beiden Variablen werden, desto mehr Information beinhalten
+ die Low Fidelity Daten.
+ Die vorhergesagte Funktion sollte also an den entsprechenden Rändern deutlich
+ schlechter werden, sofern dort keine High Fidelity Informationen vorliegen.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Die nächste Abbildung verdeutlicht dies, farbig dargestellt wird die absolute
+ Differenz zwischen der echten Funktion und der vorhergesagten.
+ Zudem sind die Low- und High-Fidelity Punkte eingetragen.
+ An dem Rand 
+\begin_inset Formula $y=0$
+\end_inset
+
+ sind nur sehr wenig High Fidelity Daten vorhanden und die Low Fidelity
+ Daten haben dort nur sehr wenig Informationsgehalt, daher ist der Fehler
+ dort auch deutlich höher.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Stretch_Error.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+CO-Kriging Modell von Testfunktion 3, farbig dargestellt ist der absolute
+ Fehler.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-Const.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 4 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang ngerman
+\begin_inset Graphics
+	filename ../images/CO-Kriging-StretchShift.png
+	scale 32
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Vergleich Testfunktion und CO-Kriging Modell von Testfunktion 5 mit 25 High
+ Fidelity Samples (schwarze Kugeln) und 90 Low Fidelity Samples (rote Kuben)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Validierung CO-Kriging Testfunktion 2 / Low-Fidelity Vorhersage
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Validierung-CO-Kriging-Testfunkt2Low-Vorhersage"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Für die Optimierung auf dem Ersatzmodell ist es nötig, eine Entscheidungsfunktio
+n zu definieren.
+ Diese Entscheidungsfunktion soll die Entscheidung treffen, ob der nächste
+ zu berechnende Member mit der Low- oder der High-Fidelity Prozesskette
+ berechnet werden soll.
+ Es gibt zahlreiche Möglichkeiten diese Entscheidungsfunktion umzusetzen.
+ Für einige dieser Möglichkeiten ist die vorhergesagte Varianz des CO-Kriging-Mo
+dells von großer Bedeutung.
+ Besonders wichtig ist hierbei, dass die vorhergesagte Varianz an beprobten
+ Orten kleiner werden soll.
+ Ist dieser bekannte Ort mit der High-Fidelity Prozesskette berechnet worden,
+ soll die vorhergesagte Varianz zu 0 werden und bei einem Low-Fidelity Punkt
+ muss eine Restunsicherheit bleiben.
+ Um dieses Verhalten zu testen, verwenden wir eine eindimensionalen Sinus
+ Funktion, wobei 
+\begin_inset Formula $x\in\mathbb{R}|x>-10\wedge x<10$
+\end_inset
+
+.
+ Die Low Fidelity Variante der Sinus Funktion, wird um einen gleichverteilten
+ zufälligen Wert im Bereich zwischen -0.2 und 0.2 gestört.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Formula 
+\begin{align*}
+f_{high}\left(x\right) & =sin\left(x\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Formula 
+\begin{align*}
+f_{low}\left(x\right) & =sin\left(x\right)+U\left(-0.2;0.2\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Es wurden 3 High-Fidelity und 10 Low-Fidelity Punkte vorgegeben, wobei die
+ Verteilung der Punkte rein zufällig ist.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CO-Kriging1DSinus"
+
+\end_inset
+
+ zeigt die Ergebnisse des trainierten CO-Kriging Modells.
+ Im oberen Bild, stellt die rote (durchgezogene) Linie die Vorhersage des
+ CO-Krigin Modells und die gestrichelte blaue Kurve die reale Funktion dar.
+ Die roten Quadrate sind die verwendeten High-Fidelity Samples und die grünen
+ Dreiecke die Low-Fidelity Samples.
+ Es ist deutlich zu erkennen, dass die vorhergesagte Funktion exakt durch
+ die High-Fidelity Samples läuft und die Low-Fidelity Samples als 
+\begin_inset Quotes eld
+\end_inset
+
+Tendenzen
+\begin_inset Quotes erd
+\end_inset
+
+ mitgenommen werden.
+ Dies entspricht genau dem Verhalten, welches man von einem CO-Kriging Modell
+ erwartet.
+ Die untere Abbildung zeigt die vorhergesagte Standardabweichung des Modells.
+ Am Verlauf dieser Funktion ist deutlich zu erkennen, dass die Standardabweichun
+g bei High-Fidelity Samples auf den Wert Null geht und bei Low-Fidelity
+ Samples kleiner wird, allerdings immer noch eine 
+\begin_inset Quotes eld
+\end_inset
+
+Restunsicherheit
+\begin_inset Quotes erd
+\end_inset
+
+ bestehen bleibt.
+ Dies ist ebenfalls ein erwünschtes Verhalten, welches wir uns in den folgenden
+ Kapiteln zu nutze machen.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+ow-Fidelity Raum vorhergesagt werden.
+ Erwartet wird hierfür, dass die Low-Fidelity Punkte voll interpoliert werden
+ und die High-Fidelity Daten nicht.
+ Die High-Fidelity Daten sollten den Funktionsverlauf allerdings tendenziell
+ beeinflussen.
+ Die vorhergesagten Varianz sollte an Low-Fidelity Punkten auf 0 sinken.
+ Die folgende Abbildung zeigt das Ergebnis, welches sich wie erwartet verhält.
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\lang ngerman
+Initialisierungsverfahren im Vergleich
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+In diesem Abschnitt geht es darum, die verschiedenen Initialisierungsverfahren
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+) an einem analytischen Beispiel zu testen.
+ Als Testfunktion wurde eine 7-dimensionale 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k};k=5$
+\end_inset
+
+ Sinusfunktion genommen.
+ Die High-Fidelity Funktion besteht aus dem Low-Fidelity Ergebnis, welches
+ skaliert und verschoben wird, zusätzlich bringt die erste freie Variable
+ noch einen zusätzlichen funktionalen Zusammenhang in die Funktion.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Formula 
+\begin{align*}
+y_{low}\left(\vec{x}\right)= & \sum_{i=1}^{i<k}\sin\left(x_{i}*2\pi\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Formula 
+\begin{align*}
+y_{high}\left(\vec{x}\right)= & 2y_{low}\left(\vec{x}\right)+10+\sin\left(x_{0}*2\pi\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Diese Funktionen bietet den Vorteil, dass man bereits ein erwartetes Trainingser
+gebnis hat und damit die Ergebnisse aus dem Kriging Training gut überprüfen
+ kann.
+ Erwartet werden:
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Ein Skalierungsfaktor zwischen Low-Fidelity und High-Fidelity von 
+\begin_inset Formula $a=2$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Globaler Erwartungswert Low-Fidelity von 
+\begin_inset Formula $\beta_{low}=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Globaler Erwartungswert High-Fidelity von 
+\begin_inset Formula $\beta_{high}=10$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Globale Standardabweichung Low-Fidelity Kovarianzfunktion von 
+\begin_inset Formula $\sigma_{low}=1.58$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Globale Standardabweichung Fehlerkovarianzfunktion von 
+\begin_inset Formula $\sigma_{err}=\frac{\sqrt{2}}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Alle Low-Fidelity Korrelations-Hyperparameter sollten den gleichen Wert
+ haben, 
+\begin_inset Formula $\forall\theta_{i,low}=const.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Korrelations-Hyperparameter der Fehlerfunktion sollten alle auf dem niedrigsten
+ Wert stehen, bis auf den ersten 
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Analytische Tests Optimierung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Testoptimierung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Multifidelity 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+GEK
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Ordinary
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Kopplung zwischen mehreren Ersatzmodellen durch ein CO-Kriging
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Potenzielle Anwendung ist die wiederverwendbarkeit von Daten aus alten Optimieru
+ngen.
+ Dieser Punkt ist für industrielle Anwendungen sehr interessant, da sich
+ während der Auslegung einer Turbomaschinen oftmals Randbedingungen und
+ sogar Parametrisierungen ändern.
+ Die Wiederverwendung von alten Optimierungsdaten ist in solch einem Fall
+ natürlich sehr sinnvoll und gewinnbringend.
+ Die Umsetzung ist allerdings recht kompliziert.
+ Eine Möglichkeit die hier kurz erwähnt werden soll, ist das Training eines
+ Ersatzmodells auf die alten Optimierungsdaten und die Verwendung dieses
+ Ersatzmodells innerhalb der neuen Multifidelity-Optimierung als Modell
+ niedriger Güte.
+ 
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+2 Mises Optimierung
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Ordinray / Multifidelity
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Trace Erich
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Trace-Erich"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+asds
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Nur die wichtigsten Sachen
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Maximal 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+90-100 Seiten
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Eine sehr wichtige Fragestellung ist natürlich, bei welcher Art von Optimierung
+ der Einsatz eines Multifildeity Verfahrens vielversprechend ist.
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Ein vollständiger Überblick ist unmöglich, allerdings sollen innerhalb dieses
+ Kapitel einige industrielle oder industrienahe Anwendungen gezeigt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Alle Anwendungen die bisher gelaufen sind zeigen als Beiospiele und darauf
+ fokussieren, welche Anwendungen sinn machen und welche nicht
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+\color magenta
+\lang ngerman
+Weiterhin die vielen Anwendungsmöglichkeiten zeigen, wie Kopplung von mehreren
+ Ersatzmodellen oder die Restart Möglichkeiten !!!
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+Anwendungsmöglichkeiten
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Lionel Akustik
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Erich CFD
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Stefan Mukoko
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Georgios
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+FEM Schalenmodelle 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yong2018"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Brennkammer Steady/Unsteady -> hat nicht so gut geklappt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wankhede2011"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+RESTART Optionen (kurz erläutern siehe Kapitel ...)
+\end_layout
+
+\begin_layout Enumerate
+
+\lang ngerman
+Kopplung mehrerer Ersatzmodelle über ein Co-Kriging (siehe Kapitel ....)
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+Dieses Verfahren fand bereits Anwendung in folgenden wissenschaftlichen
+ und industriellen Arbeiten
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Wissenschaftliche Arbeiten
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Siemens Abschlussarbeit
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Erich
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Lionel
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Georgios
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+MTU & Siemens fragen ob es bereits Anwendung fand
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Stefan Mukoko
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\lang ngerman
+Eionige davon etwas genauer beleuchten.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Lionels Anwendungn kurz zitieren.
+ Lionel hätte mit einer reinen LOFI Optimierung sein Ziel nicht erreicht
+ !!!
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Reale Anwendu
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+- Mukoko Verdichter (ca.
+ 215 Parameter) 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+- Benchmark sinnlos, da viele Einstellungen während der Optimierungs geänder
+ werden müssen und daher ein Vergleich sehr schwierig ist 
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+- Konvergenzprobleme sind extrem groß-> Nutzen immer das Maximum an Informatione
+n für die ersatzmodelle, wenn nur ein Teil der Prozesskette konmvergiert
+ ist, wird dieser verwendet
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Training asynchron, läuft permanent und die Slaves werden mit dem aktuellen
+ Metamodel Satz erzteugt
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+1 Knoten für das Training
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+1 Knoten für die Optimierung auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Slaves müssen nicht warten besser Auslastung, wenn TRACE nicht konvergiert
+ ist es wichtig, dass die Ersatzmodelle neu trainiert werden, dadurch bleibt
+ die Optimierung nicht stecken
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Timeline der Optimierung zeigen + Änderungen an genData oder Ersatzmodell
+ kenntlich machen 
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Zeiten zeigfen, Trainingszeit, Erzeugungszeit
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Alles sehr hoch, nur durch die sehr lange Prozesskette sinnvoll
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Ultra Restart hilft sehr stark
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\lang ngerman
+Wie sieht die Entwicklung der Kriging Modelle über solch eine Optimierung
+ aus?
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\lang ngerman
+aßgeblich beeinfluss wird
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\lang ngerman
+\begin_inset Tabular
+<lyxtabular version="3" rows="19" columns="6">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Strak
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+R1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+S1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+R2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+S2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+1-14
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+15-57
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+58-86
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+87-129
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+130-158
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+1-11 Aero
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+14-17
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+18-21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+22
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+23
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+27
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+28-30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+31-32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+33
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+34
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+35-36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+37-38
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang ngerman
+x
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+23.11.2016
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Erzeugung von Low-Fidelity Membern, da diese schnell berechnet werden können
+ und relativ gut konvergieren.
+ Strategie ist hierbei den initialen Member zu mutieren, anders konnte keine
+ gute Konvergenz erreicht werden.
+ Problematisch durch die langsame Prozesskette und die vielen freien Variablen.
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+29.11.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Die LF Member werden mit der HF Kette nachgerechnet
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+5.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+LF Init; ~350 LF Member erzeugt und 50 optimiert mit Ersatzmodellen und
+ weicheren Nebenbedinungen.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+HF Init: ca.
+ 1/6 kommen durch, erst 10 Samples konvergierte erzeugt
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+8.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+HF Init: Fertiggestellt ca.
+ 25 Member konvergiert
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+9.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+MF Optimierung gestartet.
+ Training läuft asynchron auf einem Knoten in der Dauerschleife und wird
+ mit Random erstmal initialisiert.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+kriginghotornot.pdf vorhanden !!!
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Erste Strukturen in der KHON Matrix zu erkennen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+HighFidelityEachMember 2: Sehr wenig HF Startsamples, deswegen nur geringes
+ Vertrauen in die ersten Ersatzmodelle.
+ Dadurch kann der Zusammenhang zwischen LF/HF besser eingeschätzt werden
+ als er ist.
+ 
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+11.12.2016 (VPN)
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Kein Member konvergiert
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+ProbOfImprovement auf 0.9
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+6 Restriktionen temporär ausgeschaltet, um mehr Variation zu ermöglichen
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+12.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Fehler in der Lofi Prozesskette, die Tests der Lofi Prozesskette liefen
+ immer auf einem Knoten, bei 2 Knoten gab es MPI Probleme.
+ Behoben während der Laufzeit, Lofi sollte jetzt konvergieren.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Ersatzmodelle sehen ansonsten gut aus.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Cluster Sehr voll, deswegen nur wenig HF Rechnungen bisher.
+ 
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+13.12.2016 
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+7 HF Member konvergiert und 3 LF
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+2 Restriktionen wieder hinzugenommen: Abstände zwischen den Moden 
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Hyperparameter ändern sich noch stark, besonders die Varianzen der Kovarianzfunk
+tionen und auch der Scale Faktor.
+ Das spricht dafür, dass immer noch nicht genügend HF Daten zur Verfügung
+ stehen
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+14.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Ersatzmodelltraining Konvergenz niedriger und Iterationen/Startiterationen
+ hoch, da keine Knoten mehr verfügbar.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+kriging_flow_14_260 
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+20.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Massentrom(0.01->0.03%)/Totaldruckverhältnis(0.01->0.03%)/Wirkungsgrad(0.05->0.06%)
+ Lofi Komvergenzkriterium TRACE höher gesetzt, damit mehr konvergieren.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Restriktionen 7592-7594 eingeschaltet
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+500->1000 Optimierungen auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+ProImpro: 0.9 -> 0.85
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Krigin 407
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Restriktionen 7428&29 ; 7460 7471
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+21.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+ProbOfImpro von 0.,85 wird nie erreicht und bis Iteration 1000 auch noch
+ bessere Member gefunden.
+ -> 2000 Iterationen und ProbImprMin auf 0.7 gesenkt, damit noch das EVG
+ optimiert werden kann
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+23.12.2016
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Vom 23.12 bis 25.12 ist das Kriging Training ausgefallen.
+ Libs wurden auf dem Cluster geändert, das führte zum Absturz und die Exec.
+ mussten neu kompiliert werden
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+10.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+1 Woche keine konvergenten LF Member mehr, scheinbar Probleme in der Netzerzeugu
+ng
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Ultra Restart angeschaltet
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+12.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Netzerzeuger PyMesh musste gegen eine neuere Version ausgetauscht werde
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Cluster wurde gewartet und komplett heruntergefahren
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+13.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Cluster wurde hochgefahren, kein Member konvergiert
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+16.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Der Permas Lizenz Server wurde nicht mit hochgefahren und wurde nach mehreren
+ Anfragen nun gestartet
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+17.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Lizenzserver schon wieder weg, wurde nochmal neu gestartet
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+20.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Permas 15 wurde von T-Systems entfernt und Permas 16 installiert, ohne richtige
+ Absprache.
+ Optimierung deswegen wieder gestoppt
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Permas 16 war zudem nicht lauffähig
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+23.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+143 HF Samples
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+HFEachMember auf 2 gestellt
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+25.01.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+HFEach auf 8 gestellt
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+154 konvergierte HF Samples 603 LF
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+1.2.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+LF konvergiert nur zu 10%, gehen alle im Pumpgrenznahen Punkt kaputt.
+ Betriebpunkt im LF wahrscheinlich verschoben.
+ Sollte bei zukünftiger Opti beachtet werden.
+ LF Betriebspunkt könnte grundsätzlich verschoben werden.
+\end_layout
+
+\begin_layout Subsection*
+
+\lang ngerman
+9.2.2017
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Run 2 in Planung, daher nur noch kurze Zeit laufen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Vorzeigbares Ergebnis ist Hauptprio.
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Einige Member erfüllen die Restriktionen
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Hauptsächlich Wirkungsgraderhöhung ab jetzt
+\end_layout
+
+\begin_layout Itemize
+
+\lang ngerman
+Wirkungsgradrestriktion auf min 0.76, um gezielter zu optimieren
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+un 1
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Beschreiben
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Probleme erklären
+\end_layout
+
+\begin_layout Section
+
+\lang ngerman
+Run 2
+\end_layout
+
+\begin_layout Standard
+
+\lang ngerman
+Änderungen zu Run1 erklären und dann Ergebnisse zeigen
+\end_layout
+
+\end_body
+\end_document

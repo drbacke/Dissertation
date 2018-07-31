@@ -1049,6 +1049,16 @@ filename "Kapitel/COKriging.lyx"
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Anwendung_Temp.lyx"
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
