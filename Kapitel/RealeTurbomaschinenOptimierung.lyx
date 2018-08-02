@@ -120,28 +120,26 @@ f_{lf}\left(x\right) & =0.5f_{hf}\left(x\right)+10(x-0.5)+5
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
 status open
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
+	scale 50
 
 \end_inset
 
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Eindimensionales analytisches Beispiel mit zwei Gütestufen.
+sEindimensionales analytisches Beispiel mit zwei Gütestufen.
  Vergleich CO-Kriging und Ordinary-Kriging Vorhersage
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -253,6 +251,13 @@ reference "sec:ZDT3"
 .
  Im Folgenden werden verschiedene Testfälle definiert, wobei jeweils unterschied
 liche Funktionen niedriger Güte getestet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Testfälle 2 und 4 sind extra so definiert, dass sie das Verfahren an
+ die Grenzen bringt, da diese Testfälle nicht direkt mathematisch modelliert
+ wurden.
  
 \end_layout
 
@@ -609,10 +614,6 @@ Auflistung der Optimierungstestfälle
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -882,6 +883,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/ZDT3_Noise.eps
+	scale 50
 
 \end_inset
 
@@ -907,8 +909,16 @@ Exemplarische Grafik der verrauschten Funktion mit 2-Variablen
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="5">
+<lyxtabular version="3" rows="3" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1022,53 +1032,6 @@ HF
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-30
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1660
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -1122,6 +1085,23 @@ MF1
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Formula 
 \[
@@ -1161,6 +1141,14 @@ weiterhin stellt dies einen guten Test für die Entscheidungsfunktiuon dar.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="5">
 <features tabularvalignment="middle">
@@ -1329,6 +1317,23 @@ MF3
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset Formula 
 \[
@@ -1350,6 +1355,14 @@ Dieser Testfall soll dazu dienen eine komplexere LF-Funktion zu testen und
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="5">
 <features tabularvalignment="middle">
@@ -1469,7 +1482,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF 50x
+MF 4
 \end_layout
 
 \end_inset
@@ -1512,6 +1525,23 @@ MF 50x
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1673,6 +1703,14 @@ Das Optimum wurde von die HF Optimierungen oft garnicht erreicht, deswegen
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="5">
 <features tabularvalignment="middle">
@@ -1841,6 +1879,23 @@ MF
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Die Multifidelity-Optimierung konnte nach tatsächlich nach einer Stützstelle
  das Optimum erreichen.
@@ -1890,7 +1945,7 @@ Könnte man die Zeit der LF Prozesskette auf 0 reduzieren ohne Information
 \end_layout
 
 \begin_layout Paragraph
-Einfluss der Entscheidungsfunktion auf den Optimieruyngsverlauf
+Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
 
 \begin_layout Standard
@@ -1968,6 +2023,7 @@ t besitzen.
  Die Streuung der einzelnen Optimierungen kommt durch einige Zufälligkeiten
  innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
  und Optimierung auf den Ersatzmodellen) zustande.
+ Zudem stellt der HF Anteil nur den Anteil am Ende der Optimierung dar.
 \end_layout
 
 \begin_layout Section
@@ -1995,7 +2051,7 @@ Deep Learning
 \end_layout
 
 \begin_layout Standard
-- 3D Information unabhängig von der PArametrisierung
+- 3D Information unabhängig von der Parametrisierung
 \end_layout
 
 \begin_layout Standard
@@ -2003,7 +2059,7 @@ Deep Learning
 \end_layout
 
 \begin_layout Standard
-- Keine statistischen Vohersagen
+- Keine statistischen Vorhersagen
 \end_layout
 
 \begin_layout Standard
