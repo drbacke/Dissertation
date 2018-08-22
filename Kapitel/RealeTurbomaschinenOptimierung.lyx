@@ -2047,7 +2047,13 @@ Kopplung unterschiedlicher Ersatzmodelle über CO-Kriging
 \end_layout
 
 \begin_layout Standard
-Deep Learning
+Deep Learning, was verspricht man sich davon warum in der Turbomaschinenauslegun
+g?
+\end_layout
+
+\begin_layout Standard
+- Industrie in der Lage sehr komplexe Geometrien zu simulieren, allerdings
+ die Parameteranzahl dadurch extrem hoch
 \end_layout
 
 \begin_layout Standard
@@ -2055,15 +2061,39 @@ Deep Learning
 \end_layout
 
 \begin_layout Standard
+- Kopplung über CO-Kriging sinnvoll
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
+ Netz innerhalb einer Optimireung verwenden möchte?
+\end_layout
+
+\begin_layout Standard
+- Vorhersagen sind sehr unpräzise durch die nötige Rasterung und die damit
+ einhergehende schlechte Netzauflösung
+\end_layout
+
+\begin_layout Standard
+- Das Vertrauensniveau ist recht niedrig, da man keine Fehlerinformationen
+ hat, Keine statistischen Vorhersagen
+\end_layout
+
+\begin_layout Standard
 - Vorhersagen selbst zu aufwendig in einer EVG Prozesskette
 \end_layout
 
 \begin_layout Standard
-- Keine statistischen Vorhersagen
-\end_layout
-
-\begin_layout Standard
-- Kopplung über CO-Kriging sinnvoll
+- Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
+ Massenerhaltung) wird nicht eingehalten
 \end_layout
 
 \end_body
