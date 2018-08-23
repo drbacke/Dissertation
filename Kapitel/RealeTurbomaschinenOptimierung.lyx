@@ -2043,7 +2043,7 @@ Restart Optionen
 \end_layout
 
 \begin_layout Subsection
-Kopplung unterschiedlicher Ersatzmodelle über CO-Kriging
+Nutzung von Deep Learning Verfahren über CO-Kriging
 \end_layout
 
 \begin_layout Standard
@@ -2094,6 +2094,31 @@ Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
 \begin_layout Standard
 - Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
  Massenerhaltung) wird nicht eingehalten
+\end_layout
+
+\begin_layout Standard
+- Das Training dauert sehr lange
+\end_layout
+
+\begin_layout Standard
+-
+\end_layout
+
+\begin_layout Standard
+Die Verwendung für den Einsatz in Turbomaschinenoptimierungen von solchen
+ Deep-Learning Netzen ist recht schwierig.
+ 
+\end_layout
+
+\begin_layout Standard
+Den wichtigsten Faktor stellt allerdings die Beurteilung darüber, ob die
+ Vorhersagen die gewünschte Information in den benötigten Genauigkeit liefern
+ können.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Prozesskette zeigen
 \end_layout
 
 \end_body
