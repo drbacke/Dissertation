@@ -136,7 +136,7 @@ reference "eq:1DCOKrigingTestfall"
 \begin_inset Formula $f_{hf}\left(x\right)$
 \end_inset
 
- und die niedriger Güte 
+ und niedriger Güte 
 \begin_inset Formula $f_{lf}\left(x\right)$
 \end_inset
 
@@ -147,7 +147,7 @@ reference "eq:1DCOKrigingTestfall"
 \begin_inset Formula 
 \begin{align}
 f_{hf}\left(x\right) & =(6x-2)^{2}\sin(12x-4),x\in\left\{ 0,...,1\right\} \label{eq:1DCOKrigingTestfall}\\
-f_{lf}\left(x\right) & =0.5f_{hf}\left(x\right)+10(x-0.5)+5\nonumber 
+f_{lf}\left(x\right) & =Af_{hf}\left(x\right)+10(x-0.5)+5\nonumber 
 \end{align}
 
 \end_inset
@@ -158,7 +158,7 @@ f_{lf}\left(x\right) & =0.5f_{hf}\left(x\right)+10(x-0.5)+5\nonumber
 \begin_layout Standard
 Die Funktion niedriger Güte stellt eine verzerrte Form der Funktion hoher
  Güte dar.
- Dies entspricht allerdings nicht der grundlegenden Annahme (siehe 
+ Die grundlegenden Annahme (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "forrester2007multi,LeGratiet"
@@ -172,9 +172,31 @@ reference "eq:KovarianzFunktionenalleDrei"
 
 \end_inset
 
-), dass die Daten hoher Güte aus den Daten niedriger Güte entspringen.
+) ist, dass die Daten hoher Güte aus den Daten niedriger Güte entspringen.
  Die Eignung dieses analytischen Testfalls ist daher nicht optimal.
- 
+ Ein Vorteil liegt laut 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+ aber darin, dass der Skalierungsfaktor 
+\begin_inset Formula $A$
+\end_inset
+
+  dem Reziproken Skalierungsfaktor 
+\begin_inset Formula $a$
+\end_inset
+
+ des trainierten Modells entspricht (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzFunktionenalleDrei"
+
+\end_inset
+
+) und das Ergebnis des Trainings somit direkt verifiziert werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -208,7 +230,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../../../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
+	filename ../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
 	scale 50
 
 \end_inset
@@ -239,8 +261,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/1D_CoKriging_Scale.eps
-	scale 50
+	filename ../images/ErgebnissKapitel/1D_CoKriging_Scale.eps
+	scale 40
 
 \end_inset
 
@@ -995,7 +1017,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../../../images/ErgebnissKapitel/ZDT3_Noise.eps
+	filename ../images/ErgebnissKapitel/ZDT3_Noise.eps
 	scale 50
 
 \end_inset
@@ -1682,7 +1704,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../../../images/ErgebnissKapitel/AnalyticTestfälle.eps
+	filename ../images/ErgebnissKapitel/AnalyticTestfälle.eps
 	scale 60
 
 \end_inset
@@ -2078,7 +2100,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../../../images/MultifidelityKapitel/EntscheidungsfunktionEinfluss.pdf
+	filename ../images/MultifidelityKapitel/EntscheidungsfunktionEinfluss.pdf
 	scale 60
 	BoundingBox 0bp 0bp 354bp 310bp
 	clip
@@ -2235,7 +2257,8 @@ S1-Schnitte Vorhersagen zeigen
 \end_layout
 
 \begin_layout Standard
-1D-Größen Vergleiche zeigen
+1D-Größen Vergleiche zeigen, z.B.
+ Massnstrom der Interfaces
 \end_layout
 
 \begin_layout Standard
