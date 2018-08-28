@@ -2424,7 +2424,7 @@ MF
 \uwave off
 \noun off
 \color none
-0.209577
+0.18264
 \end_layout
 
 \end_inset
@@ -2498,7 +2498,7 @@ MF
 \uwave off
 \noun off
 \color none
-2.68728
+2.26312
 \end_layout
 
 \end_inset
@@ -2519,7 +2519,7 @@ MF
 \uwave off
 \noun off
 \color none
-2.44015
+1.59191
 \end_layout
 
 \end_inset
@@ -2783,7 +2783,7 @@ MF
 \uwave off
 \noun off
 \color none
-0.0026444
+0.00248807
 \end_layout
 
 \end_inset
@@ -2804,7 +2804,7 @@ MF
 \uwave off
 \noun off
 \color none
-0.00238929
+0.00238831
 \end_layout
 
 \end_inset
@@ -2878,7 +2878,7 @@ MF
 \uwave off
 \noun off
 \color none
-0.406211
+0.403877
 \end_layout
 
 \end_inset
@@ -2899,7 +2899,7 @@ MF
 \uwave off
 \noun off
 \color none
-0.409722
+0.401324
 \end_layout
 
 \end_inset
@@ -2942,9 +2942,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
+<lyxtabular version="3" rows="7" columns="3">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2976,15 +2975,6 @@ MF+d
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -3012,7 +3002,7 @@ MF+d
 \uwave off
 \noun off
 \color none
-0.425928
+0.305696
 \end_layout
 
 \end_inset
@@ -3034,15 +3024,6 @@ MF+d
 \noun off
 \color none
 0.241937
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -3083,16 +3064,7 @@ MF+d
 \uwave off
 \noun off
 \color none
-2.16646
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+2.16628
 \end_layout
 
 \end_inset
@@ -3124,7 +3096,7 @@ MF+d
 \uwave off
 \noun off
 \color none
-0.00431563
+0.00421455
 \end_layout
 
 \end_inset
@@ -3134,15 +3106,6 @@ MF+d
 
 \begin_layout Plain Layout
 0.00292292
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -3172,15 +3135,6 @@ MF+d
 
 \begin_layout Plain Layout
 5.46662
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -3226,15 +3180,6 @@ MF+d
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -3250,7 +3195,19 @@ MF+d
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.488401
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.305105
 \end_layout
 
 \end_inset
@@ -3260,15 +3217,6 @@ MF+d
 
 \begin_layout Plain Layout
 0.417837
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
