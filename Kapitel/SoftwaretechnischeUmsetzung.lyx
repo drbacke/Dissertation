@@ -2667,7 +2667,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -3047,7 +3047,7 @@ lines 0
 placement O
 overhang 0in
 width "52col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -3300,7 +3300,7 @@ lines 31
 placement o
 overhang 0in
 width "45col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -8037,7 +8037,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/GPUSupercomputerEntw.png
+	filename ../images/SoftwareTechnUmsetzung/GPUSupercomputerEntw.png
 	scale 40
 
 \end_inset
@@ -8524,13 +8524,13 @@ separation "3pt"
 shadowsize "4pt"
 framecolor "black"
 backgroundcolor "none"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/GPUBenchmarks.png
+	filename ../images/SoftwareTechnUmsetzung/GPUBenchmarks.png
 	lyxscale 20
 	scale 10
 	BoundingBox 0bp 1550bp 3565bp 3028bp
@@ -8705,11 +8705,11 @@ lines 13
 placement o
 overhang 0in
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/Mukoko/khon_prediction.png
+	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_prediction.png
 	scale 70
 
 \end_inset
@@ -8845,14 +8845,14 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
+	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
 	scale 70
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
+	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
 	scale 70
 
 \end_inset

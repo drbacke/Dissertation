@@ -91,6 +91,55 @@ CO-Kriging Testfall
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
+	scale 40
+	BoundingBox 25bp 72bp 560bp 735bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "wrap:Eindimensionales-analytisches-Be"
+
+\end_inset
+
+Eindimensionales analytisches Beispiel mit zwei Gütestufen.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Der erste analytische Testfall ist ein bekanntes Beispiel aus der Literatur
  (siehe 
 \begin_inset CommandInset citation
@@ -140,7 +189,10 @@ reference "eq:1DCOKrigingTestfall"
 \begin_inset Formula $f_{lf}\left(x\right)$
 \end_inset
 
- gezeigt:
+ gezeigt.
+ Die Funktion niedriger Güte stellt eine verzerrte Form der Funktion hoher
+ Güte dar.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -156,9 +208,7 @@ f_{lf}\left(x\right) & =Af_{hf}\left(x\right)+10(x-0.5)+5\nonumber
 \end_layout
 
 \begin_layout Standard
-Die Funktion niedriger Güte stellt eine verzerrte Form der Funktion hoher
- Güte dar.
- Die grundlegenden Annahme (siehe 
+Die grundlegenden Annahme (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "forrester2007multi,LeGratiet"
@@ -189,7 +239,7 @@ key "forrester2007multi"
 \begin_inset Formula $a$
 \end_inset
 
- des trainierten Modells entspricht (siehe Gleichung 
+ des trainierten Modells entsprechen sollte (siehe Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:KovarianzFunktionenalleDrei"
@@ -211,16 +261,9 @@ reference "wrap:Eindimensionales-analytisches-Be"
  anderen die Vorhersagen des Ordinary-Kriging und des Co-Kriging Verfahrens.
  Wobei das Ordinary-Kriging nur die Stützstellen hoher Güte zur Verfügung
  hatte.
+ Das Co-Kriging kann die Funktion nahezu fehlerfrei darstellen, was auf
+ eine optimale Einstellung der Hyperparameter schließen lässt.
  
-\end_layout
-
-\begin_layout Standard
-Das Co-Kriging kann die Funktion nahezu fehlerfrei darstellen, was auf eine
- optimale Einstellung der Hyperparameter schließen lässt.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -229,35 +272,8 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
-	scale 50
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "wrap:Eindimensionales-analytisches-Be"
-
-\end_inset
-
-Eindimensionales analytisches Beispiel mit zwei Gütestufen.
- Vergleich CO-Kriging und Ordinary-Kriging Vorhersage
-\end_layout
-
-\end_inset
-
 
 \end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -267,14 +283,16 @@ status open
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
 name "wrap:Eindimensionales-analytisches-Be-1"
 
 \end_inset
 
-Eindimensionales analytisches Beispiel mit zwei Gütestufen.
- Vergleich CO-Kriging und Ordinary-Kriging Vorhersage
+Vorhergesagter und realer Skalierungsfaktor im Vergleich
 \end_layout
 
 \end_inset
@@ -282,8 +300,53 @@ Eindimensionales analytisches Beispiel mit zwei Gütestufen.
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "wrap:Eindimensionales-analytisches-Be-1"
+
+\end_inset
+
+ sind die Ergebnisse des trainierten Skalierungsfaktor 
+\begin_inset Formula $a$
+\end_inset
+
+ unter verschiedenen Skalierungsfaktoren 
+\begin_inset Formula $A$
+\end_inset
+
+ zu sehen.
+ Hiermit ist es möglich, dass Trainingsergebnis zu verifizieren.
+ Der Einfachheit halber werden die Reziprokwerte 
+\begin_inset Formula $\frac{1}{a}$
+\end_inset
+
+ dargestellt, da diese direkt mit dem eingestellten Skalierungsfaktor 
+\begin_inset Formula $A$
+\end_inset
+
+ übereinstimmen sollten.
+ Die trainierten Ergebnisse stimmen alle sehr gut mit dem eingestellten
+ Faktoren der Funktion überein.
+ Zusammenfassend kann man feststellen, dass sich dieser einfache analytische
+ Test mit dem Co-Kriging Verfahren sehr gut abbilden lässt.
+ Auch wenn dieser Test nicht mit einer Turbomaschinenoptimierung vergleichbar
+ ist, so lassen sich die Funktionsweise und auch die Leistungsfähigkeit
+ dieses Verfahrens damit gut darstellen.
+\end_layout
+
 \begin_layout Subsection
-Optimierungsbeispiel
+Analytische Optimierungsbeispiele
 \end_layout
 
 \begin_layout Subsubsection
@@ -2220,7 +2283,7 @@ Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
 
 \begin_layout Standard
 - Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
- Massenerhaltung) wird nicht eingehalten
+ Massenerhaltung, Totalgrößen, Wirkungsgrade unter 1) wird nicht eingehalten
 \end_layout
 
 \begin_layout Standard
@@ -2228,7 +2291,7 @@ Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
 \end_layout
 
 \begin_layout Standard
--
+- 
 \end_layout
 
 \begin_layout Standard
@@ -2257,7 +2320,7 @@ S1-Schnitte Vorhersagen zeigen
 \end_layout
 
 \begin_layout Standard
-1D-Größen Vergleiche zeigen, z.B.
+1D-Größen Vergleiche zeigen, die Probleme insbesondere, z.B.
  Massnstrom der Interfaces
 \end_layout
 
@@ -2909,7 +2972,7 @@ MF
 
 \end_inset
 
-6
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -3096,7 +3159,7 @@ MF+d
 \uwave off
 \noun off
 \color none
-0.00421455
+0.00342546
 \end_layout
 
 \end_inset
@@ -3105,7 +3168,19 @@ MF+d
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.00292292
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.00266979
 \end_layout
 
 \end_inset
@@ -3125,7 +3200,19 @@ MF+d
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.9854
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5.42207
 \end_layout
 
 \end_inset
@@ -3134,7 +3221,19 @@ MF+d
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.46662
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+4.81156
 \end_layout
 
 \end_inset
@@ -3175,7 +3274,19 @@ MF+d
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0054946
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.00416021
 \end_layout
 
 \end_inset
