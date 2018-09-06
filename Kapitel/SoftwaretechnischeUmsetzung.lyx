@@ -4290,6 +4290,26 @@ name "sec:VergleicheCoKrigingAndere"
 
 \end_layout
 
+\begin_layout Itemize
+Diagonalaufschlag Behandlung ist anders als bei anderen, wird außen als
+ ganze Varianz addiert in der Kov Matrix.
+ Dadurch ist es möglich dass Low Fid.
+ komplett verreuscht ist und keinen Inhalt hat.
+ bei der Formulierung (corr+diag)*sigma ist das nicht möglich
+\end_layout
+
+\begin_layout Itemize
+Likelihood wird mit vollständigem Hyperparmetersatz trainiert.
+ Mehrere Lösungen dadurch möglich für dasselbe Problem.
+ z.B.
+ bei Beispiel mit verrauschter Lofi Funktion kann einmal das a zu 0 werden
+ oder sigma, hauptsache der Diagonalaufschlag passt.
+\end_layout
+
+\begin_layout Itemize
+Allerdings aufwändiger
+\end_layout
+
 \begin_layout Standard
 Alle Kriging Verfahren in einem Code!!!!
 \end_layout
