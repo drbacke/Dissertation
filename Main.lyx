@@ -871,6 +871,38 @@ key "Jin2001"
 \end_inset
 
 (3dimensions Samples minimum in vielen Fällen)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size huge
+TODO:
+\end_layout
+
+\begin_layout Itemize
+Eigene Entwicklungen besser kennzeichnen, besonders zum DLR abgrenzen, ganzen
+ Text nochmal durchgehen
+\end_layout
+
+\begin_layout Itemize
+Korrekturen von Christian
+\end_layout
+
+\begin_layout Itemize
+Korrekturen von Prof Gottschalk
+\end_layout
+
+\begin_layout Itemize
+Kriging Software alle Verfahren in einem untergebracht
 \end_layout
 
 \begin_layout Chapter*

@@ -1814,7 +1814,14 @@ reference "eq:Entscheidungsfunktion"
 \end_layout
 
 \begin_layout Paragraph*
-Zusätzliche Gewichtung der Ersatzmodelle
+Zusätzliche Gewichtung der Ersatzmodelle 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Entschedungsfunktion"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

@@ -349,7 +349,20 @@ reference "wrap:Eindimensionales-analytisches-Be-1"
 Analytische Optimierungsbeispiele
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
+Innerhalb dieses Abschnitts sollen mehrere einfache Multifidelity-Optimierungs-T
+estfälle durchgeführt und miteinander verglichen werden.
+ Es wurden unter anderem Testfälle gewählt, welche das Verfahren in besonderer
+ Weise beanspruchen.
+ Hierzu zählt z.B.
+ eine Testfall in dem die Prozesskette niedriger und hoher Güte keine Korrelatio
+n aufweisen.
+ Weiterhin wurde eine kurze Betrachtung über die maximal erreichbare Beschleunig
+ung einer solchen Multifidelity-Optimierung angestellt.
+ 
+\end_layout
+
+\begin_layout Paragraph
 Theroretisch Maximale Beschleunigung 
 \end_layout
 
@@ -360,7 +373,7 @@ Beschleunigung allgemein:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}
+t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}
 \]
 
 \end_inset
@@ -427,52 +440,97 @@ Zudem hängt die Beschleunigung zusätzlich noch vom Informationsgehalt der
 \end_layout
 
 \begin_layout Subsubsection*
-Definition der Testfälle / Störungen
+Definition der Testfälle 
 \end_layout
 
 \begin_layout Standard
-Die hier verwendete Funktion hoher Güte ist die ZDT3-Funktion 
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+Grundlegend sollen mehrere Testfälle definiert werden, welche jeweils durch
+ eine Funktion hoher Güte 
+\begin_inset Formula $f_{hf}\left(\vec{x}\right),\,\vec{x}\in\mathbb{R^{\textrm{k}}}$
 \end_inset
 
- mit der Variable 
-\begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
+ und eine niedriger Güte 
+\begin_inset Formula $f_{lf}\left(\vec{x}\right)$
 \end_inset
 
- aus Anhang 
+ dargestellt wird.
+ Für jeden dieser Testfälle gilt, dass der Funktionsterm hoher Güte minimiert
+ werden soll: 
+\begin_inset Formula $\underset{\vec{x}\in\mathbb{R^{\textrm{k}}}}{\min}f_{hf}\left(\vec{x}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Das verwendete Multifidelity-Verfahren ist das in dieser Arbeit entwickelte
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Gewichtete Entscheidungsfunktion
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Entschedungsfunktion"
+
+\end_inset
+
+).
+ Die verwendete analytische Funktion 
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\end_inset
+
+ ist die ZDT3-Funktion aus Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:ZDT3"
 
 \end_inset
 
-.
- Im Folgenden werden verschiedene Testfälle definiert, wobei jeweils unterschied
-liche Funktionen niedriger Güte getestet werden.
+, auf der Basis dieser Funktion werden die Funktionen der unterschiedlichen
+ Gütestufen gebildet.
+ Die initialen Randbedingungen des Testfalls sind wie folgt:
+\end_layout
+
+\begin_layout Itemize
+20 freie Variablen, 
+\begin_inset Formula $\textrm{k}=20$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+10 initiale Stützstellen hoher Güte; Gleichverteilte zufällige Erzeugung
  
 \end_layout
 
 \begin_layout Standard
-Die Testfälle 2 und 4 sind extra so definiert, dass sie das Verfahren an
- die Grenzen bringt, da diese Testfälle nicht direkt mathematisch modelliert
- wurden.
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Auflistung-der-Optimierungstestf"
+
+\end_inset
+
+ werden die verschiedenen Testfälle definiert.
+ In der ersten Spalte sind die Bezeichnungen der jeweiligen Testfälle definiert.
+ Die zweite und dritte Spalte beschreibt die jeweilige Funktion hoher und
+ niedriger Güte und die vierte Spalte beschreibt den zeitlichen Faktor zwischen
+ Hoher und niedriger Güte.
+ Als konvergiert wird die Optimierung angesehen, sobald ein Zielfunktionswert
  
-\end_layout
+\begin_inset Formula $f_{hf}\left(\vec{x}\right)<0.228$
+\end_inset
 
-\begin_layout Standard
-20 freie Variablen
-\end_layout
-
-\begin_layout Standard
-25 HF Samples Start
-\end_layout
-
-\begin_layout Standard
-100 LF Samples Start
-\end_layout
-
-\begin_layout Standard
-15% MinpercHF
+ erreicht wurde.
+ Die meisten dieser Testfälle stellen Grenzfälle dar und sollen einen Eindruck
+ davon vermitteln, wie sich das Verfahren in sehr extremem Situationen verhält.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -503,7 +561,10 @@ Bezeichnung
 \begin_inset Text
 
 \begin_layout Plain Layout
-Hohe Güte
+\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -512,7 +573,11 @@ Hohe Güte
 \begin_inset Text
 
 \begin_layout Plain Layout
-Niedrige Güte
+ 
+\begin_inset Formula $f_{lf}\left(\vec{x}\right)$
+\end_inset
+
+ 
 \end_layout
 
 \end_inset
@@ -521,7 +586,10 @@ Niedrige Güte
 \begin_inset Text
 
 \begin_layout Plain Layout
-Zeitfaktor
+\begin_inset Formula $\frac{t_{hf}}{t_{lf}}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -541,7 +609,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -562,7 +630,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+-
 \end_layout
 
 \end_inset
@@ -582,7 +650,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -594,7 +662,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -626,7 +694,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -638,7 +706,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.5\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.5\right)$
 \end_inset
 
  
@@ -670,7 +738,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -682,7 +750,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}+\left(\begin{array}{c}
+\begin_inset Formula $f_{ZDT}\left(\vec{x}+\left(\begin{array}{c}
 0.1\\
 \vdots\\
 0.1
@@ -718,7 +786,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
  
@@ -762,7 +830,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $0.1f_{hf}\left(\vec{x}\right)+0.5x_{0}-10x_{1}+10$
+\begin_inset Formula $0.1f_{ZDT}\left(\vec{x}\right)+0.5x_{0}-10x_{1}+10$
 \end_inset
 
 
@@ -774,11 +842,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
-\end_inset
-
-+
-\begin_inset Formula $N\left(\mu=0,\sigma=0.05\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
 
@@ -804,6 +868,12 @@ Referenz
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Auflistung-der-Optimierungstestf"
+
+\end_inset
+
 Auflistung der Optimierungstestfälle
 \end_layout
 
@@ -817,17 +887,9 @@ Auflistung der Optimierungstestfälle
 
 \end_layout
 
-\begin_layout Paragraph*
-Ergebnisse
-\end_layout
-
-\begin_layout Standard
-Referenz
-\end_layout
-
 \begin_layout Paragraph
-Testfall 0 - Beschleunigung im Vergleich zu einer HF-Optimierung - Theoretisches
- Maximum 
+Ergebnisse - Testfall 0 - Beschleunigung im Vergleich zu einer HF-Optimierung
+ - Theoretisches Maximum 
 \end_layout
 
 \begin_layout Standard
@@ -860,7 +922,7 @@ g mit einem sehr großen zeitlichen Unterschied zwischen den Gütestufen geteste
 
 \begin_layout Standard
 Weiterhin sind die Gütestufen identisch.
- Als optimaler Wert wurde 0.227 für die Funktion gewählt, sobald dieser erreicht
+ Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreicht
  wurde galt die Optimierung als konvergiert.
 \end_layout
 
@@ -946,7 +1008,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+139
 \end_layout
 
 \end_inset
@@ -964,7 +1026,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -984,7 +1046,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF0
+MF
 \end_layout
 
 \end_inset
@@ -1011,7 +1073,7 @@ MF0
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1042,23 +1104,7 @@ Die Multifidelity-Optimierung konnte nach tatsächlich nach einer Stützstelle
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{30+128}{30+\frac{1}{50}1660+1}=2,46x
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ist die der zeitliche Faktor zwischen Low und HF bei 0, so liegt der Grenzwert
- liegt dann bei 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+0i_{initL}+1}=\frac{30+128}{30+0*1660+1}=5,097x
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{10+139}{10+\frac{1}{50}1660+1}=3,4
 \]
 
 \end_inset
@@ -1067,7 +1113,39 @@ Ist die der zeitliche Faktor zwischen Low und HF bei 0, so liegt der Grenzwert
 \end_layout
 
 \begin_layout Paragraph
-Testfall 1 - Verrauschte Funktion
+Ergebnisse - Testfall 1 - Verrauschte Funktion
+\end_layout
+
+\begin_layout Standard
+Für diesen Testfall wurde die Funktion 
+\begin_inset Formula $f_{lf}\left(\vec{x}\right)$
+\end_inset
+
+ niedriger Güte mit einem normalverteiltem Rauschen belegt.
+ Das normalverteilte Rauschen, reduziert den Informationsgehalt der Member
+ niedriger Güte deutlich.
+ Aus diesem Grund sollte die Entscheidungsfunktion nach der Initialisierungsphas
+e hauptsächlich Weiterhin sollte das Co-Kriging den Rauschterm für das Kovarianz
+modell niedriger Güte 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+ erhöhen (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Approximation"
+
+\end_inset
+
+ und Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-parametrisiertes-Model"
+
+\end_inset
+
+).
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1089,7 +1167,257 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Exemplarische Grafik der verrauschten Funktion mit 2-Variablen
+Exemplarische Darstellung der verrauschten Funktion mit 2-Variablen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Wrap table
+lines 9
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Niedrige Güte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Differenzfunktion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.415
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.634
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.56
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $3.1*10^{-8}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{h}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h_{l}>e^{-7}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h_{l}<e^{-40}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.8
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.902
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:KrigingExampleOpti1"
+
+\end_inset
+
+Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
+ am Ende der Optimierung
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1192,7 +1520,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+139
 \end_layout
 
 \end_inset
@@ -1210,7 +1538,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1230,7 +1558,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF1
+MF
 \end_layout
 
 \end_inset
@@ -1239,7 +1567,7 @@ MF1
 \begin_inset Text
 
 \begin_layout Plain Layout
-85
+118
 \end_layout
 
 \end_inset
@@ -1248,7 +1576,7 @@ MF1
 \begin_inset Text
 
 \begin_layout Plain Layout
-2
+5
 \end_layout
 
 \end_inset
@@ -1257,7 +1585,7 @@ MF1
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1266,7 +1594,7 @@ MF1
 \begin_inset Text
 
 \begin_layout Plain Layout
-512
+98
 \end_layout
 
 \end_inset
@@ -1299,7 +1627,7 @@ MF1
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{30+128}{30+\frac{1}{50}512+85+\frac{1}{50}2}=1,26x
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}5+118+\frac{1}{50}98}=1,15
 \]
 
 \end_inset
@@ -1308,17 +1636,474 @@ MF1
 \end_layout
 
 \begin_layout Paragraph
-Testfall 2 - Örtliche Verschiebung
+Ergebnisse - Testfall 2 - Örtliche Verschiebung
 \end_layout
 
 \begin_layout Standard
-Dieser Testfall ist vom CO-Kriging Modell nicht abgedeckt und soll als Beispiel
- für einen schwierigen Fall dienen.
+Eine Parameterverschiebung ist im CO-Kriging Modell nicht direkt abgedeckt
+ und kann nur indirekt über die vorhanden Modellparameter modelliert werden.
+ Dieser Testfall dient also als Beispiel für eine sehr schwierige Funktion
+ niedriger Güte.
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i_{bestH}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i_{bestL}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i_{initH}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $i_{initL}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+139
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MF
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+118
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+113
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}0+118+\frac{1}{50}113}=1.14
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Wrap table
+lines 9
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Niedrige Güte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Differenzfunktion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.349
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.317
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.21
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.8*10^{-10}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{h}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h_{l}>e^{-6}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{3}>h_{l}>e^{-50}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.82
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.48
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.046
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:KrigingExampleOpti1-1"
+
+\end_inset
+
+Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
+ am Ende der Optimierung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
-Testfall 3 - LF sinnlos
+Ergebnisse - Testfall 3 - LF sinnlos
 \end_layout
 
 \begin_layout Standard
@@ -1424,7 +2209,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+139
 \end_layout
 
 \end_inset
@@ -1442,7 +2227,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1462,7 +2247,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF3
+MF
 \end_layout
 
 \end_inset
@@ -1471,7 +2256,7 @@ MF3
 \begin_inset Text
 
 \begin_layout Plain Layout
-130
+125
 \end_layout
 
 \end_inset
@@ -1480,7 +2265,7 @@ MF3
 \begin_inset Text
 
 \begin_layout Plain Layout
-6
+2
 \end_layout
 
 \end_inset
@@ -1489,7 +2274,7 @@ MF3
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1498,7 +2283,7 @@ MF3
 \begin_inset Text
 
 \begin_layout Plain Layout
-344
+138
 \end_layout
 
 \end_inset
@@ -1531,7 +2316,7 @@ MF3
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{30+128}{30+\frac{1}{50}344+131+\frac{1}{50}6}=0,95x
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}138+125+\frac{1}{50}2}=1.08
 \]
 
 \end_inset
@@ -1539,13 +2324,285 @@ MF3
 
 \end_layout
 
+\begin_layout Standard
+Die Optimierung war also ca.
+ 5,9% langsamer als eine reine Optimierunge hoher Güte.
+ Das bedeutet, dass selbst wenn die Prozesskette niedriger Güte keinerlei
+ Korrelation zu den Daten hoher Güte besitzt, verliert man in diesem Fall
+ ca.
+ 6% an Zeit.
+ Dies ist für eine Multifidelity Optimierung der nahezu schlecht möglichste
+ Fall.
+\end_layout
+
+\begin_layout Standard
+Das Modell hat in diesem Fall mehrere Lösungsmöglichkeiten.
+ 
+\begin_inset Formula $a=0,\lambda_{l}=0.5$
+\end_inset
+
+ oder 
+\begin_inset Formula $\sigma_{low}^{2}=0,\lambda_{l}=0.5$
+\end_inset
+
+ wäre dann beliebig.
+ Da Ergebnis wäre dasselbe
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap table
+lines 9
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Niedrige Güte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Differenzfunktion
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.03
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.359
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.2*10^{-8}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{h}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{3}>h_{l}>e^{-6}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e^{3}>h_{l}>e^{-50}\forall l\in\left\{ 1,...,k\right\} $
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.12
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.88
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:KrigingExampleOpti1-2"
+
+\end_inset
+
+Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
+ am Ende der Optimierung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
-Testfall 4 - Komplexe LF-Funktion verschiedene Zeitfaktoren
+Ergebnisse - Testfall 4 - Komplexe LF-Funktion - Verschiedene Initiale LF
+ Anteile
 \end_layout
 
 \begin_layout Standard
 Dieser Testfall soll dazu dienen eine komplexere LF-Funktion zu testen und
- mit dem theoretischen Maximum zu vergleichen
+ mit dem theoretischen Maximum zu vergleichen.
+ Das Optimum verschiebt sich bei dieser Funktion 
+\begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.247$
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1558,8 +2615,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="7" columns="6">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1570,7 +2628,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Beeichnung
 \end_layout
 
 \end_inset
@@ -1623,6 +2681,18 @@ status open
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -1638,7 +2708,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+139
 \end_layout
 
 \end_inset
@@ -1656,7 +2726,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1670,13 +2740,246 @@ HF
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+141
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+41
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.98
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+101
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.33
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+87
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+252
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.46
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+52
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+413
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.12
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF 4
+5
 \end_layout
 
 \end_inset
@@ -1685,7 +2988,7 @@ MF 4
 \begin_inset Text
 
 \begin_layout Plain Layout
-40
+51
 \end_layout
 
 \end_inset
@@ -1703,7 +3006,7 @@ MF 4
 \begin_inset Text
 
 \begin_layout Plain Layout
-30
+10
 \end_layout
 
 \end_inset
@@ -1712,7 +3015,16 @@ MF 4
 \begin_inset Text
 
 \begin_layout Plain Layout
-493
+825
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.92
 \end_layout
 
 \end_inset
@@ -1729,7 +3041,7 @@ MF 4
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+0.98
 \end_layout
 
 \end_inset
@@ -1740,21 +3052,6 @@ MF 4
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{30+128}{30+\frac{1}{50}493+40+\frac{1}{50}1}=1,98x
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Fazit
 \end_layout
 
 \begin_layout Standard
@@ -1766,9 +3063,12 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/ErgebnissKapitel/AnalyticTestfälle.eps
-	scale 60
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Testfall4_VolGain.eps
 
 \end_inset
 
@@ -1776,11 +3076,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Kummulierter Volumenzugewinn über der Prozesskettenzeit für alle Testfälle
+
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1790,12 +3094,49 @@ Kummulierter Volumenzugewinn über der Prozesskettenzeit für alle Testfälle
 \end_layout
 
 \begin_layout Standard
-Fazit, wenn die Funktion zum modell passt, der Prozesskettenunterschied
- groß genug ist und eine die Optimierung sehr viele Member benötigt um zu
- konvergieren, dann lohnt es sich sehr.
- Allerdings ist der zeitliche Verlust, selbst bei einer vollkommen zufälligen
- Low-Fidelity Funktion nur sehr gering.
+Fazit:
+\end_layout
+
+\begin_layout Standard
+Bei diesem Beispiel konnte die Optimierung stark von einem hohen initialen
+ LF-Anteil profitieren.
+ Bei einem geringen Anteil sind die Schätzungen der Hyperparameter und damit
+ auch die Ersatzmodelle noch sehr instabil und dadurch kann die Entscheidungsfun
+ktion noch nicht richtig funktionieren.
+ Dieser Umstand kann prinzipiell durch eine ausreichend große Initialisierung
+ umgangen werden.
  
+\end_layout
+
+\begin_layout Subsection
+Fazit
+\end_layout
+
+\begin_layout Itemize
+Maximaler Verlust ca.
+ 2%, wenn LF komplett unkorreliert.
+ 
+\end_layout
+
+\begin_layout Itemize
+Beschleunigung hängt sehr stark von der Art der Störung und der Korrelation
+ zwischen HF/LF ab 
+\end_layout
+
+\begin_layout Itemize
+Anteil der initialen LF Samples sollte so hoch sein, dass das Co-Kriging
+ die Modellparameter der LF-Cov Funktion gut schätzen kann.
+ 
+\end_layout
+
+\begin_layout Itemize
+Die Entscheidungsfunktion hängt extrem stark von der Güte der Modelle ab.
+ 
+\end_layout
+
+\begin_layout Standard
+In der Regel kann der Einsatz lohnen und selbst wenn es nicht klappt, ist
+ der Verlust recht gering.
 \end_layout
 
 \begin_layout Section
@@ -1820,42 +3161,6 @@ Stefan Mukoko - Optimierung wurde im Rahmen der Arbeit betreut
 
 \begin_layout Enumerate
 Georgios
-\end_layout
-
-\begin_layout Standard
-Externe Multifidelity Testfälle
-\end_layout
-
-\begin_layout Enumerate
-FEM Schalenmodelle 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Yong2018"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Brennkammer Steady/Unsteady -> hat nicht so gut geklappt 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Wankhede2011"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zhang"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2134,6 +3439,15 @@ Könnte man die Zeit der LF Prozesskette auf 0 reduzieren ohne Information
 
 \end_layout
 
+\begin_layout Paragraph*
+Verlauf der einzelnen CumVolGain
+\end_layout
+
+\begin_layout Standard
+- Bei MF niemals diesen oberen Abbruch, hat immer ds Optimum gefunden.
+ Sucht also globaler
+\end_layout
+
 \begin_layout Paragraph
 Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
@@ -2236,6 +3550,19 @@ Restart Optionen
 Nutzung von Deep Learning Verfahren über CO-Kriging
 \end_layout
 
+\begin_layout Paragraph*
+Die zentrale FRAGE, die hier beantwortet werden soll:
+\end_layout
+
+\begin_layout Standard
+Hat DeepLearning für die Turbomaschinen Optimierung überhaupt Potential
+ oder nicht?
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Deep Learning, was verspricht man sich davon warum in der Turbomaschinenauslegun
 g?
@@ -2330,6 +3657,19 @@ CO-Kriging / Ordinary Vergleich zeigen
 
 \begin_layout Standard
 Optimierungsergebnisse zeigen
+\end_layout
+
+\begin_layout Paragraph*
+Paretofronten - Irgendwie Zeilfunktionen zeigen und vergleichen
+\end_layout
+
+\begin_layout Standard
+asdasd
+\end_layout
+
+\begin_layout Standard
+z.B.
+ bei 150 Member wie sehen die Paretofronten aus?
 \end_layout
 
 \begin_layout Paragraph*
@@ -3365,6 +4705,26 @@ Weiterhin wurde während des Trainings für MF Modelle der LF-Rauschterm verwend
  werden.
  Ein gewisses Potential scheint also vorhanden zu sein.
  
+\end_layout
+
+\begin_layout Paragraph*
+Fazit:
+\end_layout
+
+\begin_layout Standard
+Hat es Potential?
+\end_layout
+
+\begin_layout Standard
+Ganz klar ja, aber es gibt nocht zahlreiche Hürden, wie z.B.
+ die hohe Trainingszeit, die Erzeugung der Boxen usw., mer Efahrung mit der
+ Struktur ist nötig.
+ Ein gewissen Informationsgehalt auf Delta Basis scheint vorhanden zu sein
+ und zumindest so groß zu sein, dass ein Co-Kriging Modell davon profitiert.
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
