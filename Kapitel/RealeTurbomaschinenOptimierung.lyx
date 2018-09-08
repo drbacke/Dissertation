@@ -541,8 +541,10 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
+<lyxtabular version="3" rows="10" columns="6">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -594,13 +596,31 @@ Bezeichnung
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+initL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+initH
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Referenz
+Referenz 0
 \end_layout
 
 \end_inset
@@ -635,13 +655,31 @@ Referenz
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+0a
 \end_layout
 
 \end_inset
@@ -662,7 +700,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.0\right)$
 \end_inset
 
  
@@ -679,13 +717,31 @@ Referenz
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
+0b
 \end_layout
 
 \end_inset
@@ -706,6 +762,192 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.01\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0c
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=1.0\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Referenz 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color yellow
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color yellow
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\color yellow
 \begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.5\right)$
 \end_inset
 
@@ -718,7 +960,27 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\color yellow
 50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -771,6 +1033,24 @@ Referenz
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -815,13 +1095,31 @@ Referenz
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-4
+4.1-4.5
 \end_layout
 
 \end_inset
@@ -859,6 +1157,24 @@ Referenz
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variabel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
 </row>
 </lyxtabular>
 
@@ -888,8 +1204,7 @@ Auflistung der Optimierungstestfälle
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 0 - Beschleunigung im Vergleich zu einer HF-Optimierung
- - Theoretisches Maximum 
+Ergebnisse - Testfall 0 - Entscheidungsfunktion Test
 \end_layout
 
 \begin_layout Standard
@@ -910,10 +1225,39 @@ g mit einem sehr großen zeitlichen Unterschied zwischen den Gütestufen geteste
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{t_{l}}{t_{h}}\approx\frac{1}{50}
-\]
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
+ 0c
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
@@ -928,8 +1272,9 @@ Weiterhin sind die Gütestufen identisch.
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="5" columns="6">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -993,6 +1338,18 @@ Weiterhin sind die Gütestufen identisch.
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -1008,7 +1365,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-139
+116
 \end_layout
 
 \end_inset
@@ -1026,7 +1383,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-10
+60
 \end_layout
 
 \end_inset
@@ -1040,18 +1397,7 @@ HF
 
 \end_inset
 </cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1060,11 +1406,125 @@ MF
 
 \end_inset
 </cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+37
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.72
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0b
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+45
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+0c
 \end_layout
 
 \end_inset
@@ -1073,7 +1533,25 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-10
+82
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+60
 \end_layout
 
 \end_inset
@@ -1082,7 +1560,16 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1660
+200
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2
 \end_layout
 
 \end_inset
@@ -1101,22 +1588,15 @@ Die Multifidelity-Optimierung konnte nach tatsächlich nach einer Stützstelle
  Das theoretische Maximum wurde damit erreicht:
 \end_layout
 
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{10+139}{10+\frac{1}{50}1660+1}=3,4
-\]
-
-\end_inset
-
-
-\end_layout
+\begin_layout Paragraph
+\begin_inset Note Note
+status open
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 1 - Verrauschte Funktion
+Ergebnisse - Testfall 1 - Stark Verrauschte Funktion
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Für diesen Testfall wurde die Funktion 
 \begin_inset Formula $f_{lf}\left(\vec{x}\right)$
 \end_inset
@@ -1148,7 +1628,7 @@ reference "subsec:Kovarianz-parametrisiertes-Model"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -1179,10 +1659,6 @@ Exemplarische Darstellung der verrauschten Funktion mit 2-Variablen
 
 
 \end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Wrap table
@@ -1245,7 +1721,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.415
+0.71
 \end_layout
 
 \end_inset
@@ -1254,7 +1730,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.634
+0.32
 \end_layout
 
 \end_inset
@@ -1286,7 +1762,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $3.1*10^{-8}$
+\begin_inset Formula $1.9*10^{-8}$
 \end_inset
 
 
@@ -1350,7 +1826,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-19.9
+8.2
 \end_layout
 
 \end_inset
@@ -1359,7 +1835,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-16.8
+6.12
 \end_layout
 
 \end_inset
@@ -1382,7 +1858,7 @@ Differenzfunktion
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.902
+0.95
 \end_layout
 
 \end_inset
@@ -1425,12 +1901,36 @@ Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
 
 \end_layout
 
+\begin_layout Plain Layout
+Das Optimum wurde relativ frühzeitig gefunden, allerdings sind die Ergebnisse
+ der Kovarianzparameter leicht fehlerbehaftet.
+ Erwarten würde man bspw.
+ ein Skalierungsfaktor von 
+\begin_inset Formula $a=1$
 \end_inset
 
+ und einen Diagonalaufschlag von 
+\begin_inset Formula $\lambda_{low}=0.5$
+\end_inset
 
+.
+ Auch die Erwartungswerte der Funktionen sollten identisch sein.
+ 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+Die Hyperparameter auf Richtigkeit zu testen ist bei dieser Funktion allerdings
+ relativ schwierig, da für diese Funktion die Annahme global gültiger Hyperparam
+eter nicht ganz zutreffend ist, es wären lokal veränderliche Hyperparameter
+ notwendig.
+ Diese zu modellieren würde allerdings noch mehr Freiheitsgrade im Training
+ nötig machen.
+ Dennoch ist die Schätzung sehr nah an dem erwarteten Ergebnis und das Optimum
+ der Zielfunktion konnte ebenfalls schnell gefunden werden.
+ 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Wrap table
 lines 0
 placement o
@@ -1624,11 +2124,16 @@ MF
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula 
 \[
 \frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}5+118+\frac{1}{50}98}=1,15
 \]
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1846,256 +2351,6 @@ MF
 \[
 \frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}0+118+\frac{1}{50}113}=1.14
 \]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Wrap table
-lines 9
-placement o
-overhang 0in
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Niedrige Güte
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Differenzfunktion
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sigma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.349
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.317
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\lambda$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.21
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $2.8*10^{-10}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\vec{h}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $h_{l}>e^{-6}\forall l\in\left\{ 1,...,k\right\} $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $e^{3}>h_{l}>e^{-50}\forall l\in\left\{ 1,...,k\right\} $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\beta$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-17.82
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16.48
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $a$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.046
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:KrigingExampleOpti1-1"
-
-\end_inset
-
-Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
- am Ende der Optimierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -2596,9 +2851,11 @@ Ergebnisse - Testfall 4 - Komplexe LF-Funktion - Verschiedene Initiale LF
 \end_layout
 
 \begin_layout Standard
-Dieser Testfall soll dazu dienen eine komplexere LF-Funktion zu testen und
- mit dem theoretischen Maximum zu vergleichen.
- Das Optimum verschiebt sich bei dieser Funktion 
+Dieser Testfall soll dazu dienen einen Zusammenhang zwischen den Gütestufen
+ zu testen, welcher alle Kovarianzmodellparameter benötigt.
+ Da die Funktion hoher Güte angepasst werden musste, verschiebt sich das
+ Optimum dieser Funktion und das Konvergenzkriterium muss daher angepasst
+ werden: 
 \begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.247$
 \end_inset
 
@@ -3068,7 +3325,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Testfall4_VolGain.eps
+	filename ../images/ErgebnissKapitel/Testfall4_VolGain.eps
 
 \end_inset
 
@@ -3144,7 +3401,12 @@ Bisherige Turbomaschinen-Anwendungen
 \end_layout
 
 \begin_layout Subsection
-Übersicht aller Anwendungen
+Übersicht der bisherigen Anwendungen in Industrie und Forschung
+\end_layout
+
+\begin_layout Standard
+Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
+ hier entwickelte Verfahren bereits Anwendung gefunden hat.
 \end_layout
 
 \begin_layout Enumerate
@@ -3161,6 +3423,10 @@ Stefan Mukoko - Optimierung wurde im Rahmen der Arbeit betreut
 
 \begin_layout Enumerate
 Georgios
+\end_layout
+
+\begin_layout Enumerate
+Siemens Testfall, nachfragen ob die noch mehr haben
 \end_layout
 
 \begin_layout Subsection

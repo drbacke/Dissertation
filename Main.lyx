@@ -905,6 +905,10 @@ Korrekturen von Prof Gottschalk
 Kriging Software alle Verfahren in einem untergebracht
 \end_layout
 
+\begin_layout Itemize
+RPROP globales Minimum mit QuasiNewton vergleichen
+\end_layout
+
 \begin_layout Chapter*
 
 \size normal
