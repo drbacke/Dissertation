@@ -1248,7 +1248,9 @@ status open
 
 \begin_layout Plain Layout
 Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
- 0d
+ 0d.
+ Ein Kriterium größer 1 führt zu einer Entscheidung niedriger Güte und unter
+ Eins zu hoher Güte
 \end_layout
 
 \end_inset
@@ -1266,9 +1268,22 @@ Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind die Gütestufen identisch.
- Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreicht
- wurde galt die Optimierung als konvergiert.
+In dem Entscheidungskriterium bei der 0b Testfunktion, ist bei Member Nummer
+ 72 ein starker Sprung zu erkennen.
+ Oftmals resultiert ein solcher Sprung, aus einer starken Änderung in den
+ Hyperparametern.
+ Eine solche Änderung ist allerdings nicht erkennbar gewesen.
+ Stattdessen kann man in den Ergebnisesn erkennen, dass der Optimierer das
+ Optimum fast gefunden hat.
+ Der Bereich wurde dann lokal mit Stützstellen niedriger Güte abgetastet,
+ dies wurde so lange gemacht, bis Stützstellen niedriger Güte keinerlei
+ Fortschritt mehr bringen.
+ 
+\end_layout
+
+\begin_layout Standard
+Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreicht
+ wurde galt die Optimierung als konvergiert.v
 \end_layout
 
 \begin_layout Standard
@@ -2345,17 +2360,54 @@ Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 4 - Komplexe LF-Funktion - Verschiedene Initiale LF
+Ergebnisse - Testfall 4 - Komplexe LF-Funktion - Einfluss der Initiale LF
  Anteile
 \end_layout
 
 \begin_layout Standard
-Dieser Testfall soll dazu dienen einen Zusammenhang zwischen den Gütestufen
- zu testen, welcher alle Kovarianzmodellparameter benötigt.
- Da die Funktion hoher Güte angepasst werden musste, verschiebt sich das
+Dieser Testfall soll den Einfluss der Initialisierung bei einer komplexen
+ LF Funktion zeigen.
+ Komplexe LF Funktion bezieht sich in diesem Fall darauf, dass alle Kovarianzmod
+ellparameter benötigt werden, um diese Funktion darstellen zu können.
+ Als Startdatenbasis wurde eine sehr kleine Menge von HF Stützstellen gewählt
+ und die Menge an LF Stützstellen variiert.
+ Die Entscheidungsfunktion ist die in dieser Arbeit entwickelte lasdasd
+\end_layout
+
+\begin_layout Standard
+Ziel ist es, zu zeigen wie das Verfahren bei unterschiedlichen Initialisierungen
+ reagiert.
+ Hierbei ist das Zusammenspiel von Entscheidungsfunktion und auch Co-Kriging
+ von erheblicher Bedeutung.
+ Die Entscheidungsfunktion kann nur gut funktinieren, wenn das Co-Kriging
+ zuverlässige Vorhersagen trifft.
+ Besonders am Anfang der Optimierung kann dies problematisch sein, da oftmals
+ nur eine unzureichende Menge an Initialisierungsdaten vorliegt und das
+ Co-Kriging damit die Hyperparameter noch nicht optimal trainieren kann.
+ 
+\end_layout
+
+\begin_layout Standard
+Der andere Fall wäre, dass bereits zuviele Initialisierungsdaten niedriger
+ Güte existieren und die Entscheidungsfunktion in diesem Fall keine zusätzlichen
+ Daten niedriger Güte mehr erzeugen sollte.
+ 
+\end_layout
+
+\begin_layout Standard
+Im besten Fall, wenn nach einem Member hoher Güte sofort das Optimum gefunden
+ würde.
+ Dann dürften maximal 6900 Member niedriger Güte berechnet werden, bei mehr
+ wäre die Multifidelity Optimierung immer langsamer als die High-Fidelity
+ Optimierung.
+ 
+\end_layout
+
+\begin_layout Standard
+Da die Funktion hoher Güte angepasst werden musste, verschiebt sich das
  Optimum dieser Funktion und das Konvergenzkriterium muss daher angepasst
  werden: 
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.247$
+\begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.248$
 \end_inset
 
  
@@ -2526,7 +2578,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-141
+42
 \end_layout
 
 \end_inset
@@ -2535,7 +2587,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+126
 \end_layout
 
 \end_inset
@@ -2553,7 +2605,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-41
+50
 \end_layout
 
 \end_inset
@@ -2562,7 +2614,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.98
+2.69
 \end_layout
 
 \end_inset
@@ -2582,7 +2634,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-101
+26
 \end_layout
 
 \end_inset
@@ -2591,7 +2643,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3
+122
 \end_layout
 
 \end_inset
@@ -2609,7 +2661,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-59
+100
 \end_layout
 
 \end_inset
@@ -2618,7 +2670,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.33
+3.68
 \end_layout
 
 \end_inset
@@ -2638,7 +2690,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-87
+23
 \end_layout
 
 \end_inset
@@ -2647,7 +2699,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-11
+77
 \end_layout
 
 \end_inset
@@ -2665,7 +2717,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-252
+250
 \end_layout
 
 \end_inset
@@ -2674,7 +2726,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.46
+3.77
 \end_layout
 
 \end_inset
@@ -2694,7 +2746,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-52
+13
 \end_layout
 
 \end_inset
@@ -2703,7 +2755,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2
+12
 \end_layout
 
 \end_inset
@@ -2721,7 +2773,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-413
+500
 \end_layout
 
 \end_inset
@@ -2730,7 +2782,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.12
+4.48
 \end_layout
 
 \end_inset
@@ -2750,7 +2802,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-51
+8
 \end_layout
 
 \end_inset
@@ -2777,7 +2829,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-825
+1000
 \end_layout
 
 \end_inset
@@ -2786,7 +2838,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.92
+3.92
 \end_layout
 
 \end_inset
@@ -2806,7 +2858,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-17
+4
 \end_layout
 
 \end_inset
@@ -2815,7 +2867,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2
+0
 \end_layout
 
 \end_inset
@@ -2833,7 +2885,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1080
+1500
 \end_layout
 
 \end_inset
@@ -2842,7 +2894,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.06
+3.39
 \end_layout
 
 \end_inset
@@ -2862,7 +2914,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+5
 \end_layout
 
 \end_inset
@@ -2871,7 +2923,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0
 \end_layout
 
 \end_inset
@@ -2880,7 +2932,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+10
 \end_layout
 
 \end_inset
@@ -2889,7 +2941,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2001
+2000
 \end_layout
 
 \end_inset
@@ -2898,7 +2950,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2.71
 \end_layout
 
 \end_inset
@@ -2929,15 +2981,6 @@ HF
 \end_layout
 
 \begin_layout Standard
-Im besten Fall, wenn nach einem Member hoher Güte sofort das Optimum gefunden
- würde.
- Dann dürften maximal 6900 Member niedriger Güte berechnet werden, bei mehr
- wäre die Multifidelity Optimierung immer langsamer als die High-Fidelity
- Optimierung.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -2946,8 +2989,44 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+Grafik -> InitL über Speedup
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Man kann sehen, dass jede der Multifidelity Optimierungen erheblich schneller
+ waren als die Referenz.
+ Die maximale Beschleunigung wurde bei einer Startdatenbasis von 500 Stützstelle
+n erreicht.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei den Testfällen 5-7, welche eine bereits sehr große initiale LF Startdatenbas
+is bereitstellten, wurden praktisch keine zusätzlichen LF Samples mehr erzeugt.
+ Dieses Verhalten ist in diesem Fall optimal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -2968,6 +3047,48 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Warum sind Testfall 1,2 und 3 langsamer?
+\end_layout
+
+\begin_layout Standard
+Eigentlich sollte die Entscheidungsfunktion hier eine optimale Wahl treffen
+ und so eine stärkere Beschleunigung erreichen.
+ Allerdings sind bei einem geringen Anteil die Schätzungen der Hyperparameter
+ und damit auch die Ersatzmodelle noch sehr instabil und dadurch kann die
+ Entscheidungsfunktion noch nicht richtig funktionieren.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Likelihood und Hyperparameter zeigen von 1,2,3,4
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
