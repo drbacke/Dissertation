@@ -533,6 +533,20 @@ reference "tab:Auflistung-der-Optimierungstestf"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Formula $t_{hf}\approx5.09$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $t_{lf}\approx0.073$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float table
 wide false
 sideways false
@@ -540,7 +554,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="6">
+<lyxtabular version="3" rows="9" columns="6">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -711,7 +725,7 @@ Referenz 0
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -773,7 +787,7 @@ Referenz 0
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -835,69 +849,7 @@ Referenz 0
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-200
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-60
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0d
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=5.0\right)$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -1019,7 +971,7 @@ Referenz 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -1069,10 +1021,7 @@ Referenz 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $N\left(\mu=0,\sigma=0.5\right)$
-\end_inset
-
- 
+0
 \end_layout
 
 \end_inset
@@ -1081,7 +1030,7 @@ Referenz 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -1143,7 +1092,7 @@ Referenz 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-50
+~70
 \end_layout
 
 \end_inset
@@ -1288,7 +1237,7 @@ Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreich
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="6">
+<lyxtabular version="3" rows="5" columns="6">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1437,7 +1386,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-21
+12
 \end_layout
 
 \end_inset
@@ -1446,7 +1395,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-120
+377
 \end_layout
 
 \end_inset
@@ -1473,7 +1422,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.01
+2.2
 \end_layout
 
 \end_inset
@@ -1493,7 +1442,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-47
+24
 \end_layout
 
 \end_inset
@@ -1502,7 +1451,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-105
+214
 \end_layout
 
 \end_inset
@@ -1529,14 +1478,14 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.56
+1.96
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1545,58 +1494,11 @@ HF
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-82
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-60
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-200
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.2
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-0d
+85
 \end_layout
 
 \end_inset
@@ -1605,16 +1507,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-93
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-9
+41
 \end_layout
 
 \end_inset
@@ -1641,7 +1534,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-1.12
+1.19
 \end_layout
 
 \end_inset
@@ -1676,8 +1569,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="3" columns="6">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1741,6 +1635,18 @@ status open
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -1788,6 +1694,15 @@ HF
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -1812,7 +1727,7 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+64
 \end_layout
 
 \end_inset
@@ -1830,7 +1745,16 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-113
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.15
 \end_layout
 
 \end_inset
@@ -1854,17 +1778,6 @@ MF
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}0+118+\frac{1}{50}113}=1.14
-\]
 
 \end_inset
 
@@ -1898,8 +1811,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="3" columns="6">
 <features tabularvalignment="middle">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -1963,6 +1877,18 @@ status open
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
@@ -2010,6 +1936,15 @@ HF
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -2025,7 +1960,7 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-125
+142
 \end_layout
 
 \end_inset
@@ -2034,7 +1969,7 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2
+0
 \end_layout
 
 \end_inset
@@ -2052,7 +1987,16 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-138
+50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.98ll
 \end_layout
 
 \end_inset
@@ -2085,7 +2029,7 @@ MF
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}=\frac{10+139}{10+\frac{1}{50}138+125+\frac{1}{50}2}=1.08
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}==
 \]
 
 \end_inset
@@ -2578,7 +2522,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-42
+22
 \end_layout
 
 \end_inset
@@ -2587,7 +2531,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-126
+273
 \end_layout
 
 \end_inset
@@ -2614,7 +2558,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.69
+4.07
 \end_layout
 
 \end_inset
@@ -2634,7 +2578,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-26
+14
 \end_layout
 
 \end_inset
@@ -2643,7 +2587,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-122
+142
 \end_layout
 
 \end_inset
@@ -2670,7 +2614,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.68
+5.42
 \end_layout
 
 \end_inset
@@ -2690,7 +2634,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-23
+12
 \end_layout
 
 \end_inset
@@ -2726,7 +2670,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.77
+5.59
 \end_layout
 
 \end_inset
@@ -2746,7 +2690,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-13
+8
 \end_layout
 
 \end_inset
@@ -2755,7 +2699,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-12
+52
 \end_layout
 
 \end_inset
@@ -2782,7 +2726,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.48
+5.76
 \end_layout
 
 \end_inset
@@ -2838,7 +2782,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.92
+6.4
 \end_layout
 
 \end_inset
@@ -2894,7 +2838,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.39
+4.2
 \end_layout
 
 \end_inset
@@ -2950,7 +2894,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.71
+3.42
 \end_layout
 
 \end_inset
@@ -2989,7 +2933,12 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-Grafik -> InitL über Speedup
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Testfall4_initL_tFact.eps
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3026,7 +2975,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3564,16 +3513,7 @@ Nutzung von Deep Learning Verfahren über CO-Kriging
 \end_layout
 
 \begin_layout Paragraph*
-Die zentrale FRAGE, die hier beantwortet werden soll:
-\end_layout
-
-\begin_layout Standard
-Hat DeepLearning für die Turbomaschinen Optimierung überhaupt Potential
- oder nicht?
-\begin_inset Newline newline
-\end_inset
-
-
+Einleitend, wo stehen wir?
 \end_layout
 
 \begin_layout Standard
@@ -3588,28 +3528,20 @@ g?
 
 \begin_layout Standard
 - 3D Information unabhängig von der Parametrisierung
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-- Kopplung über CO-Kriging sinnvoll
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
 Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
  Netz innerhalb einer Optimireung verwenden möchte?
 \end_layout
 
 \begin_layout Standard
 - Vorhersagen sind sehr unpräzise durch die nötige Rasterung und die damit
- einhergehende schlechte Netzauflösung
+ einhergehende schlechte Netzauflösung (Fabian zitieren)
 \end_layout
 
 \begin_layout Standard
@@ -3631,20 +3563,43 @@ Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
 \end_layout
 
 \begin_layout Standard
-- 
+- Vorhersagen dauern lange, durch Bounding Box (Optimierungspotential vorhanden)
 \end_layout
 
 \begin_layout Standard
 Die Verwendung für den Einsatz in Turbomaschinenoptimierungen von solchen
  Deep-Learning Netzen ist recht schwierig.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Den wichtigsten Faktor stellt allerdings die Beurteilung darüber, ob die
- Vorhersagen die gewünschte Information in den benötigten Genauigkeit liefern
- können.
- 
+-> Fazit: Kopplung über MF Strategie sinnvoll, da:
+\end_layout
+
+\begin_layout Standard
+- statische Vorhersagen möglich sind.
+\end_layout
+
+\begin_layout Standard
+- Optimierungsprozess über EVG möglich ohne Änderungeun
+\end_layout
+
+\begin_layout Standard
+- Fehler können vielleicht korrigiert werden
+\end_layout
+
+\begin_layout Paragraph*
+Die zentrale FRAGE, die hier beantwortet werden soll:
+\end_layout
+
+\begin_layout Standard
+Eine erste Einschätzung, ob Deep Learning Netze mit einer MF Strategie Potential
+ haben.
+ Es soll noch keine optimale Strategie vorgestellt werden.
 \end_layout
 
 \begin_layout Paragraph*
@@ -4729,11 +4684,15 @@ Hat es Potential?
 \end_layout
 
 \begin_layout Standard
-Ganz klar ja, aber es gibt nocht zahlreiche Hürden, wie z.B.
+Ein gewisses Potential scheint vorhanden, aber es gibt nocht zahlreiche
+ Hürden, wie z.B.
  die hohe Trainingszeit, die Erzeugung der Boxen usw., mer Efahrung mit der
  Struktur ist nötig.
  Ein gewissen Informationsgehalt auf Delta Basis scheint vorhanden zu sein
  und zumindest so groß zu sein, dass ein Co-Kriging Modell davon profitiert.
+ Wenn die Vorhersagen noch etwas besser werden, was durchaus möglich ist,
+ da die Entwicklung erst am Anfang steht und die Trainings- und vorhersagezeiten
+ reduziert werden können, dann ja
 \end_layout
 
 \begin_layout Standard
