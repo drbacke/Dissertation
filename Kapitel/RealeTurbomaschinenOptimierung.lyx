@@ -3285,6 +3285,10 @@ Verlauf der einzelnen CumVolGain
  Sucht also globaler
 \end_layout
 
+\begin_layout Standard
+- Reduktionsgeschwindigkeit der Nebenbedingungen 
+\end_layout
+
 \begin_layout Paragraph
 Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
@@ -3525,6 +3529,43 @@ asdasd
 \begin_layout Standard
 z.B.
  bei 150 Member wie sehen die Paretofronten aus?
+\end_layout
+
+\begin_layout Paragraph*
+Da besonders der Anfang der Optimierung wichtig ist, Reduktion der Nebenbedingun
+gen zeigen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Reduktion der Nebenbedingung über Prozesskettenzeit
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
