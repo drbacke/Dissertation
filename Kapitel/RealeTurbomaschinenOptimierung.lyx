@@ -373,19 +373,15 @@ erfahren in besonderer Weise beanspruchen.
 \end_layout
 
 \begin_layout Standard
-Es wurden insgesamt Insbesondere sollen die Testfälle das Zusammenspiel
- zwischen Co-Kriging und Entscheidungsfunktion näher beleuchten.
-\end_layout
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Auflistung-der-Optimierungstestf"
 
-\begin_layout Standard
-Es wurden unter anderem Testfälle gewählt, welche das Verfahren in besonderer
- Weise beanspruchen.
- Hierzu zählt z.B.
- eine Testfall in dem die Prozesskette niedriger und hoher Güte keine Korrelatio
-n aufweisen.
- Weiterhin wurde eine kurze Betrachtung über die maximal erreichbare Beschleunig
-ung einer solchen Multifidelity-Optimierung angestellt.
- 
+\end_inset
+
+ werden die Testfälle aufgelistet, wobei Testfall 1&2 zu der ersten Kategorie
+ gehören und die Testfälle 3&4 zu der zweiten.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -589,7 +585,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.0\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=0.0\right)$
 \end_inset
 
  
@@ -624,7 +620,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=0.1\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=0.1\right)$
 \end_inset
 
  
@@ -659,7 +655,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+N\left(\mu=0,\sigma=1.0\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=1.0\right)$
 \end_inset
 
  
@@ -802,43 +798,173 @@ Auflistung der Optimierungstestfälle
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 1 - Entscheidungsfunktion Test
+Testfall 1 - Entscheidungsfunktion bei unterschiedlichen Informationsgehalt
+ der niedrigen Güte
 \end_layout
 
 \begin_layout Standard
-Als konvergiert wird die Optimierung angesehen, sobald ein Zielfunktionswert
+Dieser Testfall soll das Verhalten der Entscheidungsfunktion bei unterschiedlich
+ stark verrauschter Funktion niedriger Güte 
+\begin_inset Formula $f_{lf}\left(\vec{x}\right)$
+\end_inset
+
+ testen.
+ Die Funktion hoher Güte ist in diesem Fall die Funktion 
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\end_inset
+
+.
+ Die Funktion niedriger Güte ist definiert durch dieselbe Funktion, allerdings
+ mit einem gleichverteilten Rauschen belegt 
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=1.0\right)$
+\end_inset
+
+.
+ Die Breite 
+\begin_inset Formula $b$
+\end_inset
+
+ dieses Rauschens wird mit jedem Testfall variiert.
+ Man beachte, dass die Funktion durch das Rauschen im Mittel zu höheren
+ Werten verschoben wird, bei z.B.
+ 
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=1.0\right)$
+\end_inset
+
+ würde eine mittlere Verschiebung von 
+\begin_inset Formula $\frac{b-a}{2}=0.5$
+\end_inset
+
+ erwartet.
+ Als konvergiert wird die Optimierung angesehen, sobald ein Zielfunktionswert
  
 \begin_inset Formula $f_{hf}\left(\vec{x}\right)<0.228$
 \end_inset
 
  erreicht wurde.
-\end_layout
-
-\begin_layout Standard
-Hierbei handelt es sich um einen Testfall der die theoretisch erreichbare
- maximale Beschleunigung zu einer reinen HF-Optimierung bestätigen und auch
- erläutern soll.
- Diesen Testfall zu generieren ist relativ schwierig, da die Multifidelity-Optim
-ierung nach nach der Intialisierungsphase sofort das Optimum finden muss.
- Dafür muss zu Anfang eine enorme Anzahl an Stützstellen niedriger Güte
- erzeugt werden.
  
 \end_layout
 
 \begin_layout Standard
-Hierfür wurde als Testfall hoher Güte die Referenz verwendet und eine Optimierun
-g mit einem sehr großen zeitlichen Unterschied zwischen den Gütestufen getestet.
+Um einen Eindruck von dem Rauschen zu bekommen, ist in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Exemplarische-Funktion-niedriger"
+
+\end_inset
+
+ die 
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\end_inset
+
+ Funktion mit einem Rauschterm 
+\begin_inset Formula $a=0,b=1$
+\end_inset
+
+ dargestellt.
+ Die Anzahl der freien Variablen ist für diese Darstellung allerdings auf
+ zwei reduziert.
  
 \end_layout
 
 \begin_layout Standard
-- Für die Entscheidungsfunktion wurde die Trainingszeit und die Zeit für
- die Optimierung auf dem Ersazmodell künstlich auf 0 gesetzt, da diese aufgrund
- der extrem niedrigen Prozessketennzeiten überwiegen würde.
- Wenn die Trainingszeit deutlich höher ist, als die Prozesskettenzeoit selbst,
- dann verschiebt sich die Entscheidung immer mehr in Richtung hoher Güte.
+Ein stärkeres Rauschen in der Funktion niedriger Güte sollte sich im Co-Kriging
+ durch einen höheren Rauschterm 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+) ausdrücken.
+ Dadurch sollte die Varianz der Modellfunktion niedriger Güte 
+\begin_inset Formula $cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)$
+\end_inset
+
+ ein grundlegend höheres Niveau haben und der Erwartungswert approximiert/geglät
+tet werden.
+ Das Kovarianzmodell hoher Güte 
+\begin_inset Formula $cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)$
+\end_inset
+
+ sollte davon allerdings unberührt bleiben.
+ 
+\end_layout
+
+\begin_layout Standard
+Für die Entscheidungsfunktion wurde die Trainingszeit und die Zeit für die
+ Optimierung auf dem Ersatzmodell 
+\begin_inset Quotes gld
+\end_inset
+
+künstlich
+\begin_inset Quotes grd
+\end_inset
+
+ auf 0 festgelegt, da diese aufgrund der extrem niedrigen Prozessketennzeiten
+ überwiegen würde.
+ Wenn die Trainingszeit deutlich höher ist, als die Prozesskettenzeit selbst,
+ dann verschiebt sich die Entscheidung immer mehr in Richtung hoher Güte
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:TimeCrit"
+
+\end_inset
+
+).
  Dieses Verhalten ist in einer realen Anwendung auch sinnvoll, bei einem
  analytischen Testfall allerdings nicht.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/ZDT3_Noise.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Exemplarische-Funktion-niedriger"
+
+\end_inset
+
+Exemplarische Funktion niedriger Güte bei 
+\begin_inset Formula $\sigma=1$
+\end_inset
+
+ für zwei freie Variablen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -899,7 +1025,7 @@ In dem Entscheidungskriterium bei der 0b Testfunktion, ist bei Member Nummer
 
 \begin_layout Standard
 Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreicht
- wurde galt die Optimierung als konvergiert.v
+ wurde galt die Optimierung als konvergiert.
 \end_layout
 
 \begin_layout Standard
@@ -1878,7 +2004,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+Beschleunigung im Vergleich zu einer Single-Fidelity Optimierung über der
+ Anzahl initialer Stützstellen niedriger Güte 
 \end_layout
 
 \end_inset
@@ -1905,43 +2032,8 @@ is bereitstellten, wurden praktisch keine zusätzlichen LF Samples mehr erzeugt.
  Dieses Verhalten ist in diesem Fall optimal.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/Testfall4_VolGain.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subparagraph*
-Warum sind Testfall 1,2 und 3 langsamer?
+Warum ist Testfall 4 langsamer?
 \end_layout
 
 \begin_layout Standard
@@ -2897,8 +2989,15 @@ Siemens Testfall, nachfragen ob die noch mehr haben
 \end_layout
 
 \begin_layout Enumerate
-Siemens aktuelles AG Turbo Projekt, Schaffung einer LF Funktion mit Neuronalen
- Netzwerken.
+Siemens aktuelles AG Turbo Projekt, Schaffung einer 
+\begin_inset Quotes gld
+\end_inset
+
+künstlichen LF Funktion
+\begin_inset Quotes grd
+\end_inset
+
+ mit Neuronalen Netzwerken.
 \end_layout
 
 \begin_layout Subsection
@@ -3376,6 +3475,9 @@ Die zentrale FRAGE, die hier beantwortet werden soll:
 Eine erste Einschätzung, ob Deep Learning Netze mit einer MF Strategie Potential
  haben.
  Es soll noch keine optimale Strategie vorgestellt werden.
+ Auch die Neuronalen Netzwerke stehen noch ganz am Anfang was Struktur,
+ Lossfunktion usw.
+ angeht.
 \end_layout
 
 \begin_layout Paragraph*
@@ -3401,6 +3503,15 @@ CO-Kriging / Ordinary Vergleich zeigen
 
 \begin_layout Standard
 Optimierungsergebnisse zeigen
+\end_layout
+
+\begin_layout Standard
+Kein Tensorflow auf dem Cluster, da ...
+\end_layout
+
+\begin_layout Standard
+Daher wurden alle NN Vorhersagen auf einem lokalen Rechner gemacht.
+ Prozesskette erklären
 \end_layout
 
 \begin_layout Paragraph*

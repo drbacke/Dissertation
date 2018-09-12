@@ -1696,7 +1696,7 @@ Es wird weiterhin aber nicht von einem rein interpolierenden Modell ausgegangen.
 \begin_inset Formula 
 \begin{align}
 I_{low}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hl}\label{eq:Informationszugewinn}\\
-I_{high}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hh}
+I_{high}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hh}\label{eq:StandardAbRedulktion}
 \end{align}
 
 \end_inset
