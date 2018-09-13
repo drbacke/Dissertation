@@ -885,19 +885,22 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
 \begin_inset Formula $cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)$
 \end_inset
 
- ein grundlegend höheres Niveau haben und der Erwartungswert approximiert/geglät
-tet werden.
+ ein grundlegend höheres Niveau haben und der Erwartungswert niedriger Güte
+ approximiert/geglättet werden.
  Das Kovarianzmodell hoher Güte 
 \begin_inset Formula $cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)$
 \end_inset
 
- sollte davon allerdings unberührt bleiben.
- 
+ sollte davon unberührt bleiben.
+ Der Informationsgehalt der Daten niedriger Güte sollte also mit steigendem
+ Rauschen für das Co-Kriging sinken.
 \end_layout
 
 \begin_layout Standard
-Für die Entscheidungsfunktion wurde die Trainingszeit und die Zeit für die
- Optimierung auf dem Ersatzmodell 
+Die Entscheidungsfunktion sollte den Optimierungsverlauf bei einem größeren
+ Rauschen schneller in Richtung hohe Güte lenken.
+ Weiterhin wurde für die Entscheidungsfunktion die Trainingszeit und die
+ Zeit für die Optimierung auf dem Ersatzmodell 
 \begin_inset Quotes gld
 \end_inset
 
@@ -905,9 +908,10 @@ künstlich
 \begin_inset Quotes grd
 \end_inset
 
- auf 0 festgelegt, da diese aufgrund der extrem niedrigen Prozessketennzeiten
- überwiegen würde.
- Wenn die Trainingszeit deutlich höher ist, als die Prozesskettenzeit selbst,
+ auf 0 gesetzt, da diese aufgrund der extrem niedrigen Prozesskettenzeiten
+ (ca.
+ 0.07s) überwiegen würde.
+ Wenn die Trainingszeit deutlich höher ist als die Prozesskettenzeit selbst,
  dann verschiebt sich die Entscheidung immer mehr in Richtung hoher Güte
  (siehe Gleichung 
 \begin_inset CommandInset ref
@@ -933,6 +937,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/ZDT3_Noise.eps
+	scale 70
 
 \end_inset
 
@@ -968,64 +973,62 @@ Exemplarische Funktion niedriger Güte bei
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Anzahl-der-jeweiligen"
 
 \end_inset
 
+ ist die Anzahl der erzeugten Member der jeweiligen Testfälle bis zur Konvergenz
+ erkennbar.
+ Wobei 
+\begin_inset Formula $i_{bestH},i_{bestL}$
+\end_inset
 
-\begin_inset Caption Standard
+ die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt,
+ der Index 
+\begin_inset Formula $H,L$
+\end_inset
 
-\begin_layout Plain Layout
-Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
- 0d.
- Ein Kriterium größer 1 führt zu einer Entscheidung niedriger Güte und unter
- Eins zu hoher Güte, die Grenze ist als schwarze Linie eingezeichnet.
-\end_layout
+ steht jeweils für hohe und niedrige Güte.
+ Diese beiden Werte werden maßgeblich durch die Entscheidungsfunktion bestimmt.
+ 
+\begin_inset Formula $i_{initH},i_{initL}$
+\end_inset
+
+ geben die Anzahl der Member der Initialisierung an.
+ Die Definition des Beschleunigungsfaktors 
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+ ist in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:tFact"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+ zu finden.
+ Dieser beschreibt den zeitlichen Faktor zwischen der Referenzoptimierung
+ und der jeweiligen Testoptimierung, 
+\begin_inset Formula $t_{fact}>1$
 \end_inset
 
+ bedeutet hierbei eine Beschleunigung gegenüber der Referenz und 
+\begin_inset Formula $t_{fact}<1$
+\end_inset
 
-\end_layout
-
-\begin_layout Standard
-In dem Entscheidungskriterium bei der 0b Testfunktion, ist bei Member Nummer
- 72 ein starker Sprung zu erkennen.
- Oftmals resultiert ein solcher Sprung, aus einer starken Änderung in den
- Hyperparametern.
- Eine solche Änderung ist allerdings nicht erkennbar gewesen.
- Stattdessen kann man in den Ergebnisesn erkennen, dass der Optimierer das
- Optimum fast gefunden hat.
- Der Bereich wurde dann lokal mit Stützstellen niedriger Güte abgetastet,
- dies wurde so lange gemacht, bis Stützstellen niedriger Güte keinerlei
- Fortschritt mehr bringen.
+ eine Verlangsamung.
  
 \end_layout
 
 \begin_layout Standard
-Als optimaler Wert wurde 0.228 für die Funktion gewählt, sobald dieser erreicht
- wurde galt die Optimierung als konvergiert.
+Alle Optimierungen hatten dieselben 60 Initialisierungsmember hoher Güte,
+ die Multifidelity Optimierungen bekamen zusätzliche 200 Member niedriger
+ Güte für den Start.
+ Alle Parametersätze der Initialisierungsmember wurden zufällig erzeugt.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1178,7 +1181,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0a
+1a
 \end_layout
 
 \end_inset
@@ -1234,7 +1237,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0b
+1b
 \end_layout
 
 \end_inset
@@ -1290,7 +1293,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0c
+1c
 \end_layout
 
 \end_inset
@@ -1352,11 +1355,67 @@ HF
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Anzahl-der-jeweiligen"
+
+\end_inset
+
+Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte, vor und
+ nach der Initialisierungsphase.
+ 
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verlauf-des-Kriteriums"
+
+\end_inset
+
+Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
+ 0d.
+ Ein Kriterium größer 1 führt zu einer Entscheidung niedriger Güte und unter
+ Eins zu hoher Güte, die Grenze ist als schwarze Linie eingezeichnet.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2888,9 +2947,9 @@ Beschleunigung allgemein:
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}
-\]
+\begin{equation}
+t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact}
+\end{equation}
 
 \end_inset
 
@@ -2965,7 +3024,7 @@ Bisherige Turbomaschinen-Anwendungen
 
 \begin_layout Standard
 Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
- hier entwickelte Verfahren bereits Anwendung gefunden hat.
+ hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
 \end_layout
 
 \begin_layout Enumerate
@@ -2985,7 +3044,14 @@ Georgios
 \end_layout
 
 \begin_layout Enumerate
-Siemens Testfall, nachfragen ob die noch mehr haben
+Siemens Testfall, nachfragen ob die noch mehr haben 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "verheij2017multi"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
