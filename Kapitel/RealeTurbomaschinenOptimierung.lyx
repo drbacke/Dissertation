@@ -1025,10 +1025,94 @@ reference "eq:tFact"
 
 \begin_layout Standard
 Alle Optimierungen hatten dieselben 60 Initialisierungsmember hoher Güte,
- die Multifidelity Optimierungen bekamen zusätzliche 200 Member niedriger
- Güte für den Start.
+ wobei die Multifidelity Optimierungen initial 200 Member niedriger Güte
+ zur Verfügung hatten.
  Alle Parametersätze der Initialisierungsmember wurden zufällig erzeugt.
  
+\end_layout
+
+\begin_layout Standard
+Vergleicht man die Beschleunigungsfaktoren 
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+ miteinander, so konnte die Optimierung 1a die stärkste Beschleunigung von
+ 2.2 erreichen.
+ Weiterhin kann man sehen, dass je größer die Breite 
+\begin_inset Formula $b$
+\end_inset
+
+ des Rauschterms ist, desto kleiner die Beschleunigung.
+ Dies entspricht auch dem erwarteten Ergebnis.
+ Betrachtet man zusätzlich noch die Anzahl der Member hoher und niedriger
+ Güte 
+\begin_inset Formula $i_{bestH},i_{bestL}$
+\end_inset
+
+ nach der Initialisierungsphase, so kann man auch hier eine deutliche Tendenz
+ erkennen: Je höher das Rauschen in der Funktion niedriger Güte, desto weniger
+ Member niedriger Güte werden erzeugt und desto höher der Anteil an Membern
+ hohe Güte.
+ Dies entspricht ebenfalls dem erwarteten Ergebnis und gibt einen Hinweis
+ darauf, dass die Entscheidungsfunktion wie gewünscht funktioniert.
+ 
+\end_layout
+
+\begin_layout Standard
+Den genauen Verlauf des Entscheidungskriteriums kann man in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verlauf-des-Kriteriums"
+
+\end_inset
+
+ finden.
+ Gezeigt wird der Wert des Entscheidungskriteriums (siehe Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:criteriumWeighted"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:TimeCrit"
+
+\end_inset
+
+) über der Member Nummer.
+ Die schwarze Linie beschreibt die Entscheidungsgrenze: Liegt der Wert des
+ Kriteriums darüber, so wird ein Member niedriger Güte berechnet und darunter
+ einer hoher Güte.
+ Die rote Kurve (Testfall 1a) ist ein besonderer Fall, da hier die Funktion
+ niedriger und hoher Güte identisch sind.
+ Allerdings ist die Funktion niedriger Güte erheblich schneller.
+ Aus diesem Grund, sollte die Entscheidungsfunktion praktisch nur noch Member
+ niedriger Güte vorschlagen.
+ Weiterhin muss der Wert des Kriteriums in etwa mit dem Wert des zeitlichen
+ Quotienten übereinstimmen.
+ Dies liegt daran, dass der Quotient der Standardabweichungen aus Gleichung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:criteriumWeighted"
+
+\end_inset
+
+ 
+\begin_inset Formula $\left(\frac{\sigma_{h}-\sigma_{hl}}{\sigma_{h}-\sigma_{hh}}\right)=1$
+\end_inset
+
+ zu Eins werden muss, da die Funktionen und damit auch die Standardabweichungen
+ identisch sind.
+ Damit bleibt dann nur noch der Zeitquotient übrig, da in diesem Testfall
+ die Trainings- und Optimierungszeiten auf 0 gesetzt wurden, ergibt sich:
+ 
+\begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}=\frac{t_{prh}}{t_{prl}}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1415,10 +1499,6 @@ Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -1652,7 +1732,7 @@ a
 \begin_inset Text
 
 \begin_layout Plain Layout
-273
+162
 \end_layout
 
 \end_inset
@@ -1679,7 +1759,7 @@ a
 \begin_inset Text
 
 \begin_layout Plain Layout
-4.07
+4.25
 \end_layout
 
 \end_inset
