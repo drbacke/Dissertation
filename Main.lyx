@@ -898,9 +898,32 @@ Korrekturen von Christian
 \end_layout
 
 \begin_layout Itemize
-Korrekturen von Prof Gottschalk
+Korrekturen/Wünsche von Prof Gottschalk
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Entscheidungsfunktion: Alles auf Varianzen umstellen !!! Auch Kapitel 5
+ nicht vergessen !!!
+\end_layout
+
+\begin_layout Itemize
+Kriging + Entscheidungsfunktion + Kapitel 5: kovarianz zu bedingter Kovarianz
+ ändern, also unter der Bedingung dass alle Samples und Geiwchte bekannt
+ sind
+\end_layout
+
+\begin_layout Itemize
+Matrix Klasse und verteilte Systeme genauer beschreiben
+\end_layout
+
+\begin_layout Itemize
+Anfang kann gekürzt werden, alles was es bereits gibt.
+ EVG erklärung z.B.
+ Mehr auf meine Sachen konzentrieren
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Kriging Software alle Verfahren in einem untergebracht
 \end_layout

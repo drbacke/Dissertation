@@ -819,10 +819,10 @@ reference "eq:ExpoKovarianzfunktion"
 , so erhält man:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)= & a^{2}\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber \\
+cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)= & a^{2}\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber \\
  & +\lambda_{diff}\delta\left(\vec{h}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{h}\right)\nonumber \\
-cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & a\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\label{eq:KovarianzfunktionenCoKrigingGauss}\\
-cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)= & \lambda_{2}\delta\left(\vec{h}\right)+\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber 
+cov_{1,2}\left(\vec{x}_{1},\vec{x}_{2}\right)= & a\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\label{eq:KovarianzfunktionenCoKrigingGauss}\\
+cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)= & \lambda_{2}\delta\left(\vec{h}\right)+\sigma_{2}^{2}c_{2}\left(\vec{h}\right)\nonumber 
 \end{align}
 
 \end_inset
@@ -1320,6 +1320,13 @@ Ein geeigneter Wert für die obere Grenze der Konditionszahl liegt erfahrungsgem
 
 , dieser Wert kann im Einzelfall natürlich angepasst werden.
  
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\color red
+Literaturstelle !!!
 \end_layout
 
 \begin_layout Subsection
@@ -4280,7 +4287,336 @@ key "press2007numerical,gill1981practical,gill2007numerical"
 \end_layout
 
 \begin_layout Section
-Vergleiche zu anderen CO-Kriging Modellen
+Umsetzung der Entscheidungsfunktion
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Umsetzung-der-Entscheidungsfunkt"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Berechnung der Enteidungsfunktion benötigt einige Variablen, deren numerisch
+e Bestimmung von zentraler Bedeutung ist, was die Effizienz und Stabilität
+ des Verfahren angeht.
+\end_layout
+
+\begin_layout Standard
+Insbesonderen sind hierbeit die bedingten Varianzen 
+\begin_inset Formula $\sigma_{hl}^{2}\left(\vec{x}\right),\sigma_{hh}^{2}\left(\vec{x}\right)$
+\end_inset
+
+ und die verschiedenen Zeiten 
+\begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}$
+\end_inset
+
+von Bedeutung 
+\end_layout
+
+\begin_layout Paragraph*
+Bedingten Varianzen
+\end_layout
+
+\begin_layout Standard
+Eine einfache Möglichkeit die bedingten Varianzen zu berechnen ist es, die
+ Erwartungswerte vorherzusagen und dann wieder in der Kriging Modell zu
+ stecken und eine erneute Vorhersage zu treffen.
+ Dies ist prinzipiell möglich, softwaretechnisch oftmals ungünstigt, da
+ .
+ 
+\end_layout
+
+\begin_layout Standard
+Eine einfachere Möglichkeit ist es die Varianz 
+\begin_inset Formula $\sigma_{hl}^{2}\left(\vec{x}\right)=\sigma_{h}^{2}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)$
+\end_inset
+
+ mithilfe einer bedingten Normalverteilung zu berechnen.
+ Hierfür ist nur die bedingte Kovarianz 
+\begin_inset Formula $cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)$
+\end_inset
+
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzPredictor"
+
+\end_inset
+
+) zwischen den verschiedenen Gütestufen an dem Ort 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
+\end_inset
+
+, so gilt für 
+\begin_inset Formula $\sigma_{h}^{2}\left(\vec{x}\right)$
+\end_inset
+
+ bei Annahme einer Multivariaten Normalverteilung und unter der Kenntniss
+ von 
+\begin_inset Formula $y_{l}\left(\vec{x}\right)$
+\end_inset
+
+ folgender Zusammenhang:
+\begin_inset Formula 
+\begin{equation}
+\sigma_{h}^{2}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)=\sigma_{h}^{2}\left(\vec{x}\right)-\frac{\left(cov\left(Z_{l}\left(\vec{x}\right),Z_{h}\left(\vec{x}\right)\right)|w,y_{all}\right)^{2}}{\sigma_{l}^{2}\left(\vec{x}\right)}\label{eq:BedingteNormalVertilung}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Berechnung der Zeiten
+\end_layout
+
+\begin_layout Standard
+...
+\end_layout
+
+\begin_layout Paragraph*
+Minimum an HF Member muss vorgegeben werden
+\end_layout
+
+\begin_layout Standard
+Es kann vorkommen, dass die HF und LF Funktionen so stark korreliert sind,
+ dass die Entscheidungsunktion sich nur noch für die Prozessketten niedriger
+ Güte entscheidet.
+ Grundlegend ist dieses Verhalten auch sinnvoll und erwünscht.
+ Jedoch wird der Volume Gain Term in der Regel mit Stützstellen hoher Güte
+ berechnet.
+ Um es kurz zu beschreiben: Mit einem Member niedriger Güte kann kein Volumenzug
+ewinn gemacht werden, es wird nur das Ersatzmodell verbessert.
+ 
+\end_layout
+
+\begin_layout Standard
+Aus diesem Grund ist es sinnvoll einen gewisse Rate von Membern hoher Güte
+ zu erzwingen.
+ 
+\end_layout
+
+\begin_layout Standard
+Es wird ein HF Anteil vorgegeben (HJFProzent Soll) und das Maximum der letzten
+ 10 Entscheidungskriterien geholt.
+\end_layout
+
+\begin_layout Standard
+Die neue Grenze für das Kriterium wird dann so entschieden:
+\end_layout
+
+\begin_layout Itemize
+Ist die Differenz zwischen Soll und Ist HF Prozentsatz größer als 0% aber
+ kleiner als 5% 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Setze das Kriterium auf das Maximum der letzten 10.
+ Die Wahrscheinlichkeit für einen HF Member ist also sehr hoch, bekommt
+ das Entscheidungskriterium aber einen Member welcher einen höheren Wert
+ als die letzten 10 hatte, so kann trotzdem nochmal ein LF Member erzeugt
+ werden.
+ Die soll verhindern, dass besonders gute LF Member verworfen werden.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Ist die Differenz zwischen Soll und Ist HF Prozentsatz größer als 5% 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Erzwinge einen HF Member#
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Dieser Algorithus sorgt im Normalfall für eine gleichmäßige Berechnung von
+ HF Membern, bei einem besonders ausichtsreichen LF Member, kann dieser
+ aber noch vorgezogen werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "float,basicstyle={\small},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+HFProzentSoll   	= holeUserInput()
+\end_layout
+
+\begin_layout Plain Layout
+
+HFProzentIst        = holeAktuellenHFAnteilInProzent()
+\end_layout
+
+\begin_layout Plain Layout
+
+Kriterium10 		= holeLetze10EntscheidungsKriterien()
+\end_layout
+
+\begin_layout Plain Layout
+
+Kriterium10Max 	 = Maximum(Kriterium10)
+\end_layout
+
+\begin_layout Plain Layout
+
+KriteriumAktuell	= Entscheidungsfunktion()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Kriterium Grenze = Kriterium10Max
+\end_layout
+
+\begin_layout Plain Layout
+
+Wenn  (HFProzentIst > HFProzentSoll) oder (Kriterium10Max < 1.0) 
+\end_layout
+
+\begin_layout Plain Layout
+
+	KriteriumGrenze = 1.0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Wenn (HFProzentSoll-HFProzentIst>0.05)
+\end_layout
+
+\begin_layout Plain Layout
+
+	KriteriumGrenze = inf	
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Umschalten auf HF bei einem sehr guten Ersatzmodell
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Umschalten-auf-HF"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Vorhersagefehler der Ersatzmodelle gehen bei ausreichender Anzahl an
+ Stützstellen nahezu gegen 0.
+ Dieser Zustand kann für einzelne Ersatzmodelle vorkommen, wenn eine sehr
+ hohe Anzahl an Stützstellen erreicht wurde oder wenn die zu lernende Funktion
+ besonders einfach ist.
+ Trifft zusätzlich der Umstand ein, dass die Korrelation zwischen hoher
+ und niedriger Güte extrem hoch ist, so könnte es passieren, dass die Entscheidu
+ngsfunktion sich zu oft für die Prozesskette niedriger Güte entscheidet.
+ 
+\end_layout
+
+\begin_layout Standard
+Um die Problematik zu verdeutlichen soll ein Gedankenexperiment helfen:
+ Angenommen es soll eine Funktion optimiert werden, welche von dem Ersatzmodell
+ bereits nach der Initialisierungsphase perfekt gelernt wurde.
+ Zusätzlich sind die niedrige und hohe Gütestufe nahezu vollständig korreliert,
+ die niedriger Gütestufen ist aber deutlich schneller.
+ Der Optimierungsalgorithmus wäre also in der Lage, das Optimum sofort finden
+ zu können.
+ Typischerweise möchte der Anwender aber das hochwertigste Ergebnis, da
+ dieses das Vertrauenswürdigste darstellt.
+ Die Entscheidungsfunktion sollte also bei ausreichender Genauigkeit eher
+ zu Entscheidungen hoher Güte tendieren.
+\end_layout
+
+\begin_layout Standard
+Um ein solches Verhalten automatisiert zu verwirklichen wird vor dem eigentliche
+n Aufruf der Entscheidungsfunktion der Quotient aus vorhersagter Standardabweich
+ung 
+\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)$
+\end_inset
+
+ und der globalen Standardabweichung aller bekannten Stützstellen 
+\begin_inset Formula $\sigma_{h,all}$
+\end_inset
+
+ ins Verhältnis gesetzt: 
+\begin_inset Formula $\frac{\sigma_{h}\left(\vec{x}\right)}{\sigma_{h,all}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Für diesen Fall wurde die Standardabweichung gegenüber der Varianz bevorzugt,
+ da diese in der Größenordnung der Funktion selbst liegt und somit für den
+ Anwender einfacher zu interpretieren ist.
+\end_layout
+
+\begin_layout Standard
+Der Anwender hat nun die Möglichkeit eine Grenze für dieses Verhältnis anzugeben.
+ Wird diese Unterschritten, so wird diese Funktion nicht für die Entscheidung
+ berücksichtigt und erhöht somit nicht den Wert des Entscheidungskriteriums.
+ Werden dadurch bspw.
+ alle Funktionen nicht berücksichtigt, so würde das Kriterium Null werden
+ und sich zugunsten der hochwertigeren Prozesskette entscheiden.
+\end_layout
+
+\begin_layout Standard
+Typische Werte sind 1%, allerdings ist dieser Wert sehr Anwendungs- und
+ Anwender-spezifisch.
+ Der Anwender hat so auch die Möglichkeit die Optimierung frühzeitig in
+ Richtung hoher Güte zu bringen, indem er diesen Wert erhöht.
+ 
+\end_layout
+
+\begin_layout Section
+CO-Kriging - Vergleich zu anderen Verfahren 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:VergleicheCoKrigingAndere"
@@ -4307,7 +4643,7 @@ Likelihood wird mit vollständigem Hyperparmetersatz trainiert.
 \end_layout
 
 \begin_layout Itemize
-Allerdings aufwändiger
+Allerdings aufwendiger
 \end_layout
 
 \begin_layout Standard
@@ -4315,8 +4651,93 @@ Alle Kriging Verfahren in einem Code!!!!
 \end_layout
 
 \begin_layout Standard
-In diesem Abschnitt sollen die Unterschiede und Gemeinsamkeiten zu einigen
- anderen Co-Kriging Verfahren herausgestellt werden.
+Die Co-Kriging Theorie für die in dieser Arbeit entwickelte Co-Kriging Software,
+ entspricht in vielen Punkten der einschlägigen Literatur.
+ In einigen Punkten gibt es allerdings Unterschiede, welche Auswirkungen
+ auf das 
+\end_layout
+
+\begin_layout Subsection
+Softwaretechnische Unterschiede
+\end_layout
+
+\begin_layout Standard
+Das gesamte Verfahren ist streng objektorientiert, dies ermöglicht eine
+ sehr hohe Modularität in der Software selbst und drückt sich durch die
+ folgenden Punkte aus:
+\end_layout
+
+\begin_layout Itemize
+Objektorientiert eigen entwickelte Matrix-Klassen welche mehrere Rechenarchitekt
+uren unterstützt 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nvidia basierte GPU Beschleunigung 
+\end_layout
+
+\begin_layout Itemize
+Intel MKL Beschleunigung
+\end_layout
+
+\begin_layout Itemize
+Eigene OpenMP/SSE beschleunigten Umsetzung
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+durch moderne Interface Programmierung, wurde in wichtigen Klassen des Kriging-V
+erfahrens und der Matrix Klassen ein Interface SaveAbleOnServer implementiert,
+ dieses stellt sicher, dass alle nötigen Mehtoden zu serialisierung und
+ deserialisierung der Klassenspezifischen Daten zur Verfügung steht.
+ Dadurch können die gesamten Objekte der Klassen als Datenstrom über Rechnergren
+zen verschickt und ausgetauscht werden.
+ 
+\end_layout
+
+\begin_layout Itemize
+Eigenes hochperformantes verteiltes System zur asynchronen Verteilung von
+ Matrixoperationen während aller Kriging Operationen (Vorhersage und Training).
+ Dieses Verfahren ist extrem flexibel und kann verschiedene Matrixoperationen
+ automatische aufteilen und auf mehrere Server verteilten.
+ Die Aufteilung erfolgt komplett asynchron, fällt also ein Server bspw.
+ aus, so übernimmt ein anderer automatisch die Berechnung.
+ Zudem können so verschiedene Architekturen verbunden werden, also bspw.
+ CPU und GPU oder unterschiedliche Betriebssysteme.
+\end_layout
+
+\begin_layout Itemize
+Alle Kriging Verfahren (Co-Kriging, Ordinary Kriging und Gradient Enhanced
+ Kriging) sind in einem modularen Softwarepaket zusammengefasst
+\end_layout
+
+\begin_layout Standard
+Alle Verfahren sind in einem C++ Code untergebracht.
+ Die in der Literatur vorgestellten Ansätze (siehe ...) sind oft einfache Matlab
+ Umsetzungen, welche oftmals Schwächen in der Performance und Benutzerfreundlich
+keit aufweisen.
+ 
+\end_layout
+
+\begin_layout Standard
+Weitherhin bietet die hier entwickelte Software eine sehr hohe Performance
+ und ist spezielle ausgelegt für eine große Anzahl an Stützstellen und eine
+ hohe Anzahl an Parametern.
+ Hierfür wurden einige Softwaremodule und Techniken umgesetzt:
+\end_layout
+
+\begin_layout Itemize
+Kapitel durchgehen und Links dazu setzen
+\end_layout
+
+\begin_layout Subsection
+Unterschiede im mathematischen Modell und Trainingsverfahren
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt sollen Unterschiede und Gemeinsamkeiten zu einigen anderen
+ Co-Kriging Verfahren aus der einschlägigen Literatur herausgestellt werden.
  Eine grundlegende Arbeit in diesem Bereich stellt die Veröffentlichung
  von 
 \begin_inset CommandInset citation
@@ -4749,6 +5170,35 @@ reference "sec:Verwendung-von-GPGPU"
  
 \end_layout
 
+\begin_layout Standard
+
+\size larger
+\color orange
+Mehr schreiben !!! Ein paar Benchmarks/Implementierung genauert
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\color orange
+Kenntlich machen was von mir und von Fabian ist
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\color orange
+SaveAbleOnServer erklären
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\color orange
+Wie werden die Größen gespeichert, im Array selbst, für die Serialisierung
+ später
+\end_layout
+
 \begin_layout Subsection
 Verteiltes Rechnen 
 \begin_inset CommandInset label
@@ -4862,6 +5312,58 @@ key "kueppers2016,kueppers2016b"
 \end_inset
 
  verwiesen.
+\end_layout
+
+\begin_layout Standard
+- Mehr schreiben, Link zu den Matrix Klassen bringen, Interface SaveAbleOnServer
+ 
+\end_layout
+
+\begin_layout Standard
+- Serialisierung beschreiben
+\end_layout
+
+\begin_layout Standard
+- Scheduler beschreiben
+\end_layout
+
+\begin_layout Standard
+- Queue beschreiben und die Aufteilung in Paket, Asynchronität beschreiben
+\end_layout
+
+\begin_layout Itemize
+Eigenes hochperformantes verteiltes System zur asynchronen Verteilung von
+ Matrixoperationen während aller Kriging Operationen (Vorhersage und Training).
+ Dieses Verfahren ist extrem flexibel und kann verschiedene Matrixoperationen
+ automatische aufteilen und auf mehrere Server verteilten.
+ Die Aufteilung erfolgt komplett asynchron, fällt also ein Server bspw.
+ aus, so übernimmt ein anderer automatisch die Berechnung.
+ Zudem können so verschiedene Architekturen verbunden werden, also bspw.
+ CPU und GPU oder unterschiedliche Betriebssysteme.
+\end_layout
+
+\begin_layout Itemize
+Interface Programmierung hervorheben
+\end_layout
+
+\begin_layout Itemize
+Aufteilung der Pakete
+\end_layout
+
+\begin_layout Itemize
+Asynchronität beschreiben
+\end_layout
+
+\begin_layout Itemize
+Wie übernimmt ein anderer die Rechnung, falls einer ausfällt?
+\end_layout
+
+\begin_layout Itemize
+Kein MPI nötig, dadurch oft Versionsprobleme oder Lib Probleme OpenMPI/MVAPICH
+ usw.
+ alles nicht kompatibel und in der Regel nicht asynchron-> Für eine Optimierung
+ die über mehrere Rechner läuft und unterschiedlichste System ist dies kein
+ Option.
 \end_layout
 
 \begin_layout Subsection
@@ -5672,7 +6174,7 @@ lines 12
 placement o
 overhang 0in
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics

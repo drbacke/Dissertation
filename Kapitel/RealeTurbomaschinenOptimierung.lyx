@@ -105,7 +105,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
-	scale 40
+	scale 30
 	BoundingBox 25bp 72bp 560bp 735bp
 	clip
 
@@ -281,7 +281,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/1D_CoKriging_Scale.eps
-	scale 40
+	scale 30
 
 \end_inset
 
@@ -882,13 +882,13 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
 
 ) ausdrücken.
  Dadurch sollte die Varianz der Modellfunktion niedriger Güte 
-\begin_inset Formula $cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)$
+\begin_inset Formula $cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
  ein grundlegend höheres Niveau haben und der Erwartungswert niedriger Güte
  approximiert/geglättet werden.
  Das Kovarianzmodell hoher Güte 
-\begin_inset Formula $cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)$
+\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
  sollte davon unberührt bleiben.
@@ -936,8 +936,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/ZDT3_Noise.eps
-	scale 70
+	filename ../images/ErgebnissKapitel/ZDT3_Noise.eps
+	scale 40
 
 \end_inset
 
@@ -956,6 +956,7 @@ Exemplarische Funktion niedriger Güte bei
 \end_inset
 
  für zwei freie Variablen.
+ Die in der Optimierung verwendete Funktion hat allerdings 20 freie Variablen.
 \end_layout
 
 \end_inset
@@ -1107,12 +1108,80 @@ reference "eq:criteriumWeighted"
  zu Eins werden muss, da die Funktionen und damit auch die Standardabweichungen
  identisch sind.
  Damit bleibt dann nur noch der Zeitquotient übrig, da in diesem Testfall
- die Trainings- und Optimierungszeiten auf 0 gesetzt wurden, ergibt sich:
- 
+ die Trainingszeit 
+\begin_inset Formula $t_{train}$
+\end_inset
+
+ und Optimierungszeit auf dem Ersatzmodell 
+\begin_inset Formula $t_{opti}$
+\end_inset
+
+ auf 0 gesetzt wurden, bleiben nur noch die Prozesskettenzeiten 
+\begin_inset Formula $t_{prh},t_{prl}$
+\end_inset
+
+: 
 \begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}=\frac{t_{prh}}{t_{prl}}$
 \end_inset
 
+ (vgl.
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+Die realen Werte lagen am Ende der Optimierung bei einer durchschnittlichen
+ Prozesskettenzeit von 
+\begin_inset Formula $\frac{t_{prh}}{t_{prl}}=\frac{5.087522}{0.0783920}=64.464$
+\end_inset
+
+ Das Kriterium der Entscheidungsfunktion lag bei 
+\begin_inset Formula $f_{dec}(M)=64.81$
+\end_inset
+
+.
+ Bis auf eine sehr kleine Abweichungen, trifft das erwartete Ergebnis also
+ zu.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verlauf-des-Kriteriums"
+
+\end_inset
+
+ zeigt dieses Verhalten auch nochmals deutlich, das Kriterium ist nach einer
+ anfänglichen Initialisierungsphase nahezu konstant und entscheidet sich
+ erst nach Erreichen einer sehr hohen Genauigkeit für die Prozesskette hoher
+ Güte (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Umschalten-auf-HF"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Die beiden anderen Optimierungen 1b und 1c springen jeweils früher auf die
+ Prozesskette hoher Güte um, zudem sinkt auch der Anteil an berechneten
+ Membern niedriger Güte mit steigendem Rauschen der Funktion.
+ Dieser 
+\begin_inset Quotes gld
+\end_inset
+
+Entscheidungsverlauf
+\begin_inset Quotes grd
+\end_inset
+
+ entspricht ebenfalls dem gewünschten Verhalten der Entscheidungsfunktion.
 \end_layout
 
 \begin_layout Standard
@@ -1475,6 +1544,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
+	scale 40
 
 \end_inset
 
@@ -1488,8 +1558,8 @@ name "fig:Verlauf-des-Kriteriums"
 
 \end_inset
 
-Verlauf des Kriteriums der Entscheidungsfunktion für die Testfälle 0a -
- 0d.
+Verlauf des Kriteriums (logarithmische Achsenskalierung) der Entscheidungsfunkti
+on für die Testfälle 0a - 0d.
  Ein Kriterium größer 1 führt zu einer Entscheidung niedriger Güte und unter
  Eins zu hoher Güte, die Grenze ist als schwarze Linie eingezeichnet.
 \end_layout
@@ -2136,6 +2206,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/Testfall4_initL_tFact.eps
+	scale 25
 
 \end_inset
 
@@ -2192,11 +2263,7 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-Likelihood und Hyperparameter zeigen von 1,2,3,4
+Hyperparameter zeigen von a und b
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2229,7 +2296,7 @@ ktion noch nicht richtig funktionieren.
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 3 - Örtliche Verschiebung
+Ergebnisse - Testfall 3 - Örtliche Verschiebung -> Anhang ?
 \end_layout
 
 \begin_layout Standard
@@ -2466,7 +2533,7 @@ MF
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 4 - LF sinnlos
+Ergebnisse - Testfall 4 - LF sinnlos -> Anhang ?
 \end_layout
 
 \begin_layout Standard
@@ -3435,6 +3502,15 @@ Verlauf der einzelnen CumVolGain
 - Reduktionsgeschwindigkeit der Nebenbedingungen 
 \end_layout
 
+\begin_layout Paragraph*
+Einzelnen Zeiten plotten
+\end_layout
+
+\begin_layout Standard
+- Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
+ Low
+\end_layout
+
 \begin_layout Paragraph
 Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
@@ -3517,6 +3593,14 @@ t besitzen.
  Zudem stellt der HF Anteil nur den Anteil am Ende der Optimierung dar.
 \end_layout
 
+\begin_layout Paragraph
+Aerodynamische Auswertung
+\end_layout
+
+\begin_layout Standard
+Ergebnisse zeigen von MF und HF Optimierung
+\end_layout
+
 \begin_layout Section
 Weitere Anwendungsmöglichkeiten
 \end_layout
@@ -3580,7 +3664,8 @@ Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
 
 \begin_layout Standard
 - Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
- Massenerhaltung, Totalgrößen, Wirkungsgrade unter 1) wird nicht eingehalten
+ Massenerhaltung, Totalgrößen, Wirkungsgrade unter 1) wird nicht eingehalten.
+ Könnte man aber teilweise mittrainieren
 \end_layout
 
 \begin_layout Standard
@@ -3631,7 +3716,25 @@ Eine erste Einschätzung, ob Deep Learning Netze mit einer MF Strategie Potentia
 \end_layout
 
 \begin_layout Paragraph*
-Prozesskette zeigen
+Kurz die NNs vorstellen:
+\end_layout
+
+\begin_layout Standard
+- Marcel zitieren und Fabian zitieren: Netzstruktur und Box Generierung
+\end_layout
+
+\begin_layout Standard
+- Framework: Tensorflow, 
+\end_layout
+
+\begin_layout Standard
+- In dieser Arbeit wurde die Box Generierung verwendet und die voreingestellte
+ Netzstruktur, die Variationen und .
+ Das Training wurde dann wieder innerhalb dieser Arbeit durchgeführt und
+ die Prozesskette usw.
+ aufgesetzt.
+ Das hier entwickelte MF Verfahren kam dann zum Einsatz mit der LF NN Kette.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3648,7 +3751,68 @@ S1-Schnitte Vorhersagen zeigen
 \end_layout
 
 \begin_layout Standard
-CO-Kriging / Ordinary Vergleich zeigen
+.
+ Struktur grob erklären, Lossfunktion
+\end_layout
+
+\begin_layout Standard
+- jeweils ein NN pro OP
+\end_layout
+
+\begin_layout Standard
+- Trainingsverlauf zeigen
+\end_layout
+
+\begin_layout Standard
+- Vorhersagen grob vergleichen
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+Vorhersagen zeigen.
+ 50% Schnitt Vorhersage und Real, 
+\end_layout
+
+\begin_layout Plain Layout
+95% Schnitt Vorhersage und Real
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+- 1D Vorhersagen zeigen
+\end_layout
+
+\begin_layout Paragraph*
+Optimierungssetup zeigen
+\end_layout
+
+\begin_layout Standard
+NNs vorher trainiert mit 25 initialen Samples
+\end_layout
+
+\begin_layout Standard
+NNs nicht mehr nachtrainiert
 \end_layout
 
 \begin_layout Standard
@@ -3689,10 +3853,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 Reduktion der Nebenbedingung über Prozesskettenzeit
 \begin_inset Caption Standard
 
@@ -3715,7 +3875,7 @@ Reduktion der Nebenbedingung über Prozesskettenzeit
 \end_layout
 
 \begin_layout Paragraph*
-Test - Simulation bei großer Datenlage
+Ergebnisse - Simulation bei großer Datenlage
 \end_layout
 
 \begin_layout Standard
@@ -4376,7 +4536,7 @@ MF
 \end_layout
 
 \begin_layout Paragraph*
-Test - Simulation des Beginns einer Optimierung
+Ergebnisse - Simulation des Beginns einer Optimierung
 \end_layout
 
 \begin_layout Standard
@@ -4747,6 +4907,14 @@ Weiterhin wurde während des Trainings für MF Modelle der LF-Rauschterm verwend
  werden.
  Ein gewisses Potential scheint also vorhanden zu sein.
  
+\end_layout
+
+\begin_layout Paragraph*
+Optimierung - Ergebnisse
+\end_layout
+
+\begin_layout Standard
+VG Verlauf - Entscheidungsfunktion & Startdatenbasis
 \end_layout
 
 \begin_layout Paragraph*
