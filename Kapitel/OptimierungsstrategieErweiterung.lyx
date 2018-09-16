@@ -2126,5 +2126,124 @@ Eine weitere Schwierigkeit liegt in der numerischen Berechnung der Integrale,
  
 \end_layout
 
+\begin_layout Subsection
+Theroretische Beschleunigung einer Multifidelity Optimierung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Theroretische-Beschleunigung-ein"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt soll beschrieben werden, wie die Beschleunigung zwischen
+ einer Single- und Multifidelity Optimierung zu berechnen und zu bewerten
+ ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Mit Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:tFact"
+
+\end_inset
+
+ ist es möglich einen zeitlichen Faktor 
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+ zu berechnen.
+ Dieser beschreibt den zeitlichen Faktor zwischen einer Single-Fidelity
+ Referenzoptimierung und einer Multifidelity-Optimierung.
+ 
+\begin_inset Formula $t_{fact}>1$
+\end_inset
+
+ bedeutet hierbei eine Beschleunigung gegenüber der Referenz und 
+\begin_inset Formula $t_{fact}<1$
+\end_inset
+
+ eine Verlangsamung.
+ Wobei 
+\begin_inset Formula $i_{bestH},i_{bestL}$
+\end_inset
+
+ die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt,
+ der Index 
+\begin_inset Formula $H,L$
+\end_inset
+
+ steht jeweils für hohe und niedrige Güte.
+ 
+\begin_inset Formula $i_{initH},i_{initL}$
+\end_inset
+
+ geben die Anzahl der Member der Initialisierung der jeweiligen Optimierung
+ an.
+ 
+\begin_inset Formula 
+\begin{equation}
+t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das theoretische Beschleunigungsmaximum 
+\begin_inset Formula $max(t_{fact})$
+\end_inset
+
+ (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Maxium"
+
+\end_inset
+
+) einer Multifidelity-Optimierung wäre dann erreicht, wenn die Optimierung
+ nach der Initialisierungphase mit nur einem zusätzlichem Member das Optimum
+ findet.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1\right)}\label{eq:Maxium}
+\end{equation}
+
+\end_inset
+
+Dieser Wert kann aber aus folgenden Gründen praktisch nicht erreicht werden:
+\end_layout
+
+\begin_layout Itemize
+Die Stützstellen aus der Intitialisierungphase liegen oft nicht in der Nähe
+ des Optimums.
+ Daher müssen meistens noch einige Stützstellen ereugt werden, bis die Umgebung
+ des Optimums entsprechend aufgelöst wird.
+\end_layout
+
+\begin_layout Itemize
+Bei einer Mehrzieloptimierung gibt es kein eindeutiges Optimum.
+ Es muss eine Paretofront erzeugt werden, diese lässt sich mit einer Stützstelle
+ nicht auflösen.
+ 
+\end_layout
+
+\begin_layout Itemize
+Zudem hängt die Beschleunigung zusätzlich noch vom Informationsgehalt der
+ LF-Funktion ab.
+ Bietet diese nur einen geringen Informationsgehalt, so kann die theoretische
+ Beschleunigung ebenfalls nicht erreicht werden.
+\end_layout
+
 \end_body
 \end_document

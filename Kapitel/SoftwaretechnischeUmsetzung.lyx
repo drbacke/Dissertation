@@ -4438,17 +4438,8 @@ Erzwinge einen HF Member#
 Dieser Algorithus sorgt im Normalfall für eine gleichmäßige Berechnung von
  HF Membern, bei einem besonders ausichtsreichen LF Member, kann dieser
  aber noch vorgezogen werden.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float algorithm
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
 \begin_inset listings
-lstparams "float,basicstyle={\small},tabsize=4"
+lstparams "basicstyle={\small},tabsize=4"
 inline false
 status open
 
@@ -4508,24 +4499,6 @@ Wenn (HFProzentSoll-HFProzentIst>0.05)
 \begin_layout Plain Layout
 
 	KriteriumGrenze = inf	
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout

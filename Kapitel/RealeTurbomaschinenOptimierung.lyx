@@ -486,7 +486,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="8" columns="3">
+<lyxtabular version="3" rows="7" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -700,45 +700,6 @@ Referenz
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
-\end_inset
-
- 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}+\left(\begin{array}{c}
-0.1\\
-\vdots\\
-0.1
-\end{array}\right)\right)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -894,23 +855,15 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
  sollte davon unberührt bleiben.
  Der Informationsgehalt der Daten niedriger Güte sollte also mit steigendem
  Rauschen für das Co-Kriging sinken.
+ Die Entscheidungsfunktion sollte den Optimierungsverlauf bei einem größeren
+ Rauschen schneller in Richtung hohe Güte lenken.
+ 
 \end_layout
 
 \begin_layout Standard
-Die Entscheidungsfunktion sollte den Optimierungsverlauf bei einem größeren
- Rauschen schneller in Richtung hohe Güte lenken.
- Weiterhin wurde für die Entscheidungsfunktion die Trainingszeit und die
- Zeit für die Optimierung auf dem Ersatzmodell 
-\begin_inset Quotes gld
-\end_inset
-
-künstlich
-\begin_inset Quotes grd
-\end_inset
-
- auf 0 gesetzt, da diese aufgrund der extrem niedrigen Prozesskettenzeiten
- (ca.
- 0.07s) überwiegen würde.
+Weiterhin wurde für die Entscheidungsfunktion die Trainingszeit und die
+ Zeit für die Optimierung auf dem Ersatzmodell auf 0 gesetzt, da diese aufgrund
+ der extrem niedrigen Prozesskettenzeiten überwiegen würde.
  Wenn die Trainingszeit deutlich höher ist als die Prozesskettenzeit selbst,
  dann verschiebt sich die Entscheidung immer mehr in Richtung hoher Güte
  (siehe Gleichung 
@@ -1003,10 +956,10 @@ reference "tab:Anzahl-der-jeweiligen"
 \begin_inset Formula $t_{fact}$
 \end_inset
 
- ist in Gleichung 
+ ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:tFact"
+reference "sec:Theroretische-Beschleunigung-ein"
 
 \end_inset
 
@@ -1514,8 +1467,8 @@ name "tab:Anzahl-der-jeweiligen"
 
 \end_inset
 
-Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte, vor und
- nach der Initialisierungsphase.
+Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte bis zum
+ Erreichen des Optimums, vor und nach der Initialisierungsphase.
  
 \end_layout
 
@@ -1575,8 +1528,7 @@ on für die Testfälle 0a - 0d.
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 2 - Komplexe LF-Funktion - Einfluss der Initiale LF
- Anteile
+Ergebnisse - Testfall 2 - Einfluss der Optimierungs-Initialisierung
 \end_layout
 
 \begin_layout Standard
@@ -1584,9 +1536,27 @@ Dieser Testfall soll den Einfluss der Initialisierung bei einer komplexen
  LF Funktion zeigen.
  Komplexe LF Funktion bezieht sich in diesem Fall darauf, dass alle Kovarianzmod
 ellparameter benötigt werden, um diese Funktion darstellen zu können.
+ Weiterhin sind die Minima der Funktion niedriger und hoher Güte nicht an
+ demselben Ort.
  Als Startdatenbasis wurde eine sehr kleine Menge von HF Stützstellen gewählt
  und die Menge an LF Stützstellen variiert.
- Die Entscheidungsfunktion ist die in dieser Arbeit entwickelte lasdasd
+ Die verwendete Entscheidungsfunktion ist die in dieser Arbeit entwickelte
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Zusätzliche Gewichtung der Ersatzmodelle
+\begin_inset Quotes grd
+\end_inset
+
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Entscheidungsfunktion"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1594,7 +1564,7 @@ Ziel ist es, zu zeigen wie das Verfahren bei unterschiedlichen Initialisierungen
  reagiert.
  Hierbei ist das Zusammenspiel von Entscheidungsfunktion und auch Co-Kriging
  von erheblicher Bedeutung.
- Die Entscheidungsfunktion kann nur gut funktinieren, wenn das Co-Kriging
+ Die Entscheidungsfunktion kann nur gut funktionieren, wenn das Co-Kriging
  zuverlässige Vorhersagen trifft.
  Besonders am Anfang der Optimierung kann dies problematisch sein, da oftmals
  nur eine unzureichende Menge an Initialisierungsdaten vorliegt und das
@@ -1603,35 +1573,179 @@ Ziel ist es, zu zeigen wie das Verfahren bei unterschiedlichen Initialisierungen
 \end_layout
 
 \begin_layout Standard
-Der andere Fall wäre, dass bereits zuviele Initialisierungsdaten niedriger
- Güte existieren und die Entscheidungsfunktion in diesem Fall keine zusätzlichen
- Daten niedriger Güte mehr erzeugen sollte.
- 
-\end_layout
+Ein weiterer wichtiger Fall ist es, dass bereits genügend Initialisierungsdaten
+ niedriger Güte existieren und die Entscheidungsfunktion in diesem Fall
+ keine zusätzlichen Daten niedriger Güte mehr erzeugen sollte.
+ Die Funktion 
+\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
+\end_inset
 
-\begin_layout Standard
-Im besten Fall, wenn nach einem Member hoher Güte sofort das Optimum gefunden
- würde.
- Dann dürften maximal 6900 Member niedriger Güte berechnet werden, bei mehr
- wäre die Multifidelity Optimierung immer langsamer als die High-Fidelity
- Optimierung.
- 
-\end_layout
-
-\begin_layout Standard
-Da die Funktion hoher Güte angepasst werden musste, verschiebt sich das
- Optimum dieser Funktion und das Konvergenzkriterium muss daher angepasst
- werden: 
+ wird in diesem Fall als konvergent angenommen, sobald ein Wert von 
 \begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.248$
 \end_inset
 
+ unterschritten wurde.
+ Weiterhin wurde für die Entscheidungsfunktion die Trainingszeit und die
+ Zeit für die Optimierung auf dem Ersatzmodell auf 0 gesetzt, da diese aufgrund
+ der extrem niedrigen Prozesskettenzeiten überwiegen würde.
+\end_layout
+
+\begin_layout Standard
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Anzahl-der-jeweiligen-1"
+
+\end_inset
+
+ ist die Anzahl der erzeugten Member der jeweiligen Testfälle a-g bis zur
+ Konvergenz erkennbar.
+ Wobei 
+\begin_inset Formula $i_{bestH},i_{bestL}$
+\end_inset
+
+ die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt,
+ der Index 
+\begin_inset Formula $H,L$
+\end_inset
+
+ steht jeweils für hohe und niedrige Güte.
+ Diese beiden Werte werden maßgeblich durch die Entscheidungsfunktion bestimmt.
+ 
+\begin_inset Formula $i_{initH},i_{initL}$
+\end_inset
+
+ geben die Anzahl der Member der Initialisierung an.
+ Die Definition des Beschleunigungsfaktors 
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+ ist in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:tFact"
+
+\end_inset
+
+ zu finden.
+ Dieser beschreibt den zeitlichen Faktor zwischen der Referenzoptimierung
+ und der jeweiligen Testoptimierung, 
+\begin_inset Formula $t_{fact}>1$
+\end_inset
+
+ bedeutet hierbei eine Beschleunigung gegenüber der Referenz und 
+\begin_inset Formula $t_{fact}<1$
+\end_inset
+
+ eine Verlangsamung.
  
 \end_layout
 
 \begin_layout Standard
-Das Training soll in diesem Testfall vernachlässigt werden, da die Trainingszeit
- in typischen Turbomaschinenanwendungen aufgrund der hohen Prozesskettenzeiten
- vernachlässigbar sind.
+Die Anzahl 
+\begin_inset Formula $i_{bestL}$
+\end_inset
+
+ und 
+\begin_inset Formula $i_{bestH}$
+\end_inset
+
+ der berechneten Member nach der Initialisierung bis zum Auffinden des Minimums
+ wird durch die Entscheidungsfunktion bestimmt.
+ Typischerweise durchläuft eine solche Optimierung drei Entscheidungs-Phasen:
+\end_layout
+
+\begin_layout Enumerate
+Zu Beginn sind die Hyperparameter der Ersatzmodelle oft noch nicht ausreichend
+ gut geschätzt.
+ Es gilt also genügend Samples zu erzeugen, bis die Hyperparameter der Ersatzmod
+elle ausreichend gut geschätzt worden sind.
+ Die Entscheidung fällt in dieser Phase oftmals noch nicht optimal aus.
+\end_layout
+
+\begin_layout Enumerate
+Ist eine ausreichende Schätzung der Hyperparameter erreicht, so wird die
+ Entscheidungsfunktion ab dieser Phase viele Member niedriger Güte erzeugen,
+ insofern diese noch genügend Informationsgehalt bieten.
+ Hierdurch wird eine Abtastung des Raums durch 
+\begin_inset Quotes gld
+\end_inset
+
+günstige
+\begin_inset Quotes grd
+\end_inset
+
+ Stützstellen niedriger Güte erreicht.
+\end_layout
+
+\begin_layout Enumerate
+Gegen Ende der Optimierung schwenkt die Entscheidungsfunktion auf Member
+ hoher Güte um, da die Member niedriger Güte keine zusätzliche Information
+ mehr über die Lage des Optimums mehr liefern können.
+ 
+\end_layout
+
+\begin_layout Standard
+Je nach initialer Datenlage variiert die Länge der drei genannten Phasen.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beschleunigung-im-Vergleich"
+
+\end_inset
+
+ zeigt die Beschleunigung über der Anzahl an initialen Membern, hier sind
+ ebenfalls drei Bereiche zu erkennen:
+\end_layout
+
+\begin_layout Itemize
+a: In diesem Bereich ist die Anzahl an initial erzeugten Membern noch sehr
+ gering.
+ Aus diesem Grund fällt Entscheidungsphase 1 verhältnismäßig groß aus, da
+ die Hyperparameter mit dieser geringen Anzahl noch nicht gut geschätzt
+ worden sind.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Konvergenz-des-Skalierungsfaktor"
+
+\end_inset
+
+ untermauert diese Behauptung nochmals, hier ist der Skalierungsfaktor a
+ des Ersatzmodells über der Trainingsnummer zu erkennen.
+ Es wird jedes mal trainiert, sobald ein neuer Member berechnet wurde.
+ Man erkennt, dass bei Testfall a der Skalierungsfaktor bis ca.
+ 40 Trainings noch sehr stark schwankt.
+ Bei Testfall d ist diese Entscheidungsphase bereits nach 10 Trainings durchlauf
+en.
+ 
+\end_layout
+
+\begin_layout Itemize
+b-d: In diesem Bereich fällt die Entscheidungsphase 1 sehr kurz aus, die
+ initiale Datenlage ist bereits sehr gut und die Entscheidungsfunktion tritt
+ sehr schnell in Entscheidungsphase 2 ein und erzeugt hauptsächlich Member
+ niedriger Güte.
+ Bis dann Entscheidungsphase 3 erreicht wird und das Optimum dann mit einigen
+ wenigen Member hoher Güte gefunden wird.
+\end_layout
+
+\begin_layout Itemize
+e-g: In diesem Bereich fallen die Entscheidungsphasen 1-2 praktisch vollständig
+ weg.
+ Die initiale Anzahl an Membern hoher Güte ist so groß, dass das Ersatzmodell
+ von Anfang an nahezu perfekte Vorhersagen trifft.
+ Die Entscheidungsfunktion geht aus diesem Grund direkt in Entscheidungspahse
+ 3 über und erzeugt nur noch Member hoher Güte.
+ Das Optimum wird dann mit einer sehr geringen Anzahl von Membern hoher
+ Güte sehr schnell gefunden.
+ Allerdings ist bei Testfall f und g die Anzahl an Membern niedriger Güte
+ bereits höher als benötigt, sodass die letztendliche Beschleunigung 
+\begin_inset Formula $t_{fact}$
+\end_inset
+
+ darunter leidet.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1728,7 +1842,7 @@ Bezeichnung
 \begin_inset Text
 
 \begin_layout Plain Layout
-HF
+Referenz
 \end_layout
 
 \end_inset
@@ -2182,7 +2296,14 @@ g
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-0.98
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Anzahl-der-jeweiligen-1"
+
+\end_inset
+
+Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte bis zum
+ Erreichen des Optimums, vor und nach der Initialisierungsphase.
 \end_layout
 
 \end_inset
@@ -2214,6 +2335,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beschleunigung-im-Vergleich"
+
+\end_inset
+
 Beschleunigung im Vergleich zu einer Single-Fidelity Optimierung über der
  Anzahl initialer Stützstellen niedriger Güte 
 \end_layout
@@ -2229,32 +2356,6 @@ Beschleunigung im Vergleich zu einer Single-Fidelity Optimierung über der
 \end_layout
 
 \begin_layout Standard
-Man kann sehen, dass jede der Multifidelity Optimierungen erheblich schneller
- waren als die Referenz.
- Die maximale Beschleunigung wurde bei einer Startdatenbasis von 500 Stützstelle
-n erreicht.
- 
-\end_layout
-
-\begin_layout Standard
-Bei den Testfällen 5-7, welche eine bereits sehr große initiale LF Startdatenbas
-is bereitstellten, wurden praktisch keine zusätzlichen LF Samples mehr erzeugt.
- Dieses Verhalten ist in diesem Fall optimal.
-\end_layout
-
-\begin_layout Subparagraph*
-Warum ist Testfall 4 langsamer?
-\end_layout
-
-\begin_layout Standard
-Eigentlich sollte die Entscheidungsfunktion hier eine optimale Wahl treffen
- und so eine stärkere Beschleunigung erreichen.
- Allerdings sind bei einem geringen Anteil die Schätzungen der Hyperparameter
- und damit auch die Ersatzmodelle noch sehr instabil und dadurch kann die
- Entscheidungsfunktion noch nicht richtig funktionieren.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -2263,263 +2364,24 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-Hyperparameter zeigen von a und b
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Testfall2_SkalierungsfakKonv.eps
+	scale 50
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Konvergenz-des-Skalierungsfaktor"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Fazit:
-\end_layout
-
-\begin_layout Standard
-Bei diesem Beispiel konnte die Optimierung stark von einem hohen initialen
- LF-Anteil profitieren.
- Bei einem geringen Anteil sind die Schätzungen der Hyperparameter und damit
- auch die Ersatzmodelle noch sehr instabil und dadurch kann die Entscheidungsfun
-ktion noch nicht richtig funktionieren.
- Dieser Umstand kann prinzipiell durch eine ausreichend große Initialisierung
- umgangen werden.
+Konvergenz des Skalierungsfaktors a für Testfall a und d.
  
-\end_layout
-
-\begin_layout Paragraph
-Ergebnisse - Testfall 3 - Örtliche Verschiebung -> Anhang ?
-\end_layout
-
-\begin_layout Standard
-Eine Parameterverschiebung ist im CO-Kriging Modell nicht direkt abgedeckt
- und kann nur indirekt über die vorhanden Modellparameter modelliert werden.
- Dieser Testfall dient also als Beispiel für eine sehr schwierige Funktion
- niedriger Güte.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap table
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="6">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{bestH}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{bestL}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{initH}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{initL}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $t_{fact}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-139
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-118
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-64
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-50
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.15
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -2533,20 +2395,38 @@ MF
 \end_layout
 
 \begin_layout Paragraph
-Ergebnisse - Testfall 4 - LF sinnlos -> Anhang ?
+Ergebnisse - Testfall 3 - Hohe und niedrige Güte vollständig unkorreliert
 \end_layout
 
 \begin_layout Standard
-Dies stellt ebenfalls einen sehr schweren Testfall dar.
- Das CO-Kriging Verfahren muss lernen, dass die Low-Fidelity Funktion keinen
- Zusammenhang zur High-Fidelity Funktion hat und kann im besten Fall so
- gut werden die eine reine HF Optimierung.
+Dieser Testfall stellt einen Grenzfall dar: Das CO-Kriging Verfahren muss
+ lernen, dass die Low-Fidelity Funktion keinen Zusammenhang zur High-Fidelity
+ Funktion hat und die Entscheidungsfunktion sollte dann nur noch Member
+ hoher Güte erzeugen.
+ Diese Multifidelity Optimierung kann im besten Fall nur so gut werden die
+ eine reine HF Optimierung, da keine Beschleunigung durch die Funktion niedriger
+ Güte zu erreichen ist.
+ Besonders interessant ist hier der zeitliche Verlust durch eine Multifidelity-O
+ptimierung im Vergleich zu einer reinen High-Fidelity Optimierung.
+ 
 \end_layout
 
 \begin_layout Standard
-weiterhin stellt dies einen guten Test für die Entscheidungsfunktiuon dar.
- Diese müsste ebenfalls erkennen, dass sich die Berechnung weiterer LF Member
- nicht rentiert.
+Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Anzahl-der-jeweiligen-2"
+
+\end_inset
+
+ zeigt die Ergebnisse der Optimierung.
+ Die Entscheidungsunktion hat keine zusätzlichen Member niedriger Güte erzeugt,
+ was die optimale Lösung für dieses Problem darstellt.
+ Die Optimierung war insgesamt ca.
+ 2% langsamer als eine reine Optimierunge hoher Güte.
+ Dieser Testfall gibt einen Hinweis darauf, dass selbst bei keinem Informationsg
+ehalt der niedrigen Gütestufe die zeitlichen Verluste in Grenzen halten.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2761,289 +2641,14 @@ MF
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}}==
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Optimierung war also ca.
- 5,9% langsamer als eine reine Optimierunge hoher Güte.
- Das bedeutet, dass selbst wenn die Prozesskette niedriger Güte keinerlei
- Korrelation zu den Daten hoher Güte besitzt, verliert man in diesem Fall
- ca.
- 6% an Zeit.
- Dies ist für eine Multifidelity Optimierung der nahezu schlecht möglichste
- Fall.
-\end_layout
-
-\begin_layout Standard
-Das Modell hat in diesem Fall mehrere Lösungsmöglichkeiten.
- 
-\begin_inset Formula $a=0,\lambda_{l}=0.5$
-\end_inset
-
- oder 
-\begin_inset Formula $\sigma_{low}^{2}=0,\lambda_{l}=0.5$
-\end_inset
-
- wäre dann beliebig.
- Da Ergebnis wäre dasselbe
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap table
-lines 9
-placement o
-overhang 0in
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Niedrige Güte
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Differenzfunktion
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sigma$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.03
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.359
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\lambda$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.49
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $2.2*10^{-8}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\vec{h}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $e^{3}>h_{l}>e^{-6}\forall l\in\left\{ 1,...,k\right\} $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $e^{3}>h_{l}>e^{-50}\forall l\in\left\{ 1,...,k\right\} $
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\beta$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.12
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.88
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $a$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-12.7
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:KrigingExampleOpti1-2"
+name "tab:Anzahl-der-jeweiligen-2"
 
 \end_inset
 
-Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
- am Ende der Optimierung
-\end_layout
-
-\end_inset
-
-
+Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte bis zum
+ Erreichen des Optimums, vor und nach der Initialisierungsphase.
 \end_layout
 
 \end_inset
@@ -3051,121 +2656,12 @@ Die wichtigsten Trainingsergebnisse der verschiedenen Kovarianzmodellparameter
 
 \end_layout
 
-\begin_layout Subsection
-Fazit
-\end_layout
-
-\begin_layout Itemize
-Maximaler Verlust ca.
- 2%, wenn LF komplett unkorreliert.
- 
-\end_layout
-
-\begin_layout Itemize
-Beschleunigung hängt sehr stark von der Art der Störung und der Korrelation
- zwischen HF/LF ab 
-\end_layout
-
-\begin_layout Itemize
-Anteil der initialen LF Samples sollte so hoch sein, dass das Co-Kriging
- die Modellparameter der LF-Cov Funktion gut schätzen kann.
- Bei diesem Testfall war das Verfahren robust gegenüber unterschiedlicher
- initialer Stützstellenanzahl.
-\end_layout
-
-\begin_layout Itemize
-Die Entscheidungsfunktion zwar hängt von der Güte der Modelle ab, zeigte
- aber in keinem Test ein unerwartetes Verhalten.
- 
-\end_layout
-
-\begin_layout Standard
-In der Regel kann der Einsatz lohnen und selbst wenn es nicht klappt, ist
- der Verlust recht gering.
-\end_layout
-
-\begin_layout Paragraph
-Theroretisch Maximale Beschleunigung 
-\end_layout
-
-\begin_layout Standard
-Beschleunigung allgemein:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact}
-\end{equation}
-
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Das theoretische Maximum wird oftmals als das Verhältnis zwischen Low- und
- High-Fidelity Prozesskettenzeit beschrieben, diese Betrachtung ist allerdings
- zu stark vereinfacht und daher deutlich zu positiv.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1\right)}=\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Das Maximum beschreibt den Speedup, wenn die Multifidelity Optimierung nach
- der Initialisierungphase mit nur einem zusätzlichem Member das Optimum
- findet.
- Dieser Wert kann in der Realität praktisch nicht erreicht werden.
- 
-\end_layout
-
-\begin_layout Itemize
-Die Ersatzmodelle benötigen eine gewisse Anzahl an Samples beider Gütestufen
- um vernünftige Vorhersagen treffen zu können.
- 
-\end_layout
-
-\begin_layout Itemize
-Zudem liegen die Samples aus der Intitialisierungphase in der Regel nicht
- in der Nähe des Optimums.
- Daher müssen noch einige Samples erzeugt werden, bis die Umgebung des Optimums
- entsprechend aufgelöst wird.
-\end_layout
-
-\begin_layout Itemize
-Das Training wie auch die Vorhersage der Multifidelity Ersatzmodelle ist
- aufwendiger als bei der reinen HF-Optimierung.
- Dieser Punkt lässt sich allerdings durch ein asynchrones Training deutlich
- verbessern.
-\end_layout
-
-\begin_layout Itemize
-Bei einer Mehrzieloptimierung gibt es kein eindeutiges Optimum.
- Es muss eine Paretofront erzeugt werden, diese lässt sich mit einer Stützstelle
- nicht auflösen.
- 
-\end_layout
-
-\begin_layout Itemize
-Zudem hängt die Beschleunigung zusätzlich noch vom Informationsgehalt der
- LF-Funktion ab, bietet diese nur einen geringen Informationsgehalt, so
- wird die theoretische Beschleunigung ebenfalls vermindert.
 \end_layout
 
 \begin_layout Section
-Bisherige Turbomaschinen-Anwendungen
-\end_layout
-
-\begin_layout Subsection
 Übersicht der bisherigen Anwendungen in Industrie und Forschung
 \end_layout
 
@@ -4935,10 +4431,6 @@ Ein gewisses Potential scheint vorhanden, aber es gibt nocht zahlreiche
  Wenn die Vorhersagen noch etwas besser werden, was durchaus möglich ist,
  da die Entwicklung erst am Anfang steht und die Trainings- und vorhersagezeiten
  reduziert werden können, dann ja
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \end_body
