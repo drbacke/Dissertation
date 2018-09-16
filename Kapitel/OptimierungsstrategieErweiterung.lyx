@@ -876,8 +876,9 @@ name "sec:Multifidelity-OptimierungsstrateAutoOpti"
 \end_layout
 
 \begin_layout Standard
-Innerhalb dieses Abschnitts soll die in AutoOpti umgesetzte Multifidelity-Optimi
-erungsstrategie beschrieben werden.
+Innerhalb dieses Abschnitts soll die in dieser Arbeit entwickelte Multifidelity-
+Optimierungsstrategie beschrieben werden.
+ Das Verfahren wurde in der Optimierungssoftware AutoOpti umgesetzt.
  Die Basis für diese neue Strategie ist das in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1668,25 +1669,24 @@ Die Vorhersage der Standardabweichung der höchsten Gütestufe an einer Stelle
 \begin_inset Formula $\vec{x_{0}}$
 \end_inset
 
- ein Sample niedriger Güte bekannt ist, wird folgend mit 
-\begin_inset Formula $\sigma_{hl}\in\mathbb{R}$
+ ein Sample niedriger Güte 
+\begin_inset Formula $y_{l}\left(\vec{x}\right)$
+\end_inset
+
+ bekannt ist, wird folgend mit 
+\begin_inset Formula $\sigma_{hl}=\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)\in\mathbb{R}$
 \end_inset
 
  bezeichnet.
- Bei Kenntnis eines Samples hoher Güte wird die Standardabweichung mit 
-\begin_inset Formula $\sigma_{hh}\in\mathbb{R}$
+ Bei Kenntnis eines Samples hoher Güte 
+\begin_inset Formula $y_{h}\left(\vec{x}\right)$
+\end_inset
+
+ wird die Standardabweichung mit 
+\begin_inset Formula $\sigma_{hh}=\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}\right)\in\mathbb{R}$
 \end_inset
 
  bezeichnet.
- Im Falle eines Interpolierenden Modells gilt:
-\begin_inset Formula 
-\begin{align}
-\sigma_{hh} & =0
-\end{align}
-
-\end_inset
-
-Es wird weiterhin aber nicht von einem rein interpolierenden Modell ausgegangen.
  Der Informationszugewinn für eine unbekannte Stelle 
 \begin_inset Formula $x_{0}$
 \end_inset
@@ -1976,48 +1976,35 @@ T= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\label{eq:Time
 
 \end_inset
 
-Die Standardabweichung 
-\begin_inset Formula $\sigma_{hl}=\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)$
-\end_inset
 
- kann mithilfe einer bedingten Normalverteilung berechnet werden.
- Bestimmt man sich die Kovarianz 
-\begin_inset Formula $cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)$
-\end_inset
+\end_layout
 
- (siehe Gleichung 
+\begin_layout Standard
+Die konkrete Berechnung der unterschiedlichen Zeiten und auch die Abschätzung
+ der bedingten Varianzen sind in diesem Abschnitt noch nicht erläutert worden.
+ Allerdings spielen diese eine erhebliche Rolle bei der Stabilität und Effizienz
+ des Verfahrens.
+ Aus diesem Grund wird die algorithmische und softwaretechnische Umsetzung
+ des Verfahrens in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:KovarianzPredictor"
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
 \end_inset
 
-) zwischen den verschiedenen Gütestufen an dem Ort 
-\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
-\end_inset
-
-, so gilt für 
-\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)$
-\end_inset
-
- bei Annahme einer Multivariaten Normalverteilung und unter der Kenntniss
- von 
-\begin_inset Formula $y_{l}\left(\vec{x}\right)$
-\end_inset
-
- folgender Zusammenhang:
-\begin_inset Formula 
-\begin{equation}
-\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)=\sigma_{h}-cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)\frac{1}{\sigma_{l}}cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)\label{eq:BedingteNormalVertilung}
-\end{equation}
-
-\end_inset
-
-
+ detailliert beschrieben.
+ 
 \end_layout
 
 \begin_layout Paragraph*
 Globale Varianzreduktion
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\color red
+I-optimales Design erwähnen !!!!!!!!!!!
 \end_layout
 
 \begin_layout Standard
