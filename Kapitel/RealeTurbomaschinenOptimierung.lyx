@@ -2990,6 +2990,16 @@ Verlauf der einzelnen CumVolGain
 \end_layout
 
 \begin_layout Standard
+-Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch
+ bei HF Vorkommen.
+\end_layout
+
+\begin_layout Standard
+-Woher kommen die Zufälligkeiten? Exploratives Vorhegehen beim EVG + Zufälligkei
+ten bei den Ersatzmodellen (Hyperparameter Plot zeigen)
+\end_layout
+
+\begin_layout Standard
 - Bei MF niemals diesen oberen Abbruch, hat immer ds Optimum gefunden.
  Sucht also globaler
 \end_layout
@@ -3014,8 +3024,25 @@ Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \begin_layout Standard
 Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
  gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
- Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschiede
-nen Entscheidungsverläufen miteinander verglichen.
+ 
+\end_layout
+
+\begin_layout Subparagraph*
+- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
+ diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
+\end_layout
+
+\begin_layout Standard
+Kann man nicht sagen da man den Informationsgehalt des Lofi Modells nicht
+ kennt.
+ Und die Beschleunigung maßgeblich davon abhängt.
+ Zudem kann die Entscheidungsfunktion dies lokal und vollautomatisch.
+ 
+\end_layout
+
+\begin_layout Standard
+Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschieden
+en Entscheidungsverläufen miteinander verglichen.
  In Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
