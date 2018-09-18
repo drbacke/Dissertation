@@ -40,9 +40,11 @@
 %\usepackage[authoryear]{natbib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
 \usepackage{setspace}
 %\onehalfspacing
-\spacing{1.2}
+\spacing{1.0}
 
 %%%%%%%%%%%% Definitionen %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -92,6 +94,12 @@
 
 
 
+\usepackage{enumitem}
+\setlist[1]{itemsep=0pt}
+\setlist{nolistsep}
+
+
+
 %%%%%%%%%%%%%  Schalter %%%%%%%%%%%%%%%%%
 \newif\ifcomments
 %\commentstrue % comment out to hide comments
@@ -116,7 +124,7 @@
 \font_sf_scale 100 100
 \font_tt_scale 100 100
 \graphics default
-\default_output_format pdf2
+\default_output_format dvi
 \output_sync 0
 \bibtex_command default
 \index_command default
@@ -863,6 +871,65 @@ key "Jin2001"
 \end_inset
 
 (3dimensions Samples minimum in vielen Fällen)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size huge
+TODO:
+\end_layout
+
+\begin_layout Itemize
+Eigene Entwicklungen besser kennzeichnen, besonders zum DLR abgrenzen, ganzen
+ Text nochmal durchgehen
+\end_layout
+
+\begin_layout Itemize
+Korrekturen von Christian
+\end_layout
+
+\begin_layout Itemize
+Korrekturen/Wünsche von Prof Gottschalk
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Entscheidungsfunktion: Alles auf Varianzen umstellen !!! Auch Kapitel 5
+ nicht vergessen !!!
+\end_layout
+
+\begin_layout Itemize
+Kriging + Entscheidungsfunktion + Kapitel 5: kovarianz zu bedingter Kovarianz
+ ändern, also unter der Bedingung dass alle Samples und Geiwchte bekannt
+ sind
+\end_layout
+
+\begin_layout Itemize
+Matrix Klasse und verteilte Systeme genauer beschreiben
+\end_layout
+
+\begin_layout Itemize
+Anfang kann gekürzt werden, alles was es bereits gibt.
+ EVG erklärung z.B.
+ Mehr auf meine Sachen konzentrieren
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Kriging Software alle Verfahren in einem untergebracht
+\end_layout
+
+\begin_layout Itemize
+RPROP globales Minimum mit QuasiNewton vergleichen
 \end_layout
 
 \begin_layout Chapter*
@@ -968,22 +1035,9 @@ filename "Kapitel/Kriging.lyx"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
 filename "Kapitel/SoftwaretechnischeUmsetzung.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/Benchmarks.lyx"
 
 \end_inset
 
@@ -1054,6 +1108,16 @@ filename "Kapitel/COKriging.lyx"
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Anwendung_Temp.lyx"
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
@@ -1063,7 +1127,7 @@ filename "Kapitel/COKriging.lyx"
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "library"
-options "alpha"
+options "apalike"
 
 \end_inset
 

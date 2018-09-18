@@ -352,7 +352,7 @@ Zusammenfassend kann man feststellen, dass sich dieser einfache analytische
  dieses Verfahrens damit sehr gut darstellen.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Analytische Optimierungsbeispiele
 \end_layout
 
@@ -2365,7 +2365,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Testfall2_SkalierungsfakKonv.eps
+	filename ../images/ErgebnissKapitel/Testfall2_SkalierungsfakKonv.eps
 	scale 50
 
 \end_inset
@@ -2662,55 +2662,7 @@ Anzahl der jeweiligen erzeugten Member hoher und niedriger Güte bis zum
 \end_layout
 
 \begin_layout Section
-Übersicht der bisherigen Anwendungen in Industrie und Forschung
-\end_layout
-
-\begin_layout Standard
-Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
- hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
-\end_layout
-
-\begin_layout Enumerate
-Lionel Akustik - Optimierung wurde im Rahmen der Arbeit betreut
-\end_layout
-
-\begin_layout Enumerate
-Erich CFD
-\end_layout
-
-\begin_layout Enumerate
-Stefan Mukoko - Optimierung wurde im Rahmen der Arbeit betreut
-\end_layout
-
-\begin_layout Enumerate
-Georgios
-\end_layout
-
-\begin_layout Enumerate
-Siemens Testfall, nachfragen ob die noch mehr haben 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "verheij2017multi"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Siemens aktuelles AG Turbo Projekt, Schaffung einer 
-\begin_inset Quotes gld
-\end_inset
-
-künstlichen LF Funktion
-\begin_inset Quotes grd
-\end_inset
-
- mit Neuronalen Netzwerken.
-\end_layout
-
-\begin_layout Subsection
-CRISP-Testfall 
+Benchmark Optimierung einer Fan-Stufe 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:CRISP-Testfall"
@@ -2720,27 +2672,101 @@ name "subsec:CRISP-Testfall"
 
 \end_layout
 
+\begin_layout Standard
+Kurze Beschreibung was optimiert wird, CRISP ähnlicher Fan.
+ Referenz zu Erich
+\end_layout
+
+\begin_layout Subsection
+Optimierungssetup 
+\end_layout
+
+\begin_layout Paragraph*
+Prozesskette 
+\end_layout
+
+\begin_layout Standard
+3 Sätze und auf Erich verweisen.
+ Kleine Bild der Kette.
+ 
+\end_layout
+
 \begin_layout Paragraph
-Theoretisch erreichbare Beschleunigung im Vergleich zu einer HF Optimierung
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Kleines Bild von OP0 / OP1 und Zielfunktion daran erklären.
+ Nebenbedingungen kurz
+\end_layout
+
+\begin_layout Paragraph
+Unterschied HF/LF
+\end_layout
+
+\begin_layout Standard
+Kurz beschreiben.
+ Ebenfalls auf Erich verweisen.
+ Bild von den Netzen in Anhang.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{t_{l}}{t_{h}}\approx\frac{1}{10}
-\]
-
-\end_inset
-
-
+Tabelle CFD Netz Unterschiede.
+ Auflösung Naben und Gehäuse und Rotorspalt erhöht um Sekundärströmungseffekte
+ besser zu modellieren.
 \end_layout
 
 \begin_layout Standard
-Das Optimum wurde von die HF Optimierungen oft garnicht erreicht, deswegen
- wurde für den Vergleich die beste Optimierung verwendet.
- Das Optimum wurde hierbei bei einem VG von 6e-6 festgelegt.
- 
+Zeitlicher Unterschied
+\end_layout
+
+\begin_layout Paragraph*
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Tabelle Erich, Bilder Profilparameter und Strakparameter
+\end_layout
+
+\begin_layout Paragraph
+Einstellungen Optimierung
+\end_layout
+
+\begin_layout Standard
+Startmember HF/LF, welches DOE Startdatenbasis, Startparetofront, keiner
+ Erfüllt die Nebenbedingungen, Verlauf der Optimierung -> gestartet und
+ in Ruhe gelassen
+\end_layout
+
+\begin_layout Standard
+MF: Optimierungsverfahren EVG + Entscheidungsfunktion + Co_kriging
+\end_layout
+
+\begin_layout Standard
+HF: Ordinary Kriging + EVG aus dieser Arbeit
+\end_layout
+
+\begin_layout Standard
+Nach Startdatenbasis nur noch auf dem Ersatzmodell (sinnvoll da durch EVG
+ exploratives Vorgehen vorliegt)
+\end_layout
+
+\begin_layout Subsection
+Ergebnisse
+\end_layout
+
+\begin_layout Paragraph*
+Multifidelity Ergebnisse
+\end_layout
+
+\begin_layout Standard
+LofiParetofront / Hifi Paretofront 10 Member, Verbindungslinien einzeichnen
+ und Nebenbedingungen 
+\end_layout
+
+\begin_layout Standard
+Der real erreichte Wert lag bei: 
 \end_layout
 
 \begin_layout Standard
@@ -2749,7 +2775,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -2938,15 +2964,9 @@ MF
 \end_layout
 
 \begin_layout Standard
-Die Multifidelity-Optimierung konnte nach tatsächlich nach einer Stützstelle
- das Optimum erreichen.
- Das theoretische Maximum wäre damit bei:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+\frac{1}{10}75+1}=17,16x
+\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+\frac{1}{10}75+125+\frac{1}{10}1050}=2,19
 \]
 
 \end_inset
@@ -2955,43 +2975,27 @@ Die Multifidelity-Optimierung konnte nach tatsächlich nach einer Stützstelle
 \end_layout
 
 \begin_layout Standard
-Der real erreichte Wert lag bei: 
+EVG Bild vergleich -> MF findet immer das Maximum vom AreaGain, HF bleibt
+ oft stecken 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+\frac{1}{10}75+125+\frac{1}{10}1050}=2,19x
-\]
-
-\end_inset
-
-
+- EVG Bild Schwankungen der einzelnen Optimierungen: Hyperparameterschwankungen
+ zeigen
 \end_layout
 
 \begin_layout Standard
-Könnte man die Zeit der LF Prozesskette auf 0 reduzieren ohne Information
- zu verlieren, so würde sich der Wert verbessern zu:
+- Reduktionsgeschwindigkeit der Nebenbedingungen 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+0*75+125+0*1050}=3,83x
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Verlauf der einzelnen CumVolGain
+- Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
+ Low plotten
 \end_layout
 
 \begin_layout Standard
--Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch
- bei HF Vorkommen.
+Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch bei
+ HF Vorkommen.
 \end_layout
 
 \begin_layout Standard
@@ -3005,19 +3009,15 @@ ten bei den Ersatzmodellen (Hyperparameter Plot zeigen)
 \end_layout
 
 \begin_layout Standard
-- Reduktionsgeschwindigkeit der Nebenbedingungen 
-\end_layout
-
-\begin_layout Paragraph*
-Einzelnen Zeiten plotten
+- Entscheidungsfunktion und Ersatzmodelle Zusammenspiel ( Kovnergenz Ersatzmodel
+le zeigen )
 \end_layout
 
 \begin_layout Standard
-- Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
- Low
+- 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
 Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \end_layout
 
@@ -3121,7 +3121,103 @@ Aerodynamische Auswertung
 \end_layout
 
 \begin_layout Standard
-Ergebnisse zeigen von MF und HF Optimierung
+Paretofronten zeigen, dann jeweils einen Member auswählen maximaler Wirkungsgrad
+ bei Steigung min.
+ -0.0000007; HF Paretofront schmaler -> Hinweis auf weniger global
+\end_layout
+
+\begin_layout Standard
+von den beiden
+\end_layout
+
+\begin_layout Standard
+Geometrieunterschied 
+\end_layout
+
+\begin_layout Standard
+Radiale Verteilung -> Wirkungsgrad (wo sind Unterschiede? Dann Eberhard
+ ansprechen)
+\end_layout
+
+\begin_layout Section
+Übersicht der bisherigen Anwendungen in Industrie und Forschung
+\end_layout
+
+\begin_layout Standard
+Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
+ hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
+\end_layout
+
+\begin_layout Enumerate
+Lionel Akustik - Optimierung wurde im Rahmen der Arbeit betreut 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "meillard2017"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Stefan Mukoko - 200 freie Parameter und X Nebenbedingungen die alle nicht
+ erfüllt wurden.
+ Ergebnis: NB alle erfüllt und leichte Verbesserung in der Aero.
+ Optimierung wurde im Rahmen der Arbeit betreut 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hemmert2019"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Georgios 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2016optimizing,goinis2018"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Siemens Testfall, nachfragen ob die noch mehr haben 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "verheij2017multi"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Siemens aktuelles AG Turbo Projekt , Schaffung einer 
+\begin_inset Quotes gld
+\end_inset
+
+LF Funktion
+\begin_inset Quotes grd
+\end_inset
+
+ mit Neuronalen Netzwerken.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Jan GEK Paper, Alles in einer Software, GPU usw.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Backhaus"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -3293,7 +3389,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Vorhersagen zeigen.
