@@ -2673,35 +2673,466 @@ name "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Kurze Beschreibung was optimiert wird, CRISP ähnlicher Fan.
- Referenz zu Erich
+Innerhalb dieses Abschnitts soll ein Vergleich zwischen einer Multifidelity-Opti
+mierung und einer reinen Single-Fidelity-Optimierung angestellt werden.
+ Die verwendeten Optimierungsverfahren sind die in dieser Arbeit vorgestellten
+ Verfahren.
+ Das Multifidelity-Verfahren ist das in dieser Arbeit entwickelte Verfahren
+ und beide Optimierungen nutzen die in dieser Arbeit entwickelte Kriging-Softwar
+e.
+ 
+\end_layout
+
+\begin_layout Standard
+Als Basis für die hier gezeigten Optimierungen dient die Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+, diese Bachelorarbeit wurde im Rahmen dieser Dissertation angefertigt und
+ betreut.
+ Dort wird die aeromechanische Optimierung einer modernen Fan-Stufe beschrieben
+ und eine frühe Version der hier vorgestellten Multifidelity-Verfahren getestet.
+ Das Multifidelity-Verfahren in
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ unterscheidet sich in folgenden Punkten von dem aktuellen Stand:
+\end_layout
+
+\begin_layout Itemize
+Entscheidungsfunktion berücksichtigt im aktuellen Stand Gewichtungen, Nebenbedin
+gungen und auch die Wahrscheinlichkeit die Nebenbedingungen zu erfüllen.
+\end_layout
+
+\begin_layout Itemize
+Das Co-Kringing Modell bietet nun die stabile Nutzung von Rauschtermen und
+ Skalierungsfaktor.
+ Weiterhin wurde das Initialiserungsverfahren, welches in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+ beschrieben 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis bereits vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ wird, verwendet.
+\end_layout
+
+\begin_layout Itemize
+Das Trainingsverfahren wurde mit den in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Implementierung-der-DLR-Kriging-"
+
+\end_inset
+
+ beschriebenen Verfahren erheblich beschleunigt.
+\end_layout
+
+\begin_layout Standard
+Ziel dieses Benchmarks ist es, das Potential und Verhalten des hier beschriebene
+n Multifidelity-Verfahrens an einer realitätsnahen Turbomaschinenoptimierung
+ zu testen und zu beschreiben.
+ 
 \end_layout
 
 \begin_layout Subsection
 Optimierungssetup 
 \end_layout
 
-\begin_layout Paragraph*
-Prozesskette 
-\end_layout
-
 \begin_layout Standard
-3 Sätze und auf Erich verweisen.
- Kleine Bild der Kette.
+In diesem Abschnitt soll das Optimierungssetup der hier durchgeführten Optimieru
+ngen beschrieben werden.
+ Viele Details werden bereits in der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ beschrieben, daher soll hier nur ein Überblick über die wichtigsten Information
+en und Unterschiede gegeben werden und anschließend die aktuellen Ergebnisse
+ im Detail beschrieben werden.
  
 \end_layout
 
-\begin_layout Paragraph
-Zielfunktionen und Nebenbedingungen
+\begin_layout Paragraph*
+Prozesskette der Gütestufen
 \end_layout
 
 \begin_layout Standard
-Kleines Bild von OP0 / OP1 und Zielfunktion daran erklären.
- Nebenbedingungen kurz
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Prozesskette-und-die"
+
+\end_inset
+
+ ist die Abfolge der Prozesskette für die hohe und niedrige Gütestufen dargestel
+lt.
+ Weiterhin sind auch die mittleren Ausführungszeiten zu erkennen, diese
+ können im Laufe der Optimierung variieren.
+ Die beiden Gütestufen unterscheiden sich durch die Auflösung des CFD-Netzes
+ und der Laufzeitunterschied zwischen den Prozessketten liegt bei einem
+ Faktor von ungefähr 10.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Prozesskette startet in beiden Gütestufen mit der Geometrieerzeugung
+ anhand der vom Optimierer bereitgestellten Parameter (siehe Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Parametrisierung"
+
+\end_inset
+
+ Parametrisierung).
+ Mit den erzeugten Geometriedateien, kann das notwendige CFD-Rechennetz
+ erzeugt werden.
+ Das Rechennetz der unterschiedlichen Gütestufen unterscheidet sich durch
+ die Auflösung (siehe Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:UnterschiedGütestufen"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Unterschied hohe- und niedrige Gütestufe
+\begin_inset Quotes grd
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
+ des Rotors durchgeführt, hier wird die maximale Dehnung der Schaufel berechnet.
+ Der Prozess ist für beide Gütestufen ebenfalls nahezu identisch ist.
+ Der einzige Unterschied in den Gütestufen besteht in der Durckverteilung
+ auf der Schaufel, da diese aus der CFD-Simulation für OP0 verwendet wird
+ und es hier Abweichungen zwischen den Gütestufen gibt.
+ 
+\end_layout
+
+\begin_layout Standard
+Für weitergehende Informationen bezüglich der Prozesskette wie z.B.
+ die verwendete Software und deren Einstellungen wird auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ verwiesen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prozess
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zeit hohe Güte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zeit niedrige Güte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Strömungskanal Erzeugung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.7sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.7sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Geometrieerzeugung Rotor + Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD-Netzgenerierung Rotor + Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30.5sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD Strömungslöser OP0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1600sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+140sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD Strömungslöser OP1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2100sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+180sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FEM Lösung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.5sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.5sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gesamt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+~3760sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+~360sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Prozesskette-und-die"
+
+\end_inset
+
+Prozesskette und die ungefähren Ausführungszeiten der einzelnen Schritte
+ für hohe und niedrige Güte.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
-Unterschied HF/LF
+Unterschied hohe- und niedrige Gütestufe
+\begin_inset CommandInset label
+LatexCommand label
+name "par:UnterschiedGütestufen"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2721,8 +3152,24 @@ Tabelle CFD Netz Unterschiede.
 Zeitlicher Unterschied
 \end_layout
 
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Kleines Bild von OP0 / OP1 und Zielfunktion daran erklären.
+ Nebenbedingungen kurz
+\end_layout
+
 \begin_layout Paragraph*
 Parametrisierung
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Parametrisierung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2750,6 +3197,27 @@ HF: Ordinary Kriging + EVG aus dieser Arbeit
 \begin_layout Standard
 Nach Startdatenbasis nur noch auf dem Ersatzmodell (sinnvoll da durch EVG
  exploratives Vorgehen vorliegt)
+\end_layout
+
+\begin_layout Standard
+4 Wiederholungen, da einige Zufälligkeiten vorhanden sind.
+ Ersatzmodelle & Optimierung auf dem Ersatzmodell
+\end_layout
+
+\begin_layout Paragraph*
+Laufzeitumgebung
+\end_layout
+
+\begin_layout Standard
+6 Slaves gleichzeitig
+\end_layout
+
+\begin_layout Standard
+Cluster beschreiben
+\end_layout
+
+\begin_layout Standard
+Shared Knoten-> Verfälscht die trainingszeiten etwas
 \end_layout
 
 \begin_layout Subsection
@@ -2991,6 +3459,11 @@ EVG Bild vergleich -> MF findet immer das Maximum vom AreaGain, HF bleibt
 \begin_layout Standard
 - Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
  Low plotten
+\end_layout
+
+\begin_layout Standard
+- Criterion ROI / Criterion Fitness zeigen.
+ 
 \end_layout
 
 \begin_layout Standard
