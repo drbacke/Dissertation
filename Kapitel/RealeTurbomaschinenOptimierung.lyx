@@ -3462,8 +3462,23 @@ EVG Bild vergleich -> MF findet immer das Maximum vom AreaGain, HF bleibt
 \end_layout
 
 \begin_layout Standard
+<<<<<<< HEAD
 - Criterion ROI / Criterion Fitness zeigen.
  
+=======
+Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch bei
+ HF Vorkommen.
+\end_layout
+
+\begin_layout Standard
+-Woher kommen die Zufälligkeiten? Exploratives Vorhegehen beim EVG + Zufälligkei
+ten bei den Ersatzmodellen (Hyperparameter Plot zeigen)
+\end_layout
+
+\begin_layout Standard
+- Bei MF niemals diesen oberen Abbruch, hat immer ds Optimum gefunden.
+ Sucht also globaler
+>>>>>>> e69850b03da8463c66eff97e092ad444758f6c33
 \end_layout
 
 \begin_layout Standard
@@ -3482,8 +3497,25 @@ Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
 \begin_layout Standard
 Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
  gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
- Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschiede
-nen Entscheidungsverläufen miteinander verglichen.
+ 
+\end_layout
+
+\begin_layout Subparagraph*
+- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
+ diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
+\end_layout
+
+\begin_layout Standard
+Kann man nicht sagen da man den Informationsgehalt des Lofi Modells nicht
+ kennt.
+ Und die Beschleunigung maßgeblich davon abhängt.
+ Zudem kann die Entscheidungsfunktion dies lokal und vollautomatisch.
+ 
+\end_layout
+
+\begin_layout Standard
+Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschieden
+en Entscheidungsverläufen miteinander verglichen.
  In Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3587,6 +3619,26 @@ Radiale Verteilung -> Wirkungsgrad (wo sind Unterschiede? Dann Eberhard
 \begin_layout Standard
 Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
  hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
+\end_layout
+
+\begin_layout Standard
+Aufbau:
+\end_layout
+
+\begin_layout Itemize
+Grundlegendes Ziel Projekt / Rahmen
+\end_layout
+
+\begin_layout Itemize
+Zielfunktionen Nebenbedingungen Anzahl und kurzbeschreibung
+\end_layout
+
+\begin_layout Itemize
+Anzahl der Parameter + Beschreibung
+\end_layout
+
+\begin_layout Itemize
+Wie hängt es mit dieser Arbeit zusammen?
 \end_layout
 
 \begin_layout Enumerate
