@@ -75,6 +75,36 @@
 Fazit und Ausblick
 \end_layout
 
+\begin_layout Standard
+Mutlfidelity Verfahren ist sehr gewinnbringend und kann vielseitig eingesetzt
+ werden.
+\end_layout
+
+\begin_layout Enumerate
+Entscheidungsfunktion:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Konvergenzrate der Fidelities miteinbeziehen, diese kann ser unterschiedlich
+ sein
+\end_layout
+
+\begin_layout Enumerate
+Entscheidung auf einzelnen Prozesse ausweiten.
+ CFD LF z.B.
+ und FEM HF oder sowas.
+ Dynamischer
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
 \begin_layout Enumerate
 Grundlegende Zielsetzung, Entwicklung eines an industriell einsetzbaren
  und erweiterbaren Multifidelity Optimierungsverfahrens

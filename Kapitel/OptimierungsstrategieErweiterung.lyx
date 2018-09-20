@@ -1798,7 +1798,7 @@ reference "eq:EntscheidungsfunktionKriterium"
  vollständig definieren zu:
 \begin_inset Formula 
 \begin{align}
-crit=\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\left[\sum_{i}^{c+z}\frac{1}{\sum_{j}^{c+z}1}\right]\sum_{i}^{c+z}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)
+crit=\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\left[\sum_{i}^{c+z}\frac{1}{\sum_{j}^{c+z}1}\right]\sum_{i}^{c+z}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)\label{eq:VarianzEntscheidung}
 \end{align}
 
 \end_inset

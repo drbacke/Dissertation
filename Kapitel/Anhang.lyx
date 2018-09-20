@@ -92,7 +92,7 @@ Anhang
 \end_layout
 
 \begin_layout Section
-Likelihood Schätzer Erwartungswerte und Varianz 
+Kapitel 5 - Likelihood Schätzer Erwartungswerte und Varianz 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Likelihood-Schätzer-Erwartungswe"
@@ -156,7 +156,7 @@ Da nur
 \end_layout
 
 \begin_layout Section
-Beweis: Variogramm Abhängigkeit von Distanz
+Kapitel 5 - Beweis: Variogramm Abhängigkeit von Distanz
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Beweis:-Variogramm-Abhängigkeit"
@@ -287,20 +287,7 @@ reference "eq:DistanzabhängigkeitBehauptung"
 \end_layout
 
 \begin_layout Section
-Analytische CO-Kriging Beispiele
-\end_layout
-
-\begin_layout Standard
-Was passiert, wenn Low und High nichts miteinander zu tun haben, oder wenn
- Low und High identisch sind
-\end_layout
-
-\begin_layout Standard
-Vielleicht
-\end_layout
-
-\begin_layout Section
-Co-Kriging Kovarianzfunktion Herleitung
+Kapitel 4 - Co-Kriging Kovarianzfunktion Herleitung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Co-Kriging-KovarianzfunktionHerleitung"
@@ -503,7 +490,7 @@ cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)=cov\left(Z_{2}\left
 \end_layout
 
 \begin_layout Section
-Differentiation der Likelihood-Funktion
+Kapitel 5 - Differentiation der Likelihood-Funktion
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Differentiation-der-Likelihood-Funktion"
@@ -620,7 +607,7 @@ Daraus folgt:
 \end_layout
 
 \begin_layout Section
-Herleitung der Kriging-Gewichte
+Kapitel 4 - Herleitung der Kriging-Gewichte
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Herleitung-der-Kriging-Gewichte"
@@ -782,8 +769,9 @@ reference "eq:MatrixKrigingInverse-1-1"
 
 \end_layout
 
-\begin_layout Subsection
-Beispiel einer einfachen Dichtefunktion für ein CO-Kriging Model 
+\begin_layout Section
+Kapitel 4 - Beispiel einer einfachen Dichtefunktion für ein CO-Kriging Model
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:AnhangLikelihoodCOKrigingBsp"
@@ -926,7 +914,7 @@ reference "eq:Likelihood Funktion"
 \end_layout
 
 \begin_layout Section
-Aerodynamische Größen
+Kapitel 3 -Aerodynamische Größen
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangAerodynamische-Größen"
@@ -1017,7 +1005,7 @@ reference "fig:Auswerteebenen-eines-exemplarisc"
 \end_layout
 
 \begin_layout Section
-Varianz der Fehlerfunktion 
+Kapitel 4 - Varianz der Fehlerfunktion 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Anhang-1-1"
@@ -1228,7 +1216,7 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 \end_layout
 
 \begin_layout Section
-Kovarianz zwischen Vorhersagen
+Kapitel 4 -Kovarianz zwischen Vorhersagen
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangKovarianz-zwischen-Vorhersagen"
@@ -1381,7 +1369,7 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 \end_layout
 
 \begin_layout Section
-Varianz des Schätzfehlers
+Kapitel 4 - Varianz des Schätzfehlers
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangVarianz-des-Schätzfehlers"
@@ -1602,7 +1590,7 @@ Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
 \end_layout
 
 \begin_layout Section
-Likelihood Schätzer Varianzen im CO-Kriging
+Kapitel 5 - Likelihood Schätzer Varianzen im CO-Kriging
 \end_layout
 
 \begin_layout Standard
@@ -1966,7 +1954,7 @@ reference "sec:Korrelationsfunktionen"
 \end_layout
 
 \begin_layout Section
-Vereinfachung der Vorhersagegleichung 
+Kapitel 5 - Vereinfachung der Vorhersagegleichung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Vereinfachung-der-Vorhersageglei"
@@ -2109,7 +2097,7 @@ Daraus folgt letztlich:
 \end_layout
 
 \begin_layout Section
-Testfunktion ZDT3
+Kapitel 6 - Testfunktion ZDT3
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:ZDT3"
@@ -2242,7 +2230,8 @@ Plot der Testfunktion mit zwei Variablen
 \end_layout
 
 \begin_layout Section
-Beschleunigter Rückwärtsdifferenzierter-Cholesky-Algorithmus nach Smith
+Kapitel 5 - Beschleunigter Rückwärtsdifferenzierter-Cholesky-Algorithmus
+ nach Smith
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Beschleunigter-BackChodec"
@@ -3033,7 +3022,8 @@ for(int k=n-1; k>=0; k--){
 \end_layout
 
 \begin_layout Section
-Iterative Varianzbestimmung innerhalb des Co-Kriging Trainingsverfahrens
+Kapitel 5 - Iterative Varianzbestimmung innerhalb des Co-Kriging Trainingsverfah
+rens
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Iterative-VarianzbestimmungTraining"
@@ -3128,7 +3118,7 @@ n sich nicht sehr stark verändern.
 \end_layout
 
 \begin_layout Section
-Renormalisierung der Hyperparameter 
+Kapitel 5 - Renormalisierung der Hyperparameter 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Renormalisierung-der-Hyperparame"
@@ -3360,8 +3350,8 @@ Die Formel lässt sich damit weiterhin vereinfachen:
 \end_layout
 
 \begin_layout Section
-Wann würde eine globales Varianzkriterium zu einer anderen Entscheidung
- führen als das lokale?
+Kapitel 3 - Wann würde eine globales Varianzkriterium zu einer anderen Entscheid
+ung führen als das lokale?
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:globalVarianzEntscheidungBsp"
@@ -3845,7 +3835,7 @@ In diesem Fall würden das lokale und globale Kriterium zu einer anderen
 \end_layout
 
 \begin_layout Section
-Cholesky Zerlegung
+Kapitel 5 - Cholesky Zerlegung
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Cholesky-Zerlegung"
@@ -4010,7 +4000,7 @@ key "press2007numerical,gill2007numerical"
 \end_layout
 
 \begin_layout Section
-Wirtschaftliche Betrachtung CPU/GPU
+Kapitel 5 - Wirtschaftliche Betrachtung CPU/GPU
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Wirtschaftliche-Betrachtung-CPUGPU"
@@ -5558,7 +5548,7 @@ GTX1080
 \end_layout
 
 \begin_layout Section
-GPU Resourcenverteilung bei parallelen Trainings
+Kapitel 5 - GPU Resourcenverteilung bei parallelen Trainings
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:GPU-Resourcenverteilung-ParalleleTrainigns"
@@ -8450,7 +8440,8 @@ Benchmark der besten Verteilung mehrerer Trainings mit 1000 Samples auf
 \end_layout
 
 \begin_layout Section
-Rückwärtsdifferenzierung des Likelihood-Terms - Benchmark Ergebnisse 
+Kapitel 5 - Rückwärtsdifferenzierung des Likelihood-Terms - Benchmark Ergebnisse
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
@@ -8510,6 +8501,72 @@ rms
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Kapitel 6 - CFD-Netze der Fanstufenoptimierung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnahngKapitel-6"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways true
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/3D_Netz_HighFidelity.png
+	scale 35
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/3D_Netz_LowFidelity.png
+	scale 35
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Exemplarisches-CFD-Netz-der"
+
+\end_inset
+
+Exemplarisches CFD-Netz der hohen Güte (linkes Bild) und der niedrigen Güte
+ (rechtes Bild) Quelle: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 

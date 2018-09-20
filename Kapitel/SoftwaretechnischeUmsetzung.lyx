@@ -73,6 +73,13 @@
 
 \begin_layout Chapter
 Implementierung der DLR-Kriging-Verfahren 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Implementierung-der-DLR-Kriging-"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4369,6 +4376,18 @@ reference "eq:KovarianzPredictor"
 
 \end_layout
 
+\begin_layout Subparagraph*
+Sampling der zusammengesetzten Fitness Funktion
+\end_layout
+
+\begin_layout Standard
+Ungenauigkeiten in den Varianzen möglich, durch das Sampling.
+ Im schlimmsten Fall ist die Bedingte Varianz <0 oder der bedingte HF Varianz
+ > LF Varianz.
+ Daher sind noch einige Sicherheitsabfragen nötig.
+ 
+\end_layout
+
 \begin_layout Paragraph*
 Berechnung der Zeiten
 \end_layout
@@ -4963,7 +4982,14 @@ g zwischen den Gütestufen dargestellt werden.
 \end_layout
 
 \begin_layout Section
-Numerische Effizienz steigern
+Numerische Effizienz steigern 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Numerische-Effizienz-steigern"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
