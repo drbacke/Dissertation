@@ -3457,7 +3457,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Erich_Kennfeld_Zielfunktin.pdf
+	filename ../images/ErgebnissKapitel/Erich_Kennfeld_Zielfunktin.pdf
 	scale 35
 
 \end_inset
@@ -4296,7 +4296,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Grundlagen_Profil.pdf
+	filename ../images/ErgebnissKapitel/Grundlagen_Profil.pdf
 	scale 30
 
 \end_inset
@@ -4334,7 +4334,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Strak_Variables_2.pdf
+	filename ../images/ErgebnissKapitel/Strak_Variables_2.pdf
 	scale 30
 
 \end_inset
@@ -5319,13 +5319,138 @@ n Auslegungsverfahren unter Berücksichtigung des Realgaseinflusses
 \end_layout
 
 \begin_layout Standard
+Im Rahmen des AG-Turbo COOREFLEX-turbo 1.2.4d Projekts wurden die 8 hinteren
+ Stufen einer 13-stufige Verdichterkonfiguration mit dem in dieser Arbeit
+ vorgestellten Multifidelity-Verfahren optimiert.
+ Hauptziel dieses Vorhabens war es, eine hoch belastete, für hohen Wirkungsgrad
+ und hohe Stabilität optimierte Konfiguration eines Gasturbinenverdichters
+ zu untersuchen und für dessen hintere Stufen Designerkenntnisse, -Regeln
+ und –Richtlinien zu erarbeitet.
+ In diesem Abschnitt sollen die Ergebnisse der Multifidelity-Optimierung
+ kurz zusammengefasst werden.
+ Die Ergebnisse des gesamten Vorhabens wurden in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "goinis2018"
 
 \end_inset
 
+ veröffentlicht.
+ 
+\end_layout
 
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Ausgangspunkt dieser Optimierung ist ein Basisdesign von Siemens.
+ Ausgehend von diesem Design sollte weitere Erhöhung des polytropen Wirkungsgrad
+s erreicht werden ohne Einschränkungen im Arbeitsbereichs des Verdichters.
+ Daraus ergeben sich auch die zwei verwendeten Zielfunktionen:
+\end_layout
+
+\begin_layout Itemize
+Maximierung des polytropen Wirkungsgrads im Arbeitspunkt
+\end_layout
+
+\begin_layout Itemize
+Maximierung des Totaldruckverhältnisses in einem angedrosselten Betriebspunkt
+\end_layout
+
+\begin_layout Standard
+Als Nebenbedingung wurde der Massenstrom im Arbeitspunkt in einem engen
+ Intervall festgelegt.
+ Zusätzlich wurde eine strukturmechanische Nebenbedingung festgelegt.
+ Die maximale Vergleichsspannung auf der Schaufel dürfte nicht schlechter
+ werden als die des Ausgangsdesigns.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+In dieser Optimierung wurden die Schaufelparameter freigegeben.
+ Weiterhin 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+Es wurden zwei Gütestufen verwendet, diese unterschieden sich durch die
+ Zellen der CFD-Netze (14.700.000 gegen 1.800.000 Zellen) und durch die Anzahl
+ der Elemente der FEM-Berechnung (19.000 gegen 2376 Elemente).
+ Die Prozessketten hatten einen zeitlichen Faktor von ca.
+ 7.5, wobei der Prozesskette hoher Güte ca.
+ 7.5h und die Prozesskette niedriger Güte ca.
+ 1h benötigten.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Entwicklung der Entscheidungsfunktion war zu diesem Zeitpunkt noch nicht
+ abgeschlossen, daher wurde die in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzEntscheidung"
+
+\end_inset
+
+ beschriebene Entscheidungsfunktion genutzt.
+ Die Ergebnisse dieser Optimierung trugen auch wesentlich zur Weiterentwicklung
+ der in dieser Arbeit beschriebenen 
+\begin_inset Quotes gld
+\end_inset
+
+Gewichteten Entscheidungsfunktion
+\begin_inset Quotes grd
+\end_inset
+
+ und auch des Co-Krigings bei.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Die gesamte Optimierung hatte eine Laufzeit von ca.
+ 1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
+ DLR durchgeführt.
+ Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
+ variiert, lag im Mittel aber bei ca.
+ 10 Knoten.
+ Die Ausstattung der Knoten entspricht der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Die Durchführung einer solch komplexen Optimierung erwies sich als große
+ Herausforderung und benötigte eine intensive Betreuung und Begutachtung
+ des Verlaufs der Zielfunktionen, Nebenbedingungen, der Konvergenz des CFD-Löser
+s und auch der Ersatzmodelle.
+ 
+\end_layout
+
+\begin_layout Standard
+Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
+ Die finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das
+ Ausgangsdesign, konnte die Schallemissionen aber um 3dB senken.
+ Weiterhin konnte die maximale Spannung um des zweiten Rotors um ca.
+ 62% gesenkt und die dynamischen Kriterien ebenfalls alle erfüllt werden.
+ Auch die aerodynamischen und geometrischen Restriktionen wurden allesamt
+ erfüllt.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -6755,12 +6880,51 @@ Fazit:
 \end_layout
 
 \begin_layout Standard
-Hat es Potential?
+Hat es Potential gewinnbringend in einer 3D-CFD Turbomaschinenoptimierung
+ eingesetzt werden zu können?
 \end_layout
 
 \begin_layout Standard
-Ein gewisses Potential scheint vorhanden, aber es gibt nocht zahlreiche
- Hürden, wie z.B.
+Bei jetzigem Stand konnte keine Beschleunigung erreicht werden.
+ Die größten Schwierigkeiten sind:
+\end_layout
+
+\begin_layout Itemize
+0D Vorhersagen sind sehr schlecht korreliert mit den CFD Simulationen
+\end_layout
+
+\begin_layout Itemize
+Training dauert extrem lange, selbst auf Hochleistungshardware
+\end_layout
+
+\begin_layout Itemize
+Physikalische Gesetze werden nicht eingehalten: Wirkungsgrad > 1 oder Eintrittsm
+assenstrom != Austrittsmassenstrom, Totalgrößen werden nicht erhalten
+\end_layout
+
+\begin_layout Standard
+Aber es ist noch sehr viel Entwicklungspotential vorhanden.
+\end_layout
+
+\begin_layout Itemize
+Physikalischen Gesetze könnten durch ein geschicktes Trainingsverfahren
+ gelernt werden 
+\end_layout
+
+\begin_layout Itemize
+0D Größen können in das Training mit aufgenommen werden
+\end_layout
+
+\begin_layout Itemize
+Trainingszeit könnte durch ein vortrainiertes Netz reduziert werden
+\end_layout
+
+\begin_layout Itemize
+Struktur der NNs bietet noch zahlreiche Möglichkeiten
+\end_layout
+
+\begin_layout Standard
+Unsicher, es gibt noch zahlreiche Hürden, wie z.B.
  die hohe Trainingszeit, die Erzeugung der Boxen usw., mer Efahrung mit der
  Struktur ist nötig.
  Ein gewissen Informationsgehalt auf Delta Basis scheint vorhanden zu sein
