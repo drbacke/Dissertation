@@ -4462,6 +4462,261 @@ Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
 Ergebnisse
 \end_layout
 
+\begin_layout Paragraph
+Co-Kriging Einstellungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HF
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MF
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DiagOn
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Off
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+On
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Off
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.105
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.105
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.77
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.64
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph*
 Multifidelity Ergebnisse
 \end_layout
@@ -5362,8 +5617,8 @@ Maximierung des Totaldruckverhältnisses in einem angedrosselten Betriebspunkt
 Als Nebenbedingung wurde der Massenstrom im Arbeitspunkt in einem engen
  Intervall festgelegt.
  Zusätzlich wurde eine strukturmechanische Nebenbedingung festgelegt.
- Die maximale Vergleichsspannung auf der Schaufel dürfte nicht schlechter
- werden als die des Ausgangsdesigns.
+ Die maximale Vergleichsspannung der Rotoren dürfte nicht schlechter werden
+ als die des Ausgangsdesigns.
 \end_layout
 
 \begin_layout Paragraph
@@ -5371,8 +5626,10 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-In dieser Optimierung wurden die Schaufelparameter freigegeben.
- Weiterhin 
+In dieser Optimierung wurden insgesamt 350 Parameter freigegegen.
+ Ein Großteil davon entfiel auf die Schaufelparametrisierung.
+ Der Rest der Parameter wurde für eine Gehäusekonturierung verwendet.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -5381,35 +5638,31 @@ Gütestufen
 
 \begin_layout Standard
 Es wurden zwei Gütestufen verwendet, diese unterschieden sich durch die
- Zellen der CFD-Netze (14.700.000 gegen 1.800.000 Zellen) und durch die Anzahl
- der Elemente der FEM-Berechnung (19.000 gegen 2376 Elemente).
- Die Prozessketten hatten einen zeitlichen Faktor von ca.
- 7.5, wobei der Prozesskette hoher Güte ca.
- 7.5h und die Prozesskette niedriger Güte ca.
- 1h benötigten.
+ Zellen der CFD-Netze (14.700.000 gegen 1.800.000 Zellen).
+ Die FEM-Rechnungen verwendeten dieselben Rechennetze und hatten damit keinen
+ Laufzeitunterschied.
  
 \end_layout
 
 \begin_layout Standard
-Die Entwicklung der Entscheidungsfunktion war zu diesem Zeitpunkt noch nicht
- abgeschlossen, daher wurde die in Gleichung 
+Die Prozessketten hatten insgesamt einen zeitlichen Faktor von ca.
+ 4.
+ Wobei die Prozesskette hoher Güte mit 48 CPUs berechnet wurde und die niedrige
+ Prozesskette mit nur 24 CPUs, aus diesem Grund halbiert sich der Faktor
+ in etwa.
+\end_layout
+
+\begin_layout Standard
+Da die in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:VarianzEntscheidung"
+reference "subsec:Entscheidungsfunktion"
 
 \end_inset
 
- beschriebene Entscheidungsfunktion genutzt.
- Die Ergebnisse dieser Optimierung trugen auch wesentlich zur Weiterentwicklung
- der in dieser Arbeit beschriebenen 
-\begin_inset Quotes gld
-\end_inset
-
-Gewichteten Entscheidungsfunktion
-\begin_inset Quotes grd
-\end_inset
-
- und auch des Co-Krigings bei.
+ beschriebenen Entscheidungsfunktionen zu diesem Zeitpunkt noch in der Entwicklu
+ng waren, wurde diese Optimierung mit einer initialen Datenbasis niedriger
+ Güte gestartet und danach nur noch Member hoher Güte erzeugt.
  
 \end_layout
 
@@ -5435,21 +5688,14 @@ reference "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Die Durchführung einer solch komplexen Optimierung erwies sich als große
- Herausforderung und benötigte eine intensive Betreuung und Begutachtung
- des Verlaufs der Zielfunktionen, Nebenbedingungen, der Konvergenz des CFD-Löser
-s und auch der Ersatzmodelle.
- 
-\end_layout
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2018"
 
-\begin_layout Standard
-Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
- Die finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das
- Ausgangsdesign, konnte die Schallemissionen aber um 3dB senken.
- Weiterhin konnte die maximale Spannung um des zweiten Rotors um ca.
- 62% gesenkt und die dynamischen Kriterien ebenfalls alle erfüllt werden.
- Auch die aerodynamischen und geometrischen Restriktionen wurden allesamt
- erfüllt.
+\end_inset
+
+ wird beschrieben, dass die Ergebnisse der Gütestufen sehr stark korrelierten
  
 \end_layout
 
