@@ -9230,8 +9230,10 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_prediction.png
+	filename ../images/khonprediction.pdf
 	scale 70
+	BoundingBox 0bp 0bp 563bp 376bp
+	clip
 
 \end_inset
 
@@ -9245,7 +9247,8 @@ name "fig:KhonFehlerVorhersage"
 
 \end_inset
 
-Exemplarische Ausgabe eines vorhergesagten Fehlers.
+Exemplarische Ausgabe eines vorhergesagten Fehlers der maximalen mechanischen
+ Dehnung eines Rotors.
  
 \end_layout
 
@@ -9282,12 +9285,15 @@ reference "fig:KhonFehlerVorhersage"
  zeigt den typischen Verlauf eines solchen Vorhersagefehlers.
  In blau dargestellt sind die Vorhersagen der Stützstellen und in rot die
  nachgerechneten Werte.
+ Die angezeigten Fehlerbalken entsprechen der vorhergesagten Standardabweichung.
  Die X-Achse stellt die jeweilige Optimierungsiteration dar.
  Die grüne Kurve beschreibt die absolute Differenz zwischen Vorhersage und
  realem Wert.
- Es ist ersichtlich, dass die absolute Differenz während der Optimierung
- sehr stark schwankt, was mit explorativen Vorgehen erklärt werden kann.
- Erst nach über 150 Iterationen ist eine deutliche Besserung erkennbar.
+ In dieser Abbildung ist erkennbar, dass zu anfang der Optimierung die vorherges
+agte Standardabweichung zu hoch ist, da nahzu keiner der echten Werte innerhalb
+ der Fehlerbalken liegt.
+ Erst nach ca.
+ 40 Iterationen ist eine Besserung erkennbar.
 \end_layout
 
 \begin_layout Subsection*
