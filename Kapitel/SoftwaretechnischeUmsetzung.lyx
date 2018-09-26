@@ -837,6 +837,50 @@ cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)= & \lambda_{2}\delta\left(\vec{h}\
 
 \end_layout
 
+\begin_layout Subsection
+Numerischen Grenzen für die Hyperparameter
+\end_layout
+
+\begin_layout Standard
+Betrachtet man sich die Gleichung für die Korrelationen 
+\begin_inset Formula $c\left(\vec{h}\right)=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}$
+\end_inset
+
+, so können die 
+\begin_inset Formula $\theta_{l}$
+\end_inset
+
+ Werte sehr große oder kleine Werte annehmen.
+ Diese Werte gehen dann in eine verkettete Exponentialfunktion ein.
+ Der innere Teil der Exponentialfunktion 
+\begin_inset Formula $e^{\theta_{l}}$
+\end_inset
+
+ kann sehr große oder sehr kleine Werte annehmen.
+ Es sollten daher numerische Grenzen für die 
+\begin_inset Formula $\theta_{l}$
+\end_inset
+
+ Werte gelten.
+\end_layout
+
+\begin_layout Standard
+Um diese Werte zu bestimmen bietet sich ein einfacher numerischer Testfall
+ an.
+ Hierfür wurde ein kleines Testprogramm geschrieben, welches die Grenzwerte
+ für 
+\begin_inset Formula $c\left(\vec{h}\right)=e^{-\frac{1}{2}e^{\theta}}$
+\end_inset
+
+ bestimmt.
+ Die gefundenen Grenzen lagen bei 
+\begin_inset Formula $\theta\in\mathbb{R}|5<\theta_{l}<-34$
+\end_inset
+
+.
+ 
+\end_layout
+
 \begin_layout Section
 Regularisierung und Behandlung verrauschter Funktionen
 \begin_inset CommandInset label
@@ -4291,6 +4335,338 @@ key "press2007numerical,gill1981practical,gill2007numerical"
  erhebliche Vorteile bringt, da das Quasi-Newton Verfahren zu lokalen Minima
  tendiert und somit zu schlechteren Ersatzmodellen führt.
  
+\end_layout
+
+\begin_layout Subsection*
+Vergleich QuasiNewton / RPROP / RPROP2 und Initialisierungsverfahren
+\end_layout
+
+\begin_layout Standard
+In diesem Kapitel soll ein direkter Vergleich zwischen den verschiedenen
+ Optimierungsverfahren angestellt werden.
+ Hierfür wurde ein Testfall aus der Fanstufenoptimierung (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+) zusammengestellt.
+ 
+\begin_inset Wrap table
+lines 7
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RPROP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RPROP2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+QN
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+53.5s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+42.83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.7s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Mittlere-Trainingszeit-für"
+
+\end_inset
+
+Mittlere Trainingszeit für alle durchgeführten Trainings.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Trainingsfunktion: 
+\begin_inset Formula $\dot{m}_{OP1}$
+\end_inset
+
+ (Massenstrom Betriebspunkt 1)
+\end_layout
+
+\begin_layout Itemize
+Stützstellen (niedrige / hohe Güte): 300 / 500
+\end_layout
+
+\begin_layout Itemize
+Testdatenbasis: 400 Stützstellen hoher Güte
+\end_layout
+
+\begin_layout Itemize
+Maximal 1000 Trainingsiterationen
+\end_layout
+
+\begin_layout Itemize
+20 Threads auf zwei Intel(R) Xeon(R) CPU E5-2650 v3
+\end_layout
+
+\begin_layout Itemize
+Pro Testfall 10 aufeinanderfolgende Trainings
+\end_layout
+
+\begin_layout Itemize
+Das Initialisierungsverfahren, ist das 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+.
+ Das Verfahren nutzt 5 bereits trainierte Kriging Modelle
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Ergebnisse-des-Testfalls."
+
+\end_inset
+
+ zeigt die Ergebnisse der 3 verschiedenen Testfälle.
+ Aufgetragen ist jeweils der Wert des Likelihood-Terms, die Trainingszeit
+ und der Testfehler.
+ Nach 5 Iterationen startet die Initialisierung aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+, da ab diesem Zeitpunkt genügend alte Kriging-Modelle vorhanden sind.
+ Dieser Übergang wird mit einer gestrichelten Linie gekennzeichnet.
+ 
+\end_layout
+
+\begin_layout Standard
+Der Testfehler ist bei allen Verfahren auf einem ähnlich gutem Niveau (der
+ Mittelwert des Massenstroms liegt bei 514 kg/s).
+ Das RPROP2 Verfahren zeigt insgesamt den besten Testfehler.
+ Das Quasi-Newton Verfahren zeigt bei Iteration 4 einen starken kurzfristigen
+ Anstieg des Testfehlers.
+ Bei diesem Training wurde der Skalierungsfaktor 
+\begin_inset Formula $a$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COKrigingKovarianzmodell"
+
+\end_inset
+
+) falsch eingeschätzt und die Ergebnisse dadurch verzerrt.
+ Der genaue Trainingsverlauf (hier nicht dargestellt) lässt auf ein lokales
+ Minimum in der Likelihood Funktion schließen.
+ Zu diesem Zeitpunkt war noch die zufällige Initialsierung aktiviert.
+ Nachdem die 
+\begin_inset Quotes gld
+\end_inset
+
+Initialsierung auf Basis vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ aktiviert wurde, blieb der Testfehler bei allen Verfahren nahezu konstant.
+ Der Anstieg des Testfehlers beim Quasi-Newton Verfahren lässt deshalb auf
+ eine schlechte Initialsierung als Ursache schließen.
+\end_layout
+
+\begin_layout Standard
+Die Verläufe des Likelihood-Terms ähneln sich bei den RPROP Verfahren sehr
+ stark, beide Verfahren finden bereits in der Phase zufälliger Initialisierung
+ direkt den optimalen Likelihood-Term.
+ Das Quasi-Newton Verfahren ist in dieser Phase noch sehr instabil.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Trainingszeiten zwischen den Verfahren variieren in der 
+\begin_inset Quotes gld
+\end_inset
+
+zufälligen
+\begin_inset Quotes grd
+\end_inset
+
+ Phase noch sehr stark, in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Mittlere-Trainingszeit-für"
+
+\end_inset
+
+ werden die mittleren Trainingszeiten aufgelistet.
+ Das RPROP2 Verfahren bietet einen Zeitersparnis von ca.
+ 20% gegenüber dem RPROP Verfahren und das QuasiNewton Verfahren einen Zeiterspa
+rnis von ca.
+ 74% gegenüber dem RPROP Verfahren.
+ Nach der 
+\begin_inset Quotes gld
+\end_inset
+
+zufälligen
+\begin_inset Quotes grd
+\end_inset
+
+ Phase sind die Trainingszeiten zwischen den Verfahren allerdings nahezu
+ identisch.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Fazit
+\end_layout
+
+\begin_layout Standard
+Dieses Testbeispiel zeigt zum einen die Robustheit der beiden RPROP-Verfahren
+ gegenüber dem Quasi-Newton Verfahren und zum anderen den enormen Nutzen
+ des in dieser Arbeit entwickelten Intialisierungsverfahrens.
+ Das Initialisierungsverfahren verbessert zum einen die Trainingszeit erheblich
+ und zum anderen sorgt es auch für ein deutlich besseren Likelihood-Verlauf
+ in allen Verfahren.
+ 
+\end_layout
+
+\begin_layout Standard
+Aufgrund dieser Ergebnisse wird als Standardverfahren innerhalb der hier
+ entwickelten Co-Kriging Software die 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ und das RPROP2 Verfahren gewählt.
+ Für den Ordinary- und Gradient-Enhanced-Modus der Kriging-Software wird
+ allerdings das RPROP-Verfahren verwendet, da dieses bei einer geringeren
+ Anzahl von Hyperparametern zeitlich besser abschneidet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/SoftwareTechnUmsetzung/RandomRestartVergleich.eps
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ergebnisse-des-Testfalls."
+
+\end_inset
+
+Ergebnisse des Testfalls.
+ Dargestellt sind die Ergebnisse des Likelihoods, der Trainingszeit und
+ des Testfehlers über den Trainingsiterationen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -9173,12 +9549,18 @@ ereiche der GPU festgelegt.
 
 \begin_layout Section
 Laufzeit-Analysesoftware für Krigingmodelle
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Laufzeit-Analysesoftware-für-Kri"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Während einer Optimierung werden mehrere Ersatzmodelle trainiert, wobei
- das Training mit steigender Stützstellenanzahl sehr häufig durchgeführt
- wird.
+ das Training sehr häufig durchgeführt wird.
  Aus diesem Grund ist es von großer Bedeutung, die Ersatzmodelle während
  einer Optimierung stetig zu überwachen.
  Besonderer Wert sollte dabei auf folgende Punkte gelegt werden:
@@ -9606,6 +9988,175 @@ corr_{ges}\left(x_{1},x_{2}\right)=\frac{cov\left(x_{1},x_{2}\right)}{\sigma_{ge
 Mit dieser Formel hat man eine Abschätzung für einen zusammengefassten Hyperpara
 meter, dieser ermöglicht z.B.
  Diagramme.
+\end_layout
+
+\begin_layout Paragraph*
+Anteile der Differenz- und Low-Fidelity-Lovarianzfunktion 
+\end_layout
+
+\begin_layout Standard
+Im Falle einer Multifidelity Optimierung ist oft von Interesse, wie stark
+ die verschiedenen Gütestufen in das Co-Kriging Modell einfließen.
+ Von Anwenderseite ist ein einfacher Prozentwert wünschenswert, da dieser
+ einfach zu interpretieren ist.
+ Eine Möglichkeit der Abschätzung eines solchen prozentualen Anteils ist
+ es von einer vollen Korrelation auszugehen und die Anteile der Kovarianz
+ hoher Güte im Verhältnis der Kovarianz niedriger Güte.
+ Betrachtet man hierfür den Teil 
+\begin_inset Formula $cov_{1,1}$
+\end_inset
+
+ und 
+\begin_inset Formula $cov_{2,2}$
+\end_inset
+
+ von Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzfunktionenCoKrigingGauss"
+
+\end_inset
+
+ und geht weiterhin von einer vollen Korrelation 
+\begin_inset Formula $c_{2}\left(\vec{h}\right)=1$
+\end_inset
+
+, 
+\begin_inset Formula $c_{diff}\left(\vec{h}\right)=1$
+\end_inset
+
+ aus und vernachlässigt den Rauschterm 
+\begin_inset Formula $\lambda_{diff}$
+\end_inset
+
+, so ergibt sich:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+cov_{1,1}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}\\
+cov_{2,2}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Setzt man die beiden Terme ins Verhältnis 
+\begin_inset Formula $LF_{perc}=\frac{a^{2}\sigma_{2}^{2}}{a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}}$
+\end_inset
+
+ so erhält man eine einfache Abschätzung des Anteils der Kovarianzfunktion
+ niedriger Güte 
+\begin_inset Formula $cov_{2,2}$
+\end_inset
+
+ an der Kovarianz hoher Güte 
+\begin_inset Formula $cov_{1,1}$
+\end_inset
+
+ bei voller Korrelation.
+ Geht man bspw.
+ von den Extremfällen aus:
+\end_layout
+
+\begin_layout Enumerate
+Hohe und niedrige Güte unkorreliert
+\end_layout
+
+\begin_layout Enumerate
+Hohe und niedrige Güte identisch
+\end_layout
+
+\begin_layout Standard
+Ergeben sich folgende Werte:
+\end_layout
+
+\begin_layout Enumerate
+Dieser Fall wird beim Training durch den Skalierungsfaktor gelöst, dieser
+ wird auf Null gesetzt und damit eine vollständige Unkorreliertheit erreicht.
+ Der Anteil der Kovarianzfunktion niedriger Güte wäre dann: 
+\begin_inset Formula $LF_{perc}=\frac{0\sigma_{2}^{2}}{0\sigma_{2}^{2}+\sigma_{diff}^{2}}=0$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Sind beide Funktionen identisch, so wird die Differenzkovarianzfunktion
+ nicht benötigt und im Training durch 
+\begin_inset Formula $\sigma_{diff}^{2}=0$
+\end_inset
+
+ ausgeschaltet.
+ Der Anteil der Kovarianzfunktion niedriger Güte wäre dann: 
+\begin_inset Formula $LF_{perc}=\frac{a^{2}\sigma_{2}^{2}}{a^{2}\sigma_{2}^{2}+0}=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Gewichtung der beiden Kovarianzfunktionen durch die Hyperparameter 
+\begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianz-parametrisiertes-Model"
+
+\end_inset
+
+) werden damit allerdings nicht dargestellt.
+ Dennoch kann diese Art der Darstellung eine einfache und schnelle Methode
+ sein, um einen Eindruck der Gewichtungen untereinander zu bekommen.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ASME-Veröffentlichung:-Optimieru"
+
+\end_inset
+
+ wird ein erfolgreiches Beispiel aus einer Optimierung eines transsonischen
+ Verdichters gezeigt.
+ Bei einigen Ersatzmodellen dieser Optimierung war bekannt, dass einige
+ Daten niedriger Güte keinen Korrelation zu den Daten hoher Güte aufweisen
+ können.
+ Dies konnte in der entsprechenden Grafik (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anteile-der-Kovarianzfunktionen"
+
+\end_inset
+
+ - Ersatzmodell Nummer 9) erkannt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein weiteres Beispiel aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kopplung-mehrerer-Ersatzmodelle:"
+
+\end_inset
+
+ entspricht dem Gegenteiligen Fall.
+ Die Berechnung der maximale mechanische Dehnung des Rotors, war in beiden
+ Gütestufen identisch.
+ Dies konnte ebenfalls in der entsprechenden Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anteile-der-Kovarianzfunktionen-1"
+
+\end_inset
+
+ (Ersatzmodell Nummer 6) erkannt werden.
+ 
 \end_layout
 
 \end_body

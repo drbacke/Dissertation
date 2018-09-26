@@ -8510,7 +8510,7 @@ rms
 \end_layout
 
 \begin_layout Section
-Kapitel 6 - CFD-Netze der Fanstufenoptimierung
+Kapitel 6 - Zusätzliche Abbildungen der Fanstufenoptimierung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnahngKapitel-6"
@@ -8524,7 +8524,7 @@ name "sec:AnahngKapitel-6"
 \begin_inset Float figure
 wide false
 sideways true
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -8567,6 +8567,176 @@ key "Reimer2016"
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/kriginghotornot_CRISP.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Anteile-der-Kovarianzfunktionen-1"
+
+\end_inset
+
+Anteile der Kovarianzfunktionen verschiedenen Co-Kriging Modellen der Fanstufen-
+Optimierung (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+).
+ Auszug der Kriging-Analysesoftware
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Kapitel 6 - Optimierung von Casing-Treatments eines transsonischen Verdichters
+ Co-Kriging Auswertung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:AnahngKapitel-6-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dargestellt sind hier die Auswertung aus der Rotoroptimierung.
+ Die Bilder sind direkte Auszüge der in dieser Arbeit entwickelten Analysesoftwa
+re (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Laufzeit-Analysesoftware-für-Kri"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/kriginghotornot_Geoprgios1.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Anteile-der-Kovarianzfunktionen"
+
+\end_inset
+
+Anteile der Kovarianzfunktionen verschiedenen Co-Kriging Modellen der Verdichter
+-Optimierung aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ASME-Veröffentlichung:-Optimieru"
+
+\end_inset
+
+.
+ Auszug der Kriging-Analysesoftware 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/kriginghotornot_Geoprgios2.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vergleich-von-Vorhersage"
+
+\end_inset
+
+Vergleich von Vorhersage und Echtwerten des Totaldruckverhältnisses der
+ numerischen Pumpgrenze der Verdichteroptimierung aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:ASME-Veröffentlichung:-Optimieru"
+
+\end_inset
+
+.
+ Auszug der Kriging-Analysesoftware.
+ 
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
