@@ -5487,8 +5487,16 @@ LF Funktion
 Speedup berechnen
 \end_layout
 
-\begin_layout Standard
-Yuf'llige Initialsierung der Optimierung und nur 1 Wiederholung
+\begin_layout Itemize
+Zufällige Initialsierung der Optimierung und nur 1 Wiederholung
+\end_layout
+
+\begin_layout Itemize
+Beschleunigungsfaktor berechnen
+\end_layout
+
+\begin_layout Itemize
+Optimale Initialisierung aus Beschleunigungsfaktor berechnen Gleichung umstellen
 \end_layout
 
 \begin_layout Subsection
