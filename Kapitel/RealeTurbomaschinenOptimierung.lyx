@@ -5819,88 +5819,6 @@ Innerhalb dieses Abschnitts sollen noch andere Anwendungsmöglichkeiten der
 \end_layout
 
 \begin_layout Subsection
-Wiederverwendung von älteren ähnlichen Optimierungen
-\end_layout
-
-\begin_layout Standard
-Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
- z.B.
- geänderte Randbedingungen während der laufenden Entwicklung.
- Dies kann bspw.
- dazu führen, dass 
-\end_layout
-
-\begin_layout Standard
-Restart 4
-\end_layout
-
-\begin_layout Standard
-einfache Mises Optimierung, Mittelschnittsprofil Stator aus CRIPS Opti:
- 
-\end_layout
-
-\begin_layout Itemize
-Opti Ref: 8 Parameter: Restag, betaLE, betaTE, rLE, rTE, chord, x3SS,x2SS,
- dMaxApprox; MInlet =0.65
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-5 Zufällige Startmember
-\end_layout
-
-\begin_layout Itemize
-Ziel1 = Losses ADP reduzieren
-\end_layout
-
-\begin_layout Itemize
-Ziel2 = Losses NS +NC
-\end_layout
-
-\begin_layout Itemize
-NB1: Axiale Abströmung ADP < 0.5° 
-\end_layout
-
-\begin_layout Itemize
-NB2: Axiale Abströmung Stall < 1° 
-\end_layout
-
-\begin_layout Itemize
-NB3: Axiale Abströmung Choke < 1° 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Opti 1 : 7 Parameter: Restag2, betaLE, betaTE, rLE, rTE, chord, x3SS,x2SS,
- dMaxApprox + ATOBLE; MInlet =0.75, betaADPInlet -1.0°
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-5 Zufällige Startmebern (wie Opti 2)
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Opti 2 (Restart): 7 Parameter: Restag2, betaLE, betaTE, rLE, rTE, chord,
- x3SS,x2SS, dMaxApprox + ATOBLE; MInlet =0.75, betaADPInlet -1.0°
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-5 Zufällige Startmebern (wie Opti 2)
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-- Alte Daen weiterverwenden
-\end_layout
-
-\begin_layout Standard
-- Mit kleineren Änderungen oder leicht veränderter Parametrisierung
-\end_layout
-
-\begin_layout Subsection
 Kopplung mehrerer Ersatzmodelle: Nutzung von Deep Learning Verfahren über
  CO-Kriging 
 \begin_inset CommandInset label
@@ -5910,10 +5828,6 @@ name "subsec:Kopplung-mehrerer-Ersatzmodelle:"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Thema des aktuellen AG Turbo Projekts 1.asdsa
 \end_layout
 
 \begin_layout Paragraph*
@@ -5957,9 +5871,9 @@ Convolutional
 \end_layout
 
 \begin_layout Standard
-Anf'nge im Rahmen dieser Arbeit und des AG Turbo Proejkts 1.2.4 wurden erste
- Versuche unternommen komplette FEM Vorhersagen mit Tensorflow basierten
- Nueonalen Netyen yu machen.
+Anf'nge im Rahmen dieser Arbeit und des wurden erste Versuche unternommen
+ komplette FEM Vorhersagen mit Tensorflow basierten Nueonalen Netyen yu
+ machen.
  Dann wurde das von Aulich und Kuepper weiterentwickelt um komplette Str;mungsvo
 rhersagen yu treffen.
  Diese daraus entstandenen NNs wurden dann in der hier geyeigten Optimierung
