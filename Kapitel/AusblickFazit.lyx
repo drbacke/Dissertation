@@ -234,5 +234,26 @@ Sehr sinnvoll, da oftmals nur wenige HF Member bekannt sind und damit die
 Vielleicht nur in den Ausblick!!!!
 \end_layout
 
+\begin_layout Subsection
+Wiederverwendung von älteren ähnlichen Optimierungen
+\end_layout
+
+\begin_layout Standard
+Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
+ z.B.
+ geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
+ Entwicklung.
+ Dies kann bspw.
+ dazu führen, dass 
+\end_layout
+
+\begin_layout Standard
+Die Option existiert bereits und wurde an einfachen Tests bereits erfolgreich
+ angewandt.
+ Allerdings sind noch weitere Tests nötig, um einschätzen zu können inwieweit
+ eine Änderung der Randbedingungeun oder der Parametrisierung noch gewinnbringen
+d sein kann.
+\end_layout
+
 \end_body
 \end_document

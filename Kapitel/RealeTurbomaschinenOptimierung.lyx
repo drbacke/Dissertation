@@ -5480,6 +5480,10 @@ LF Funktion
 \end_inset
 
  mit Neuronalen Netzwerken.
+ 2 Stufiger Verdichter.
+ Ein Score wurde gebildet, der die Korrelation zwischen Hi und Low und dem
+ zeitlichen Faktor ins Verhältnis setzt und die Eignung eines Setups für
+ eine Multifidelity-Optimierung abschätzen soll.
  
 \end_layout
 
@@ -5487,16 +5491,281 @@ LF Funktion
 Speedup berechnen
 \end_layout
 
-\begin_layout Itemize
-Zufällige Initialsierung der Optimierung und nur 1 Wiederholung
+\begin_layout Standard
+Maximal theoretische Speedups:
+\end_layout
+
+\begin_layout Paragraph*
+Zielfunktionen und Nebenbedingungeun:
+\end_layout
+
+\begin_layout Enumerate
+Isentroper Wirkungsgad bei 100% Drehzahl 
+\end_layout
+
+\begin_layout Enumerate
+Isentroper Wirkungsgrad bei Teildrehzahl und höherer Umgebungstemperatur
+\end_layout
+
+\begin_layout Standard
+Zwei Nebenbedingungen wurden definiert:
+\end_layout
+
+\begin_layout Enumerate
+Intervall auf das Totaldruckverhältnis eines pumpgrenznahen Betriebspunktes
+ bei Teildrehzahl
+\end_layout
+
+\begin_layout Enumerate
+Untere Grenze auf den Massenstrom.
+ Betriebspunkt nicht beschrieben.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Nur Rotor 2 wurde parametrisiert mit 80 freien Parametern.
+ Der Rotor wurde mit jeweils 5 Profilschnitten parametrisiert.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+5 verschiedene Setups wurden getestet.
+ 
 \end_layout
 
 \begin_layout Itemize
-Beschleunigungsfaktor berechnen
+HF: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+2x Widerholt 1x mit 3 Slaves und einmal mit 5 Slaves.
+ 
 \end_layout
 
 \begin_layout Itemize
-Optimale Initialisierung aus Beschleunigungsfaktor berechnen Gleichung umstellen
+Die beste als Referenz
+\end_layout
+
+\begin_layout Itemize
+80 Member Init 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+MF:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+1x Wiederholt nd mit der besten von SF vergleichen
+\end_layout
+
+\begin_layout Itemize
+80 + 400LF Member Die Member wurden immer neu erzeugt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Ergebnisse
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Ergebnisse zeigen eine gewissen Zufälligkeit, durch zufällige INit und
+ grundsätzlicher Zufälligkeit gegeben
+\end_layout
+
+\begin_layout Itemize
+Die Geschwindigkeiteunterschiede lagen zwische +14 und -39% was im Bereich
+ normaler Schwankungen liegt, besonders da die Initialsien Member nicht
+ gleich waren
+\end_layout
+
+\begin_layout Itemize
+Konvegenzkrieterium der Optimierungen 
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Ergebnisse und Fazit
+\end_layout
+
+\begin_layout Standard
+Zusammengefasst kann man sagen, dass alle Optimierungen zu einer signifikanten
+ Verbesserung der Zielfunktionen führten und die Nebenbedingungen alle eingehalt
+en wurden.
+ Ebenfalls waren die aerodynamischen Ergebnisse der Multi- und Single-Fidelity
+ Optimierungen miteinander vergleichbar.
+ Beide Verfahren lieferten also in allen Testfällen stehts vergleichbare
+ Ergebnisse.
+\end_layout
+
+\begin_layout Standard
+Die Beschleunigung der Multfidelity-Verfahren variierte bei diesen Testoptimieru
+ngen allerdings.
+ In drei Fällen konnte eine Verlangsamung der Optimierung beobachtet werden
+ und in zwei Fällen eine Beschleunigung der Optimierung.
+ Als Begründung in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "verheij2017multi"
+
+\end_inset
+
+ wird eine mangelnde Korrelation und ein zu geringer Laufzeitunterschied
+ zwischen den Gütestufen angegeben.
+ Allerdings existieren noch einige andere Unsicherheiten die in der Art
+ der Ausführung und in den gewählten Optimierungseinstellungen zu finden
+ sind:
+\end_layout
+
+\begin_layout Itemize
+Die Erzeugung der Member erfolgte nur zu ca.
+ 50% mithilfe der Ersatzmodelle.
+ Die anderen 50% wurden mit rein genetischen Algorithmen erzeugt.
+ Dadurch geht der generelle Einfluss und damit auch die mögliche Beschleunigung
+ durch die Ersatzmodelle verloren oder relativiert sich zumindest.
+ Grundsätzlich ist diese Strategie sinnvoll, um durch eine gewissen Zufallskompo
+nente ein robusteres Optimierungsergebnis zu erhalten.
+ Genau hier liegt allerdings der Vorteil in der Multifidelity-Optimerung:
+ Durch die 
+\begin_inset Quotes gld
+\end_inset
+
+günstige
+\begin_inset Quotes grd
+\end_inset
+
+ Abtastung des Raums mit dem Modell niedriger Güte ist dies nicht mehr nötig.
+ Das Multifidelity-Verfahren liefert ein robustes Ergebnis bei weniger Zeit,
+ zumindest in den in dieser Arbeit beschriebenen Testfällen.
+\end_layout
+
+\begin_layout Itemize
+Die Initialisierung der Testfälle war vollständig zufällig.
+ Der Startpunkt der unterschiedlichen Optimierungen ist also zufällig und
+ daher nicht miteinander vergleichbar.
+ Dies kann den Optimierungsverlauf stark beeinflussen.
+\end_layout
+
+\begin_layout Itemize
+Die Optimierungen wurden jeweils nur einmal durchgeführt.
+ Vergleicht man bspw.
+ die in dieser Arbeit durchgeführte Fanstufenoptimierung (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+), so sind dort die Schwankungen der Optimierungswiederholungen erheblich,
+ obwohl alle Optimierungen mit derselben Startdatenbasis durchgeführt werden.
+ Eine solche Optimierung ist ein stark stochastisch geprägtes Verfahren.
+ Daher sind mehrere Wiederholungen unerlässlich, um eine fundierte Aussage
+ treffen zu können.
+\end_layout
+
+\begin_layout Itemize
+Das Ersatzmodelltraining wurde nur nach jedem fünften konvergierten Member
+ durchgeführt.
+ Dies führt insbesondere am Anfang einer Optimierung, zu einer verlangsamten
+ Anpassung der Hyperparameter und damit zu einer Verlangsamung der Optimierung
+ selbst.
+ 
+\end_layout
+
+\begin_layout Itemize
+Die Anzahl an gleichzeitig rechnenden Slaves variiert, das ändert ebenfalls
+ stark das Ergebnis.
+\end_layout
+
+\begin_layout Itemize
+Die ersten beiden Testoptimierungen besaßen einen zeitlichen Faktor von
+ ungefähr 
+\begin_inset Formula $\frac{t_{l}}{t_{h}}=0.5$
+\end_inset
+
+.
+ Mit diesem Faktor und der gewählten Anzahl an intitialen Startmembern ist
+ es für die Multifidelity Optimierung sehr schwierig eine Beschleunigung
+ zu erreichen.
+ Die Optimierung hoher Güte startete mit 80 Member, die Multifidelity-Optimierun
+g hingegen mit 80 Startmember und 400 Member niedriger Güte.
+ Zeitlich gesehen entsprechen die Member niedriger Güte ungefähr 200 Membern
+ hoher Güte.
+ Die Single-Fidelity Optimierung startete also mit einem Zeitverzug von
+ 80 Membern und die Multifideltiy-Optimierung mit einem Zeitverzug von 280
+ Membern.
+ Dies entspricht einer 3.5 fach längeren Initialisierungsphase, zudem ist
+ die Länge der Initialisierungsphase mit 280 Membern hoher Güte sehr lang.
+ Die Verlangsamung der Optimierung ist für diese beiden Testfälle also analytisc
+h erklärbar.
+ 
+\size larger
+\color magenta
+
+\begin_inset Newline newline
+\end_inset
+
+Formel zeigen
+\end_layout
+
+\begin_layout Standard
+Fazit:
+\end_layout
+
+\begin_layout Itemize
+Einstellungen sollten überdacht werden, insbesondere die Form der Initialisierun
+g und Member Generierung beinhaltet massive Zufälligkeiten die einen Vergleich
+ sehr schwierig machen.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Genetische Erzeugung ausschalten
+\end_layout
+
+\begin_layout Itemize
+Gleiche Initialisierung für alle Testfälle
+\end_layout
+
+\begin_layout Itemize
+Jeden Member trainieren
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Mehrere Wiederholungen sollten durchgeführt werden um einen Eindruck der
+ Variation zu bekommen.
+\end_layout
+
+\begin_layout Itemize
+Faktor 2 also Unterschied ist nach bisherigen Kenntnisstand nicht ausreichend.
+\end_layout
+
+\begin_layout Itemize
+Aktuelle Entscheidungsfunktion nutzen
+\end_layout
+
+\begin_layout Standard
+Die Arbeit hat so keine sehr hohe Aussagekraft.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -5826,6 +6095,20 @@ Innerhalb dieses Abschnitts sollen noch andere Anwendungsmöglichkeiten der
  
 \end_layout
 
+\begin_layout Standard
+Bild von der Prozesskette mit Informationsdichte zeigen.
+\end_layout
+
+\begin_layout Standard
+-> mit einem Member könnte bereist Information gelernt weden.
+ Mit Kriging so nicht möglich.
+\end_layout
+
+\begin_layout Standard
+-> Aber Probleme die NNs zu nutzen, daher über einen Multifidelity Ansatz
+ am sinnvollsten
+\end_layout
+
 \begin_layout Subsection
 Kopplung mehrerer Ersatzmodelle: Nutzung von Deep Learning Verfahren über
  CO-Kriging 
@@ -6050,10 +6333,6 @@ Vorhersagen zeigen.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
