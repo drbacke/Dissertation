@@ -2258,6 +2258,97 @@ Was aus dieser Gleichung sehr gut ersichtlich ist, ist die Wichtigkeit der
 \end_layout
 
 \begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitstrahlen-von-zwei"
+
+\end_inset
+
+ sind zwei Zeitstrahlen zu erkennen.
+ Der obere stellt eine reine High-Fidelity Optimierung dar mit einer Initialsier
+ungs- und Optimierungsphase.
+ Der untere Zeitstrahl stellt eine Multifidelity-Optimierung dar.
+ Diese besitzt einen zusätzlichen Low-Fidelity Initialsierungsteil.
+ Soll mit der Multifidelity-Optimierung eine Beschleunigung gegenübebr der
+ High-Fidelity Optimierung erreicht werden, so ergibt sich eine maximal
+ mögliche Optimierungzeit.
+ 
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitstrahlen-von-zwei-1"
+
+\end_inset
+
+ zeigt dieselbe Optimierung, allerdings mit einen erheblich größerem LF-Initiali
+sierunganteil.
+ Die mögliche Optimierungzeit für die Multifidelity Optimierung schrumpft
+ damit enorm und damit ist auch die mögliche Beschleunigung gegenüber der
+ High-Fidelity-Optimierung stark begrenzt.
+ 
+\end_layout
+
+\begin_layout Standard
+Um eine optimale Initialiersierung zu erreichen sind folgende Punkte von
+ besonderer Bedeutung:
+\end_layout
+
+\begin_layout Enumerate
+Die Prozesskettengeschwindigkeit der niedrigen Güte.
+ Je schneller diese ist, desto mehr initiale Member sollten berechnet werden.
+\end_layout
+
+\begin_layout Enumerate
+Die Korrelation zwischen den Gütestufen.
+ Nur bei ausreichendem Zusammenhang, können die Stützstellen niedriger Güte
+ gewinnbringend verwendet werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Die Komplexität der Zielfunktion und der Nebenbedingungen.
+ Je komplexer die Optimierung ist, desto länger würde eine reine High-Fidelity-R
+eferenzoptimierung benötigen und desto mehr Potential für eine Beschleunigung
+ wäre vorhanden.
+ Betrachtet man z.B.
+ eine sehr einfache High-Fidelity-Optimierung, welche nach einer sehr kurzen
+ Initialisierungsphase mit einem Member das Optimum findet, so ist es praktisch
+ nicht mehr möglich mit einer Multifidelity-Optimierung eine Beschleunigung
+ zu erreichen.
+ 
+\end_layout
+
+\begin_layout Standard
+Wie lassen sich diese drei Punkte abschätzen und damit eine initiale Anzahl
+ an Membern berechnen?
+\end_layout
+
+\begin_layout Enumerate
+Prozesskettengeschwindigkeit ist in der Regel bekannt oder kann einfach
+ gemessen werden
+\end_layout
+
+\begin_layout Enumerate
+Die Korrelation der Gütestufen kann mit einer geringen Anzahl an Stützstellen
+ abgeschätzt werden oder ist unter Umständen bereits bekannt.
+ Oftmals reicht hier eine grobe Schätzung aus.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Die Komplexität kann über eine geschätzte Gesamtlaufzeit der Optimierung
+ abgebildet werden.
+ Dies stellt zwar kein direktes Maß dar, aber typischerweise werden sehr
+ komplexe Optimierungen mit einer großen Laufzeit versehen und weniger komplexe
+ mit einer geringeren Laufzeit.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2276,6 +2367,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitstrahlen-von-zwei"
+
+\end_inset
+
 Zeitstrahlen von zwei fiktiven Optimierungen.
  Der obere entspricht einer Single-Fidelity Optimierung und der untere einer
  Mutlfidelity-Optimierung.
@@ -2313,6 +2410,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitstrahlen-von-zwei-1"
+
+\end_inset
+
 Zeitstrahlen von zwei fiktiven Optimierungen.
  Der obere entspricht einer Single-Fidelity Optimierung und der untere einer
  Mutlfidelity-Optimierung mit einer langen Initialisierungsphase.
@@ -2332,7 +2435,8 @@ ung erreichen kann.
 \end_layout
 
 \begin_layout Standard
-Wie kann man die Anzahl an initialen Membern abschätzen?
+Mit diesen Werten kann eine sinnvolle initiale Anzahl an Member geschätzt
+ werden: 
 \end_layout
 
 \begin_layout Enumerate
@@ -2354,7 +2458,7 @@ Schätzung einer maximalen Gesamtlaufzeit:
  bekannt.
  Damit ergibt sich die maximale Anzahl an Membern für eine HF Optimierung
  
-\begin_inset Formula $i_{H}=\frac{t_{max}}{t_{h}}$
+\begin_inset Formula $i_{max}=\frac{t_{max}}{t_{h}}$
 \end_inset
 
 
@@ -2398,35 +2502,43 @@ Berechnung des Korrelationskoeffizienten zwischen niedriger und hoher Gütestufe
 \end_layout
 
 \begin_layout Standard
-Damit wird eine gleichmäßige Aufteilung der initial Verfügbaren Zeit vorgenommen
- unter Berücksichtigung der Korrelation und des zeitlichen Faktors.
- Dies stellt allerdings nur eine Schätzformel dar und sichert keineswegs
- eine Beschleunigung.
- Dennoch können damit sehr ungünstige Initialisierungsverhältnisse vermieden
- werden.
- 
-\end_layout
-
-\begin_layout Standard
 Weiterhin sind Abschätzungen der maximalen Gesamtlaufzeit und eine Festlegung
  der prozentualen initialen Phase notwendig.
  Diese Schätzungen sind für einen erfahrenen Anwender aber im Bereich des
  möglichen.
- 
-\end_layout
-
-\begin_layout Standard
-Sinnvolle Werte für 
+ Sinnvolle Werte für 
 \begin_inset Formula $p_{init}$
 \end_inset
 
- liegen bei 5% diese Werte basieren auf Mittelwerten von bisher durchgeführten
- Optimierungen, welche eine gute Beschleunigung erreichen konnten.
+ liegen bei 7-10% diese Werte basieren auf Mittelwerten von bisher durchgeführte
+n Optimierungen, welche eine gute Beschleunigung erreichen konnten.
+ Damit wird eine gleichmäßige Aufteilung der initial Verfügbaren Zeit vorgenomme
+n unter Berücksichtigung der Korrelation und des zeitlichen Faktors.
+ Dies stellt allerdings nur eine Schätzformel dar, welche den Anwendern
+ helfen soll besonders ungünstige Initialisierungsverhältnisse zu vermeiden.
+ 
+\end_layout
+
+\begin_layout Subparagraph*
+Keine Korrelation
 \end_layout
 
 \begin_layout Standard
-Beispiele für die Anwendung dieser Gleichung können in den Kapiteln ....
- gefunden werden 
+Wenn die Gütestufen keine Korrelation besitzen, so wäre der Anteil der intialen
+ Member niedriger Güte 
+\begin_inset Formula $i_{l,Init}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subparagraph*
+Volle Korrelation
+\end_layout
+
+\begin_layout Standard
+Wenn die Gütestufen volle Korrelation besitzen, so würden beide Gütestufen
+ dieselbe Zeit für die Erzeugung von initialen Stützstellen bekommen.
 \end_layout
 
 \end_body

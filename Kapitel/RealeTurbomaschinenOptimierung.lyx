@@ -4273,10 +4273,6 @@ name "tab:Überblick-über-alle"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -4289,10 +4285,6 @@ placement o
 overhang 0col%
 width "50col%"
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -4463,209 +4455,35 @@ Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
 Ergebnisse
 \end_layout
 
+\begin_layout Paragraph
+Vergleich der Fidelities
+\end_layout
+
 \begin_layout Standard
-Der QuasiNewton 
+Sehr kurz halten, auf Erichs Arbeit verweisen.
+ Da hat sich nichts geändert.
+ Ein paar tabellarische Ergebnisse der Zielf.
+ und Nebenbedingunge zeigen zwischen HF und LF.
+ NB grafisch
 \end_layout
 
 \begin_layout Paragraph*
-Multifidelity Ergebnisse
+Gemittelten Ergebnisse aller Optimierungen
 \end_layout
 
 \begin_layout Standard
-Anzahl an erzeugten Paretorang 1 Membern,
-\end_layout
-
-\begin_layout Standard
-LofiParetofront / Hifi Paretofront 10 Member, Verbindungslinien einzeichnen
- und Nebenbedingungen 
-\end_layout
-
-\begin_layout Standard
-Der real erreichte Wert lag bei: 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap table
+\begin_inset Wrap figure
 lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{bestH}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{bestL}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{initH}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{initL}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-550
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-25
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
--
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-25
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-75
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+Gemittelte Volumenzugewinn der unterschiedlichen Testfälle bis zur Abbruchzeit
 \end_layout
 
 \end_inset
@@ -4679,10 +4497,24 @@ MF
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+\frac{1}{10}75+125+\frac{1}{10}1050}=2,19
-\]
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI 
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -4690,70 +4522,175 @@ MF
 \end_layout
 
 \begin_layout Standard
-EVG Bild vergleich -> MF findet immer das Maximum vom AreaGain, HF bleibt
- oft stecken 
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Einzelnen Zeiten, Trainingszeit Zeit für Opti on MM, Prozesskettenzeiten
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-- EVG Bild Schwankungen der einzelnen Optimierungen: Hyperparameterschwankungen
- zeigen
-\end_layout
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
 
-\begin_layout Standard
-- Reduktionsgeschwindigkeit der Nebenbedingungen 
-\end_layout
+\begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\begin_layout Standard
-- Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
- Low plotten
-\end_layout
-
-\begin_layout Standard
-Criterion ROI / Criterion Fitness zeigen.
+\begin_layout Plain Layout
+Verlauf der Entscheidungsfunktion der 0.05 und 0.1.
  
 \end_layout
 
-\begin_layout Standard
-Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch bei
- HF Vorkommen.
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Einzelergebnisse Langläufer
 \end_layout
 
 \begin_layout Standard
--Woher kommen die Zufälligkeiten? Exploratives Vorhegehen beim EVG + Zufälligkei
-ten bei den Ersatzmodellen (Hyperparameter Plot zeigen)
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Volumenzugewinn einer Single-Fidelity und einer Multifidelity-Optimierung
+ die bis zur Konvergenz gelaufen sind
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Einzelergebnisse HF und MF nicht bis zum Ende
 \end_layout
 
 \begin_layout Standard
-- Bei MF niemals diesen oberen Abbruch, hat immer ds Optimum gefunden.
- Sucht also globaler
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paretofront der besten HF Optimierung zum Zeitpunkt X und der besten MF
+ Optimierung 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-- Entscheidungsfunktion und Ersatzmodelle Zusammenspiel ( Kovnergenz Ersatzmodel
-le zeigen )
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ersatzmodellverlauf von Optimierung X und Y
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-- PercHF, aber nur von den konvergierten Member 
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vorhersagefehler von Optimierung X und Y über CumUDPTime
 \end_layout
 
-\begin_layout Standard
-- 
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
+ diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
 \end_layout
 
 \begin_layout Standard
 Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
  gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
  
-\end_layout
-
-\begin_layout Subparagraph*
-- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
- diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
 \end_layout
 
 \begin_layout Standard
@@ -5707,65 +5644,18 @@ g hingegen mit 80 Startmember und 400 Member niedriger Güte.
  Membern.
  Dies entspricht einer 3.5 fach längeren Initialisierungsphase, zudem ist
  die Länge der Initialisierungsphase mit 280 Membern hoher Güte sehr lang.
- Die Verlangsamung der Optimierung ist für diese beiden Testfälle also analytisc
-h erklärbar.
- 
-\size larger
-\color magenta
-
-\begin_inset Newline newline
-\end_inset
-
-Formel zeigen
-\end_layout
-
-\begin_layout Standard
-Fazit:
-\end_layout
-
-\begin_layout Itemize
-Einstellungen sollten überdacht werden, insbesondere die Form der Initialisierun
-g und Member Generierung beinhaltet massive Zufälligkeiten die einen Vergleich
- sehr schwierig machen.
+ Die Verlangsamung der Optimierung ist für diese beiden Testfälle also erklärbar.
  
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-Genetische Erzeugung ausschalten
-\end_layout
-
-\begin_layout Itemize
-Gleiche Initialisierung für alle Testfälle
-\end_layout
-
-\begin_layout Itemize
-Jeden Member trainieren
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Mehrere Wiederholungen sollten durchgeführt werden um einen Eindruck der
- Variation zu bekommen.
-\end_layout
-
-\begin_layout Itemize
-Faktor 2 also Unterschied ist nach bisherigen Kenntnisstand nicht ausreichend.
-\end_layout
-
-\begin_layout Itemize
-Aktuelle Entscheidungsfunktion nutzen
-\end_layout
-
 \begin_layout Standard
-Die Arbeit hat so keine sehr hohe Aussagekraft.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
+Fazit: Erneute Tests sind geplant, in denen die genetiche Komponente vollständig
+ ausgeschaltet werden soll und ein günstigeres Verhältnis an initialen Membern
+ gewählt wird.
+ Als Hilfestellung wird die Formel aus Kapitel X verwendet, um besonders
+ ungünstige initialierisungsen zu vermeiden..
+ Weiterhin wird die Kopplung mit einem Vorauslegungsverfahren aktuell getestet.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -6082,34 +5972,6 @@ reference "sec:Numerische-Effizienz-steigern"
 \end_layout
 
 \begin_layout Section
-Weitere Anwendungsmöglichkeiten
-\end_layout
-
-\begin_layout Standard
-Innerhalb dieses Abschnitts sollen noch andere Anwendungsmöglichkeiten der
- hier entwickelten Co-Kriging Software gezeigt werden.
- Anders bezieht sich in diesem Rahmen auf die Nutzung des Ersatzmodells
- innerhalb einer Optimierung.
- Es werden zwei weitere Anwendungen vorgestellt, beide sind ebenfalls im
- Rahmen dieser Arbeit entstanden.
- 
-\end_layout
-
-\begin_layout Standard
-Bild von der Prozesskette mit Informationsdichte zeigen.
-\end_layout
-
-\begin_layout Standard
--> mit einem Member könnte bereist Information gelernt weden.
- Mit Kriging so nicht möglich.
-\end_layout
-
-\begin_layout Standard
--> Aber Probleme die NNs zu nutzen, daher über einen Multifidelity Ansatz
- am sinnvollsten
-\end_layout
-
-\begin_layout Subsection
 Kopplung mehrerer Ersatzmodelle: Nutzung von Deep Learning Verfahren über
  CO-Kriging 
 \begin_inset CommandInset label
@@ -6121,12 +5983,11 @@ name "subsec:Kopplung-mehrerer-Ersatzmodelle:"
 
 \end_layout
 
-\begin_layout Paragraph*
-Einleitend, wo stehen wir?
-\end_layout
-
 \begin_layout Standard
-Die Nutzung von Deep Learning Verfahren im Rahmen einer Turbomaschinenauslegung
+Im Rahmen dieser Arbeit wurde die Nutzung von Deep-Learning CFD-Vorhersagen
+ in Kombination mit dem in dieser Arbeit vorgestellten Multifidelity-Verfahren
+ getestet.
+ Die Nutzung von Deep Learning Verfahren im Rahmen einer Turbomaschinenauslegung
  ist ein noch sehr junges Forschungsgebiet, aus diesem Grund gibt es noch
  sehr wenig an aktueller Forschungsliteratur.
  In 
@@ -6138,8 +5999,8 @@ key "Bai2018"
 
  wurde ein erster Versuch unternommen mithilfe von Deep-Learning Verfahren
  Druckverteilungen von 2D-Profilschnitten vorherzusagen.
- Zu diesem Zweck wurde drei verschiedene Neuronale Netzwerke mit einer Datenbank
- von 60.000 Profilschnitten trainiert.
+ Zu diesem Zweck wurden drei verschiedene Neuronale Netzwerke mit einer
+ Datenbank von 60.000 Profilschnitten trainiert.
  Für zwei der Neuronalen Netzwerke wurden 
 \begin_inset Quotes gld
 \end_inset
@@ -6163,12 +6024,100 @@ Convolutional
 
 \begin_layout Standard
 Anf'nge im Rahmen dieser Arbeit und des wurden erste Versuche unternommen
- komplette FEM Vorhersagen mit Tensorflow basierten Nueonalen Netyen yu
- machen.
- Dann wurde das von Aulich und Kuepper weiterentwickelt um komplette Str;mungsvo
-rhersagen yu treffen.
- Diese daraus entstandenen NNs wurden dann in der hier geyeigten Optimierung
+ Vorhersagen der Hauptspannungen von Verdichterschaufeln mit Tensorflow
+ basierten Neuronalen Netzen zu treffen.
+ Die Ergebnisse waren vielversprechend, allerdings ist die Berechnung von
+ Hauptspannungen bereits so schnell, dass sich solche Vorhersagen zeitlich
+ nicht rentieren.
+ 
+\end_layout
+
+\begin_layout Standard
+In der Arbeit von Aulich und Kueppers wurde aufbauend darauf die Vorhersage
+ von CFD-Strömungslösungen getestet.
+ Hierfür wurde ein 
+\begin_inset Quotes gld
+\end_inset
+
+Bounding Box
+\begin_inset Quotes grd
+\end_inset
+
+ Verfahren entwickelt, welches die CFD-Lösung in Form eines hochauflösenden
+ Rechengitters auf ein festes Gitter von geringerer Auflösung konvertiert.
+ Jeder Knotenpunkt dieses neuen Gitters entspricht einem Knoten der Input-Schich
+t des zu trainierenden Neuronalen Netzwerks.
+ Die Geometrie wird dann über die Aktivierung des entsprechenden Input-Knotens
+ abgebildet.
+ Ein Knoten welcher bspw.
+ in der Geometrie liegt bekommt einen anderen Wert zugewiesen als Knoten
+ außerhalb der Geometrie.
+ Die entsprechende 
+\end_layout
+
+\begin_layout Standard
+Diese daraus entstandenen NNs wurden dann in der hier geyeigten Optimierung
  als Low Fid Modelle getestet.
+\end_layout
+
+\begin_layout Standard
+Bild von der Prozesskette mit Informationsdichte zeigen.
+\end_layout
+
+\begin_layout Standard
+-> mit einem Member könnte bereist Information gelernt weden.
+ Mit Kriging so nicht möglich.
+\end_layout
+
+\begin_layout Standard
+-> Aber Probleme die NNs zu nutzen, daher über einen Multifidelity Ansatz
+ am sinnvollsten
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/NN_KrigingAblaufdiagramm.pdf
+	BoundingBox 0bp 210bp 660bp 510bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verschiedene-Prozessketten-am"
+
+\end_inset
+
+Verschiedene Prozessketten am Beispiel der Fanstufenoptimierung, mit jeweiliger
+ Anzahl an Informationsgrößen.
+ Mittig ist die Optimierungs-Prozesskette, links die Prozesskette für eine
+ Vorhersage mit Neuronalen Netzwerken und rechts der Ablauf einer Kriging
+ Vorhersage.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Einleitend, wo stehen wir?
 \end_layout
 
 \begin_layout Standard
@@ -6404,10 +6353,6 @@ Reduktion der Nebenbedingung über Prozesskettenzeit
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -6741,6 +6686,14 @@ Optimierung - Ergebnisse
 
 \begin_layout Standard
 VG Verlauf - Entscheidungsfunktion & Startdatenbasis
+\end_layout
+
+\begin_layout Standard
+- Geht am Anfang sehr stark auf die Nebenbedingungen und dort ist flow_93
+ sehr wichtig.
+ Bei diesem bringen die NNs relativ viel, deswegen ist das Kriterium hoch.
+ Gewichtung funktioniert also ganz gut.
+ 
 \end_layout
 
 \begin_layout Paragraph*

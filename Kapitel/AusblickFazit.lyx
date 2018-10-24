@@ -75,6 +75,10 @@
 Fazit und Ausblick
 \end_layout
 
+\begin_layout Section*
+Fazit
+\end_layout
+
 \begin_layout Standard
 Mutlfidelity Verfahren ist sehr gewinnbringend und kann vielseitig eingesetzt
  werden.
@@ -217,6 +221,17 @@ Client / Server System, um Berechnungunge asynchron und dynamisch zu verteilen.
 
 \end_deeper
 \end_deeper
+\begin_layout Standard
+Das wichtigste Ziel, ein in einer industriellen Umgebung einsetzbares Verfahren
+ zu entwickeln ist gelungen.
+ Dies lässt sich besonders an den sehr komplexen Anwendungen zeigen die
+ das in dieser Arbeit entwickelte Verfahren gewinnbringend verwendet haben
+\end_layout
+
+\begin_layout Section*
+Ausblick
+\end_layout
+
 \begin_layout Subsection
 Gradient Enhanced CO-Kriging
 \end_layout
@@ -232,6 +247,17 @@ Sehr sinnvoll, da oftmals nur wenige HF Member bekannt sind und damit die
 
 \begin_layout Standard
 Vielleicht nur in den Ausblick!!!!
+\end_layout
+
+\begin_layout Subsection
+Vorauslegungsverfahren als Modell niedriger Güte testen
+\end_layout
+
+\begin_layout Standard
+ACDC als Modell niedriger Güte.
+ Extremer Zeitunterschied und möglicherweise hoher Informationsgehalt könnte
+ die Optimierungen deutlich beschleunigen.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -253,6 +279,56 @@ Die Option existiert bereits und wurde an einfachen Tests bereits erfolgreich
  Allerdings sind noch weitere Tests nötig, um einschätzen zu können inwieweit
  eine Änderung der Randbedingungeun oder der Parametrisierung noch gewinnbringen
 d sein kann.
+\end_layout
+
+\begin_layout Subsection
+Kopplung mehrerer Ersatzmodelle weiterbringen
+\end_layout
+
+\begin_layout Standard
+Hier wird ein sehr großes Potential gesehen, insbesondere bei der Bewältigung
+ sehr großer Parameterräume.
+ 
+\end_layout
+
+\begin_layout Subsection
+Stochastic RPROP testen
+\end_layout
+
+\begin_layout Standard
+Verfahren aus dem Deep-Learning Bereich könnten beim Kriging sinnvoll sein.
+ Hier könnte man bspw.
+ das RPROP Verfahren immer mit zufällig wechselnden Teilmengen der Trainingsstüt
+zstellen trainieren.
+ Die Konvergenzzeit sollte dadurch steigen, aber das Verfahren könnte robuster
+ werden und auch die einzelnen Iterationsschritte dadurch erheblich schneller
+ werden.
+ 
+\end_layout
+
+\begin_layout Subsection
+Umgang mit anderen Verteilungen
+\end_layout
+
+\begin_layout Standard
+Eine Annahme des Kriging-Verfahrens ist die Normalverteilung der Funktionswerte.
+ Oftmals ist aber von vornherein bekannt, dass die zu modellierenden Funktionen
+ nicht normalverteilt sind.
+ Ein gutes Beispiel ist hier der Wirkungsgrad, dieser kann durch seine obere
+ Grenze nicht normalverteilt sein.
+ Während der Optimierung kann dies zu Schwierigkeiten führen.
+ Z.B.
+ kann bei der Optimierung auf dem Ersatzmodell dadurch eine gewisse Wahrscheinli
+chkeit für Wirkungsgrade über Eins bestehen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Umsetzung anderer Verteilungsfunktionen ist allerdings mit erheblichen
+ technischen Aufwand verbunden.
+ Zum einen muss das Ersatzmodell angepasst werden und zum anderen der Optimierun
+gsalgorithmus selbst.
+ Weiterhin 
 \end_layout
 
 \end_body
