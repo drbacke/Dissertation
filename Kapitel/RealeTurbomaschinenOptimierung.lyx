@@ -4480,6 +4480,15 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_CumVolGain.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4505,10 +4514,17 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_dist2ROI.eps
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI 
+Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI für ausgewählte
+ Optimierungen
 \end_layout
 
 \end_inset
@@ -4573,36 +4589,6 @@ Verlauf der Entscheidungsfunktion der 0.05 und 0.1.
 \end_layout
 
 \begin_layout Paragraph*
-Einzelergebnisse Langläufer
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Volumenzugewinn einer Single-Fidelity und einer Multifidelity-Optimierung
- die bis zur Konvergenz gelaufen sind
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
 Einzelergebnisse HF und MF nicht bis zum Ende
 \end_layout
 
@@ -4619,32 +4605,7 @@ status open
 
 \begin_layout Plain Layout
 Paretofront der besten HF Optimierung zum Zeitpunkt X und der besten MF
- Optimierung 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Ersatzmodellverlauf von Optimierung X und Y
+ Optimierung, 3 Zeitpunkte in einem Bild 
 \end_layout
 
 \end_inset

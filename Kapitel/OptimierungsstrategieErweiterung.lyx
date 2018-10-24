@@ -2435,6 +2435,16 @@ ung erreichen kann.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\color magenta
+WEG
+\end_layout
+
+\begin_layout Plain Layout
 Mit diesen Werten kann eine sinnvolle initiale Anzahl an Member geschätzt
  werden: 
 \end_layout
@@ -2501,7 +2511,7 @@ Berechnung des Korrelationskoeffizienten zwischen niedriger und hoher Gütestufe
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Weiterhin sind Abschätzungen der maximalen Gesamtlaufzeit und eine Festlegung
  der prozentualen initialen Phase notwendig.
  Diese Schätzungen sind für einen erfahrenen Anwender aber im Bereich des
@@ -2523,7 +2533,7 @@ n unter Berücksichtigung der Korrelation und des zeitlichen Faktors.
 Keine Korrelation
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Wenn die Gütestufen keine Korrelation besitzen, so wäre der Anteil der intialen
  Member niedriger Güte 
 \begin_inset Formula $i_{l,Init}=0$
@@ -2536,9 +2546,14 @@ Wenn die Gütestufen keine Korrelation besitzen, so wäre der Anteil der intiale
 Volle Korrelation
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Wenn die Gütestufen volle Korrelation besitzen, so würden beide Gütestufen
  dieselbe Zeit für die Erzeugung von initialen Stützstellen bekommen.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
