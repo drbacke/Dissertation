@@ -4401,21 +4401,36 @@ reference "subsec:EVG"
 \end_inset
 
 ) verwendet.
- Jeder Member wird mit diesem Algortihmus erzeugt.
+ Jeder Member wurde mit diesem Algortihmus erzeugt.
 \end_layout
 
 \begin_layout Itemize
-Jedes Optimierungssetup wird 4x wiederholt, um Zufälligkeiten abbilden zu
- können.
+Jedes Optimierungssetup wurde 4x wiederholt, um Zufälligkeiten abbilden
+ zu können.
 \end_layout
 
 \begin_layout Itemize
-Jede Optimierung bekommt eine Laufzeit von ca.
- 550h 
+Jeder Optimierung wurde eine Laufzeit von ca.
+ 550h zugewiesen
+\end_layout
+
+\begin_layout Itemize
+Es wurde ein minimaler prozentualer Anteil von 10% an Membern hoher Güte
+ festgelegt.
+ Hierfür wurde das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Minimale-Menge-an"
+
+\end_inset
+
+ gezeigte Verfahren verwendet.
+ Zusätzlich wurde eine weitere Optimierung mit einem Anteil von 5% durchgeführt
+ um das Verhalten der Entscheidungsfunktion zu zeigen.
 \end_layout
 
 \begin_layout Standard
-Es werden 2 Optimierungssetups verglichen:
+Es werden zwei Optimierungssetups verglichen:
 \end_layout
 
 \begin_layout Enumerate
@@ -4432,8 +4447,8 @@ Zusätzliche Gewichtung der Ersatzmodelle
 \begin_inset Quotes grd
 \end_inset
 
- Entscheidungsfunktion, welche im Rahmen dieser Arbeit entwickelt wurd (sieh
- Kapitel 
+ Entscheidungsfunktion, welche im Rahmen dieser Arbeit entwickelt wurde
+ (sieh Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Entschedungsfunktion"
@@ -4443,6 +4458,16 @@ reference "par:Entschedungsfunktion"
 ).
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Minimaler prozentualer Anteil an Membern hoher Güte 10%
+\end_layout
+
+\begin_layout Enumerate
+Minimaler prozentualer Anteil an Membern hoher Güte 5% (nur eine Wiederholung)
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
  durchgeführt.
@@ -4453,6 +4478,18 @@ Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
 
 \begin_layout Subsection
 Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Innerhalb dieses Abschnittes werden die Ergebnisse der vorgestellten Testoptimie
+rungen gezeigt.
+ Im ersten Teil sollen kurz die Unterschiede zwischen den Gütestufen gezeigt
+ werden.
+ Darauf folgend werden die Ergebnisse aller Optimierungen miteinander verglichen
+ und einige ausgewählte Optimierungen nochmals detailliert beschrieben.
+ Im letzten Teil sollen die aerodynamischen Ergebnisse verglichen werden,
+ der Fokus soll dabei auf die Unterschiede in den aerodynamischen Ergebnissen
+ der unterschiedlichen Optimierungsverfahren gelegt werden.
 \end_layout
 
 \begin_layout Paragraph
@@ -4468,7 +4505,7 @@ Sehr kurz halten, auf Erichs Arbeit verweisen.
 \end_layout
 
 \begin_layout Paragraph*
-Gemittelten Ergebnisse aller Optimierungen
+Ergebnisse der Testoptimierungen im Vergleich
 \end_layout
 
 \begin_layout Standard
@@ -4481,7 +4518,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_CumVolGain.eps
+	filename ../images/ErgebnissKapitel/Opti_CumVolGain.eps
 
 \end_inset
 
@@ -4492,39 +4529,16 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Gemittelte Volumenzugewinn der unterschiedlichen Testfälle bis zur Abbruchzeit
-\end_layout
-
+Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
+ bis zur Abbruchzeit.
+ 
+\begin_inset Newline newline
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_dist2ROI.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI für ausgewählte
- Optimierungen
+\size largest
+\color magenta
+MARKIERUNG der Optimierungssetups 1 2a und 2b, Einzeloptimierungen S1,MF1,MF2
 \end_layout
 
 \end_inset
@@ -4589,7 +4603,42 @@ Verlauf der Entscheidungsfunktion der 0.05 und 0.1.
 \end_layout
 
 \begin_layout Paragraph*
-Einzelergebnisse HF und MF nicht bis zum Ende
+Detail-Ergebnisse ausgewählter Optimierungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_dist2ROI.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI für ausgewählte
+ Optimierungen
+\size largest
+\color magenta
+Einzeloptimierungen S1,MF1,MF2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

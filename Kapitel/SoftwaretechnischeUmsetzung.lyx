@@ -4773,7 +4773,14 @@ Berechnung der Zeiten
 \end_layout
 
 \begin_layout Paragraph*
-Minimum an HF Member muss vorgegeben werden
+Minimale Menge an Membern hoher Güte 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Minimale-Menge-an"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4781,8 +4788,8 @@ Es kann vorkommen, dass die HF und LF Funktionen so stark korreliert sind,
  dass die Entscheidungsunktion sich nur noch für die Prozessketten niedriger
  Güte entscheidet.
  Grundlegend ist dieses Verhalten auch sinnvoll und erwünscht.
- Jedoch wird der Volume Gain Term in der Regel mit Stützstellen hoher Güte
- berechnet.
+ Jedoch interessiert den Anwender letztendlich das Ergebnis hoher Güte,
+ aus diesem Grund wird der Volume-Gain-Term im Raum hoher Güte berechnet.
  Um es kurz zu beschreiben: Mit einem Member niedriger Güte kann kein Volumenzug
 ewinn gemacht werden, es wird nur das Ersatzmodell verbessert.
  
@@ -6391,7 +6398,7 @@ Ist die Anzahl der Variablen nicht durch zwei teilbar, so bleibt ein Rest
 \end_layout
 
 \begin_layout Subsection
-Filtern von unwichtigen Samples
+Reduktion von Stützstellen
 \end_layout
 
 \begin_layout Standard
