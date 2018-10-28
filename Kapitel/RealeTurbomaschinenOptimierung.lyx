@@ -4358,7 +4358,14 @@ Freigegebene Konstruktionspunkte am Gehäuse G1,G2,G3,G5 und an der Nabe
 \end_layout
 
 \begin_layout Paragraph
-Einstellungen Optimierung und Laufzeitumgebung
+Einstellungen Optimierung und Laufzeitumgebung 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Einstellungen-Optimierung-und"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -4509,6 +4516,82 @@ Ergebnisse der Testoptimierungen im Vergleich
 \end_layout
 
 \begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+ ist der zeitliche Verlauf des Volumenzugewinns dargestellt.
+ Bei der Zeit handelt es sich um die kummulierte Prozesskettenzeit aller
+ Gütestufen.
+ Weiterhin sind die Startpunkte der Multifidelity- und Highfidelity-Optimierunge
+n eingezeichnet.
+ Die zeitliche Verzögerung der Multifidelity-Optimierungen ergibt sich aus
+ den zusätzlichen Startmembern niedriger Güte.
+ Die blauen Linien beschreiben die Verläufe der Optimierungen 2a (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Einstellungen-Optimierung-und"
+
+\end_inset
+
+).
+ Die grüne Linie entspricht der Optimierung 2b mit einem minimalen prozentualen
+ Anteil an Membern hoher Güte von 5%.
+ Die schwarzen Linien entsprechen den High-Fidelity Referenz-Optimierungen.
+ 
+\end_layout
+
+\begin_layout Standard
+Betrachtet man den ersten Anstieg im Volumenzugewinn der Optimierungen,
+ so steigen die Optimierungen 2a als erstes an.
+ Dies lässt darauf schließen, dass die Nebenbedingungen früh erfüllt wurden,
+ da ohne Erfüllung der Nebenbedingungen kein Volumenzugewinn möglich ist.
+ Im Vergleich dazu ist der Anstieg von Optimierung 2b stark verzögert, dies
+ ist darin begründet, dass zu Anfang der Optimierung die Entscheidungsfunktion
+ deutlich mehr Member niedriger Güte erzeugt.
+ Da Member niedriger Güte keinen Volumenzugewinn bringen können, zeigt sich
+ dieses Verhalten in Form einer Verzögerung.
+ Optimierung 2b kann diese Verzögerung allerdings sehr schnell einholen.
+ Dies spricht für ein vernünftiges Verhalten der Entscheidungsfunktion,
+ die unterschiedlichen Startbedingungen sinnvoll auszugleichen.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin kann man erkennen, dass alle Multifidelity-Optimierungen in der
+ zugewiesenen Zeit ein deutlich höheren Volumenzugewinn erreichen konnten.
+ Zudem ist die Streuung des Volumenzugewinns bei allen Multifidelity-Optimierung
+en erheblich geringer, das erreichte Optimum konnte in der gegebenen Zeit
+ also robust gefunden werden.
+ Die Highfidelity-Optimierungen zeigen eine vergleichsweise starke Streuung.
+ Dieses Verhalten kann für industrielle Anwendungen von großer Bedeutung
+ sein, ein Beispiel hierfür ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Anwendung-bei-Siemens"
+
+\end_inset
+
+ zu finden.
+ Um die Robustheit der Optimierung zu gewährleisten wurde in diesem Beispiel
+ ein sehr großer Anteil mit genetischen Algortihmen ohne Ersatzmodellbeschleunig
+ung erzeugt.
+ Möglicherweise ist dies mit einer Multifidelity-Optimierung nicht notwendig,
+ hierfür sind weitere Untersuchungen angedacht (siehe Ausblick 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Anwendung-bei-Siemens-1"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -4529,6 +4612,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
 Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
  bis zur Abbruchzeit.
  
@@ -4538,7 +4627,8 @@ Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
 
 \size largest
 \color magenta
-MARKIERUNG der Optimierungssetups 1 2a und 2b, Einzeloptimierungen S1,MF1,MF2
+MARKIERUNG der Optimierungssetups 1 2a und 2b, Einzeloptimierungen S1,MF1,MF2;
+ Multifidelity nur 3
 \end_layout
 
 \end_inset
@@ -5403,6 +5493,13 @@ Anwendung bei
 Siemens (Siemens Energy? Power and Gas???)
 \color inherit
  
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Anwendung-bei-Siemens"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

@@ -233,6 +233,23 @@ Ausblick
 \end_layout
 
 \begin_layout Subsection
+Anwendung bei Siemens
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Anwendung-bei-Siemens-1"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+genetischen Algorithmus ausschalten, in der Hoffnung dieselbe Robustheit
+ der Optimierunt mit MF zu erhalten, allerdings mit einer erheblichen Zeiterspar
+nis.
+\end_layout
+
+\begin_layout Subsection
 Gradient Enhanced CO-Kriging
 \end_layout
 
