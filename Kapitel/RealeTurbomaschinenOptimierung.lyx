@@ -4621,14 +4621,6 @@ name "fig:Zeitlicher-Verlauf-des"
 Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
  bis zur Abbruchzeit.
  
-\begin_inset Newline newline
-\end_inset
-
-
-\size largest
-\color magenta
-MARKIERUNG der Optimierungssetups 1 2a und 2b, Einzeloptimierungen S1,MF1,MF2;
- Multifidelity nur 3
 \end_layout
 
 \end_inset
@@ -4650,6 +4642,12 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_timeTrain.eps
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4675,11 +4673,22 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Fidelity_2a.eps
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Fidelity_2b.eps
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verlauf der Entscheidungsfunktion der 0.05 und 0.1.
- 
+Verlauf der Entscheidungsfunktion der 2a und 2b 
 \end_layout
 
 \end_inset
@@ -4740,11 +4749,31 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_300s.eps
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_500s.eps
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_800s.eps
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Paretofront der besten HF Optimierung zum Zeitpunkt X und der besten MF
- Optimierung, 3 Zeitpunkte in einem Bild 
+ Optimierung, 3 Zeitpunkte in einem Bild.
+ Eingezeichnet sind nur Member hoher Güte welche die Nebenbedingungen erfüllen
+ .
 \end_layout
 
 \end_inset
@@ -4844,7 +4873,8 @@ name "fig:OptimierungenEntscheidungsfVerläfe"
 Vergleich verschiedener Optimierungen mit unterschiedlichen Entscheidungsverläuf
 en 
 \color magenta
-NOchmal checken mit nur konvergierten Membern !!!
+NOchmal checken mit nur konvergierten Membern mnach 800000sec, 0.05 einzeichnen
+ und alle 0.1er und HF !!!
 \end_layout
 
 \end_inset
