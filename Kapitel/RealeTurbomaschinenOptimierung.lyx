@@ -4516,6 +4516,47 @@ Ergebnisse der Testoptimierungen im Vergleich
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_CumVolGain.eps
+	scale 40
+	BoundingBox 11bp 150bp 600bp 642bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
+ bis zur Abbruchzeit.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4542,6 +4583,44 @@ reference "par:Einstellungen-Optimierung-und"
  Die grüne Linie entspricht der Optimierung 2b mit einem minimalen prozentualen
  Anteil an Membern hoher Güte von 5%.
  Die schwarzen Linien entsprechen den High-Fidelity Referenz-Optimierungen.
+ Die mit Symbolen gekennzeichneten Optimierungen werden im nächsten Abschnitt
+ noch genauer untersucht.
+ 
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_timeTrain.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Prozentualer-Anteil-der"
+
+\end_inset
+
+Prozentualer Anteil der Trainingszeit an der Gesamtlaufzeit der verschiedenen
+ Testoptimierungen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
  
 \end_layout
 
@@ -4578,7 +4657,7 @@ reference "subsec:Anwendung-bei-Siemens"
 
  zu finden.
  Um die Robustheit der Optimierung zu gewährleisten wurde in diesem Beispiel
- ein sehr großer Anteil mit genetischen Algortihmen ohne Ersatzmodellbeschleunig
+ ein sehr großer Anteil mit genetischen Algorithmen ohne Ersatzmodellbeschleunig
 ung erzeugt.
  Möglicherweise ist dies mit einer Multifidelity-Optimierung nicht notwendig,
  hierfür sind weitere Untersuchungen angedacht (siehe Ausblick 
@@ -4592,113 +4671,69 @@ reference "subsec:Anwendung-bei-Siemens-1"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/Opti_CumVolGain.eps
+Ein weiterer wichtiger Aspekt bei der zeitlichen Betrachtung der unterschiedlich
+en Optimierungsverfahren ist die benötigte Trainingszeit.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Prozentualer-Anteil-der"
 
 \end_inset
 
+ stellt die benötigte Trainingszeit der einzelnen Testoptimierung als prozentual
+en Anteil an der Gesamtzeit dar.
+ Die schwarzen Kurven stellen den Anteil der High-Fidelity Optimierungen
+ dar, dieser liegt deutlich unter einem Prozent und geht fällt daher kaum
+ ins Gewicht der Gesamtlaufzeit.
+ Die Multifidelity-Optimierungen benötigen eine deutlich höhere Trainingszeit,
+ welche im Bereich von ca.
+ 4% liegt.
+ Die Multifidelity-Optimierung 2b liegt aufgrund der höheren Stützstellenanzahl
+ bei ca.
+ 5%.
+ Die höheren Trainingszeiten entstehen hauptsächlich durch die höhere Anzahl
+ an Trainingsmustern niedriger Güte.
+ Außerdem ist aber auch das Trainingsverfahren selbst aufwendiger und benötigt
+ mehr Zeit.
+ Bei den Multifidelity-Optimierungen ist eine Abflachung der Zeitkurven
+ zu erkennen, dieser wird durch die 
+\begin_inset Quotes gld
+\end_inset
 
-\end_layout
+Restart Option auf Basis von vorhandenen Modellen
+\begin_inset Quotes grd
+\end_inset
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Zeitlicher-Verlauf-des"
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
 
 \end_inset
 
-Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
- bis zur Abbruchzeit.
+) verursacht.
+ Sobald genügend trainierte Modelle vorhanden sind und diese die Bedingungen
+ für den 
+\begin_inset Quotes gld
+\end_inset
+
+Restart
+\begin_inset Quotes grd
+\end_inset
+
+ erfüllen, können diese zur Initialisierung der Ersatzmodelle verwendet
+ werden und beschleunigen das Training so erheblich.
  
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_timeTrain.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Einzelnen Zeiten, Trainingszeit Zeit für Opti on MM, Prozesskettenzeiten
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Fidelity_2a.eps
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Fidelity_2b.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Verlauf der Entscheidungsfunktion der 2a und 2b 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+Fasst man die zeitlichen Ergebnisse zusammen, so waren die Multifidelity-Optimie
+rungen ungefähr doppelt so schnell wie die High-Fidelity Optimierungen bei
+ einem Trainingszeitberlust von ca.
+ 3%.
+ In diesem Beispiel war der Einsatz des Multifidelity-Verfahrens trotz der
+ längeren Trainingszeiten also sehr lohnenswert.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -4716,6 +4751,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/Opti_dist2ROI.eps
+	scale 40
 
 \end_inset
 
@@ -4723,11 +4759,170 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Reduktionsgeschwindigkeit der Nebenbedingungen und Criterion ROI für ausgewählte
- Optimierungen
-\size largest
-\color magenta
-Einzeloptimierungen S1,MF1,MF2
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+Summierte Restriktionsterm über der Optimierungslaufzeit.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In diesem Abschnitt sollen die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+ gekennzeichneten Optimierungen detaillierter betrachtet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Als erstes soll der Verlauf der Nebenbedingungen verglichen werden, diese
+ zu erfüllen stellt einen wesentlichen Anteil an der Optimierungslaufzeit
+ dar.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+ zeigt den Verlauf des summierten Restriktionsterms über der Optimierungslaufzei
+t.
+ Aufsummiert werden die Abstände zu den in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Übersicht-aller-Nebenbedingungen"
+
+\end_inset
+
+ definierten Intervallen.
+ Ziel ist es diesen Term auf den Wert Null zu bekommen.
+ Die schwarze Kurve beschreibt die High-Fidelity Optimierung und startet
+ zeitlich vor den Multifidelity-Optimierungen, da diese keine Member niedriger
+ Güte in der Initialisierungsphase benötigt.
+ Die Multifidelity-Optimierungen starten ca.
+ 35000s später.
+ Trotz des späteren Starts erfüllen beide Mutlfidelity-Optimierungen die
+ Restriktionen deutlich schneller, können also von den zusätzlichen Membern
+ niedriger Güte profitieren.
+ Die Optimierung 2b erzeugt zu Anfang die meisten Member niedriger Güte
+ und erfüllt die Restriktionen am schnellsten.
+ In diesem Beispiel scheint also eine klare Abhängigkeit zwischen Erfüllung
+ der Nebenbedingungen und der Anzahl an berechneten Membern niedriger Güte
+ zu existieren.
+ 
+\end_layout
+
+\begin_layout Standard
+Als nächstes soll der Verlauf der Entscheidungsfunktion betrachtet werden.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verlauf-der-Entscheidungsfunktio"
+
+\end_inset
+
+ zeigt den Verlauf der Entscheidungsfunktion Optimierung 2a und 2b.
+ Die roten Punkte beschrieben die jeweiligen Werte des Entscheidungskriteriums
+ und die grünen Punkte stellen den jeweiligen Wert der Barriere dar (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Minimale-Menge-an"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Minimale Menge an Membern hoher Güte
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Liegt das Kriterium über der Barriere, so wird zugunsten eines Members
+ niedriger Güte entschieden, liegt der Wert unter der Barriere, dann wird
+ ein Member hoher Güte erzeugt.
+ Da bei Optimierung 2a der minimale prozentuale Anteil an Membern hoher
+ Güte bei 10% lag und bei Optimierung 2b bei 5%, wird die Barriere bei Optimieru
+ng 2a öfter verschoben, um den minimalen Prozentsatz zu erfüllen.
+ Die globale Tendenz des Kriteriums ist bei beiden Optimierungen fallend,
+ auch dies entspricht der Erwartung.
+ Da mit steigender Anzahl an Membern die Ersatzmodellunsicherheiten immer
+ kleiner werden, verschiebt sich das Kriterium auch immer weiter zu niedrigeren
+ Werten.
+ Bei Optimierung 2b geschieht dies allerdings mit geringerem Tempo, da die
+ Ersatzmodellunsicherheiten langsamer sinken aufgrund des höheren Anteils
+ an Membern niedriger Güte.
+ 
+\end_layout
+
+\begin_layout Standard
+In dem Verlauf von Optimierung 2b ist bei Member-Nummer 300 ein leichter
+ Sprung zu erkennen, das Entscheidungskriterium zeigt ab dieser Member-Nummer
+ deutlich öfter Werte unter Eins.
+ Dies lässt sich dadurch erklären, dass ab Member-Nummer 299 der erste Member
+ gefunden wurde, der alle Restriktionen erfüllt.
+ Die Wahrscheinlichkeit die Nebenbedingungen zu erfüllen ist ab diesem Zeitpunkt
+ stark erhöht, was einen großen Einfluss auf die Entscheidungsfunktion hat
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Entschedungsfunktion"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Fidelity_2a.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Fidelity_2b.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verlauf-der-Entscheidungsfunktio"
+
+\end_inset
+
+Verlauf der Entscheidungsfunktion der Optimierungen 2a und 2b.
+ Die roten Symbole stellen den jeweiligen Wert der Entscheidungsfunktion
+ dar und die grünen Punkte die Barriere.
+ Wobei ein überschreiten der Barriere zu einem Member niedriger Güte führt
+ und ein unterschreiten zu einem hoher Güte.
 \end_layout
 
 \end_inset
@@ -4750,19 +4945,25 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_300s.eps
+	filename ../images/ErgebnissKapitel/Opti_Pareto_300s.eps
+	scale 30
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_500s.eps
+	filename ../images/ErgebnissKapitel/Opti_Pareto_500s.eps
+	scale 30
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Opti_Pareto_800s.eps
+	filename ../images/ErgebnissKapitel/Opti_Pareto_800s.eps
+	scale 30
 
 \end_inset
 
@@ -4772,8 +4973,7 @@ status open
 \begin_layout Plain Layout
 Paretofront der besten HF Optimierung zum Zeitpunkt X und der besten MF
  Optimierung, 3 Zeitpunkte in einem Bild.
- Eingezeichnet sind nur Member hoher Güte welche die Nebenbedingungen erfüllen
- .
+ Eingezeichnet sind nur Member hoher Güte welche die Nebenbedingungen erfüllen.
 \end_layout
 
 \end_inset
