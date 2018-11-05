@@ -4877,7 +4877,7 @@ In dem Verlauf von Optimierung 2b ist bei Member-Nummer 300 ein leichter
  Dies lässt sich dadurch erklären, dass ab Member-Nummer 299 der erste Member
  gefunden wurde, der alle Restriktionen erfüllt.
  Die Wahrscheinlichkeit die Nebenbedingungen zu erfüllen ist ab diesem Zeitpunkt
- stark erhöht, was einen großen Einfluss auf die Entscheidungsfunktion hat
+ sehr hoch, was einen großen Einfluss auf die Entscheidungsfunktion hat
  (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4936,6 +4936,62 @@ Verlauf der Entscheidungsfunktion der Optimierungen 2a und 2b.
 \end_layout
 
 \begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Paretofront-der-besten"
+
+\end_inset
+
+ zeigt die Entwicklung der Paretofronten von Optimierung 1 und 2a zu jeweils
+ drei unterschiedlichen Zeitpunkten.
+ Eingezeichnet sind die Member hoher Güte welche die Restriktionen bereits
+ erfüllt haben.
+ Der erste Zeitpunkt wurde bei 300.000 Sekunden gewählt, der Zweite bei 500.000
+ Sekunden und der Letzte bei 800.000 Sekunden.
+ Bei 300.000 Sekunden wurde nur ein einziger Member von der Multifidelity-Optimie
+rung gefunden, welcher die Restriktionen erfüllt.
+ Bereits ab diesem frühen Zeitpunkt der Optimierung überholt die Mutlfidelity-Op
+timierung bereits die High-Fidelity Optimierung, trotz der anfänglichen
+ Verzögerung durch die initialen Member niedriger Güte.
+ Bei 500.000 Sekunden konnte die Multifidelity-Optimierung bereits eine kleine
+ Paretofront aufbauen und schon Member mit sehr hohem Wirkungsgrad auffinden.
+ Die High-Fidelity Optimierung konnte zu diesem Zeitpunkt drei Member finden,
+ welche die Restriktionen erfüllen.
+ Bei 800.000 Sekunden, was dem Abbruchzeitpunkt der Optimierung entspricht,
+ konnte die Mutltifidelity-Optimierung bereits eine sehr breite Paretofront
+ aufstellen.
+ Die High-Fidelity Optimierung ist auch bei diesem Zeitpunkt noch nicht
+ so weit, sowohl was die Breite der Paretofront anbelangt, als auch die
+ Zielfunktionswerte selbst.
+ Betrachtet man die Wirkungsgrade bei diesem Zeitpunkt, so ist die Mutlfidelity-
+Optimierung um ca.
+ 0.05 Wirkungsgradpunkte besser, was keinesfalls zu vernachlässigen ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Vergleicht man die globalen Werte wie kummulierter Volumenzugewinn (siehe
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+) oder auch die Reduktionsgeschwindigkeit der Nebenbedigungen (siehe Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+), so lassen sich diese Verläufe in den Paretofrontbildern sehr gut wiederfinden.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -4971,34 +5027,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Paretofront der besten HF Optimierung zum Zeitpunkt X und der besten MF
- Optimierung, 3 Zeitpunkte in einem Bild.
- Eingezeichnet sind nur Member hoher Güte welche die Nebenbedingungen erfüllen.
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paretofront-der-besten"
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Vorhersagefehler von Optimierung X und Y über CumUDPTime
+Zeitliche Entwicklung der Paretofronten der High-Fidelity Optimierung 1
+ und der Multifidelity-Optimierung 2a.
+ 
 \end_layout
 
 \end_inset
