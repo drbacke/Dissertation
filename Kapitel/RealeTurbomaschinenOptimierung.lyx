@@ -354,6 +354,13 @@ Zusammenfassend kann man feststellen, dass sich dieser einfache analytische
 
 \begin_layout Section
 Analytische Optimierungsbeispiele
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Analytische-Optimierungsbeispiel"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4490,25 +4497,11 @@ Ergebnisse
 \begin_layout Standard
 Innerhalb dieses Abschnittes werden die Ergebnisse der vorgestellten Testoptimie
 rungen gezeigt.
- Im ersten Teil sollen kurz die Unterschiede zwischen den Gütestufen gezeigt
- werden.
- Darauf folgend werden die Ergebnisse aller Optimierungen miteinander verglichen
+ Als erstes werden die Ergebnisse aller Optimierungen miteinander verglichen
  und einige ausgewählte Optimierungen nochmals detailliert beschrieben.
  Im letzten Teil sollen die aerodynamischen Ergebnisse verglichen werden,
  der Fokus soll dabei auf die Unterschiede in den aerodynamischen Ergebnissen
  der unterschiedlichen Optimierungsverfahren gelegt werden.
-\end_layout
-
-\begin_layout Paragraph
-Vergleich der Fidelities
-\end_layout
-
-\begin_layout Standard
-Sehr kurz halten, auf Erichs Arbeit verweisen.
- Da hat sich nichts geändert.
- Ein paar tabellarische Ergebnisse der Zielf.
- und Nebenbedingunge zeigen zwischen HF und LF.
- NB grafisch
 \end_layout
 
 \begin_layout Paragraph*
@@ -5048,39 +5041,11 @@ Zeitliche Entwicklung der Paretofronten der High-Fidelity Optimierung 1
 
 \end_layout
 
-\begin_layout Subparagraph*
-- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
- diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
+\begin_layout Paragraph*
+Einfluss des Anteils an Membern hoher Güte auf den Optimierungsverlauf
 \end_layout
 
 \begin_layout Standard
-Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
- gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
- 
-\end_layout
-
-\begin_layout Standard
-Kann man nicht sagen da man den Informationsgehalt des Lofi Modells nicht
- kennt.
- Und die Beschleunigung maßgeblich davon abhängt.
- Zudem kann die Entscheidungsfunktion dies lokal und vollautomatisch.
- 
-\end_layout
-
-\begin_layout Standard
-Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschieden
-en Entscheidungsverläufen miteinander verglichen.
- In Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:CRISP-Testfall"
-
-\end_inset
-
- werden die Optimierungen detaillierter behandelt.
- Es handelt sich um eine 3D-aeromechanische-Optimierung einer Fanstufe.
- Als Gütestufen werden verschiedene Netzauflösungen verwendet.
- 
 \begin_inset Wrap figure
 lines 18
 placement o
@@ -5090,8 +5055,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/AlleOpti_VolGain_PercHF.eps
-	scale 60
+	filename ../images/ErgebnissKapitel/AlleOpti_VolGain_PercHF.eps
+	scale 30
 	BoundingBox 0bp 0bp 354bp 310bp
 
 \end_inset
@@ -5108,9 +5073,6 @@ name "fig:OptimierungenEntscheidungsfVerläfe"
 
 Vergleich verschiedener Optimierungen mit unterschiedlichen Entscheidungsverläuf
 en 
-\color magenta
-NOchmal checken mit nur konvergierten Membern mnach 800000sec, 0.05 einzeichnen
- und alle 0.1er und HF !!!
 \end_layout
 
 \end_inset
@@ -5120,9 +5082,9 @@ NOchmal checken mit nur konvergierten Membern mnach 800000sec, 0.05 einzeichnen
 
 \end_inset
 
- Diese Optimierungen eignen sich für einen Vergleich, da viele verschiedene
- Entscheidungsverläufe getestet wurden und es sich zudem bereits um eine
- realitätsnahe aeromechanische Optimierung handelt.
+Um eine Idee davon zu bekommen wie stark der Einfluss der Anteil an Membern
+ hoher Güte ist, werden alle durchgeführten Optimierungen mit verschiedenen
+ Entscheidungsverläufen miteinander verglichen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5130,7 +5092,7 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
 
 \end_inset
 
- zeigt den Vergleich,wobei jeder Punkt eine Optimierung mit gleicher Laufzeit
+ zeigt den Vergleich, wobei jeder Punkt eine Optimierung nach 800.000 Sekunden
  darstellt.
  Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
  Samples hoher Güte und niedriger Güte dargestellt.
@@ -5139,10 +5101,87 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
  deutlich höheren Volumenzugewinn bewirkt.
  Die Prozesskette niedriger Güte muss also bereits einen hohen Informationsgehal
 t besitzen.
- Die Streuung der einzelnen Optimierungen kommt durch einige Zufälligkeiten
- innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
- und Optimierung auf den Ersatzmodellen) zustande.
- Zudem stellt der HF Anteil nur den Anteil am Ende der Optimierung dar.
+ Die Streuung der einzelnen Optimierungen kommt zum einen durch einige Zufälligk
+eiten innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
+ und Optimierung auf den Ersatzmodellen) zustande und zum anderen durch
+ die jeweiligen Entscheidungsverläufe der Optimierungen, da hier nur das
+ Ende der Optimierung dargestellt wird.
+ Weiterhin sinkt der Volumenzugewinn auf Null bei keinem Member hoher Güte,
+ da ohne Member hoher Güte kein Volumenzugewinn möglich ist.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 18
+placement o
+overhang 0in
+width "45col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/AlleOpti_VolGain_PercHF_Exempl.eps
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:OptimierungenEntscheidungsfVerläfe-1"
+
+\end_inset
+
+Exemplarischer Verlauf verschiedener Entscheidungsverläufe bei unterschiedlichem
+ Informationsgehalt der niedrigen Gütestufen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zusammenfassend ist es ersichtlich, dass der Anteil von Membern niedriger
+ Güte in diesem Optimierungssetup eine wesentlich Rolle spielt.
+ Weiterhin ist ebenfalls erkennbar, dass es ein Optimum an Member niedriger
+ Güte existiert.
+ 
+\end_layout
+
+\begin_layout Standard
+Betrachtet man zusätzlich die Ergebnisse aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analytische-Optimierungsbeispiel"
+
+\end_inset
+
+, so lässt sich folgende Aussage treffen: Bei Optimierungen mit ähnlichem
+ Informationsgehalt der Prozesskette niedriger Güte wird der Verlauf ähnlich
+ ausfallen, bei geringerem Informationsgehalt wird sich der Punkt höchsten
+ Informationsgewinns absenken auf ein Niveau ähnlich der Optimierungen hoher
+ Güte.
+ Bei einem höheren Informationsgehalt wird der optimale Punkt zu höheren
+ Volumenzugewinnen und niedrigeren Anteilen hoher Güte verschoben.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:OptimierungenEntscheidungsfVerläfe-1"
+
+\end_inset
+
+ zeigt dieser Verläufe exemplarisch.
+ 
 \end_layout
 
 \begin_layout Paragraph
