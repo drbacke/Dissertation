@@ -392,11 +392,19 @@ Die Unsicherheit der Vorhersage in Form einer Varianz:
 
 \begin_layout Enumerate
 Die Kovarianzen 
-\begin_inset Formula $cov\left(Z_{g}^{*}\left(\vec{x_{1}}\right),Z_{g}^{*}\left(\vec{x_{2}}\right)\right)$
+\begin_inset Formula $\left.cov\left(Z_{g}^{*}\left(\vec{x_{1}}\right),Z_{g}^{*}\left(\vec{x_{2}}\right)\right)\right|\vec{y}_{i},\vec{w}_{i}$
 \end_inset
 
  zwischen den Vorhersagen der unbeprobten Orte 
 \begin_inset Formula $\vec{x_{1}},\vec{x_{2}}\in\mathbb{R^{\mathrm{k}}}$
+\end_inset
+
+ unter der Bedingung aller bekannten Daten 
+\begin_inset Formula $\vec{y}$
+\end_inset
+
+ und Gewichte 
+\begin_inset Formula $\vec{w}$
 \end_inset
 
 

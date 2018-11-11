@@ -4681,13 +4681,21 @@ name "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_layout
 
 \begin_layout Standard
-Die Berechnung der Enteidungsfunktion benötigt einige Variablen, deren numerisch
-e Bestimmung von zentraler Bedeutung ist, was die Effizienz und Stabilität
- des Verfahren angeht.
+Die Berechnung der in dieser Arbeit entwickelten Entscheidungsfunktion (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Entscheidungsfunktion"
+
+\end_inset
+
+) benötigt die Berechnung einiger Variablen, deren numerische Bestimmung
+ von zentraler Bedeutung ist, was die Effizienz und Stabilität des Verfahrens
+ angeht.
 \end_layout
 
 \begin_layout Standard
-Insbesonderen sind hierbeit die bedingten Varianzen 
+Insbesondere sind hierbei die bedingten Varianzen 
 \begin_inset Formula $\sigma_{hl}^{2}\left(\vec{x}\right),\sigma_{hh}^{2}\left(\vec{x}\right)$
 \end_inset
 
@@ -4695,7 +4703,9 @@ Insbesonderen sind hierbeit die bedingten Varianzen
 \begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}$
 \end_inset
 
-von Bedeutung 
+ von Bedeutung.
+ Wie die genaue Berechnung innerhalb der hier entwickelten Software funktioniert
+, soll in diesem Abschnitt erläutert werden.
 \end_layout
 
 \begin_layout Paragraph*
@@ -4703,12 +4713,11 @@ Bedingten Varianzen
 \end_layout
 
 \begin_layout Standard
-Eine einfache Möglichkeit die bedingten Varianzen zu berechnen ist es, die
- Erwartungswerte vorherzusagen und dann wieder in der Kriging Modell zu
- stecken und eine erneute Vorhersage zu treffen.
- Dies ist prinzipiell möglich, softwaretechnisch oftmals ungünstigt, da
- .
- 
+Eine Möglichkeit die bedingten Varianzen abzuschätzen ist es, Vorhersagen
+ niedriger Güte mit dem Ersatzmodell zu treffen und mit diesen Vorhersagen
+ das Ersatzmodell neu zu trainieren und wieder neue Vorhersagen zu treffen.
+ Diese Vorgehensweise ist softwaretechnisch allerdings sehr aufwendig und
+ fehleranfällig.
 \end_layout
 
 \begin_layout Standard
@@ -4717,8 +4726,8 @@ Eine einfachere Möglichkeit ist es die Varianz
 \end_inset
 
  mithilfe einer bedingten Normalverteilung zu berechnen.
- Hierfür ist nur die bedingte Kovarianz 
-\begin_inset Formula $cov\left(y_{l}\left(\vec{x}\right),y_{h}\left(\vec{x}\right)\right)$
+ Hierfür ist die bedingte Kovarianz 
+\begin_inset Formula $\left.cov\left(Z_{l}\left(\vec{x}\right),Z_{h}\left(\vec{x}\right)\right)\right|\vec{y},\vec{w}$
 \end_inset
 
  (siehe Gleichung 
@@ -4728,16 +4737,36 @@ reference "eq:KovarianzPredictor"
 
 \end_inset
 
-) zwischen den verschiedenen Gütestufen an dem Ort 
+) zwischen den verschiedenen Gütestufen 
+\begin_inset Formula $h,l$
+\end_inset
+
+ an dem Ort 
 \begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
 \end_inset
 
-, so gilt für 
+ unter der Bedingung aller bekannten Daten 
+\begin_inset Formula $\vec{y}$
+\end_inset
+
+ und Gewichte 
+\begin_inset Formula $\vec{w}$
+\end_inset
+
+ (genaue Definition siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Co-Kriging"
+
+\end_inset
+
+).
+ So gilt für 
 \begin_inset Formula $\sigma_{h}^{2}\left(\vec{x}\right)$
 \end_inset
 
- bei Annahme einer Multivariaten Normalverteilung und unter der Kenntniss
- von 
+ bei Annahme einer Multivariaten Normalverteilung und unter der Kenntnis
+ einer Stützstelle niedriger Güte 
 \begin_inset Formula $y_{l}\left(\vec{x}\right)$
 \end_inset
 
@@ -4752,24 +4781,138 @@ reference "eq:KovarianzPredictor"
 
 \end_layout
 
-\begin_layout Subparagraph*
-Sampling der zusammengesetzten Fitness Funktion
-\end_layout
-
-\begin_layout Standard
-Ungenauigkeiten in den Varianzen möglich, durch das Sampling.
- Im schlimmsten Fall ist die Bedingte Varianz <0 oder der bedingte HF Varianz
- > LF Varianz.
- Daher sind noch einige Sicherheitsabfragen nötig.
- 
-\end_layout
-
 \begin_layout Paragraph*
 Berechnung der Zeiten
 \end_layout
 
 \begin_layout Standard
-...
+Grundlegend gibt es für die Entscheidungsfunktion drei verschiedene Zeiten,
+ welche berechnet werden müssen.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Die Trainingszeit 
+\begin_inset Formula $t_{train}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Die Zeit für die Optimierung auf dem Ersatzmodell 
+\begin_inset Formula $t_{opti}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Die Prozesskettenzeit 
+\begin_inset Formula $t_{pr}$
+\end_inset
+
+, wobei es für jede Gütestufe eine einzelne Zeit gibt.
+\end_layout
+
+\begin_layout Standard
+Die Zeiten zu bestimmen ist kein großes Problem, da diese innerhalb der
+ Optimierung gemessen und gespeichert werden.
+ So hat man zumindest die vergangenen Zeiten und kann damit Schätzungen
+ anstellen.
+ Da diese Zeiten innerhalb der Optimierung sehr stark schwanken können und
+ weiterhin einen sehr erheblichen Anteil in der Entscheidungsfunktion besitzen,
+ ist es sinnvoll einen Mittelwert aus den vergangenen Zeiten zu bilden.
+ Allerdings stellt sich dabei die Frage, wie viele vergangene Zeiten in
+ das Mittel aufgenommen werden sollen.
+ Hierbei sollte unterschieden werden: 
+\end_layout
+
+\begin_layout Standard
+Die Prozesskettenzeit 
+\begin_inset Formula $t_{pr}$
+\end_inset
+
+ ändert sich während einer laufenden Optimierung in der Regel nur unwesentlich,
+ da die Prozesskette sich während der Optimierung nicht ändert.
+ Bei CFD-Optimierungn ist oftmals eine kleine Reduktion der Prozesskettenzeit
+ zum Ende einer Optimierung zu beobachten, da die Member sich dem Optimum
+ nähern und somit schneller konvergieren.
+ Allerdings ist dies nicht immer der Fall und die zeitliche Differenz nicht
+ ausschlaggebend.
+ Aus diesem Grund wird in der hier entwickelten Software, das Mittel aus
+ allen bereits gemessenen Prozesskettenzeiten 
+\begin_inset Formula $t_{pr,i},i\in\{1,...,n\}$
+\end_inset
+
+, wobei 
+\begin_inset Formula $n$
+\end_inset
+
+ die Anzahl aller bisher berechneten Member der betrachteten Gütestufe angibt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+t_{pr}=\frac{1}{n}\stackrel[i=1]{i\leq n}{\sum}t_{pr,i}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Trainingszeit 
+\begin_inset Formula $t_{train}$
+\end_inset
+
+, sowie die Zeit für die Optimierung auf dem Ersatzmodell 
+\begin_inset Formula $t_{opti}$
+\end_inset
+
+ ändern sich im Verlauf der Optimierung stetig.
+ Typischerweise wachsen diese mit steigender Stützstellenanzahl an.
+ Verwendet man bswp.
+ eine Restart Methode wie die in dieser Arbeit entwickelte (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+), dann kann die Trainingszeit schlagartig fallen.
+ Aufgrund dieser starken zeitlichen Schwankungen ist es sinnvoller, für
+ den Mittelwert der Zeit nur eine kleine Anzahl 
+\begin_inset Formula $m$
+\end_inset
+
+ an bereits gemessenen Zeiten zu verwenden: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+t_{train} & =\frac{1}{m}\stackrel[i=1]{i\leq m}{\sum}t_{train,(n-i)}\\
+t_{opti} & =\frac{1}{m}\stackrel[i=1]{i\leq m}{\sum}t_{opti,(n-i)}
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Standardeinstellung in der hier entwickelten Software ist eine Anzahl von
+ 
+\begin_inset Formula $m=15$
+\end_inset
+
+, diese hat sich für die meisten Anwendungen als günstig erwiesen.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -4788,26 +4931,44 @@ Es kann vorkommen, dass die HF und LF Funktionen so stark korreliert sind,
  dass die Entscheidungsunktion sich nur noch für die Prozessketten niedriger
  Güte entscheidet.
  Grundlegend ist dieses Verhalten auch sinnvoll und erwünscht.
- Jedoch interessiert den Anwender letztendlich das Ergebnis hoher Güte,
- aus diesem Grund wird der Volume-Gain-Term im Raum hoher Güte berechnet.
- Um es kurz zu beschreiben: Mit einem Member niedriger Güte kann kein Volumenzug
-ewinn gemacht werden, es wird nur das Ersatzmodell verbessert.
+ Jedoch interessiert den Anwender letztendlich das Ergebnis hoher Güte.
+ Aus diesem Grund wird der Volume-Gain-Term im Raum hoher Güte berechnet.
+ Um es kurz zu beschreiben: 
+\shape italic
+Mit einem Member niedriger Güte kann kein Volumenzugewinn erreicht werden,
+ es wird nur das Ersatzmodell verbessert.
  
 \end_layout
 
 \begin_layout Standard
-Aus diesem Grund ist es sinnvoll einen gewisse Rate von Membern hoher Güte
- zu erzwingen.
+Aus diesem Grund ist es sinnvoll eine Mindestrate von Membern hoher Güte
+ vorzugeben.
+ In der hier entwickelten Software wird dafür ein prozentualer Anteil hoher
+ Güte (HFProzent Soll) vorgegeben.
+ Wird dieser Anteil unterschritten, so soll ein Member hoher Güte erzwungen
+ werden.
+ Um die Entscheidungsfunktion aber nicht vollständig zu umgehen, soll bei
+ besonders aussichtsreichen Membern weiterhin möglich sein, einen Member
+ niedriger Güte zu berechnen.
  
 \end_layout
 
 \begin_layout Standard
-Es wird ein HF Anteil vorgegeben (HJFProzent Soll) und das Maximum der letzten
- 10 Entscheidungskriterien geholt.
-\end_layout
+Algorithmus 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Vorgabe-eines-minimalen"
 
-\begin_layout Standard
-Die neue Grenze für das Kriterium wird dann so entschieden:
+\end_inset
+
+ beschreibt den Ablauf dieser Auswahl.
+ Die Grundidee ist es, die Grenze für das Entscheidungskriterium (KriteriumGrenz
+e) auf einen höheren Wert zu setzen und damit die Wahrscheinlichkeit für
+ die Wahl eines Members hoher Güte zu erhöhen.
+ Dafür werden als erstes die aktuellen Anteile hoher Güte bestimmt (HFProzentIst
+) und dann das Maximum der letzten 10 berechneten Entscheidungskriterien
+ (Kriterium10Max) bestimmt.
+ Die neue Grenze für das Kriterium wird dann so entschieden:
 \end_layout
 
 \begin_layout Itemize
@@ -4838,8 +4999,15 @@ Erzwinge einen HF Member#
 \end_deeper
 \begin_layout Standard
 Dieser Algorithus sorgt im Normalfall für eine gleichmäßige Berechnung von
- HF Membern, bei einem besonders ausichtsreichen LF Member, kann dieser
+ Membern hoher Güte.
+ Bei einem besonders aussichtsreichen Member niedriger Güte, kann dieser
  aber noch vorgezogen werden.
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset listings
 lstparams "basicstyle={\small},tabsize=4"
 inline false
@@ -4876,7 +5044,7 @@ KriteriumAktuell	= Entscheidungsfunktion()
 
 \begin_layout Plain Layout
 
-Kriterium Grenze = Kriterium10Max
+KriteriumGrenze = Kriterium10Max
 \end_layout
 
 \begin_layout Plain Layout
@@ -4904,6 +5072,29 @@ Wenn (HFProzentSoll-HFProzentIst>0.05)
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Vorgabe-eines-minimalen"
+
+\end_inset
+
+Vorgabe eines minimalen Anteils Member hoher Güte
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -5085,6 +5276,11 @@ Eigenes hochperformantes verteiltes System zur asynchronen Verteilung von
 \begin_layout Itemize
 Alle Kriging Verfahren (Co-Kriging, Ordinary Kriging und Gradient Enhanced
  Kriging) sind in einem modularen Softwarepaket zusammengefasst
+\end_layout
+
+\begin_layout Itemize
+Starke Erweiterbarkeit, SVM und Klassifikatoren in demselben Code in anderen
+ Studentischen Arbeiten (Link)
 \end_layout
 
 \begin_layout Standard

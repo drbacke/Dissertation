@@ -167,23 +167,24 @@ Erreicht wird dies durch
 
 \begin_deeper
 \begin_layout Enumerate
-Eigen entwickeltes CO-Kriging als Ersatzmodell
-\end_layout
-
-\begin_layout Enumerate
-Erweiterung des bisherigen Optimierungsverfahren auf mehrere Fidelities,
- Entscheidungsfunktionen, Datenbasen usw.
-\end_layout
-
-\begin_layout Enumerate
-Offenes Softwaredesign
+Eigenes offenes Softwaredesign
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-SVM müssen umgesetzt werden können
+Objektorientiertes Programm
 \end_layout
 
+\begin_deeper
+\begin_layout Enumerate
+Beinhaltet alle Kriging Verfahren (Gradient-Enhanced-, Co-, Ordinary-Kriging)
+\end_layout
+
+\begin_layout Enumerate
+Erweiterbar
+\end_layout
+
+\end_deeper
 \begin_layout Enumerate
 Andere Kriging Verfahren müssen umgesetzt werden können
 \end_layout
@@ -205,6 +206,19 @@ Unterschiedliche Programmiersprachen
 \end_layout
 
 \end_deeper
+\begin_layout Enumerate
+Entwicklung und Validierung einer automatisierten Entscheidungsfunktion
+\end_layout
+
+\begin_layout Enumerate
+Eigen entwickeltes CO-Kriging als Ersatzmodell
+\end_layout
+
+\begin_layout Enumerate
+Erweiterung des bisherigen Optimierungsverfahren auf mehrere Fidelities,
+ Entscheidungsfunktionen, Datenbasen usw.
+\end_layout
+
 \begin_layout Enumerate
 Kriging Verfahren Hardwaremäßig
 \end_layout
