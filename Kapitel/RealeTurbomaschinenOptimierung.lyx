@@ -4781,6 +4781,15 @@ reference "fig:Zeitlicher-Verlauf-des"
 \end_layout
 
 \begin_layout Standard
+
+\color magenta
+Restriktionsgröße nochmal erklären, 0 ist das Zeil, da auch kleinere Werte
+ z.B.
+ Druckverh.
+ / Massenstrom
+\end_layout
+
+\begin_layout Standard
 Als erstes soll der Verlauf der Nebenbedingungen verglichen werden, diese
  zu erfüllen stellt einen wesentlichen Anteil an der Optimierungslaufzeit
  dar.
@@ -5121,7 +5130,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/AlleOpti_VolGain_PercHF_Exempl.eps
+	filename ../images/ErgebnissKapitel/AlleOpti_VolGain_PercHF_Exempl.eps
 	scale 30
 
 \end_inset
@@ -5137,7 +5146,10 @@ name "fig:OptimierungenEntscheidungsfVerläfe-1"
 \end_inset
 
 Exemplarischer Verlauf verschiedener Entscheidungsverläufe bei unterschiedlichem
- Informationsgehalt der niedrigen Gütestufen
+ Informationsgehalt der niedrigen Gütestufen.
+ 
+\color magenta
+Zahlen nur 0 und 1, niedrig -> Kein Beitrag LF gerade keinen Knick
 \end_layout
 
 \end_inset
@@ -5207,6 +5219,28 @@ Radiale Verteilung -> Wirkungsgrad (wo sind Unterschiede? Dann Eberhard
  ansprechen)
 \end_layout
 
+\begin_layout Standard
+Maximaler Wirkungsgrad.
+ 1x grün, 1x rot normal zur Paretofront und 1x rot max Wirkungsgrad
+\end_layout
+
+\begin_layout Standard
+Radiale Verteilung: Wirkungsgrad Stufe, Rotor+Druckverh.
+ Stufe+Druckverlust Stator
+\end_layout
+
+\begin_layout Standard
+Restriktionen Tabelle 
+\end_layout
+
+\begin_layout Standard
+Strak darstellen
+\end_layout
+
+\begin_layout Standard
+Schaufelgeometrien
+\end_layout
+
 \begin_layout Section
 Übersicht der bisherigen Anwendungen in Industrie und Forschung
 \end_layout
@@ -5217,16 +5251,8 @@ Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
 \end_layout
 
 \begin_layout Subsection
-EU-Projekt-COBRA: 
-\begin_inset Quotes gld
-\end_inset
-
 Design of a counter rotating fan using a multidisciplinary and multifidelity
  optimisation under high level of restrictions
-\begin_inset Quotes grd
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5383,16 +5409,8 @@ Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
 \end_layout
 
 \begin_layout Subsection
-Mukoko Projekt: 
-\begin_inset Quotes gld
-\end_inset
-
 High-dimensional multi-fidelity optimisation of a 2.5 stage low pressure
  compressor
-\begin_inset Quotes grd
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard
@@ -5640,8 +5658,8 @@ reference "subsec:RPROP2"
 \end_layout
 
 \begin_layout Subsection
-AG-Turbo Projekt 1.2.4d: Entwicklung und Anwendung von modernen optimierungsfähige
-n Auslegungsverfahren unter Berücksichtigung des Realgaseinflusses
+Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren
+ unter Berücksichtigung des Realgaseinflusses
 \end_layout
 
 \begin_layout Standard
@@ -6071,8 +6089,7 @@ Fazit: Erneute Tests sind geplant, in denen die genetiche Komponente vollständi
 \end_layout
 
 \begin_layout Subsection
-ASME Veröffentlichung: Optimierung von Casing-Treatments eines transsonischen
- Verdichters
+Optimierung von Casing-Treatments eines transsonischen Verdichters
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:ASME-Veröffentlichung:-Optimieru"
@@ -6347,8 +6364,8 @@ reference "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Subsection
-ASME Veröffentlichung: Application of an Algorithmically Differentiated
- Turbomachinery Flow Solver to the Optimization of a Fan Stage
+Application of an Algorithmically Differentiated Turbomachinery Flow Solver
+ to the Optimization of a Fan Stage
 \end_layout
 
 \begin_layout Standard

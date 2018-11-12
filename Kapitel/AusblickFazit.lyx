@@ -72,11 +72,17 @@
 \begin_body
 
 \begin_layout Chapter
-Fazit und Ausblick
+Zusammenfassung und Ausblick
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Zusammenfassung und Ausblick nicht trennen textlich
 \end_layout
 
 \begin_layout Section*
-Fazit
+Zusammenfassung
 \end_layout
 
 \begin_layout Standard
@@ -261,25 +267,40 @@ asdsad
 \end_layout
 
 \end_deeper
+\begin_layout Description
+
+\color magenta
+Restart + DeepLearning in ein paar Sätzen, als mögliche Anwendung die bereits
+ mehr nicht
+\end_layout
+
 \begin_layout Section*
 Ausblick
 \end_layout
 
+\begin_layout Standard
+So kurz wie möglich, ruhig was weglassen
+\end_layout
+
 \begin_layout Subsection
-Anwendung bei Siemens
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Anwendung-bei-Siemens-1"
-
-\end_inset
-
-
+Wiederverwendung von älteren ähnlichen Optimierungen
 \end_layout
 
 \begin_layout Standard
-genetischen Algorithmus ausschalten, in der Hoffnung dieselbe Robustheit
- der Optimierunt mit MF zu erhalten, allerdings mit einer erheblichen Zeiterspar
-nis.
+Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
+ z.B.
+ geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
+ Entwicklung.
+ Dies kann bspw.
+ dazu führen, dass 
+\end_layout
+
+\begin_layout Standard
+Die Option existiert bereits und wurde an einfachen Tests bereits erfolgreich
+ angewandt.
+ Allerdings sind noch weitere Tests nötig, um einschätzen zu können inwieweit
+ eine Änderung der Randbedingungeun oder der Parametrisierung noch gewinnbringen
+d sein kann.
 \end_layout
 
 \begin_layout Subsection
@@ -311,77 +332,6 @@ ACDC als Modell niedriger Güte.
 \end_layout
 
 \begin_layout Subsection
-Wiederverwendung von älteren ähnlichen Optimierungen
-\end_layout
-
-\begin_layout Standard
-Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
- z.B.
- geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
- Entwicklung.
- Dies kann bspw.
- dazu führen, dass 
-\end_layout
-
-\begin_layout Standard
-Die Option existiert bereits und wurde an einfachen Tests bereits erfolgreich
- angewandt.
- Allerdings sind noch weitere Tests nötig, um einschätzen zu können inwieweit
- eine Änderung der Randbedingungeun oder der Parametrisierung noch gewinnbringen
-d sein kann.
-\end_layout
-
-\begin_layout Subsection
-Kopplung mehrerer Ersatzmodelle weiterbringen
-\end_layout
-
-\begin_layout Standard
-Hier wird ein sehr großes Potential gesehen, insbesondere bei der Bewältigung
- sehr großer Parameterräume.
- 
-\end_layout
-
-\begin_layout Subsection
-Stochastic RPROP testen
-\end_layout
-
-\begin_layout Standard
-Verfahren aus dem Deep-Learning Bereich könnten beim Kriging sinnvoll sein.
- Hier könnte man bspw.
- das RPROP Verfahren immer mit zufällig wechselnden Teilmengen der Trainingsstüt
-zstellen trainieren.
- Die Konvergenzzeit sollte dadurch steigen, aber das Verfahren könnte robuster
- werden und auch die einzelnen Iterationsschritte dadurch erheblich schneller
- werden.
- 
-\end_layout
-
-\begin_layout Subsection
-Umgang mit anderen Verteilungen
-\end_layout
-
-\begin_layout Standard
-Eine Annahme des Kriging-Verfahrens ist die Normalverteilung der Funktionswerte.
- Oftmals ist aber von vornherein bekannt, dass die zu modellierenden Funktionen
- nicht normalverteilt sind.
- Ein gutes Beispiel ist hier der Wirkungsgrad, dieser kann durch seine obere
- Grenze nicht normalverteilt sein.
- Während der Optimierung kann dies zu Schwierigkeiten führen.
- Z.B.
- kann bei der Optimierung auf dem Ersatzmodell dadurch eine gewisse Wahrscheinli
-chkeit für Wirkungsgrade über Eins bestehen.
- 
-\end_layout
-
-\begin_layout Standard
-Die Umsetzung anderer Verteilungsfunktionen ist allerdings mit erheblichen
- technischen Aufwand verbunden.
- Zum einen muss das Ersatzmodell angepasst werden und zum anderen der Optimierun
-gsalgorithmus selbst.
- Weiterhin 
-\end_layout
-
-\begin_layout Section
 Kopplung mehrerer Ersatzmodelle: Nutzung von Deep Learning Verfahren über
  CO-Kriging 
 \begin_inset CommandInset label
@@ -391,6 +341,16 @@ name "subsec:Kopplung-mehrerer-Ersatzmodelle:"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Sehr kurz, Marcel zitieren.
+ DeepLeasrniong als Lowfi verwenden.
+ Erste klweine Ansätze in unsere Optisuite getestet und sieht vielversprechend
+ aus.
+ Das wars
 \end_layout
 
 \begin_layout Standard
