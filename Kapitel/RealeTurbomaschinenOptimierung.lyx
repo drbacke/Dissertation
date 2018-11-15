@@ -4540,7 +4540,8 @@ name "fig:Zeitlicher-Verlauf-des"
 
 Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
  bis zur Abbruchzeit.
- 
+ Die mit Symbolen markierten Linien werden im späteren Verlauf noch genauer
+ ausgewertet.
 \end_layout
 
 \end_inset
@@ -4605,6 +4606,8 @@ name "fig:Prozentualer-Anteil-der"
 
 Prozentualer Anteil der Trainingszeit an der Gesamtlaufzeit der verschiedenen
  Testoptimierungen.
+ Die mit Symbolen markierten Linien werden im späteren Verlauf noch genauer
+ ausgewertet.
 \end_layout
 
 \end_inset
@@ -4781,15 +4784,6 @@ reference "fig:Zeitlicher-Verlauf-des"
 \end_layout
 
 \begin_layout Standard
-
-\color magenta
-Restriktionsgröße nochmal erklären, 0 ist das Zeil, da auch kleinere Werte
- z.B.
- Druckverh.
- / Massenstrom
-\end_layout
-
-\begin_layout Standard
 Als erstes soll der Verlauf der Nebenbedingungen verglichen werden, diese
  zu erfüllen stellt einen wesentlichen Anteil an der Optimierungslaufzeit
  dar.
@@ -4811,6 +4805,9 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 
  definierten Intervallen.
  Ziel ist es diesen Term auf den Wert Null zu bekommen.
+ Die Größenordnung des Restriktionsterms ist nicht normiert, also ein Druckverhä
+ltnis würde einen kleineren Eintrag in den Wert bringen als bspw.
+ ein Massenstrom.
  Die schwarze Kurve beschreibt die High-Fidelity Optimierung und startet
  zeitlich vor den Multifidelity-Optimierungen, da diese keine Member niedriger
  Güte in der Initialisierungsphase benötigt.
@@ -5148,8 +5145,6 @@ name "fig:OptimierungenEntscheidungsfVerläfe-1"
 Exemplarischer Verlauf verschiedener Entscheidungsverläufe bei unterschiedlichem
  Informationsgehalt der niedrigen Gütestufen.
  
-\color magenta
-Zahlen nur 0 und 1, niedrig -> Kein Beitrag LF gerade keinen Knick
 \end_layout
 
 \end_inset
@@ -5178,21 +5173,25 @@ reference "sec:Analytische-Optimierungsbeispiel"
 
 \end_inset
 
-, so lässt sich folgende Aussage treffen: Bei Optimierungen mit ähnlichem
- Informationsgehalt der Prozesskette niedriger Güte wird der Verlauf ähnlich
- ausfallen, bei geringerem Informationsgehalt wird sich der Punkt höchsten
- Informationsgewinns absenken auf ein Niveau ähnlich der Optimierungen hoher
- Güte.
- Bei einem höheren Informationsgehalt wird der optimale Punkt zu höheren
- Volumenzugewinnen und niedrigeren Anteilen hoher Güte verschoben.
- Abbildung 
+, so lassen sich einige Gesetzmäßigkeiten finden.
+ Diese sind in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:OptimierungenEntscheidungsfVerläfe-1"
 
 \end_inset
 
- zeigt dieser Verläufe exemplarisch.
+ exemplarisch dargestellt.
+ Bei Optimierungen mit hohem Informationsgehalt der Prozesskette niedriger
+ Güte wird der Verlauf ein Optimum bei geringem Anteil hoher Güte aufweisen
+ und dann bei steigendem Anteil hoher Güte absinken.
+ Wenn die niedriger Gütestufe keine Korrelation zu der hohen Güte besitzt,
+ so kann durch Stützstellen niedriger Güte keine Verbesserung im Volumenzugewinn
+ erzielt werden, mit jedem zusätzlich gerechneten Member niedriger Güte
+ sinkt der Volumenzugewinn.
+ In der Regel erkennen die Ersatzmodelle eine unkorrelierte niedrige Gütestufe
+ relativ schnell und die Entscheidungsfunktion würde dann keine Member niedriger
+ Güte mehr erzeugen.
  
 \end_layout
 

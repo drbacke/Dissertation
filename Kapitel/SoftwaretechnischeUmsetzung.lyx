@@ -5002,14 +5002,11 @@ Dieser Algorithus sorgt im Normalfall für eine gleichmäßige Berechnung von
  Membern hoher Güte.
  Bei einem besonders aussichtsreichen Member niedriger Güte, kann dieser
  aber noch vorgezogen werden.
-\begin_inset Float algorithm
-wide false
-sideways false
-status open
+\end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
-lstparams "basicstyle={\small},tabsize=4"
+lstparams "float"
 inline false
 status open
 
@@ -5071,19 +5068,9 @@ Wenn (HFProzentSoll-HFProzentIst>0.05)
 	KriteriumGrenze = inf	
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
 name "alg:Vorgabe-eines-minimalen"
@@ -5091,16 +5078,6 @@ name "alg:Vorgabe-eines-minimalen"
 \end_inset
 
 Vorgabe eines minimalen Anteils Member hoher Güte
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Paragraph
@@ -5182,6 +5159,10 @@ Typische Werte sind 1%, allerdings ist dieser Wert sehr Anwendungs- und
 \end_layout
 
 \begin_layout Section
+
+\color magenta
+WEG ? ODer am Ende oder Anfang ????
+\color inherit
 CO-Kriging - Vergleich zu anderen Verfahren 
 \begin_inset CommandInset label
 LatexCommand label
@@ -5192,28 +5173,8 @@ name "sec:VergleicheCoKrigingAndere"
 
 \end_layout
 
-\begin_layout Itemize
-Diagonalaufschlag Behandlung ist anders als bei anderen, wird außen als
- ganze Varianz addiert in der Kov Matrix.
- Dadurch ist es möglich dass Low Fid.
- komplett verreuscht ist und keinen Inhalt hat.
- bei der Formulierung (corr+diag)*sigma ist das nicht möglich
-\end_layout
-
-\begin_layout Itemize
-Likelihood wird mit vollständigem Hyperparmetersatz trainiert.
- Mehrere Lösungen dadurch möglich für dasselbe Problem.
- z.B.
- bei Beispiel mit verrauschter Lofi Funktion kann einmal das a zu 0 werden
- oder sigma, hauptsache der Diagonalaufschlag passt.
-\end_layout
-
-\begin_layout Itemize
-Allerdings aufwendiger
-\end_layout
-
-\begin_layout Standard
-Alle Kriging Verfahren in einem Code!!!!
+\begin_layout Subsection
+Unterschiede im mathematischen Modell und Trainingsverfahren
 \end_layout
 
 \begin_layout Standard
@@ -5223,87 +5184,12 @@ Die Co-Kriging Theorie für die in dieser Arbeit entwickelte Co-Kriging Software
  auf das 
 \end_layout
 
-\begin_layout Subsection
-Softwaretechnische Unterschiede
-\end_layout
-
-\begin_layout Standard
-Das gesamte Verfahren ist streng objektorientiert, dies ermöglicht eine
- sehr hohe Modularität in der Software selbst und drückt sich durch die
- folgenden Punkte aus:
-\end_layout
-
 \begin_layout Itemize
-Objektorientiert eigen entwickelte Matrix-Klassen welche mehrere Rechenarchitekt
-uren unterstützt 
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Nvidia basierte GPU Beschleunigung 
-\end_layout
-
-\begin_layout Itemize
-Intel MKL Beschleunigung
-\end_layout
-
-\begin_layout Itemize
-Eigene OpenMP/SSE beschleunigten Umsetzung
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-durch moderne Interface Programmierung, wurde in wichtigen Klassen des Kriging-V
-erfahrens und der Matrix Klassen ein Interface SaveAbleOnServer implementiert,
- dieses stellt sicher, dass alle nötigen Mehtoden zu serialisierung und
- deserialisierung der Klassenspezifischen Daten zur Verfügung steht.
- Dadurch können die gesamten Objekte der Klassen als Datenstrom über Rechnergren
-zen verschickt und ausgetauscht werden.
- 
-\end_layout
-
-\begin_layout Itemize
-Eigenes hochperformantes verteiltes System zur asynchronen Verteilung von
- Matrixoperationen während aller Kriging Operationen (Vorhersage und Training).
- Dieses Verfahren ist extrem flexibel und kann verschiedene Matrixoperationen
- automatische aufteilen und auf mehrere Server verteilten.
- Die Aufteilung erfolgt komplett asynchron, fällt also ein Server bspw.
- aus, so übernimmt ein anderer automatisch die Berechnung.
- Zudem können so verschiedene Architekturen verbunden werden, also bspw.
- CPU und GPU oder unterschiedliche Betriebssysteme.
-\end_layout
-
-\begin_layout Itemize
-Alle Kriging Verfahren (Co-Kriging, Ordinary Kriging und Gradient Enhanced
- Kriging) sind in einem modularen Softwarepaket zusammengefasst
-\end_layout
-
-\begin_layout Itemize
-Starke Erweiterbarkeit, SVM und Klassifikatoren in demselben Code in anderen
- Studentischen Arbeiten (Link)
-\end_layout
-
-\begin_layout Standard
-Alle Verfahren sind in einem C++ Code untergebracht.
- Die in der Literatur vorgestellten Ansätze (siehe ...) sind oft einfache Matlab
- Umsetzungen, welche oftmals Schwächen in der Performance und Benutzerfreundlich
-keit aufweisen.
- 
-\end_layout
-
-\begin_layout Standard
-Weitherhin bietet die hier entwickelte Software eine sehr hohe Performance
- und ist spezielle ausgelegt für eine große Anzahl an Stützstellen und eine
- hohe Anzahl an Parametern.
- Hierfür wurden einige Softwaremodule und Techniken umgesetzt:
-\end_layout
-
-\begin_layout Itemize
-Kapitel durchgehen und Links dazu setzen
-\end_layout
-
-\begin_layout Subsection
-Unterschiede im mathematischen Modell und Trainingsverfahren
+Diagonalaufschlag Behandlung ist anders als bei anderen, wird außen als
+ ganze Varianz addiert in der Kov Matrix.
+ Dadurch ist es möglich dass Low Fid.
+ komplett verreuscht ist und keinen Inhalt hat.
+ bei der Formulierung (corr+diag)*sigma ist das nicht möglich
 \end_layout
 
 \begin_layout Standard
@@ -5561,10 +5447,262 @@ g zwischen den Gütestufen dargestellt werden.
 \end_layout
 
 \begin_layout Section
-Numerische Effizienz steigern 
+Softwaretechnische Umsetzung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Numerische-Effizienz-steigern"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Innerhalb dieses Abschnittes sollen die wichtigsten softwaretechnischen
+ Entwicklungen, welche im Rahmen dieser Arbeit entstanden sind, vorgestellt
+ werden.
+ Hierzu zählen z.B.
+ der Modulare Aufbau der Software, der es ermöglicht verschiedene Verfahren
+ wie Supporting-Vector-Machines und alle Kriging-Verfahren innerhalb einer
+ Software unterzubringen und so Redundanzen zu vermeiden.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin wurden zahlreiche Anstrengungen unternommen um die Software möglichst
+ effizient zu gestalten.
+ Hierzu zählt eine eigen entwickelte Matrix-Klasse, welche zahlreiche Architektu
+ren abdeckt wie z.B.
+ GPUs, Intel MKL Bibkiotheken und OpenMP mit AVX/SSE Beschleunigung.
+ Dadurch ist es möglich, die Software sehr flexibel auf unterschiedlichen
+ Systemen einzusetzen und die vorhandene Prozessorarchitektur effizient
+ zu nutzen.
+ Weiterhin wurde eine Netzwerkbibliothek entwickelt, welche es ermöglicht
+ zahlreiche numerische Operationen asynchron auf mehrere Rechner zu verteilen,
+ unabhängig von der Architektur.
+ Das System ist zudem stark ausfallsicher: Fällt ein Server aus, übernimmt
+ ein anderer dessen Aufgaben.
+ 
+\end_layout
+
+\begin_layout Standard
+Neben diesen beschriebenen Maßnahmen werden noch einige andere Entwicklungen
+ beschrieben, die den Einsatz der Kriging-Software für den Bereich des Turbomasc
+hinendesigns im industriellen Umfeld nutzbar macht.
+ 
+\end_layout
+
+\begin_layout Subsection
+Softwarearchitektur und Laufzeitumgebung
+\end_layout
+
+\begin_layout Standard
+Das gesamte Verfahren ist objektorientiert und nutzt zahlreiche Interfaces,
+ dies ermöglicht eine sehr große Flexibilität und Modularität in der Software
+ und drückt sich durch die folgenden Punkte aus:
+\end_layout
+
+\begin_layout Itemize
+Objektorientiert eigen entwickelte Matrix-Klassen welche mehrere Rechenarchitekt
+uren unterstützt 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nvidia basierte GPU Beschleunigung 
+\end_layout
+
+\begin_layout Itemize
+Intel MKL Beschleunigung
+\end_layout
+
+\begin_layout Itemize
+Eigene OpenMP/SSE beschleunigten Umsetzung
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Alle Kriging Verfahren (Co-Kriging, Ordinary Kriging und Gradient Enhanced
+ Kriging) sind in einem modularen Softwarepaket zusammengefasst
+\end_layout
+
+\begin_layout Itemize
+Starke Erweiterbarkeit, SVM und Klassifikatoren in demselben Code in anderen
+ Studentischen Arbeiten (Link)
+\end_layout
+
+\begin_layout Standard
+Alle Verfahren sind in einem C++ Code untergebracht.
+ Die in der Literatur vorgestellten Ansätze (siehe ...) sind oft einfache Matlab
+ Umsetzungen, welche oftmals Schwächen in der Performance und Benutzerfreundlich
+keit aufweisen.
+ 
+\end_layout
+
+\begin_layout Standard
+Weitherhin bietet die hier entwickelte Software eine sehr hohe Performance
+ und ist spezielle ausgelegt für eine große Anzahl an Stützstellen und eine
+ hohe Anzahl an Parametern.
+ Hierfür wurden einige Softwaremodule und Techniken umgesetzt:
+\end_layout
+
+\begin_layout Standard
+Die wichtigsten Klassen sind:
+\end_layout
+
+\begin_layout Itemize
+Point: Beinhaltet Koordinaten, Funktionswerte, Gütestufe, partielle Ableitungen
+ und Indices einer Stützstelle
+\end_layout
+
+\begin_layout Itemize
+Trainer: Vereint und steuert die unterschiedlichen Minimierungsverfahren,
+ Initialisierungsverfahren und die Konfiguration 
+\end_layout
+
+\begin_layout Itemize
+MinimizerInterface: Schnittstelle, welche die Methoden für eine Minimierungsklas
+se vorgibt und damit die verschiedenen Minimierungsverfahren ermöglicht.
+ 
+\end_layout
+
+\begin_layout Itemize
+Gröbsten Klassen zeigen: DensityFunction und deren Spezialisierungen, Point,
+ MinimizerInterface, AUtoOptiInterface
+\end_layout
+
+\begin_layout Paragraph*
+Implementierung unterschiedlicher Verfahren in einem Softwarepaket
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Density.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vereinfachtes UML Diagramm der verschiedenen Verfahren innerhalb der Kriging-Sof
+tware und deren Anbindung an das Server Interface
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Schnittstellen zwischen AutoOpti und der KrigingSoftware
+\end_layout
+
+\begin_layout Standard
+Kriging und NN Interface, Interface bezieht sich in diesem Fall auf die
+ Schnittstelle zwischen den verschiedenen Programmen und ist nicht, wie
+ im sonst üblich, im Sinne einer objektorientierten Interface Programmierung
+ gemeint.
+ Das Kriging-Interface stellt hier auch die Schnittstellen zwischen den
+ Programmiersprachen C und C++ dar, da AutoOpti in C geschrieben wurde und
+ das gesamte Kriging in C++.
+ Es finden dort zahlreiche Übersetzungen von C-Strukturen in C++-Objekte
+ usw.
+ statt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vereinfachtes UML Diagramm der Kopplungsklasse zwischen AutoOpti (verwendet
+ die Klasse MetaModel) und dem Kriging bzw.
+ den Neuronalen Netzwerken.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Minimierungsverfahren
+\end_layout
+
+\begin_layout Standard
+Einige Bibliotheken in C geschrieben, dafür mit Boost Function gearbeitet.
+ kurz beschreiben
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/MinimizerInterface.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -5644,7 +5782,8 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Aufbau der Matrix Klassen
+UML Diagramm der Matrix Klassen und deren Anbindung an das SaveableOnServer
+ Interface
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:MatrixKlasseUML"
@@ -5789,6 +5928,60 @@ name "chap:Verteiltes-Rechnen-1"
 \end_layout
 
 \begin_layout Standard
+Im Rahmen dieser Arbeit und der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b"
+
+\end_inset
+
+, wurde eine umfangreiche Bibliothek entwickelt, welche es ermöglicht vielen
+ von den für das Kriging benötigten komplexen Matrix-Operationen asynchron
+ auf mehrere Rechner zu verteilen.
+ Die Rechner können dabei unterschiedliche Architektur besitzen, bspw.
+ ist eine gleichzeitige Nutzung von Servern mit GPUs und konventionellen
+ CPUs möglich.
+ 
+\end_layout
+
+\begin_layout Standard
+Die hauptsächliche Entwicklung der Bibliothek fand im Rahmen dieser Arbeit
+ statt.
+ Innerhalb der Bachelorarbeit 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b"
+
+\end_inset
+
+ wurde diese Bibliothek um weitere Matrixoperationen erweitert, der Scheduler
+ überarbeitet und die Fehlertoleranz erhöht.
+ 
+\end_layout
+
+\begin_layout Standard
+Serialisierung und Deserialisierung über Interface geregelt.
+ Die Einbindung des Interfaces stellt sicher, dass die Klasse über alle
+ Methoden verfügt, die benötigt werden um diese über das Netzwerk zu verschicken.
+ 
+\end_layout
+
+\begin_layout Standard
+Damit ist es aber auch möglich komplette Objekte über das Netzwerk zu verschicke
+n.
+\end_layout
+
+\begin_layout Standard
+Der Server wartet praktisch auf Befehle und kann über ein eigenes Protokoll
+ angesteuert werden.
+ 
+\end_layout
+
+\begin_layout Standard
+FABIAN / Meinen Teil kenntlich machen
+\end_layout
+
+\begin_layout Standard
 Für das Training der Kriging-Modelle innerhalb einer Optimierung müssen
  diverse Matrixoperationen durchgeführt werden und diese können je nach
  Problemgröße sehr aufwendig werden.
@@ -5820,6 +6013,102 @@ reference "subsec:Gradient-Enhanced-Kriging"
 
 ): Die Kovarianzmatrix kann sehr groß werden, durch die zusätzlichen partiellen
  Ableitungen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Ablauf der Berechnung einer Matrix-Multiplikation würde wie folgt ablaufen:
+\end_layout
+
+\begin_layout Enumerate
+Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Server
+\end_layout
+
+\begin_layout Standard
+Wartet nur auf Aufgaben.
+ Es können Objekte allokiert werden und darauf Befehle ausgeführt werden.
+ Die Ergebnisse werden dann an der Client zurückgeschickt.
+ Der Client muss diese dann wieder zusammensetzen,
+\end_layout
+
+\begin_layout Paragraph
+Client
+\end_layout
+
+\begin_layout Standard
+Sorgt für die Aufgaben und deren Verteilung an die Server mithilfe eines
+ Round-Robin Verfahrens.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Messaging Middleware ZeroMQ
+\end_layout
+
+\begin_layout Paragraph
+Netzwerkobjekte
+\end_layout
+
+\begin_layout Standard
+Klassen die das Interface SaveableOnServer implementieren, müssen folgende
+ Methoden bereitsstellen:
+\end_layout
+
+\begin_layout Itemize
+getSerializedData(int& size): void* 
+\end_layout
+
+\begin_layout Itemize
+setSerializedData(void* data): void 
+\end_layout
+
+\begin_layout Itemize
+getServerType(): string 
+\end_layout
+
+\begin_layout Itemize
+freeMem(): void 
+\end_layout
+
+\begin_layout Paragraph
+Ausfallsicherheit
+\end_layout
+
+\begin_layout Standard
+Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
+ sind, existiert neben jeder Haupt- verbindung eine zusätzliche Ping-Verbindung
+ zu jedem bekannten Server.
+ Diese wiederum öffnen analog zum Client auch einen zusätzlichen Socket,
+ der lediglich für die Verwaltung des periodischen Pingsignals zuständig
+ ist.
+ Der Ping besteht dabei aus der Signatur des Clients, anhand derer der Server
+ erkennen kann, mit welchem Client dieser sich verbunden hat.
+ Die Antwort des Servers wiederum besteht aus der Signatur des Clients,
+ mit welchem er aktuell gekoppelt ist.
+ Sollte ein zweiter Client eine Anfrage an einen bereits gekoppelten Server
+ senden, kann dieser anhand der zurückgesendeten Signatur feststellen, dass
+ der Server bereits anderweitig vergeben ist.
+ Auch Ausfälle eines Servers während der Programmlaufzeit können so vom
+ Client erkannt werden.
  
 \end_layout
 
