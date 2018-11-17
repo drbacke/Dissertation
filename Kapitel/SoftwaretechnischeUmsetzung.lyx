@@ -571,6 +571,13 @@ cov\left(\vec{h}\right)=\sigma^{2}+\lambda\delta\left(\vec{h}\right)-2\gamma\lef
 
 \begin_layout Paragraph*
 Überleitung Modellfunktion
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Überleitung-Modellfunktion"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5471,8 +5478,8 @@ Innerhalb dieses Abschnittes sollen die wichtigsten softwaretechnischen
 \begin_layout Standard
 Weiterhin wurden zahlreiche Anstrengungen unternommen um die Software möglichst
  effizient zu gestalten.
- Hierzu zählt eine eigen entwickelte Matrix-Klasse, welche zahlreiche Architektu
-ren abdeckt wie z.B.
+ Hierzu zählt eine eigene Matrix-Klasse, welche zahlreiche Architekturen
+ abdeckt wie z.B.
  GPUs, Intel MKL Bibkiotheken und OpenMP mit AVX/SSE Beschleunigung.
  Dadurch ist es möglich, die Software sehr flexibel auf unterschiedlichen
  Systemen einzusetzen und die vorhandene Prozessorarchitektur effizient
@@ -5488,7 +5495,7 @@ ren abdeckt wie z.B.
 \begin_layout Standard
 Neben diesen beschriebenen Maßnahmen werden noch einige andere Entwicklungen
  beschrieben, die den Einsatz der Kriging-Software für den Bereich des Turbomasc
-hinendesigns im industriellen Umfeld nutzbar macht.
+hinendesigns im industriellen Umfeld effizient nutzbar macht.
  
 \end_layout
 
@@ -5497,82 +5504,414 @@ Softwarearchitektur und Laufzeitumgebung
 \end_layout
 
 \begin_layout Standard
-Das gesamte Verfahren ist objektorientiert und nutzt zahlreiche Interfaces,
- dies ermöglicht eine sehr große Flexibilität und Modularität in der Software
- und drückt sich durch die folgenden Punkte aus:
-\end_layout
+Zahlreiche in der Literatur vorgestellten Ansätze (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeGratiet,forrester2007multi"
 
-\begin_layout Itemize
-Objektorientiert eigen entwickelte Matrix-Klassen welche mehrere Rechenarchitekt
-uren unterstützt 
-\end_layout
+\end_inset
 
-\begin_deeper
-\begin_layout Itemize
-Nvidia basierte GPU Beschleunigung 
-\end_layout
-
-\begin_layout Itemize
-Intel MKL Beschleunigung
-\end_layout
-
-\begin_layout Itemize
-Eigene OpenMP/SSE beschleunigten Umsetzung
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Alle Kriging Verfahren (Co-Kriging, Ordinary Kriging und Gradient Enhanced
- Kriging) sind in einem modularen Softwarepaket zusammengefasst
-\end_layout
-
-\begin_layout Itemize
-Starke Erweiterbarkeit, SVM und Klassifikatoren in demselben Code in anderen
- Studentischen Arbeiten (Link)
-\end_layout
-
-\begin_layout Standard
-Alle Verfahren sind in einem C++ Code untergebracht.
- Die in der Literatur vorgestellten Ansätze (siehe ...) sind oft einfache Matlab
- Umsetzungen, welche oftmals Schwächen in der Performance und Benutzerfreundlich
-keit aufweisen.
+) sind oftmals in Matlab oder ähnlichen Umgebungen umgesetzt, dadurch entstehen
+ oftmals Schwächen in der Performance und insbesondere der Benutzerfreundlichkei
+t.
+ Das hier entwickelte Verfahren ist objektorientiert, verwendet moderne
+ Interface basierte Programmierung Dies ermöglicht eine sehr große Flexibilität
+ und Modularität in der Software, was bereits an den zahlreichen integrierten
+ Verfahren und nutzbaren Architekturen zu sehen ist.
+ Die gewählte Programmiersprache ist C++, wobei der GCC-Compiler ab Version
+ 4.7 unterstützt wird.
+ Eine Kompilierung mit dem Intel Compiler ist ebenfalls ab Version 12.1 möglich.
+ Weiterhin werden die Messaging-Middleware-ZeroMQ und die Boost Bibliothek
+ Version 1.62 benötigt.
  
 \end_layout
 
 \begin_layout Standard
-Weitherhin bietet die hier entwickelte Software eine sehr hohe Performance
- und ist spezielle ausgelegt für eine große Anzahl an Stützstellen und eine
- hohe Anzahl an Parametern.
- Hierfür wurden einige Softwaremodule und Techniken umgesetzt:
-\end_layout
-
-\begin_layout Standard
-Die wichtigsten Klassen sind:
-\end_layout
-
-\begin_layout Itemize
-Point: Beinhaltet Koordinaten, Funktionswerte, Gütestufe, partielle Ableitungen
- und Indices einer Stützstelle
-\end_layout
-
-\begin_layout Itemize
-Trainer: Vereint und steuert die unterschiedlichen Minimierungsverfahren,
- Initialisierungsverfahren und die Konfiguration 
-\end_layout
-
-\begin_layout Itemize
-MinimizerInterface: Schnittstelle, welche die Methoden für eine Minimierungsklas
-se vorgibt und damit die verschiedenen Minimierungsverfahren ermöglicht.
+Im folgenden sollen die wichtigsten Klassen benannt und kurz beschrieben
+ werden.
  
-\end_layout
-
-\begin_layout Itemize
-Gröbsten Klassen zeigen: DensityFunction und deren Spezialisierungen, Point,
- MinimizerInterface, AUtoOptiInterface
 \end_layout
 
 \begin_layout Paragraph*
-Implementierung unterschiedlicher Verfahren in einem Softwarepaket
+Point
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Point
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Klassenstruktur-der-Klasse"
+
+\end_inset
+
+) beschreibt einen Member oder Stützstelle innerhalb des Kriging-Verfahrens.
+ Ein Objekt dieser Klasse beinhaltet, dann alle Parameter und Funktionswerte.
+ Weiterhin können (im Falle des Gradient-Enhanced-Krigings) partielle Ableitunge
+n gespeichert werden, sofern diese vorhanden sind.
+ Da die partiellen Ableitungen nur teilweise vorhanden sein können, werden
+ diese als Map gespeichert.
+ Der Zugriff auf diese Werte erfolgt, über entsprechende 
+\begin_inset Quotes gld
+\end_inset
+
+Getter
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Setter
+\begin_inset Quotes grd
+\end_inset
+
+ Methoden, wobei in dem UML-Diagramm nur ein kleiner Teil dargestellt wird.
+ 
+\end_layout
+
+\begin_layout Standard
+Zudem implementiert die Klasse das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+, Objekte dieser Klasse können somit über das Netzwerk verteilt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Point.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Klassenstruktur-der-Klasse"
+
+\end_inset
+
+Klassenstruktur der Klasse Point, welche eine Stützstelle beschreibt
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+CorrelationFunction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/CorrelationFunction.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Klassenstruktur-der-Kovarianzfun"
+
+\end_inset
+
+Klassenstruktur der Kovarianzfunktionsklassen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Klassenstruktur-der-Kovarianzfun"
+
+\end_inset
+
+ zeigt die Generalisierungsklasse 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunction
+\begin_inset Quotes grd
+\end_inset
+
+ und deren Spezialisierungen.
+ Die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunction
+\begin_inset Quotes grd
+\end_inset
+
+ legt den Aufbau der Kovarianzklassen fest und in den Spezialisierungen
+ sind die Implementierungen der einzelnen Kovariansfunktionen.
+ Innerhalb dieser Software sind bisher die 
+\begin_inset Quotes gld
+\end_inset
+
+Gauss
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Überleitung-Modellfunktion"
+
+\end_inset
+
+), und die 
+\begin_inset Quotes gld
+\end_inset
+
+Spline
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lophaven2002aspects"
+
+\end_inset
+
+) Kovarianzfunktionen umgesetzt.
+ Der Name 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunction
+\begin_inset Quotes grd
+\end_inset
+
+ mag hier etwas verwirrend sein, da es sich eigentlich um Kovarianzfunktionen
+ handelt.
+ Diese ungünstige Namensgebung ist historisch entstanden und kann nur mit
+ großem Aufwand geändert werden, aus diesem Grund wurde bisher darauf verzichtet.
+ 
+\end_layout
+
+\begin_layout Standard
+Für ein Co-Kriging gibt es die Spezialisierung 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunctionLinearCombination
+\begin_inset Quotes grd
+\end_inset
+
+, die Funktionsweise dieser Kovarianzfunktion soll hier kurz erläutert werden:
+ Um die Kovarianzmatrix für das hier beschriebene Co-Kriging-Modell aufzustellen
+, werden drei Kovarianzfunktionen benötigt.
+ Diese können wiederum über zwei Kovarianzmodellfunktionen 
+\begin_inset Formula $cov_{2}\left(\vec{h}\right),cov_{diff}\left(\vec{h}\right)$
+\end_inset
+
+ und einer Skalierung 
+\begin_inset Formula $a$
+\end_inset
+
+ abgebildet werden: 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)=a^{2}cov_{2}\left(\vec{h}\right)+cov_{diff}\left(\vec{h}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $cov_{1,2}\left(\vec{x}_{1},\vec{x}_{2}\right)=acov_{2}\left(\vec{h}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)=cov_{2}\left(\vec{h}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Innerhalb des Programms werden also nur zwei Kovarianzmodellfunktionen mit
+ eigenen Hyperparametersätze benötigt, die dritte 
+\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ wird über eine Summe abgebildet.
+ Konkret bedeutet dies, dass zwei Instanzen einer Kovarianzfunktion 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunctionGauss
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunctionSpline
+\begin_inset Quotes grd
+\end_inset
+
+ erzeugt werden müssen.
+ Die Kovarianzfunktion 
+\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ wird dann über die 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunctionLinearCombination
+\begin_inset Quotes grd
+\end_inset
+
+ abgebildet, indem diese die Referenzen auf die beiden bereits vorhandenen
+ Kovarianzfunktionen erhält.
+ Die Steuerung und Instantiierung der Objekte wird von der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationContainer
+\begin_inset Quotes grd
+\end_inset
+
+ übernommen, welche im folgenden noch erläutert wird.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin sind die Methoden getAllCov und getAllCovPartialDerTheta beschrieben.
+ Diese berechnen die eigentliche Kovarianzfunktion zwischen zwei Punkten
+ 
+\begin_inset Quotes gld
+\end_inset
+
+point1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+point2
+\begin_inset Quotes grd
+\end_inset
+
+ und deren partielle Ableitung nach einem Hyperparameter 
+\begin_inset Quotes gld
+\end_inset
+
+partialDerNumber
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Die Ergebnisse werden von den Methoden in die Matrix 
+\begin_inset Quotes gld
+\end_inset
+
+CovMat
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+CovMatrixDer
+\begin_inset Quotes grd
+\end_inset
+
+ geschrieben, welche jeweils als Referenz übergeben werden.
+ Im Falle eine Gradient-Enhanced-Krigings werden die benötigten Kovarianzfunktio
+nen der vorgegebenen partiellen Ableitungen direkt mit bestimmt und ebenfalls
+ in die Matrix geschrieben.
+ Die Position der jeweiligen Einträge in der Matrix wird in einer internen
+ Map gespeichert, welche zu Anfang des Programms erzeugt wird und den Objekten
+ bekannt ist.
+ Auf diese Weise übergibt man der Kovarianzfunktion nur zwei Objekte der
+ Point Klasse und die Kovarianzfunktion schreibt die korrekten Ergebnisse
+ direkt an die korrekte Stelle der entsprechenden Matrix.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+CorrelationContainer - Behälter und Kontrolle für die benötigten Korrelationsfun
+ktionen
+\end_layout
+
+\begin_layout Standard
+Beinhaltet alle Korrelationsfunktionen und die Zuordnung der Korrelationsobjekte
+ auf entsprechende Gütestufenpaare.
+ Außerdem die Tabelle welches Memberpaar wo in der Matrix sitzt
+\end_layout
+
+\begin_layout Paragraph*
+DensityFunction - Implementierung unterschiedlicher Verfahren in einem Softwarep
+aket
 \end_layout
 
 \begin_layout Standard
@@ -5637,10 +5976,6 @@ placement o
 overhang 0col%
 width "50col%"
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -5709,7 +6044,7 @@ status open
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph*
 Matrixoperationen
 \begin_inset CommandInset label
 LatexCommand label
@@ -6024,15 +6359,6 @@ reference "subsec:Gradient-Enhanced-Kriging"
 \end_layout
 
 \begin_layout Standard
-Der Ablauf der Berechnung einer Matrix-Multiplikation würde wie folgt ablaufen:
-\end_layout
-
-\begin_layout Enumerate
-Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Separator plain
 \end_inset
 
@@ -6040,24 +6366,30 @@ Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
 \end_layout
 
 \begin_layout Paragraph
-Server
-\end_layout
-
-\begin_layout Standard
-Wartet nur auf Aufgaben.
- Es können Objekte allokiert werden und darauf Befehle ausgeführt werden.
- Die Ergebnisse werden dann an der Client zurückgeschickt.
- Der Client muss diese dann wieder zusammensetzen,
-\end_layout
-
-\begin_layout Paragraph
 Client
 \end_layout
 
 \begin_layout Standard
-Sorgt für die Aufgaben und deren Verteilung an die Server mithilfe eines
+Der Client ist das ausführende Programm, in diesem Fall das Kriging selbst.
+ Um die Netzwerkfunktionen nutzen zu können, müssen die Klassen das Interface
+ SaveableOnServer implementieren.
+ Sorgt für die Aufgaben und deren Verteilung an die Server mithilfe eines
  Round-Robin Verfahrens.
  
+\end_layout
+
+\begin_layout Paragraph
+Server
+\end_layout
+
+\begin_layout Standard
+Ist ein eigenständiges kleine Programm, welches auf einem Rechner ausgeführt
+ wird und dann auf Aufgaben wartet.
+ Solange es keine Aufgaben erfüllt, verbraucht es praktisch keine Kapazitäten
+ und kann im Hintergrund laufen.
+ Es können Objekte allokiert werden und darauf Befehle ausgeführt werden.
+ Die Ergebnisse werden dann an der Client zurückgeschickt.
+ Der Client muss diese dann wieder zusammensetzen,
 \end_layout
 
 \begin_layout Paragraph
@@ -6109,6 +6441,15 @@ Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
  der Server bereits anderweitig vergeben ist.
  Auch Ausfälle eines Servers während der Programmlaufzeit können so vom
  Client erkannt werden.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Exemplarischer Ablauf einer Matrix Multiplikation
+\end_layout
+
+\begin_layout Enumerate
+Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
  
 \end_layout
 
