@@ -5501,6 +5501,13 @@ hinendesigns im industriellen Umfeld effizient nutzbar macht.
 
 \begin_layout Subsection
 Softwarearchitektur und Laufzeitumgebung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Softwarearchitektur-und-Laufzeit"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5552,13 +5559,15 @@ reference "fig:Klassenstruktur-der-Klasse"
 
 \end_inset
 
-) beschreibt einen Member oder Stützstelle innerhalb des Kriging-Verfahrens.
- Ein Objekt dieser Klasse beinhaltet, dann alle Parameter und Funktionswerte.
- Weiterhin können (im Falle des Gradient-Enhanced-Krigings) partielle Ableitunge
-n gespeichert werden, sofern diese vorhanden sind.
- Da die partiellen Ableitungen nur teilweise vorhanden sein können, werden
- diese als Map gespeichert.
- Der Zugriff auf diese Werte erfolgt, über entsprechende 
+) beschreibt eine Stützstelle innerhalb des Kriging-Verfahrens.
+ Ein Objekt dieser Klasse beinhaltet alle Parameter, Funktionswerte und
+ ggf.
+ partielle Ableitungen (Gradient-Enhanced-Kriging).
+ Die partiellen Ableitungen werden als assoziatives Datenfeld gespeichert,
+ um die Zuordnung zu den Parametern zu gewährleisten und um unvollständige
+ Daten zuzulassen.
+ Der Zugriff auf Variablen, Funktionswerte und partielle Ableitungen erfolgt
+ über entsprechende 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5574,12 +5583,8 @@ Setter
 \begin_inset Quotes grd
 \end_inset
 
- Methoden, wobei in dem UML-Diagramm nur ein kleiner Teil dargestellt wird.
- 
-\end_layout
-
-\begin_layout Standard
-Zudem implementiert die Klasse das Interface 
+ Methoden.
+ Zudem implementiert die Klasse das Interface 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5587,8 +5592,16 @@ SaveableOnServer
 \begin_inset Quotes grd
 \end_inset
 
-, Objekte dieser Klasse können somit über das Netzwerk verteilt werden.
- 
+.
+ Objekte dieser Klasse können somit über das Netzwerk verteilt werden.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Verteiltes-Rechnen-1"
+
+\end_inset
+
+ wird dieser Punkt noch genauer erklärt.
 \end_layout
 
 \begin_layout Standard
@@ -5598,10 +5611,6 @@ placement o
 overhang 0col%
 width "50col%"
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -5638,6 +5647,13 @@ Klassenstruktur der Klasse Point, welche eine Stützstelle beschreibt
 
 \begin_layout Paragraph*
 CorrelationFunction
+\begin_inset CommandInset label
+LatexCommand label
+name "par:CorrelationFunction"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5895,6 +5911,15 @@ nen der vorgegebenen partiellen Ableitungen direkt mit bestimmt und ebenfalls
  Auf diese Weise übergibt man der Kovarianzfunktion nur zwei Objekte der
  Point Klasse und die Kovarianzfunktion schreibt die korrekten Ergebnisse
  direkt an die korrekte Stelle der entsprechenden Matrix.
+ Weiterhin wird in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:SoftwaretechnKorrelationsfunktionen"
+
+\end_inset
+
+ gezeigt, wie die Berechnung der Kovarianzfunktion mit SIMD-Instruktionen
+ beschleunigt werden kann.
  
 \end_layout
 
@@ -5904,14 +5929,81 @@ ktionen
 \end_layout
 
 \begin_layout Standard
-Beinhaltet alle Korrelationsfunktionen und die Zuordnung der Korrelationsobjekte
- auf entsprechende Gütestufenpaare.
- Außerdem die Tabelle welches Memberpaar wo in der Matrix sitzt
+Die Klasse CorrelationContainer beinhaltet und steuert alle Instanzen der
+ verwendeten Kovarianzfunktionen.
+ Bei der Initialisierung des Kriging-Modells erzeugt diese Klasse alle nötigen
+ Kovarianzfunktionen und setzt im Falle des Multifidelity-Verfahrens die
+ entsprechenden Referenzen (siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:CorrelationFunction"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunction
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Alle weiteren Zugriffe auf die Kovarianzfunktionen erfolgen immer über
+ ein Objekt dieser Klasse und niemals direkt.
+ Weiterhin wird die Zuordnung der Kovarianzobjekte auf entsprechende Gütestufenp
+aare von dieser Klasse übernommen.
+ Dies bedeutet konkret, dass das Aufstellen der Kovarianzmatrizen immer
+ mit Hilfe des CorrelationContainer erfolgt und niemals direkt über die
+ Kovarianzfunktionen selbst.
+ Da die Kovarianzfunktionen an sehr vielen Stellen im Programm aufgerufen
+ werden, kann durch diese Zentralisierung die Fehleranfälligkeit des Programms
+ deutlich reduziert werden.
+\end_layout
+
+\begin_layout Standard
+Neben der Steuerung der Kovarianzfunktionen übernimmt diese Klasse auch
+ die Steuerung der Hyperparameter.
+ Innerhalb des Programms werden die Hyperparameter in mehrere Gruppen aufgeteilt
+ und in unterschiedlichen Objekten gespeichert.
+ Dies kommt durch die unterschiedliche Natur der Hyperparameter zustande.
+ Beispielsweise kann der Skalierungsfaktor 
+\begin_inset Formula $a$
+\end_inset
+
+ nicht direkt einer Kovarianzmodellfunktion zugeordnet werden, da er von
+ mehreren Kovarianzmodellfunktionen verwendet wird und sollte aus diesem
+ Grund in einer übergeordneten Instanz verwaltet werden.
+ Diese übergeordnete Instanz ist der CorrelationContainer.
+ Ebenfalls stellen die Diagonalaufschläge eine Besonderheit dar und werden
+ aus diesem Grund ebenfalls dort zentral verwaltet.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine weitere Aufgabe ist die zentrale Speicherung der Positions-Tabelle,
+ diese ordnet einem Paar der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Point
+\begin_inset Quotes grd
+\end_inset
+
+ eine Position in der Kovarianzmatrix und deren Ableitungen zu.
+ 
 \end_layout
 
 \begin_layout Paragraph*
 DensityFunction - Implementierung unterschiedlicher Verfahren in einem Softwarep
-aket
+aket 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:DensityFunction---Implementierun"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5933,6 +6025,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vereinfachtes-UML-Diagramm"
+
+\end_inset
+
 Vereinfachtes UML Diagramm der verschiedenen Verfahren innerhalb der Kriging-Sof
 tware und deren Anbindung an das Server Interface
 \end_layout
@@ -5942,31 +6040,162 @@ tware und deren Anbindung an das Server Interface
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vereinfachtes-UML-Diagramm"
 
 \end_inset
 
+ zeigt die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
 
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+ und deren Spezialisierungen an.
+ Diese Klassenstruktur soll es ermöglichen unterschiedlichste Interpolations/Kla
+ssifikations-Verfahren innerhalb des Programms umsetzen zu können.
+ Prinzipiell lassen sich mit dieser Klassenstruktur alle Arten von Verfahren
+ einbinden, die folgende Merkmale aufweisen:
 \end_layout
 
-\begin_layout Paragraph*
-Schnittstellen zwischen AutoOpti und der KrigingSoftware
+\begin_layout Itemize
+Abstands- oder Kovarianzmatrix mit Ableitungen
+\end_layout
+
+\begin_layout Itemize
+Verwendung einer Abstandsfunktion in Form der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationFunction
+\begin_inset Quotes grd
+\end_inset
+
+, siehe Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:CorrelationFunction"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Hyperparameter welche die Kovarianzmatrix beeinflussen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Bewertungsfunktion des aktuellen Hyperparametersatzes, z.B.
+ Likelihood mit Ableitungen nach den Hyperparametern
 \end_layout
 
 \begin_layout Standard
-Kriging und NN Interface, Interface bezieht sich in diesem Fall auf die
- Schnittstelle zwischen den verschiedenen Programmen und ist nicht, wie
- im sonst üblich, im Sinne einer objektorientierten Interface Programmierung
- gemeint.
- Das Kriging-Interface stellt hier auch die Schnittstellen zwischen den
- Programmiersprachen C und C++ dar, da AutoOpti in C geschrieben wurde und
- das gesamte Kriging in C++.
- Es finden dort zahlreiche Übersetzungen von C-Strukturen in C++-Objekte
- usw.
- statt.
+Sofern diese Merkmale vorhanden sind, kann eine neue Spezialisierung der
+ Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+ erzeugt werden.
+ Die Bewertungsfunktion soll mit der Methode 
+\begin_inset Quotes gld
+\end_inset
+
+calcDensity
+\begin_inset Quotes grd
+\end_inset
+
+ umgesetzt werden und einen Fließkommawert zurückgeben, welcher die Qualität
+ des aktuellen Modells zurück gibt.
+ Wobei hier kleinere Werte als besser angesehen werden.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+calcDensityDerivative
+\begin_inset Quotes grd
+\end_inset
+
+ gibt alle Ableitungen der Bewertungsfunktion nach allen Hyperparametern
+ in Form einer Matrix zurück.
+ Die Matrix hat in der Regel nur eine Dimension eines Vektors.
+ Die Methode createAndInvertCovMat soll die Kovarianzmatrix erzeugen und
+ eine notwendige Invertierung oder Zerlegung vornehmen.
+ Bisher implementierte Spezialisierungen sind:
+\end_layout
+
+\begin_layout Itemize
+ReducedNormalDistribution: Likelihood Funktion für alle Kriging-Verfahren
  
+\end_layout
+
+\begin_layout Itemize
+SVMDistribution: Eine Implementierung des Klassifikators 
+\begin_inset Quotes gld
+\end_inset
+
+Supporting Vector Machines
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Diese wurden im Rahmen einer studentischen Bachelorarbeit implementiert,
+ weitere Informationen sind in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "schu2014"
+
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Itemize
+CorrelationClassificator: Einfacher Klassifikator auf Basis von Korrelationsfunk
+tionen.
+ Zu diesem Verfahren existieren bis zum jetzigen Zeitpunkt noch keine Veröffentl
+ichungen.
+\end_layout
+
+\begin_layout Standard
+Die Verfahren 
+\begin_inset Quotes gld
+\end_inset
+
+SVMDistribution
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+CorrelationClassificator
+\begin_inset Quotes grd
+\end_inset
+
+ sollen hier nicht weiter thematisiert werden, da sie nicht Teil dieser
+ Arbeit waren.
+ Dennoch soll damit gezeigt werden, dass die hier etablierte Klassenstruktur
+ es mit wenig Aufwand ermöglicht zahlreiche Verfahren zu implementieren.
+ Zumindest wenn eine gewisse Ähnlichkeit zum Kriging-Verfahren vorhanden
+ ist.
+\end_layout
+
+\begin_layout Paragraph*
+AutoOpti Schnittstelle
 \end_layout
 
 \begin_layout Standard
@@ -5975,7 +6204,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -5988,9 +6217,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Vereinfachtes UML Diagramm der Kopplungsklasse zwischen AutoOpti (verwendet
- die Klasse MetaModel) und dem Kriging bzw.
- den Neuronalen Netzwerken.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vereinfachtes-UML-Diagramm-1"
+
+\end_inset
+
+Vereinfachtes UML Diagramm der MetaModel Klasse, welche eine Anbindung an
+ AutoOpti ermöglicht.
  
 \end_layout
 
@@ -6001,16 +6235,78 @@ Vereinfachtes UML Diagramm der Kopplungsklasse zwischen AutoOpti (verwendet
 
 \end_inset
 
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vereinfachtes-UML-Diagramm-1"
 
+\end_inset
+
+ zeigt den Aufbau der Schnittstelle zwischen AutoOpti und externen Ersatzmodelle
+n.
+ Die Klasse MetaModel in innerhalb des Programms 
+\begin_inset Quotes gld
+\end_inset
+
+AutoOpti
+\begin_inset Quotes grd
+\end_inset
+
+ (hier als Package dargestellt) definiert und ermöglicht über die Methodendefini
+tion eine Anbindung an das Verfahren.
+ Um die Anbindung vornehmen zu können, sind allerdings detaillierte Kenntnisse
+ über die Funktionsweise von AutoOpti nötig, da der Austausch von Informationen
+ über die 
+\begin_inset Quotes gld
+\end_inset
+
+Member
+\begin_inset Quotes grd
+\end_inset
+
+ Struktur erfolgt.
+ Diese Struktur beinhaltet zahlreiche verschachtelte Informationen, welche
+ innerhalb der Schnittstellenimplementationen bekannt sein müssen.
+ Weiterhin folgt diese Struktur einem älteren C-Standard, welcher eine Übersetzu
+ng der Speicherverwaltung ins modernere C++ notwendig macht.
+ Bei den Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+KrigingInterface
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+NNInterface
+\begin_inset Quotes grd
+\end_inset
+
+ bezieht sich das Wort Interface in diesem Fall auf die Schnittstelle zwischen
+ den verschiedenen Programmen und ist nicht, wie im sonst üblich, im Sinne
+ einer objektorientierten Interface Programmierung gemeint.
+ Das Kriging-Interface stellt hier auch die Schnittstellen zwischen den
+ Programmiersprachen C und C++ dar, da AutoOpti in C geschrieben wurde und
+ das gesamte Kriging in C++.
+ Es finden dort zahlreiche Übersetzungen von C-Strukturen in C++-Objekte
+ usw.
+ statt.
+ Die exakte Funktionsweise stellt allerdings keinen Mehrwert für diese Arbeit
+ dar und soll daher nicht weiter beschrieben werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Über diese Schnittstelle sind das hier beschrieben Kriging-Verfahren angebunden
+ und eine DLR-Neuronale-Netzwerk Entwicklung.
+ 
 \end_layout
 
 \begin_layout Paragraph*
 Minimierungsverfahren
-\end_layout
-
-\begin_layout Standard
-Einige Bibliotheken in C geschrieben, dafür mit Boost Function gearbeitet.
- kurz beschreiben
 \end_layout
 
 \begin_layout Standard
@@ -6031,7 +6327,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-der-Klasse"
 
+\end_inset
+
+UML-Diagramm der Klasse MinimizerInterface und deren Spezialisierungen
 \end_layout
 
 \end_inset
@@ -6041,10 +6343,359 @@ status open
 
 \end_inset
 
+Die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerInterface
+\begin_inset Quotes grd
+\end_inset
+
+ beschreibt die Schnittstelle für ein Minimierungsverfahren.
+ Fünf Minimierungsverfahren implementieren diese Schnittstelle.
+ Die gesamte Struktur wird in dem UML-Diagramm in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:UML-Diagramm-der-Klasse"
+
+\end_inset
+
+ beschrieben.
+ Die Spezialisierungen 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerRandom
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerRandom2
+\begin_inset Quotes grd
+\end_inset
+
+ werden in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+ beschrieben, wobei es sich dabei um zufällige Initialisierungsverfahren
+ handelt.
+ Die Software macht allerdings keinen Unterschied zwischen einem Trainings-
+ und Initialisierungsverfahren, beide Verfahren wären also auch als Trainingsver
+fahren zulässig und umgekehrt.
+ Die Spezialisierungen 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerRPROP
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerRPROP2
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerQN
+\begin_inset Quotes grd
+\end_inset
+
+ stellen die Trainingsverfahren aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Minimierungsverfahren"
+
+\end_inset
+
+ dar.
+ Die Schnittstelle 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerInterface
+\begin_inset Quotes grd
+\end_inset
+
+ schreibt zwei 
+\begin_inset Quotes gld
+\end_inset
+
+public
+\begin_inset Quotes grd
+\end_inset
+
+ Methoden vor: 
+\end_layout
+
+\begin_layout Itemize
+callMinimizer: Mit diesem Aufruf wird das Verfahren gestartet und das Minimum
+ gesucht.
+\end_layout
+
+\begin_layout Itemize
+MinimizerInterface (Konstruktor): Diesem Konstruktor muss Objekt vom Typ
+ 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+ übergeben werden, womit dann das gesamte Minimierungsproblem beschrieben
+ ist (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:DensityFunction---Implementierun"
+
+\end_inset
+
+ - 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Innerhalb des Objekts vom Typ 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+ werden dann die Methoden 
+\begin_inset Quotes gld
+\end_inset
+
+calcDensity
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+calcDensityDerivative
+\begin_inset Quotes grd
+\end_inset
+
+ verwendet, diese liefern den zu minimierenden Term und dessen Ableitungen.
+\end_layout
+
+\begin_layout Standard
+Die privaten Methoden implementieren das Minimierungsverfahren selbst und
+ werden innerhalb der Methode 
+\begin_inset Quotes gld
+\end_inset
+
+callMinimizer
+\begin_inset Quotes grd
+\end_inset
+
+ angesprochen.
+ Diese privaten Methoden sprechen dann wiederum die Methoden aus dem übergebeben
+en Objekt vom Typ 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+ an.
+ 
+\end_layout
+
+\begin_layout Standard
+Beispielsweise die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+function
+\begin_inset Quotes grd
+\end_inset
+
+ beschreibt die Auswertung der zu minimierenden Funktion und wird in der
+ Methode 
+\begin_inset Quotes gld
+\end_inset
+
+callMinimizer
+\begin_inset Quotes grd
+\end_inset
+
+ verwendet.
+ Diese wird mit dem aktuellen Hyperparametersatz 
+\begin_inset Quotes gld
+\end_inset
+
+variables
+\begin_inset Quotes grd
+\end_inset
+
+ aufgerufen und übergibt diese dann weiter an das Objekt des Typs 
+\begin_inset Quotes gld
+\end_inset
+
+DensityFunction
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Wurden die Parameter erfolgreich übergeben, wird die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+calcDensity
+\begin_inset Quotes grd
+\end_inset
+
+ aufgerufen und der Funktionswert bestimmt.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+saveFunction
+\begin_inset Quotes grd
+\end_inset
+
+ beschreibt das Verhalten des Verfahrens, wenn ein Iterationsschritt nicht
+ erfolgreich war.
+ Zum Beispiel, wenn die Zerlegung der Matrix nicht funktioniert hat.
+ In der Regel wird die Schrittweite halbiert und der letzte Schritt nochmal
+ ausgeführt oder der Diagonalaufschlag erhöht.
+ Wenn keine dieser Maßnahmen greift, wird das Minimierungsverfahren abgebrochen.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+convergenceCheck
+\begin_inset Quotes grd
+\end_inset
+
+ prüft die Konvergenz des Verfahrens.
+ Typischerweise gilt das Verfahren als konvergiert, wenn sich die Funktionswerte
+ seit einer bestimmten Anzahl an Iterationen nicht mehr verändert oder verbesser
+t haben.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+constraintFunction
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+constraintFunctionDerivative
+\begin_inset Quotes grd
+\end_inset
+
+ gibt einen Restriktionsterm, bzw.
+ dessen Ableitung zurück.
+ Diese Methode ist allerdings nur optional, falls diese nicht implementiert
+ werden soll, so muss ein konstanter Integer Wert von 0 zurückgeben werden
+ womit die Restriktionen dann ignoriert werden.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+functions
+\begin_inset Quotes grd
+\end_inset
+
+ bekommt eine Liste von Variablensätzen und wertet diese dann parallel aus.
+ 
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Standard
+Ein weiterer interessanter Punkt bei dieser Klasse ist die Nutzung von externen
+ C-Minimierungs-Bibliotheksfunktionen.
+ Beispielsweise wurde das RPROP-Verfahren innerhalb der AutoOpti-Umgebung
+ in einer C-Bibliothek angeboten.
+ Um Redundanz zu vermeiden und zukünftige Änderungen an diesem Verfahren
+ nicht mehrfach machen zu müssen, ist es sinnvoll dieses bereits vorhandene
+ Verfahren zu nutzen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Ausführung des C-Minimierungsverfahrens erfolgt in diesem Fall durch
+ Aufruf einer Minimierungsfunktion, welche zwei Funktionspointer erwartet.
+ Diese Funktionspointer stellen dann die zu minimierende Funktion und deren
+ Ableitungen dar.
+ Die direkte Nutzung dieser Funktion ist innerhalb des hier beschrieben
+ Programms nicht möglich, da die C++ Objektmethoden 
+\begin_inset Quotes gld
+\end_inset
+
+function
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+functionDerivative
+\begin_inset Quotes grd
+\end_inset
+
+ inkompatibel zu den in C verwendeten Funktionspointern sind.
+ Insbesondere da die Spezialisierungen von MinimizerInterface ein polymorphes
+ Klassenkonstrukt darstellt und für ein C-Programm immer unterschiedlichen
+ Typs wäre.
+ Eine elegante Lösung für dieses Problem bietet die Bibliothek Boost mit
+ der Unterbibliothek 
+\begin_inset Quotes gld
+\end_inset
+
+function
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Hiermit ist es möglich aus einer Methode eines beliebigen Objekts ein allgemein
+es Funktionsobjekt zu machen, welches ebenfalls polymorphe Eigenschaften
+ besitzt und somit austauschbar ist.
+ In diesem Fall ist es möglich ein Funktionsobjekt zu erzeugen, welche der
+ Schnittstelle MinimizerInterface entspricht.
+ Damit lassen sich alle Spezialisierungen von 
+\begin_inset Quotes gld
+\end_inset
+
+MinimizerInterface
+\begin_inset Quotes grd
+\end_inset
+
+ in der externen Bibliothek elegant nutzen.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
 Matrixoperationen
 \begin_inset CommandInset label
 LatexCommand label
@@ -6077,7 +6728,7 @@ reference "subsec:Kovarianz-zwischen-zwei"
 
 \end_inset
 
-) wie auch das Training (siehe Gleichungen 
+) wie auch für das Training (siehe Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:AbleitungLogLikelihood"
@@ -6100,12 +6751,13 @@ lines 0
 placement o
 overhang 0in
 width "55col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../images/Fabian/uml_net_matrix_implementations.eps
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Matrix.eps
+	lyxscale 70
 	scale 40
 
 \end_inset
@@ -6138,42 +6790,365 @@ name "fig:MatrixKlasseUML"
 Weiterhin werden diese Modelle innerhalb verschiedenster Hardware-Architekturen
  verwendet, bspw.
  AMD/Intel CPUs und NVidia GPUs.
- Für jede dieser Hardwarearchitekturen gibt es verschiedene Implementierungen
- der benötigten Matrix Operationen.
- Jede dieser Implementierungen sind stark auf die jeweilige Architektur
- optimiert und bringen enorme Geschwindigkeitsvorteile.
+ Für jede dieser Hardwarearchitekturen gibt es verschiedene Hersteller-Bibliothe
+ken und damit Implementierungen der benötigten Matrix Operationen.
+ Jede dieser Implementierungen ist stark auf die jeweilige Architektur optimiert
+ und bringt enorme Geschwindigkeitsvorteile.
  Eine einheitliche Softwareschnittstelle existiert hierfür leider nicht.
- Aus diesem Grund wurde ein einheitliches Matrix-Interface entwickelt (siehe
- Abbildung 
+ Aus diesem Grund wurde innerhalb dieser Arbeit ein einheitliches polymorphes
+ Matrix-Interface entwickelt (siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:MatrixKlasseUML"
 
 \end_inset
 
-), alle Spezialisierungen müssen dieses Interface einbinden und bieten somit
- dieselben Methoden an.
+).
+ Die Implementierungen sind also untereinander konvertier- und austauschbar.
+ Bislang stehen drei verschiedene Spezialsierungen zur Verfügung, welche
+ im folgenden erläutert werden: 
+\end_layout
+
+\begin_layout Subparagraph
+Matrix 
+\end_layout
+
+\begin_layout Standard
+Innerhalb der Superklasse 
+\begin_inset Quotes gld
+\end_inset
+
+Matrix
+\begin_inset Quotes grd
+\end_inset
+
+ wird hauptsächlich die Speicherverwaltung und Zugriffsmethoden auf eine
+ beliebige Matrix Klasse vorgegeben.
+ Durch diese einheitliche Speicherverwaltung ist die Austauschbarkeit der
+ einzelnen Spezialisierungen erst möglich.
+ Diese Klasse ist also keine abstrakte Klasse, sondern vererbt einige Methoden
+ und auch Attribute an die Sub-Klassen.
+ Die Klasse implementiert auch das Interface 
+\shape italic
+
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+,
+\shape default
+ wodurch die Matrixklassen über das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Verteiltes-Rechnen-1"
+
+\end_inset
+
+ beschriebene Verfahren asynchron und rechnerweit parallelisierbar sind.
  
 \end_layout
 
 \begin_layout Standard
-Zur Berechnung der Matrix-Operationen wurden drei verschiedene Klassen entwickel
-t, welche jeweils das Interface 
-\shape italic
-Matrix
-\shape default
- und 
-\shape italic
-SaveableOnServer
-\shape default
- einbinden.
- Die Klasse 
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+m
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+isSymmetric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+frei
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Matrix Daten
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64Bit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64Bit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64Bit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+320Bit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+x Byte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+underbrace{512Bit Header}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $x=\begin{cases}
+8*m*n & nicht\,symmetrisch\\
+4*n*(n-1) & symmetrisch
+\end{cases}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:128Bit-Speicherausrichtung-1"
+
+\end_inset
+
+Interne Speicherstruktur der Matrix Klassen 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die vollständige Datenstruktur der Klasse Matrix und deren Spezialisierungen
+ sind in dem Array 
+\begin_inset Quotes gld
+\end_inset
+
+elements
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert.
+ In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:128Bit-Speicherausrichtung-1"
+
+\end_inset
+
+ ist die Struktur ersichtlich.
+ Neben den eigentlichen Matrixeinträgen sind hier in den ersten Feldern
+ noch zusätzliche Informationen, wie Zeilen-, Spaltenanzahl und ein Symmetriefla
+g gespeichert.
+ Dies ermöglicht eine einfache Serialisierung der Daten für das Netzwerksystem.
+ Zusätzlich sind noch 320Bit freier Speicher verfügbar, dies hat zwei Gründe:
+ 
+\end_layout
+
+\begin_layout Enumerate
+Falls noch zusätzliche Informationen über das Netzwerk transportiert werden
+ müssen, ist keine Änderung der Speicherstruktur nötig.
+\end_layout
+
+\begin_layout Enumerate
+Diese 512Bit sind linear im Speicher ausgerichtet, was eine Nutzung von
+ SSE/AVX/AVX512 erst möglich macht (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Einschub-Speicherausrichtung"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Speicherausrichtung
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Da die SIMD Routinen nur auf die Daten der Matrix selbst angewendet werden
+ sollen, müssen die 
+\begin_inset Quotes gld
+\end_inset
+
+Header-Daten
+\begin_inset Quotes grd
+\end_inset
+
+ von den SIMD Routinen übersprungen werden.
+ Dies ist nur möglich, wenn die entsprechende lineare Speicherausrichtung
+ in Größe der SIMD-Routine selbst (SSE:128Bit,AVX:256Bit,AVX512:512Bit)
+ gewährleistet ist.
+ Andernfalls würde das Programm abstürzen.
+ 
+\end_layout
+
+\begin_layout Subparagraph
+OpenMPMatrix 
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
 \shape italic
 OpenMPMatrix
 \shape default
- beeinhaltet eine SSE-beschleunigte und Thread-parallelisierte Implementierung
- der Matrix Operationen, jedoch keine CPU-spezifischen Optimierungen.
+ beeinhaltet SSE/AVX-beschleunigte und Thread-parallelisierte Implementierung
+ der Matrix Operationen.
+ Die Parallelisierung erfolgt hierbei durch OpenMP 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "dagum1998openmp"
+
+\end_inset
+
+.
+ Alle Algorithmen sind im Rahmen dieser Arbeit umgesetzt worden und bieten
+ für die meisten CPU-Architekturen eine hohe Effizienz, der wesentliche
+ Vorteil liegt hier allerdings in der Unabhängigkeit gegenüber einzelner
+ Hersteller.
  
+\end_layout
+
+\begin_layout Subparagraph
+MKLMatrix 
 \end_layout
 
 \begin_layout Standard
@@ -6189,7 +7164,17 @@ key "INTEL"
 \end_inset
 
  Bibliothek und ist somit nur für Intel-CPUs brauchbar.
- Die Klasse 
+ Die Bibliothek gilt allgemein als äußerst effizient, besonders im Hinblick
+ auf sehr große und komplexe Matrizenoperationen.
+ 
+\end_layout
+
+\begin_layout Subparagraph
+CudaMatrix 
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
 \shape italic
 CudaMatrix 
 \shape default
@@ -6201,17 +7186,26 @@ key "Cuda2018"
 \end_inset
 
  zur Beschleunigung der Matrix Operationen.
+ Als Basis wurde die CuBLAS Bibliothek von Nvidia verwendet.
+ Diese bietet eine effiziente Umsetzung aller Level 1-3 BLAS Routinen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lawson1979basic"
+
+\end_inset
+
+ auf modernen Nvidia-GPUs.
  Nähere Informationen zu der genauen Implementierung der Klassen sind in
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "kueppers2016,kueppers2016b,Kueppers2016c"
+key "Kueppers2016c"
 
 \end_inset
 
-.
- Weiterhin wird die praktische Verwendung von GPUs für die Beschleunigung
- der Ersatzmodelle innerhalb einer Optimierungen in Kapitel 
+ zu finden.
+ Weiterhin wird die Verwendung von GPUs für die Beschleunigung der hier
+ entwickelten Ersatzmodelle innerhalb einer Optimierungen in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Verwendung-von-GPGPU"
@@ -6223,32 +7217,51 @@ reference "sec:Verwendung-von-GPGPU"
 \end_layout
 
 \begin_layout Standard
+Der Aufbau und einige Methode der 
+\begin_inset Quotes gld
+\end_inset
 
-\size larger
-\color orange
-Mehr schreiben !!! Ein paar Benchmarks/Implementierung genauert
-\end_layout
+CudaMatrix
+\begin_inset Quotes grd
+\end_inset
 
-\begin_layout Standard
+ und 
+\begin_inset Quotes gld
+\end_inset
 
-\size larger
-\color orange
-Kenntlich machen was von mir und von Fabian ist
-\end_layout
+MKLMatrix
+\begin_inset Quotes grd
+\end_inset
 
-\begin_layout Standard
+ innerhalb der studentischen Arbeit 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016,kueppers2016b"
 
-\size larger
-\color orange
-SaveAbleOnServer erklären
-\end_layout
+\end_inset
 
-\begin_layout Standard
+ entwickelt wurden.
+ Diese studentische Arbeit wurde im Rahmen dieser Dissertation betreut und
+ angeleitet.
+ Die Methoden zur Rückwärtsdifferenzierung der Cholesky Zerlegung (siehe
+ Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Ableitung-LikelihoodRueckMode"
 
-\size larger
-\color orange
-Wie werden die Größen gespeichert, im Array selbst, für die Serialisierung
- später
+\end_inset
+
+) und auch die OpenMP-Klasse sowie der gesamte Aufbau der Schnittstellenklasse
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Matrix
+\begin_inset Quotes grd
+\end_inset
+
+ erfolgte innerhalb dieser Arbeit.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -6263,65 +7276,264 @@ name "chap:Verteiltes-Rechnen-1"
 \end_layout
 
 \begin_layout Standard
-Im Rahmen dieser Arbeit und der Arbeit von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "kueppers2016,kueppers2016b"
-
-\end_inset
-
-, wurde eine umfangreiche Bibliothek entwickelt, welche es ermöglicht vielen
- von den für das Kriging benötigten komplexen Matrix-Operationen asynchron
- auf mehrere Rechner zu verteilen.
+Im Rahmen dieser Arbeit wurde eine umfangreiche Bibliothek entwickelt, welche
+ es ermöglicht  Matrix-Operationen asynchron auf mehrere Rechner zu verteilen.
  Die Rechner können dabei unterschiedliche Architektur besitzen, bspw.
  ist eine gleichzeitige Nutzung von Servern mit GPUs und konventionellen
  CPUs möglich.
+ Theoretisch können so auch Rechnungen über das Internet verteilt werden,
+ wobei das System zur Zeit nicht dafür ausgelegt ist da es nicht den notwendigen
+ Sicherheitsstandards entspricht.
+ Hierfür müssten noch Verschlüsselungsalgorithmen, ein Benutzersystem und
+ Absicherungen gegenüber 
+\begin_inset Quotes gld
+\end_inset
+
+Remote-Exploits
+\begin_inset Quotes grd
+\end_inset
+
+ eingeführt werden, um Missbrauch zu vermeiden.
+ Ein wichtiger Punkt bei der Entwicklung war die Vermeidung von MPI-Bibliotheken.
+ Die Gründ dafür lagen in den zahlreichen inkompatiblen MPI-Umsetzungen,
+ der inkompatibeln Verisonen innerhalb einzelner MPI Pakete und der zwangsweisen
+ Synchronität der Netzwerkkommunikation.
+ Die Asynchronität war hierbei der wichtigste Punkt, dies liegt daran, dass
+ Optimierungen oftmals über Wochen laufen und es durchaus vorkommt, dass
+ einzelnen Rechenknoten ausfallen.
+ Verwendet man MPI, so fällt die gesamte Rechnung damit aus.
+ Bei einer asynchronen Umsetzung, übernimmt ein anderer Knoten die Aufgaben
+ des ausgefallenen.
  
 \end_layout
 
 \begin_layout Standard
-Die hauptsächliche Entwicklung der Bibliothek fand im Rahmen dieser Arbeit
- statt.
- Innerhalb der Bachelorarbeit 
+Nach der anfänglichen Entwicklung wurde im Rahmen dieser Dissertation die
+ Bachelorarbeit von Kueppers (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "kueppers2016,kueppers2016b"
+key "kueppers2016"
 
 \end_inset
 
- wurde diese Bibliothek um weitere Matrixoperationen erweitert, der Scheduler
- überarbeitet und die Fehlertoleranz erhöht.
+) betreut und angeleitet.
+ In dieser wurde der Client um weitere Matrixoperationen erweitert, der
+ Scheduler auf ein Round Robin Verfahren erweitert, weitere Klassen Serialisiert
+ und die Fehlertoleranz erhöht.
+ Nach Abschluss der Bachelorarbeit wurde eine gemeinsame Abhandlung 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016b"
+
+\end_inset
+
+ im Rahmen des DGLR Kongress veröffentlicht.
  
 \end_layout
 
 \begin_layout Standard
-Serialisierung und Deserialisierung über Interface geregelt.
- Die Einbindung des Interfaces stellt sicher, dass die Klasse über alle
- Methoden verfügt, die benötigt werden um diese über das Netzwerk zu verschicken.
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schematische-Darstellung-der"
+
+\end_inset
+
+Schematische Darstellung der Client/Server Verbindungen und des Round-Robin
+ Schedulers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schematische-Darstellung-der"
+
+\end_inset
+
+ zeigt den schematischen Aufbau der etablierten Client-/Server-Verbindungen.
+ Der Client stellt das auszuführende Programm dar, welches die zu berechnenden
+ Probleme stellt.
+ In diesem Fall handelt es sich dabei um das Kriging, dieses muss eine Client-Kl
+asse implementieren und auch aufrufen.
+ Die Client Klasse wird im späterem Verlauf dieses Abschnitts erklärt.
+ Auf der anderen Seite sind mehrere Server die jeweils einen Dämon-Prozess
+ starten, welche dann im Hintergrund laufen, einen Netzwerk-Port öffnen
+ und auf Aufgaben des Clients warten.
+ Die Server-Programme können auf CPUs sowie GPUs rechnen und verbrauchen
+ im Wartemodus praktisch keine Resourcen.
  
 \end_layout
 
 \begin_layout Standard
-Damit ist es aber auch möglich komplette Objekte über das Netzwerk zu verschicke
-n.
-\end_layout
+Eine weitere Besonderheit ist, dass jeder Client auf jedem Server virtuelle
+ Variablen/Objekte allokieren kann, z.B.
+ eine Matrix.
+ Es werden dann die Daten auf Client-Seite serialisiert und übertragen.
+ Auf dem Server ist dann also ein vollständiges Objekt mit eigenen Namen
+ verfügbar, welches alle Methoden und Attribute des Originalobjekts besitzt.
+ Die Methoden und Attribute können dann von Client-Seite aus über ein eigenes
+ Protokoll angesprochen und auf dem Server ausgeführt werden.
+ Ergebnisse können dann in eine neues virtuelles Objekt gespeichert werden,
+ welches der Client dann wieder zurück übertragen kann.
+ Voraussetzung dafür ist allerdings, dass die Klasse des Objekts das 
+\begin_inset Quotes gld
+\end_inset
 
-\begin_layout Standard
-Der Server wartet praktisch auf Befehle und kann über ein eigenes Protokoll
- angesteuert werden.
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+-Interface implementiert hat (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Softwarearchitektur-und-Laufzeit"
+
+\end_inset
+
+).
  
 \end_layout
 
 \begin_layout Standard
-FABIAN / Meinen Teil kenntlich machen
+Steht auf Client-Seite eine Aufgabe an, so wird diese dort in kleinere Teilaufga
+ben zerlegt und auf einem 
+\begin_inset Quotes gld
+\end_inset
+
+Aufgabenstack
+\begin_inset Quotes grd
+\end_inset
+
+ abgelegt.
+ Falls auf Server-Seite dafür Objekte/Daten benötigt werden (z.B.
+ eine Matrix), so kann der Client dafür auf dem Server ein virtuelles Objekt
+ desselben Typs mit Variablennamen allokieren.
+ Ein 
+\begin_inset Quotes gld
+\end_inset
+
+Round-Robin
+\begin_inset Quotes grd
+\end_inset
+
+ Scheduler verteilt diese Aufgaben dann nach und nach an die verbundenen
+ Server, sofern diese bereit sind.
+ Die Server erledigen diese Teilaufgabe und senden dieses an den Client
+ zurück und stehen dann für neue Aufgaben zur Verfügung.
+ Die Größe dieser Pakete/Teilaufgaben wird jeweils vom Scheduler bestimmt
+ und ist wichtig für die Effizienz des Verfahrens, die genaue Aufteilung
+ wird in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016"
+
+\end_inset
+
+ detailliert beschrieben und soll hier nicht weiter thematisiert werden.
+ Der Client sammelt alle Teillösungen und setzt diese am Ende dann wieder
+ zu einer Gesamtlösung zusammen und kann die Server dann beenden oder im
+ Wartemodus belassen.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Exemplarischer Ablauf einer Matrix Addition
 \end_layout
 
 \begin_layout Standard
-Für das Training der Kriging-Modelle innerhalb einer Optimierung müssen
- diverse Matrixoperationen durchgeführt werden und diese können je nach
- Problemgröße sehr aufwendig werden.
- Besonders bei einer Multifidelity-Optimierung oder einer gradientenunterstützte
--Optimierung kann das Training zum Flaschenhals der ganzen Optimierung werden.
+Um den Ablauf deutlich zu machen und die Prozessinteraktionen zu verstehen,
+ wird folgend ein Beispiel anhand einer Matrixaddition auf zwei Servern
+ gezeigt:
+\end_layout
+
+\begin_layout Enumerate
+Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Der Client wird gestartet und belegt die zu addierenden Matrizen.
+\end_layout
+
+\begin_layout Enumerate
+Der Client verbindet sich mit beiden Servern 
+\end_layout
+
+\begin_layout Enumerate
+Der Client startet für jeden Server einen Überwachungsthread, welcher in
+ regelmäßigen Abständen einen Ping sendet um zu überprüfen ob der jeweilige
+ Server noch verfügbar ist.
+\end_layout
+
+\begin_layout Enumerate
+Der Client startet die Matrix-Addition mit einem Befehl.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Intern: Der Client zerlegt die Addition in mehrere Teilmatrix-Additionen
+\end_layout
+
+\begin_layout Enumerate
+Intern: Der Client allokiert alle nötigen Teilmatrizen auf jedem Server
+ und übersendet die serialisierten Daten.
+\end_layout
+
+\begin_layout Enumerate
+Intern: Alle Teil-Matrix-Additions Befehle werden auf den Stack vom Client
+ gelegt
+\end_layout
+
+\begin_layout Enumerate
+Intern: Der Client startet den Scheduler, dieser verteilt dann alle Teilaufgaben
+ der Reihe nach
+\end_layout
+
+\begin_layout Enumerate
+Intern: Jeder Server speichert die Teilmatrizen in ein neue Matrix und konvertie
+rt diese in den Typ 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Der Client sammelt alle Teilergebnisse ein, wandelt diese in Matrix Objekte
+ um und setzt die Teilmatrizen zu einer Gesamtmatrix zusammen
+\end_layout
+
+\begin_layout Standard
+Besonders bei einer Multifidelity-Optimierung oder einer gradientenunterstützte-
+Optimierung kann das Training zum Flaschenhals der ganzen Optimierung werden.
  Prinzipiell sind hier zwei Fälle zu unterscheiden:
 \end_layout
 
@@ -6366,13 +7578,145 @@ reference "subsec:Gradient-Enhanced-Kriging"
 \end_layout
 
 \begin_layout Paragraph
+Netzwerkobjekte
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Alle Objekte die potenziell über das Netzwerk übertragen werden und als
+ virtuelle Variable auf Servern zur Verfügung stehen, müssen das Interface
+ 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ implementieren.
+ Das Interface erzwingt folgende Methoden, die die entsprechende Klasse
+ bereitstellen muss:
+\end_layout
+
+\begin_layout Itemize
+getSerializedData: Ein typloser Datenstrom mit allen benötigten Daten, um
+ die Klasse zu beschreiben.
+ Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:128Bit-Speicherausrichtung-1"
+
+\end_inset
+
+ beschreibt einen solchen Datenstrom, mit diesem ist ein vollständiges Matrix-Ob
+jekt beschrieben.
+ 
+\end_layout
+
+\begin_layout Itemize
+setSerializedData: Ein leeres Objekt eines Typs welches das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert, kann über diese Methode einen Datenstrom erhalten.
+ Dieser Datenstrom wird dann wieder zerlegt und in die entsprechenden Attribute
+ kopiert oder verschoben.
+ 
+\end_layout
+
+\begin_layout Itemize
+getBaseType: Der Ursprungstyp der Objekts (z.B.
+ Matrix) als String.
+ 
+\end_layout
+
+\begin_layout Itemize
+freeMem: Der belegte Speicher des Objekts wird vollständig geleert.
+\end_layout
+
+\begin_layout Standard
+Die Serialisierung und Deserialisierung ist in diesem Fall also über das
+ Interface sichergestellt.
+ Die korrekte Implementierung der (De-)Serialisierung allerdings nicht,
+ dies ist mit der Programmiersprache C++ allerdings auch nicht möglich.
+ Bei korrekter Implementierung ist es mit diesem System möglich komplette
+ Objekte über das Netzwerk zu verschicken.
+ Das besondere dabei ist, dass diese Objekte auf dem Server Typunabhängig
+ gespeichert werden und dadurch sehr flexibel miteinander interagieren können.
+ 
+\end_layout
+
+\begin_layout Paragraph
 Client
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_client.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Der Client ist das ausführende Programm, in diesem Fall das Kriging selbst.
- Um die Netzwerkfunktionen nutzen zu können, müssen die Klassen das Interface
- SaveableOnServer implementieren.
  Sorgt für die Aufgaben und deren Verteilung an die Server mithilfe eines
  Round-Robin Verfahrens.
  
@@ -6383,11 +7727,44 @@ Server
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 Ist ein eigenständiges kleine Programm, welches auf einem Rechner ausgeführt
  wird und dann auf Aufgaben wartet.
  Solange es keine Aufgaben erfüllt, verbraucht es praktisch keine Kapazitäten
  und kann im Hintergrund laufen.
- Es können Objekte allokiert werden und darauf Befehle ausgeführt werden.
+ Es können vom Client aus virtuelle Variablen/Objekte allokiert werden.
+ Auf diesen Objekten können Methoden aufgerufen werden oder diese als Parameter
+ an andere Methoden übergeben werden.
  Die Ergebnisse werden dann an der Client zurückgeschickt.
  Der Client muss diese dann wieder zusammensetzen,
 \end_layout
@@ -6396,29 +7773,19 @@ Ist ein eigenständiges kleine Programm, welches auf einem Rechner ausgeführt
 Messaging Middleware ZeroMQ
 \end_layout
 
-\begin_layout Paragraph
-Netzwerkobjekte
-\end_layout
-
 \begin_layout Standard
-Klassen die das Interface SaveableOnServer implementieren, müssen folgende
- Methoden bereitsstellen:
-\end_layout
+ZeroMQ (auch ∅MQ, 0MQ oder ZMQ) ist eine asynchrone Messaging-Bibliothek,
+ welche eine hocheffiziente Nachrichtenübermittlung anbietet.
+ ZeroMQ ist für Problemstellungen entwickelt worden, welche eine hoch optimierte
+ und schnelle Datenübertragung benötigen.
+ Für weitere Informationen sei auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZeroMQ,Dworak2011"
 
-\begin_layout Itemize
-getSerializedData(int& size): void* 
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-setSerializedData(void* data): void 
-\end_layout
-
-\begin_layout Itemize
-getServerType(): string 
-\end_layout
-
-\begin_layout Itemize
-freeMem(): void 
+ verwiesen.
 \end_layout
 
 \begin_layout Paragraph
@@ -6444,134 +7811,36 @@ Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
  
 \end_layout
 
-\begin_layout Paragraph*
-Exemplarischer Ablauf einer Matrix Multiplikation
-\end_layout
-
-\begin_layout Enumerate
-Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
- 
-\end_layout
-
 \begin_layout Standard
-Für den ersten Fall bietet es sich an, die Berechnung der partiellen Ableitungen
- 
-\begin_inset Formula $\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}$
-\end_inset
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
 
- (vgl.
- Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:COKrigingTraining"
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Fabiab_Netzwerk_one_many_total_speedup.eps
 
 \end_inset
 
-) auf mehrere Rechner zu verteilen.
- 
-\end_layout
 
-\begin_layout Standard
-Für den zweiten Fall ist ein leistungsstarker Rechner günstiger, da sich
- die aufwendigen numerischen Operationen schlechter aufteilen lassen.
- Besonders die Verwendung von leistungsstarken GPUs hat sich für diesen
- Fall als sehr effizient erwiesen und wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Verwendung-von-GPGPU"
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beschleunigungsfaktor eines Kriging-Trainings mit n Stützstellen im Vergleich
+ zu einer Einzelrechnung bei Nutzung von mehreren Servern.
+\end_layout
 
 \end_inset
 
- beschrieben.
- Da die meisten Optimierungen auf einem Großrechner des DLR ausführt werden
- und dieser keine GPU-Infrastruktur bietet, ist eine Auslagerung der Matrixopera
-tionen auf einen leistungsstarken externen Rechner in diesem Fall wünschenswert.
-\end_layout
 
-\begin_layout Standard
-Um diesen Anforderungen gerecht zu werden, wurde ein asynchrones Server-Client
- System entwickelt (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "kueppers2016,kueppers2016b"
+\end_layout
 
 \end_inset
 
-).
- Als Messaging-Middleware wurde ZeroMQ (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ZeroMQ,Dworak2011"
 
-\end_inset
-
-) verwendet und für die (De-)Serialisierung eine eigene Implementation entwickel
-t.
- Die Schnittstelle wurde erfolgreich getestet und konnte im zweiten Fall
- ab einer Matrixgröße von ca.
- 3000x3000 gewinnbringend eingesetzt werden.
- Für den zweiten Fall stieg die Beschleunigung nahezu linear mit der Anzahl
- der Server.
- Für weitere Informationen und die genaue Implementierung sei auf 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "kueppers2016,kueppers2016b"
-
-\end_inset
-
- verwiesen.
-\end_layout
-
-\begin_layout Standard
-- Mehr schreiben, Link zu den Matrix Klassen bringen, Interface SaveAbleOnServer
- 
-\end_layout
-
-\begin_layout Standard
-- Serialisierung beschreiben
-\end_layout
-
-\begin_layout Standard
-- Scheduler beschreiben
-\end_layout
-
-\begin_layout Standard
-- Queue beschreiben und die Aufteilung in Paket, Asynchronität beschreiben
-\end_layout
-
-\begin_layout Itemize
-Eigenes hochperformantes verteiltes System zur asynchronen Verteilung von
- Matrixoperationen während aller Kriging Operationen (Vorhersage und Training).
- Dieses Verfahren ist extrem flexibel und kann verschiedene Matrixoperationen
- automatische aufteilen und auf mehrere Server verteilten.
- Die Aufteilung erfolgt komplett asynchron, fällt also ein Server bspw.
- aus, so übernimmt ein anderer automatisch die Berechnung.
- Zudem können so verschiedene Architekturen verbunden werden, also bspw.
- CPU und GPU oder unterschiedliche Betriebssysteme.
-\end_layout
-
-\begin_layout Itemize
-Interface Programmierung hervorheben
-\end_layout
-
-\begin_layout Itemize
-Aufteilung der Pakete
-\end_layout
-
-\begin_layout Itemize
-Asynchronität beschreiben
-\end_layout
-
-\begin_layout Itemize
-Wie übernimmt ein anderer die Rechnung, falls einer ausfällt?
-\end_layout
-
-\begin_layout Itemize
-Kein MPI nötig, dadurch oft Versionsprobleme oder Lib Probleme OpenMPI/MVAPICH
- usw.
- alles nicht kompatibel und in der Regel nicht asynchron-> Für eine Optimierung
- die über mehrere Rechner läuft und unterschiedlichste System ist dies kein
- Option.
 \end_layout
 
 \begin_layout Subsection
@@ -7037,11 +8306,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular

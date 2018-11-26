@@ -1,11 +1,11 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Point.dia
+%%Title: /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.dia
 %%Creator: Dia v0.97.3
-%%CreationDate: Mon Nov 26 10:45:43 2018
+%%CreationDate: Sat Nov 24 13:37:21 2018
 %%For: schm_ad
 %%Orientation: Portrait
 %%Magnification: 1.0000
-%%BoundingBox: 0 0 585 584
+%%BoundingBox: 0 0 706 1053
 %%BeginSetup
 %%EndSetup
 %%EndComments
@@ -341,98 +341,166 @@ definefont pop
     currentdict end
 definefont pop
 28.346000 -28.346000 scale
--3.950000 -26.550000 translate
+-7.804540 -40.276900 translate
 %%EndProlog
 
 
-0.100000 slw
+0.150000 slw
 [] 0 sd
 1.000000 1.000000 1.000000 srgb
-n 4.000000 16.000000 m 4.000000 18.100000 l 24.520000 18.100000 l 24.520000 16.000000 l f
+n 13.284400 3.218250 m 13.284400 5.318250 l 27.259400 5.318250 l 27.259400 3.218250 l f
 0.000000 0.000000 0.000000 srgb
-n 4.000000 16.000000 m 4.000000 18.100000 l 24.520000 18.100000 l 24.520000 16.000000 l cp s
+n 13.284400 3.218250 m 13.284400 5.318250 l 27.259400 5.318250 l 27.259400 3.218250 l cp s
 /Helvetica-Bold-latin1 ff 0.700000 scf sf
-(Point) dup sw 2 div 14.260000 ex sub 16.750000 m
+(ZMQConnection) dup sw 2 div 20.271900 ex sub 3.968250 m
  gs 1 -1 sc sh gr
 /Helvetica-Oblique-latin1 ff 0.490000 scf sf
-(Beschreibt eine Stützstelle) dup sw 2 div 14.260000 ex sub 17.585000 m
+(Klasse welche eine ZMQ Verbindung darstellt) dup sw 2 div 20.271900 ex sub 4.803250 m
  gs 1 -1 sc sh gr
 1.000000 1.000000 1.000000 srgb
-n 4.000000 18.100000 m 4.000000 20.700000 l 24.520000 20.700000 l 24.520000 18.100000 l f
+n 13.284400 5.318250 m 13.284400 5.718250 l 27.259400 5.718250 l 27.259400 5.318250 l f
 0.000000 0.000000 0.000000 srgb
-n 4.000000 18.100000 m 4.000000 20.700000 l 24.520000 20.700000 l 24.520000 18.100000 l cp s
+n 13.284400 5.318250 m 13.284400 5.718250 l 27.259400 5.718250 l 27.259400 5.318250 l cp s
+1.000000 1.000000 1.000000 srgb
+n 13.284400 5.718250 m 13.284400 9.118250 l 27.259400 9.118250 l 27.259400 5.718250 l f
+0.000000 0.000000 0.000000 srgb
+n 13.284400 5.718250 m 13.284400 9.118250 l 27.259400 9.118250 l 27.259400 5.718250 l cp s
 /Courier-latin1 ff 0.560000 scf sf
-(-variables: vector) 4.150000 18.640000 m
+(+send\(msg:T,size:unsigned long int\)) 13.459400 6.258250 m
  gs 1 -1 sc sh gr
-(-partialDerivatives: map<int,double>) 4.150000 19.440000 m
+(+recvMem\(size:unsigned long int\): T) 13.459400 7.058250 m
  gs 1 -1 sc sh gr
-(-fitness: double) 4.150000 20.240000 m
+(+sendOk\(timeout:int=-1\): bool) 13.459400 7.858250 m
+ gs 1 -1 sc sh gr
+(+recvOk\(timeout:int=-1\): bool) 13.459400 8.658250 m
+ gs 1 -1 sc sh gr
+0.150000 slw
+[] 0 sd
+1.000000 1.000000 1.000000 srgb
+n 12.680400 11.506400 m 12.680400 13.606400 l 27.810400 13.606400 l 27.810400 11.506400 l f
+0.000000 0.000000 0.000000 srgb
+n 12.680400 11.506400 m 12.680400 13.606400 l 27.810400 13.606400 l 27.810400 11.506400 l cp s
+/Helvetica-Bold-latin1 ff 0.700000 scf sf
+(ZMQServer) dup sw 2 div 20.245400 ex sub 12.256400 m
+ gs 1 -1 sc sh gr
+/Helvetica-Oblique-latin1 ff 0.490000 scf sf
+(Klasse, welche eine Server Verbindung darstellt) dup sw 2 div 20.245400 ex sub 13.091400 m
  gs 1 -1 sc sh gr
 1.000000 1.000000 1.000000 srgb
-n 4.000000 20.700000 m 4.000000 26.500000 l 24.520000 26.500000 l 24.520000 20.700000 l f
+n 12.680400 13.606400 m 12.680400 16.206400 l 27.810400 16.206400 l 27.810400 13.606400 l f
 0.000000 0.000000 0.000000 srgb
-n 4.000000 20.700000 m 4.000000 26.500000 l 24.520000 26.500000 l 24.520000 20.700000 l cp s
-(+getVars\(\): vector) 4.150000 21.240000 m
+n 12.680400 13.606400 m 12.680400 16.206400 l 27.810400 16.206400 l 27.810400 13.606400 l cp s
+/Courier-latin1 ff 0.560000 scf sf
+(-vars: map<string, SaveableOnServer*>) 12.855400 14.146400 m
  gs 1 -1 sc sh gr
-(+getPartialDerivative\(variable:int\): double) 4.150000 22.040000 m
+(-connection: ZMQConnection*) 12.855400 14.946400 m
  gs 1 -1 sc sh gr
-(+getFit\(\): double) 4.150000 22.840000 m
+(-pingConnection: ZMQConnection*) 12.855400 15.746400 m
  gs 1 -1 sc sh gr
-(+setVars\(variables:vector\): void) 4.150000 23.640000 m
+1.000000 1.000000 1.000000 srgb
+n 12.680400 16.206400 m 12.680400 21.206400 l 27.810400 21.206400 l 27.810400 16.206400 l f
+0.000000 0.000000 0.000000 srgb
+n 12.680400 16.206400 m 12.680400 21.206400 l 27.810400 21.206400 l 27.810400 16.206400 l cp s
+(#serve\(\): void) 12.855400 16.746400 m
  gs 1 -1 sc sh gr
-(+setFit\(fitness:double\): void) 4.150000 24.440000 m
+(#resetMemory\(\): void) 12.855400 17.546400 m
  gs 1 -1 sc sh gr
-(+setPartialDerivatives\(partDerivatives:vector\): void) 4.150000 25.240000 m
+(+malloc\(type:string,name:string\): void) 12.855400 18.346400 m
  gs 1 -1 sc sh gr
-(+...\(...\): ...) 4.150000 26.040000 m
+(+sendVar\(name:string\): void) 12.855400 19.146400 m
+ gs 1 -1 sc sh gr
+(+listen\(\): void) 12.855400 19.946400 m
+ gs 1 -1 sc sh gr
+(+...\(\): ...) 12.855400 20.746400 m
+ gs 1 -1 sc sh gr
+0.150000 slw
+[] 0 sd
+1.000000 1.000000 1.000000 srgb
+n 7.879540 24.901900 m 7.879540 27.001900 l 32.634540 27.001900 l 32.634540 24.901900 l f
+0.000000 0.000000 0.000000 srgb
+n 7.879540 24.901900 m 7.879540 27.001900 l 32.634540 27.001900 l 32.634540 24.901900 l cp s
+/Helvetica-Bold-latin1 ff 0.700000 scf sf
+(MatrixServerFunctions) dup sw 2 div 20.257040 ex sub 25.651900 m
+ gs 1 -1 sc sh gr
+/Helvetica-Oblique-latin1 ff 0.490000 scf sf
+(Server Funktionen, welche Variablen des Typs SaveAbleOnServer verwenden) dup sw 2 div 20.257040 ex sub 26.486900 m
+ gs 1 -1 sc sh gr
+1.000000 1.000000 1.000000 srgb
+n 7.879540 27.001900 m 7.879540 28.801900 l 32.634540 28.801900 l 32.634540 27.001900 l f
+0.000000 0.000000 0.000000 srgb
+n 7.879540 27.001900 m 7.879540 28.801900 l 32.634540 28.801900 l 32.634540 27.001900 l cp s
+/Courier-latin1 ff 0.560000 scf sf
+(-vars: map<string,SaveableOnServer*> *) 8.054540 27.541900 m
+ gs 1 -1 sc sh gr
+(-useGPU: bool) 8.054540 28.341900 m
+ gs 1 -1 sc sh gr
+1.000000 1.000000 1.000000 srgb
+n 7.879540 28.801900 m 7.879540 40.201900 l 32.634540 40.201900 l 32.634540 28.801900 l f
+0.000000 0.000000 0.000000 srgb
+n 7.879540 28.801900 m 7.879540 40.201900 l 32.634540 40.201900 l 32.634540 28.801900 l cp s
+(+calcDensity\(densityName:string,updateVariance:bool,) 8.054540 29.341900 m
+ gs 1 -1 sc sh gr
+(             adjointMat:bool\): bool) 8.054540 30.141900 m
+ gs 1 -1 sc sh gr
+(+calcDensityDerivative\(densityName:string,) 8.054540 30.941900 m
+ gs 1 -1 sc sh gr
+(                       result:string\): bool) 8.054540 31.741900 m
+ gs 1 -1 sc sh gr
+(+calcDensityDerivativePartial\(densityName:string,) 8.054540 32.541900 m
+ gs 1 -1 sc sh gr
+(                              adjointMat_name:string,) 8.054540 33.341900 m
+ gs 1 -1 sc sh gr
+(                              dVec_name:string,) 8.054540 34.141900 m
+ gs 1 -1 sc sh gr
+(                              result:string,) 8.054540 34.941900 m
+ gs 1 -1 sc sh gr
+(                              pair1:int,pair2:int,) 8.054540 35.741900 m
+ gs 1 -1 sc sh gr
+(                              from:int,to:int,) 8.054540 36.541900 m
+ gs 1 -1 sc sh gr
+(                              hyperGlobalNr:unsigned int\): bool) 8.054540 37.341900 m
+ gs 1 -1 sc sh gr
+(+choleskyInversionVector\(matrix_name:string,) 8.054540 38.141900 m
+ gs 1 -1 sc sh gr
+(                         result:string,from:int,) 8.054540 38.941900 m
+ gs 1 -1 sc sh gr
+(                         to:int\): bool) 8.054540 39.741900 m
  gs 1 -1 sc sh gr
 0.100000 slw
 [] 0 sd
-1.000000 1.000000 1.000000 srgb
-n 4.000000 6.000000 m 4.000000 8.900000 l 23.365000 8.900000 l 23.365000 6.000000 l f
-0.000000 0.000000 0.000000 srgb
-n 4.000000 6.000000 m 4.000000 8.900000 l 23.365000 8.900000 l 23.365000 6.000000 l cp s
-/Courier-latin1 ff 0.560000 scf sf
-(<<interface>>) dup sw 2 div 13.682500 ex sub 6.640000 m
- gs 1 -1 sc sh gr
-/Helvetica-BoldOblique-latin1 ff 0.700000 scf sf
-(SaveableOnServer) dup sw 2 div 13.682500 ex sub 7.550000 m
- gs 1 -1 sc sh gr
-/Helvetica-Oblique-latin1 ff 0.490000 scf sf
-(Interface für die Netzwerkkommunikation) dup sw 2 div 13.682500 ex sub 8.385000 m
- gs 1 -1 sc sh gr
-1.000000 1.000000 1.000000 srgb
-n 4.000000 8.900000 m 4.000000 9.300000 l 23.365000 9.300000 l 23.365000 8.900000 l f
-0.000000 0.000000 0.000000 srgb
-n 4.000000 8.900000 m 4.000000 9.300000 l 23.365000 9.300000 l 23.365000 8.900000 l cp s
-1.000000 1.000000 1.000000 srgb
-n 4.000000 9.300000 m 4.000000 13.500000 l 23.365000 13.500000 l 23.365000 9.300000 l f
-0.000000 0.000000 0.000000 srgb
-n 4.000000 9.300000 m 4.000000 13.500000 l 23.365000 13.500000 l 23.365000 9.300000 l cp s
-/Courier-latin1 ff 0.560000 scf sf
-(+getSerializedData\(size:unsigned long int\): void*) 4.150000 9.840000 m
- gs 1 -1 sc sh gr
-(+setSerializedData\(data:void*\): void) 4.150000 10.640000 m
- gs 1 -1 sc sh gr
-(+freeMem\(\): void) 4.150000 11.440000 m
- gs 1 -1 sc sh gr
-(+print\(\): void) 4.150000 12.240000 m
- gs 1 -1 sc sh gr
-(+getBaseType\(\): string) 4.150000 13.040000 m
- gs 1 -1 sc sh gr
-0.100000 slw
-[1.000000] 0 sd
-[0.400000] 0 sd
 0 slj
 0 slc
-n 13.682500 14.411803 m 13.682500 15.124838 l 14.260000 15.124838 l 14.260000 15.949677 l s
+n 20.245400 22.539852 m 20.245400 23.404100 l 20.257040 23.404100 l 20.257040 24.827860 l s
+[] 0 sd
 0 slj
+0 slc
 1.000000 1.000000 1.000000 srgb
-n 14.082500 14.411803 m 13.682500 13.611803 l 13.282500 14.411803 l ef
+n 20.245400 21.281273 m 20.485400 21.981273 l 20.245400 22.681273 l 20.005400 21.981273 l ef
 0.100000 slw
 [] 0 sd
 0 slj
+0 slc
 0.000000 0.000000 0.000000 srgb
-n 14.082500 14.411803 m 13.682500 13.611803 l 13.282500 14.411803 l cp s
+n 20.245400 21.281273 m 20.485400 21.981273 l 20.245400 22.681273 l 20.005400 21.981273 l cp s
 /Courier-latin1 ff 0.560000 scf sf
+(1) 20.457040 24.477860 m
+ gs 1 -1 sc sh gr
+0.100000 slw
+[] 0 sd
+0 slj
+0 slc
+n 20.245400 10.172521 m 20.245400 9.962359 l 20.271900 9.962359 l 20.271900 9.193619 l s
+[] 0 sd
+0 slj
+0 slc
+1.000000 1.000000 1.000000 srgb
+n 20.245400 11.431099 m 20.005400 10.731099 l 20.245400 10.031099 l 20.485400 10.731099 l ef
+0.100000 slw
+[] 0 sd
+0 slj
+0 slc
+0.000000 0.000000 0.000000 srgb
+n 20.245400 11.431099 m 20.005400 10.731099 l 20.245400 10.031099 l 20.485400 10.731099 l cp s
+(2) 20.471900 9.643619 m
+ gs 1 -1 sc sh gr
 showpage
