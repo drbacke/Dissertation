@@ -2822,6 +2822,37 @@ en und Unterschiede gegeben werden und anschließend die aktuellen Ergebnisse
 \end_layout
 
 \begin_layout Paragraph*
+Laufzeitumgebung
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Laufzeitumgebung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jede Optimierung erhielt 6+1 Knoten auf dem DLR-AT Cluster, wobei ein Knoten
+ folgende Konfiguration besitzt:
+\end_layout
+
+\begin_layout Itemize
+2x Intel® Xeon E5-2695 v2 mit 2.4GHz 
+\end_layout
+
+\begin_layout Itemize
+128GB ECC RAM
+\end_layout
+
+\begin_layout Standard
+Für die Prozesskettenberechnung wurden 6 Knoten vorgesehen.
+ Das Training und alle AutoOpti internen Prozesse fanden auf jeweils einem
+ eigenen Knoten statt.
+ 
+\end_layout
+
+\begin_layout Paragraph*
 Prozesskette der Gütestufen
 \end_layout
 

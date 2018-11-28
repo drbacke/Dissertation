@@ -3835,6 +3835,48 @@ In diesem Fall würden das lokale und globale Kriterium zu einer anderen
 \end_layout
 
 \begin_layout Section
+Kapitel 5 - UML Diagramm der ZMQClient Klasse und deren Abhängigkeiten
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Kapitel-5--asd"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_client.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UML Diagramm der Klassenstrukt einer Client Verbindung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Kapitel 5 - Cholesky Zerlegung
 \begin_inset CommandInset label
 LatexCommand label

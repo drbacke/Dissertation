@@ -7689,37 +7689,38 @@ Client
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_client.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Der Client ist das ausführende Programm, in diesem Fall das Kriging selbst.
  Sorgt für die Aufgaben und deren Verteilung an die Server mithilfe eines
  Round-Robin Verfahrens.
- 
+ Das UML Diagramm ist in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Kapitel-5--asd"
+
+\end_inset
+
+ zu finden.
+ Die Struktur besteht im Wesentlichen aus einer 
+\begin_inset Quotes gld
+\end_inset
+
+ZMQClient
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse, welche alle Verbindungen und Kommunikation mit den Servern verwaltet.
+ Weiterhin gibt es eine 
+\begin_inset Quotes gld
+\end_inset
+
+ClientFunctions
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse, diese beinhaltet die aufrufbaren Methoden wie z.B.
+ die Matrix Multiplikation usw..
+ Diese Methoden werden dann innerhalb des Kriging-Programms aufgerufen und
+ liefern dann die entsprechenden Ergebnisse sofort zurück.
 \end_layout
 
 \begin_layout Paragraph
@@ -7732,7 +7733,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -7744,7 +7745,13 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-der"
 
+\end_inset
+
+UML Diagramm der Server-Klassen
 \end_layout
 
 \end_inset
@@ -7758,15 +7765,312 @@ status collapsed
 
 \end_inset
 
-Ist ein eigenständiges kleine Programm, welches auf einem Rechner ausgeführt
- wird und dann auf Aufgaben wartet.
+Die hier beschriebene Server Software ist ein eigenständiges Programm, welches
+ auf einem Rechner ausgeführt wird und dann auf Aufgaben wartet.
  Solange es keine Aufgaben erfüllt, verbraucht es praktisch keine Kapazitäten
- und kann im Hintergrund laufen.
- Es können vom Client aus virtuelle Variablen/Objekte allokiert werden.
- Auf diesen Objekten können Methoden aufgerufen werden oder diese als Parameter
- an andere Methoden übergeben werden.
- Die Ergebnisse werden dann an der Client zurückgeschickt.
- Der Client muss diese dann wieder zusammensetzen,
+ und wartet im Hintergrund.
+ Der Aufbau der zugehörigen Klassen ist in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:UML-Diagramm-der"
+
+\end_inset
+
+ dargestellt.
+ Kern des Programms ist die 
+\begin_inset Quotes gld
+\end_inset
+
+ZMQServer
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse.
+ Diese enthält genau zwei Verbindungen, eine zur hauptsächlichen Kommunikation
+ mit dem Client und eine Ping-Verbindung.
+ Die Ping-Verbindung sendet in regelmäßigen Abständen kleine Netzwerk-Pings
+ und der Client weiß damit, dass der Server noch funktioniert.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin stellt der 
+\begin_inset Quotes gld
+\end_inset
+
+ZMQServer
+\begin_inset Quotes grd
+\end_inset
+
+ die Verwaltung der virtuellen Variablen bereit.
+ Hierfür ist ein assoziativer Container in Form einer Map namens 
+\begin_inset Quotes gld
+\end_inset
+
+vars
+\begin_inset Quotes grd
+\end_inset
+
+ vorgesehen.
+ Dieser bildet einen Variablennamen auf ein 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt ab.
+ Dadurch können alle Objekte mit dem Interface SaveableOnServer innerhalb
+ dieses Containers gespeichert werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+MatrixServerFunctions
+\begin_inset Quotes grd
+\end_inset
+
+ stellt alle Methoden bereit, welche vom Client benötigt werden und hat
+ Zugriff auf den Variablen-Container.
+ Die Berechnung einer Matrix Addition der Matrizen 
+\begin_inset Quotes gld
+\end_inset
+
+mat1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+mat2
+\begin_inset Quotes grd
+\end_inset
+
+ auf einem Server würde wie folgt ablaufen:
+\end_layout
+
+\begin_layout Enumerate
+Der Client muss die beiden Matrizen per Typumwandlung in 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ Objekte umwandeln.
+ Dies ist nur möglich, wenn das Interface implementiert wurde.
+ Diese Objekte können dann serialisiert und übertragen werden.
+\end_layout
+
+\begin_layout Enumerate
+Der ZMQServer erhält diese Objekte und speicher die Objekte und kann diese
+ dann in der 
+\begin_inset Quotes gld
+\end_inset
+
+vars
+\begin_inset Quotes grd
+\end_inset
+
+ Map mit dem vorgesehenen Namen speichern.
+\end_layout
+
+\begin_layout Enumerate
+Der Client ruft über das Netzwerkprotokoll den Befehl auf, die Matrizen
+ 
+\begin_inset Quotes gld
+\end_inset
+
+mat1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+mat2
+\begin_inset Quotes grd
+\end_inset
+
+ zu addieren und in 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ zu speichern.
+\end_layout
+
+\begin_layout Enumerate
+Der Server erhält den Befehl und ruft die 
+\begin_inset Quotes gld
+\end_inset
+
+matrixAddition
+\begin_inset Quotes grd
+\end_inset
+
+ Methode auf, als Parameter werden nur die Namen 
+\begin_inset Quotes gld
+\end_inset
+
+mat1
+\begin_inset Quotes grd
+\end_inset
+
+,
+\begin_inset Quotes grd
+\end_inset
+
+mat2
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ übergeben.
+ Zusätzlich können noch die Werte 
+\begin_inset Quotes gld
+\end_inset
+
+from
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+to
+\begin_inset Quotes grd
+\end_inset
+
+ belegt werden, welche die zu addierenden Zeilen beschreiben.
+ Damit könnte auch nur ein Teil der Matrix addiert werden.
+\end_layout
+
+\begin_layout Enumerate
+Die Funktion führt eine Typumwandlung auf die Einträge 
+\begin_inset Quotes gld
+\end_inset
+
+mat1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+mat2
+\begin_inset Quotes grd
+\end_inset
+
+ des 
+\begin_inset Quotes gld
+\end_inset
+
+vars
+\begin_inset Quotes grd
+\end_inset
+
+ Containers durch und wandelt diese in Objekte vom Typ 
+\begin_inset Quotes gld
+\end_inset
+
+Matrix
+\begin_inset Quotes grd
+\end_inset
+
+ um.
+ Diese können dann addiert und in einem neuen Matrix Objekt 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert werden.
+ Dieses wird per Typumwandlung wieder in ein 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt umgewandelt und kann dann in dem 
+\begin_inset Quotes gld
+\end_inset
+
+vars
+\begin_inset Quotes grd
+\end_inset
+
+ Container unter dem Namen 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Der Client kann nun das 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ zurück übertragen und in ein Objekt vom Typ 
+\begin_inset Quotes gld
+\end_inset
+
+Matrix
+\begin_inset Quotes grd
+\end_inset
+
+ umwandeln und hat dann das fertige Ergebnis.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei mehreren Servern würde die Typumwandlung genauso verlaufen, es würden
+ dann nur Teilmatrizen übertragen werden oder nur Teilrechnungen ausgeführt
+ werden.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -7811,13 +8115,17 @@ Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
  
 \end_layout
 
+\begin_layout Paragraph
+Geschwindigkeit bei mehreren Servern
+\end_layout
+
 \begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -7829,9 +8137,18 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beschleunigungsfaktor-eines-Krig"
+
+\end_inset
+
 Beschleunigungsfaktor eines Kriging-Trainings mit n Stützstellen im Vergleich
  zu einer Einzelrechnung bei Nutzung von mehreren Servern.
-\end_layout
+ Quelle: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kueppers2016b,kueppers2016"
 
 \end_inset
 
@@ -7841,6 +8158,57 @@ Beschleunigungsfaktor eines Kriging-Trainings mit n Stützstellen im Vergleich
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+Bei einem verteilten System leidet die Geschwindigkeit der Operationen oft
+ erheblich, da für die Kommunikation und die Verwaltung der Teilberechnungen
+ ein großer Anteil der Rechenzeit aufgewendet wird.
+ Meist steigt der Aufwand mit steigender Server-Anzahl und lohnt sich erst
+ ab einer gewissen Problemgröße.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beschleunigungsfaktor-eines-Krig"
+
+\end_inset
+
+ zeigt die Messung des zeitlichen Faktors eines Kriging-Trainings bei steigender
+ Server-Anzahl und unterschiedlichen Problemgrößen.
+ Das Training wurde auf dem DLR-AT Cluster ausgeführt (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Laufzeitumgebung"
+
+\end_inset
+
+).
+ Als Testfall dienten zufällige Stützstellen der in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ZDT3"
+
+\end_inset
+
+ beschriebenen ZDT3 Funktion mit 20 freien Variablen.
+ Eine Anzahl an Servern von 0 stellt ein lokales Training dar und eine Anzahl
+ von 1 eine 1:1 Verbindung.
+\end_layout
+
+\begin_layout Standard
+Man kann sehen, dass der Verlust eine 1:1 Verbindung sehr klein ist, der
+ Verlust über die reine Netzwerkkommunikation ist also als gering einzustufen.
+ Bei einer Anzahl von 2-3 Servern ist der Verlust ab einer Stützstellenanzahl
+ von 2000 ebenfalls sehr klein.
+ Mit zunehmender Anzahl an Servern nimmt dann auch der Verlust auch weiter
+ zu, dieses Verhalten ist allerdings auch so zu erwarten.
+ Die Problemstellung ist für eine so hohe Anzahl an so leistungsstarken
+ Rechnern noch zu klein, dennoch lässt sich bei 7 Servern eine maximale
+ Beschleunigung des Faktors 5 erreichen, also 71% der Rechenleistung werden
+ effektiv genutzt.
+ Bedenkt man weiterhin die Flexibilität und Ausfallsicherheit des System,
+ so ist der Einsatz bei entsprechend großen Problemen sehr lohnenswert.
 \end_layout
 
 \begin_layout Subsection
