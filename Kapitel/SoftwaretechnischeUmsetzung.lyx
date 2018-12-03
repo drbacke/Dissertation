@@ -8078,8 +8078,8 @@ Messaging Middleware ZeroMQ
 \end_layout
 
 \begin_layout Standard
-ZeroMQ (auch ∅MQ, 0MQ oder ZMQ) ist eine asynchrone Messaging-Bibliothek,
- welche eine hocheffiziente Nachrichtenübermittlung anbietet.
+ZeroMQ ist eine asynchrone Messaging-Bibliothek, welche eine hocheffiziente
+ Nachrichtenübermittlung anbietet.
  ZeroMQ ist für Problemstellungen entwickelt worden, welche eine hoch optimierte
  und schnelle Datenübertragung benötigen.
  Für weitere Informationen sei auf 

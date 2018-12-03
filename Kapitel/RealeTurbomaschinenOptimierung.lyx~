@@ -354,6 +354,13 @@ Zusammenfassend kann man feststellen, dass sich dieser einfache analytische
 
 \begin_layout Section
 Analytische Optimierungsbeispiele
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Analytische-Optimierungsbeispiel"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2673,100 +2680,255 @@ name "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Kurze Beschreibung was optimiert wird, CRISP ähnlicher Fan.
- Referenz zu Erich
+Innerhalb dieses Abschnitts soll ein Vergleich zwischen einer Multifidelity-Opti
+mierung und einer reinen Single-Fidelity-Optimierung angestellt werden.
+ Die verwendeten Optimierungsverfahren sind die in dieser Arbeit vorgestellten
+ Verfahren.
+ Das Multifidelity-Verfahren ist das in dieser Arbeit entwickelte Verfahren
+ und beide Optimierungen nutzen die in dieser Arbeit entwickelte Kriging-Softwar
+e.
+ 
+\end_layout
+
+\begin_layout Standard
+Als Basis für die hier gezeigten Optimierungen dient die Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+, diese Bachelorarbeit wurde im Rahmen dieser Dissertation angefertigt und
+ betreut.
+ Dort wird die aeromechanische Optimierung einer modernen Fan-Stufe beschrieben
+ und eine frühe Version der hier vorgestellten Multifidelity-Verfahren getestet.
+ Das Multifidelity-Verfahren in
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ unterscheidet sich in folgenden Punkten von dem aktuellen Stand:
+\end_layout
+
+\begin_layout Itemize
+Die Entscheidungsfunktion berücksichtigt im aktuellen Stand die Gewichtung
+ der Nebenbedingungen und Zielfunktion und auch die Gewichtung der Nebenbedingun
+gen untereinander je nach Wahrscheinlichkeit diese zu erfüllen.
+\end_layout
+
+\begin_layout Itemize
+Das Co-Kringing Modell bietet im Vergleich zu 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ die stabile Nutzung von Rauschtermen und dem Skalierungsfaktor.
+ Weiterhin wurde das Initialiserungsverfahren, welches in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+ beschrieben 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis bereits vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ wird, verwendet.
+\end_layout
+
+\begin_layout Itemize
+Das Trainingsverfahren wurde mit den in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Implementierung-der-DLR-Kriging-"
+
+\end_inset
+
+ beschriebenen Verfahren erheblich beschleunigt.
+\end_layout
+
+\begin_layout Itemize
+Für die Optimierung auf dem Ersatzmodell wurde bei 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ eine Restriktion auf die Wahrscheinlichkeit einer Verbesserung in Zielfunktion
+ und Nebenbedingung von mindestens 80% gesetzt.
+ Dies wurde gemacht um Konvergenzproblemen in der Prozesskette aus dem Weg
+ zu gehen.
+ Um diese Restriktion erfüllen zu können, muss der Optimierungsalgorithmus
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Erwarteter Volumenzugewinn
+\begin_inset Quotes grd
+\end_inset
+
+ immer zu kleinen vorhergesagten Varianzen tendieren.
+ Dies wiederum bedeutet, dass sich die Suche auf dem Ersatzmodell vom Startpunkt
+ kaum wegbewegt und das Explorative Vorgehen dadurch stark eingeschränkt
+ wird.
+ Bei einer Multifidelity-Optimierung sollten aber besonders diese 
+\begin_inset Quotes gld
+\end_inset
+
+explorativen
+\begin_inset Quotes grd
+\end_inset
+
+ Bereiche interessant sein, da dort mit wenig Aufwand eine Schätzung gegeben
+ werden kann.
+ Aus diesem Grund wurde diese Restriktion in diesen Benchmarks ausgeschaltet.
+\end_layout
+
+\begin_layout Standard
+Ziel dieses Benchmarks ist es, das Potential und Verhalten des hier beschriebene
+n Multifidelity-Verfahrens an einer realitätsnahen Turbomaschinenoptimierung
+ zu testen und zu beschreiben.
+ 
 \end_layout
 
 \begin_layout Subsection
 Optimierungssetup 
 \end_layout
 
-\begin_layout Paragraph*
-Prozesskette 
-\end_layout
-
 \begin_layout Standard
-3 Sätze und auf Erich verweisen.
- Kleine Bild der Kette.
+In diesem Abschnitt soll das Optimierungssetup der hier durchgeführten Optimieru
+ngen beschrieben werden.
+ Viele Details werden bereits in der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ beschrieben, daher soll hier nur ein Überblick über die wichtigsten Information
+en und Unterschiede gegeben werden und anschließend die aktuellen Ergebnisse
+ im Detail beschrieben werden.
  
 \end_layout
 
-\begin_layout Paragraph
-Zielfunktionen und Nebenbedingungen
+\begin_layout Paragraph*
+Laufzeitumgebung
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Laufzeitumgebung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Kleines Bild von OP0 / OP1 und Zielfunktion daran erklären.
- Nebenbedingungen kurz
+Jede Optimierung erhielt 6+1 Knoten auf dem DLR-AT Cluster, wobei ein Knoten
+ folgende Konfiguration besitzt:
 \end_layout
 
-\begin_layout Paragraph
-Unterschied HF/LF
+\begin_layout Itemize
+2x Intel® Xeon E5-2695 v2 mit 2.4GHz 
+\end_layout
+
+\begin_layout Itemize
+128GB ECC RAM
 \end_layout
 
 \begin_layout Standard
-Kurz beschreiben.
- Ebenfalls auf Erich verweisen.
- Bild von den Netzen in Anhang.
+Für die Prozesskettenberechnung wurden 6 Knoten vorgesehen.
+ Das Training und alle AutoOpti internen Prozesse fanden auf jeweils einem
+ eigenen Knoten statt.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Prozesskette der Gütestufen
+\end_layout
+
+\begin_layout Standard
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Prozesskette-und-die"
+
+\end_inset
+
+ ist die Abfolge der Prozesskette für die hohe und niedrige Gütestufen dargestel
+lt.
+ Weiterhin sind auch die mittleren Ausführungszeiten zu erkennen, diese
+ können im Laufe der Optimierung variieren.
+ Die beiden Gütestufen unterscheiden sich durch die Auflösung des CFD-Netzes
+ und der Laufzeitunterschied zwischen den Prozessketten liegt bei einem
+ Faktor von ungefähr 10.
  
 \end_layout
 
 \begin_layout Standard
-Tabelle CFD Netz Unterschiede.
- Auflösung Naben und Gehäuse und Rotorspalt erhöht um Sekundärströmungseffekte
- besser zu modellieren.
+Die Prozesskette startet in beiden Gütestufen mit der Geometrieerzeugung
+ anhand der vom Optimierer bereitgestellten Parameter (siehe Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Parametrisierung"
+
+\end_inset
+
+ Parametrisierung).
+ Mit den erzeugten Geometriedateien, kann das notwendige CFD-Rechennetz
+ erzeugt werden.
+ Das Rechennetz der unterschiedlichen Gütestufen unterscheidet sich durch
+ die Auflösung (siehe Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:UnterschiedGütestufen"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Unterschied hohe- und niedrige Gütestufe
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Das Konvergenzkriterium ist durch eine maximale Schwankung des Wirkungsgrads,
+ Massenstrom und Totaldruckverhältnis von 0.01% der letzten 100 Zeitschritte
+ festgelegt.
+ Das Konvergenzkriterium gilt für beide Gütestufen.
 \end_layout
 
 \begin_layout Standard
-Zeitlicher Unterschied
-\end_layout
-
-\begin_layout Paragraph*
-Parametrisierung
-\end_layout
-
-\begin_layout Standard
-Tabelle Erich, Bilder Profilparameter und Strakparameter
-\end_layout
-
-\begin_layout Paragraph
-Einstellungen Optimierung
+Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
+ des Rotors durchgeführt, hier wird die maximale Dehnung der Schaufel berechnet.
+ Der Prozess ist für beide Gütestufen ebenfalls nahezu identisch ist.
+ Der einzige Unterschied in den Gütestufen besteht in der Durckverteilung
+ auf der Schaufel, da diese aus der CFD-Simulation für OP0 verwendet wird
+ und es hier Abweichungen zwischen den Gütestufen gibt.
+ 
 \end_layout
 
 \begin_layout Standard
-Startmember HF/LF, welches DOE Startdatenbasis, Startparetofront, keiner
- Erfüllt die Nebenbedingungen, Verlauf der Optimierung -> gestartet und
- in Ruhe gelassen
-\end_layout
+Für weitergehende Informationen bezüglich der Prozesskette wie z.B.
+ die verwendete Software und deren Einstellungen wird auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
 
-\begin_layout Standard
-MF: Optimierungsverfahren EVG + Entscheidungsfunktion + Co_kriging
-\end_layout
+\end_inset
 
-\begin_layout Standard
-HF: Ordinary Kriging + EVG aus dieser Arbeit
-\end_layout
-
-\begin_layout Standard
-Nach Startdatenbasis nur noch auf dem Ersatzmodell (sinnvoll da durch EVG
- exploratives Vorgehen vorliegt)
-\end_layout
-
-\begin_layout Subsection
-Ergebnisse
-\end_layout
-
-\begin_layout Paragraph*
-Multifidelity Ergebnisse
-\end_layout
-
-\begin_layout Standard
-LofiParetofront / Hifi Paretofront 10 Member, Verbindungslinien einzeichnen
- und Nebenbedingungen 
-\end_layout
-
-\begin_layout Standard
-Der real erreichte Wert lag bei: 
+ verwiesen.
 \end_layout
 
 \begin_layout Standard
@@ -2775,14 +2937,12 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="8" columns="3">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2791,7 +2951,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Prozess
 \end_layout
 
 \end_inset
@@ -2800,34 +2960,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $i_{bestH}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{bestL}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $i_{initH}$
-\end_inset
-
-
+Zeit hohe Güte
 \end_layout
 
 \end_inset
@@ -2836,10 +2969,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $i_{initL}$
-\end_inset
-
-
+Zeit niedrige Güte
 \end_layout
 
 \end_inset
@@ -2850,7 +2980,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Plain Layout
-HF
+Strömungskanal Erzeugung
 \end_layout
 
 \end_inset
@@ -2859,25 +2989,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-550
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-25
+0.7sec
 \end_layout
 
 \end_inset
@@ -2886,7 +2998,152 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-0
+0.7sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Geometrieerzeugung Rotor + Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD-Netzgenerierung Rotor + Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30.5sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD Strömungslöser OP0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1600sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+140sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD Strömungslöser OP1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2100sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+180sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FEM Lösung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.5sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.5sec
 \end_layout
 
 \end_inset
@@ -2897,7 +3154,7 @@ HF
 \begin_inset Text
 
 \begin_layout Plain Layout
-MF
+Gesamt
 \end_layout
 
 \end_inset
@@ -2906,25 +3163,7 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
--
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-25
+~3760sec
 \end_layout
 
 \end_inset
@@ -2933,7 +3172,7 @@ MF
 \begin_inset Text
 
 \begin_layout Plain Layout
-75
+~360sec
 \end_layout
 
 \end_inset
@@ -2944,13 +3183,1396 @@ MF
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Prozesskette-und-die"
+
+\end_inset
+
+Prozesskette und die ungefähren Ausführungszeiten der einzelnen Schritte
+ für hohe und niedrige Güte.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Unterschied hohe- und niedrige Gütestufe
+\begin_inset CommandInset label
+LatexCommand label
+name "par:UnterschiedGütestufen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Unterschied zwischen der hohen und niedrigen Gütestufe liegt im CFD-Netz.
+ Die niedrige Gütestufe hat ein gröberes CFD-Netz.
+ In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Nezunterschied"
+
+\end_inset
+
+ werden einige Netzparameter aufgelistet.
+ Der Unterschied der Gesamtzellen liegt bei einem Faktor von ca.
+ 8.1 die zeitliche Differenz der Rechnung liegt etwas höher bei einem Faktor
+ von ca.
+ 10.
+ Weiterhin konvergieren die Rechnungen der niedrigen Gütestufe schneller,
+ da die Anzahl die I-Linien in axialer Richtung um ca.
+ die Hälfte reduziert wurde.
+ Dies führt zu einem schnelleren Informationstransport innerhalb des Strömungslö
+sers und sorgt so für eine schnellere Konvergenz.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Anzahl der Zellen im Spaltblock wurde bei der hohen Gütestufe verdreifacht
+ und die Anzahl der K-Linien, also der radialen Auflösung, ungefähr verdoppelt.
+ Dadurch können Sekundärströmungseffekte besser modelliert werden.
+ In Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AnahngKapitel-6"
+
+\end_inset
+
+ ist eine exemplarische Abbildung der beiden Rechennetze dargestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hohe Güte
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Niedrige Güte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zellen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.1\cdot10^{6}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.36\cdot10^{5}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I-Linien Rotor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+123
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+I-Linien Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+137
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K Linien
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+55
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zellen-Spaltblock
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4896
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1560
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Nezunterschied"
+
+\end_inset
+
+Unterschiede in den CFD-Netzen zwischen den Gütestufen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Erich_Kennfeld_Zielfunktin.pdf
+	scale 35
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Darstellung-der-Betriebspunkte"
+
+\end_inset
+
+Darstellung der Betriebspunkte OP0 und OP1 auf der 100% Drehzahllinie.
+ Der graue Bereich beschreibt die Nebenbedinungen auf den Massenstrom und
+ das Totaldruckverhältnis.
+ Quelle: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Für die Optimierung werden zwei Zielfunktionen festgesetzt.
+ Zum einen die Maximierung des isentropen Wirkungsgrads 
+\begin_inset Formula $\eta_{is}=\frac{\Pi_{t,OP0}^{\frac{\kappa-1}{\kappa}}-1}{\frac{T_{t,out}}{T_{t,in}}-1}$
+\end_inset
+
+ im Betriebspunkt OP0 und zum anderen die Maximierung der Kennliniensteigung
+ 
+\begin_inset Formula $\frac{\triangle\Pi_{t}}{\triangle\dot{m}}=\frac{\Pi_{t,OP1}-\Pi_{t,OP0}}{\dot{m}_{OP1}-\dot{m}_{OP0}}$
+\end_inset
+
+.
+ Weiterhin werden 5 Nebenbedingungen festgelegt, welche in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Übersicht-aller-Nebenbedingungen"
+
+\end_inset
+
+ zusammengefasst werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die zweite Zielfunktion ist in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Darstellung-der-Betriebspunkte"
+
+\end_inset
+
+ grafisch dargestellt, es handelt sich um die Kennliniensteigung 
+\begin_inset Formula $\frac{\triangle\Pi_{t}}{\triangle\dot{m}}$
+\end_inset
+
+.
+ Da die Maximierung der Steigung nur durch Erhöhung des Druckverhältnisses
+ 
+\begin_inset Formula $\Pi_{t,OP1}$
+\end_inset
+
+ erreicht werden soll und der Betriebspunkt OP0 sich nicht verändern darf,
+ werden die Massenströme 
+\begin_inset Formula $\dot{m}_{OP0}$
+\end_inset
+
+, 
+\begin_inset Formula $\dot{m}_{OP1}$
+\end_inset
+
+ und das Totaldruckverähltnis 
+\begin_inset Formula $\Pi_{t,OP1}$
+\end_inset
+
+ in sehr engen Grenzen restringiert.
+ Diese Bereiche sind in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Darstellung-der-Betriebspunkte"
+
+\end_inset
+
+ in grau dargestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin soll eine möglichst axiale Abströmung am Austritt des Fans erreicht
+ werden, aus diesem Grund ist der absolute Abströmwinkel der Fanstufe 
+\begin_inset Formula $\left|\theta_{out,OP0}\right|$
+\end_inset
+
+ auf maximal 3° festgelegt.
+ Alle aerodynamischen Größen sind massenstromgemittelt.
+\end_layout
+
+\begin_layout Standard
+Strukturmechanisch wird die maximale Dehnung des Rotors auf 0.25% beschränkt.
+ 
+\end_layout
+
+\begin_layout Standard
+Insgesamt ergeben sich damit 7 Ersatzmodelle die trainiert für die Flowparameter
+ 
+\begin_inset Formula $\Pi_{t,OP1},\Pi_{t,OP0},\dot{m}_{OP1},\dot{m}_{OP0},T_{t,out},\theta_{out,OP0},\varepsilon$
+\end_inset
+
+ trainiert werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nebenbedingung
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Min.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Max.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\dot{m}_{OP0}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[kg/s] 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Massenstrom OP0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+557.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+559.5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\dot{m}_{OP1}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[kg/s]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Massenstrom OP1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+518.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+520.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Pi_{t,OP1}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[-]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Totaldruckverhältnis OP0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.397
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.399
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|\theta_{out,OP0}\right|$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[°]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Abströmwinkel OP0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+[-]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+maximale Dehnung des Rotors
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0025
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Übersicht-aller-Nebenbedingungen"
+
+\end_inset
+
+Übersicht aller Nebenbedingungen der Optimierung 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Parametrisierung
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Parametrisierung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Parametrisierung besteht im Wesentlichen aus den Naben- und Gehäuseparameter
+n, welche durch Konstruktionspunkte festgelegt werden (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Freigegebene-Konstruktionspunkte"
+
+\end_inset
+
+) und den Profilparametern.
+ Eine Übersicht der Parameter ist in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Überblick-über-alle"
+
+\end_inset
+
+ gegeben.
+ Die Profilparameter werden in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Exemplarische-Darstellung-der"
+
+\end_inset
+
+ dargestellt und bestehen aus den Vorder- und Hinterkantenradien 
+\begin_inset Formula $r_{LE},r_{TE}$
+\end_inset
+
+, Vorder- und Hinterkantenwinkeln 
+\begin_inset Formula $\beta_{LE},\beta_{TE}$
+\end_inset
+
+, dem Staffelungswinkel 
+\begin_inset Formula $\beta_{ST}$
+\end_inset
+
+, der Sehnenlänge 
+\begin_inset Formula $c$
+\end_inset
+
+ und zwei Konstruktionspunkten welche die Saugseitenkrümmung beschreiben.
+ Für den Rotor und Stator sind jeweils drei Profile an Nabe, Mitte und Gehäuse
+ definiert, wobei die mittlere radiale Position des mittleren Profils in
+ engen Grenzen geändert werden kann.
+\end_layout
+
+\begin_layout Standard
+Insgesamt kommen dadurch 64 freie Parameter zustande, wobei die Freigabeinterval
+le insgesamt großzügig gewählt wurden.
+ Weitere Informationen über die Parametrisierung sind in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ zu finden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anzahl
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Strak
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nabe
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gehäuse
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rotor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3x Profile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3x9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rad.
+ Position Profil 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stator
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3x Profile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3x9
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rad.
+ Position Profil 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gesamt
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Überblick-über-alle"
+
+\end_inset
+
+Überblick über alle freien Variablen der Optimierung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Grundlagen_Profil.pdf
+	lyxscale 200
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Exemplarische-Darstellung-der"
+
+\end_inset
+
+Exemplarische Darstellung der freigegebenen Profilparameter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Strak_Variables_2.pdf
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Freigegebene-Konstruktionspunkte"
+
+\end_inset
+
+Freigegebene Konstruktionspunkte am Gehäuse G1,G2,G3,G5 und an der Nabe
+ N1,N2,N3,N5 des Straks in rot dargestellt und freigegebene Profilschnitte
+ in blau
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Einstellungen Optimierung und Laufzeitumgebung 
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Einstellungen-Optimierung-und"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Die Optimierungssoftware war AutoOpti und die Ersatzmodellsoftware für alle
+ Optimierungen ist die in dieser Arbeit entwickelte.
+\end_layout
+
+\begin_layout Itemize
+Startdatenbasis: Es wurden 25 Member hoher Güte und 75 Member niedriger
+ Güte bestimmt.
+ Diese einmal erzeugte Startdatenbasis diente dann als Initialisierung für
+ alle Benchmarkoptimierungen.
+ Die Bestimmung der Parameter erfolgte zufällig gleichverteilt.
+ 
+\end_layout
+
+\begin_layout Itemize
+Keiner der initialen Member erfüllte die Nebenbedingungen.
+\end_layout
+
+\begin_layout Itemize
+Die Optimierung wurde einmal gestartet und dann ohne Eingriffe laufen gelassen.
+\end_layout
+
+\begin_layout Itemize
+Die Optimierung auf dem Ersatzmodell wurde mit jeweils 5000 Iterationen
+ durchgeführt und als Optimierungsalgorithmus der 
+\begin_inset Quotes gld
+\end_inset
+
+Erwartete Volumenzugewinn
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:EVG"
+
+\end_inset
+
+) verwendet.
+ Jeder Member wurde mit diesem Algortihmus erzeugt.
+\end_layout
+
+\begin_layout Itemize
+Jedes Optimierungssetup wurde 4x wiederholt, um Zufälligkeiten abbilden
+ zu können.
+\end_layout
+
+\begin_layout Itemize
+Jeder Optimierung wurde eine Laufzeit von ca.
+ 550h zugewiesen
+\end_layout
+
+\begin_layout Itemize
+Es wurde ein minimaler prozentualer Anteil von 10% an Membern hoher Güte
+ festgelegt.
+ Hierfür wurde das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Minimale-Menge-an"
+
+\end_inset
+
+ gezeigte Verfahren verwendet.
+ Zusätzlich wurde eine weitere Optimierung mit einem Anteil von 5% durchgeführt
+ um das Verhalten der Entscheidungsfunktion zu zeigen.
+\end_layout
+
+\begin_layout Standard
+Es werden zwei Optimierungssetups verglichen:
+\end_layout
+
+\begin_layout Enumerate
+Singlefidelity-Optimierung als Referenz.
+ Ersatzmodell: Ordinary-Kriging
+\end_layout
+
+\begin_layout Enumerate
+Multifidelity-Optimierung mit der 
+\begin_inset Quotes gld
+\end_inset
+
+Zusätzliche Gewichtung der Ersatzmodelle
+\begin_inset Quotes grd
+\end_inset
+
+ Entscheidungsfunktion, welche im Rahmen dieser Arbeit entwickelt wurde
+ (sieh Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Entschedungsfunktion"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Minimaler prozentualer Anteil an Membern hoher Güte 10%
+\end_layout
+
+\begin_layout Enumerate
+Minimaler prozentualer Anteil an Membern hoher Güte 5% (nur eine Wiederholung)
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
+ durchgeführt.
+ Jede Optimierung hat 6 Knoten mit jeweils 2 Intel(R) Xeon(R) E5-2695v2
+ CPUs und 64 GB Arbeitsspeicher zur Verfügung.
+ 
+\end_layout
+
+\begin_layout Subsection
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Innerhalb dieses Abschnittes werden die Ergebnisse der vorgestellten Testoptimie
+rungen gezeigt.
+ Als erstes werden die Ergebnisse aller Optimierungen miteinander verglichen
+ und einige ausgewählte Optimierungen nochmals detailliert beschrieben.
+ Im letzten Teil sollen die aerodynamischen Ergebnisse verglichen werden,
+ der Fokus soll dabei auf die Unterschiede in den aerodynamischen Ergebnissen
+ der unterschiedlichen Optimierungsverfahren gelegt werden.
+\end_layout
+
+\begin_layout Paragraph*
+Ergebnisse der Testoptimierungen im Vergleich
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_CumVolGain.eps
+	scale 40
+	BoundingBox 11bp 150bp 600bp 642bp
+	clip
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Zeitlicher-Verlauf-des"
 
+\end_inset
+
+Zeitlicher Verlauf des Volumenzugewinns der verschiedenen Testoptimierungen
+ bis zur Abbruchzeit.
+ Die mit Symbolen markierten Linien werden im späteren Verlauf noch genauer
+ ausgewertet.
 \end_layout
 
 \end_inset
@@ -2960,100 +4582,507 @@ MF
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-\frac{i_{init}+i_{bestH}}{i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1}=\frac{25+550}{25+\frac{1}{10}75+125+\frac{1}{10}1050}=2,19
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-EVG Bild vergleich -> MF findet immer das Maximum vom AreaGain, HF bleibt
- oft stecken 
-\end_layout
-
-\begin_layout Standard
-- EVG Bild Schwankungen der einzelnen Optimierungen: Hyperparameterschwankungen
- zeigen
-\end_layout
-
-\begin_layout Standard
-- Reduktionsgeschwindigkeit der Nebenbedingungen 
-\end_layout
-
-\begin_layout Standard
-- Trainingszeit + Optimierungszeit / Prozesskettenzeit High / prozesskettenzeit
- Low plotten
-\end_layout
-
-\begin_layout Standard
-<<<<<<< HEAD
--Liegen die Streuungen an der Entscheidungsfunktion? Nein da diese auch
- bei HF Vorkommen.
-\end_layout
-
-\begin_layout Standard
--Woher kommen die Zufälligkeiten? Exploratives Vorhegehen beim EVG + Zufälligkei
-ten bei den Ersatzmodellen (Hyperparameter Plot zeigen)
-\end_layout
-
-\begin_layout Standard
-- Bei MF niemals diesen oberen Abbruch, hat immer ds Optimum gefunden.
- Sucht also globaler
-=======
-- Entscheidungsfunktion und Ersatzmodelle Zusammenspiel ( Kovnergenz Ersatzmodel
-le zeigen )
->>>>>>> dfc0870dd455380d6f26267395a32d82d58288b8
-\end_layout
-
-\begin_layout Standard
-- 
-\end_layout
-
-\begin_layout Standard
-Einfluss der Entscheidungsfunktion auf den Optimierungsverlauf
-\end_layout
-
-\begin_layout Standard
-Abschließend muss die Frage beantwortet werden, wie groß der Einfluss der
- gewählten Entscheidungsfunktion auf die Optimierungszeit und Ergebnis ist.
- 
-\end_layout
-
-\begin_layout Subparagraph*
-- Ist dieser Verlauf unten möglicherweise typisch für Optimierungen wie
- diese, kann man nicht einfach immer 80% LF am Anfang rechnen und gut? 
-\end_layout
-
-\begin_layout Standard
-Kann man nicht sagen da man den Informationsgehalt des Lofi Modells nicht
- kennt.
- Und die Beschleunigung maßgeblich davon abhängt.
- Zudem kann die Entscheidungsfunktion dies lokal und vollautomatisch.
- 
-\end_layout
-
-\begin_layout Standard
-Um eine Idee davon zu bekommen, werden mehrere Testoptimierungen mit verschieden
-en Entscheidungsverläufen miteinander verglichen.
- In Kapitel 
+In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:CRISP-Testfall"
+reference "fig:Zeitlicher-Verlauf-des"
 
 \end_inset
 
- werden die Optimierungen detaillierter behandelt.
- Es handelt sich um eine 3D-aeromechanische-Optimierung einer Fanstufe.
- Als Gütestufen werden verschiedene Netzauflösungen verwendet.
+ ist der zeitliche Verlauf des Volumenzugewinns dargestellt.
+ Bei der Zeit handelt es sich um die kummulierte Prozesskettenzeit aller
+ Gütestufen.
+ Weiterhin sind die Startpunkte der Multifidelity- und Highfidelity-Optimierunge
+n eingezeichnet.
+ Die zeitliche Verzögerung der Multifidelity-Optimierungen ergibt sich aus
+ den zusätzlichen Startmembern niedriger Güte.
+ Die blauen Linien beschreiben die Verläufe der Optimierungen 2a (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Einstellungen-Optimierung-und"
+
+\end_inset
+
+).
+ Die grüne Linie entspricht der Optimierung 2b mit einem minimalen prozentualen
+ Anteil an Membern hoher Güte von 5%.
+ Die schwarzen Linien entsprechen den High-Fidelity Referenz-Optimierungen.
+ Die mit Symbolen gekennzeichneten Optimierungen werden im nächsten Abschnitt
+ noch genauer untersucht.
  
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_timeTrain.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Prozentualer-Anteil-der"
+
+\end_inset
+
+Prozentualer Anteil der Trainingszeit an der Gesamtlaufzeit der verschiedenen
+ Testoptimierungen.
+ Die mit Symbolen markierten Linien werden im späteren Verlauf noch genauer
+ ausgewertet.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Betrachtet man den ersten Anstieg im Volumenzugewinn der Optimierungen,
+ so steigen die Optimierungen 2a als erstes an.
+ Dies lässt darauf schließen, dass die Nebenbedingungen früh erfüllt wurden,
+ da ohne Erfüllung der Nebenbedingungen kein Volumenzugewinn möglich ist.
+ Im Vergleich dazu ist der Anstieg von Optimierung 2b stark verzögert, dies
+ ist darin begründet, dass zu Anfang der Optimierung die Entscheidungsfunktion
+ deutlich mehr Member niedriger Güte erzeugt.
+ Da Member niedriger Güte keinen Volumenzugewinn bringen können, zeigt sich
+ dieses Verhalten in Form einer Verzögerung.
+ Optimierung 2b kann diese Verzögerung allerdings sehr schnell einholen.
+ Dies spricht für ein vernünftiges Verhalten der Entscheidungsfunktion,
+ die unterschiedlichen Startbedingungen sinnvoll auszugleichen.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin kann man erkennen, dass alle Multifidelity-Optimierungen in der
+ zugewiesenen Zeit ein deutlich höheren Volumenzugewinn erreichen konnten.
+ Zudem ist die Streuung des Volumenzugewinns bei allen Multifidelity-Optimierung
+en erheblich geringer, das erreichte Optimum konnte in der gegebenen Zeit
+ also robust gefunden werden.
+ Die Highfidelity-Optimierungen zeigen eine vergleichsweise starke Streuung.
+ Dieses Verhalten kann für industrielle Anwendungen von großer Bedeutung
+ sein, ein Beispiel hierfür ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Anwendung-bei-Siemens"
+
+\end_inset
+
+ zu finden.
+ Um die Robustheit der Optimierung zu gewährleisten wurde in diesem Beispiel
+ ein sehr großer Anteil mit genetischen Algorithmen ohne Ersatzmodellbeschleunig
+ung erzeugt.
+ Möglicherweise ist dies mit einer Multifidelity-Optimierung nicht notwendig,
+ hierfür sind weitere Untersuchungen angedacht (siehe Ausblick 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Anwendung-bei-Siemens-1"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Ein weiterer wichtiger Aspekt bei der zeitlichen Betrachtung der unterschiedlich
+en Optimierungsverfahren ist die benötigte Trainingszeit.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Prozentualer-Anteil-der"
+
+\end_inset
+
+ stellt die benötigte Trainingszeit der einzelnen Testoptimierung als prozentual
+en Anteil an der Gesamtzeit dar.
+ Die schwarzen Kurven stellen den Anteil der High-Fidelity Optimierungen
+ dar, dieser liegt deutlich unter einem Prozent und geht fällt daher kaum
+ ins Gewicht der Gesamtlaufzeit.
+ Die Multifidelity-Optimierungen benötigen eine deutlich höhere Trainingszeit,
+ welche im Bereich von ca.
+ 4% liegt.
+ Die Multifidelity-Optimierung 2b liegt aufgrund der höheren Stützstellenanzahl
+ bei ca.
+ 5%.
+ Die höheren Trainingszeiten entstehen hauptsächlich durch die höhere Anzahl
+ an Trainingsmustern niedriger Güte.
+ Außerdem ist aber auch das Trainingsverfahren selbst aufwendiger und benötigt
+ mehr Zeit.
+ Bei den Multifidelity-Optimierungen ist eine Abflachung der Zeitkurven
+ zu erkennen, dieser wird durch die 
+\begin_inset Quotes gld
+\end_inset
+
+Restart Option auf Basis von vorhandenen Modellen
+\begin_inset Quotes grd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+) verursacht.
+ Sobald genügend trainierte Modelle vorhanden sind und diese die Bedingungen
+ für den 
+\begin_inset Quotes gld
+\end_inset
+
+Restart
+\begin_inset Quotes grd
+\end_inset
+
+ erfüllen, können diese zur Initialisierung der Ersatzmodelle verwendet
+ werden und beschleunigen das Training so erheblich.
+ 
+\end_layout
+
+\begin_layout Standard
+Fasst man die zeitlichen Ergebnisse zusammen, so waren die Multifidelity-Optimie
+rungen ungefähr doppelt so schnell wie die High-Fidelity Optimierungen bei
+ einem Trainingszeitberlust von ca.
+ 3%.
+ In diesem Beispiel war der Einsatz des Multifidelity-Verfahrens trotz der
+ längeren Trainingszeiten also sehr lohnenswert.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Detail-Ergebnisse ausgewählter Optimierungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_dist2ROI.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+Summierte Restriktionsterm über der Optimierungslaufzeit.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In diesem Abschnitt sollen die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+ gekennzeichneten Optimierungen detaillierter betrachtet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Als erstes soll der Verlauf der Nebenbedingungen verglichen werden, diese
+ zu erfüllen stellt einen wesentlichen Anteil an der Optimierungslaufzeit
+ dar.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+ zeigt den Verlauf des summierten Restriktionsterms über der Optimierungslaufzei
+t.
+ Aufsummiert werden die Abstände zu den in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Übersicht-aller-Nebenbedingungen"
+
+\end_inset
+
+ definierten Intervallen.
+ Ziel ist es diesen Term auf den Wert Null zu bekommen.
+ Die Größenordnung des Restriktionsterms ist nicht normiert, also ein Druckverhä
+ltnis würde einen kleineren Eintrag in den Wert bringen als bspw.
+ ein Massenstrom.
+ Die schwarze Kurve beschreibt die High-Fidelity Optimierung und startet
+ zeitlich vor den Multifidelity-Optimierungen, da diese keine Member niedriger
+ Güte in der Initialisierungsphase benötigt.
+ Die Multifidelity-Optimierungen starten ca.
+ 35000s später.
+ Trotz des späteren Starts erfüllen beide Mutlfidelity-Optimierungen die
+ Restriktionen deutlich schneller, können also von den zusätzlichen Membern
+ niedriger Güte profitieren.
+ Die Optimierung 2b erzeugt zu Anfang die meisten Member niedriger Güte
+ und erfüllt die Restriktionen am schnellsten.
+ In diesem Beispiel scheint also eine klare Abhängigkeit zwischen Erfüllung
+ der Nebenbedingungen und der Anzahl an berechneten Membern niedriger Güte
+ zu existieren.
+ 
+\end_layout
+
+\begin_layout Standard
+Als nächstes soll der Verlauf der Entscheidungsfunktion betrachtet werden.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Verlauf-der-Entscheidungsfunktio"
+
+\end_inset
+
+ zeigt den Verlauf der Entscheidungsfunktion Optimierung 2a und 2b.
+ Die roten Punkte beschrieben die jeweiligen Werte des Entscheidungskriteriums
+ und die grünen Punkte stellen den jeweiligen Wert der Barriere dar (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Minimale-Menge-an"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Minimale Menge an Membern hoher Güte
+\begin_inset Quotes grd
+\end_inset
+
+).
+ Liegt das Kriterium über der Barriere, so wird zugunsten eines Members
+ niedriger Güte entschieden, liegt der Wert unter der Barriere, dann wird
+ ein Member hoher Güte erzeugt.
+ Da bei Optimierung 2a der minimale prozentuale Anteil an Membern hoher
+ Güte bei 10% lag und bei Optimierung 2b bei 5%, wird die Barriere bei Optimieru
+ng 2a öfter verschoben, um den minimalen Prozentsatz zu erfüllen.
+ Die globale Tendenz des Kriteriums ist bei beiden Optimierungen fallend,
+ auch dies entspricht der Erwartung.
+ Da mit steigender Anzahl an Membern die Ersatzmodellunsicherheiten immer
+ kleiner werden, verschiebt sich das Kriterium auch immer weiter zu niedrigeren
+ Werten.
+ Bei Optimierung 2b geschieht dies allerdings mit geringerem Tempo, da die
+ Ersatzmodellunsicherheiten langsamer sinken aufgrund des höheren Anteils
+ an Membern niedriger Güte.
+ 
+\end_layout
+
+\begin_layout Standard
+In dem Verlauf von Optimierung 2b ist bei Member-Nummer 300 ein leichter
+ Sprung zu erkennen, das Entscheidungskriterium zeigt ab dieser Member-Nummer
+ deutlich öfter Werte unter Eins.
+ Dies lässt sich dadurch erklären, dass ab Member-Nummer 299 der erste Member
+ gefunden wurde, der alle Restriktionen erfüllt.
+ Die Wahrscheinlichkeit die Nebenbedingungen zu erfüllen ist ab diesem Zeitpunkt
+ sehr hoch, was einen großen Einfluss auf die Entscheidungsfunktion hat
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Entschedungsfunktion"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Fidelity_2a.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Fidelity_2b.eps
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Verlauf-der-Entscheidungsfunktio"
+
+\end_inset
+
+Verlauf der Entscheidungsfunktion der Optimierungen 2a und 2b.
+ Die roten Symbole stellen den jeweiligen Wert der Entscheidungsfunktion
+ dar und die grünen Punkte die Barriere.
+ Wobei ein überschreiten der Barriere zu einem Member niedriger Güte führt
+ und ein unterschreiten zu einem hoher Güte.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Paretofront-der-besten"
+
+\end_inset
+
+ zeigt die Entwicklung der Paretofronten von Optimierung 1 und 2a zu jeweils
+ drei unterschiedlichen Zeitpunkten.
+ Eingezeichnet sind die Member hoher Güte welche die Restriktionen bereits
+ erfüllt haben.
+ Der erste Zeitpunkt wurde bei 300.000 Sekunden gewählt, der Zweite bei 500.000
+ Sekunden und der Letzte bei 800.000 Sekunden.
+ Bei 300.000 Sekunden wurde nur ein einziger Member von der Multifidelity-Optimie
+rung gefunden, welcher die Restriktionen erfüllt.
+ Bereits ab diesem frühen Zeitpunkt der Optimierung überholt die Mutlfidelity-Op
+timierung bereits die High-Fidelity Optimierung, trotz der anfänglichen
+ Verzögerung durch die initialen Member niedriger Güte.
+ Bei 500.000 Sekunden konnte die Multifidelity-Optimierung bereits eine kleine
+ Paretofront aufbauen und schon Member mit sehr hohem Wirkungsgrad auffinden.
+ Die High-Fidelity Optimierung konnte zu diesem Zeitpunkt drei Member finden,
+ welche die Restriktionen erfüllen.
+ Bei 800.000 Sekunden, was dem Abbruchzeitpunkt der Optimierung entspricht,
+ konnte die Mutltifidelity-Optimierung bereits eine sehr breite Paretofront
+ aufstellen.
+ Die High-Fidelity Optimierung ist auch bei diesem Zeitpunkt noch nicht
+ so weit, sowohl was die Breite der Paretofront anbelangt, als auch die
+ Zielfunktionswerte selbst.
+ Betrachtet man die Wirkungsgrade bei diesem Zeitpunkt, so ist die Mutlfidelity-
+Optimierung um ca.
+ 0.05 Wirkungsgradpunkte besser, was keinesfalls zu vernachlässigen ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Vergleicht man die globalen Werte wie kummulierter Volumenzugewinn (siehe
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Zeitlicher-Verlauf-des"
+
+\end_inset
+
+) oder auch die Reduktionsgeschwindigkeit der Nebenbedigungen (siehe Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reduktionsgeschwindigkeit-der-Ne"
+
+\end_inset
+
+), so lassen sich diese Verläufe in den Paretofrontbildern sehr gut wiederfinden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Pareto_300s.eps
+	scale 30
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Pareto_500s.eps
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/Opti_Pareto_800s.eps
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paretofront-der-besten"
+
+\end_inset
+
+Zeitliche Entwicklung der Paretofronten der High-Fidelity Optimierung 1
+ und der Multifidelity-Optimierung 2a.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Einfluss des Anteils an Membern hoher Güte auf den Optimierungsverlauf
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 18
 placement o
@@ -3063,10 +5092,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/MultifidelityKapitel/EntscheidungsfunktionEinfluss.pdf
-	scale 60
+	filename ../images/ErgebnissKapitel/AlleOpti_VolGain_PercHF.eps
+	scale 30
 	BoundingBox 0bp 0bp 354bp 310bp
-	clip
 
 \end_inset
 
@@ -3081,7 +5109,7 @@ name "fig:OptimierungenEntscheidungsfVerläfe"
 \end_inset
 
 Vergleich verschiedener Optimierungen mit unterschiedlichen Entscheidungsverläuf
-en
+en 
 \end_layout
 
 \end_inset
@@ -3091,9 +5119,9 @@ en
 
 \end_inset
 
- Diese Optimierungen eignen sich für einen Vergleich, da viele verschiedene
- Entscheidungsverläufe getestet wurden und es sich zudem bereits um eine
- realitätsnahe aeromechanische Optimierung handelt.
+Um eine Idee davon zu bekommen wie stark der Einfluss der Anteil an Membern
+ hoher Güte ist, werden alle durchgeführten Optimierungen mit verschiedenen
+ Entscheidungsverläufen miteinander verglichen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3101,7 +5129,7 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
 
 \end_inset
 
- zeigt den Vergleich,wobei jeder Punkt eine Optimierung mit gleicher Laufzeit
+ zeigt den Vergleich, wobei jeder Punkt eine Optimierung nach 800.000 Sekunden
  darstellt.
  Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
  Samples hoher Güte und niedriger Güte dargestellt.
@@ -3110,14 +5138,829 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
  deutlich höheren Volumenzugewinn bewirkt.
  Die Prozesskette niedriger Güte muss also bereits einen hohen Informationsgehal
 t besitzen.
- Die Streuung der einzelnen Optimierungen kommt durch einige Zufälligkeiten
- innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
- und Optimierung auf den Ersatzmodellen) zustande.
- Zudem stellt der HF Anteil nur den Anteil am Ende der Optimierung dar.
+ Die Streuung der einzelnen Optimierungen kommt zum einen durch einige Zufälligk
+eiten innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
+ und Optimierung auf den Ersatzmodellen) zustande und zum anderen durch
+ die jeweiligen Entscheidungsverläufe der Optimierungen, da hier nur das
+ Ende der Optimierung dargestellt wird.
+ Weiterhin sinkt der Volumenzugewinn auf Null bei keinem Member hoher Güte,
+ da ohne Member hoher Güte kein Volumenzugewinn möglich ist.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 18
+placement o
+overhang 0in
+width "45col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/ErgebnissKapitel/AlleOpti_VolGain_PercHF_Exempl.eps
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:OptimierungenEntscheidungsfVerläfe-1"
+
+\end_inset
+
+Exemplarischer Verlauf verschiedener Entscheidungsverläufe bei unterschiedlichem
+ Informationsgehalt der niedrigen Gütestufen.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zusammenfassend ist es ersichtlich, dass der Anteil von Membern niedriger
+ Güte in diesem Optimierungssetup eine wesentlich Rolle spielt.
+ Weiterhin ist ebenfalls erkennbar, dass es ein Optimum an Member niedriger
+ Güte existiert.
+ 
+\end_layout
+
+\begin_layout Standard
+Betrachtet man zusätzlich die Ergebnisse aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analytische-Optimierungsbeispiel"
+
+\end_inset
+
+, so lassen sich einige Gesetzmäßigkeiten finden.
+ Diese sind in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:OptimierungenEntscheidungsfVerläfe-1"
+
+\end_inset
+
+ exemplarisch dargestellt.
+ Bei Optimierungen mit hohem Informationsgehalt der Prozesskette niedriger
+ Güte wird der Verlauf ein Optimum bei geringem Anteil hoher Güte aufweisen
+ und dann bei steigendem Anteil hoher Güte absinken.
+ Wenn die niedriger Gütestufe keine Korrelation zu der hohen Güte besitzt,
+ so kann durch Stützstellen niedriger Güte keine Verbesserung im Volumenzugewinn
+ erzielt werden, mit jedem zusätzlich gerechneten Member niedriger Güte
+ sinkt der Volumenzugewinn.
+ In der Regel erkennen die Ersatzmodelle eine unkorrelierte niedrige Gütestufe
+ relativ schnell und die Entscheidungsfunktion würde dann keine Member niedriger
+ Güte mehr erzeugen.
+ 
 \end_layout
 
 \begin_layout Paragraph
 Aerodynamische Auswertung
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt sollen die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Paretofront-der-besten"
+
+\end_inset
+
+ mit 1,2,3 markierten Member aerodynamisch bewertet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="9">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nummer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\eta_{is}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\triangle\Pi_{t}}{\triangle\dot{m}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\dot{m}_{OP0}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\dot{m}_{OP1}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Pi_{t,OP1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left|\theta_{out,OP0}\right|$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1(20)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94,3%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0005067
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+558.24
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+519.86
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3973
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0024
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2(6)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94,1%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0005816
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+557.36
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+519.34
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.379
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0024
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3(4)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93,9%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0005446
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+558.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+519.32
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.398
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0016
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Werte-der-Zielfunktionen"
+
+\end_inset
+
+Werte der Zielfunktionen und Nebenbedingungen der einzelnen Member.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Nebenbedingungen.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Relative-Lage-der"
+
+\end_inset
+
+Relative Lage der verschiedenen Nebenbedingungen der einzelnen Member.
+ Die obere Linie gibt das Maximum und die untere das Minimum der Nebenbedingung
+ an.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StufeEta.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Radiale Verteilung des isentropen Wirkungsgrads und des Totaldruckverhälnisses
+ der gesamten Stufe.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_RotorEta.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Radiale Verteilung des isentropen Wirkungsgrads und des Totaldruckverhälnisses
+ des Rotors.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StatorLoss.eps
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StatorUmlenk.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Radiale Verteilung des Totaldruckverlustbeiwerts und der Umlenkung des Stators.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_Strak.eps
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Strakverlauf der einzelnen Member im Vergleich
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileRotor50.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rotor 50% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileRotor95.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Rotor 95% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileStator50.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Stator 50% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileStator100.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Stator 95% 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3139,6 +5982,28 @@ Radiale Verteilung -> Wirkungsgrad (wo sind Unterschiede? Dann Eberhard
  ansprechen)
 \end_layout
 
+\begin_layout Standard
+Maximaler Wirkungsgrad.
+ 1x grün, 1x rot normal zur Paretofront und 1x rot max Wirkungsgrad
+\end_layout
+
+\begin_layout Standard
+Radiale Verteilung: Wirkungsgrad Stufe, Rotor+Druckverh.
+ Stufe+Druckverlust Stator
+\end_layout
+
+\begin_layout Standard
+Restriktionen Tabelle 
+\end_layout
+
+\begin_layout Standard
+Strak darstellen
+\end_layout
+
+\begin_layout Standard
+Schaufelgeometrien
+\end_layout
+
 \begin_layout Section
 Übersicht der bisherigen Anwendungen in Industrie und Forschung
 \end_layout
@@ -3148,55 +6013,595 @@ Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
  hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
 \end_layout
 
-\begin_layout Enumerate
-Lionel Akustik - Optimierung wurde im Rahmen der Arbeit betreut 
+\begin_layout Subsection
+Design of a counter rotating fan using a multidisciplinary and multifidelity
+ optimisation under high level of restrictions
+\end_layout
+
+\begin_layout Standard
+Im Rahmen des EU-Projekts COBRA wurde eine gegenläufige Fanstufe ausgelegt
+ und optimiert.
+ An dem Projekt beteiligen sich die Institutionen DLR, ONERA, COMOTI and
+ Safran Aircraft Engines.
+ Innerhalb dieses Projekts wurde eine sehr komplexe Multifidelity-Optimierung
+ mit der hier entwickelten Multifidelity-Software erfolgreich durchgeführt
+ und im Rahmen dieser Arbeit betreut.
+ Die Ergebnisse dieser Optimierung wurden in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "meillard2017"
 
 \end_inset
 
-
+ veröffentlicht und sollen in diesem Abschnitt kurz zusammengefasst werden.
+ 
 \end_layout
 
-\begin_layout Enumerate
-Stefan Mukoko - 200 freie Parameter und X Nebenbedingungen die alle nicht
- erfüllt wurden.
- Ergebnis: NB alle erfüllt und leichte Verbesserung in der Aero.
- Optimierung wurde im Rahmen der Arbeit betreut 
+\begin_layout Standard
+
+\color magenta
+INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
+\end_layout
+
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Ausgangspunkt dieser Optimierung ist ein Basisdesign von Safran Aircraft
+ Engines.
+ Ausgehend von diesem Design sollte eine Reduktion der Schallemissionen
+ um -3dB erreicht werden und dies ohne Einbußen im Wirkungsgrad.
+ Daraus ergeben sich auch die zwei verwendeten Zielfunktionen:
+\end_layout
+
+\begin_layout Itemize
+Maximierung des isentropen Wirkungsgrads in einem Betriebspunkt 
+\end_layout
+
+\begin_layout Itemize
+Minimierung des Schalldrucks in Austrittsrichtung
+\end_layout
+
+\begin_layout Standard
+Weiterhin wurden 15 Nebenbedingungen definiert, diese umfassten geometrische,
+ aerodynamische, strukturmechanische und akustische Restriktionen.
+ Die Erfüllung der Nebenbedingungen stellte bei dieser Optimierung die größte
+ Herausforderung dar, da die festgelegten Gültigkeitsintervalle sehr eng
+ gesetzt wurden.
+ Zu den wichtigsten Nebenbedingungen gehörte die Einhaltung eines sehr eng
+ gesetzten Drehmomentenverhältnisses der Rotoren, eine axiale Abtrömung
+ am Austritt der Fanstufe, strukturmechanische Restriktion der maximalen
+ mechanischen Spannungen und die Vermeidung von mechanischen Resonanzen.
+ Die initiale Geometrie erfüllte keine dieser Nebenbedingungen.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Beide Rotoren wurden jeweils durch 5 Profilschnitte beschrieben, die Parametrisi
+erung dieser Profilschnitte entspricht auch dem Großteil der Parameter.
+ Neben der Profilparametrisierung wurde auch die Drehzahl beider Rotoren
+ in sehr engen Grenzen freigegeben.
+ 
+\end_layout
+
+\begin_layout Standard
+Insgesamt ergibt sich damit eine Gesamtzahl von 112 freien Parametern.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+Es wurden zwei Gütestufen verwendet, diese unterschieden sich durch die
+ Zellen der CFD-Netze (2.000.000 gegen 300.000 Zellen) und durch die Anzahl
+ der Elemente der FEM-Berechnung (19.000 gegen 2376 Elemente).
+ Die Prozessketten hatten einen zeitlichen Faktor von ca.
+ 7.5, wobei der Prozesskette hoher Güte ca.
+ 7.5h und die Prozesskette niedriger Güte ca.
+ 1h benötigten.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Entwicklung der Entscheidungsfunktion war zu diesem Zeitpunkt noch nicht
+ abgeschlossen, daher wurde die in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzEntscheidung"
+
+\end_inset
+
+ beschriebene Entscheidungsfunktion genutzt.
+ Die Ergebnisse dieser Optimierung trugen auch wesentlich zur Weiterentwicklung
+ der in dieser Arbeit beschriebenen 
+\begin_inset Quotes gld
+\end_inset
+
+Gewichteten Entscheidungsfunktion
+\begin_inset Quotes grd
+\end_inset
+
+ und auch des Co-Krigings bei.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Die gesamte Optimierung hatte eine Laufzeit von ca.
+ 1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
+ DLR durchgeführt.
+ Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
+ variiert, lag im Mittel aber bei ca.
+ 10 Knoten.
+ Die Ausstattung der Knoten entspricht der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Die Durchführung einer solch komplexen Optimierung erwies sich als große
+ Herausforderung und benötigte eine intensive Betreuung und Begutachtung
+ des Verlaufs der Zielfunktionen, Nebenbedingungen, der Konvergenz des CFD-Löser
+s und auch der Ersatzmodelle.
+ 
+\end_layout
+
+\begin_layout Standard
+Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
+ Die finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das
+ Ausgangsdesign, konnte die Schallemissionen aber um 3dB senken.
+ Weiterhin konnte die maximale Spannung um des zweiten Rotors um ca.
+ 62% gesenkt und die dynamischen Kriterien ebenfalls alle erfüllt werden.
+ Auch die aerodynamischen und geometrischen Restriktionen wurden allesamt
+ erfüllt.
+ 
+\end_layout
+
+\begin_layout Subsection
+High-dimensional multi-fidelity optimisation of a 2.5 stage low pressure
+ compressor
+\end_layout
+
+\begin_layout Standard
+Im Rahmen des wehrtechnischen Projekts Mukoko wird ein 2.5 stufiger hochbelastete
+r Niederdruckverdichter ausgelegt.
+ Dieses Projekt findet in einer Kooperation zwischen dem DLR und der MTU
+ statt.
+ Während des Projekts wurde eine sehr aufwendige Multifidelity-Optimierung
+ mit dem in dieser Arbeit entwickelten Verfahren durchgeführt.
+ Die Ergebnisse dieser Optimierung sind bereits abgeschlossen und werden
+ in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "hemmert2019"
 
 \end_inset
 
-
+ veröffentlicht.
+ Die hier gezeigte Zusammenfassung der vorläufigen Ergebnisse erfolgt in
+ freundlicher Zustimmung des Autors.
 \end_layout
 
-\begin_layout Enumerate
-Georgios 
+\begin_layout Standard
+
+\color magenta
+INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
+\end_layout
+
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Es wurden insgesamt 4 verschiedene aerodynamische Betriebspunkte OP1-OP4
+ betrachtet.
+ OP1 und OP3 sind pumpgrenznahe Punkte, OP2 und OP4 sind Punkte nahe des
+ Sperrmassenstroms.
+ OP1 und OP2 sind jeweils bei Auslegungsdrehzahl definiert und OP3 und OP4
+ bei Teillast.
+ Die zwei Zielfunktionen waren die Maximierung des isentropen Wirkungsgrads
+ in OP1 und OP3.
+\end_layout
+
+\begin_layout Standard
+Weiterhin wurden 30 Nebenbedingungen definiert, von denen ein Großteil auf
+ mechanische Restriktionen fällt.
+ Die mechanischen Nebenbedingungen umfassen die Vermeidung von Kreuzungen
+ zwischen Eigenfrequenzen der Schaufeln und Anregefrequenzen.
+ Zudem werden zahlreiche Nebenbedingungen auf die maximale Spannung an verschied
+enen Teilen der Schaufeln definiert, die Schaufelspitzer unterliegt bswp.
+ stärkeren Restriktionen aufgrund von Vogelschlagsgefahr.
+ 
+\end_layout
+
+\begin_layout Standard
+Neben den mechanischen wurden auch aerodynamische Restriktionen definiert,
+ diese umfassten ein möglichst axiale Abströmung, Pumpgrenzkriterien in
+ zwei Betriebspunkten und mehrere Massenströme.
+ Die initiale Geometrie erfüllte keine dieser Nebenbedingungen.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Die Parametrisierung umfasste die Strömungskanalgeometrie, die Anzahl der
+ Schaufeln, die Parametrisierung der Rotoren mit jeweils 5 Schnitten und
+ die Parametrisierung der Statoren mit jeweils 3 Schnitten.
+ Insgesamt wurde damit eine Anzahl von 264 freien Parametern erreicht.
+ Dies stellt eine enorme Herausforderung für das Optimierungsverfahren dar.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+Es wurden zwei Gütestufen verwendet, diese unterschieden hauptsächlich sich
+ durch die Zellen der CFD-Netze (7.600.000 gegen 400.000 Zellen) und durch
+ die Anzahl der Elemente der FEM-Berechnung (43.200 gegen 10.000 Elemente).
+ Weiterhin wurde eine geometrische heiß zu kalt Transformation der Schaufel
+ durchgeführt.
+ Das Konvergenzkriterium wurde für die niedrige Gütestufe niedriger eingestellt.
+ Die Prozessketten hatten einen zeitlichen Faktor von ca.
+ 7-11, wobei die Prozesskette hoher Güte ca.
+ 21-34h (je nach CFD Konvergenzgeschwindigkeit) und die Prozesskette niedriger
+ Güte ca.
+ 3h benötigten.
+ Die Prozesskette niedriger Güte verwendete 24 CPUs während die hohe Güte
+ 48 CPUs zugewiesen bekam.
+ Eine Erhöhung der CPUs für die niedrige Güte konnte nicht vorgenommen werden,
+ da die Zellenanzahl für eine effiziente Parallelisierung nicht ausreichend
+ war.
+\end_layout
+
+\begin_layout Standard
+Die verwendete Entscheidungsfunktion war die in dieser Arbeit entwickelte
+ 
+\begin_inset Quotes gld
+\end_inset
+
+gewichtete Entscheidungsfunktion
+\begin_inset Quotes grd
+\end_inset
+
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Entschedungsfunktion"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Die Optimierung verlief in mehreren Phasen, wobei die Hauptphase die hier
+ beschriebene Multifidelity-Optimierung darstellte.
+ Diese Optimierung dauerte ca.
+ 4.5 Monaten und wurde auf dem Cluster des Instituts für Antriebstechnik
+ am DLR durchgeführt.
+ Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
+ variiert, lag im Mittel aber bei ca.
+ 30 Knoten.
+ Die Hardwareausstattung der Knoten entspricht der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Hauptziel der Optimierung war es die Nebenbedingungen zu erfüllen bei möglichst
+ geringen Wirkungsgradeinbußen, wobei der Großteil der Zeit auf die Erfüllung
+ der zahlreichen Nebenbedingungen fiel.
+ Die finale Geometrie konnte im Vergleich zur initialen Geometrie alle Nebenbedi
+ngungen erfüllen.
+ Der Wirkungsgrad konnte bei Auslegungsdrehzahl um 0.7 Prozentpunkte erhöht
+ werden und bei Teillast um 2.5 Prozentpunkte.
+ Das Pumpgrenzkriterium zeigte allerdings einen Verlust von ca.
+ 2.5 und 2.9 Prozentpunkten in den entsprechenden Betriebspunkten, wobei dieser
+ Wert noch im angegebenen Gültigkeitsintervall lag.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine Optimierung dieser Größenordnung mit derart langen Prozesskettenzeiten
+ hätte man mit einer reinen Singlefidelity-Optimierung in dieser Form nicht
+ durchgeführt.
+ Allerdings kann die Frage entstehen, warum man nicht nur mit dem Modell
+ niedriger Güte optimiert oder warum man nicht erst auf dem Modell niedriger
+ Güte optimiert und dann mit den Ergebnissen eine Optimierung hoher Güte
+ startet.
+ Diese Fragen sind leicht zu beantworten:
+\end_layout
+
+\begin_layout Itemize
+Eine reine Optimierung niedriger Güte liefert nicht die geforderte Genauigkeit.
+ 
+\end_layout
+
+\begin_layout Itemize
+Eine Optimierung erst auf niedriger Güte zu starten und die Ergebnisse dann
+ als Start für eine Optimierung hoher Güte zu verwenden ist äußerst ineffizient.
+ Dies liegt daran, dass man aus einer Optimierung niedriger Güte nur besonders
+ gute Member mit in die Optimierung hoher Güte übernehmen würde.
+ Diese müssten dann mit der Prozesskette hoher Güte neu bewertet werden
+ und damit dann die Optimierung hoher Güte gestartet werden.
+ Dies wiederum bedeutet, dass die Optimierung hoher Güte mit einer sehr
+ kleinen Startdatenbasis anfängt und große Bereiche des Parameterraums nicht
+ abgedeckt sind.
+ Daraus resultiert, dass die Ersatzmodelle praktisch von vorne anfangen
+ müssen.
+ Weiterhin führte eine Neubewertung der Member aus der niedrigen Gütestufe
+ mit der hohen Gütestufe, zu einer Verschiebung der Nebenbedingungen.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Trainingszeit spielte in dieser Optimierung aufgrund der enormen Prozesskett
+enzeiten zwar eine untergeordnete Rolle.
+ Dies konnte alllerdings nur durch Einsatz der in dieser Arbeit beschriebenen
+ Verfahren erreicht werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Der große Aufwand des Trainings resultiert aus den 35 Ersatzmodellen, welche
+ in jedem Optimierungsschritt trainiert werden müssen.
+ Weiterhin hatte jedes dieser Ersatzmodelle 533 Hyperparameter zu trainieren,
+ dies entspricht einer Minimierung in einem 533-dimensionalen Raum.
+ Das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+ beschrieben 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis bereits vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ Initialisierungsverfahren stabilisierte und beschleunigte das Trainingsverfahre
+n.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin kamen hier auch die zahlreichen softwaretechnischen Beschleunigungsver
+fahren aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Numerische-Effizienz-steigern"
+
+\end_inset
+
+ und auch das speziell an das Co-Kriging angepasste Trainingsverfahren aus
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:RPROP2"
+
+\end_inset
+
+ zum Einsatz.
+ Insbesondere die Bestimmung der partiellen Ableitungen des Likelihood-Terms
+ sind bei 533 Parametern ein erheblicher Zeitaufwand.
+ Ohne diese Techniken hätte das Training der Ersatzmodelle zu einem Flaschenhals
+ in der Optimierung werden können.
+ 
+\end_layout
+
+\begin_layout Subsection
+Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren
+ unter Berücksichtigung des Realgaseinflusses
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
+\end_layout
+
+\begin_layout Standard
+Im Rahmen des AG-Turbo COOREFLEX-turbo 1.2.4d Projekts wurden die 8 hinteren
+ Stufen einer 13-stufige Verdichterkonfiguration mit dem in dieser Arbeit
+ vorgestellten Multifidelity-Verfahren optimiert.
+ Hauptziel dieses Vorhabens war es, eine hoch belastete, für hohen Wirkungsgrad
+ und hohe Stabilität optimierte Konfiguration eines Gasturbinenverdichters
+ zu untersuchen und für dessen hintere Stufen Designerkenntnisse, -Regeln
+ und –Richtlinien zu erarbeitet.
+ Weiterhin sollte der Einfluss einer Gehäusekonturierung auf den Wirkungsgrad
+ und das Betriebsverhalten evaluiert werden.
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt sollen die Ergebnisse der Multifidelity-Optimierung
+ kurz zusammengefasst werden.
+ Die Ergebnisse des gesamten Vorhabens wurden in 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "goinis2016optimizing,goinis2018"
+key "goinis2018"
+
+\end_inset
+
+ veröffentlicht.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Ausgangspunkt dieser Optimierung ist ein Basisdesign von Siemens.
+ Ausgehend von diesem Design sollte weitere Erhöhung des polytropen Wirkungsgrad
+s erreicht werden ohne Einschränkungen im Arbeitsbereichs des Verdichters.
+ Daraus ergeben sich auch die zwei verwendeten Zielfunktionen:
+\end_layout
+
+\begin_layout Itemize
+Maximierung des polytropen Wirkungsgrads im Arbeitspunkt
+\end_layout
+
+\begin_layout Itemize
+Maximierung des Totaldruckverhältnisses in einem angedrosselten Betriebspunkt
+\end_layout
+
+\begin_layout Standard
+Als Nebenbedingung wurde der Massenstrom im Arbeitspunkt in einem engen
+ Intervall festgelegt.
+ Zusätzlich wurde eine strukturmechanische Nebenbedingung festgelegt.
+ Die maximale Vergleichsspannung der Rotoren dürfte nicht schlechter werden
+ als die des Ausgangsdesigns.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+In dieser Optimierung wurden insgesamt 350 Parameter freigegegen.
+ Ein Großteil davon entfiel auf die Schaufelparametrisierung.
+ Der Rest der Parameter wurde für eine Gehäusekonturierung verwendet.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+Es wurden zwei Gütestufen verwendet, diese unterschieden sich durch die
+ Zellen der CFD-Netze (14.700.000 gegen 1.800.000 Zellen).
+ Die FEM-Rechnungen verwendeten dieselben Rechennetze und hatten damit keinen
+ Laufzeitunterschied.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Prozessketten hatten insgesamt einen zeitlichen Faktor von ca.
+ 4.
+ Wobei die Prozesskette hoher Güte mit 48 CPUs berechnet wurde und die niedrige
+ Prozesskette mit nur 24 CPUs, aus diesem Grund halbiert sich der Faktor
+ in etwa.
+\end_layout
+
+\begin_layout Standard
+Da die in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Entscheidungsfunktion"
+
+\end_inset
+
+ beschriebenen Entscheidungsfunktionen zu diesem Zeitpunkt noch in der Entwicklu
+ng waren, wurde diese Optimierung mit einer initialen Datenbasis niedriger
+ Güte gestartet und danach nur noch Member hoher Güte erzeugt.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Die gesamte Optimierung hatte eine Laufzeit von ca.
+ 1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
+ DLR durchgeführt.
+ Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
+ variiert, lag im Mittel aber bei ca.
+ 10 Knoten.
+ Die Ausstattung der Knoten entspricht der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2018"
+
+\end_inset
+
+ wird beschrieben, dass die Ergebnisse der Gütestufen sehr stark korrelierten,
+ was dem Multifidelity-Verfahren zugute kam.
+ Die Optimierung wurde in drei Phasen durchgeführt.
+ In der ersten Phase wurden aus der Referenzgeometrie Mutationen in beiden
+ Gütestufen erzeugt, um eine initialie Datenbasis für die Ersatzmodelle
+ zu generieren.
+ Nach dieser initialen Phase, wurden hauptsächlich Member niedriger Güte
+ berechnet.
+ In der dritten und letzten Phase wurde dann auf Member hoher Güte umgestellt.
+ Die finale Paretofront im Raum hoher Güte konnte dann innerhalb sehr kurzer
+ Zeit gefunden werden.
+ Insgesamt wurde eine Wirkungsgradverbesserung von 0.45% Punkten erreicht.
+ 
+\end_layout
+
+\begin_layout Subsection
+Anwendung bei 
+\color magenta
+Siemens (Siemens Energy? Power and Gas???)
+\color inherit
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Anwendung-bei-Siemens"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Enumerate
-Siemens Testfall, nachfragen ob die noch mehr haben 
+\begin_layout Standard
+Das hier vorgestellte Multifidelity-Verfahren befindet sich bei Siemens
+ aktuell in der Testphase.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset citation
 LatexCommand cite
 key "verheij2017multi"
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Enumerate
-Siemens aktuelles AG Turbo Projekt , Schaffung einer 
+ Siemens aktuelles AG Turbo Projekt , Schaffung einer 
 \begin_inset Quotes gld
 \end_inset
 
@@ -3205,11 +6610,529 @@ LF Funktion
 \end_inset
 
  mit Neuronalen Netzwerken.
+ 2 Stufiger Verdichter.
+ Ein Score wurde gebildet, der die Korrelation zwischen Hi und Low und dem
+ zeitlichen Faktor ins Verhältnis setzt und die Eignung eines Setups für
+ eine Multifidelity-Optimierung abschätzen soll.
+ 
+\end_layout
+
+\begin_layout Standard
+Speedup berechnen
+\end_layout
+
+\begin_layout Standard
+Maximal theoretische Speedups:
+\end_layout
+
+\begin_layout Paragraph*
+Zielfunktionen und Nebenbedingungeun:
+\end_layout
+
+\begin_layout Enumerate
+Isentroper Wirkungsgad bei 100% Drehzahl 
+\end_layout
+
+\begin_layout Enumerate
+Isentroper Wirkungsgrad bei Teildrehzahl und höherer Umgebungstemperatur
+\end_layout
+
+\begin_layout Standard
+Zwei Nebenbedingungen wurden definiert:
+\end_layout
+
+\begin_layout Enumerate
+Intervall auf das Totaldruckverhältnis eines pumpgrenznahen Betriebspunktes
+ bei Teildrehzahl
+\end_layout
+
+\begin_layout Enumerate
+Untere Grenze auf den Massenstrom.
+ Betriebspunkt nicht beschrieben.
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Nur Rotor 2 wurde parametrisiert mit 80 freien Parametern.
+ Der Rotor wurde mit jeweils 5 Profilschnitten parametrisiert.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+5 verschiedene Setups wurden getestet.
+ 
+\end_layout
+
+\begin_layout Itemize
+HF: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+2x Widerholt 1x mit 3 Slaves und einmal mit 5 Slaves.
+ 
+\end_layout
+
+\begin_layout Itemize
+Die beste als Referenz
+\end_layout
+
+\begin_layout Itemize
+80 Member Init 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+MF:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+1x Wiederholt nd mit der besten von SF vergleichen
+\end_layout
+
+\begin_layout Itemize
+80 + 400LF Member Die Member wurden immer neu erzeugt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Ergebnisse
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Die Ergebnisse zeigen eine gewissen Zufälligkeit, durch zufällige INit und
+ grundsätzlicher Zufälligkeit gegeben
+\end_layout
+
+\begin_layout Itemize
+Die Geschwindigkeiteunterschiede lagen zwische +14 und -39% was im Bereich
+ normaler Schwankungen liegt, besonders da die Initialsien Member nicht
+ gleich waren
+\end_layout
+
+\begin_layout Itemize
+Konvegenzkrieterium der Optimierungen 
+\end_layout
+
+\end_deeper
+\begin_layout Paragraph
+Ergebnisse und Fazit
+\end_layout
+
+\begin_layout Standard
+Zusammengefasst kann man sagen, dass alle Optimierungen zu einer signifikanten
+ Verbesserung der Zielfunktionen führten und die Nebenbedingungen alle eingehalt
+en wurden.
+ Ebenfalls waren die aerodynamischen Ergebnisse der Multi- und Single-Fidelity
+ Optimierungen miteinander vergleichbar.
+ Beide Verfahren lieferten also in allen Testfällen stehts vergleichbare
+ Ergebnisse.
+\end_layout
+
+\begin_layout Standard
+Die Beschleunigung der Multfidelity-Verfahren variierte bei diesen Testoptimieru
+ngen allerdings.
+ In drei Fällen konnte eine Verlangsamung der Optimierung beobachtet werden
+ und in zwei Fällen eine Beschleunigung der Optimierung.
+ Als Begründung in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "verheij2017multi"
+
+\end_inset
+
+ wird eine mangelnde Korrelation und ein zu geringer Laufzeitunterschied
+ zwischen den Gütestufen angegeben.
+ Allerdings existieren noch einige andere Unsicherheiten die in der Art
+ der Ausführung und in den gewählten Optimierungseinstellungen zu finden
+ sind:
+\end_layout
+
+\begin_layout Itemize
+Die Erzeugung der Member erfolgte nur zu ca.
+ 50% mithilfe der Ersatzmodelle.
+ Die anderen 50% wurden mit rein genetischen Algorithmen erzeugt.
+ Dadurch geht der generelle Einfluss und damit auch die mögliche Beschleunigung
+ durch die Ersatzmodelle verloren oder relativiert sich zumindest.
+ Grundsätzlich ist diese Strategie sinnvoll, um durch eine gewissen Zufallskompo
+nente ein robusteres Optimierungsergebnis zu erhalten.
+ Genau hier liegt allerdings der Vorteil in der Multifidelity-Optimerung:
+ Durch die 
+\begin_inset Quotes gld
+\end_inset
+
+günstige
+\begin_inset Quotes grd
+\end_inset
+
+ Abtastung des Raums mit dem Modell niedriger Güte ist dies nicht mehr nötig.
+ Das Multifidelity-Verfahren liefert ein robustes Ergebnis bei weniger Zeit,
+ zumindest in den in dieser Arbeit beschriebenen Testfällen.
+\end_layout
+
+\begin_layout Itemize
+Die Initialisierung der Testfälle war vollständig zufällig.
+ Der Startpunkt der unterschiedlichen Optimierungen ist also zufällig und
+ daher nicht miteinander vergleichbar.
+ Dies kann den Optimierungsverlauf stark beeinflussen.
+\end_layout
+
+\begin_layout Itemize
+Die Optimierungen wurden jeweils nur einmal durchgeführt.
+ Vergleicht man bspw.
+ die in dieser Arbeit durchgeführte Fanstufenoptimierung (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+), so sind dort die Schwankungen der Optimierungswiederholungen erheblich,
+ obwohl alle Optimierungen mit derselben Startdatenbasis durchgeführt werden.
+ Eine solche Optimierung ist ein stark stochastisch geprägtes Verfahren.
+ Daher sind mehrere Wiederholungen unerlässlich, um eine fundierte Aussage
+ treffen zu können.
+\end_layout
+
+\begin_layout Itemize
+Das Ersatzmodelltraining wurde nur nach jedem fünften konvergierten Member
+ durchgeführt.
+ Dies führt insbesondere am Anfang einer Optimierung, zu einer verlangsamten
+ Anpassung der Hyperparameter und damit zu einer Verlangsamung der Optimierung
+ selbst.
+ 
+\end_layout
+
+\begin_layout Itemize
+Die Anzahl an gleichzeitig rechnenden Slaves variiert, das ändert ebenfalls
+ stark das Ergebnis.
+\end_layout
+
+\begin_layout Itemize
+Die ersten beiden Testoptimierungen besaßen einen zeitlichen Faktor von
+ ungefähr 
+\begin_inset Formula $\frac{t_{l}}{t_{h}}=0.5$
+\end_inset
+
+.
+ Mit diesem Faktor und der gewählten Anzahl an intitialen Startmembern ist
+ es für die Multifidelity Optimierung sehr schwierig eine Beschleunigung
+ zu erreichen.
+ Die Optimierung hoher Güte startete mit 80 Member, die Multifidelity-Optimierun
+g hingegen mit 80 Startmember und 400 Member niedriger Güte.
+ Zeitlich gesehen entsprechen die Member niedriger Güte ungefähr 200 Membern
+ hoher Güte.
+ Die Single-Fidelity Optimierung startete also mit einem Zeitverzug von
+ 80 Membern und die Multifideltiy-Optimierung mit einem Zeitverzug von 280
+ Membern.
+ Dies entspricht einer 3.5 fach längeren Initialisierungsphase, zudem ist
+ die Länge der Initialisierungsphase mit 280 Membern hoher Güte sehr lang.
+ Die Verlangsamung der Optimierung ist für diese beiden Testfälle also erklärbar.
+ 
+\end_layout
+
+\begin_layout Standard
+Fazit: Erneute Tests sind geplant, in denen die genetiche Komponente vollständig
+ ausgeschaltet werden soll und ein günstigeres Verhältnis an initialen Membern
+ gewählt wird.
+ Als Hilfestellung wird die Formel aus Kapitel X verwendet, um besonders
+ ungünstige initialierisungsen zu vermeiden..
+ Weiterhin wird die Kopplung mit einem Vorauslegungsverfahren aktuell getestet.
+ 
+\end_layout
+
+\begin_layout Subsection
+Optimierung von Casing-Treatments eines transsonischen Verdichters
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:ASME-Veröffentlichung:-Optimieru"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
+\end_layout
+
+\begin_layout Standard
+Im Rahmen der ASME Veröffentlichung 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2016optimizing"
+
+\end_inset
+
+ wurde untersucht, inwiefern die Anwendung von Casing-Treatments (CTs) an
+ einem transsonischer Verdichter zu einer Verbesserung des Wirkungsgrades
+ und der Pumpgrenze führen können.
+ Bei dem Testverdichter 
+\begin_inset Quotes gld
+\end_inset
+
+Rig250
+\begin_inset Quotes grd
+\end_inset
+
+ handelt es sich um einen 4.5 stufiger Axialverdichter, welcher bereits experimen
+tell und numerisch untersucht wurde.
+ Die numerische Studie wurde mithilfe des in dieser Arbeit entwickelten
+ Multifidelity-Optimierungsverfahrens durchgeführt und soll in diesem Abschnitt
+ kurz zusammengefasst werden.
+ Der Fokus soll allerdings stärker auf der Anwendung des Multifidelty-Verfahrens
+ liegen.
+\end_layout
+
+\begin_layout Paragraph
+Zielfunktionen und Nebenbedingungen
+\end_layout
+
+\begin_layout Standard
+Es wurden insgesamt 5 verschiedene aerodynamische Betriebspunkte OP1-OP5
+ betrachtet.
+ OP1 (Auslegungspunkt) und OP2 lagen auf der 100% Drehzahllinie.
+ OP3, OP4 und OP5 lagen auf der 90% Drehzahllinie bei jeweils verschiedenen
+ Massenströmen.
+ Der Betriebspunkt OP5 wurde für jede Simulation an die numerische Pumpgrenze
+ iteriert, der genaue Ablauf dieses Verfahrens wird in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2016optimizing"
+
+\end_inset
+
+ erläutert.
+ 
+\end_layout
+
+\begin_layout Standard
+Es gab insgesamt 2 Zielfunktionen (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "goinis2016optimizing"
+
+\end_inset
+
+ für die genaue Definition): 
+\end_layout
+
+\begin_layout Enumerate
+Isentrope Wikrungsgrad des Verdichters in OP2
+\end_layout
+
+\begin_layout Enumerate
+Pumpgrenzkriterium 
+\end_layout
+
+\begin_layout Standard
+Als Nebenbedingungen wurde der Massenstrom bei OP1 und OP2 in engen Grenzen
+ festgelegt und zusätzlich auch das Totaldruckverhältnis von OP2.
+ Weiterhin wurden die maximalen Vergleichsspannungen des Rotors berechnet
+ und ein Maximum festgelegt.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Parametrisierung
+\end_layout
+
+\begin_layout Standard
+Die Parametrisierung umfasste zum einen die Rotor Geometrie, es wurden Profilpar
+ameter auf 6 unterschiedlichen radialen Höhen freigegeben.
+ Über dem Rotor wurde eine Gehäusekonturierung ermöglicht, diese wurde mit
+ 6 Spline Punkten aufgelöst.
+ Neben der Gehäusekonturierung und den Profilparametern wurde eine Umfangsnut
+ definiert und 6 Parametern beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Insgesamt wurde eine Anzahl von 70 Parametern erreicht.
+\end_layout
+
+\begin_layout Paragraph
+Gütestufen
+\end_layout
+
+\begin_layout Standard
+Die in dieser Optimierung verwendeten Gütestufen unterscheiden sich nicht
+ durch die Güte der CFD-Netze wie in den meisten hier vorgestellten Beispielen,
+ sondern durch die Anzahl der Betriebspunkte und einer einfacheren Pumpgrenzabsc
+hätzung.
+\end_layout
+
+\begin_layout Standard
+Während in der hohen Gütestufen 5 Betriebspunkte berechnet werden und einer
+ davon durch eine numerische Pumpgrenzbestimmung besonders aufwendig ist,
+ werden für die niedrige Gütestufen nur 3 Betriebspunkte festgelegt.
+ Weiterhin wird in der niedrigen Gütestufen auf die Pumpgrenzbestimmung
+ verzichtet, stattdessen wird ein fester pumpgrenznaher Massenstrom eingestellt.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Ergebnisse
+\end_layout
+
+\begin_layout Standard
+Es wurden insgesamt drei verschiedene Optimierungen mit derselben Prozesskette
+ durchgeführt:
+\end_layout
+
+\begin_layout Enumerate
+Optimierung der Umfangsnuten
+\end_layout
+
+\begin_layout Enumerate
+Optimierung der Gehäusekontur
+\end_layout
+
+\begin_layout Enumerate
+Optimierung des Rotors
+\end_layout
+
+\begin_layout Standard
+Besonders interessant ist das Verhalten der Co-Kriging Ersatzmodelle für
+ die Pumpgrenzabschätzung.
+ Für den pumpgrenznahen Betriebspunkt niedriger Güte wurde ein Massenstrom
+ festgelegt.
+ Das Modell hoher Güte wurde der Massenstrom über die Pumpgrenzbestimmung
+ innerhalb des CFD-Solvers bestimmt.
+ Das Co-Kriging Ersatzmodell für den Massenstrom bekommt also einmal variierende
+ Massenströme hoher Güte und einen konstanten Massenstrom für alle Stützstellen
+ niedriger Güte.
+ Die Daten niedriger Güte liefer also keinerlei Information.
+ In Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AnahngKapitel-6-1"
+
+\end_inset
+
+ sind einige Ergebnisse der Co-Kriging Analysesoftware dargestellt.
+ Besonders interessant ist Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anteile-der-Kovarianzfunktionen"
+
+\end_inset
+
+, Ersatzmodell Nummer 9 beschreibt das Massenstrom-Ersatzmodell für den
+ erwähnten pumpgrenznahen Betriebspunkt.
+ Man kann sehen, dass die niedrige Güte vollständig ausgeschaltet wurde,
+ was auch dem erwarteten Verhalten entspricht.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin ist interessant, inwiefern das Totaldruckverhältnis der niedrigen
+ Güte zur Verbesserung des Ersatzmodells beiträgt.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anteile-der-Kovarianzfunktionen"
+
+\end_inset
+
+ handelt es sich dabei um das Ersatzmodell Nummer 10, dieses weist eine
+ sehr hohe Gewichtung der niedrigen Gütestufe auf.
+ Das Ersatzmodell scheint also die Daten niedrige Güte in großem Maße zu
+ gewichten.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vergleich-von-Vorhersage"
+
+\end_inset
+
+ zeigt alle Vorhersagen und die dazugehörigen Realwerte des Totaldrucks
+ an.
+ Die blaue Linie beschreibt die Ideallinie, in diesem Fall würden Vorhersagen
+ und Realwerte perfekt übereinstimmen.
+ In rot dargestellt sind die letzten 25 Vorhersagen und in grün alle übrigen.
+ Damit lässt sich feststellen, ob die letzten Vorhersagen besser geworden
+ sind.
+ Die Abbildung zeigt grundsätzlich ein sehr gutes Ergebniss, die Vorhersagen
+ liegen alle gleichmäßig verteilt mit einer kleinen Streuung um die Echtwerte.
+ Dies lässt darauf schließen, dass das Ersatzmodell keine Verzerrungen wie
+ z.B.
+ eine Erwartungswertverschiebung aufweist.
+ Weiterhin ist die Fehlerrate sehr gering und das bereits schon am Anfang
+ der Optimierung, was wiederum auf die gute Qualität der Daten niedriger
+ Güte schließen lässt.
+\end_layout
+
+\begin_layout Standard
+Nach Abschluss der Optimierungen wurde versucht die Einzelergebnisse der
+ Optimierungen miteinander zu kombinieren.
+ Beispielsweise wurden ausgewählte Gehäusekonturierungen und Umfangsnuten
+ an optimierten Rotorgeometrien getestet.
+ 
+\end_layout
+
+\begin_layout Standard
+Zusammengefasst resultierten die einzelnen Optimierungen in folgenden Ergebnisse
+n:
+\end_layout
+
+\begin_layout Enumerate
+Die Optimierung der Umfangsnuten resultierte in einer leichten Erhöhung
+ der Pumpgrenze bei gleichzeitigem Verlust des Wirkungsgrads.
  
 \end_layout
 
 \begin_layout Enumerate
-Jan GEK Paper, Alles in einer Software, GPU usw.
+Die Optimierung der Gehäusekontur resultierte in einer leichten Erhöhung
+ der Pumpgrenze bei gleichzeitiger leichter Erhöhung des Wirkungsgrads.
+ Die Erhöhung des Wirkungsgrads wurde auf eine Umverteilung des Massenstroms
+ zurückgeführt, welche zu einer besseren Rotoranströmung führt.
+ Die Erhöhung des Wirkungsgrads wurde also auf ein suboptimales Rotordesign
+ zurückgeführt und nicht auf direkte Verlustmechanismen der Gehäusekontur.
+\end_layout
+
+\begin_layout Enumerate
+Die Optimierung der Gehäusekontur resultierte in einer Erhöhung der Pumpgrenze
+ bei gleichzeitiger Erhöhung des Wirkungsgrads.
+ 
+\end_layout
+
+\begin_layout Standard
+Diese Optimierung dauerte ca.
+ X Monate und wurde auf dem Cluster des Instituts für Antriebstechnik am
+ DLR durchgeführt.
+ Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
+ variiert, lag im Mittel aber bei ca.
+ 10 Knoten.
+ Die Hardwareausstattung der Knoten entspricht der aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Application of an Algorithmically Differentiated Turbomachinery Flow Solver
+ to the Optimization of a Fan Stage
+\end_layout
+
+\begin_layout Standard
+Eine Anwendung der in dieser Arbeit entwickelten Kriging-Software ist in
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3217,1343 +7140,27 @@ key "Backhaus"
 
 \end_inset
 
+ zu finden.
+ Diese Arbeit beschäftigt sich mit der algorithmischen differenzierung von
+ CFD-Codes, womit ist möglich ist unter relativ geringem numerischen Aufwand
+ partielle Ableitungen für zahlreiche Funktionale wie z.B.
+ den Wirkungsgrad zu erhalten.
+ Die so gewonnenen partiellen Ableitungen flossen dann in die in dieser
+ Arbeit entwickelten Gradient-Enhanced-Kriging-Software ein und konnten
+ eine Benchmarkoptimierung so beschleunigen.
+ Durch die Verwendung der partiellen Ableitungen werden die Kovarianzmatrizen
+ des Kriging-Verfahren bereits nach wenigen Membern sehr groß und damit
+ das Training entsprechend aufwändig.
+ Aus diesem Grund sind die in dieser Arbeit zahlreichen Beschleunigungsverfahren
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Numerische-Effizienz-steigern"
 
-\end_layout
-
-\begin_layout Section
-Weitere Anwendungsmöglichkeiten
-\end_layout
-
-\begin_layout Subsection
-Restart Optionen
-\end_layout
-
-\begin_layout Standard
-- Alte Daen weiterverwenden
-\end_layout
-
-\begin_layout Standard
-- Mit kleineren Änderungen oder leicht veränderter Parametrisierung
-\end_layout
-
-\begin_layout Subsection
-Nutzung von Deep Learning Verfahren über CO-Kriging
-\end_layout
-
-\begin_layout Paragraph*
-Einleitend, wo stehen wir?
-\end_layout
-
-\begin_layout Standard
-Deep Learning, was verspricht man sich davon warum in der Turbomaschinenauslegun
-g?
-\end_layout
-
-\begin_layout Standard
-- Industrie in der Lage sehr komplexe Geometrien zu simulieren, allerdings
- die Parameteranzahl dadurch extrem hoch
-\end_layout
-
-\begin_layout Standard
-- 3D Information unabhängig von der Parametrisierung
-\begin_inset Newline newline
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
- Netz innerhalb einer Optimireung verwenden möchte?
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen sind sehr unpräzise durch die nötige Rasterung und die damit
- einhergehende schlechte Netzauflösung (Fabian zitieren)
-\end_layout
-
-\begin_layout Standard
-- Das Vertrauensniveau ist recht niedrig, da man keine Fehlerinformationen
- hat, Keine statistischen Vorhersagen
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen selbst zu aufwendig in einer EVG Prozesskette
-\end_layout
-
-\begin_layout Standard
-- Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
- Massenerhaltung, Totalgrößen, Wirkungsgrade unter 1) wird nicht eingehalten.
- Könnte man aber teilweise mittrainieren
-\end_layout
-
-\begin_layout Standard
-- Das Training dauert sehr lange
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen dauern lange, durch Bounding Box (Optimierungspotential vorhanden)
-\end_layout
-
-\begin_layout Standard
-Die Verwendung für den Einsatz in Turbomaschinenoptimierungen von solchen
- Deep-Learning Netzen ist recht schwierig.
+ von zentraler Bedeutung gewesen.
  
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
--> Fazit: Kopplung über MF Strategie sinnvoll, da:
-\end_layout
-
-\begin_layout Standard
-- statische Vorhersagen möglich sind.
-\end_layout
-
-\begin_layout Standard
-- Optimierungsprozess über EVG möglich ohne Änderungeun
-\end_layout
-
-\begin_layout Standard
-- Fehler können vielleicht korrigiert werden
-\end_layout
-
-\begin_layout Paragraph*
-Die zentrale FRAGE, die hier beantwortet werden soll:
-\end_layout
-
-\begin_layout Standard
-Eine erste Einschätzung, ob Deep Learning Netze mit einer MF Strategie Potential
- haben.
- Es soll noch keine optimale Strategie vorgestellt werden.
- Auch die Neuronalen Netzwerke stehen noch ganz am Anfang was Struktur,
- Lossfunktion usw.
- angeht.
-\end_layout
-
-\begin_layout Paragraph*
-Kurz die NNs vorstellen:
-\end_layout
-
-\begin_layout Standard
-- Marcel zitieren und Fabian zitieren: Netzstruktur und Box Generierung
-\end_layout
-
-\begin_layout Standard
-- Framework: Tensorflow, 
-\end_layout
-
-\begin_layout Standard
-- In dieser Arbeit wurde die Box Generierung verwendet und die voreingestellte
- Netzstruktur, die Variationen und .
- Das Training wurde dann wieder innerhalb dieser Arbeit durchgeführt und
- die Prozesskette usw.
- aufgesetzt.
- Das hier entwickelte MF Verfahren kam dann zum Einsatz mit der LF NN Kette.
- 
-\end_layout
-
-\begin_layout Standard
-Rasterung Zeigen
-\end_layout
-
-\begin_layout Standard
-S1-Schnitte Vorhersagen zeigen
-\end_layout
-
-\begin_layout Standard
-1D-Größen Vergleiche zeigen, die Probleme insbesondere, z.B.
- Massnstrom der Interfaces
-\end_layout
-
-\begin_layout Standard
-.
- Struktur grob erklären, Lossfunktion
-\end_layout
-
-\begin_layout Standard
-- jeweils ein NN pro OP
-\end_layout
-
-\begin_layout Standard
-- Trainingsverlauf zeigen
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen grob vergleichen
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-Vorhersagen zeigen.
- 50% Schnitt Vorhersage und Real, 
-\end_layout
-
-\begin_layout Plain Layout
-95% Schnitt Vorhersage und Real
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-- 1D Vorhersagen zeigen
-\end_layout
-
-\begin_layout Paragraph*
-Optimierungssetup zeigen
-\end_layout
-
-\begin_layout Standard
-NNs vorher trainiert mit 25 initialen Samples
-\end_layout
-
-\begin_layout Standard
-NNs nicht mehr nachtrainiert
-\end_layout
-
-\begin_layout Standard
-Optimierungsergebnisse zeigen
-\end_layout
-
-\begin_layout Standard
-Kein Tensorflow auf dem Cluster, da ...
-\end_layout
-
-\begin_layout Standard
-Daher wurden alle NN Vorhersagen auf einem lokalen Rechner gemacht.
- Prozesskette erklären
-\end_layout
-
-\begin_layout Paragraph*
-Paretofronten - Irgendwie Zeilfunktionen zeigen und vergleichen
-\end_layout
-
-\begin_layout Standard
-asdasd
-\end_layout
-
-\begin_layout Standard
-z.B.
- bei 150 Member wie sehen die Paretofronten aus?
-\end_layout
-
-\begin_layout Paragraph*
-Da besonders der Anfang der Optimierung wichtig ist, Reduktion der Nebenbedingun
-gen zeigen
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-Reduktion der Nebenbedingung über Prozesskettenzeit
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Ergebnisse - Simulation bei großer Datenlage
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="5">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF+d
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF+d
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-65TtOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.119006
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.107791
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.135753
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.18264
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-93mOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-2.27461
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-2.0581
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-2.26312
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-1.59191
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-96 piOp0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.0011689
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00116733
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00235409
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.0021817
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-168 mOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-3.73239
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-4.12907
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-3.65276
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-4.02397
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-171piOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.0018392
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00167622
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00248807
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00238831
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-352AngleOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.432427
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.409054
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.403877
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.401324
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-314HF + 1389LF MeanError der Vorhersagen, jeweils die besten Ergebnisse
- aus 8 Trainings, Zufällige Initialisierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Ergebnisse - Simulation des Beginns einer Optimierung
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF+d
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF+d
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-65TtOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.305696
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.241937
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-93mOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.28947
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-2.16628
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-96 piOp0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00342546
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00266979
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-168 mOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-5.42207
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-4.81156
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-171piOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00571259
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.00416021
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-352AngleOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-0.305105
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.417837
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-25HF + 1389LF MeanError der Vorhersagen, jeweils die besten Ergebnisse aus
- 8 Trainings, Zufällige Initialisierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Weiterhin wurde während des Trainings für MF Modelle der LF-Rauschterm verwendet.
- Die Vorhersagen des Neuronalen Netzwerks werden also als verrauscht angesehen.
- Dennoch konnten fast alle Vorhersagen durch die Neuronalen-Netzwerke verbessert
- werden.
- Ein gewisses Potential scheint also vorhanden zu sein.
- 
-\end_layout
-
-\begin_layout Paragraph*
-Optimierung - Ergebnisse
-\end_layout
-
-\begin_layout Standard
-VG Verlauf - Entscheidungsfunktion & Startdatenbasis
-\end_layout
-
-\begin_layout Paragraph*
-Fazit:
-\end_layout
-
-\begin_layout Standard
-Hat es Potential?
-\end_layout
-
-\begin_layout Standard
-Ein gewisses Potential scheint vorhanden, aber es gibt nocht zahlreiche
- Hürden, wie z.B.
- die hohe Trainingszeit, die Erzeugung der Boxen usw., mer Efahrung mit der
- Struktur ist nötig.
- Ein gewissen Informationsgehalt auf Delta Basis scheint vorhanden zu sein
- und zumindest so groß zu sein, dass ein Co-Kriging Modell davon profitiert.
- Wenn die Vorhersagen noch etwas besser werden, was durchaus möglich ist,
- da die Entwicklung erst am Anfang steht und die Trainings- und vorhersagezeiten
- reduziert werden können, dann ja
 \end_layout
 
 \end_body
