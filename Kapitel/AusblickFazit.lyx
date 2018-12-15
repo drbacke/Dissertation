@@ -412,202 +412,76 @@ Testen des entwickelten Verfahrens
 \end_layout
 
 \begin_layout Standard
-Das wichtigste Ziel, ein in einer industriellen Umgebung einsetzbares Verfahren
- zu entwickeln ist gelungen.
- Dies lässt sich besonders an den sehr komplexen Anwendungen zeigen die
- das in dieser Arbeit entwickelte Verfahren gewinnbringend verwendet haben.
- Weiterhin konnten bereits einige Anwendungen in Forschung und Industrie
- vorgestellt werden, von denen viele auch im Rahmen dieser Arbeit betruet
- wurden und entscheidend zu der Entwicklung dieses Verfahren beigetragen
- haben.
+Das hauptsächliche Ziel dieser Arbeit ist es ein in einer industriellen
+ Umgebung nutzbares Multifidelity-Verfahren zu entwickeln.
+ Neben der eigentlichen Entwicklung der Software, ist das Testen und die
+ direkte Anwendung einer der wichtigsten Punkte dieser Arbeit.
+ Erst dadurch ist es möglich eine Software zu entwickeln, welche die notwendige
+ Stabilität und Benutzerfreundlichkeit bietet um in einer Industrie- und
+ Forschungsumgebung Anwendung finden zu können.
+ Hierfür wurde die entwickelte Software in zahlreichen komplexen Anwendungen
+ in Forschung und Industrie verwendet und betreut.
+ Die gewonnenen Erkenntnisse wurden für die Weiterentwicklung des Verfahrens
+ benutzt.
+ Eine Übersicht aller Anwendungen ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Übersicht-der-bisherigen"
+
+\end_inset
+
+ zu finden.
  
 \end_layout
 
-\begin_layout Enumerate
-Aufzählen von den Anwendungn
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Siemens
-\end_layout
-
-\begin_layout Enumerate
-asdsad
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Praktische Anwendbarkeit an industriellen Turbomaschinenoptimierung zeigen
-\end_layout
-
 \begin_layout Standard
-\begin_inset Separator plain
+Weiterhin sind in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analytische-Optimierungsbeispiel"
+
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Industriell einsetzbares Mutlfideiltiy Verfahren für das Turbomaschinendesign,
- welches moderne Großrechner-Systeme unterstützt und verwenden kann.
-\end_layout
-
-\begin_layout Enumerate
-Entscheidungsfunktion:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Konvergenzrate der Fidelities miteinbeziehen, diese kann ser unterschiedlich
- sein
-\end_layout
-
-\begin_layout Enumerate
-Entscheidung auf einzelnen Prozesse ausweiten.
- CFD LF z.B.
- und FEM HF oder sowas.
- Dynamischer
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
+ einige akademische Testfälle zu finden.
+ Innerhalb dieser Testfälle sind besonders 
+\begin_inset Quotes gld
 \end_inset
 
+Grenzfälle
+\begin_inset Quotes grd
+\end_inset
 
+, wie z.B.
+ ein Modell niedriger Güte ohne Informationsgehalt, erfolgreich überprüft
+ worden.
+ 
 \end_layout
 
-\begin_layout Enumerate
-Grundlegende Zielsetzung, Entwicklu
+\begin_layout Standard
+Neben den akademischen Testfällen ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+ eine aeromechanische Optimierungsreihe einer modernen Fanstufe zu finden.
+ Innerhalb dieser Optimierungsreihe sollte der Geschwindigkeitsvorteil des
+ hier entwickelten Multifidelity-Verfahrens gegenüber einer konventionellen
+ Single-Fidelity Optimierung gezeigt werden.
+ Hierfür wurden die Optimierungeun mehrfach wiederholt um Zufälligkeiten
+ abzubilden und auch die Robustheit des Verfahrens messen zu können.
+ Als Hauptergebnis konnte die gesamte Optimierungszeit durch das neue Verfahren
+ in etwa halbiert werden.
+ Neben der reinen Beschleunigung kann auch beobachtet werden, dass die Multifide
+lity-Optimierungen alle zu demselben guten Ergebniss führen.
+ Die Single-Fidelity Optimierungen zeigen stärkere Schwankungen zu schlechteren
+ Ergebnissen hin.
+ Die Multifidelity-Optimierungen haben in dieser Anwendung also robuster
+ zu dem bestmöglichen Ergebnis geführt.
+ 
 \end_layout
 
-\begin_layout Enumerate
-ng eines an industriell einsetzbaren und erweiterbaren Multifidelity Optimierung
-sverfahrens
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Optimierungsverfahren stark ausgerichtet auf den Turbomaschinenbereich,
- bedeutet:
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Viele Restriktionen
-\end_layout
-
-\begin_layout Enumerate
-mehrere Zielfunktionen
-\end_layout
-
-\begin_layout Enumerate
-hochdimensionale Räume
-\end_layout
-
-\begin_layout Enumerate
-numerisch sehr rechenaufwendige Prozessketten
-\end_layout
-
-\begin_layout Enumerate
-Prozessketten in verschiedenen Gütestufen
-\end_layout
-
-\begin_layout Enumerate
-HPC Rechnerarchitektur mit GPUs, 
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Zukünftige Problemstellungn müssen auch bearbeitet werden können
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-GEK-CO Kriging
-\end_layout
-
-\begin_layout Enumerate
-CO-Kriging fließénde Gütestufen
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Enumerate
-Erreicht wird dies durch
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Eigenes offenes Softwaredesign
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Objektorientiertes Programm
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Beinhaltet alle Kriging Verfahren (Gradient-Enhanced-, Co-, Ordinary-Kriging)
-\end_layout
-
-\begin_layout Enumerate
-Erweiterbar
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Andere Kriging Verfahren müssen umgesetzt werden können
-\end_layout
-
-\begin_layout Enumerate
-Danach noch Erweiterbar sein
-\end_layout
-
-\begin_layout Enumerate
-Objektorientierung
-\end_layout
-
-\begin_layout Enumerate
-Allgemeine Schnitstellen vom Ersatzmodell zum Optimierer
-\end_layout
-
-\begin_layout Enumerate
-Unterschiedliche Programmiersprachen 
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Entwicklung und Validierung einer automatisierten Entscheidungsfunktion
-\end_layout
-
-\begin_layout Enumerate
-Eigen entwickeltes CO-Kriging als Ersatzmodell
-\end_layout
-
-\begin_layout Enumerate
-Erweiterung des bisherigen Optimierungsverfahren auf mehrere Fidelities,
- Entscheidungsfunktionen, Datenbasen usw.
-\end_layout
-
-\begin_layout Enumerate
-Kriging Verfahren Hardwaremäßig
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-CPU-GPU Mixbetrieb muss möglich sein für das Optimierungsverfahren
-\end_layout
-
-\begin_layout Enumerate
-Client / Server System, um Berechnungunge asynchron und dynamisch zu verteilen.
- Auch auf verschiedenen Architekturen (GPU/CPU)
-\end_layout
-
-\end_deeper
-\end_deeper
 \begin_layout Section*
 Ausblick
 \end_layout

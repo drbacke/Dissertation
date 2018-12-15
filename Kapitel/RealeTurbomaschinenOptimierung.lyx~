@@ -6003,43 +6003,6 @@ Naben- und Gehäusekontur der einzelnen Member im Vergleich
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/Opti_ProfileRotor95.eps
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Rotor-90%,-Relative"
-
-\end_inset
-
-Profilschnitte des Rotors bei 90% relativer Höhe 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
