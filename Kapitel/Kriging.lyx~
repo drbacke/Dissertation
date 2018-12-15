@@ -400,11 +400,11 @@ Die Kovarianzen
 \end_inset
 
  unter der Bedingung aller bekannten Daten 
-\begin_inset Formula $\vec{y}_{i}$
+\begin_inset Formula $\vec{y}$
 \end_inset
 
- und der Gewichte 
-\begin_inset Formula $\vec{w}_{i}$
+ und Gewichte 
+\begin_inset Formula $\vec{w}$
 \end_inset
 
 
@@ -1619,6 +1619,252 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 
  so sind die Ähnlichkeiten trotz der unterschiedlichen Herleitungen sehr
  groß.
+\end_layout
+
+\begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:VergleicheCoKrigingAndere"
+
+\end_inset
+
+Vergleich des Co-Kriging Verfahrens mit anderen Verfahren aus der Literatur
+\end_layout
+
+\begin_layout Standard
+Das in dieser Arbeit vorgestellte Modell basiert in den Grundzügen auf der
+ Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+.
+ Aus diesem Grund sollen innerhalb dieses Abschnittes die Gemeinsamkeiten
+ und Unterschiede herausgestellt werden.
+ Beispielsweise gleichen sich die Kovarianzmodelle, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COKrigingKovarianzmodell"
+
+\end_inset
+
+.
+ Damit gleichen sich auch der Aufbau der Kovarianzmatrix 
+\begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
+\end_inset
+
+ und im Wesentlichen auch der Aufbau des Erwartungswertvektors 
+\begin_inset Formula $\vec{F}$
+\end_inset
+
+ und des Stützstellenvektors 
+\begin_inset Formula $\vec{y}_{s}$
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:FVektorGEK"
+
+\end_inset
+
+).
+ Die Unterschiede in den Verfahren können durch folgende Punkte zusammengefasst
+ werden:
+\end_layout
+
+\begin_layout Enumerate
+In dem Modell von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ existiert eine Unabhängigkeitsbedingung (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ Gleichung 8).
+ Diese besagt, dass die Hyperparameter (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzfunktion-CO-Kriging"
+
+\end_inset
+
+ ) 
+\begin_inset Formula $\vec{\theta}_{2},\sigma_{2}^{2}$
+\end_inset
+
+ des Modells niedriger Güte unabhängig von den Hyperparametern 
+\begin_inset Formula $a,\vec{\theta}_{1},\sigma_{1}^{2}$
+\end_inset
+
+ geschätzt werden können.
+ Das hat zufolge, dass das Modell niedrigerer Güte im ersten Schritt alleine
+ trainiert werden kann und darauf aufbauend das Differenzmodell trainiert
+ wird.
+ Dies bietet numerische Vorteile, da hierfür nur die jeweiligen Submatrizen
+ der gesamten Kovarianzmatrix invertiert werden müssen und auch der jeweilige
+ Hyperparamterraum kleiner ist.
+ Allerdings bedingt dies ebenfalls, dass an jedem bekannten Punkt niedriger
+ Güte auch eine Stützstelle hoher Güte bekannt sein muss.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Aufbauend auf der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+, schlägt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+ ein weiteres Modell vor.
+ In diesem wird ein Ordinary-Kriging Modell mit den Daten niedrigerer Güte
+ aufgestellt.
+ Die möglicherweise fehlenden Punkte niedriger Güte an Stellen hoher Güte,
+ werden dann aus den Vorhersagen des Ordinary-Kriging Modells erzeugt.
+ Der reale Prozess wird also durch einen Kriging-Prozess ersetzt.
+ Die verwendeten Vorhersagen sind allerdings mit einer Unsicherheit behaftet,
+ stellen also selbst Verteilungen dar.
+ Inwiefern dieser Umstand beachtet werden sollte, wurde in der Arbeit von
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+ nicht erwähnt.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+In dem hier beschriebenen Modell werden die Hyperparameter Sätze als ganzes
+ trainiert und sind damit nicht mehr unabhängig, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+.
+ Das hat folgende Auswirkungen
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Die Punkteverteilung kann beliebig verteilt sein: An einem Punkt hoher Güte
+ muss kein Punkt niedriger Güte mehr existieren.
+\end_layout
+
+\begin_layout Enumerate
+Der Hyperparameterraum ist deutlich größer, und das Modell aus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ ist somit eine Untermenge von dem in dieser Arbeit beschriebenen
+\end_layout
+
+\begin_layout Enumerate
+Innerhalb dieser Arbeit wurden beide Strategien anhand von analytischen
+ Funktionen getestet.
+ Es wurden jeweils dieselben Trainingsdatensätze verwendet.
+ Dabei konnte beobachtet werden, dass durch den größeren Parameterraum ein
+ besserer Likelihood-Term erzielt werden konnte als mit dem in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ beschriebenen Modell.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Die Trainingszeiten steigen dadurch allerdings an, da die gesamte Kovarianzmatri
+x zerlegt werden muss und der zu trainierende Hyperparameterraum deutlich
+ größer ist.
+ In den hier betrachteten Anwendungsfällen sind die Prozesskettenzeiten
+ allerdings so erheblich, dass die Trainingszeit immernoch keine wesentliche
+ Rolle spielt.
+ Siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Reale-Turbomaschinen-Optimierung-1"
+
+\end_inset
+
+.
+ Bei sehr schnellen Prozessketten kann die Strategie von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ allerdings wieder sinnvoller sein.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+Eine weitere Herangehensweise kann in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
+
+\end_inset
+
+ gefunden werden.
+ In dieser Arbeit wird ein Co-Kriging-Modell mit drei unabhängigen Kovarianzfunk
+tionen beschrieben.
+ Die bedeutet, dass drei verschiedene Hyperparametersätze gleichzeitig trainiert
+ werden.
+ Dies führt allerdings zu erheblichen numerischen Problemen.
+ Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
+ nicht mehr gesichert ist.
+ Praktisch ist das Verfahren damit nicht anwendbar.
+ Um dieses Problem zu umgehen, wurde in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2009improving"
+
+\end_inset
+
+ vorgeschlagen, für alle drei Kovarianzfunktionen denselben Hyperparametersatz
+ zu verwenden.
+ Verglichen mit einem Ordinary-Kriging welches alle Fidelity Samples beinhaltet,
+ besteht der Unterschied dann nur noch in einer eigenen globalen Varianz
+ und einem eigenen globalen Erwartungswert für die verschiedenen Fidelities.
+ Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun
+g zwischen den Gütestufen dargestellt werden.
+ Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
+ dar und für industrielle Anwendungen nicht ausreichend ist.
 \end_layout
 
 \end_body

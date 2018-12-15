@@ -5166,294 +5166,6 @@ Typische Werte sind 1%, allerdings ist dieser Wert sehr Anwendungs- und
 \end_layout
 
 \begin_layout Section
-
-\color magenta
-WEG ? ODer am Ende oder Anfang ????
-\color inherit
-CO-Kriging - Vergleich zu anderen Verfahren 
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:VergleicheCoKrigingAndere"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Unterschiede im mathematischen Modell und Trainingsverfahren
-\end_layout
-
-\begin_layout Standard
-Die Co-Kriging Theorie für die in dieser Arbeit entwickelte Co-Kriging Software,
- entspricht in vielen Punkten der einschlägigen Literatur.
- In einigen Punkten gibt es allerdings Unterschiede, welche Auswirkungen
- auf das 
-\end_layout
-
-\begin_layout Itemize
-Diagonalaufschlag Behandlung ist anders als bei anderen, wird außen als
- ganze Varianz addiert in der Kov Matrix.
- Dadurch ist es möglich dass Low Fid.
- komplett verreuscht ist und keinen Inhalt hat.
- bei der Formulierung (corr+diag)*sigma ist das nicht möglich
-\end_layout
-
-\begin_layout Standard
-In diesem Abschnitt sollen Unterschiede und Gemeinsamkeiten zu einigen anderen
- Co-Kriging Verfahren aus der einschlägigen Literatur herausgestellt werden.
- Eine grundlegende Arbeit in diesem Bereich stellt die Veröffentlichung
- von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- dar.
- Das dort beschriebene Modell ist dem in dieser Arbeit in sehr vielen Punkten
- ähnlich.
- Beispielsweise ist das Kovarianzmodell dasselbe wie in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:COKrigingKovarianzmodell"
-
-\end_inset
-
- beschrieben.
- Damit gleichen sich der Aufbau der Kovarianzmatrix 
-\begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
-\end_inset
-
- und außerdem ähnelt die analytische Bestimmung des Erwartungswertvektors
- 
-\begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
-\end_inset
-
- der Bestimmung aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
-
-\end_inset
-
-.
- Allerdings beinhaltet der Erwartungswertvektor bei 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- die Erwartungswerte der höchsten Gütestufe und die der Differenzfunktion
- (vgl.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- Gleichung 4 und 5).
- In der hier verwendeten Formulierung entspricht der Differenzerwartungswert
- dem Erwartungswert der niedrigen Gütestufe selbst.
- Dieser Unterschied ist aber nur unwesentlich, da das Ergebnis davon unberührt
- bleibt.
- 
-\end_layout
-
-\begin_layout Standard
-Größere Unterschiede zeigen sich im Trainingsverfahren und zwar gilt bei
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- die Bedingung, dass an jeder Stützstelle hoher Güte auch eine Stützstelle
- niedriger Güte bekannt sein muss.
- Dies resultiert aus der Annahme, dass die Daten und damit auch die Hyperparamet
-er niedrigerer Güte, unabhängig von den Daten hoher Güte trainierbar sind.
- 
-\end_layout
-
-\begin_layout Standard
-Durch diese Annahme kann man die Hyperparameter für die Gütestufen hierarchisch
- (Bottom-Top) bestimmen.
- Das Training der Hyperparameter wird dadurch vereinfacht und auch der numerisch
-e Aufwand sinkt dadurch, da man zwei unabhängige Trainings durchführt mit
- jeweils einer Kovarianzmatrix der Größe des jeweiligen Datensatzes.
- Als Beispiel müssten bei einer Anzahl von 
-\begin_inset Formula $n_{high}$
-\end_inset
-
- High-Fidelity und 
-\begin_inset Formula $n_{low}$
-\end_inset
-
- Low-Fidelity Stützstellen jeweils ein Training mit den Kovarianzmatrizen
- 
-\begin_inset Formula $\mathbf{Cov_{high}}\in\mathbb{R^{\mathrm{n_{high}\times n_{high}}}}$
-\end_inset
-
- und 
-\begin_inset Formula $\mathbf{Cov_{low}}\in\mathbb{R^{\mathrm{n_{low}\times n_{low}}}}$
-\end_inset
-
- durchgeführt werden.
- Die Komplexität liegt dann bei etwa 
-\begin_inset Formula $\mathcal{O}\left(n_{high}^{3}\right)+\mathcal{O}\left(n_{low}^{3}\right)$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-In dem hier beschrieben Verfahren werden alle Hyperparameter gleichzeitig
- trainiert, wodurch die Stützstellen der unterschiedlichen Gütestufen beliebig
- verteilt sein können.
- Es muss also nicht an jedem Punkt hoher Güte auch ein Punkt niedriger Güte
- vorhanden sein.
- Der numerische Aufwand steigt dadurch allerdings, da die gesamte Kovarianzmatri
-x zerlegt werden muss und auch alle Hyperparameter gleichzeitig trainiert
- werden.
- Die Komplexität liegt dann bei 
-\begin_inset Formula $\mathcal{O}\left(\left(n_{high}+n_{low}\right)^{3}\right)$
-\end_inset
-
-.
- Dennoch wird dies als zeitlicher Vorteil erachtet, da der Zeitaufwand für
- die Bestimmung der zusätzlichen Stützstellen deutlich größer ist als der
- zusätzliche Trainingsaufwand, insbesondere bei Turbomaschinenanwendungen.
- 
-\end_layout
-
-\begin_layout Standard
-Weiterhin wird auch der mögliche Lösungsraum für die Hyperparameter größer.
- Der Grund liegt darin, dass man den Raum der Hyperparameter (wobei 
-\begin_inset Formula $o$
-\end_inset
-
- die Anzahl der Hyperparameter angibt) von 
-\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}+o_{low}}}}$
-\end_inset
-
- auf die beiden Räume 
-\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}}}}$
-\end_inset
-
- und 
-\begin_inset Formula $\mathbb{R^{\mathrm{o_{high}}}}$
-\end_inset
-
- auftrennt und damit mögliche Lösungen für die Hyperparameter ausschließt.
-\end_layout
-
-\begin_layout Standard
-Aufbauend auf der Arbeit von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
-, schlägt 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "forrester2007multi"
-
-\end_inset
-
- ein weiteres Modell vor.
- In diesem wird ein Ordinary-Kriging auf die Daten niedrigerer Güte aufgestellt
- und die Vorhersagen aus dem Modell dazu verwendet, die Differenz-Kovarianzfunkt
-ion und damit das resultierende Co-Kriging Modell aufzustellen.
- Grundlegend ist dies zwar eine praktikable Lösung, allerdings wird damit
- die Bedingung von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- 
-\begin_inset Formula $p\left(z|\phi\right)=p\left(z_{high}|z_{low},\rho,\beta_{high},\sigma_{high}^{2}\right)p\left(z_{low}|\beta_{low},\sigma_{low}^{2}\right)$
-\end_inset
-
- (vgl.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- Gleichung 8) verletzt.
- Diese besagt, das die Schätzung der Parameter der Verteilungsfunktion hoher
- Güte 
-\begin_inset Formula $\rho,\beta_{high},\sigma_{high}^{2}$
-\end_inset
-
- unabhängig von den Parametern niedrigerer Güte 
-\begin_inset Formula $\beta_{low},\sigma_{low}^{2}$
-\end_inset
-
- erfolgen kann.
- Da die Daten niedrigerer Güte dann aber aus einer Kriging-Vorhersage stammen,
- sind 
-\begin_inset Formula $z_{low},\rho,\beta_{high},\sigma_{high}^{2}$
-\end_inset
-
- nicht mehr unabhängig von 
-\begin_inset Formula $\beta_{low},\sigma_{low}^{2}$
-\end_inset
-
-.
- Weiterhin sind diese Vorhersagen mit einer Unsicherheit behaftet, stellen
- also selbst Verteilungen dar.
- Inwiefern dieser Umstand beachtet werden sollte, wurde hier allerdings
- nicht mehr weiter untersucht.
- 
-\end_layout
-
-\begin_layout Standard
-Eine weitere Herangehensweise kann in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2012alternative"
-
-\end_inset
-
- gefunden werden.
- In dieser Arbeit wird ein Co-Kriging-Modell mit drei unabhängigen Kovarianzfunk
-tionen beschrieben.
- Die bedeutet, dass drei verschiedene Hyperparametersätze gleichzeitig trainiert
- werden.
- Dies führt allerdings zu erheblichen numerischen Problemen.
- Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
- nicht mehr gesichert ist.
- Praktisch ist das Verfahren damit nicht anwendbar.
- Um dieses Problem zu umgehen, wurde in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2009improving"
-
-\end_inset
-
- vorgeschlagen, für alle drei Kovarianzfunktionen denselben Hyperparametersatz
- zu verwenden.
- Verglichen mit einem Ordinary-Kriging welches alle Fidelity Samples beinhaltet,
- besteht der Unterschied dann nur noch in einer eigenen globalen Varianz
- und einem eigenen globalen Erwartungswert für die verschiedenen Fidelities.
- Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun
-g zwischen den Gütestufen dargestellt werden.
- Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells
- dar und für industrielle Anwendungen nicht ausreichend ist.
-\end_layout
-
-\begin_layout Section
 Softwaretechnische Umsetzung 
 \begin_inset CommandInset label
 LatexCommand label
@@ -5614,7 +5326,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Point.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/Point.eps
 
 \end_inset
 
@@ -5662,11 +5374,11 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/CorrelationFunction.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/CorrelationFunction.eps
 	scale 50
 
 \end_inset
@@ -6016,7 +5728,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Density.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/Density.eps
 	scale 50
 
 \end_inset
@@ -6204,11 +5916,11 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
 	scale 50
 
 \end_inset
@@ -6319,7 +6031,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/MinimizerInterface.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/MinimizerInterface.eps
 
 \end_inset
 
@@ -6751,12 +6463,12 @@ lines 0
 placement o
 overhang 0in
 width "55col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/Matrix.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/Matrix.eps
 	lyxscale 70
 	scale 40
 
@@ -7337,11 +7049,11 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
+	filename ../images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
 
 \end_inset
 
@@ -7595,7 +7307,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
 
 \end_inset
 
@@ -7737,7 +7449,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.eps
+	filename ../images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.eps
 
 \end_inset
 
@@ -8129,7 +7841,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Fabiab_Netzwerk_one_many_total_speedup.eps
+	filename ../images/SoftwareTechnUmsetzung/Fabiab_Netzwerk_one_many_total_speedup.eps
 
 \end_inset
 
@@ -8858,6 +8570,13 @@ Ist die Anzahl der Variablen nicht durch zwei teilbar, so bleibt ein Rest
 
 \begin_layout Subsection
 Reduktion von Stützstellen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Reduktion-von-Stützstellen"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

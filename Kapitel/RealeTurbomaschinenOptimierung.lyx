@@ -2680,13 +2680,11 @@ name "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Innerhalb dieses Abschnitts soll ein Vergleich zwischen einer Multifidelity-Opti
-mierung und einer reinen Single-Fidelity-Optimierung angestellt werden.
- Die verwendeten Optimierungsverfahren sind die in dieser Arbeit vorgestellten
- Verfahren.
- Das Multifidelity-Verfahren ist das in dieser Arbeit entwickelte Verfahren
- und beide Optimierungen nutzen die in dieser Arbeit entwickelte Kriging-Softwar
-e.
+Innerhalb dieses Abschnitts soll ein Vergleich zwischen einer Multifidelity-
+ und Single-Fidelity-Optimierung anhand einer Fan-Stufen Optimierung angestellt
+ werden.
+ Das verwendete Multifidelity-Verfahren ist das in dieser Arbeit entwickelte
+ und alle Optimierungen nutzen die in dieser Arbeit entwickelte Kriging-Software.
  
 \end_layout
 
@@ -2698,24 +2696,18 @@ key "Reimer2016"
 
 \end_inset
 
-, diese Bachelorarbeit wurde im Rahmen dieser Dissertation angefertigt und
- betreut.
+, welche im Rahmen dieser Dissertation betreut wurde.
  Dort wird die aeromechanische Optimierung einer modernen Fan-Stufe beschrieben
  und eine frühe Version der hier vorgestellten Multifidelity-Verfahren getestet.
- Das Multifidelity-Verfahren in
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
- unterscheidet sich in folgenden Punkten von dem aktuellen Stand:
+ Wobei sich das Multifidelity-Verfahren in folgenden Punkten von dem aktuellen
+ Stand unterscheidet:
 \end_layout
 
 \begin_layout Itemize
 Die Entscheidungsfunktion berücksichtigt im aktuellen Stand die Gewichtung
  der Nebenbedingungen und Zielfunktion und auch die Gewichtung der Nebenbedingun
-gen untereinander je nach Wahrscheinlichkeit diese zu erfüllen.
+gen untereinander.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -2734,7 +2726,7 @@ reference "subsec:UltraRestart"
 
 \end_inset
 
- beschrieben 
+ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -2742,7 +2734,7 @@ Initialisierung auf Basis bereits vorhandener Kriging Modelle
 \begin_inset Quotes grd
 \end_inset
 
- wird, verwendet.
+ beschrieben wird verwendet.
 \end_layout
 
 \begin_layout Itemize
@@ -2764,10 +2756,10 @@ key "Reimer2016"
 
 \end_inset
 
- eine Restriktion auf die Wahrscheinlichkeit einer Verbesserung in Zielfunktion
- und Nebenbedingung von mindestens 80% gesetzt.
- Dies wurde gemacht um Konvergenzproblemen in der Prozesskette aus dem Weg
- zu gehen.
+ eine Restriktion auf die Wahrscheinlichkeit die Zielfunktion und Nebenbedingung
+ zu verbessern gesetzt.
+ Die Wahrscheinlichkeit musste mindestens 80% betragen.
+ Damit konnten Konvergenzprobleme in der Prozesskette vermieden werden.
  Um diese Restriktion erfüllen zu können, muss der Optimierungsalgorithmus
  
 \begin_inset Quotes gld
@@ -2792,6 +2784,7 @@ explorativen
  Bereiche interessant sein, da dort mit wenig Aufwand eine Schätzung gegeben
  werden kann.
  Aus diesem Grund wurde diese Restriktion in diesen Benchmarks ausgeschaltet.
+ Konvergenzprobleme konnten dennoch nicht beobachtet werden.
 \end_layout
 
 \begin_layout Standard
@@ -2817,7 +2810,7 @@ key "Reimer2016"
 
  beschrieben, daher soll hier nur ein Überblick über die wichtigsten Information
 en und Unterschiede gegeben werden und anschließend die aktuellen Ergebnisse
- im Detail beschrieben werden.
+ im Detail erläutert.
  
 \end_layout
 
@@ -2854,81 +2847,6 @@ Für die Prozesskettenberechnung wurden 6 Knoten vorgesehen.
 
 \begin_layout Paragraph*
 Prozesskette der Gütestufen
-\end_layout
-
-\begin_layout Standard
-In Tabelle 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Prozesskette-und-die"
-
-\end_inset
-
- ist die Abfolge der Prozesskette für die hohe und niedrige Gütestufen dargestel
-lt.
- Weiterhin sind auch die mittleren Ausführungszeiten zu erkennen, diese
- können im Laufe der Optimierung variieren.
- Die beiden Gütestufen unterscheiden sich durch die Auflösung des CFD-Netzes
- und der Laufzeitunterschied zwischen den Prozessketten liegt bei einem
- Faktor von ungefähr 10.
- 
-\end_layout
-
-\begin_layout Standard
-Die Prozesskette startet in beiden Gütestufen mit der Geometrieerzeugung
- anhand der vom Optimierer bereitgestellten Parameter (siehe Abschnitt 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Parametrisierung"
-
-\end_inset
-
- Parametrisierung).
- Mit den erzeugten Geometriedateien, kann das notwendige CFD-Rechennetz
- erzeugt werden.
- Das Rechennetz der unterschiedlichen Gütestufen unterscheidet sich durch
- die Auflösung (siehe Abschnitt 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:UnterschiedGütestufen"
-
-\end_inset
-
- 
-\begin_inset Quotes gld
-\end_inset
-
-Unterschied hohe- und niedrige Gütestufe
-\begin_inset Quotes grd
-\end_inset
-
-).
- Das Konvergenzkriterium ist durch eine maximale Schwankung des Wirkungsgrads,
- Massenstrom und Totaldruckverhältnis von 0.01% der letzten 100 Zeitschritte
- festgelegt.
- Das Konvergenzkriterium gilt für beide Gütestufen.
-\end_layout
-
-\begin_layout Standard
-Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
- des Rotors durchgeführt, hier wird die maximale Dehnung der Schaufel berechnet.
- Der Prozess ist für beide Gütestufen ebenfalls nahezu identisch ist.
- Der einzige Unterschied in den Gütestufen besteht in der Durckverteilung
- auf der Schaufel, da diese aus der CFD-Simulation für OP0 verwendet wird
- und es hier Abweichungen zwischen den Gütestufen gibt.
- 
-\end_layout
-
-\begin_layout Standard
-Für weitergehende Informationen bezüglich der Prozesskette wie z.B.
- die verwendete Software und deren Einstellungen wird auf 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
- verwiesen.
 \end_layout
 
 \begin_layout Standard
@@ -3201,13 +3119,73 @@ Prozesskette und die ungefähren Ausführungszeiten der einzelnen Schritte
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Prozesskette-und-die"
 
 \end_inset
 
+ ist die Abfolge der Prozesskette für die hohe und niedrige Gütestufe dargestell
+t.
+ Weiterhin sind auch die mittleren Ausführungszeiten zu erkennen, diese
+ können im Laufe der Optimierung allerdings variieren.
+ Beide Gütestufen unterscheiden sich durch die Auflösung des CFD-Netzes.
+ Der Laufzeitunterschied zwischen den Prozessketten liegt bei einem Faktor
+ von ungefähr 10.
+ 
+\end_layout
 
+\begin_layout Standard
+Die Prozesskette startet in beiden Gütestufen mit der Geometrieerzeugung
+ anhand der vom Optimierer bereitgestellten Parameter unterscheidet.
+ Mit den Geometriedaten, kann dann das CFD-Rechennetz erzeugt werden.
+ Wobei sich das Rechennetz der unterschiedlichen Gütestufen durch die Auflösung
+ unterscheidet, mehr dazu in Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:UnterschiedGütestufen"
+
+\end_inset
+
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Unterschied hohe- und niedrige Gütestufe
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Das Konvergenzkriterium ist durch eine maximal zulässige Schwankung des
+ Wirkungsgrads, Massenstrom und Totaldruckverhältnis von 0.01% innerhalb
+ der letzten 100 Zeitschritte festgelegt und gilt für beide Gütestufen.
+\end_layout
+
+\begin_layout Standard
+Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
+ des Rotors durchgeführt, hier wird die maximale Dehnung der Schaufel bestimmt
+ und als Nebenbedingung verwendet.
+ Der Prozess ist für beide Gütestufen nahezu identisch.
+ Der einzige Unterschied besteht in der Durckverteilung auf der Schaufel,
+ da diese aus der CFD-Simulation für OP0 verwendet wird und es hier Abweichungen
+ zwischen den Gütestufen gibt.
+ Die Auswirkungen der Druckverteilung auf den Rotor ist allerdings im Vergleich
+ zu dem auftretenden Fliehkräften eher gering.
+\end_layout
+
+\begin_layout Standard
+Für weitergehende Informationen bezüglich der Prozesskette wie z.B.
+ die verwendete Software und deren Einstellungen wird auf 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reimer2016"
+
+\end_inset
+
+ verwiesen.
 \end_layout
 
 \begin_layout Paragraph
@@ -3222,8 +3200,8 @@ name "par:UnterschiedGütestufen"
 \end_layout
 
 \begin_layout Standard
-Der Unterschied zwischen der hohen und niedrigen Gütestufe liegt im CFD-Netz.
- Die niedrige Gütestufe hat ein gröberes CFD-Netz.
+Der Unterschied zwischen der hohen und niedrigen Gütestufe liegt in der
+ Auflösung des CFD-Netzes.
  In Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3233,15 +3211,14 @@ reference "tab:Nezunterschied"
 
  werden einige Netzparameter aufgelistet.
  Der Unterschied der Gesamtzellen liegt bei einem Faktor von ca.
- 8.1 die zeitliche Differenz der Rechnung liegt etwas höher bei einem Faktor
+ 8.1 und die zeitliche Differenz der gesamten Rechnung liegt bei einem Faktor
  von ca.
  10.
- Weiterhin konvergieren die Rechnungen der niedrigen Gütestufe schneller,
- da die Anzahl die I-Linien in axialer Richtung um ca.
- die Hälfte reduziert wurde.
- Dies führt zu einem schnelleren Informationstransport innerhalb des Strömungslö
-sers und sorgt so für eine schnellere Konvergenz.
- 
+ Ein Grund dafür liegt darin, dass die Rechnungen der niedrigen Gütestufe
+ schneller konvergieren, da die Anzahl die I-Linien in axialer Richtung
+ um ca.
+ die Hälfte reduziert wurde und es dadurch zu einem schnelleren Informationstran
+sport innerhalb des Rechennetzes kommt.
 \end_layout
 
 \begin_layout Standard
@@ -3548,30 +3525,30 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 
 \end_inset
 
- zusammengefasst werden.
+ zusammengefasst sind.
  
 \end_layout
 
 \begin_layout Standard
-Die zweite Zielfunktion ist in Abbildung 
+Die Kennliniensteigung 
+\begin_inset Formula $\frac{\triangle\Pi_{t}}{\triangle\dot{m}}$
+\end_inset
+
+ ist in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Darstellung-der-Betriebspunkte"
 
 \end_inset
 
- grafisch dargestellt, es handelt sich um die Kennliniensteigung 
-\begin_inset Formula $\frac{\triangle\Pi_{t}}{\triangle\dot{m}}$
-\end_inset
-
-.
+ grafisch dargestellt.
  Da die Maximierung der Steigung nur durch Erhöhung des Druckverhältnisses
  
 \begin_inset Formula $\Pi_{t,OP1}$
 \end_inset
 
- erreicht werden soll und der Betriebspunkt OP0 sich nicht verändern darf,
- werden die Massenströme 
+ erreicht werden soll und der Betriebspunkt OP0 sich nur geringfügig verändern
+ darf, werden die Massenströme 
 \begin_inset Formula $\dot{m}_{OP0}$
 \end_inset
 
@@ -3996,8 +3973,7 @@ reference "tab:Überblick-über-alle"
 
 \end_inset
 
- gegeben.
- Die Profilparameter werden in Abbildung 
+ gegeben und die Profilparameter werden in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Exemplarische-Darstellung-der"
@@ -4022,8 +3998,8 @@ reference "fig:Exemplarische-Darstellung-der"
 
  und zwei Konstruktionspunkten welche die Saugseitenkrümmung beschreiben.
  Für den Rotor und Stator sind jeweils drei Profile an Nabe, Mitte und Gehäuse
- definiert, wobei die mittlere radiale Position des mittleren Profils in
- engen Grenzen geändert werden kann.
+ definiert, wobei die radiale Position des mittleren Profils in engen Grenzen
+ geändert werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -4407,15 +4383,15 @@ name "par:Einstellungen-Optimierung-und"
 \end_layout
 
 \begin_layout Itemize
-Die Optimierungssoftware war AutoOpti und die Ersatzmodellsoftware für alle
- Optimierungen ist die in dieser Arbeit entwickelte.
+Die Optimierungssoftware war AutoOpti und die Ersatzmodellsoftware war die
+ in dieser Arbeit entwickelte.
 \end_layout
 
 \begin_layout Itemize
 Startdatenbasis: Es wurden 25 Member hoher Güte und 75 Member niedriger
  Güte bestimmt.
- Diese einmal erzeugte Startdatenbasis diente dann als Initialisierung für
- alle Benchmarkoptimierungen.
+ Diese Startdatenbasis wurde einmal erzeugt diente dann als Initialisierung
+ für alle Benchmarkoptimierungen.
  Die Bestimmung der Parameter erfolgte zufällig gleichverteilt.
  
 \end_layout
@@ -4493,7 +4469,7 @@ Zusätzliche Gewichtung der Ersatzmodelle
 \end_inset
 
  Entscheidungsfunktion, welche im Rahmen dieser Arbeit entwickelt wurde
- (sieh Kapitel 
+ (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Entschedungsfunktion"
@@ -4513,14 +4489,6 @@ Minimaler prozentualer Anteil an Membern hoher Güte 5% (nur eine Wiederholung)
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-Die Optimierungen werden auf dem Cluster des Instituts für Antriebstechnik
- durchgeführt.
- Jede Optimierung hat 6 Knoten mit jeweils 2 Intel(R) Xeon(R) E5-2695v2
- CPUs und 64 GB Arbeitsspeicher zur Verfügung.
- 
-\end_layout
-
 \begin_layout Subsection
 Ergebnisse
 \end_layout
@@ -4530,9 +4498,7 @@ Innerhalb dieses Abschnittes werden die Ergebnisse der vorgestellten Testoptimie
 rungen gezeigt.
  Als erstes werden die Ergebnisse aller Optimierungen miteinander verglichen
  und einige ausgewählte Optimierungen nochmals detailliert beschrieben.
- Im letzten Teil sollen die aerodynamischen Ergebnisse verglichen werden,
- der Fokus soll dabei auf die Unterschiede in den aerodynamischen Ergebnissen
- der unterschiedlichen Optimierungsverfahren gelegt werden.
+ Im letzten Teil werden einige ausgewählte aerodynamischen Ergebnisse verglichen.
 \end_layout
 
 \begin_layout Paragraph*
@@ -4592,8 +4558,8 @@ reference "fig:Zeitlicher-Verlauf-des"
  ist der zeitliche Verlauf des Volumenzugewinns dargestellt.
  Bei der Zeit handelt es sich um die kummulierte Prozesskettenzeit aller
  Gütestufen.
- Weiterhin sind die Startpunkte der Multifidelity- und Highfidelity-Optimierunge
-n eingezeichnet.
+ Weiterhin sind die Startpunkte der Multi- und High-Fidelity-Optimierungen
+ eingezeichnet.
  Die zeitliche Verzögerung der Multifidelity-Optimierungen ergibt sich aus
  den zusätzlichen Startmembern niedriger Güte.
  Die blauen Linien beschreiben die Verläufe der Optimierungen 2a (siehe
@@ -4653,7 +4619,7 @@ Prozentualer Anteil der Trainingszeit an der Gesamtlaufzeit der verschiedenen
 
 \begin_layout Standard
 Betrachtet man den ersten Anstieg im Volumenzugewinn der Optimierungen,
- so steigen die Optimierungen 2a als erstes an.
+ so steigt die Optimierungen 2a als erstes an.
  Dies lässt darauf schließen, dass die Nebenbedingungen früh erfüllt wurden,
  da ohne Erfüllung der Nebenbedingungen kein Volumenzugewinn möglich ist.
  Im Vergleich dazu ist der Anstieg von Optimierung 2b stark verzögert, dies
@@ -4661,7 +4627,7 @@ Betrachtet man den ersten Anstieg im Volumenzugewinn der Optimierungen,
  deutlich mehr Member niedriger Güte erzeugt.
  Da Member niedriger Güte keinen Volumenzugewinn bringen können, zeigt sich
  dieses Verhalten in Form einer Verzögerung.
- Optimierung 2b kann diese Verzögerung allerdings sehr schnell einholen.
+ Optimierung 2b kann diese Verzögerung allerdings schnell einholen.
  Dies spricht für ein vernünftiges Verhalten der Entscheidungsfunktion,
  die unterschiedlichen Startbedingungen sinnvoll auszugleichen.
  
@@ -4684,17 +4650,9 @@ reference "subsec:Anwendung-bei-Siemens"
 
  zu finden.
  Um die Robustheit der Optimierung zu gewährleisten wurde in diesem Beispiel
- ein sehr großer Anteil mit genetischen Algorithmen ohne Ersatzmodellbeschleunig
-ung erzeugt.
- Möglicherweise ist dies mit einer Multifidelity-Optimierung nicht notwendig,
- hierfür sind weitere Untersuchungen angedacht (siehe Ausblick 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Anwendung-bei-Siemens-1"
-
-\end_inset
-
-).
+ ein sehr großer Anteil an Membern mit genetischen Algorithmen ohne Ersatzmodell
+beschleunigung erzeugt.
+ Möglicherweise ist dies mit einem Multifidelity-Ansatz nicht notwendig.
 \end_layout
 
 \begin_layout Standard
@@ -4711,7 +4669,7 @@ reference "fig:Prozentualer-Anteil-der"
 en Anteil an der Gesamtzeit dar.
  Die schwarzen Kurven stellen den Anteil der High-Fidelity Optimierungen
  dar, dieser liegt deutlich unter einem Prozent und geht fällt daher kaum
- ins Gewicht der Gesamtlaufzeit.
+ ins Gewicht.
  Die Multifidelity-Optimierungen benötigen eine deutlich höhere Trainingszeit,
  welche im Bereich von ca.
  4% liegt.
@@ -4719,11 +4677,11 @@ en Anteil an der Gesamtzeit dar.
  bei ca.
  5%.
  Die höheren Trainingszeiten entstehen hauptsächlich durch die höhere Anzahl
- an Trainingsmustern niedriger Güte.
- Außerdem ist aber auch das Trainingsverfahren selbst aufwendiger und benötigt
- mehr Zeit.
+ an Trainingsmustern.
+ Außerdem ist aber auch das Trainingsverfahren durch eine höhere Anzahl
+ an Hyperparametern etwas aufwendiger.
  Bei den Multifidelity-Optimierungen ist eine Abflachung der Zeitkurven
- zu erkennen, dieser wird durch die 
+ zu erkennen, diese wird durch die 
 \begin_inset Quotes gld
 \end_inset
 
@@ -4756,7 +4714,7 @@ Restart
 \begin_layout Standard
 Fasst man die zeitlichen Ergebnisse zusammen, so waren die Multifidelity-Optimie
 rungen ungefähr doppelt so schnell wie die High-Fidelity Optimierungen bei
- einem Trainingszeitberlust von ca.
+ einem Trainingszeitverlust von ca.
  3%.
  In diesem Beispiel war der Einsatz des Multifidelity-Verfahrens trotz der
  längeren Trainingszeiten also sehr lohnenswert.
@@ -4835,7 +4793,7 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 \end_inset
 
  definierten Intervallen.
- Ziel ist es diesen Term auf den Wert Null zu bekommen.
+ Ziel ist es diesen Term auf den Wert Null zu bringen.
  Die Größenordnung des Restriktionsterms ist nicht normiert, also ein Druckverhä
 ltnis würde einen kleineren Eintrag in den Wert bringen als bspw.
  ein Massenstrom.
@@ -4865,7 +4823,7 @@ reference "fig:Verlauf-der-Entscheidungsfunktio"
 \end_inset
 
  zeigt den Verlauf der Entscheidungsfunktion Optimierung 2a und 2b.
- Die roten Punkte beschrieben die jeweiligen Werte des Entscheidungskriteriums
+ Die roten Punkte beschreiben die jeweiligen Werte des Entscheidungskriteriums
  und die grünen Punkte stellen den jeweiligen Wert der Barriere dar (siehe
  Kapitel 
 \begin_inset CommandInset ref
@@ -4884,8 +4842,8 @@ Minimale Menge an Membern hoher Güte
 
 ).
  Liegt das Kriterium über der Barriere, so wird zugunsten eines Members
- niedriger Güte entschieden, liegt der Wert unter der Barriere, dann wird
- ein Member hoher Güte erzeugt.
+ niedriger Güte entschieden.
+ Liegt der Wert unter der Barriere, dann wird ein Member hoher Güte erzeugt.
  Da bei Optimierung 2a der minimale prozentuale Anteil an Membern hoher
  Güte bei 10% lag und bei Optimierung 2b bei 5%, wird die Barriere bei Optimieru
 ng 2a öfter verschoben, um den minimalen Prozentsatz zu erfüllen.
@@ -4975,29 +4933,27 @@ reference "fig:Paretofront-der-besten"
 
  zeigt die Entwicklung der Paretofronten von Optimierung 1 und 2a zu jeweils
  drei unterschiedlichen Zeitpunkten.
- Eingezeichnet sind die Member hoher Güte welche die Restriktionen bereits
- erfüllt haben.
+ Eingezeichnet sind Member hoher Güte welche die Restriktionen bereits erfüllt
+ haben.
  Der erste Zeitpunkt wurde bei 300.000 Sekunden gewählt, der Zweite bei 500.000
  Sekunden und der Letzte bei 800.000 Sekunden.
  Bei 300.000 Sekunden wurde nur ein einziger Member von der Multifidelity-Optimie
 rung gefunden, welcher die Restriktionen erfüllt.
  Bereits ab diesem frühen Zeitpunkt der Optimierung überholt die Mutlfidelity-Op
-timierung bereits die High-Fidelity Optimierung, trotz der anfänglichen
- Verzögerung durch die initialen Member niedriger Güte.
- Bei 500.000 Sekunden konnte die Multifidelity-Optimierung bereits eine kleine
- Paretofront aufbauen und schon Member mit sehr hohem Wirkungsgrad auffinden.
+timierung die High-Fidelity Optimierung, trotz der anfänglichen Verzögerung
+ durch die initialen Member niedriger Güte.
+ Bei 500.000 Sekunden konnte die Multifidelity-Optimierung eine kleine Paretofron
+t aufbauen und schon Member mit sehr hohem Wirkungsgrad auffinden.
  Die High-Fidelity Optimierung konnte zu diesem Zeitpunkt drei Member finden,
  welche die Restriktionen erfüllen.
  Bei 800.000 Sekunden, was dem Abbruchzeitpunkt der Optimierung entspricht,
- konnte die Mutltifidelity-Optimierung bereits eine sehr breite Paretofront
- aufstellen.
- Die High-Fidelity Optimierung ist auch bei diesem Zeitpunkt noch nicht
- so weit, sowohl was die Breite der Paretofront anbelangt, als auch die
- Zielfunktionswerte selbst.
+ konnte die Multifidelity-Optimierung eine sehr breite Paretofront aufstellen.
+ Die High-Fidelity Optimierung hingegen ist auch bei diesem Zeitpunkt noch
+ nicht so weit, sowohl was die Breite der Paretofront anbelangt, als auch
+ die Zielfunktionswerte selbst.
  Betrachtet man die Wirkungsgrade bei diesem Zeitpunkt, so ist die Mutlfidelity-
 Optimierung um ca.
- 0.05 Wirkungsgradpunkte besser, was keinesfalls zu vernachlässigen ist.
- 
+ 0.05 Wirkungsgradpunkte besser.
 \end_layout
 
 \begin_layout Standard
@@ -5129,13 +5085,13 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
 
 \end_inset
 
- zeigt den Vergleich, wobei jeder Punkt eine Optimierung nach 800.000 Sekunden
- darstellt.
+ zeigt den Vergleich, wobei jeder Punkt das Ergebnis einer Optimierung nach
+ 800.000 Sekunden darstellt.
  Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
  Samples hoher Güte und niedriger Güte dargestellt.
  Auf der Ordinate wird der erreichte Volumenzugewinn gezeigt.
  Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte einen
- deutlich höheren Volumenzugewinn bewirkt.
+ höheren Volumenzugewinn bewirkt.
  Die Prozesskette niedriger Güte muss also bereits einen hohen Informationsgehal
 t besitzen.
  Die Streuung der einzelnen Optimierungen kommt zum einen durch einige Zufälligk
@@ -5143,8 +5099,9 @@ eiten innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
  und Optimierung auf den Ersatzmodellen) zustande und zum anderen durch
  die jeweiligen Entscheidungsverläufe der Optimierungen, da hier nur das
  Ende der Optimierung dargestellt wird.
- Weiterhin sinkt der Volumenzugewinn auf Null bei keinem Member hoher Güte,
- da ohne Member hoher Güte kein Volumenzugewinn möglich ist.
+ Weiterhin sinkt der Volumenzugewinn auf Null, wenn kein Member hoher Güte
+ berechnet wird, da ohne Member hoher Güte kein Volumenzugewinn möglich
+ ist.
  
 \end_layout
 
@@ -5212,17 +5169,18 @@ reference "fig:OptimierungenEntscheidungsfVerläfe-1"
 
 \end_inset
 
- exemplarisch dargestellt.
+ exemplarisch dargestellt und stellen Tendenzen dar, die realen Kurven sollten
+ allerdings einen ähnlichen Verlauf haben.
  Bei Optimierungen mit hohem Informationsgehalt der Prozesskette niedriger
  Güte wird der Verlauf ein Optimum bei geringem Anteil hoher Güte aufweisen
  und dann bei steigendem Anteil hoher Güte absinken.
- Wenn die niedriger Gütestufe keine Korrelation zu der hohen Güte besitzt,
+ Wenn die niedrige Gütestufe keine Korrelation zu der hohen Güte besitzt,
  so kann durch Stützstellen niedriger Güte keine Verbesserung im Volumenzugewinn
  erzielt werden, mit jedem zusätzlich gerechneten Member niedriger Güte
  sinkt der Volumenzugewinn.
  In der Regel erkennen die Ersatzmodelle eine unkorrelierte niedrige Gütestufe
  relativ schnell und die Entscheidungsfunktion würde dann keine Member niedriger
- Güte mehr erzeugen.
+ Güte mehr erzeugen, sodass diese Kurve steiler verlaufen sollte.
  
 \end_layout
 
@@ -5231,30 +5189,16 @@ Aerodynamische Auswertung
 \end_layout
 
 \begin_layout Standard
-In diesem Abschnitt sollen die in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Paretofront-der-besten"
-
-\end_inset
-
- mit 1,2,3 markierten Member aerodynamisch bewertet werden.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="9">
+<lyxtabular version="3" rows="6" columns="9">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -5364,6 +5308,89 @@ Nummer
 \end_inset
 
  
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Unteres Limit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+557
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+518.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.397
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
 \end_layout
 
 \end_inset
@@ -5536,7 +5563,7 @@ Nummer
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5545,7 +5572,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5554,7 +5581,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5563,7 +5590,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5572,7 +5599,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5581,7 +5608,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5590,7 +5617,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5599,7 +5626,7 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -5608,11 +5635,94 @@ Nummer
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 0.0016
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Oberes Limit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+559.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+520
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.399
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0025
 \end_layout
 
 \end_inset
@@ -5642,10 +5752,39 @@ Werte der Zielfunktionen und Nebenbedingungen der einzelnen Member.
 
 \end_inset
 
+In diesem Abschnitt sollen die in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Paretofront-der-besten"
 
+\end_inset
+
+ mit 1,2,3 markierten Member aerodynamisch bewertet werden.
+ Da es sich um eine Testanwendung handelt, soll sich die Auswertung auf
+ die wichtigsten Daten beschränken.
+ 
 \end_layout
 
 \begin_layout Standard
+Die Auswertung des Member erfolgte nach 800.000 Sekunden Optimierungslaufzeit,
+ wobei die Optimierungen zu diesem Zeitpunkt noch nicht vollständig konvergiert
+ waren.
+ Die erreichten Zielfunktionswerte und Nebenbedingungen sind in Tabelle
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Werte-der-Zielfunktionen"
+
+\end_inset
+
+ aufgelistet.
+ Member 1 und 3 haben jeweils den höchsten Wirkungsgrad innerhalb der Optimierun
+g.
+ Member 2 wurde ausgehend von Member 3 ausgewählt und entspricht einer orthogona
+len Verschiebung von Member 2 auf der High-Fidelity Paretofront.
+ Der Übersichtlichkeit halber sind weiterhin die obere und untere Grenze
+ der Nebenbedingungen aufgelistet.
+ 
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -5654,13 +5793,9 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Nebenbedingungen.png
-	scale 50
+	filename ../images/ErgebnissKapitel/Nebenbedingungen.png
+	scale 30
 
 \end_inset
 
@@ -5674,9 +5809,10 @@ name "fig:Relative-Lage-der"
 
 \end_inset
 
-Relative Lage der verschiedenen Nebenbedingungen der einzelnen Member.
+Relative Lage der Nebenbedingungen einzelner Member.
  Die obere Linie gibt das Maximum und die untere das Minimum der Nebenbedingung
  an.
+ 
 \end_layout
 
 \end_inset
@@ -5684,13 +5820,70 @@ Relative Lage der verschiedenen Nebenbedingungen der einzelnen Member.
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Relative-Lage-der"
 
 \end_inset
 
+ ist die relative Lage der einzelnen Nebenbedingungen für jeden Member zu
+ erkennen.
+ Die obere und untere Linie beschreiben die jeweiligen Intervallgrenzen.
+ Die Multifidelity Member (1,2) liegen öfter an Grenzen von Nebenbedingungen
+ als der High-Fidelity Member (3).
+ Der Grund dafür liegt an dem größeren Optimierungsfortschritt.
+ Der Optimierer geht z.B.
+ mit der mechanischen Dehnung bis an die obere Grenze und nutzt somit das
+ Maximum an Belastung aus.
+ Bei der High-Fidelity Optimierung wurden zu diesem Zeitpunkt erst 5 Member
+ gefunden, welche die Nebenbedingungen überhaupt erfüllen.
+ 
+\end_layout
 
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Radiale-Verteilung-des"
+
+\end_inset
+
+ zeigt die radialen Verteilungen der Stufe und des Rotors.
+ Auf das Totaldruckverhältnis des Rotors wurde verzichtet, da das Stufendruckver
+hältnis nahezu identisch ist.
+ Beim Totaldruckverhältnis ist bei beiden Multifidelity-Membern eine Lastumverte
+ilung zu erkennen: Im Bereich von ca.
+ 90% relativen Massenstrom wurde der Rotor etwas entlastet und im mittleren
+ Bereich dafür stärker belastet.
+ Beide Rotoren erreichen dadurch einen höheren Wirkungsgrad im Bereich über
+ 80% relativen Massenstrom.
+ Im Bereich zwischen 15%-40% ist der Wirkungsgrad im Vergleich zu Member
+ 3 etwas niedriger.
+ 
+\end_layout
+
+\begin_layout Standard
+Betrachtet man die radialen Verteilungen der Statoren in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Radiale-Verteilung-des-1"
+
+\end_inset
+
+, so fällt bei der Umlenkung auf, dass Member 1 und 3 eine relativ ähnliche
+ Umlenkung haben.
+ Member 1 besitzt allerdings die niedrigeren Totaldruckverluste und kann
+ dadurch den Gesamtwirkungsgrad nochmals erhöhen.
+ Member 2 lenkt im gehäusenahen Bereich etwas stärker um, wahrscheinlich
+ um auf die geänderten Zuströmbedingungen durch den Rotor zu reagieren und
+ die geforderte Abströmung von max.
+ 3° einzuhalten.
+ Die Verluste sind auf einem leicht höherem Niveau als Member 1, aber niedriger
+ als die von Member 3.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5703,7 +5896,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StufeEta.eps
+	filename ../images/ErgebnissKapitel/Opti_StufeEta.eps
+	scale 75
 
 \end_inset
 
@@ -5711,8 +5905,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Radiale Verteilung des isentropen Wirkungsgrads und des Totaldruckverhälnisses
- der gesamten Stufe.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Radiale-Verteilung-des"
+
+\end_inset
+
+Radiale Verteilung des isentropen Wirkungsgrads der Stufe und des Rotors
+ und das Totaldruckverhälnisses der gesamten Stufe.
  
 \end_layout
 
@@ -5736,7 +5936,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_RotorEta.eps
+	filename ../images/ErgebnissKapitel/Opti_StatorLoss.eps
+	scale 40
 
 \end_inset
 
@@ -5744,45 +5945,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Radiale Verteilung des isentropen Wirkungsgrads und des Totaldruckverhälnisses
- des Rotors.
- 
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Radiale-Verteilung-des-1"
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StatorLoss.eps
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_StatorUmlenk.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
 Radiale Verteilung des Totaldruckverlustbeiwerts und der Umlenkung des Stators.
 \end_layout
 
@@ -5806,7 +5974,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_Strak.eps
+	filename ../images/ErgebnissKapitel/Opti_Strak.eps
+	scale 30
 
 \end_inset
 
@@ -5814,7 +5983,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Strakverlauf der einzelnen Member im Vergleich
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Strakverlauf-der-einzelnen"
+
+\end_inset
+
+Naben- und Gehäusekontur der einzelnen Member im Vergleich
 \end_layout
 
 \end_inset
@@ -5828,180 +6003,42 @@ Strakverlauf der einzelnen Member im Vergleich
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileRotor50.eps
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Strakverlauf-der-einzelnen"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Rotor 50% 
-\end_layout
-
-\end_inset
-
-
-\end_layout
+ zeigt den Strakverlauf und die Vorder- und Hinterkanten der Beschaufelung
+ im S2-Schnitt.
+ Bei den Rotoren von Member 1 und 2 ist deutlich erkennbar, dass diese eine
+ geringere Sehnenlänge im gehäusenahen Bereich aufweisen als Member 3.
+ Die Profile sind in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Rotor-90%,-Relative"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileRotor95.eps
+ dargestellt, man erkennt die deutlich kürzere Sehnenlänge bei ähnlicher
+ Staffelung.
+ Der mittlere Bereich dagegen weist mehr Sehnenlänge auf.
+ Vergleicht man dies mit den Werten aus Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Radiale-Verteilung-des"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Rotor 95% 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileStator50.eps
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Stator 50% 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename /home/schm_ad/Diss/images/ErgebnissKapitel/Opti_ProfileStator100.eps
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Stator 95% 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Paretofronten zeigen, dann jeweils einen Member auswählen maximaler Wirkungsgrad
- bei Steigung min.
- -0.0000007; HF Paretofront schmaler -> Hinweis auf weniger global
-\end_layout
-
-\begin_layout Standard
-von den beiden
-\end_layout
-
-\begin_layout Standard
-Geometrieunterschied 
-\end_layout
-
-\begin_layout Standard
-Radiale Verteilung -> Wirkungsgrad (wo sind Unterschiede? Dann Eberhard
- ansprechen)
-\end_layout
-
-\begin_layout Standard
-Maximaler Wirkungsgrad.
- 1x grün, 1x rot normal zur Paretofront und 1x rot max Wirkungsgrad
-\end_layout
-
-\begin_layout Standard
-Radiale Verteilung: Wirkungsgrad Stufe, Rotor+Druckverh.
- Stufe+Druckverlust Stator
-\end_layout
-
-\begin_layout Standard
-Restriktionen Tabelle 
-\end_layout
-
-\begin_layout Standard
-Strak darstellen
-\end_layout
-
-\begin_layout Standard
-Schaufelgeometrien
+, so konnte durch die kürzeren Schaufeln im gehäusenahen Bereich der Wirkungsgra
+d erhöht werden ohne einen nennenswerten Einbruch im Totaldruckverhältnis.
+ Beim Stator hingegen wurde die Sehnenlänge bei den Membern 2 und 3 im mittleren
+ Bereich deutlich gekürzt.
+ Allerdings wurde für die Statoren keine mechanische Nebenbedingung berücksichti
+gt, bei einer so schmalen Bauweise könnte die Struktur allerdings an ihre
+ Belastungsgrenzen kommen.
+ 
 \end_layout
 
 \begin_layout Section
@@ -6035,12 +6072,6 @@ key "meillard2017"
 
  veröffentlicht und sollen in diesem Abschnitt kurz zusammengefasst werden.
  
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
 \end_layout
 
 \begin_layout Paragraph
@@ -6194,12 +6225,6 @@ key "hemmert2019"
  veröffentlicht.
  Die hier gezeigte Zusammenfassung der vorläufigen Ergebnisse erfolgt in
  freundlicher Zustimmung des Autors.
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
 \end_layout
 
 \begin_layout Paragraph
@@ -6426,12 +6451,6 @@ Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren
 \end_layout
 
 \begin_layout Standard
-
-\color magenta
-INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
-\end_layout
-
-\begin_layout Standard
 Im Rahmen des AG-Turbo COOREFLEX-turbo 1.2.4d Projekts wurden die 8 hinteren
  Stufen einer 13-stufige Verdichterkonfiguration mit dem in dieser Arbeit
  vorgestellten Multifidelity-Verfahren optimiert.
@@ -6574,11 +6593,9 @@ key "goinis2018"
 \end_layout
 
 \begin_layout Subsection
-Anwendung bei 
-\color magenta
-Siemens (Siemens Energy? Power and Gas???)
-\color inherit
- 
+
+\size normal
+Testanwendung bei Siemens 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Anwendung-bei-Siemens"
@@ -6589,44 +6606,28 @@ name "subsec:Anwendung-bei-Siemens"
 \end_layout
 
 \begin_layout Standard
-Das hier vorgestellte Multifidelity-Verfahren befindet sich bei Siemens
- aktuell in der Testphase.
- 
-\end_layout
-
-\begin_layout Standard
+Im Rahmen einer Masterarbeit 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "verheij2017multi"
 
 \end_inset
 
- Siemens aktuelles AG Turbo Projekt , Schaffung einer 
-\begin_inset Quotes gld
-\end_inset
-
-LF Funktion
-\begin_inset Quotes grd
-\end_inset
-
- mit Neuronalen Netzwerken.
- 2 Stufiger Verdichter.
- Ein Score wurde gebildet, der die Korrelation zwischen Hi und Low und dem
- zeitlichen Faktor ins Verhältnis setzt und die Eignung eines Setups für
- eine Multifidelity-Optimierung abschätzen soll.
+ wurde das in dieser Arbeit entwickelte Multifidelity-Verfahren bei Siemens
+ getestet.
+ Ziel dieses Tests war es eine Gesetzmäßigkeit zu finden, wann sich der
+ Einsatz eines Multifidelity-Verfahrens lohnt oder nicht.
+ Zu diesem Zweck, wurden verschiedene Variationen der niedrigen Prozesskette
+ durchgeführt und die Ergebnisse mit einer Referenzoptimierung verglichen.
  
 \end_layout
 
-\begin_layout Standard
-Speedup berechnen
-\end_layout
-
-\begin_layout Standard
-Maximal theoretische Speedups:
-\end_layout
-
 \begin_layout Paragraph*
-Zielfunktionen und Nebenbedingungeun:
+Zielfunktionen und Nebenbedingungen:
+\end_layout
+
+\begin_layout Standard
+Zwei Zielfunktionen und zwei Nebenbedingungen wurden definiert:
 \end_layout
 
 \begin_layout Enumerate
@@ -6638,7 +6639,7 @@ Isentroper Wirkungsgrad bei Teildrehzahl und höherer Umgebungstemperatur
 \end_layout
 
 \begin_layout Standard
-Zwei Nebenbedingungen wurden definiert:
+Die Nebenbedingungen waren wie folgt definiert:
 \end_layout
 
 \begin_layout Enumerate
@@ -6647,8 +6648,8 @@ Intervall auf das Totaldruckverhältnis eines pumpgrenznahen Betriebspunktes
 \end_layout
 
 \begin_layout Enumerate
-Untere Grenze auf den Massenstrom.
- Betriebspunkt nicht beschrieben.
+Untere Grenze auf den Massenstrom beim Auslegungspunkt.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -6656,9 +6657,8 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-Nur Rotor 2 wurde parametrisiert mit 80 freien Parametern.
- Der Rotor wurde mit jeweils 5 Profilschnitten parametrisiert.
- 
+Es wurde der zweite Rotor parametrisiert.
+ Hierfür wurden 80 Parametern auf 5 Profilschnitten freigegeben.
 \end_layout
 
 \begin_layout Paragraph
@@ -6666,63 +6666,65 @@ Gütestufen
 \end_layout
 
 \begin_layout Standard
-5 verschiedene Setups wurden getestet.
- 
+Es wurden insgesamt 6 verschiedene Optimierungen miteinander verglichen:
 \end_layout
 
 \begin_layout Itemize
-HF: 
+Referenz High-Fidelity Optimierung:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-2x Widerholt 1x mit 3 Slaves und einmal mit 5 Slaves.
- 
+Zwei Wiederholungen mit unterschiedlicher Anzahl an Rechenknoten
 \end_layout
 
 \begin_layout Itemize
-Die beste als Referenz
+Als Referenz wurde die beste der beiden Optimierungen gewählt
 \end_layout
 
 \begin_layout Itemize
-80 Member Init 
+80 initiale zufällig erzeugte Member
+\end_layout
+
+\begin_layout Itemize
+903.000 Zellen für das gesamte Rechengitter
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-MF:
+Multifidelity
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-1x Wiederholt nd mit der besten von SF vergleichen
+Eine Wiederholung 
 \end_layout
 
 \begin_layout Itemize
-80 + 400LF Member Die Member wurden immer neu erzeugt
+80 High-Fidelity und 400 Low-Fidelity Member für die Initialisierung
+\end_layout
+
+\begin_layout Itemize
+5 verschiedene Low-Fidelity Prozessketten.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In 3 Optimierungen wurde die Anzahl an Zellen reduziert auf bis zu 223.000
+\end_layout
+
+\begin_layout Itemize
+In einer Optimierung wurde der Spaltblock weggelassen, damit konnten die
+ Zellen auf 132.000 reduziert werden
+\end_layout
+
+\begin_layout Itemize
+In einer Optimierung wurde der Spaltblock weggelassen, die Auflösung noch
+ weiter reduziert und mit Euler-Wänden gerechnet.
+ Damit wurden dann 12.800 Zellen erreicht.
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
-Ergebnisse
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Die Ergebnisse zeigen eine gewissen Zufälligkeit, durch zufällige INit und
- grundsätzlicher Zufälligkeit gegeben
-\end_layout
-
-\begin_layout Itemize
-Die Geschwindigkeiteunterschiede lagen zwische +14 und -39% was im Bereich
- normaler Schwankungen liegt, besonders da die Initialsien Member nicht
- gleich waren
-\end_layout
-
-\begin_layout Itemize
-Konvegenzkrieterium der Optimierungen 
-\end_layout
-
 \end_deeper
 \begin_layout Paragraph
 Ergebnisse und Fazit
@@ -6860,12 +6862,6 @@ name "subsec:ASME-Veröffentlichung:-Optimieru"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-INITIALISIERUNGSVERFHREN RPROP / ULTRA RESTART
 \end_layout
 
 \begin_layout Standard
