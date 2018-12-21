@@ -4619,26 +4619,26 @@ Prozentualer Anteil der Trainingszeit an der Gesamtlaufzeit der verschiedenen
 
 \begin_layout Standard
 Betrachtet man den ersten Anstieg im Volumenzugewinn der Optimierungen,
- so steigt die Optimierungen 2a als erstes an.
- Dies lässt darauf schließen, dass die Nebenbedingungen früh erfüllt wurden,
- da ohne Erfüllung der Nebenbedingungen kein Volumenzugewinn möglich ist.
+ so steigen die Optimierungen 2a als erste an.
+ Dies liegt daran, dass die Nebenbedingungen früh erfüllt wurden, da ohne
+ Erfüllung der Nebenbedingungen kein Volumenzugewinn möglich ist.
  Im Vergleich dazu ist der Anstieg von Optimierung 2b stark verzögert, dies
  ist darin begründet, dass zu Anfang der Optimierung die Entscheidungsfunktion
  deutlich mehr Member niedriger Güte erzeugt.
- Da Member niedriger Güte keinen Volumenzugewinn bringen können, zeigt sich
- dieses Verhalten in Form einer Verzögerung.
- Optimierung 2b kann diese Verzögerung allerdings schnell einholen.
+ Da Member niedriger Güte keinen Volumenzugewinn bringen, zeigt sich dieses
+ Verhalten in Form einer Verzögerung.
+ Optimierung 2b hat diese Verzögerungen schnell eingeholt.
  Dies spricht für ein vernünftiges Verhalten der Entscheidungsfunktion,
  die unterschiedlichen Startbedingungen sinnvoll auszugleichen.
  
 \end_layout
 
 \begin_layout Standard
-Weiterhin kann man erkennen, dass alle Multifidelity-Optimierungen in der
- zugewiesenen Zeit ein deutlich höheren Volumenzugewinn erreichen konnten.
+Weiterhin kann man erkennen, dass alle Multifidelity-Optimierungen zur Abbruchze
+it einen deutlich höheren Volumenzugewinn erreicht haben.
  Zudem ist die Streuung des Volumenzugewinns bei allen Multifidelity-Optimierung
 en erheblich geringer, das erreichte Optimum konnte in der gegebenen Zeit
- also robust gefunden werden.
+ also zuverlässig gefunden werden.
  Die Highfidelity-Optimierungen zeigen eine vergleichsweise starke Streuung.
  Dieses Verhalten kann für industrielle Anwendungen von großer Bedeutung
  sein, ein Beispiel hierfür ist in Kapitel 
@@ -4649,10 +4649,7 @@ reference "subsec:Anwendung-bei-Siemens"
 \end_inset
 
  zu finden.
- Um die Robustheit der Optimierung zu gewährleisten wurde in diesem Beispiel
- ein sehr großer Anteil an Membern mit genetischen Algorithmen ohne Ersatzmodell
-beschleunigung erzeugt.
- Möglicherweise ist dies mit einem Multifidelity-Ansatz nicht notwendig.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4668,8 +4665,8 @@ reference "fig:Prozentualer-Anteil-der"
  stellt die benötigte Trainingszeit der einzelnen Testoptimierung als prozentual
 en Anteil an der Gesamtzeit dar.
  Die schwarzen Kurven stellen den Anteil der High-Fidelity Optimierungen
- dar, dieser liegt deutlich unter einem Prozent und geht fällt daher kaum
- ins Gewicht.
+ dar, dieser liegt deutlich unter einem Prozent und fällt daher kaum ins
+ Gewicht.
  Die Multifidelity-Optimierungen benötigen eine deutlich höhere Trainingszeit,
  welche im Bereich von ca.
  4% liegt.
@@ -4678,8 +4675,8 @@ en Anteil an der Gesamtzeit dar.
  5%.
  Die höheren Trainingszeiten entstehen hauptsächlich durch die höhere Anzahl
  an Trainingsmustern.
- Außerdem ist aber auch das Trainingsverfahren durch eine höhere Anzahl
- an Hyperparametern etwas aufwendiger.
+ Außerdem ist auch das Trainingsverfahren durch eine höhere Anzahl an Hyperparam
+etern etwas aufwendiger.
  Bei den Multifidelity-Optimierungen ist eine Abflachung der Zeitkurven
  zu erkennen, diese wird durch die 
 \begin_inset Quotes gld
@@ -4712,11 +4709,13 @@ Restart
 \end_layout
 
 \begin_layout Standard
-Fasst man die zeitlichen Ergebnisse zusammen, so waren die Multifidelity-Optimie
-rungen ungefähr doppelt so schnell wie die High-Fidelity Optimierungen bei
- einem Trainingszeitverlust von ca.
+
+\shape italic
+Fasst man die zeitlichen Ergebnisse zusammen, so sind die Multifidelity-Optimier
+ungen ungefähr doppelt so schnell wie die High-Fidelity Optimierungen bei
+ einer Zunahme der Trainingszeit von ca.
  3%.
- In diesem Beispiel war der Einsatz des Multifidelity-Verfahrens trotz der
+ In diesem Beispiel ist der Einsatz des Multifidelity-Verfahrens trotz der
  längeren Trainingszeiten also sehr lohnenswert.
  
 \end_layout
@@ -4793,15 +4792,12 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 \end_inset
 
  definierten Intervallen.
- Ziel ist es diesen Term auf den Wert Null zu bringen.
- Die Größenordnung des Restriktionsterms ist nicht normiert, also ein Druckverhä
-ltnis würde einen kleineren Eintrag in den Wert bringen als bspw.
- ein Massenstrom.
+ Ziel ist es diesen Term auf den Wert Null zu bringen, wobei die Größenordnung
+ des Restriktionsterms nicht normiert ist.
  Die schwarze Kurve beschreibt die High-Fidelity Optimierung und startet
- zeitlich vor den Multifidelity-Optimierungen, da diese keine Member niedriger
+ ca.
+ 35000s vor den Multifidelity-Optimierungen, da diese keine Member niedriger
  Güte in der Initialisierungsphase benötigt.
- Die Multifidelity-Optimierungen starten ca.
- 35000s später.
  Trotz des späteren Starts erfüllen beide Mutlfidelity-Optimierungen die
  Restriktionen deutlich schneller, können also von den zusätzlichen Membern
  niedriger Güte profitieren.
@@ -4823,6 +4819,7 @@ reference "fig:Verlauf-der-Entscheidungsfunktio"
 \end_inset
 
  zeigt den Verlauf der Entscheidungsfunktion Optimierung 2a und 2b.
+ Die Member Nummer bezieht sich in diesem Fall auf alle Gütestufen.
  Die roten Punkte beschreiben die jeweiligen Werte des Entscheidungskriteriums
  und die grünen Punkte stellen den jeweiligen Wert der Barriere dar (siehe
  Kapitel 
@@ -4852,14 +4849,15 @@ ng 2a öfter verschoben, um den minimalen Prozentsatz zu erfüllen.
  Da mit steigender Anzahl an Membern die Ersatzmodellunsicherheiten immer
  kleiner werden, verschiebt sich das Kriterium auch immer weiter zu niedrigeren
  Werten.
- Bei Optimierung 2b geschieht dies allerdings mit geringerem Tempo, da die
- Ersatzmodellunsicherheiten langsamer sinken aufgrund des höheren Anteils
- an Membern niedriger Güte.
+ Bei Optimierung 2b fällt der Wert des Entscheidungskriteriums erst nach
+ höherer Memberanzahl.
+ Da die Member Nummer allerdings auch Member niedriger Güte beinhaltet,
+ darf diese nicht mit der Zeit gleichgesetzt werden.
  
 \end_layout
 
 \begin_layout Standard
-In dem Verlauf von Optimierung 2b ist bei Member-Nummer 300 ein leichter
+In dem Verlauf von Optimierung 2a ist bei Member-Nummer 300 ein leichter
  Sprung zu erkennen, das Entscheidungskriterium zeigt ab dieser Member-Nummer
  deutlich öfter Werte unter Eins.
  Dies lässt sich dadurch erklären, dass ab Member-Nummer 299 der erste Member
@@ -5075,7 +5073,7 @@ en
 
 \end_inset
 
-Um eine Idee davon zu bekommen wie stark der Einfluss der Anteil an Membern
+Um eine Idee davon zu bekommen wie stark der Einfluss des Anteils an Membern
  hoher Güte ist, werden alle durchgeführten Optimierungen mit verschiedenen
  Entscheidungsverläufen miteinander verglichen.
  Abbildung 
@@ -5099,9 +5097,8 @@ eiten innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
  und Optimierung auf den Ersatzmodellen) zustande und zum anderen durch
  die jeweiligen Entscheidungsverläufe der Optimierungen, da hier nur das
  Ende der Optimierung dargestellt wird.
- Weiterhin sinkt der Volumenzugewinn auf Null, wenn kein Member hoher Güte
- berechnet wird, da ohne Member hoher Güte kein Volumenzugewinn möglich
- ist.
+ Weiterhin ist der Volumenzugewinn Null, wenn kein Member hoher Güte berechnet
+ wird, da ohne Member hoher Güte kein Volumenzugewinn möglich ist.
  
 \end_layout
 
@@ -5148,7 +5145,7 @@ Exemplarischer Verlauf verschiedener Entscheidungsverläufe bei unterschiedliche
 \begin_layout Standard
 Zusammenfassend ist es ersichtlich, dass der Anteil von Membern niedriger
  Güte in diesem Optimierungssetup eine wesentlich Rolle spielt.
- Weiterhin ist ebenfalls erkennbar, dass es ein Optimum an Member niedriger
+ Weiterhin ist ebenfalls erkennbar, dass ein Optimum an Membern niedriger
  Güte existiert.
  
 \end_layout
@@ -5180,8 +5177,7 @@ reference "fig:OptimierungenEntscheidungsfVerläfe-1"
  sinkt der Volumenzugewinn.
  In der Regel erkennen die Ersatzmodelle eine unkorrelierte niedrige Gütestufe
  relativ schnell und die Entscheidungsfunktion würde dann keine Member niedriger
- Güte mehr erzeugen, sodass diese Kurve steiler verlaufen sollte.
- 
+ Güte mehr erzeugen.
 \end_layout
 
 \begin_layout Paragraph
@@ -5760,13 +5756,16 @@ reference "fig:Paretofront-der-besten"
 \end_inset
 
  mit 1,2,3 markierten Member aerodynamisch bewertet werden.
- Da es sich um eine Testanwendung handelt, soll sich die Auswertung auf
- die wichtigsten Daten beschränken.
+ Da es sich um ein Benchmark der Optimierungsverfahren handelt, liegt der
+ Fokus bei dieser Auswertung mehr auf den Unterschieden zwischen den verschieden
+en Ergebnissen.
+ Es soll herausgestellt werden, dass die Multifidelity-Optimierungen einem
+ fortgeschrittenerem Optimierungsstand entsprechen.
  
 \end_layout
 
 \begin_layout Standard
-Die Auswertung des Member erfolgte nach 800.000 Sekunden Optimierungslaufzeit,
+Die Auswertung der Member erfolgte nach 800.000 Sekunden Optimierungslaufzeit,
  wobei die Optimierungen zu diesem Zeitpunkt noch nicht vollständig konvergiert
  waren.
  Die erreichten Zielfunktionswerte und Nebenbedingungen sind in Tabelle
@@ -5852,8 +5851,6 @@ reference "fig:Radiale-Verteilung-des"
 \end_inset
 
  zeigt die radialen Verteilungen der Stufe und des Rotors.
- Auf das Totaldruckverhältnis des Rotors wurde verzichtet, da das Stufendruckver
-hältnis nahezu identisch ist.
  Beim Totaldruckverhältnis ist bei beiden Multifidelity-Membern eine Lastumverte
 ilung zu erkennen: Im Bereich von ca.
  90% relativen Massenstrom wurde der Rotor etwas entlastet und im mittleren
@@ -5881,8 +5878,8 @@ reference "fig:Radiale-Verteilung-des-1"
  um auf die geänderten Zuströmbedingungen durch den Rotor zu reagieren und
  die geforderte Abströmung von max.
  3° einzuhalten.
- Die Verluste sind auf einem leicht höherem Niveau als Member 1, aber niedriger
- als die von Member 3.
+ Die Verluste sind auf einem leicht höherem Niveau als bei Member 1, aber
+ niedriger als die von Member 3.
  
 \end_layout
 
@@ -6014,15 +6011,6 @@ reference "fig:Strakverlauf-der-einzelnen"
  im S2-Schnitt.
  Bei den Rotoren von Member 1 und 2 ist deutlich erkennbar, dass diese eine
  geringere Sehnenlänge im gehäusenahen Bereich aufweisen als Member 3.
- Die Profile sind in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Rotor-90%,-Relative"
-
-\end_inset
-
- dargestellt, man erkennt die deutlich kürzere Sehnenlänge bei ähnlicher
- Staffelung.
  Der mittlere Bereich dagegen weist mehr Sehnenlänge auf.
  Vergleicht man dies mit den Werten aus Abbildung 
 \begin_inset CommandInset ref

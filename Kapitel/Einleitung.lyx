@@ -240,18 +240,24 @@ key "Rechenberg1973"
 \end_inset
 
 , welche den Grundstein der heutigen modernen Algorithmen darstellen.
- Zum anderen bieten die Bücher von Gen et al.
- 
+ Zum anderen bieten die Bücher von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Gen2000"
 
 \end_inset
 
- und Weicker 
+, 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Weicker2015"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gill1981practical,gill2007numerical"
 
 \end_inset
 
@@ -298,9 +304,11 @@ en, welche während einer Optimierung verwendet werden, um Vorhersagen über
  unbekannte Parametersätze zu machen und damit besonders vielversprechende
  Parametersätze schneller als bei der Verwendung einer reinen Evolutionsstrategi
 e zu finden.
- Im ersten Teil wird dem Leser ein aktueller Überblick über dieses Themengebiet
- gegeben.
- Als erstes wird der umfassende Übersichtsbeitrag von Queipo et al.
+ 
+\end_layout
+
+\begin_layout Standard
+Als erstes wird der umfassende Übersichtsbeitrag von Queipo et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -430,34 +438,67 @@ onsverfahren.
 rt voraus, sondern eine statistische Verteilung dessen.
  Praktisch bedeutet dies, dass eine Abschätzung über den Fehler der Vorhersage
  gemacht werden kann.
- Diese Information kann in einem Optimierungsverfahren gewinnbringend eingesetzt
- werden und wird oft mit EGO für Efficient Global Optimization abgekürzt.
- Wichtige theoretische Beiträge zu diesem Verfahren und dessen Verwendung
- liefern die Arbeiten von Jones et al.
- 
+ Historisch sind die ersten Ansätze statistischer Ersatzmodell innerhalb
+ der mathematischen Geologie 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Jones1998"
+key "cressie1990origins,Cressie1993,matheron1963principles"
 
 \end_inset
 
-, Keane 
+ und der Statistik 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "keane2006statistical"
+key "sacks1970statistical"
 
 \end_inset
 
- und Aulich 
+
 \begin_inset CommandInset citation
 LatexCommand cite
-key "AULICH"
+key "sacks1989design"
+
+\end_inset
+
+ zu finden.
+ Die erste Erwähnung der Nutzung dieser Verfahren innerhalb einer globalen
+ Optimierung ist in dem Seminarbeitrag 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kushner1964new"
+
+\end_inset
+
+ zu finden und wurde dann von vielen Wissenschaftlern aufgegriffen und weiterent
+wickelt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cox1992statistical,mockus1994application,perttunen1991computational,Jones1998,gibbs1997efficient"
 
 \end_inset
 
 .
- Eine Anwendung einer solchen EGO-Optimierung findet sich in der Arbeit
- von Voß et al.
+ Das EGO Verfahren (für Efficient Global Optimization) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jones1998,Jones2001"
+
+\end_inset
+
+ hat in modernen Optimierungsalgorithmen besondere Bedeutung erlangt.
+ Dieses Verfahren ermöglicht eine gut Balance zwischen der Exploration und
+ Exploitation von statistischen Ersatzmodellen innerhalb globaler Optimierung.
+ Weitere aktuelle Beiträge und Anwendungen dieses Verfahrens sind z.B.
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keane2006statistical,AULICH,Sacks2007,Sacks2007a,forrester2009recent"
+
+\end_inset
+
+ zu finden.
+ Eine interessante Anwendung einer solchen EGO-Optimierung findet sich in
+ der Arbeit von Voß et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -762,7 +803,15 @@ key "Dakota2016"
 
 \begin_layout Standard
 Ein statistisches Verfahren, welches auch komplexere Zusammenhänge beschreiben
- kann, ist das CO-Kriging-Ersatzmodell.
+ kann, ist das CO-Kriging-Ersatzmodell, hier sei besonders auf die grundlegenden
+ Arbeiten von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ verwiesen.
  In der Arbeit von Han et al.
  
 \begin_inset CommandInset citation
@@ -793,8 +842,8 @@ key "Kennedy2000"
 \end_inset
 
  beruhen.
- Für das CO-Kriging Modell von Kennedy und O'Hagan muss an jeden bekannten
- Ort der höchsten Gütestufe auch die niedrigere Gütestufe berechnet werden.
+ Für dieses CO-Kriging Modell muss an jeden bekannten Ort der höchsten Gütestufe
+ auch die niedrigere Gütestufe berechnet werden.
  Innerhalb dieser Arbeit wird eine CO-Kriging-Variation vorgestellt, die
  dies nicht benötigt.
  Weitere interessante CO-Kriging Ansätze bietet zum einen die Arbeit von
@@ -805,8 +854,14 @@ key "LeGratiet"
 
 \end_inset
 
-, welche eine sehr effiziente Umsetzung der Methode von Kennedy darstellt
- und zum anderen die Arbeiten von Han 
+, welche eine sehr effiziente Umsetzung der Methode von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ darstellt und zum anderen die Arbeiten von Han 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "han2012alternative,Han2010"

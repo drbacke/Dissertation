@@ -793,84 +793,8 @@ description "Anzahl der verwendeten Ersatzmodelle innerhalb einer Optimierung"
 
 \series bold
 \size largest
-Noch einbaue n: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "LeGratiet"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "box1958note"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Eifinger2013"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "forrester2009recent"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gibbs1997efficient"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gill1981practical,gill2007numerical"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Sacks2007a"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jones1998"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "keane2006statistical"
-
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jones2001"
-
-\end_inset
-
-(10dimensions Samples minimum) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jin2001"
-
-\end_inset
-
-(3dimensions Samples minimum in vielen Fällen)
+Noch einbaue n: (10dimensions Samples minimum) (3dimensions Samples minimum
+ in vielen Fällen)
 \begin_inset Newline newline
 \end_inset
 
@@ -899,10 +823,6 @@ Bezug zu den Turbomaschinenoptimierungen und die speziellen Optimierungen
 \end_layout
 
 \begin_layout Itemize
-Korrekturen von Christian
-\end_layout
-
-\begin_layout Itemize
 Korrekturen/Wünsche von Prof Gottschalk
 \end_layout
 
@@ -919,26 +839,38 @@ Kriging + Entscheidungsfunktion + Kapitel 5: kovarianz zu bedingter Kovarianz
 \end_layout
 
 \begin_layout Itemize
-Matrix Klasse und verteilte Systeme genauer beschreiben
-\end_layout
-
-\begin_layout Itemize
 Anfang kann gekürzt werden, alles was es bereits gibt.
  EVG erklärung z.B.
  Mehr auf meine Sachen konzentrieren
 \end_layout
 
 \begin_layout Itemize
-Mehr Originalliteratur erwähnen, beim Optimierer/EVG besonders
+Pseudocode
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Kriging Software alle Verfahren in einem untergebracht
+Anhang aufräumen
 \end_layout
 
 \begin_layout Itemize
-RPROP globales Minimum mit QuasiNewton vergleichen
+Literaturverzeichnis checken
+\end_layout
+
+\begin_layout Itemize
+Abstract/Kurzfassung schreiben
+\end_layout
+
+\begin_layout Itemize
+Bilder / Layout
+\end_layout
+
+\begin_layout Itemize
+Kapitel 4,5,6, Fazit selbst nochmal lesen und prüfen
+\end_layout
+
+\begin_layout Itemize
+In Optimierung / Erweiterung nch auf die Einleitung Stand der Technik beziehen
 \end_layout
 
 \begin_layout Chapter*

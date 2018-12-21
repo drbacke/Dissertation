@@ -229,13 +229,8 @@ Es wird ein parametrisiertes Modell für die Kovarianzfunktion benötigt,
  welches zu einer positiv definiten und symmetrischen Matrix führt.
 \end_layout
 
-\begin_layout Enumerate
-Die darin verwendeten Parameter, im Folgenden Hyperparameter genannt, müssen
- in einem gradientenbasierten Trainingsverfahren nutzbar sein.
-\end_layout
-
 \begin_layout Standard
-Diese Problemstellungen werden in den folgenden drei Abschnitten behandelt.
+Diese Problemstellungen werden in den folgenden zwei Abschnitten behandelt.
 \end_layout
 
 \begin_layout Subsection
@@ -283,7 +278,12 @@ key "matheron1963principles"
 
 \end_inset
 
-Weiterhin wird das Kovariogramm wie folgt definiert:
+
+\begin_inset Formula $\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
+\end_inset
+
+ wird als Semivariogramm bezeichnet.
+ Weiterhin wird das Kovariogramm wie folgt definiert:
 \end_layout
 
 \begin_layout Standard
@@ -296,13 +296,8 @@ cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{
 
 Einfacher formuliert beschreibt das Variogramm und auch das Kovariogramm
  die räumliche Abhängigkeit eines Punktes zu Nachbarpunkten.
- 
-\begin_inset Formula $\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)$
-\end_inset
-
- wird als Semivariogramm bezeichnet.
- Trifft man die Annahme, dass das Zufallsfeld schwach stationär ist, dann
- gilt (siehe 
+ Trifft man die Annahme, dass das räumlicher Zufallsprozess schwach stationär
+ ist, dann gilt (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ozkaya2014"
@@ -368,14 +363,6 @@ reference "chap:MinimierungsverfahrenTraining"
 \end_inset
 
 ) entspricht.
- Der Beweis für Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovariogrammGrundformel"
-
-\end_inset
-
- ist in Anhang zu finden.
  Die Modellierung von 
 \begin_inset Formula $\gamma\left(\vec{h}\right)$
 \end_inset
@@ -615,9 +602,10 @@ key "Cressie1993"
 
 \end_inset
 
-), dieses Verfahren liefert für die Abstände bekannter Stützstellen den
- entsprechenden räumlichen Zusammenhang und ist als nicht parametrisches
- Verfahren einzuordnen.
+).
+ Dieses Verfahren liefert für die Abstände bekannter Stützstellen den entspreche
+nden räumlichen Zusammenhang und ist als nicht parametrisches Verfahren
+ einzuordnen.
  Diese Art von Verfahren benötigen aber eine sehr große Anzahl an Stützstellen,
  um plausible Variogramme zu liefern.
  Dafür benötigen diese keinerlei Annahmen über den Verlauf des Variogramms
@@ -628,9 +616,6 @@ key "Cressie1993"
 \begin_layout Standard
 Typischerweise greift man aber auf parametrisierte Modellfunktionen zurück,
  welche an die vorhandenen Stützstellen bestmöglich angepasst werden.
- Für diese parametrisierten Modellfunktionen wird ein typischer Verlauf
- einer Variogrammfunktion angenommen und die Parameter so gewählt, dass
- die Funktion bestmöglich an die vorhanden Stützstellen angepasst wird.
  Dadurch kommt diese Art des Verfahrens mit weniger Stützstellen aus, als
  eine empirische Schätzung, ist dafür allerdings eingeschränkter was die
  Form der Funktion angeht.
@@ -643,8 +628,8 @@ key "Cressie1993,Krueger2013,Schmid2012"
 \end_inset
 
 ).
- Da dieser Nachweis sehr schwierig ist, beschränkt man sich bekannte Modellfunkt
-ionen für die der Nachweis bereits erbracht worden ist.
+ Da dieser Nachweis sehr schwierig ist, beschränkt man sich auf bekannte
+ Modellfunktionen für die der Nachweis bereits erbracht worden ist.
  Hier ist insbesondere ein Modell zu erwähnen 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -699,6 +684,10 @@ Die Benutzung der Exponentialfunktion
 \begin_inset Formula $e^{\theta_{l}}$
 \end_inset
 
+ anstelle von 
+\begin_inset Formula $\theta_{l}$
+\end_inset
+
  dient der numerischen Stabilität des Trainingsverfahrens.
  Da die Hyperparameter nicht negativ werden dürfen und somit für Formulierung
  
@@ -725,8 +714,8 @@ Für den Fall
 \begin_inset Formula $p=2$
 \end_inset
 
- spricht man auch von einer Gauss'schen Korrelationsfunktion, welche in
- der hier beschriebenen Software auch als Standard gewählt wird.
+ spricht man auch von einer Gauss'schen Kovarianzfunktion, welche in der
+ hier beschriebenen Software auch als Standard gewählt wird.
  Der Vorteil dieser Korrelationsfunktion liegt in der schnellen Berechnung
  und damit in der schnellen Erzeugung der benötigten Kovarianzmatrix.
  
@@ -767,7 +756,7 @@ reference "eq:KovarianzmodellAllgemein"
 \begin_inset Formula 
 \begin{align}
 cov\left(\vec{h}\right) & =\sigma^{2}+\lambda\delta\left(\vec{h}\right)-\sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKovarianzfunktion}\\
- & =\lambda\delta\left(\vec{h}\right)+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}
+ & =\lambda\delta\left(\vec{h}\right)+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\label{eq:asdasd}
 \end{align}
 
 \end_inset
@@ -904,7 +893,7 @@ Zwei weitere wichtige Punkte der verschiedenen Kriging-Verfahren, sind die
  Berücksichtigungen von schlecht konditionierten Kovarianzmatrizen und der
  Umgang mit verrauschten Funktionen.
  Da die praktische Behandlung beider Problematiken sehr ähnlich ist, werden
- innerhalb dieses Kapitels beide Probleme gemeinsam beschrieben.
+ sie innerhalb dieses Kapitels gemeinsam beschrieben.
 \end_layout
 
 \begin_layout Subsection
@@ -969,16 +958,21 @@ key "Sacks2007a,tikhonov2013numerical,hoerl2000"
 \end_layout
 
 \begin_layout Standard
-Dieser Diagonalaufschlag sollte so klein wie möglich gehalten werden, da
- dessen Größe einen starken Einfluss auf die Vorhersagen hat.
- Das resultierende Verhalten wird im nächsten Abschnitt 
+Der Diagonalaufschlag 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ wurde bei Herleitung von Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:Approximation"
+reference "eq:ExpoKovarianzfunktion"
 
 \end_inset
 
- behandelt.
+ bereits berücksichtigt.
+ Bezüglich der Regularisierung der Matrix sollte er jedoch so klein wie
+ möglich gehalten werden, da dessen Größe einen starken Einfluss auf die
+ Vorhersagen hat.
  
 \end_layout
 
@@ -1021,6 +1015,10 @@ Zur Bestimmung eines geeigneten Wertes, ist es sinnvoll die Konditionszahl
 
 \begin_layout Standard
 Geht man weiterhin von einer Ordinary-Kriging Kovarianzmatrix aus, so kann
+ (im Falle 
+\begin_inset Formula $\lambda=0)$
+\end_inset
+
  die Varianz 
 \begin_inset Formula $\sigma^{2}$
 \end_inset
@@ -1041,11 +1039,22 @@ Geht man weiterhin von einer Ordinary-Kriging Kovarianzmatrix aus, so kann
 \end_layout
 
 \begin_layout Standard
-Die Korrelationen innerhalb der Korrelationsmatrix 
+Die Werte innerhalb der Korrelationsmatrix 
 \begin_inset Formula $\mathbf{R\in\mathbb{R}^{n\times n}}$
 \end_inset
 
- können einen maximalen Wert von 1 annehmen.
+ können (im Falle 
+\begin_inset Formula $\lambda=0)$
+\end_inset
+
+ einen maximalen Wert von 1 annehmen (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:asdasd"
+
+\end_inset
+
+).
  Daraus lässt sich der ungünstigste Fall 
 \begin_inset Formula $\mathbf{\widetilde{R}}\in\mathbb{R}^{n\times n}$
 \end_inset
@@ -1073,15 +1082,12 @@ Die minimalen und maximalen Eigenwerte der Einsmatrix sind für diesen Fall
 
 \end_inset
 
-Dies würde einer unendlichen Konditionszahl entsprechen:
-\begin_inset Formula 
-\begin{align}
-\kappa & =\infty
-\end{align}
-
+Dies würde einer unendlichen Konditionszahl entsprechen 
+\begin_inset Formula $\kappa=\infty$
 \end_inset
 
-Addiert man nun den Diagonalaufschlag, bekommt man folgende Kovarianzmatrix:
+.
+ Addiert man nun den Diagonalaufschlag, bekommt man folgende Kovarianzmatrix:
  
 \begin_inset Formula 
 \begin{align}
@@ -1089,11 +1095,6 @@ Addiert man nun den Diagonalaufschlag, bekommt man folgende Kovarianzmatrix:
 \sigma^{2}+\lambda & ... & \sigma^{2}\\
 ... & ... & ...\\
 \sigma^{2} & ... & \sigma^{2}+\lambda
-\end{array}\right]\\
-\mathbf{\mathbf{Cov}} & =\sigma^{2}\left[\begin{array}{ccc}
-1+\frac{\lambda}{\sigma^{2}} & ... & 1\\
-... & ... & ...\\
-1 & ... & 1+\frac{\lambda}{\sigma^{2}}
 \end{array}\right]
 \end{align}
 
@@ -1103,7 +1104,7 @@ Daraus ergeben sich die folgenden maximalen und minimalen Eigenwerte:
 \begin_inset Formula 
 \begin{align}
 \Xi_{min}\left(\mathbf{\mathbf{Cov}}\right) & =\lambda\\
-\Xi_{max}\left(\mathbf{Cov}\right) & =\sigma^{2}\left(n+\frac{\lambda}{\sigma^{2}}\right)=\lambda+\sigma^{2}n
+\Xi_{max}\left(\mathbf{Cov}\right) & =\lambda+\sigma^{2}n
 \end{align}
 
 \end_inset
@@ -1165,16 +1166,14 @@ Der Ansatz aus dem Ordinary-Kriging ist mit dieser partitionierten Matrix
 \end_layout
 
 \begin_layout Standard
-Geht man von zusammengesetzten Kovarianzfunktion wie sie in den Gleichungen
- 
+Geht man von den Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:KovarianzfunktionenCoKrigingGauss"
 
 \end_inset
 
- gezeigt wurde aus, so ergibt sich die Spur als Summe der Diagonaleinträge
- wie folgt:
+ aus, so ergibt sich die Spur als Summe der Diagonaleinträge wie folgt:
 \begin_inset Formula 
 \begin{align}
 spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{0}\right)+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\lambda_{2}\right)
@@ -1197,7 +1196,7 @@ Da die Korrelationen der Diagonalen den Wert Eins besitzen,
 , gilt für die Spur der Matrix:
 \begin_inset Formula 
 \begin{align}
-spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}1+\sigma_{diff}^{2}1+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}1+\lambda_{2}\right)\\
+\sum_{i=1}^{n_{all}}\Xi_{i}=spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}+\lambda_{2}\right)\\
  & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
 \end{align}
 
@@ -1248,21 +1247,7 @@ Geht man weiterhin von nur einem Regularisierungsterm
 \end_layout
 
 \begin_layout Standard
-Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:EigenwertMinGrLambda"
-
-\end_inset
-
- folgt aus 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:EigenwertBedSpur"
-
-\end_inset
-
- Für die Konditionszahl 
+Für die Konditionszahl 
 \begin_inset Formula $\kappa$
 \end_inset
 
@@ -2679,6 +2664,53 @@ Um das Training starten zu können, ist eine geeignete Initialisierung der
 
 \begin_layout Subsubsection*
 Allgemeine Vorbemerkungen und Definitionen
+\end_layout
+
+\begin_layout Standard
+Ein wichtiger Punkt ist die initiale Menge an Daten, die für eine sinnvolle
+ Schätzung der Hyperparameter notwendig ist.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gibbs1997efficient"
+
+\end_inset
+
+ wird vorgeschlagen, mindestens das zehnfache der Parameteranzahl zu verwenden,
+ bevor eine vernünftige Schätzung möglich ist.
+ Die Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jin2001"
+
+\end_inset
+
+ hingegen zeigt, dass je nach Funktion auch dreimal die Anzahl der Parameter
+ genügt, um vernünftige Schätzungen zu erwarten.
+ Oftmals sind die Prozessketten allerdings so langwierig oder die Konvergenzrate
+ sehr schlecht, so dass sehr aufwendige Initialisierungen wie sie 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gibbs1997efficient"
+
+\end_inset
+
+ vorschlägt nicht möglich sind.
+ Eine sehr gute Möglichkeit, um die Datenlage zu beurteilen ist die Nutzung
+ der hier entwickelten Kriging-Analysesoftware, siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Laufzeit-Analysesoftware-für-Kri"
+
+\end_inset
+
+.
+ So kann in der Initialisierungsphase regelmäßig ein Training durchgeführt
+ und Beurteilt werden.
+ Besonders der Verlauf des Likelihood-Terms über der Optimierungslaufzeit
+ eignet sich, um erkennen zu können ob eine ausreichende Anzahl von Stützstellen
+ vorhanden ist oder nicht.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -7921,6 +7953,7 @@ Man kann sehen, dass der Verlust eine 1:1 Verbindung sehr klein ist, der
  effektiv genutzt.
  Bedenkt man weiterhin die Flexibilität und Ausfallsicherheit des System,
  so ist der Einsatz bei entsprechend großen Problemen sehr lohnenswert.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -11210,14 +11243,7 @@ e Hardware-Konfigurationen.
 
 \begin_layout Standard
 Als Referenz wurde ein Rechner mit 2xIntel Xeon E5-2695v2 verwendet.
- Die GPU-Benchmarks wurden auf dem NVidia-PSG-Cluster 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Nvidia2018"
-
-\end_inset
-
- ausgeführt
+ Die GPU-Benchmarks wurden auf dem NVidia-PSG-Cluster ausgeführt
 \begin_inset Foot
 status open
 

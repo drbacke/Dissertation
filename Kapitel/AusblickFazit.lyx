@@ -482,846 +482,128 @@ lity-Optimierungen alle zu demselben guten Ergebniss führen.
  
 \end_layout
 
-\begin_layout Section*
-Ausblick
+\begin_layout Paragraph
+Aktuelle Entwicklungen
 \end_layout
 
 \begin_layout Standard
-So kurz wie möglich, ruhig was weglassen
-\end_layout
-
-\begin_layout Subsection
-Netzwerkbibliothek
-\end_layout
-
-\begin_layout Standard
-Erweitern wie SETI
-\end_layout
-
-\begin_layout Subsection
-Wiederverwendung von älteren ähnlichen Optimierungen
-\end_layout
-
-\begin_layout Standard
-Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
+Die Software sowie das Verfahren werden natürlich auch nach dieser Arbeit
+ weiterentwickelt.
+ Bereits zum jetzigen Zeitpunkt sind einige dieser Entwicklungen besonders
+ interessant und aussichtsreich.
+ Besonders die Nutzung des Co-Kriging Modells außerhalb von reinen Multifidelity
+-Optimierungen ist ein neues Feld und ermöglicht einige interessante Ansätze.
+ Beispielsweise die Wiederverwendung von älteren Optimierungen.
+ Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
  z.B.
  geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
  Entwicklung.
  Dies kann bspw.
- dazu führen, dass 
-\end_layout
-
-\begin_layout Standard
-Die Option existiert bereits und wurde an einfachen Tests bereits erfolgreich
- angewandt.
- Allerdings sind noch weitere Tests nötig, um einschätzen zu können inwieweit
- eine Änderung der Randbedingungeun oder der Parametrisierung noch gewinnbringen
-d sein kann.
-\end_layout
-
-\begin_layout Subsection
-Vorauslegungsverfahren als Modell niedriger Güte testen
-\end_layout
-
-\begin_layout Standard
-ACDC als Modell niedriger Güte.
- Extremer Zeitunterschied und möglicherweise hoher Informationsgehalt könnte
- die Optimierungen deutlich beschleunigen.
+ dazu führen, dass komplette Optimierungen mit kleineren Veränderungen neu
+ gestartet werden müssen, ohne dass die alten Daten verwendet werden können.
+ Mithilfe des Co-Krigings können die Daten von älteren Optimierungen als
+ niedrige Güte in einer neuen Optimierung weiterverwendet werden.
+ Je nach Ähnlichkeit der Optimierungen, kann der Zugewinn hier sehr hoch
+ sein.
+ Eine solche Option existiert zum momentanen Zeitpunkt bereits innerhalb
+ von AutoOpti, befindet sich allerdings noch in der Testphase.
+ Die bisherigen Ergebnisse sind aber sehr aussichtsreich.
  
 \end_layout
 
-\begin_layout Subsection
-Kopplung mehrerer Ersatzmodelle: Nutzung von Deep Learning Verfahren über
- CO-Kriging 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Kopplung-mehrerer-Ersatzmodelle:"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-
-\color magenta
-Sehr kurz, Marcel zitieren.
- DeepLeasrniong als Lowfi verwenden.
- Erste klweine Ansätze in unsere Optisuite getestet und sieht vielversprechend
- aus.
- Das wars
-\end_layout
-
-\begin_layout Standard
-Im Rahmen dieser Arbeit wurde die Nutzung von Deep-Learning CFD-Vorhersagen
- in Kombination mit dem in dieser Arbeit vorgestellten Multifidelity-Verfahren
- getestet.
- Die Nutzung von Deep Learning Verfahren im Rahmen einer Turbomaschinenauslegung
- ist ein noch sehr junges Forschungsgebiet, aus diesem Grund gibt es noch
- sehr wenig an aktueller Forschungsliteratur.
- In 
+Eine weitere interessante Nutzung des Co-Kriging Modells ist, die Kopplung
+ von komplexen nicht statistischen Ersatzmodellen zur Verbesserung der Vorhersag
+egenauigkeit.
+ Hier sind insbesondere Deep-Learning Verfahren gemeint.
+ Dabei handelt es sich um Neuronale Netzwerke mit einem komplexen Aufbau
+ und einer sehr hohen Anzahl an Zwischenschichten.
+ Mithilfe dieser Neuronalen Netzwerke sollen komplette 3D-Strömungslösungen
+ gelernt, verallgemeinert und damit Vorhersagen getroffen werden.
+ Ein großer Vorteil liegt dabei in der Unabhängigkeit der Vorhersagen von
+ den Parametern.
+ Dies kommt dadurch zustande, da das Neuronale-Netzwerk als Input die gesamte
+ 3D-Geometrie verwendet.
+ Erste Arbeiten solcher Vorhersagen sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Bai2018"
+key "aulich2019"
 
 \end_inset
 
- wurde ein erster Versuch unternommen mithilfe von Deep-Learning Verfahren
- Druckverteilungen von 2D-Profilschnitten vorherzusagen.
- Zu diesem Zweck wurden drei verschiedene Neuronale Netzwerke mit einer
- Datenbank von 60.000 Profilschnitten trainiert.
- Für zwei der Neuronalen Netzwerke wurden 
+ zu finden.
+ Innerhalb einer Optimierung ist die Anwendung solcher Neuronalen Netzwerke
+ bisher nur schwer möglich, da eine Optimierung auf einem solchen Neuronalen
+ Netzwerk zum jetzigen Zeitpunkt noch zu aufwendig ist.
+ Zudem bieten solche Neuronalen Netzwerke bisher noch keine Unsicherheitsvorhers
+age an, sodass ein 
 \begin_inset Quotes gld
 \end_inset
 
-Convolutional-Layer
+Expected Volume Gain
 \begin_inset Quotes grd
 \end_inset
 
- verwendet und eins wurde voll vernetzt.
- Die 
+ Algorithmus (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:EVG"
+
+\end_inset
+
+) nicht machbar ist.
+ Eine mögliche Lösung hierfür bietet die Nutzung eines Co-Krigings.
+ Die Vorhersagen des Neuronalen Netzwerks könnten so als niedrige Gütestufe
+ verwendet und die Kriging-Vorhersagen so verbessert werden.
+ Man verspricht sich davon, durch die 
 \begin_inset Quotes gld
 \end_inset
 
-Convolutional
+günstigen
 \begin_inset Quotes grd
 \end_inset
 
- Netzwerke zeigten bei diesem Test eine bessere Vorhersagegenauigkeit.
+ Vorhersagen des Neuronalen Netzwerks den Suchraum bereits effektiv abtasten
+ zu können und optimalen Regionen so früh zu lokalisieren.
+ Hiermit sollte die Anzahl an freien Parametern deutlich erhöht werden können.
+ Dieses Verfahren befindet sich allerdings noch in einem sehr frühen Stadium.
+ Es finden zwar bereits erste kleinere Machbarkeitsstudien statt, allerdings
+ ist zu diesem Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
+\end_layout
+
+\begin_layout Standard
+Die in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Verteiltes-Rechnen-1"
+
+\end_inset
+
+ beschriebene Netzwerkbibliothek weiterentwickelt.
+ Hier liegt das Ziel darin, die Bibliothek so zu erweitern, dass diese freie
+ Rechnerkapazitäten für größeren Anwendungen automatisch nutzen kann.
+ In einem ersten Schritt innerhalb des internen Netzwerkes und auf lange
+ Sicht möglicherweise auch auf das Internet ausgedehnt, in Anlehnung an
+ das SETI@home Programm (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "korpela2001seti"
+
+\end_inset
+
+).
  
 \end_layout
 
 \begin_layout Standard
-Anf'nge im Rahmen dieser Arbeit und des wurden erste Versuche unternommen
- Vorhersagen der Hauptspannungen von Verdichterschaufeln mit Tensorflow
- basierten Neuronalen Netzen zu treffen.
- Die Ergebnisse waren vielversprechend, allerdings ist die Berechnung von
- Hauptspannungen bereits so schnell, dass sich solche Vorhersagen zeitlich
- nicht rentieren.
+Neben den bisher benannten Weiterentwicklungen sollen auch Multifidelity-Anwendu
+ngen in Verbindung mit Vorauslegungsverfahren getestet werden.
+ Insbesondere sind hier 2D-Strömungslöser interessant, welche innerhalb
+ von Sekunden globale Performance Daten liefern können.
+ Hierbei muss allerdings untersucht werden, inwiefern die Funktionale durch
+ die niedrige Güte abgebildet werden können und ob das Co-Kriging die Differenzf
+unktion abbilden kann.
  
-\end_layout
-
-\begin_layout Standard
-In der Arbeit von Aulich und Kueppers wurde aufbauend darauf die Vorhersage
- von CFD-Strömungslösungen getestet.
- Hierfür wurde ein 
-\begin_inset Quotes gld
-\end_inset
-
-Bounding Box
-\begin_inset Quotes grd
-\end_inset
-
- Verfahren entwickelt, welches die CFD-Lösung in Form eines hochauflösenden
- Rechengitters auf ein festes Gitter von geringerer Auflösung konvertiert.
- Jeder Knotenpunkt dieses neuen Gitters entspricht einem Knoten der Input-Schich
-t des zu trainierenden Neuronalen Netzwerks.
- Die Geometrie wird dann über die Aktivierung des entsprechenden Input-Knotens
- abgebildet.
- Ein Knoten welcher bspw.
- in der Geometrie liegt bekommt einen anderen Wert zugewiesen als Knoten
- außerhalb der Geometrie.
- Die entsprechende 
-\end_layout
-
-\begin_layout Standard
-Diese daraus entstandenen NNs wurden dann in der hier geyeigten Optimierung
- als Low Fid Modelle getestet.
-\end_layout
-
-\begin_layout Standard
-Bild von der Prozesskette mit Informationsdichte zeigen.
-\end_layout
-
-\begin_layout Standard
--> mit einem Member könnte bereist Information gelernt weden.
- Mit Kriging so nicht möglich.
-\end_layout
-
-\begin_layout Standard
--> Aber Probleme die NNs zu nutzen, daher über einen Multifidelity Ansatz
- am sinnvollsten
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ErgebnissKapitel/NN_KrigingAblaufdiagramm.pdf
-	BoundingBox 0bp 210bp 660bp 510bp
-	clip
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Verschiedene-Prozessketten-am"
-
-\end_inset
-
-Verschiedene Prozessketten am Beispiel der Fanstufenoptimierung, mit jeweiliger
- Anzahl an Informationsgrößen.
- Mittig ist die Optimierungs-Prozesskette, links die Prozesskette für eine
- Vorhersage mit Neuronalen Netzwerken und rechts der Ablauf einer Kriging
- Vorhersage.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Einleitend, wo stehen wir?
-\end_layout
-
-\begin_layout Standard
-Deep Learning, was verspricht man sich davon warum in der Turbomaschinenauslegun
-g?
-\end_layout
-
-\begin_layout Standard
-- Industrie in der Lage sehr komplexe Geometrien zu simulieren, allerdings
- die Parameteranzahl dadurch extrem hoch
-\end_layout
-
-\begin_layout Standard
-- 3D Information unabhängig von der Parametrisierung
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Vor welchen Problemstellungen steht man, wenn man ein solches Deep_Learning
- Netz innerhalb einer Optimireung verwenden möchte?
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen sind sehr unpräzise durch die nötige Rasterung und die damit
- einhergehende schlechte Netzauflösung (Fabian zitieren)
-\end_layout
-
-\begin_layout Standard
-- Das Vertrauensniveau ist recht niedrig, da man keine Fehlerinformationen
- hat, Keine statistischen Vorhersagen
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen selbst zu aufwendig in einer EVG Prozesskette
-\end_layout
-
-\begin_layout Standard
-- Fehler (noch) sehr hoch, pysikalische Gesetze (z.B.
- Massenerhaltung, Totalgrößen, Wirkungsgrade unter 1) wird nicht eingehalten.
- Könnte man aber teilweise mittrainieren
-\end_layout
-
-\begin_layout Standard
-- Das Training dauert sehr lange
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen dauern lange, durch Bounding Box (Optimierungspotential vorhanden)
-\end_layout
-
-\begin_layout Standard
-Die Verwendung für den Einsatz in Turbomaschinenoptimierungen von solchen
- Deep-Learning Netzen ist recht schwierig.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
--> Fazit: Kopplung über MF Strategie sinnvoll, da:
-\end_layout
-
-\begin_layout Standard
-- statische Vorhersagen möglich sind.
-\end_layout
-
-\begin_layout Standard
-- Optimierungsprozess über EVG möglich ohne Änderungeun
-\end_layout
-
-\begin_layout Standard
-- Fehler können vielleicht korrigiert werden
-\end_layout
-
-\begin_layout Paragraph*
-Die zentrale FRAGE, die hier beantwortet werden soll:
-\end_layout
-
-\begin_layout Standard
-Eine erste Einschätzung, ob Deep Learning Netze mit einer MF Strategie Potential
- haben.
- Es soll noch keine optimale Strategie vorgestellt werden.
- Auch die Neuronalen Netzwerke stehen noch ganz am Anfang was Struktur,
- Lossfunktion usw.
- angeht.
-\end_layout
-
-\begin_layout Paragraph*
-Kurz die NNs vorstellen:
-\end_layout
-
-\begin_layout Standard
-- Marcel zitieren und Fabian zitieren: Netzstruktur und Box Generierung
-\end_layout
-
-\begin_layout Standard
-- Framework: Tensorflow, 
-\end_layout
-
-\begin_layout Standard
-- In dieser Arbeit wurde die Box Generierung verwendet und die voreingestellte
- Netzstruktur, die Variationen und .
- Das Training wurde dann wieder innerhalb dieser Arbeit durchgeführt und
- die Prozesskette usw.
- aufgesetzt.
- Das hier entwickelte MF Verfahren kam dann zum Einsatz mit der LF NN Kette.
- 
-\end_layout
-
-\begin_layout Standard
-Rasterung Zeigen
-\end_layout
-
-\begin_layout Standard
-S1-Schnitte Vorhersagen zeigen
-\end_layout
-
-\begin_layout Standard
-1D-Größen Vergleiche zeigen, die Probleme insbesondere, z.B.
- Massnstrom der Interfaces
-\end_layout
-
-\begin_layout Standard
-.
- Struktur grob erklären, Lossfunktion
-\end_layout
-
-\begin_layout Standard
-- jeweils ein NN pro OP
-\end_layout
-
-\begin_layout Standard
-- Trainingsverlauf zeigen
-\end_layout
-
-\begin_layout Standard
-- Vorhersagen grob vergleichen
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-Vorhersagen zeigen.
- 50% Schnitt Vorhersage und Real, 
-\end_layout
-
-\begin_layout Plain Layout
-95% Schnitt Vorhersage und Real
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-- 1D Vorhersagen zeigen
-\end_layout
-
-\begin_layout Paragraph*
-Optimierungssetup zeigen
-\end_layout
-
-\begin_layout Standard
-NNs vorher trainiert mit 25 initialen Samples
-\end_layout
-
-\begin_layout Standard
-NNs nicht mehr nachtrainiert
-\end_layout
-
-\begin_layout Standard
-Optimierungsergebnisse zeigen
-\end_layout
-
-\begin_layout Standard
-Kein Tensorflow auf dem Cluster, da ...
-\end_layout
-
-\begin_layout Standard
-Daher wurden alle NN Vorhersagen auf einem lokalen Rechner gemacht.
- Prozesskette erklären
-\end_layout
-
-\begin_layout Paragraph*
-Paretofronten - Irgendwie Zeilfunktionen zeigen und vergleichen
-\end_layout
-
-\begin_layout Standard
-asdasd
-\end_layout
-
-\begin_layout Standard
-z.B.
- bei 150 Member wie sehen die Paretofronten aus?
-\end_layout
-
-\begin_layout Paragraph*
-Da besonders der Anfang der Optimierung wichtig ist, Reduktion der Nebenbedingun
-gen zeigen
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-Reduktion der Nebenbedingung über Prozesskettenzeit
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Ergebnisse - Simulation des Beginns einer Optimierung
-\end_layout
-
-\begin_layout Standard
-Unterschied zwischen RPROP & QN liegt an 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="4">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-HF
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF RPROP
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-MF QN
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-65TtOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.640 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.897
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.477
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-93mOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.975
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4.037
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.406
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-96 piOp0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.009
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.013
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.011
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-168 mOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-6.425
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10.211
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-8.816
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-171piOP1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.009
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.012
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.007
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-352AngleOP0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.499
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.735
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.632
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Scale On; 25HF + 488LF MeanError der Vorhersagen, 10 Trainings,Zufällige
- Initialisierung, 747 Crossval
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Weiterhin wurde während des Trainings für MF Modelle der LF-Rauschterm verwendet.
- Die Vorhersagen des Neuronalen Netzwerks werden also als verrauscht angesehen.
- Dennoch konnten fast alle Vorhersagen durch die Neuronalen-Netzwerke verbessert
- werden.
- Ein gewisses Potential scheint also vorhanden zu sein.
- 
-\end_layout
-
-\begin_layout Paragraph*
-Optimierung - Ergebnisse
-\end_layout
-
-\begin_layout Standard
-VG Verlauf - Entscheidungsfunktion & Startdatenbasis
-\end_layout
-
-\begin_layout Standard
-- Geht am Anfang sehr stark auf die Nebenbedingungen und dort ist flow_93
- sehr wichtig.
- Bei diesem bringen die NNs relativ viel, deswegen ist das Kriterium hoch.
- Gewichtung funktioniert also ganz gut.
- 
-\end_layout
-
-\begin_layout Paragraph*
-Fazit:
-\end_layout
-
-\begin_layout Standard
-Hat es Potential gewinnbringend in einer 3D-CFD Turbomaschinenoptimierung
- eingesetzt werden zu können?
-\end_layout
-
-\begin_layout Standard
-Bei jetzigem Stand konnte keine Beschleunigung erreicht werden.
- Die größten Schwierigkeiten sind:
-\end_layout
-
-\begin_layout Itemize
-0D Vorhersagen sind sehr schlecht korreliert mit den CFD Simulationen
-\end_layout
-
-\begin_layout Itemize
-Training dauert extrem lange, selbst auf Hochleistungshardware
-\end_layout
-
-\begin_layout Itemize
-Physikalische Gesetze werden nicht eingehalten: Wirkungsgrad > 1 oder Eintrittsm
-assenstrom != Austrittsmassenstrom, Totalgrößen werden nicht erhalten
-\end_layout
-
-\begin_layout Standard
-Aber es ist noch sehr viel Entwicklungspotential vorhanden.
-\end_layout
-
-\begin_layout Itemize
-Physikalischen Gesetze könnten durch ein geschicktes Trainingsverfahren
- gelernt werden 
-\end_layout
-
-\begin_layout Itemize
-0D Größen können in das Training mit aufgenommen werden
-\end_layout
-
-\begin_layout Itemize
-Trainingszeit könnte durch ein vortrainiertes Netz reduziert werden
-\end_layout
-
-\begin_layout Itemize
-Struktur der NNs bietet noch zahlreiche Möglichkeiten
-\end_layout
-
-\begin_layout Standard
-Unsicher, es gibt noch zahlreiche Hürden, wie z.B.
- die hohe Trainingszeit, die Erzeugung der Boxen usw., mer Efahrung mit der
- Struktur ist nötig.
- Ein gewissen Informationsgehalt auf Delta Basis scheint vorhanden zu sein
- und zumindest so groß zu sein, dass ein Co-Kriging Modell davon profitiert.
- Wenn die Vorhersagen noch etwas besser werden, was durchaus möglich ist,
- da die Entwicklung erst am Anfang steht und die Trainings- und vorhersagezeiten
- reduziert werden können, dann ja
 \end_layout
 
 \end_body
