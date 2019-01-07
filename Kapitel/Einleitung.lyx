@@ -1155,7 +1155,7 @@ Testen des entwickelten Verfahrens
 \end_layout
 
 \begin_layout Enumerate
-Praktische Anwendbarkeit an industriellen Turbomaschinenoptimierung zeigen
+Praktische Anwendbarkeit an industriellen Turbomaschinenoptimierung nachweisen
 \end_layout
 
 \begin_layout Standard
@@ -1168,8 +1168,25 @@ odells für die AutoOpti-Umgebung.
 ng) in einer Softwarestruktur untergebracht und zum anderen werden auch
  Klassifikatoren wie z.B.
  Supporting-Vector-Machines in die Software implementiert.
- Weitergehend wird die Software über eine prozessinterne synchrone Parallelisier
-ung durch Threads verfügen und auch moderne Befehlssatzerweiterungen wie
+ Hierfür ist wird moderne Interface-basierte Programmierung verwendet.
+ Die in der Literatur beschriebenen Programme beschränken sich in der Regel
+ auf einzelne Ersatzmodelle welche oftmals in Frameworks wie Matlab (siehe
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Toal2016,Han2010,han2012alternative,Forrester2008"
+
+\end_inset
+
+ umgesetzt sind und bieten daher nicht die Benutzerfreundlichkeit, den Programmu
+mfang und die Geschwindigkeit wie er für eine industrienahe Umgebung benötigt
+ wird.
+ 
+\end_layout
+
+\begin_layout Standard
+Weitergehend wird die Software über eine prozessinterne synchrone Parallelisieru
+ng durch Threads verfügen und auch moderne Befehlssatzerweiterungen wie
  SSE unterstützen.
  Eine weitere Möglichkeit der Beschleunigung ist die prozessweite Parallelisieru
 ng, damit sollen die notwendigen Berechnungen auch über Rechnergrenzen hinaus
@@ -1183,6 +1200,12 @@ ng, damit sollen die notwendigen Berechnungen auch über Rechnergrenzen hinaus
  Weiterhin soll die Verwendung von GPUs (Graphics Processing Unit) möglich
  sein, womit die notwendigen Berechnungen für das Ersatzmodell beschleunigt
  werden sollen.
+ Vergleicht man diese Punkte mit den Softwarepaketen welche in der Literatur
+ beschrieben werden, so kann diese Art der Umsetzung nicht wiedergefunden
+ werden.
+ Insbesondere ein asynchrones Client/Server System zur Parallelisierung
+ und ebenfalls der Mischbetrieb unterschiedlicher Architekturen ist für
+ diese Anwendung nicht in der Literatur zu finden.
  
 \end_layout
 
@@ -1200,6 +1223,8 @@ Der zweite Punkt umfasst die Erweiterung der bestehen Optimierungssoftware
  Die Optimierungssoftware muss außerdem die Daten verschiedener Güte speichern,
  auswerten können und zudem die Verwaltung von unterschiedlichen Prozessketten
  für die jeweiligen Gütestufen übernehmen.
+ Die hier vorgestellten Ansätze einer Entscheidungsfunktion sind ebenfalls
+ neuartig und unterscheiden sich von anderen Multifidelity-Ansätzen.
  
 \end_layout
 

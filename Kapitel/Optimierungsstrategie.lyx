@@ -130,20 +130,28 @@ Die Aerodynamik von Turbomaschinen kann sich auf verschiedene Baugruppen
  Ein häufiges Ziel ist z.B.
  das Auffinden einer Geometrie für eine oder mehrere Schaufelreihen, welche
  den Wirkungsgrad (Verhältnis von genutzter Energie zu zugeführter Energie)
- und gleichzeitig auch das Druckverhältnis (Verhältnis vom Druck am Austritt
- der Komponente zum Druck am Eintritt der Komponente) maximiert.
+ und gleichzeitig auch das Totaldruckverhältnis (Verhältnis vom Totaldruck
+ am Austritt der Komponente zum Totaldruck am Eintritt der Komponente) maximiert.
  In der Regel werden zusätzlich Nebenbedingungen definiert, bspw.
  ein bestimmter Abströmwinkel in Umfangsrichtung und/oder ein einzuhaltender
  Betriebsbereich.
  Diese Ziele und Nebenbedingungen müssen für mehrere Betriebspunkte der
  Komponente definiert und eingehalten werden, wodurch sehr viele Nebenbedingunge
-n und komplexe Zielfunktionen entstehen können.
+n und zu minimierende Funktionale (Zielfunktionen) entstehen können.
  Um diese Kennzahlen zu erhalten, wird aus einem vorher definierten Parametersat
 z eine Geometrie erzeugt und diese dann mittels eines CFD-Verfahrens simuliert.
- Dieser Prozess ist numerisch extrem aufwendig und benötigt pro Geometrie
- auf einem modernen Rechencluster mehrere Stunden.
+ Dieser Prozess ist numerisch extrem aufwendig und benötigt in der Regel
+ mehrere Stunden.
  Bei komplexen Simulationen sind auch Rechenzeiten von mehreren Tagen möglich.
+ Einen guten Überblick über diese Thematik bieten die folgenden Literaturstellen
  
+\begin_inset CommandInset citation
+LatexCommand cite
+key "anderson1995computational,Braunling2004,schlichting2006grenzschicht"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -161,7 +169,16 @@ Die Strukturmechanik von Turbomaschinen beschäftigt sich mit der Bestimmung
  Schaufelschwingungen vermieden werden.
  Um dies zu realisieren werden für verschiedene Drehzahlen die Eigenfrequenzen
  und Eigenformen der Schaufelreihen mit modernen CSM-Verfahren berechnet.
- 
+ Im Falle einer Turbinenauslegung sind durch die hohen Temperaturen thermomechan
+ische Simulationen notwendig, welche den Aufwand nochmals erhöhen.
+ Weitere Informationen zu diesem Thema können in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Braunling2004,zienkiewicz2005finite,gere1965analysis,przemieniecki1985theory"
+
+\end_inset
+
+ gefunden werden.
 \end_layout
 
 \begin_layout Paragraph*
@@ -182,26 +199,15 @@ anik angesehen werden.
  Die hierfür notwendigen Berechnungen sind allerdings mit so hohem numerischem
  Aufwand verbunden, dass diese oftmals erst nach einer Optimierung für ausgewähl
 te Geometrien durchgeführt werden.
- Einen umfassenden Überblick zu diesem Thema bietet das Buch 
-\shape italic
-
-\begin_inset Quotes gld
-\end_inset
-
-Introduction to structural dynamics and aeroelasticity
-\begin_inset Quotes grd
-\end_inset
-
-
-\shape default
- von Hodges 
+ Einen umfassenden Überblick zu diesem Thema bieten die folgenden Bücher:
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Hodges2011"
+key "Hodges2011,bisplinghoff1957aeroelasticity,sechler1952elasticity"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -226,6 +232,13 @@ Die hier aufgelisteten Fachdisziplinen stellen nur die wesentlichen Disziplinen
  Dennoch wird ersichtlich, dass durch diese Vielzahl sehr hohe Anforderungen
  an das Optimierungsverfahren sowie den Anwender gestellt werden.
  
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lighthill1952sound,lighthill1954sound"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -243,7 +256,15 @@ name "subsec:OptimierungsBegriffe"
 Im Folgenden werden wichtige Begrifflichkeiten bezüglich Optimierungsverfahren
  eingeführt und zum besseren Verständnis einige Beispiele aus dem Bereich
  der Turbomaschinenauslegung erläutert.
- 
+ Für weitere Informationen sei der Leser auf folgende Literaturstellen verwiesen
+: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "miettinen2012nonlinear,ehrgott2005multicriteria,deb2014multi,marler2004survey"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -411,22 +432,15 @@ Aus der Formulierung wird ersichtlich, dass dieser Ansatz die Möglichkeit
 \end_inset
 
  gleichzeitig zu verfolgen.
- Es muss jedoch eine Norm 
-\begin_inset Formula $\left\Vert \vec{y}\left(\vec{x}\right)\right\Vert $
-\end_inset
-
- definiert werden.
- Die Bestimmung einer geeigneten Norm 
-\begin_inset Formula $\left\Vert \vec{y}\left(\vec{x}\right)\right\Vert $
-\end_inset
-
- ist allerdings sehr schwierig.
- Eine Möglichkeit stellt die (gewichtete) euklidische Norm dar.
- Diese hat aber den Nachteil, dass nur derjenige Punkt im Zielfunktionsraum
- mit der niedrigsten Norm das Optimum darstellt.
+ Da die die Ziele oftmals nicht gemeinsam optimiert werden können, da diese
+ z.B.
+ Widersprüchlich sind, fasst man diese oftmals über Gewichtungsfaktoren
+ als gemeinsame Zielfunktion zusammen.
+ Diese Faktoren zu bestimmen ist allerdings sehr schwierig.
  Um dieses Problem zu umgehen wird in der Regel ein Paretorang-Gütekriterium
  verwendet, dieses Konzept bietet die Möglichkeit, mehrere Ziele gleichzeitig
- zu optimieren ohne diese gegeneinander zu gewichten.
+ zu optimieren ohne diese gegeneinander zu gewichten und so eine Menge an
+ optimalen Lösungen zu finden.
  Der Paretorang soll im folgenden erläutert werden.
 \end_layout
 
@@ -435,16 +449,14 @@ Paretorang / Paretofront
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
-Die Begriffe Dominanz, Paretorang und Paretofront seien im Folgenden kurz
- definiert, vgl.
+Die Begriffe Paretorang und Paretofront sind nach dem Ökonomen und Soziologen
+ Vilfredo Pareto (1848–1923) benannt.
+ Weiterhin sollen die Begriffe Dominanz, Paretorang und Paretofront im Folgenden
+ kurz definiert werden, vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Voss2008"
+key "pareto1964cours,ehrgott2005multicriteria,miettinen2012nonlinear,Voss2008"
 
 \end_inset
 
@@ -553,7 +565,7 @@ lines 0
 placement O
 overhang 0in
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -705,8 +717,8 @@ Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
 \begin_layout Standard
 
 \shape italic
-Das alles führt dazu, dass das verwendete Optimierungsverfahren also auch
- unvollständige Gradienteninformationen verarbeiten können muss.
+Das alles führt dazu, dass das verwendete Optimierungsverfahren auch unvollständ
+ige Gradienteninformationen verarbeiten muss.
  
 \end_layout
 
@@ -746,8 +758,8 @@ Dieser Punkt ist im Bereich der Turbomaschinenoptimierung sehr entscheidend,
 \end_layout
 
 \begin_layout Standard
-Trotz der steigenden Rechnerkapazität ist in diesem Punkt keine Besserung
- zu erwarten.
+Trotz der steigenden Rechnerkapazität ist nicht zu erwarten, dass die Prozessket
+tenlaufzeiten abnehmen.
  Dies liegt daran, dass für die Berechnung von Strömungen vereinfachte Modelle
  verwendet werden und die steigenden Rechenkapazitäten eher für aufwendigere
  Verfahren eingesetzt werden, um komplexere Strömungsvorgänge simulieren
@@ -761,7 +773,8 @@ Ein Optimierungsverfahren sollte also mit so wenig Berechnungen wie möglich
  Durch die langen Prozesskettenzeiten ist also möglich und auch sinnvoll
  sehr hochwertige Optimierungsverfahren anzuwenden, auch wenn diese selbst
  viel Zeit in Anspruch nehmen.
- 
+ Abhilfe kann hier also nur ein möglichst effizienter Optimierungsprozess
+ sein, welcher nur sehr wenige Prozesskettenauswertungen benötigt.
 \end_layout
 
 \begin_layout Paragraph*
@@ -785,9 +798,23 @@ key "Bellman1972"
 
 \end_inset
 
- und beschreibt die massive Zunahme des mathematischen Raumvolumens beim
- weiteren Hinzufügen von Dimensionen.
+.
+ Der Begriff beschreibt eine Problematik, welche in vielen Bereichen zu
+ finden ist: Z.B.
+ bei der Verteilung von Stichproben (Sampling) oder der Optimierung.
+ Geht man bspw.
+ von einem Raum aus, welcher dicht mit vorhandenen Stichproben besetzt ist
+ und so gut beschrieben ist.
+ So kann dieser durch das Hinzufügen von weiteren Dimensionen dünn besetzt
+ sein und nur noch unzureichend beschrieben werden.
  
+\begin_inset CommandInset citation
+LatexCommand cite
+key "friedman2001elements,trunk1979"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -828,101 +855,13 @@ key "Siller2009"
  möglichst schnell Verbesserungen zu finden.
 \end_layout
 
-\begin_layout Paragraph*
-Behandlung von Nebenbedingungen
-\begin_inset CommandInset label
-LatexCommand label
-name "par:Behandlung-von-Nebenbedingungen"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In AutoOpti können Gültigkeitsintervalle für alle gespeicherten physikalischen
- Größen und Zielfunktionen angegeben werden.
- Liegt ein berechneter Member nicht innerhalb dieses Gültigkeitsbereich,
- so wird der Abstand 
-\begin_inset Formula $d_{N}\left(M\right)$
-\end_inset
-
- des Members 
-\begin_inset Formula $M$
-\end_inset
-
- zum Gültigkeitsbereich als zusätzliches Gütekriterium herangezogen.
- Die Definition der Dominanz (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Dominanz"
-
-\end_inset
-
-) muss daher erweitert werden zu:
-\begin_inset Formula 
-\begin{align}
-M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\\
- & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
-\end{align}
-
-\end_inset
-
-Ein Member 
-\begin_inset Formula $M_{1}$
-\end_inset
-
- dominiert einen Member 
-\begin_inset Formula $M_{2}$
-\end_inset
-
-, wenn der Abstand zum Gültigkeitsbereich verbessert wird oder der Abstand
- zum Gültigkeitsbereich gleich bleibt und gleichzeitig die ursprüngliche
- Definition der Dominanz (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Dominanz"
-
-\end_inset
-
-) erfüllt wird.
- Mit der Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:DominanzNebenbedidungn"
-
-\end_inset
-
- hat die Erfüllung der Nebenbedingungen Vorrang vor den Zilefunktionswerten
- bei der Bestimmung des Paretorangs.
-\end_layout
-
-\begin_layout Standard
-Diese hier aufgelisteten Themen, stellen hohe Anforderungen an die Optimierung
- von Turbomaschinen und schränken die Wahl der Optimierungsverfahren stark
- ein.
- Deterministische Verfahren wie z.B.
- Gradientenverfahren sind nicht anwendbar, da keine oder nur ein Teil der
- benötigten Gradienteninformation zur Verfügung steht und die existierenden
- gradientenfreien deterministische Verfahren sind in hochdimensionalen Räumen
- sehr ineffizient.
- Weiterhin kann diese Art der Optimierungsverfahren die Möglichkeiten modernen
- Supercomputer nur eingeschränkt nutzen, da nur ein sehr geringer Parallelisieru
-ngsgrad besteht.
- Im Gegensatz dazu stehen stochastische Verfahren wie z.B.
- evolutionäre Algorithmen.
- Diese benötigen nur die Zielfunktionswerte und bieten einen sehr hohen
- Parallelisierungsgrad.
- 
-\end_layout
-
 \begin_layout Standard
 Für weitere Informationen bieten folgende Literaturstellen einen umfassenden
  Vergleich verschiedenster Optimierungsverfahren im Bereich der Turbomaschinen:
   
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Shyy2001,Muller-Tows2000,Shahpar2000"
+key "Shyy2001,Muller-Tows2000,Shahpar2000,Bellman1972,ehrgott2005multicriteria,Gian2006,miettinen2012nonlinear,Spiegel2000"
 
 \end_inset
 
@@ -1154,8 +1093,9 @@ Eine mögliche Lösung bietet das dritte Verfahren.
 \begin_layout Standard
 Die Auswahl der hier beschriebenen Verfahren und auch die Anzahl der zu
  erzeugenden Member, muss der jeweilige Anwender treffen.
- Erfahrungsgemäß ist es sinnvoll zuerst ein raumfüllendes Verfahren zu wählen
- und nur bei zu niedriger Erfolgsquote auf das lokale Verfahren zu wechseln.
+ Erfahrungsgemäß ist es sinnvoll zuerst ein raumfüllendes Verfahren zu bevorzuge
+n und nur bei (absehbar) zu niedriger Erfolgsquote auf das lokale Verfahren
+ zu wechseln.
  
 \end_layout
 
@@ -1252,6 +1192,75 @@ reference "subsec:OptimierungsBegriffe"
  Nachdem diese Werte bestimmt worden sind, trägt der Root-Prozess den Member
  gemäß seiner Güte in die Datenbank ein.
  Danach springt der Root-Prozess wieder zu Punkt 2.
+\end_layout
+
+\begin_layout Subsection
+Behandlung von Nebenbedingungen
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Behandlung-von-Nebenbedingungen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In AutoOpti können Gültigkeitsintervalle für alle gespeicherten physikalischen
+ Größen und Zielfunktionen angegeben werden.
+ Liegt ein berechneter Member nicht innerhalb dieses Gültigkeitsbereich,
+ so wird der Abstand 
+\begin_inset Formula $d_{N}\left(M\right)$
+\end_inset
+
+ des Members 
+\begin_inset Formula $M$
+\end_inset
+
+ zum Gültigkeitsbereich als zusätzliches Gütekriterium herangezogen.
+ Die Definition der Dominanz (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Dominanz"
+
+\end_inset
+
+) muss daher erweitert werden zu:
+\begin_inset Formula 
+\begin{align}
+M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\\
+ & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\label{eq:Domianzn}
+\end{align}
+
+\end_inset
+
+Ein Member 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ dominiert einen Member 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, wenn der Abstand zum Gültigkeitsbereich verbessert wird oder der Abstand
+ zum Gültigkeitsbereich gleich bleibt und gleichzeitig die ursprüngliche
+ Definition der Dominanz (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Dominanz"
+
+\end_inset
+
+) erfüllt wird.
+ Mit der Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Domianzn"
+
+\end_inset
+
+ hat die Erfüllung der Nebenbedingungen Vorrang vor den Zielfunktionswerten
+ bei der Bestimmung des Paretorangs.
 \end_layout
 
 \begin_layout Subsection
@@ -1455,9 +1464,16 @@ t, um möglichst gute Vorhersagen zu erlangen.
  Meistens sind diese Trainingsverfahren sehr aufwendig und benötigen je
  nach Typ des Ersatzmodells und der Anzahl an Stützstellen viel Zeit.
  Nach dem Training können die Ersatzmodelle für Vorhersagen der trainierten
- Funktion verwendet werden, wobei die Vorhersagen erfahrungsgemäß sehr viel
- schneller sind als das Training und auch die Prozesskette.
- 
+ Funktion verwendet werden, wobei die Vorhersagen bei z.B.
+ einem Kriging Verfahren schneller sind als das Training und auch die Prozessket
+te (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -1508,8 +1524,8 @@ ess muss permanent überwacht werden, da der Root-Prozess keine auftretenden
 Ist das Training abgeschlossen, wird eine eigene Optimierung auf den Ersatzmodel
 len gestartet, wobei die Ersatzmodelle die Prozesskette ersetzen.
  Da die Funktionsauswertungen auf den Ersatzmodellen um Größenordnungen
- schneller sind, als die Prozesskette selbst, geht dieser Schritt relativ
- schnell.
+ schneller sind, als die Prozesskette selbst, nimmt dieser Schritt wenig
+ Zeit in Anspruch.
  Ziel der Optimierung auf den Ersatzmodellen ist es, einen vielversprechenden
  Parametersatz zu finden, welcher die Zielfunktionen möglichst stark verbessert
  und zudem eine hohe Wahrscheinlichkeit besitzt alle Nebenbedingungen einzuhalte
