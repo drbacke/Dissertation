@@ -83,10 +83,14 @@ name "chap:Multifidelity-Optimierungsstrate"
 \end_layout
 
 \begin_layout Standard
-Im vorhergehenden Kapitel wurde die bisher verwendete Optimierungstrategie
- im DLR beschrieben.
- Das folgende Kapitel beschreibt eine Erweiterung dieser Strategie basierend
- auf der Nutzung von verschiedenen Gütestufen.
+Das folgende Kapitel beschreibt eine Erweiterung der in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Optimierungsstrategie"
+
+\end_inset
+
+ beschriebenen Strategie basierend auf der Nutzung von verschiedenen Gütestufen.
  Diese Art der Optimierungsstrategie wird Multifidelity-Optimierung genannt.
  
 \end_layout
@@ -94,8 +98,8 @@ Im vorhergehenden Kapitel wurde die bisher verwendete Optimierungstrategie
 \begin_layout Standard
 Im ersten Teil dieses Kapitels sollen allgemeine Grundlagen, sowie die Vorteile
  und Grenzen einer solchen Strategie ausgearbeitet werden.
- Darauf aufbauend wird im zweiten Teil dieses Kapitels die konkrete Umsetzung
- innerhalb der Optimierungssoftware AutoOpti beschrieben.
+ Darauf aufbauend wird im zweiten Teil dieses Kapitels die Umsetzung dieses
+ Verfahrens und die in dieser Arbeit neu entwickelten Verfahren beschrieben.
 \end_layout
 
 \begin_layout Section
@@ -239,7 +243,15 @@ Wünschenswert wäre es allerdings, Rechennetze mit verschiedener Güte in
  Beispielsweise könnte man ein grobes (Low-Fidelity) und ein feines Netz
  (High-Fidelity) zur Verfügung stellen.
  Die Erfahrung zeigt, dass bei Optimierungen mit groben Rechennetzen der
- Verlauf der Zielfunktion bereits gut wiedergegeben wird.
+ Verlauf der Zielfunktion bereits gut wiedergegeben wird (vgl.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+).
  Die Güte der mit groben Netzen erzeugten Verdichterkennfelder sinkt aber
  insbesondere nahe der Stabilitätsgrenze.
  Wird ein solchen Ergebnis mit einem feinen Netz nachgerechnet, so ergeben
@@ -260,11 +272,25 @@ Gütestufen innerhalb eines Simulationsverfahrens
 
 \begin_deeper
 \begin_layout Itemize
-Auflösung des Rechennetzes
+Auflösung des Rechennetzes (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2007multi"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Itemize
-Anzahl an Iterationen innerhalb einer Strömungssimulation
+Anzahl an Iterationen innerhalb einer Strömungssimulation (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "forrester2006optimization"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Itemize
@@ -932,9 +958,8 @@ reference "subsec:Grundlegender-Optimierungsprozes"
 
  vorgestellten Optimierungsprozesses dar.
  Grundlegend wurde bei der Entwicklung ein besonderer Wert darauf gelegt,
- die Abwärtskompatibilität zu gewährleisten und auch die Möglichkeit zu
- bieten diese Strategie auf Ähnliche Verfahren zu übertragen.
- Aus diesem Grund wurde versucht mit nur wenigen Änderungen auszukommen.
+ die bisherigen Prozesse möglichst wenig zu ändern aber auch die Möglichkeit
+ zu bieten diese Strategie auf Ähnliche Verfahren zu übertragen.
  Einfachheitshalber sind in der Abbildung nur zwei Gütestufen dargestellt.
  Die Strategie bietet aber die Option mehrere Gütestufen zu verwenden.
  
@@ -1066,8 +1091,6 @@ reference "subsec:Grundlegender-Optimierungsprozes"
  beschrieben, müssen die in AutoOpti verwendeten Ersatzmodelle vor der Verwendun
 g trainiert werden.
  Dieses dient zur Bestimmung von ersatzmodellspezifischen Parametern.
- Dabei kann es sich z.B.
- um Korrelationslängen oder Gewichtungen handeln.
  Diese Parameter werden mithilfe der vorhandenen Daten eingestellt.
  An dieser Vorgehensweise ändert sich bei der hier vorgestellten Multifidelity-O
 ptimierung prinzipiell nichts.
@@ -1076,8 +1099,14 @@ ptimierung prinzipiell nichts.
  Die Entwicklung der Software des neuen Ersatzmodells und dessen Qualifizierung
  für den industrienahen Einsatz ist unter mitunter einer der Kernpunkte
  dieser Arbeit.
- Zur Anwendung kommt ein Co-Kriging Verfahren, dessen theoretische Grundlagen
- in Kapitel 
+ Zur Anwendung kommt ein Co-Kriging Verfahren (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+), dessen theoretische Grundlagen in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Die-Kriging-Verfahren"
@@ -1093,18 +1122,12 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Da die Member der verschiedenen Gütestufen nur sehr schwer gegeneinander
- bewertet werden können, ist es am sinnvollsten diese in getrennten Datenbanken
- zu speichern oder in einer Datenbank getrennt zu behandeln.
- In AutoOpti werden die bewerteten Member verschiedener Gütestufen in getrennten
- Datenbanken gespeichert.
+Die bewerteten Member verschiedener Gütestufen werden in getrennten Datenbanken
+ gespeichert.
  Eine Bewertung der niedrigeren Stufen wird nicht vorgenommen, es wird also
  kein Paretorang oder ähnliche Kriterien berechnet.
- Die Berechnung des Paretorangs zwischen verschiedenen Gütestufen ist ohne
- genaue Kenntnis der funktionalen Zusammenhänge zwischen den Gütestufen
- nicht möglich.
- Daher werden die Daten der niedrigeren Stufen zur Verbesserung der Vorhersagege
-nauigkeit der Ersatzmodelle herangezogen.
+ Daher werden die Daten der niedrigeren Stufen nur zur Verbesserung der
+ Vorhersagegenauigkeit der Ersatzmodelle herangezogen.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1199,50 +1222,10 @@ name "subsec:Entscheidungsfunktion"
 \end_layout
 
 \begin_layout Standard
-Ein entscheidender Punkt bei der Durchführung einer Multi-Fidelity-Optimierung
- besteht darin zu entscheiden, mit welcher Prozesskette und damit Gütestufe
- ein neu erzeugter Member berechnet werden soll.
- Folgend sollen zwei beispielhafte Gütestufen betrachtet werden.
- Eine niedrige Gütestufe, welche mit dem Index 
-\begin_inset Formula $low$
-\end_inset
-
- gekennzeichnet wird und eine höherwertige Gütestufe welche mit dem Index
- 
-\begin_inset Formula $high$
-\end_inset
-
- bezeichnet wird.
- Da alle Gütestufen aus einem Simulationsprozess stammen, geben sie die
- Realität nicht fehlerfrei wieder.
- Jeder dieser Prozesse hat also einen mittleren Fehler 
-\begin_inset Formula $F$
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Um eine sinnvolle Entscheidung treffen zu können, müssen zwei Dinge berücksichti
-gt werden.
- Auf der einen Seite sollte die Auswertung eines Members mit niedriger Gütestufe
- eine vergleichsweise kürzere Zeit 
-\begin_inset Formula $t_{low}<t_{high}$
-\end_inset
-
- als eine höhere Gütestufe benötigen.
- Auf der anderen Seite kann angenommen werden, dass für die mittleren Fehler
- gilt 
-\begin_inset Formula $F_{low}\geq F_{high}$
-\end_inset
-
-.
- 
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1271,9 +1254,59 @@ Möglichkeiten der Membererzeugung mit mehreren Fidelities
 
 \end_inset
 
-Während einer laufenden Multifidelity-Optimierung muss also permanent eine
- Entscheidung getroffen werden, welche Prozesskette als nächstes durchlaufen
- werden soll.
+Ein entscheidender Punkt bei der Durchführung einer Multi-Fidelity-Optimierung
+ besteht darin zu entscheiden, mit welcher Prozesskette und damit Gütestufe
+ ein neu erzeugter Member berechnet werden soll.
+ Eine Gütestufe wird mit dem Index 
+\begin_inset Formula $g\in J,J=\{0,...,m_{f}\}$
+\end_inset
+
+ gekennzeichnet, wobei eine niedrigere Gütestufe einen höheren Index besitzt.
+ Da alle Gütestufen aus einem Simulationsprozess stammen, geben sie die
+ Realität nicht fehlerfrei wieder.
+ Jeder dieser Prozesse hat also einen mittleren Fehler 
+\begin_inset Formula $F$
+\end_inset
+
+ und eine Ausführungszeit 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Es wird davon ausgegangen, dass ein Member höhere Güte einen niedrigeren
+ Fehler hat, aber länger für die Ausführung benötigt als die niedrigerer
+ Güte.
+ Es gilt also 
+\begin_inset Formula $F_{g+1}\geq F_{g}$
+\end_inset
+
+und 
+\begin_inset Formula $t_{g+1}<t_{g}$
+\end_inset
+
+.
+ Weiterhin wird der Begriff des Informationszugwinns 
+\begin_inset Formula $I$
+\end_inset
+
+ eingeführt, dieser wird für die notwendige Bewertung einer Gütestufe benötigt.
+ Denn für die Bewertung einer Gütestufe sind viele Werte denkbar (beispielsweise
+ ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), diese
+ sollen durch den Begriff des Informationszugewinns zusammengefasst werden.
+ Für den Informationszugewinn gilt: 
+\begin_inset Formula $I_{g+1}\leq I_{g}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Da die genaue Berechnung dieser Werte verschiedene Möglichkeiten bestehen,
+ wird darauf erst im späteren Verlauf dieses Abschnitts eingegangen.
+ Allerdings muss auf Basis dieser Werte während einer laufenden Multifidelity-Op
+timierung permanent eine Entscheidung getroffen werden, welche Prozesskette
+ als nächstes durchlaufen werden soll.
  Benötigt wird also eine Entscheidungsfunktion 
 \begin_inset Formula $f$
 \end_inset
@@ -1292,11 +1325,12 @@ reference "fig:Mglichkeiten-der-Membererzeugun"
 
 \end_inset
 
- sind einige Möglichkeiten der Entscheidungsfindung kategorisiert und sollen
- folgend beschrieben werden.
+ sind einige Möglichkeiten der Entscheidungsfindung zusammengefasst und
+ kategorisiert.
+ Diese sollen im folgenden beschrieben werden.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Benutzergesteuerte Entscheidungsfunktionen
 \end_layout
 
@@ -1334,18 +1368,14 @@ igt.
 eren kann.
  Die praktische Umsetzung erfolgt dann über die Vorgabe der gewünschten
  Wahrscheinlichkeit einen Member niedriger Güte zu erzeugen in Abhängigkeit
- des Optimierungsfortschritts (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Entscheidungsfunktion"
-
-\end_inset
-
-).
+ des Optimierungsfortschritts.
+ Da diese Art der Entscheidung allerdings sehr stark von den gewählten Parameter
+n abhängt und die Wahl dieser selbst für einen erfahrenen Anwender schwierig
+ ist, soll diese Entscheidungsfunktion nicht weiter betrachtet werden.
  
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Ersatzmodellgesteuerte Entscheidungsfunktionen
 \end_layout
 
@@ -1370,35 +1400,60 @@ Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
 \end_inset
 
  für einen vielversprechenden Member vor.
- Innerhalb von AutoOpti erfolgt das durch die Maximierung des 
-\begin_inset Quotes gld
-\end_inset
-
-Expected Volume Gain
-\begin_inset Quotes grd
-\end_inset
-
-.
- Es ist in diesem Zusammenhang denkbar die Optimierung auf dem Ersatzmodell
- zusätzlich von den vorhandenen Gütestufen abhängig zu machen, indem versucht
- wird neben der Maximierung des 
-\begin_inset Quotes gld
-\end_inset
-
-Expected Volume Gain
-\begin_inset Quotes grd
-\end_inset
-
- den Informationsgehalt pro Zeit zu maximieren.
- Dieser Fall würde dann einer Mehrzieloptimierung entsprechen und ließe
- letztlich immer noch die Frage offen, welcher Member dieser so erzeugten
- Paretofront verwendet werden soll.
- Bei dieser Vorgehensweise würde der Rechenaufwand um Größenordnungen steigen.
+ Optimal ist es, während dieser Optimierung auf dem Ersatzmodell die Wahl
+ der Gütestufe direkt einfließen zu lassen.
+ Ein solches Verfahren ist allerdings sehr schwer umzusetzen, im folgenden
+ soll erläutert werden warum.
  
 \end_layout
 
 \begin_layout Standard
-Eine heuristische Lösung für dieses Problem kann in der Arbeit von Huang
+Am Ende einer Optimierung sind nur die Paretorang 1 Member der höchsten
+ Gütestufe von Interesse, da das Vertrauensniveau für diese am höchste ist.
+ Aus diesem Grund bringt ein neuer Member niedriger Gütestufe keinen direkten
+ Optimierungsfortschritt, sondern nur eine Reduktion der Varianz der Ersatzmodel
+le und kann damit im übernächsten Optimierungsschritt einen Fortschritt
+ erzielen, da die Vorhersagen der Ersatzmodelle dann möglicherweise etwas
+ besser geworden sind (vorausgesetzt der übernächste Member wird dann mit
+ der höchsten Gütestufen berechnet).
+ Für die Umsetzung müsste geschätzt werden, inwiefern sich ein Member hoher
+ oder niedriger Gütestufe (die ebenfalls geschätzt werden müssen) den Optimierun
+gsfortschritt im übernächsten Optimierungsschritt beeinflussen.
+ 
+\end_layout
+
+\begin_layout Standard
+Eine typische Optimierung auf dem Ersatzmodell in AutoOpti wird in der Regel
+ mit 5000 Iterationen durchgeführt.
+ Soll eine Abschätzung für den übernächsten Schritt erfolgen, müsste in
+ jedem dieser 5000 Schritte eine weitere Optimierung mit wieder 5000 Iterationen
+ durchgeführt werden, insgesamt also 
+\begin_inset Formula $25*10^{6}$
+\end_inset
+
+ Iterationen.
+ Eine sinnvollere Strategie ist es, den Member mit dem höchsten erwarteten
+ Optimierungsfortschritt zu suchen und erst dann zu entscheiden mit welcher
+ Gütestufe dieser berechnet werden soll.
+ Diese Art der Strategie wird im nächsten Abschnitt 
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+Nach der Optimierung auf dem Ersatzmodell
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+ vorgestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+In der Literatur ist bisher nur sehr wenig zu dieser Thematik zu finden.
+ Eine heuristische Lösung für dieses Problem kann in der Arbeit von Huang
  et.
  al.
  (siehe 
@@ -1409,30 +1464,9 @@ key "huang2006sequential"
 \end_inset
 
 ) gefunden werden.
- Dieser multipliziert drei verschiedene Terme an den 
-\begin_inset Quotes gld
-\end_inset
-
-Expected Volume Gain
-\begin_inset Quotes grd
-\end_inset
-
- Term.
- Die Terme beinhalten einmal den zeitlichen Faktor zwischen einer niedrigeren
- Gütestufe und der höchsten Gütestufe.
- Weiterhin wird ein Term eingeführt, der die örtliche Vorhersageunsicherheit
- einbezieht und zuletzt ein Term der die Korrelation zwischen einer niedrigeren
- Gütestufe zur höchsten Gütestufe darstellt.
- Die Terme werden alle gleich gewichtet und sind auf einen Wertebereich
- von 
-\begin_inset Formula $[0,1]$
-\end_inset
-
- normiert.
- Durch die Ortsabhängigkeit, verändert sich natürlich auch die Optimierung
- auf dem Ersatzmodell und damit auch der gesamte Optimierungsverlauf.
- Inwiefern dieser heuristischer Ansatz immer zu einer Beschleunigung führt,
- kann allerdings nur schwer abgeschätzt werden.
+ Dieser Ansatz stellt allerdings keine optimale oder analytisch nachvollziehbare
+ Lösung des Problems dar und inwiefern ein heuristischer Ansatz immer zu
+ einer Beschleunigung führt, kann ebenfalls nur schwer abgeschätzt werden.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1440,88 +1474,184 @@ Nach der Optimierung auf dem Ersatzmodell
 \end_layout
 
 \begin_layout Standard
-Von der Optimierung auf dem Ersatzmodell wird ein fester Ort 
-\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}\,wobei\,EVG\left(\vec{x}\right)\geq EVG\left(\vec{y}\right)\forall\vec{y}\in\mathbb{R}^{k}$
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MufiProzess"
+
 \end_inset
 
- übergeben und nachfolgend entschieden, welche Prozesskette ausgeführt wird.
+ ist der grundlegende Optimierungsprozess dargestellt, die hier beschrieben
+ Strategie setzt nach der Optimierung auf dem Ersatzmodell an.
+ Innerhalb dieser Optimierung auf dem Ersatzmodell wird ein Member mit hohem
+ erwarteten Optimierungsfortschritt ausgewählt.
+ Daraufhin muss entschieden werden, mit welcher Gütestufe 
+\begin_inset Formula $g\in J$
+\end_inset
+
+, 
+\begin_inset Formula $J=\{0,...,m_{f}\}$
+\end_inset
+
+ dieser Member 
+\begin_inset Formula $M$
+\end_inset
+
+ berechnet werden soll.
+ Der übergebene Member 
+\begin_inset Formula $M$
+\end_inset
+
+ besitzt einen festen Ort 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
+\end_inset
+
+ und die Ersatzmodellvorhersagen 
+\begin_inset Formula $\vec{y}^{*}\in\mathbb{R}^{q}$
+\end_inset
+
+ für 
+\begin_inset Formula $q$
+\end_inset
+
+ Ersatzmodelle mit den zugehörigen Varianzen 
+\begin_inset Formula $\vec{\sigma}^{2*}\in\mathbb{R}^{q}$
+\end_inset
+
+.
+ Weiterhin sind die Zeit für die Erzeugung eines Members 
+\begin_inset Formula $t_{g}$
+\end_inset
+
+ der Gütestufe 
+\begin_inset Formula $g\in J$
+\end_inset
+
+, 
+\begin_inset Formula $J=\{0,...,m_{f}\}$
+\end_inset
+
+ bekannt, hierzu zählen die Prozesskettenzeiten, die Trainingszeit und die
+ Zeit für die Optimierung auf dem Ersatzmodell.
+ Mithilfe dieser Werte soll eine Entscheidung getroffen werden, mit welcher
+ Prozesskette der Member nachgerechnet werden soll.
  
 \end_layout
 
 \begin_layout Standard
-Hierfür ist ein Maß für den Zugewinn an Information durch ein Sample notwendig.
+Im Folgenden wird erst allgemeingültig die Funktionsweise einer geeigneten
+ Entscheidungsfunktion erläutert und darauf folgend eine konkrete Umsetzung
+ gezeigt.
+ Hierfür ist ein Maß für den Zugewinn an Information durch einen neuen Member
+ notwendig.
+ Informationszugewinn wird in diesem Zusammenhang als Überbegriff für alle
+ möglichen Bewertungskriterien (wie z.B.
+ ein Reduktion der Ersatzmodellunsicherheit, einem Zuwachs im erwarteten
+ Volumenzugewinn...) verwendet.
  Daher wird eine Größe 
-\begin_inset Formula $I\in\left\{ I_{low},I_{high}\right\} $
+\begin_inset Formula $I_{g}\in\left\{ I_{0},...,I_{m_{f}}\right\} $
 \end_inset
 
- definiert, welche diesen Informationszugewinn durch einen Member beschreibt.
+ wobei 
+\begin_inset Formula $I_{g}\in\mathbb{R}|0\leq I_{g}<\infty$
+\end_inset
+
+ definiert, welche den Informationszugewinn durch einen Member beschreibt.
+ Ein Informationszugewinn von 
+\begin_inset Formula $I_{g}=0$
+\end_inset
+
+ bedeutet, dass keine Information aus dieser Gütestufe gewonnen werden kann.
  Der Informationszugewinn der niedrigeren Gütestufe ist kleiner oder gleich
  dem Informationszugewinn der höheren Stufe 
-\begin_inset Formula $I_{low}\leq I_{high}$
+\begin_inset Formula $I_{g+1}\leq I_{g}$
 \end_inset
 
 .
  Außerdem gibt es für jede Fidelity jeweils nur einen Informationszugewinn,
  jedoch viele Zielfunktionale und Nebenbedingungen.
- Zusätzlich benötigt man eine Funktion, welche den Ortsvektor auf den Informatio
-nsgewinn abbildet:
-\begin_inset Formula 
-\begin{alignat*}{1}
-I:\mathbb{R}^{k} & \rightarrow\mathbb{R}^{2}\\
-\vec{x}\,\, & \mapsto\left(\begin{array}{c}
-I_{low}\\
-I_{high}
-\end{array}\right)
-\end{alignat*}
-
+ Neben dem Informationszugewinn spielen die Laufzeiten 
+\begin_inset Formula $t_{g}$
 \end_inset
 
-Die Entscheidungsfunktion selbst bildet den Informationsgewinn und die entsprech
-enden Zeiten auf eine Entscheidung ab:
+ der Prozessketten der jeweiligen Gütestufen eine erhebliche Rolle.
+ Je größer der Faktor zwischen der Laufzeit hoher Güte zu niedriger Güte
+ 
+\begin_inset Formula $\frac{t_{g}}{t_{g+1}}$
+\end_inset
+
+, desto eher lohnt sich ein Durchlauf niedriger Güte (vorausgesetzt 
+\begin_inset Formula $I_{g+1}>0$
+\end_inset
+
+).
+ Beachtet man zusätzlich noch den Informationszugewinn so ist es sinnvoll,
+ diesen ins Verhältnis zu den Prozesskettenzeiten zu setzten 
+\begin_inset Formula $\frac{I_{g}}{t_{g}}$
+\end_inset
+
+, also dem Informationszugewinn pro Zeit für jede Gütestufe.
+ Ein größerer Wert entspricht mehr Informationszugewinn pro benötigter Erzeugung
+szeit.
+ Eine Entscheidungsfunktion 
+\begin_inset Formula $f_{dec}(\vec{x_{0}})$
+\end_inset
+
+ für beliebig viele Gütestufen 
+\begin_inset Formula $m_{f}$
+\end_inset
+
+ wählt dann die Gütestufe 
+\begin_inset Formula $g_{max}\in J$
+\end_inset
+
+, 
+\begin_inset Formula $J=\{0,...,m_{f}\}$
+\end_inset
+
+ mit dem höchsten Verhältnis von 
+\begin_inset Formula $\frac{I_{g}}{t_{g}}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}:\mathbb{R}^{4} & \rightarrow\left\{ low,high\right\} \nonumber \\
-\left(\begin{array}{c}
-I_{low}\\
-t_{low}\\
-I_{high}\\
-t_{high}
-\end{array}\right)\,\, & \mapsto\begin{cases}
-low & ,\frac{I_{low}}{t_{low}}\geq\frac{I_{high}}{t_{high}}\\
-high & ,sonst
-\end{cases}\label{eq:Entscheidungsfunktion}
+f_{dec}(\vec{x_{0}})= & \{g_{max}\in J|\frac{I_{g}(\vec{x_{0}})}{t_{g}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\forall g\neq j\}\label{eq:Entscheidungsfunktion}
 \end{alignat}
 
 \end_inset
 
-Dies lässt sich auch umformulieren zu einem Kriterium:
-\begin_inset Formula 
-\begin{align}
-\left(\begin{array}{c}
-I_{low}\\
-t_{low}\\
-I_{high}\\
-t_{high}
-\end{array}\right)\,\, & \mapsto\begin{cases}
-low & ,\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}\geq1\\
-high & ,\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}<1
-\end{cases}\label{eq:EntscheidungsfunktionKriterium}
-\end{align}
+
+\end_layout
+
+\begin_layout Standard
+Um eine solche Entscheidungsfunktion umsetzen zu können, müssen 
+\begin_inset Formula $I(\vec{x_{0}})$
+\end_inset
+
+ und 
+\begin_inset Formula $t$
+\end_inset
+
+ geschätzt werden.
+ Die Schätzung der Erzeugungszeit 
+\begin_inset Formula $t$
+\end_inset
+
+ kann aus älteren Daten geschätzt werden, die genaue Umsetzung wird in Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Diese Entscheidungsfunktion bewertet nur zwei mögliche Gütestufen anhand
- des Informationsgewinns pro Zeit.
- Bei einer größeren Anzahl an Gütestufen kann die Funktion aber öfter angewendet
- werden und somit eine Rangliste erzeugt werden.
-\end_layout
-
-\begin_layout Standard
-Ein sehr wichtiger Punkt ist die Modellierung des Informationszugewinns.
+ erklärt.
+ Weiterhin ist die Modellierung des Informationszugewinns ein sehr wichtiger
+ Punkt.
  Dafür eignet sich die Unsicherheitsvorhersage statistischer Ersatzmodelle
  sehr gut.
  Die meisten statistischen Ersatzmodelle sagen neben einem Erwartungswert
@@ -1529,14 +1659,20 @@ Ein sehr wichtiger Punkt ist die Modellierung des Informationszugewinns.
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
- auch eine Unsicherheit in Form einer Standardabweichung 
-\begin_inset Formula $\sigma\in\mathbb{R}$
+ auch eine Unsicherheit in Form einer Varianz 
+\begin_inset Formula $\vec{\sigma}^{2*}\in\mathbb{R}$
+\end_inset
+
+ oder Standardabweichung 
+\begin_inset Formula $\vec{\sigma}^{*}\in\mathbb{R}$
 \end_inset
 
  voraus.
  Fügt man einem solchen Ersatzmodell an einem unbekannten Ort ein neues
- Sample hinzu, so sollte die vorhersagte Standardabweichung dort reduziert
- werden.
+ Sample hinzu, so sollte die vorhersagte Varianz dort reduziert werden.
+ Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
+ weniger stark reduziert, dieses Verhalten lässt sich für eine Entscheidung
+ heranziehen.
  Oftmals wird angenommen, dass die Unsicherheit auf Null reduziert wird,
  wenn an dieser Stelle ein Sample hoher Güte bekannt ist.
  
@@ -1638,15 +1774,24 @@ Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
 \end_layout
 
 \begin_layout Standard
-Um den Informationszugewinn zu modellieren ist die Reduktion der Standardabweich
-ung ein geeignetes Maß.
+Um den Informationszugewinn zu modellieren ist die Reduktion der Varianz
+ ein geeignetes Maß.
  Um diese Reduktion zu berechnen müssen einige Definitionen und Annahmen
  getroffen werden.
+ Folgend soll ein Entscheidungskriterium für ein Ersatzmodell auf Basis
+ dieser Varianzreduktion vorgestellt werden, im weiteren Verlauf des Kapitels
+ wird dieses dann auf viele Ersatzmodelle erweitert:
 \end_layout
 
 \begin_layout Standard
-Das innerhalb dieser Arbeit verwendete CO-Kriging kann prinzipiell für jede
- der verwendeten Gütestufen Vorhersagen treffen.
+Das innerhalb dieser Arbeit verwendete CO-Kriging (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
+
+\end_inset
+
+) kann prinzipiell für jede der verwendeten Gütestufen Vorhersagen treffen.
  Während des Optimierungsprozesses sind in diesem Fall nur die Vorhersagen
  der höchsten Gütestufe von Interesse.
  Aus diesem Grund wird im weiteren Verlauf grundlegend von Vorhersagen der
@@ -1655,55 +1800,72 @@ Das innerhalb dieser Arbeit verwendete CO-Kriging kann prinzipiell für jede
 \end_layout
 
 \begin_layout Standard
-Die Vorhersage der Standardabweichung der höchsten Gütestufe an einer Stelle
- 
+Die Vorhersage der Varianz einer Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
+ für ein Ersatzmodell an einer gegebenen Stelle 
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
  wird im Folgenden mit 
-\begin_inset Formula $\sigma_{h}\in\mathbb{R}$
+\begin_inset Formula $\sigma_{g}^{2}\in\mathbb{R}$
 \end_inset
 
- benannt und die Vorhersage der Standardabweichung unter der Annahme, dass
- an der Stelle 
-\begin_inset Formula $\vec{x_{0}}$
+ benannt.
+ Bei Kenntnis einer Stützstelle 
+\begin_inset Formula $y_{j}\left(\vec{x}\right)$
 \end_inset
 
- ein Sample niedriger Güte 
-\begin_inset Formula $y_{l}\left(\vec{x}\right)$
+ der Güte 
+\begin_inset Formula $j$
 \end_inset
 
- bekannt ist, wird folgend mit 
-\begin_inset Formula $\sigma_{hl}=\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}\right)\in\mathbb{R}$
-\end_inset
-
- bezeichnet.
- Bei Kenntnis eines Samples hoher Güte 
-\begin_inset Formula $y_{h}\left(\vec{x}\right)$
-\end_inset
-
- wird die Standardabweichung mit 
-\begin_inset Formula $\sigma_{hh}=\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}\right)\in\mathbb{R}$
+ wird die Varianz mit 
+\begin_inset Formula $\sigma_{g|j}^{2}=\sigma_{g}^{2}\left(\vec{x}\right)\mid y_{j}\left(\vec{x}\right)\in\mathbb{R}$
 \end_inset
 
  bezeichnet.
- Der Informationszugewinn für eine unbekannte Stelle 
-\begin_inset Formula $x_{0}$
+ Eine effiziente Möglichkeit die Varianz 
+\begin_inset Formula $\sigma_{g|j}^{2}$
 \end_inset
 
- kann damit als Reduktion der vorhergesagten Standardabweichung modelliert
+ zu berechnen wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
+
+\end_inset
+
+ beschrieben.
+ Der Informationszugewinn für eine Stelle 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
+\end_inset
+
+ einer Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
+ unter der Bedingung das eine Stützstelle der Gütestufe 
+\begin_inset Formula $j$
+\end_inset
+
+ bekannt ist, kann damit als Reduktion der vorhergesagten Varianz modelliert
  werden:
 \begin_inset Formula 
 \begin{align}
-I_{low}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hl}\label{eq:Informationszugewinn}\\
-I_{high}\left(\vec{x_{0}}\right)= & \sigma_{h}-\sigma_{hh}\label{eq:StandardAbRedulktion}
+I_{g|j}\left(\vec{x_{0}}\right)= & \sigma_{g}^{2}-\sigma_{g|j}^{2}\label{eq:StandardAbRedulktion}
 \end{align}
 
 \end_inset
 
 Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
  eines neuen Members 
-\begin_inset Formula $t_{low},t_{high}\in\mathbb{R}$
+\begin_inset Formula $t_{j}\in\mathbb{R}$
+\end_inset
+
+ für die jeweilige Gütestufe 
+\begin_inset Formula $j$
 \end_inset
 
 .
@@ -1723,19 +1885,22 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
  Der dritte und damit letzte Teil beinhaltet die Berechnung der Prozesskette.
  Für diesen Teil benötigen die Gütestufen auch jeweils unterschiedliche
  Zeiten welche mit 
-\begin_inset Formula $t_{prl}\in\mathbb{R}$
+\begin_inset Formula $t_{pr,j}\in\mathbb{R}$
 \end_inset
 
- für die niedrigere Gütestufe und 
-\begin_inset Formula $t_{prh}\in\mathbb{R}$
+ bezeichnet werden.
+ Damit können die jeweiligen Erzeugungszeiten definiert werden, wobei die
+ genaue Berechnung dieser Zeiten wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
+
 \end_inset
 
- für die höhere Gütestufe bezeichnet werden.
- Damit können die jeweiligen Erzeugungszeiten definiert werden:
+ beschrieben wird:
 \begin_inset Formula 
 \begin{align}
-t_{low}= & t_{train}+t_{opti}+t_{prl}\\
-t_{high}= & t_{train}+t_{opti}+t_{prh}
+t_{j}= & t_{train}+t_{opti}+t_{pr,j}
 \end{align}
 
 \end_inset
@@ -1750,71 +1915,31 @@ reference "eq:Entscheidungsfunktion"
  definierten Verhältnisse von Informationszugewinn pro Zeit festlegen:
 \begin_inset Formula 
 \begin{align}
-\frac{I_{low}}{t_{low}} & =\frac{\sigma_{h}-\sigma_{hl}}{t_{train}+t_{opti}+t_{prl}}\\
-\frac{I_{high}}{t_{high}} & =\frac{\sigma_{h}-\sigma_{hh}}{t_{train}+t_{opti}+t_{prh}}
+\frac{I_{g|j}}{t_{g}} & =\frac{\sigma_{g}^{2}-\sigma_{g|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\label{eq:asdsa}
 \end{align}
 
 \end_inset
 
-Diese Verhältnisse gelten für jeweils ein Ersatzmodell.
- Für mehrere Ersatzmodelle bietet sich eine gewichtete Summe aus den Einzelwerte
-n an.
- Die Gewichte werden mit 
-\begin_inset Formula $w_{i}\in\mathbb{R}$
-\end_inset
-
- bezeichnet.
- Für jede der 
-\begin_inset Formula $z\in\mathbb{N}$
-\end_inset
-
- Zielfunktionen und 
-\begin_inset Formula $c\in\mathbb{N}$
-\end_inset
-
- Nebenbedingungen existiert ein Ersatzmodell.
-\begin_inset Formula 
-\begin{align}
-\frac{I}{t}=\sum_{i}^{c+z}\frac{w_{i}}{\sum_{i}^{c+z}w_{i}} & \frac{I_{i}}{t_{i}}
-\end{align}
-
-\end_inset
-
-Vorerst sollen die Gewichte vernachlässigt werden, daher wird im Folgenden
- von 
-\begin_inset Formula $w_{i}=1$
-\end_inset
-
- ausgegangen.
- Eine sinnvolle Belegung der Gewichte wird im späteren Verlauf des Kapitels
- besprochen.
- Daraus lässt sich nun das Kriterium aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:EntscheidungsfunktionKriterium"
-
-\end_inset
-
- vollständig definieren zu:
-\begin_inset Formula 
-\begin{align}
-crit=\frac{I_{low}}{t_{low}}\frac{t_{high}}{I_{high}}= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\left[\sum_{i}^{c+z}\frac{1}{\sum_{j}^{c+z}1}\right]\sum_{i}^{c+z}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)\label{eq:VarianzEntscheidung}
-\end{align}
-
-\end_inset
-
-Mit dieser Formulierung kann das Kriterium aus Gleichung 
+Eingesetzt in Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Entscheidungsfunktion"
 
 \end_inset
 
- Anwendung finden.
+, ergibt sich eine Entscheidungsfunktion für ein Ersatzmodell:
+\begin_inset Formula 
+\begin{alignat}{1}
+f_{dec}(\vec{x_{0}})= & \{g\in J|\frac{I_{g|g}(\vec{x_{0}})}{t_{g}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\forall g\neq j\}\label{eq:Entscheidungsfunktion-1}
+\end{alignat}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
-Zusätzliche Gewichtung der Ersatzmodelle 
+Gewichtung der Ersatzmodelle 
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Entschedungsfunktion"
@@ -1825,13 +1950,96 @@ name "par:Entschedungsfunktion"
 \end_layout
 
 \begin_layout Standard
-Bei der vorgestellten Entscheidungsfunktion, werden die verschiedenen Ersatzmode
-lle alle gleich gewichtet.
- Sinnvoller ist eine gezielte Gewichtung der einzelnen Ersatzmodelle die
- nachfolgend vorgestellt wird.
- Um dies näher zu erläutern werden die Ersatzmodelle in zwei unterschiedliche
- Gruppen eingeteilt.
+In einer typischen Optimierung werden mehrere Ersatzmodelle trainiert (vgl.
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Ersatzmodellbeschleunigung"
+
+\end_inset
+
+).
+ Daher soll Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion-1"
+
+\end_inset
+
+ entsprechend angepasst werden.
+ Für jede der 
+\begin_inset Formula $z\in\mathbb{N}$
+\end_inset
+
  
+\begin_inset Quotes gld
+\end_inset
+
+Flowparameter
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Formula $c\in\mathbb{N}$
+\end_inset
+
+ Nebenbedingungen existiert ein Ersatzmodell.
+ Um diese in der Entscheidungsfunktion zu berücksichtigen bietet sich eine
+ gewichtete Summe an: 
+\begin_inset Formula 
+\begin{align}
+\frac{I}{t}= & \sum_{i}^{c+z}\frac{w_{i}}{\sum_{j}^{c+z}w_{j}}=\frac{1}{\sum_{j}^{c+z}w_{j}}\sum_{i}^{c+z}w_{i}\frac{I_{i}}{t_{i}}\label{eq:Gewichtung}
+\end{align}
+
+\end_inset
+
+Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:asdsa"
+
+\end_inset
+
+ für den Informationszugewinn an einer Stelle 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
+\end_inset
+
+ für eine Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
+ unter der Bedingung das eine Stützstelle der Gütestufe 
+\begin_inset Formula $j$
+\end_inset
+
+ bekannt ist, wird damit für mehrere Ersatzmodelle erweitert zu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\label{eq:asdsa-1}
+\end{align}
+
+\end_inset
+
+Mit dieser Formulierung, lässt sich die Entscheidungsfunktion aus Gleichung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion-1"
+
+\end_inset
+
+ weiterverwenden, wobei die Bestimmung der Gewichte folgend erläutert wird:
+\end_layout
+
+\begin_layout Standard
+Für die Bestimmung der Gewichte 
+\begin_inset Formula $w\in\mathbb{R}$
+\end_inset
+
+ ist es sinnvoll die Ersatzmodelle in zwei unterschiedliche Gruppen einzuteilen:
 \end_layout
 
 \begin_layout Enumerate
@@ -1878,6 +2086,10 @@ ionen
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Typischerweise gibt es in Turbomaschinenoptimierungen zahlreiche Nebenbedingunge
 n welche am Anfang der Optimierung nicht erfüllt werden.
  Wie in Kapitel 
@@ -1933,7 +2145,7 @@ Die Abbildung zeigt sehr deutlich, wie im Verlauf der Optimierung ein Wechsel
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind die verschiedenen Nebenbedingungen auch unterschiedlich schwer
+Weiterhin sind die verschiedenen Nebenbedingungen unterschiedlich schwer
  zu erfüllen und sollten daher ebenfalls unterschiedlich stark gewichtet
  werden.
  Als geeignete Gewichtung für die Nebenbedingungen kann die Wahrscheinlichkeit
@@ -1942,8 +2154,44 @@ Weiterhin sind die verschiedenen Nebenbedingungen auch unterschiedlich schwer
 \end_inset
 
  für die Erfüllung der jeweiligen Nebenbedingungen verwendet werden.
- Je höher die Wahrscheinlichkeit die Nebenbedingung zu erfüllen, desto niedriger
- das Gewicht der Nebenbedingung.
+ Nimmt man ferner an, dass die Nebenbedingungen unabhängig sind, so kann
+ die Wahrscheinlichkeit 
+\begin_inset Formula $P_{i}\in\mathbb{R}$
+\end_inset
+
+ über die Ersatzmodellvorhersagen und die bekannten Intervallgrenzen der
+ Nebenbedingung geschätzt werden.
+ Weiterhin gilt dann, dass die Gesamtwahrscheinlichkeit zur Erfüllung aller
+ Nebenbedingungen über das Produkt der Einzelwahrscheinlichkeiten 
+\begin_inset Formula $\prod_{i=1}^{c}P_{i}$
+\end_inset
+
+ bestimmt werden kann.
+ Über diese Wahrscheinlichkeiten können dann auch die Gewichtungen vorgenommen
+ werden:
+\end_layout
+
+\begin_layout Enumerate
+Gewichtung der einzelnen Nebenbedinungen über die Einzelwahrscheinlichkeiten
+ 
+\begin_inset Formula $w_{i}=\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Gewichtung Zielfunktionen zu Nebenbedingungen über die Gesamtwahrscheinlichkeit:
+ 
+\begin_inset Formula $\prod_{i=1}^{c}P_{i}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Für den ersten Punkt gilt: Je höher die Wahrscheinlichkeit eine Nebenbedingung
+ zu erfüllen, desto niedriger das Gewicht der Nebenbedingung.
  Wenn z.B.
  die Wahrscheinlichkeit bei 100% liegt, so ist diese Nebenbedingung für
  die Entscheidung unerheblich, da diese unabhängig von der Entscheidung
@@ -1954,7 +2202,7 @@ Weiterhin sind die verschiedenen Nebenbedingungen auch unterschiedlich schwer
 \begin_layout Standard
 Die Zielfunktionen untereinander werden gleich gewichtet.
  Letztlich bleibt dann noch die Frage offen, wie Zielfunktionen und Nebenbedingu
-ngen zueinander gewichtet werden.
+ngen zueinander gewichtet werden (Punkt 2).
  Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung der Nebenbeding
 ungen an.
  Geht man davon aus, dass diese unabhängig sind, so lässt sich die Gesamtwahrsch
@@ -1966,12 +2214,16 @@ cheinlichkeiten darstellen
 .
  Mit dieser Gesamtwahrscheinlichkeit lassen sich dann auch die Zielfunktionen
  und Nebenbedingungen zueinander gewichten.
- 
+ Daraus ergibt sich:
 \begin_inset Formula 
 \begin{align}
-crit= & T\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{\sigma_{i,h}-\sigma_{i,hl}}{\sigma_{i,h}-\sigma_{i,hh}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{\sigma_{j,h}-\sigma_{j,hl}}{\sigma_{j,h}-\sigma_{j,hh}}\right)\right]\label{eq:criteriumWeighted}\\
-w_{i}= & \left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \label{eq:GewichteCrit}\\
-T= & \frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}\label{eq:TimeCrit}
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\label{eq:GewichteCrit}\\
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\\
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{T_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right.\label{eq:IzuT}\\
+ & +\left.\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right]\nonumber \\
+\\
+w_{i} & =\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \label{eq:TimeCrit}\\
+T_{j} & =t_{train}+t_{opti}+t_{pr,j}
 \end{align}
 
 \end_inset
@@ -1993,18 +2245,13 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_inset
 
  detailliert beschrieben.
- 
+ Das hier gezeigten Kriterium kann ohne weiteres auf viele Gütestufen angewandt
+ werden.
+ Hierfür müssen alle möglichen Gütestufenpaaren gegeneinander bewertet werden.
 \end_layout
 
 \begin_layout Paragraph*
 Globale Varianzreduktion
-\end_layout
-
-\begin_layout Standard
-
-\size larger
-\color red
-I-optimales Design erwähnen !!!!!!!!!!!
 \end_layout
 
 \begin_layout Standard
@@ -2024,26 +2271,51 @@ Die bisher vorgestellten Kriterien beziehen sich alle auf einen lokalen
  Um dies zu erreichen muss die Formulierung aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Informationszugewinn"
+reference "eq:StandardAbRedulktion"
 
 \end_inset
 
  zu einem räumlichen Integral erweitert werden.
+ Dieses Vorgehen ist in der Theorie der optimalen Versuchplanung (auch bekannt
+ unter 
+\begin_inset Quotes gld
+\end_inset
+
+Optimal Design of Experiments
+\begin_inset Quotes grd
+\end_inset
+
+) als I-optimales Design zu verstehen, in der die vorhergesagte Varianz
+ über dem gesamten Designraum minimiert werden soll, siehe hierzu 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kiefer1974general,kiefer1959optimum,bandemer1980theorie,pukelsheim1980linear"
+
+\end_inset
+
+.
  
 \begin_inset Formula 
 \begin{align}
-I_{high}\left(\vec{x_{0}}\right) & =\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}\\
-I_{low}\left(\vec{x_{0}}\right) & =\int\left(\sigma_{h}\left(\vec{x}\right)-\left[\sigma_{h}\left(\vec{x}\right)\mid y_{l}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}
+I_{g|j}\left(\vec{x_{0}}\right) & =\int\left(\sigma_{g}\left(\vec{x}\right)-\left[\sigma_{g}\left(\vec{x}\right)\mid y_{j}\left(\vec{x}_{0}\right)\right]\right)d\vec{x}
 \end{align}
 
 \end_inset
 
 Die Formulierung 
-\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)\mid y_{h}\left(\vec{x}_{0}\right)$
+\begin_inset Formula $\sigma_{g}\left(\vec{x}\right)\mid y_{j}\left(\vec{x}_{0}\right)$
 \end_inset
 
- soll die Vorhersage der Unsicherheit der höheren Gütestufe 
-\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)\in\mathbb{R}$
+ soll die Vorhersage der Unsicherheit 
+\begin_inset Formula $\sigma_{g}\left(\vec{x}\right)\in\mathbb{R}$
+\end_inset
+
+ der Gütestufe 
+\begin_inset Formula $g\in J$
+\end_inset
+
+, 
+\begin_inset Formula $J=\{0,...,m_{f}\}$
 \end_inset
 
  an einer beliebigen Stelle 
@@ -2055,22 +2327,26 @@ Die Formulierung
 \end_inset
 
  ein Sample 
-\begin_inset Formula $y_{h}\left(\vec{x}_{0}\right)\in\mathbb{R}$
+\begin_inset Formula $y_{j}\left(\vec{x}_{0}\right)\in\mathbb{R}$
 \end_inset
 
- hoher Güte oder ein Sample niedrigerer Güte 
-\begin_inset Formula $y_{l}\left(\vec{x}_{0}\right)\in\mathbb{R}$
+ der Gütestufe 
+\begin_inset Formula $j\in J$
+\end_inset
+
+, 
+\begin_inset Formula $J=\{0,...,m_{f}\}$
 \end_inset
 
  bekannt ist.
  Damit ändert sich Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:criteriumWeighted"
+reference "eq:IzuT"
 
 \end_inset
 
- zu, die Gewichte und Zeiten bleiben wie in den Gleichungen 
+, die Gewichte und Zeiten bleiben wie in den Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:GewichteCrit"
@@ -2087,7 +2363,7 @@ reference "eq:TimeCrit"
 :
 \begin_inset Formula 
 \begin{align}
-crit= & T*\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\sum_{i=1}^{c}\left(\frac{w_{i}}{\sum_{i=1}^{c}w_{i}}\left(\frac{I_{low}}{I_{high}}\right)\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{z}\sum_{j=1}^{z}\left(\frac{I_{low}}{I_{high}}\right)\right]\label{eq:criteriumWeighted-1}
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}I_{g|j}\left(\vec{x_{0}}\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}I_{g|j}\left(\vec{x_{0}}\right)\right]
 \end{align}
 
 \end_inset
@@ -2120,9 +2396,6 @@ Eine weitere Schwierigkeit liegt in der numerischen Berechnung der Integrale,
  und Nebenbedingungen bei typischen Turbomaschinenoptimierungen sehr hoch
  sind, ist die Berechnung eines solchen Integrals mit einem enormen Aufwand
  verbunden.
- Es ist unwahrscheinlich, dass dieser erhebliche Mehraufwand die Optimierung
- derart beschleunigen kann, dass insgesamt eine kürzere Optimierungszeit
- erreicht wird.
  
 \end_layout
 

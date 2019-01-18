@@ -1553,174 +1553,6 @@ globalere
 \begin_layout Paragraph*
 3.
  Auswahl der vielversprechendsten Member
-\end_layout
-
-\begin_layout Standard
-Meistens werden in Turbomaschinenoptimierungen mehrere Zielfunktionen und
- Nebenbedingungen verwendet.
- Dies führt dazu, dass bei der Optimierung auf den Ersatzmodellen mehrere
- vielversprechende Parametersätze generiert werden.
- Bei der Verwendung eines Gütekriteriums wie dem Paretorang würden viele
- Parametersätze mit dem Paretorang Eins erzeugt werden und könnten untereinander
- nicht weiter gewichtet werden.
- Es ist also ein Gütekriterium nötig, welches mehrere Zielfunktionen und
- Nebenbedingungen vereint und auch den zu erwartenden Optimierungsfortschritt
- zu einer bestehenden Paretofront genauer quantifizieren kann.
- In AutoOpti findet der 
-\begin_inset Quotes gld
-\end_inset
-
-Volumenzugewinn
-\begin_inset Quotes grd
-\end_inset
-
- als Gütekriterium Anwendung und wird im nächsten Abschnitt vorgestellt.
- Der Root-Prozess wählt nun den vielversprechendsten Member aus und schickt
- diesen zur Berechnung an einen freien Slave Prozess.
- Der Slave Prozess berechnet dann die echte Zielfunktion.
- Danach ist ein Vergleich mit den Vorhersagen der Ersatzmodelle möglich.
-\begin_inset Wrap figure
-lines 19
-placement O
-overhang 0in
-width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/Erich/VolumeGain.eps
-	scale 90
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:VolumeGain"
-
-\end_inset
-
-Exemplarische Darstellung des Volumenzugewinns anhand einer Optimierung
- mit zwei Zielfunktionen.
- Quelle: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Volumenzugewinn 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Volumenzugewinn"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Wie bereits erwähnt, ist für die Optimierung auf den Ersatzmodellen ein
- Gütekriterium nötig, welches den Optimierungsfortschritt für Mehrzieloptimierun
-gen genauer quantifizieren kann als bspw.
- der Paretorang.
- Das in AutoOpti verwendete Kriterium ist der Volumenzugewinn (englisch:
- 
-\begin_inset Quotes gld
-\end_inset
-
-Volume-Gain
-\begin_inset Quotes grd
-\end_inset
-
-).
- Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:VolumeGain"
-
-\end_inset
-
- zeigt den Volumenzugewinn einer beispielhaften Optimierung mit zwei Zielfunktio
-nen.
- Gezeigt wird eine Paretofront, dargestellt durch die blauen Punkte.
- Die zwei grünen Punkte beschreiben neu hinzugekommene Member, auf die das
- Gütekriterium angewandt werden soll.
- Beide würden Paretorang Eins bekommen und sind damit gleichwertig.
- Betrachtet man nun die in grau dargestellte Fläche zwischen der aktuellen
- Paretofront und den neu hinzugekommenen Membern, beschreibt diese den Volumenzu
-gewinn.
- Das Kriterium lässt sich auch für einen höherdimensionalen Zielfunktionsraum
- anwenden und quantifiziert so den Optimierungsfortschritt für eine Mehrzielopti
-mierung im Bezug auf eine bestehende Paretofront.
- Der Volumenzugewinn kann auch in einer Optimierung auf den Ersatzmodellen
- angewendet werden.
- 
-\begin_inset Wrap figure
-lines 20
-placement O
-overhang 0in
-width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/Erich/ExpectedVolumeGain.eps
-	scale 90
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ExpectedVolumeGain"
-
-\end_inset
-
-Exemplarische Darstellung des erwarteten Volumenzugewinns anhand einer Optimieru
-ng mit zwei Zielfunktionen und drei Ersatzmodellvorhersagen.
- Quelle: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Erwarteter Volumenzugewinn
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:EVG"
@@ -1731,74 +1563,40 @@ name "subsec:EVG"
 \end_layout
 
 \begin_layout Standard
-AutoOpti verwendet statistische Ersatzmodelle, die Ersatzmodelle sagen also
- eine statistische Verteilung vorher.
- Als Verteilungsfunktion wird eine Normalverteilung angenommen.
- Dies stellt in der Regel eine vernünftige Annahme dar und ist vom numerischen
- Aufwand noch im vertretbarem Rahmen.
- Die Ersatzmodelle sagen also für einen unbeprobten Ort 
-\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
+Meistens werden in Turbomaschinenoptimierungen mehrere Zielfunktionen und
+ Nebenbedingungen verwendet.
+ Dies führt dazu, dass bei der Optimierung auf den Ersatzmodellen mehrere
+ vielversprechende Parametersätze generiert werden.
+ Bei der Verwendung eines Gütekriteriums wie dem Paretorang würden viele
+ Parametersätze mit dem Paretorang Eins erzeugt werden und könnten untereinander
+ nicht weiter gewichtet werden.
+ Für die Optimierung auf dem Ersatzmodell ist also ein Gütekriterium nötig,
+ welches mehrere Zielfunktionen und Nebenbedingungen vereint und auch den
+ zu erwartenden Optimierungsfortschritt zu einer bestehenden Paretofront
+ genauer quantifizieren kann als der Paretorang.
+ In AutoOpti findet dafür das 
+\begin_inset Quotes gld
 \end_inset
 
- einen Erwartungswert 
-\begin_inset Formula $y^{*}\left(\vec{x}\right)$
+Expected Volume Gain
+\begin_inset Quotes grd
 \end_inset
 
- und eine Standardabweichung 
-\begin_inset Formula $\sigma^{*}\left(\vec{x}\right)$
-\end_inset
+ als Gütekriterium Anwendung.
+ Dieses Kriterium berechnet den zu erwartenden Volumenzugewinn von einem
+ vorhergesagten Member zu einer bereits vorhandenen Paretofront unter Berücksich
+tung von bereits rechnenden Membern.
+ 
+\end_layout
 
- der jeweiligen Funktion voraus.
- Die Berechnung des Volumenzugewinns für einen vorhergesagten Member sollte
- also die Verteilung berücksichtigen.
- Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ExpectedVolumeGain"
-
-\end_inset
-
- zeigt eine exemplarische Optimierung mit zwei Zielfunktionen und einer
- mit blauen Punkten dargestellten Paretofront.
- Die beiden grünen Punkte stellen Vorhersagen aus einer Optimierung auf
- den Ersatzmodellen dar.
- Die Fehlerbalken sollen die vorhergesagte Standardabweichung andeuten.
- Mithilfe der Standardabweichung lässt sich nun auch die Unsicherheit in
- der Vorhersage der Ersatzmodelle berücksichtigen und eine erwartete Verbesserun
-g 
-\begin_inset Formula $I$
-\end_inset
-
- und die dazugehörige Wahrscheinlichkeit überhaupt eine Verbesserung zu
- erzielen.
- Das in AutoOpti verwendete Erwartete Volumenzugewinn Kriterium 
-\begin_inset Formula $EVG$
-\end_inset
-
- eines Members 
-\begin_inset Formula $M$
-\end_inset
-
- beschreibt das Produkt aus beiden Werten:
-\begin_inset Formula 
-\begin{equation}
-EVG\left(M\right)=P\left(M\right)*I\left(M\right)
-\end{equation}
-
-\end_inset
-
-Bei einer Optimierung auf den Ersatzmodellen, wie sie in diesem Kapitel
- beschrieben wurde, wird versucht das Kriterium 
-\begin_inset Formula $EVG\left(M\right)$
-\end_inset
-
-zu maximieren.
- Ein großer Vorteil bei Berücksichtigung der Unsicherheiten der Vorhersage
- ist das daraus resultierende explorative Verhalten der Optimierung.
- Ein Optimierungsalgorithmus, welcher nur die Vorhersage des Funktionswert
- berücksichtigt, besitzt in der Regel ein rein exploitatives Verhalten.
- Der Algorithmus sucht also direkt nach einem Optimum und versucht nicht
- unbekannte Räume auf Optima zu untersuchen (siehe 
+\begin_layout Standard
+Ein großer Vorteil bei diesem Verfahren ist die Berücksichtigung der Unsicherhei
+ten der Vorhersage.
+ Bei statistischen Ersatzmodellen werden Erwartungswerte und auch Varianzen
+ für die Zielgrößen vorhergesagt.
+ Bleiben die Varianzen hierbei unberücksichtigt, kann dies zu einer ungeeigneten
+ Member-Auswahl führen (vgl.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Forrester2008"
@@ -1806,18 +1604,28 @@ key "Forrester2008"
 \end_inset
 
 ).
- Der EVG Algorithmus bietet hier einen sehr guten Kompromiss zwischen explorativ
-en und expoitativen Verhalten.
- Auf die genaue mathematische Herleitung und auch die Behandlung von Nebenbeding
-ungen soll in dieser Arbeit nicht weiter eingegangen werden.
- Es sei hierfür auf 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "AULICH,Jones1998,Jones2001,keane2006statistical"
+ Zum Beispiel neigen die in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
 
 \end_inset
 
- verwiesen.
+ vorgestellten Kriging-Verfahren dazu, in Bereichen des Raums mit niedriger
+ Stützstellendichte einen globalen Erwartungswert mit einer großen Varianz
+ vorherzusagen.
+ Da die globalen Erwartungswerte in der Regel nicht das Optimum darstellen,
+ würde ohne Berücksichtigung der Varianz kein Verbesserungspotential erkannt
+ werden.
+ Da die Entwicklung dieses Verfahrens nicht Teil dieser Arbeit ist und eine
+ adäquate Beschreibung zu viel Platz in Anspruch nehmen würde, sei der interessi
+erte Leser hierfür auf folgende Literaturstellen verwiesen: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AULICH,Jones1998,Jones2001,keane2006statistical,emmerich2005single,emmerich2008computation"
+
+\end_inset
+
  
 \end_layout
 
