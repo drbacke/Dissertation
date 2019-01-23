@@ -17,6 +17,7 @@
 \usepackage{verbatim}
 \usepackage{ifthen}
 \usepackage{ifpdf} 
+\usepackage{algorithmic} 
 
 \usepackage{lscape}     %% supplies a landscape environment 
 
@@ -828,24 +829,9 @@ Korrekturen/Wünsche von Prof Gottschalk
 
 \begin_deeper
 \begin_layout Itemize
-Entscheidungsfunktion: Alles auf Varianzen umstellen !!! Auch Kapitel 5
- nicht vergessen !!!
-\end_layout
-
-\begin_layout Itemize
-Kriging + Entscheidungsfunktion + Kapitel 5: kovarianz zu bedingter Kovarianz
- ändern, also unter der Bedingung dass alle Samples und Geiwchte bekannt
- sind
-\end_layout
-
-\begin_layout Itemize
 Anfang kann gekürzt werden, alles was es bereits gibt.
  EVG erklärung z.B.
  Mehr auf meine Sachen konzentrieren
-\end_layout
-
-\begin_layout Itemize
-Pseudocode
 \end_layout
 
 \end_deeper

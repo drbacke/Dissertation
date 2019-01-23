@@ -72,7 +72,7 @@
 \begin_body
 
 \begin_layout Chapter
-Die DLR-Kriging-Verfahren: Analytische Herleitung 
+Kriging-Verfahren: Analytische Herleitung 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Die-Kriging-Verfahren"
@@ -169,11 +169,9 @@ Die Initialisierung ist sehr einfach, d.h.
 \end_layout
 
 \begin_layout Itemize
-Das Extrapolationsverhalten ist bei einer Optimierung sehr vorteilhaft,
- da das Kriging-Verfahren in diesem Fall einen globalen Erwartungswert liefert.
- Die meisten Neuronalen Netzwerke bspw.
- würden ein unbestimmtes Verhalten zeigen, dies könnte bei einer Optimierung
- zu Schwierigkeiten führen.
+Das Extrapolationsverhalten ist bei einer Optimierung robust, da das Kriging-Ver
+fahren in diesem Fall einen globalen Erwartungswert mit hoher Varianz liefert
+ und der Optimierungsalgorithmus nicht in diese Bereiche gehen wird.
  
 \end_layout
 
@@ -243,7 +241,7 @@ reference "chap:Multifidelity-Optimierungsstrate"
 \end_layout
 
 \begin_layout Section
-DLR-AT-Kriging: Analytische Herleitung 
+Kriging: Analytische Herleitung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Co-Kriging"
@@ -314,7 +312,7 @@ Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
 \begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
- als Realisierung eines Zufallsprozesses 
+ als Realisierung eines stationären Zufallsprozesses 
 \begin_inset Formula $Z_{i}\left(\vec{x}\right),i\in\left\{ 1,...,s\right\} $
 \end_inset
 
@@ -328,8 +326,8 @@ Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
 \end_inset
 
  bezeichnet.
- Desweiteren sollen die Zufallsprozesse der einzelnen Gütestufen stationär
- sein, also einen konstanten Erwartungswert 
+ Desweiteren sollen die Zufallsprozesse der einzelnen Gütestufen einen konstante
+n Erwartungswert 
 \begin_inset Formula $E\left[Z_{i}\right]=const$
 \end_inset
 
@@ -373,8 +371,8 @@ reference "sec:Multifidelity-OptimierungsstrateAutoOpti"
 \end_layout
 
 \begin_layout Enumerate
-Den Erwartungswert 
-\begin_inset Formula $E\left[Z_{g}^{*}\left(\vec{x}\right)\right]$
+Den geschätzten bedingten Erwartungswert 
+\begin_inset Formula $Z_{g}^{*}\left(\vec{x}\right)$
 \end_inset
 
  der Gütestufe 
@@ -394,7 +392,11 @@ Die Unsicherheit der Vorhersage in Form einer Varianz:
 
 \begin_layout Enumerate
 Die Kovarianzen 
-\begin_inset Formula $\left.cov\left(Z_{g}^{*}\left(\vec{x_{1}}\right),Z_{g}^{*}\left(\vec{x_{2}}\right)\right)\right|\vec{y}_{i},\vec{w}_{i}$
+\begin_inset Formula $\left.cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)\right|\vec{y}_{i},\vec{w}_{i}$
+\end_inset
+
+, folgend 
+\begin_inset Formula $cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right)$
 \end_inset
 
  zwischen den Vorhersagen der unbeprobten Orte 
@@ -409,7 +411,11 @@ Die Kovarianzen
 \begin_inset Formula $\vec{w}$
 \end_inset
 
+ der Gütestufen 
+\begin_inset Formula $g_{1},g_{2}\in\left\{ 1,...,s\right\} $
+\end_inset
 
+ 
 \end_layout
 
 \begin_layout Standard
@@ -507,6 +513,11 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \end_inset
 
  abhängen.
+ 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ beschreibt die Anzahl der Stützstellen für die jeweilige Gütestufe.
  Der Einfachheit halber werden die Stützstellen wie auch die Gewichte zukünftig
  durch die folgenden Vektoren beschrieben 
 \begin_inset Formula $\vec{y}_{i}=\left(y_{i}\left(\vec{x}_{1}\right),...,y_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} $
@@ -517,23 +528,7 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \end_inset
 
 .
- Daraus folgt die Gleichung für die Vorhersage der Gütestufe 
-\begin_inset Formula $g\in\left\{ 1,...,s\right\} $
-\end_inset
-
-:
-\begin_inset Formula 
-\begin{align}
-y_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{y}_{i}^{T}\vec{w}_{i}(g\vec{,x})\label{eq:GewichtetSummeCOKriging}
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Da die Stützstellen 
+ Da die Stützstellen 
 \begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
@@ -541,7 +536,7 @@ Da die Stützstellen
 \begin_inset Formula $i$
 \end_inset
 
- als Realisierung des jeweiligen stochastischen Prozesses 
+ als Realisierung des jeweiligen stationären stochastischen Prozesses 
 \begin_inset Formula $Z_{i}\left(\vec{x}\right),i\in\left\{ 1,...,s\right\} $
 \end_inset
 
@@ -561,7 +556,7 @@ Da die Stützstellen
  wird damit zu:
 \begin_inset Formula 
 \begin{align}
-Z_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g\vec{,x})\label{eq:GewichtetSummeCOKrigingZufallsVektor}
+Z_{g}^{*}\left(\vec{x}\right) & =\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g,\vec{x})\label{eq:GewichtetSummeCOKrigingZufallsVektor}
 \end{align}
 
 \end_inset
@@ -667,7 +662,7 @@ reference "sec:Anhang-1-1"
 \noindent
 \begin_inset Formula 
 \begin{align}
-\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}*\mathbf{Cov}*\vec{w}(g\vec{,x})\label{eq:VarianzSchaetzfehlerGewichte}
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w}(g\vec{,x})\label{eq:VarianzSchaetzfehlerGewichte}
 \end{align}
 
 \end_inset
@@ -685,7 +680,14 @@ Wobei
 \begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
 \end_inset
 
- die Kovarianzmatrix und 
+ die Kovarianzmatrix (Bildungsforschrift in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+ erläutert) und 
 \begin_inset Formula $\overrightarrow{c}(g\vec{,x})\mathbf{\in\mathbb{R^{\mathrm{n_{all}}}};}$
 \end_inset
 
@@ -715,7 +717,7 @@ Damit lässt sich folgende Minimierungsaufgabe mit Nebenbedingung stellen:
 \begin_inset Formula 
 \begin{align}
 \begin{cases}
-\min_{w_{1},...,w_{n}}\left(\textrm{var}[Z_{g}\left(\vec{x}\right)]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}*\mathbf{Cov}*\vec{w}(g\vec{,x})\right)\\
+\min_{w_{1},...,w_{n}}\left(\textrm{var}[Z_{g}\left(\vec{x}\right)]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w}(g\vec{,x})\right)\\
 \sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{k} & =0
 \end{cases}\label{eq:Minimierungsaufgabe-1-2}
 \end{align}
@@ -775,8 +777,8 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 :
 \begin_inset Formula 
 \begin{align}
-\nabla_{w}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}*\mathbf{Cov}*\vec{w(g\vec{,x})}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=\vec{0}\label{eq:MinimierungMitKovarianz-1-2}\\
-\wedge\,\,\nabla_{\lambda}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}*\mathbf{Cov}*\vec{w}(g\vec{,x})+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=0\nonumber 
+\nabla_{w}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w(g\vec{,x})}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=\vec{0}\label{eq:MinimierungMitKovarianz-1-2}\\
+\nabla_{\lambda}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w}(g\vec{,x})+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=0\nonumber 
 \end{align}
 
 \end_inset
@@ -840,6 +842,22 @@ n_{s}\,Eintr\ddot{a}ge\\
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Die Schätzung der Einträge 
+\begin_inset Formula $\beta_{1}...\beta_{s}$
+\end_inset
+
+ wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
+
+\end_inset
+
+ beschrieben.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1601,7 +1619,14 @@ Cov_{21} & Cov_{22}
 
 \end_inset
 
-Daraus folgt (siehe :
+Daraus folgt (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fahrmeir2015multivariate"
+
+\end_inset
+
+):
 \begin_inset Formula 
 \[
 Z_{1}|Z_{2}\sim\mathcal{N}\left(F_{1}+Cov_{12}Cov_{22}^{-1}\left(X_{2}-F_{2}\right),Cov_{11}-Cov_{12}Cov_{22}^{-1}Cov_{21}\right)

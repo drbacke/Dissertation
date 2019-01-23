@@ -1258,22 +1258,22 @@ Ein entscheidender Punkt bei der Durchführung einer Multi-Fidelity-Optimierung
  besteht darin zu entscheiden, mit welcher Prozesskette und damit Gütestufe
  ein neu erzeugter Member berechnet werden soll.
  Eine Gütestufe wird mit dem Index 
-\begin_inset Formula $g\in J,J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
 \end_inset
 
  gekennzeichnet, wobei eine niedrigere Gütestufe einen höheren Index besitzt.
  Da alle Gütestufen aus einem Simulationsprozess stammen, geben sie die
  Realität nicht fehlerfrei wieder.
  Jeder dieser Prozesse hat also einen mittleren Fehler 
-\begin_inset Formula $F$
+\begin_inset Formula $F_{g}$
 \end_inset
 
  und eine Ausführungszeit 
-\begin_inset Formula $t$
+\begin_inset Formula $t_{g}$
 \end_inset
 
 .
- Es wird davon ausgegangen, dass ein Member höhere Güte einen niedrigeren
+ Es wird davon ausgegangen, dass ein Member höherer Güte einen niedrigeren
  Fehler hat, aber länger für die Ausführung benötigt als die niedrigerer
  Güte.
  Es gilt also 
@@ -1286,13 +1286,13 @@ und
 
 .
  Weiterhin wird der Begriff des Informationszugwinns 
-\begin_inset Formula $I$
+\begin_inset Formula $I_{g}$
 \end_inset
 
- eingeführt, dieser wird für die notwendige Bewertung einer Gütestufe benötigt.
- Denn für die Bewertung einer Gütestufe sind viele Werte denkbar (beispielsweise
- ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), diese
- sollen durch den Begriff des Informationszugewinns zusammengefasst werden.
+ eingeführt.
+ Da für die Bewertung einer Gütestufe viele Werte denkbar sind (beispielsweise
+ ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), werden
+ diese durch den Begriff des Informationszugewinns zusammengefasst.
  Für den Informationszugewinn gilt: 
 \begin_inset Formula $I_{g+1}\leq I_{g}$
 \end_inset
@@ -1304,18 +1304,21 @@ und
 \begin_layout Standard
 Da die genaue Berechnung dieser Werte verschiedene Möglichkeiten bestehen,
  wird darauf erst im späteren Verlauf dieses Abschnitts eingegangen.
- Allerdings muss auf Basis dieser Werte während einer laufenden Multifidelity-Op
-timierung permanent eine Entscheidung getroffen werden, welche Prozesskette
- als nächstes durchlaufen werden soll.
+ Allerdings muss auf Basis dieser Werte 
+\begin_inset Formula $(I_{g},F_{g},t_{g})$
+\end_inset
+
+ während einer laufenden Multifidelity-Optimierung permanent eine Entscheidung
+ getroffen werden, welche Prozesskette als nächstes durchlaufen werden soll.
  Benötigt wird also eine Entscheidungsfunktion 
 \begin_inset Formula $f$
 \end_inset
 
- die diese Entscheidung während einer laufenden Optimierung vornimmt und
- den Optimierungsverlauf möglichst günstig beeinflusst.
- Eine Entscheidungsfunktion zu finden, die einen optimalen Verlauf findet
- ist allerdings unrealistisch, da hierfür jeder mögliche Verlauf der gesamten
- Optimierung bekannt sein müsste.
+ welche diese Entscheidung während einer laufenden Optimierung vornimmt
+ und den Optimierungsverlauf möglichst günstig beeinflusst.
+ Eine Entscheidungsfunktion zu finden, die einen bestmöglichen Optimierungsverla
+uf sicherstellt, ist allerdings unrealistisch, da hierfür jeder mögliche
+ Verlauf der gesamten Optimierung bekannt sein müsste.
  Aus diesem Grund, müssen einige Vereinfachungen und Annahmen über die Entscheid
 ungsfunktion getroffen werden.
  In Abbildung 
@@ -1341,7 +1344,9 @@ ng einen festen Datensatz an Low-Fidelity Membern zu erzeugen und diese
  Während der Optimierung wird dann nur noch die High-Fidelity Prozesskette
  verwendet.
  Durch die anfangs hinzugefügten Low-Fidelity Member kann das Ersatzmodell
- verbessert werden und dies wiederum die eigentliche Optimierung beschleunigen.
+ verbessert werden.
+ Die Verbesserung des Ersatzmodells führt dann zu einer Beschleunigung der
+ Optimierung.
  Diese Methode ist sehr einfach umzusetzen, wird aber nur am Anfang der
  Optimierung einen signifikanten Zugewinn bringen.
  Zudem muss die Beschleunigung der Optimierung größer sein als die anfangs
@@ -1353,19 +1358,16 @@ ng einen festen Datensatz an Low-Fidelity Membern zu erzeugen und diese
 
 \begin_layout Standard
 Die einfachste Variante einer Entscheidungsfunktion ist die feste Vorgabe
- der Reihenfolge der zu verwendenden Prozesskette.
+ der Reihenfolge der zu verwendenden Prozessketten.
  Hier wird der Verlauf der Optimierung bzw.
  die vorhandenen Informationen über die Güte des Ersatzmodells nicht berücksicht
 igt.
  Sinnvoll erscheint hier am Anfang einer Optimierung relativ viele Low-Fidelity
  Member zu erzeugen, um den groben Funktionsverlauf darzustellen und dann
  gegen Ende nur noch High-Fidelity Member zu erzeugen.
- Hierbei ist es zu berücksichtigen, dass auch am Anfang einer Optimierung
- eine minimale Anzahl von High- und Low-Fidelity Member erforderlich ist,
- um ein initiales Ersatzmodell zu trainieren.
- Weiterhin bietet AutoOpti die Möglichkeit diese Vorgaben während der Laufzeit
- zu verändern, sodass ein erfahrener Anwender jederzeit diese Funktion nachjusti
-eren kann.
+ Hierbei ist zu berücksichtigen, dass auch am Anfang einer Optimierung eine
+ minimale Anzahl von High- und Low-Fidelity Member erforderlich ist, um
+ ein initiales Ersatzmodell zu trainieren.
  Die praktische Umsetzung erfolgt dann über die Vorgabe der gewünschten
  Wahrscheinlichkeit einen Member niedriger Güte zu erzeugen in Abhängigkeit
  des Optimierungsfortschritts.
@@ -1402,9 +1404,7 @@ Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
  für einen vielversprechenden Member vor.
  Optimal ist es, während dieser Optimierung auf dem Ersatzmodell die Wahl
  der Gütestufe direkt einfließen zu lassen.
- Ein solches Verfahren ist allerdings sehr schwer umzusetzen, im folgenden
- soll erläutert werden warum.
- 
+ Ein solches Verfahren ist allerdings schwer umsetzbar:
 \end_layout
 
 \begin_layout Standard
@@ -1416,38 +1416,22 @@ le und kann damit im übernächsten Optimierungsschritt einen Fortschritt
  erzielen, da die Vorhersagen der Ersatzmodelle dann möglicherweise etwas
  besser geworden sind (vorausgesetzt der übernächste Member wird dann mit
  der höchsten Gütestufen berechnet).
- Für die Umsetzung müsste geschätzt werden, inwiefern sich ein Member hoher
- oder niedriger Gütestufe (die ebenfalls geschätzt werden müssen) den Optimierun
-gsfortschritt im übernächsten Optimierungsschritt beeinflussen.
+ Für die Umsetzung müsste geschätzt werden, inwiefern ein Member hoher oder
+ niedriger Gütestufe (die ebenfalls geschätzt werden müssen) den Optimierungsfor
+tschritt im übernächsten Optimierungsschritt beeinflusst.
  
 \end_layout
 
 \begin_layout Standard
 Eine typische Optimierung auf dem Ersatzmodell in AutoOpti wird in der Regel
- mit 5000 Iterationen durchgeführt.
+ mit 5000 Optimierungsschritten durchgeführt.
  Soll eine Abschätzung für den übernächsten Schritt erfolgen, müsste in
  jedem dieser 5000 Schritte eine weitere Optimierung mit wieder 5000 Iterationen
  durchgeführt werden, insgesamt also 
 \begin_inset Formula $25*10^{6}$
 \end_inset
 
- Iterationen.
- Eine sinnvollere Strategie ist es, den Member mit dem höchsten erwarteten
- Optimierungsfortschritt zu suchen und erst dann zu entscheiden mit welcher
- Gütestufe dieser berechnet werden soll.
- Diese Art der Strategie wird im nächsten Abschnitt 
-\begin_inset Quotes gld
-\end_inset
-
-
-\shape italic
-Nach der Optimierung auf dem Ersatzmodell
-\shape default
-
-\begin_inset Quotes grd
-\end_inset
-
- vorgestellt.
+ Optimierungsschritte.
  
 \end_layout
 
@@ -1469,28 +1453,44 @@ key "huang2006sequential"
  einer Beschleunigung führt, kann ebenfalls nur schwer abgeschätzt werden.
 \end_layout
 
+\begin_layout Standard
+Eine vielversprechendere Strategie ist es, den Member mit dem höchsten erwartete
+n Optimierungsfortschritt zu suchen und erst dann zu entscheiden mit welcher
+ Gütestufe dieser berechnet werden soll.
+ Diese Art der Strategie wird im nächsten Abschnitt 
+\begin_inset Quotes gld
+\end_inset
+
+
+\shape italic
+Nach der Optimierung auf dem Ersatzmodell
+\shape default
+
+\begin_inset Quotes grd
+\end_inset
+
+ vorgestellt.
+ 
+\end_layout
+
 \begin_layout Paragraph*
 Nach der Optimierung auf dem Ersatzmodell
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Nach-der-Optimierung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:MufiProzess"
-
-\end_inset
-
- ist der grundlegende Optimierungsprozess dargestellt, die hier beschrieben
- Strategie setzt nach der Optimierung auf dem Ersatzmodell an.
+Die hier beschrieben Strategie setzt nach der Optimierung auf dem Ersatzmodell
+ an.
  Innerhalb dieser Optimierung auf dem Ersatzmodell wird ein Member mit hohem
  erwarteten Optimierungsfortschritt ausgewählt.
  Daraufhin muss entschieden werden, mit welcher Gütestufe 
-\begin_inset Formula $g\in J$
-\end_inset
-
-, 
-\begin_inset Formula $J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
 \end_inset
 
  dieser Member 
@@ -1524,15 +1524,12 @@ reference "fig:MufiProzess"
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $g\in J$
+\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
 \end_inset
 
-, 
-\begin_inset Formula $J=\{0,...,m_{f}\}$
-\end_inset
-
- bekannt, hierzu zählen die Prozesskettenzeiten, die Trainingszeit und die
- Zeit für die Optimierung auf dem Ersatzmodell.
+ bekannt.
+ Hierzu zählen die Prozesskettenzeiten, die Trainingszeit und die Zeit für
+ die Optimierung auf dem Ersatzmodell.
  Mithilfe dieser Werte soll eine Entscheidung getroffen werden, mit welcher
  Prozesskette der Member nachgerechnet werden soll.
  
@@ -1546,14 +1543,14 @@ Im Folgenden wird erst allgemeingültig die Funktionsweise einer geeigneten
  notwendig.
  Informationszugewinn wird in diesem Zusammenhang als Überbegriff für alle
  möglichen Bewertungskriterien (wie z.B.
- ein Reduktion der Ersatzmodellunsicherheit, einem Zuwachs im erwarteten
- Volumenzugewinn...) verwendet.
+ Reduktion der Ersatzmodellunsicherheit, Zuwachs im erwarteten Volumenzugewinn...)
+ verwendet.
  Daher wird eine Größe 
 \begin_inset Formula $I_{g}\in\left\{ I_{0},...,I_{m_{f}}\right\} $
 \end_inset
 
  wobei 
-\begin_inset Formula $I_{g}\in\mathbb{R}|0\leq I_{g}<\infty$
+\begin_inset Formula $0\leq I_{g}<\infty$
 \end_inset
 
  definiert, welche den Informationszugewinn durch einen Member beschreibt.
@@ -1602,14 +1599,10 @@ szeit.
 \end_inset
 
  wählt dann die Gütestufe 
-\begin_inset Formula $g_{max}\in J$
+\begin_inset Formula $g_{max}\in J=\{0,...,m_{f}\}$
 \end_inset
 
-, 
-\begin_inset Formula $J=\{0,...,m_{f}\}$
-\end_inset
-
- mit dem höchsten Verhältnis von 
+mit dem höchsten Verhältnis von 
 \begin_inset Formula $\frac{I_{g}}{t_{g}}$
 \end_inset
 
@@ -1629,19 +1622,20 @@ f_{dec}(\vec{x_{0}})= & \{g_{max}\in J|\frac{I_{g}(\vec{x_{0}})}{t_{g}}\geq\frac
 
 \begin_layout Standard
 Um eine solche Entscheidungsfunktion umsetzen zu können, müssen 
-\begin_inset Formula $I(\vec{x_{0}})$
+\begin_inset Formula $I_{g}(\vec{x_{0}})$
 \end_inset
 
  und 
-\begin_inset Formula $t$
+\begin_inset Formula $t_{g}$
 \end_inset
 
  geschätzt werden.
  Die Schätzung der Erzeugungszeit 
-\begin_inset Formula $t$
+\begin_inset Formula $t_{g}$
 \end_inset
 
- kann aus älteren Daten geschätzt werden, die genaue Umsetzung wird in Kapitel
+ kann aus älteren Daten erfolgen.
+ Die in dieser Arbeit entwickelte Umsetzung dieser Schätzung wird in Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1649,7 +1643,7 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
 \end_inset
 
- erklärt.
+ gezeigt.
  Weiterhin ist die Modellierung des Informationszugewinns ein sehr wichtiger
  Punkt.
  Dafür eignet sich die Unsicherheitsvorhersage statistischer Ersatzmodelle
@@ -1671,8 +1665,8 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
  Fügt man einem solchen Ersatzmodell an einem unbekannten Ort ein neues
  Sample hinzu, so sollte die vorhersagte Varianz dort reduziert werden.
  Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
- weniger stark reduziert, dieses Verhalten lässt sich für eine Entscheidung
- heranziehen.
+ weniger stark reduziert.
+ Dieses Verhalten lässt sich für eine Entscheidung heranziehen.
  Oftmals wird angenommen, dass die Unsicherheit auf Null reduziert wird,
  wenn an dieser Stelle ein Sample hoher Güte bekannt ist.
  
@@ -1800,6 +1794,12 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "BedingteVarianzDefinition"
+
+\end_inset
+
 Die Vorhersage der Varianz einer Gütestufe 
 \begin_inset Formula $g$
 \end_inset
