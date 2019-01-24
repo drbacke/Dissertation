@@ -1624,7 +1624,7 @@ mit dem höchsten Verhältnis von
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{best}\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\forall g_{best}\neq j\}\label{eq:Entscheidungsfunktion}
+f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\}\label{eq:Entscheidungsfunktion}
 \end{alignat}
 
 \end_inset
@@ -1944,7 +1944,7 @@ reference "eq:Entscheidungsfunktion"
 , ergibt sich eine Entscheidungsfunktion für ein Ersatzmodell:
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{best}\in J|\frac{I_{g|g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\forall g_{best}\neq j\}\label{eq:Entscheidungsfunktion-1}
+f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g|g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\}\label{eq:Entscheidungsfunktion-1}
 \end{alignat}
 
 \end_inset
@@ -2328,11 +2328,7 @@ Die Formulierung
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $j\in$
-\end_inset
-
-
-\begin_inset Formula $J=\{0,...,m_{f}\}$
+\begin_inset Formula $j\in J=\{0,...,m_{f}\}$
 \end_inset
 
  bekannt ist.

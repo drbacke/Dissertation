@@ -837,7 +837,32 @@ Anfang kann gekürzt werden, alles was es bereits gibt.
 \end_deeper
 \begin_layout Itemize
 Anhang aufräumen, Aufteilen in Subkaptiel.
- Herleiotungeun, Definitionen von Begriffen usw.
+ Herleiotun
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+geun, Definitionen von Begriffen usw.
 \end_layout
 
 \begin_layout Itemize

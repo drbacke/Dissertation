@@ -92,7 +92,11 @@ Anhang
 \end_layout
 
 \begin_layout Section
-Kapitel 3 - Aerodynamische Größen
+Kapitel 3
+\end_layout
+
+\begin_layout Subsection
+Aerodynamische Größen
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangAerodynamische-Größen"
@@ -104,6 +108,7 @@ name "sec:AnhangAerodynamische-Größen"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -182,8 +187,8 @@ reference "fig:Auswerteebenen-eines-exemplarisc"
  
 \end_layout
 
-\begin_layout Section
-Kapitel 3 - Beispiel Entscheidungsfunktion globales/lokales Varianzkriterium
+\begin_layout Subsection
+Beispiel Entscheidungsfunktion globales/lokales Varianzkriterium
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:globalVarianzEntscheidungBsp"
@@ -222,6 +227,7 @@ f_{low} & =0.1\sin\left(20x\right)+0.2
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -256,6 +262,7 @@ Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -290,6 +297,7 @@ Dieselbe Vorhersage mit einem zusätzlichen HF Sample an der Stelle x=0.35
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -324,6 +332,7 @@ Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -358,6 +367,7 @@ Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status collapsed
@@ -392,13 +402,14 @@ Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
 
 \begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="5">
+<lyxtabular version="3" rows="4" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -547,7 +558,7 @@ Original
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -556,7 +567,7 @@ Original
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -565,7 +576,7 @@ Original
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -574,58 +585,11 @@ Original
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 0.0001315242093663
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
@@ -658,16 +622,928 @@ Original
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 In diesem Fall würden das lokale und globale Kriterium zu einer anderen
  Entscheidung führen.
 \end_layout
 
 \begin_layout Section
-Kapitel 4 - Herleitung der Kriging-Gewichte
+Kapitel 4
+\end_layout
+
+\begin_layout Subsection
+Gauss Korrelationsfunktion mit Ableitungen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Gauss-Korrelationsfunktion-mit"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Ableitungen der Hyperparameter
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{d}}\left|x_{1d}-x_{2d}\right|^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Erste Ableitungen nach dem Ort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Zweite Ableitungen nach dem Ort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
+-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\frac{\partial f}{\partial x_{2}^{k}} & k\neq l\\
+\left(e^{\theta_{k}}-\left[\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\right]^{2}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k=l
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}\partial x_{1}^{l}} & =\begin{cases}
+0 & k\neq l\\
+e^{\theta_{k}} & k=l
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Ableitungen nach Ort und Hyperparameter
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =\frac{1}{2}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{p}+\theta_{k}}\left(x_{1p}-x_{2p}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\left(1-\frac{1}{2}\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}e^{\theta_{k}+\theta_{p}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Zweite Ableitungen nach Ort und Hyperparameter
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{p}\partial x_{2}^{p}\theta_{p}} & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left[\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(x_{1d}-x_{2d}\right)^{2}\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}e^{\theta_{p}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{l}}\left(e^{\theta_{l}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}+\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =\frac{1}{2}e^{\theta_{l}+\theta_{k}+\theta_{p}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Exponential Korrelationsfunktion mit Ableitungen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Exponential-Korrelationsfunktion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left|x_{1d}-x_{2d}\right|^{p}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\frac{\partial}{\partial p}\left(\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\frac{\partial}{\partial p}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)log\left(\left|x_{1k}-x_{2k}\right|\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Kubische Spline Korrelationsfunktion mit Ableitungen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Kubische-Spline-Korrelationsfunk"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+f\left(x_{1},x_{2}\right) & =\overset{N}{\underset{j=1}{\prod}}p_{j}+\delta e^{\lambda}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\xi_{j} & =e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
+1-\frac{3}{a}\xi_{j}^{2}+\frac{1+a}{a^{2}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{1-a}\left(1-\xi_{j}\right)^{3} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\theta_{j}} & =\frac{\partial p_{j}}{\partial\theta_{j}}\overset{N}{\underset{i\neq j}{\prod}}p_{i}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
+3\xi_{j}^{2}\left(\frac{1+a}{a^{2}}\xi_{j}-\frac{2}{a}\right) & ,0\leq\xi_{j}\leq a\\
+-\frac{3}{1-a}\xi_{j}\left(1-\xi_{j}\right)^{2} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial a} & =\overset{N}{\underset{j=1}{\sum}}\left(\frac{\partial p_{j}}{\partial a}\overset{N}{\underset{i\neq j}{\prod}}p_{i}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{j}}{\partial a} & =\begin{cases}
+\frac{3}{a^{2}}\xi_{j}^{2}-\frac{a+2}{a^{3}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{\left(1-a\right)^{2}}\left(1-\xi_{j}\right)^{3}, & a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Erste Ableitung nach Ort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}} & =\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
+1-\frac{3}{a}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{2}+\frac{1+a}{a^{2}}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,0\leq\xi_{j}\leq a\\
+\frac{1}{1-a}\left(1-e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,a<\xi_{j}<1\\
+0 & ,\xi_{j}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Zweite Ableitung nach Ort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}} & =\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}} & =\begin{cases}
+-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}\xi_{k}-1\right] & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}e^{2\theta_{k}}\left[\left(1-\xi_{k}\right)\right] & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}} & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial p_{l}}{\partial x_{2}^{l}} & =\begin{cases}
+-sgn\left(x_{1l}-x_{2l}\right)\frac{3}{a}e^{\theta_{l}}\xi\left(\frac{1+a}{a}\xi_{l}-2\right) & ,0\leq\xi_{l}\leq a\\
+sgn\left(x_{1l}-x_{2l}\right)\frac{3}{1-a}e^{\theta_{l}}\left(1-\xi_{l}\right)^{2} & ,a<\xi_{l}<1\\
+0 & ,\xi_{l}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Erste Ableitung nach Hyperparametern:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{k}} & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial p_{p}}{\partial\theta_{p}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Zweite Ableitung nach Hyperparametern:
+\end_layout
+
+\begin_layout Standard
+p=k=l
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+p!=k=l
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial^{2}p_{k}}{\partial x_{2}^{k}\partial x_{1}^{k}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+p=k!=l
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+p=l ; k!=l
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+p!=k!=l
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq l;j\neq p}{\prod}}p_{j}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Ableitung nach Ort und a:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial a} & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Formula 
+\begin{align*}
+ & =\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial p_{j}}{\partial a}}{p_{j}}\right)\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Zweite Ableitung nach Ort nach a abgeleitet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+ & =\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\left[\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+= & \frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+=\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j} & \left[\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Produktableitungen nach Theta
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\xi_{k} & =e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
+-\frac{6}{a}e^{2\theta_{k}}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-2\right) & ,0\leq\xi_{k}\leq a\\
+-\frac{6}{1-a}e^{2\theta_{k}}\left(2-3\xi_{k}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & ==\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-4\right) & ,0\leq\xi_{k}\leq a\\
+-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-3\xi_{k}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+0 & ,0\leq\xi_{k}\leq a\\
+0 & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Produktableitungen nach a
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
+-6e^{2\theta_{k}}\frac{1}{a^{2}}\left(1-\frac{2+a}{a}\xi_{k}\right) & ,0\leq\xi_{k}\leq a\\
+-e^{2\theta_{k}}\frac{6\left(1-\xi_{k}\right)}{\left(a-1\right)^{2}} & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula 
+\begin{align*}
+\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
+sgn\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\xi_{k}\left(-3\frac{\left(2+a\right)}{a^{3}}\xi_{k}+\frac{6}{a^{2}}\right) & ,0\leq\xi_{k}\leq a\\
+-\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{\left(a-1\right)^{2}}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
+0 & ,\xi_{k}>1
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Herleitung der Kriging-Gewichte
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Herleitung-der-Kriging-Gewichte"
@@ -829,8 +1705,8 @@ reference "eq:MatrixKrigingInverse-1-1"
 
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Beispiel Dichtefunktion für ein CO-Kriging Model 
+\begin_layout Subsection
+Beispiel Dichtefunktion für ein CO-Kriging Model 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:AnhangLikelihoodCOKrigingBsp"
@@ -904,20 +1780,12 @@ Dieses Beispiel ist interessant, da man die Hyperparameter und die Varianzen
  des CO-Kriging Modells in irgendeiner Form initialisieren muss.
  Beim Ordinary Kriging sind es nur die Hälfte der Hyperparameter und die
  Varianzen werden über einen Maximum Likelihood Schätzer bestimmt.
- Besonders schwer ist die Initialisierung der Varianzen
-\end_layout
-
-\begin_layout Standard
-Training ist schwer, aufgrund lokaler Minima, daher ist die Initialisierung
- besonders wichtig.
-\end_layout
-
-\begin_layout Standard
-Optimalwerte für THeta und mit angeben 
+ 
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -972,8 +1840,8 @@ reference "eq:Likelihood Funktion"
  
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Varianz der Fehlerfunktion 
+\begin_layout Subsection
+Varianz der Fehlerfunktion 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Anhang-1-1"
@@ -1153,8 +2021,8 @@ In Matrix-Schreibweise ergibt sich die folgende Formulierung, wobei
 
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Kovarianz zwischen Vorhersagen Gewichtsformulierung
+\begin_layout Subsection
+Kovarianz zwischen Vorhersagen Gewichtsformulierung
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Kovarianz-zwischen-Vorhersagen"
@@ -1183,8 +2051,8 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Kovarianz zwischen Vorhersagen
+\begin_layout Subsection
+Kovarianz zwischen Vorhersagen
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangKovarianz-zwischen-Vorhersagen"
@@ -1336,8 +2204,8 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Varianz des Schätzfehlers
+\begin_layout Subsection
+Varianz des Schätzfehlers
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangVarianz-des-Schätzfehlers"
@@ -1557,8 +2425,8 @@ Bei dem Term in der Klammer handelt es sich nur um Skalare und damit entspricht
 
 \end_layout
 
-\begin_layout Section
-Kapitel 4 - Co-Kriging Kovarianzfunktion Herleitung
+\begin_layout Subsection
+Co-Kriging Kovarianzfunktion Herleitung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Co-Kriging-KovarianzfunktionHerleitung"
@@ -1761,7 +2629,11 @@ cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)=cov\left(Z_{2}\left
 \end_layout
 
 \begin_layout Section
-Kapitel 5 - Likelihood Schätzer Erwartungswerte und Varianz 
+Kapitel 5
+\end_layout
+
+\begin_layout Subsection
+Likelihood Schätzer Erwartungswerte und Varianz 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Likelihood-Schätzer-Erwartungswe"
@@ -1824,8 +2696,8 @@ Da nur
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Beweis: Variogramm Abhängigkeit von Distanz
+\begin_layout Subsection
+Beweis: Variogramm Abhängigkeit von Distanz
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Beweis:-Variogramm-Abhängigkeit"
@@ -1835,7 +2707,7 @@ name "sec:Beweis:-Variogramm-Abhängigkeit"
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subparagraph*
 Behauptung:
 \end_layout
 
@@ -1922,7 +2794,7 @@ cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+\mu^{2}= & E\left[Z(\vec{0}+\vec{h
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subparagraph*
 Beweis Gl.
  
 \begin_inset CommandInset ref
@@ -1955,8 +2827,8 @@ reference "eq:DistanzabhängigkeitBehauptung"
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Differentiation der Likelihood-Funktion
+\begin_layout Subsection
+Differentiation der Likelihood-Funktion
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Differentiation-der-Likelihood-Funktion"
@@ -1966,7 +2838,7 @@ name "sec:Differentiation-der-Likelihood-Funktion"
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subparagraph*
 Behauptung:
 \end_layout
 
@@ -1981,7 +2853,7 @@ Behauptung:
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subparagraph*
 Beweis:
 \end_layout
 
@@ -2072,8 +2944,8 @@ Daraus folgt:
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Likelihood Schätzer Varianzen im CO-Kriging
+\begin_layout Subsection
+Likelihood Schätzer Varianzen im CO-Kriging
 \end_layout
 
 \begin_layout Standard
@@ -2218,8 +3090,8 @@ Oben links:
 Vorausgesetzt man kennt die Low Varianz bereits:
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Vereinfachung der Vorhersagegleichung 
+\begin_layout Subsection
+Vereinfachung der Vorhersagegleichung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Vereinfachung-der-Vorhersageglei"
@@ -2246,7 +3118,7 @@ An dieser Stelle stellt sich die Frage, inwiefern
  sieht wie folgt aus: 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 \begin_inset Formula 
 \[
 \left(G^{T}\mathbf{Cov}^{-1}G\right)^{-1}\left(G^{T}\mathbf{Cov}^{-1}\overrightarrow{y}\right)=\vec{\tilde{\beta}}
@@ -2361,142 +3233,8 @@ Daraus folgt letztlich:
 
 \end_layout
 
-\begin_layout Section
-Kapitel 6 - Testfunktion ZDT3
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:ZDT3"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Hier dargestellt ist eine oft verwendete Testfunktion namens ZDT3 (siehe
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "zitzler2000comparison"
-
-\end_inset
-
-).
- Die Testfunktionen 
-\begin_inset Formula $f_{1}\left(\vec{x}\right)$
-\end_inset
-
- und 
-\begin_inset Formula $f_{2}\left(\vec{x}\right)$
-\end_inset
-
- mit der Variable 
-\begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
-\end_inset
-
- wird wie folgt berechnet:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align}
-f_{1}\left(\vec{x}\right) & =x_{0}\label{eq:Testfunktion}\\
-f_{2}\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-g\left(\vec{x}\right) & =\left(1+\frac{9}{k-1}\overset{k}{\underset{i=2}{\sum}}\left(x_{i}-0.5\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-h\left(\vec{x}\right) & =\left(2-\sqrt{\frac{x_{1}}{g}}\right)-\frac{x_{1}}{g}\sin\left(10\pi x_{1}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ZDT3"
-
-\end_inset
-
- ist die Testfunktion dargestellt, es wurden zwei Variablen 
-\begin_inset Formula $\vec{x}=\left\{ \vec{x}\in\mathbb{R}^{k}|k=2\right\} $
-\end_inset
-
- verwendet.
- Bei der Funktion handelt es sich um einen Paraboloid mit überlagerter Sinusschw
-ingung.
- Diese Funktion hat einige lokale Minima und kann auf beliebig viele Dimensionen
- angewandt werden und eignet sich daher für analytische Optimierungs-Tests.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/ZDT3.eps
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ZDT3"
-
-\end_inset
-
-Plot der Testfunktion mit zwei Variablen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Kapitel 5 - Iterative Varianzbestimmung innerhalb des Co-Kriging Trainingsverfah
-rens
+\begin_layout Subsection
+Iterative Varianzbestimmung innerhalb des Co-Kriging Trainingsverfahrens
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Iterative-VarianzbestimmungTraining"
@@ -2590,8 +3328,8 @@ n sich nicht sehr stark verändern.
  
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Restandardisierung der Hyperparameter 
+\begin_layout Subsection
+Restandardisierung der Hyperparameter 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Renormalisierung-der-Hyperparame"
@@ -2632,7 +3370,7 @@ Wobei
 \begin_inset Formula $x_{real}$
 \end_inset
 
- den unnormierten Parameter darstellt, 
+ den nicht standardisierten Parameter darstellt, 
 \begin_inset Formula $\mu_{alt}$
 \end_inset
 
@@ -2640,7 +3378,7 @@ Wobei
 \begin_inset Formula $\sigma_{alt}$
 \end_inset
 
- stellen den alten Erwartungswert sowie die Standartabweichung der Parameter
+ stellen den alten Erwartungswert sowie die Standardabweichung der Parameter
  dar.
 \end_layout
 
@@ -2724,14 +3462,7 @@ Geht man nun davon aus, dass die Kriging Varianz sich nicht ändert:
 Wobei diese Bedingung im Code unbedingt erfüllt sein muss.
  Im Code ist es so umgesetzt, dass zuerst die Kovarianzmatrix mit der alten
  Krigingvarianz erzeugt wird und danach der Likelihood Schätzer für die
- Krigingvarianz aufgerufen wird, siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:sSqrLikelihoodOrdinary"
-
-\end_inset
-
-.
+ Krigingvarianz aufgerufen wird.
 \end_layout
 
 \begin_layout Standard
@@ -2822,8 +3553,8 @@ Die Formel lässt sich damit weiterhin vereinfachen:
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - UML Diagramm: ZMQClient Klasse
+\begin_layout Subsection
+UML Diagramm: ZMQClient Klasse
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Kapitel-5--asd"
@@ -2834,16 +3565,21 @@ name "sec:Kapitel-5--asd"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/UML/uml_net_interface_client.eps
+	scale 45
 
 \end_inset
 
@@ -2851,6 +3587,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-der-ClientVerbindung"
+
+\end_inset
+
 UML Diagramm der Klassenstrukt einer Client Verbindung
 \end_layout
 
@@ -2859,13 +3601,345 @@ UML Diagramm der Klassenstrukt einer Client Verbindung
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Cholesky Zerlegung
+\begin_layout Subsection
+UML Diagramm: Point
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/Point.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Klassenstruktur-der-Klasse"
+
+\end_inset
+
+Klassenstruktur der Klasse Point, welche eine Stützstelle beschreibt
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: CorrelationFunction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/CorrelationFunction.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Klassenstruktur-der-Kovarianzfun"
+
+\end_inset
+
+Klassenstruktur der Kovarianzfunktionsklassen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: DensityFunction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/Density.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vereinfachtes-UML-Diagramm"
+
+\end_inset
+
+Vereinfachtes UML Diagramm der verschiedenen Verfahren innerhalb der Kriging-Sof
+tware und deren Anbindung an das Server Interface
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: MetaModel
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vereinfachtes-UML-Diagramm-1"
+
+\end_inset
+
+Vereinfachtes UML Diagramm der MetaModel Klasse, welche eine Anbindung an
+ AutoOpti ermöglicht.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: MinimizerInterface
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/MinimizerInterface.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-der-Klasse"
+
+\end_inset
+
+UML-Diagramm der Klasse MinimizerInterface und deren Spezialisierungen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: Matrix
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/Matrix.eps
+	lyxscale 70
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+UML Diagramm der Matrix Klassen und deren Anbindung an das SaveableOnServer
+ Interface
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MatrixKlasseUML"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+UML Diagramm: ZMQConnection, ZMQServer, MatrixServerFunctions
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-der"
+
+\end_inset
+
+UML Diagramm der Server-Klassen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Cholesky Zerlegung
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Cholesky-Zerlegung"
@@ -3029,8 +4103,8 @@ key "press2007numerical,gill2007numerical"
  nochmals detaillierter beschrieben.
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Wirtschaftliche Betrachtung CPU/GPU
+\begin_layout Subsection
+Wirtschaftliche Betrachtung CPU/GPU
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Wirtschaftliche-Betrachtung-CPUGPU"
@@ -3040,11 +4114,18 @@ name "sec:Wirtschaftliche-Betrachtung-CPUGPU"
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 Intel CPUs
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="10" columns="6">
 <features tabularvalignment="middle">
@@ -3068,8 +4149,7 @@ Name
 \begin_inset Text
 
 \begin_layout Plain Layout
-Max.
- GFlops (double FMA)
+GFlops
 \end_layout
 
 \end_inset
@@ -3078,7 +4158,7 @@ Max.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Straßenpreis (8.8.2016)
+Preis 
 \end_layout
 
 \end_inset
@@ -3087,7 +4167,7 @@ Straßenpreis (8.8.2016)
 \begin_inset Text
 
 \begin_layout Plain Layout
-max.
+el.
  Leistung
 \end_layout
 
@@ -3106,7 +4186,7 @@ Watt/GFlop
 \begin_inset Text
 
 \begin_layout Plain Layout
-GFlops/Euro
+GFlops/€
 \end_layout
 
 \end_inset
@@ -3565,7 +4645,7 @@ E5-2650v3
 \begin_inset Text
 
 \begin_layout Plain Layout
-E5-2695v2 (Cluster)
+E5-2695v2
 \end_layout
 
 \end_inset
@@ -3623,7 +4703,35 @@ E5-2695v2 (Cluster)
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relative Leistung aktueller Prozessoren (Stand 2018).
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
+ auf double 
+\begin_inset Quotes gld
+\end_inset
+
+fused multiply add (FMA)
+\begin_inset Quotes grd
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
 Intel GPUs
 \end_layout
 
@@ -3644,6 +4752,13 @@ e Software einfacher portiert werden kann.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="8">
 <features tabularvalignment="middle">
@@ -3669,8 +4784,7 @@ Name
 \begin_inset Text
 
 \begin_layout Plain Layout
-Max.
- GFlops (double FMA)
+GFlops
 \end_layout
 
 \end_inset
@@ -3679,7 +4793,7 @@ Max.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Straßenpreis (8.8.2016)
+Preis
 \end_layout
 
 \end_inset
@@ -3688,7 +4802,7 @@ Straßenpreis (8.8.2016)
 \begin_inset Text
 
 \begin_layout Plain Layout
-GPU RAM
+RAM
 \end_layout
 
 \end_inset
@@ -3706,7 +4820,7 @@ GB/s
 \begin_inset Text
 
 \begin_layout Plain Layout
-max.
+el.
  Leistung
 \end_layout
 
@@ -3725,7 +4839,7 @@ Watt/GFlop
 \begin_inset Text
 
 \begin_layout Plain Layout
-GFlops/Euro
+GFlops/€
 \end_layout
 
 \end_inset
@@ -3911,7 +5025,7 @@ GFlops/Euro
 \begin_inset Text
 
 \begin_layout Plain Layout
-16GB (DDR4)
+16GB
 \end_layout
 
 \end_inset
@@ -3960,11 +5074,45 @@ GFlops/Euro
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relative Leistung Intel GPUs (Stand 2018).
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
+ auf double 
+\begin_inset Quotes gld
+\end_inset
+
+fused multiply add (FMA)
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
 Nvidia GPUs
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="8">
 <features tabularvalignment="middle">
@@ -3990,8 +5138,7 @@ Name
 \begin_inset Text
 
 \begin_layout Plain Layout
-Max.
- GFlops (double FMA)
+GFlops
 \end_layout
 
 \end_inset
@@ -4000,7 +5147,7 @@ Max.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Straßenpreis 
+Preis 
 \end_layout
 
 \end_inset
@@ -4009,7 +5156,7 @@ Straßenpreis
 \begin_inset Text
 
 \begin_layout Plain Layout
-GPU RAM
+RAM
 \end_layout
 
 \end_inset
@@ -4027,7 +5174,7 @@ GB/s
 \begin_inset Text
 
 \begin_layout Plain Layout
-max.
+el.
  Leistung
 \end_layout
 
@@ -4046,7 +5193,7 @@ Watt/GFlop
 \begin_inset Text
 
 \begin_layout Plain Layout
-GFlops/Euro
+GFlops/€
 \end_layout
 
 \end_inset
@@ -4057,7 +5204,7 @@ GFlops/Euro
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tesla V100 NVLink
+V100 NVLink
 \end_layout
 
 \end_inset
@@ -4084,7 +5231,7 @@ Tesla V100 NVLink
 \begin_inset Text
 
 \begin_layout Plain Layout
-16GB (HBM)
+16GB
 \end_layout
 
 \end_inset
@@ -4131,7 +5278,7 @@ Tesla V100 NVLink
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tesla P100 NVLink
+V100 PCIe
 \end_layout
 
 \end_inset
@@ -4158,7 +5305,7 @@ Tesla P100 NVLink
 \begin_inset Text
 
 \begin_layout Plain Layout
-16GB (HBM)
+16GB
 \end_layout
 
 \end_inset
@@ -4205,7 +5352,7 @@ Tesla P100 NVLink
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tesla P100 PCIe
+P100 PCIe
 \end_layout
 
 \end_inset
@@ -4232,7 +5379,7 @@ Tesla P100 PCIe
 \begin_inset Text
 
 \begin_layout Plain Layout
-16GB (HBM)
+16GB
 \end_layout
 
 \end_inset
@@ -4279,7 +5426,7 @@ Tesla P100 PCIe
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tesla K80
+K80
 \end_layout
 
 \end_inset
@@ -4288,7 +5435,7 @@ Tesla K80
 \begin_inset Text
 
 \begin_layout Plain Layout
-1863(@BaseClock 560MHz), 2912@BoostClock(875MHz)
+2912
 \end_layout
 
 \end_inset
@@ -4306,7 +5453,7 @@ Tesla K80
 \begin_inset Text
 
 \begin_layout Plain Layout
-24GB (DDR5)
+24GB
 \end_layout
 
 \end_inset
@@ -4353,7 +5500,7 @@ Tesla K80
 \begin_inset Text
 
 \begin_layout Plain Layout
-Tesla K40
+K40
 \end_layout
 
 \end_inset
@@ -4380,7 +5527,7 @@ Tesla K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-12GB (DDR5)
+12GB
 \end_layout
 
 \end_inset
@@ -4427,7 +5574,7 @@ Tesla K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-Quadro K6000
+K6000
 \end_layout
 
 \end_inset
@@ -4436,7 +5583,7 @@ Quadro K6000
 \begin_inset Text
 
 \begin_layout Plain Layout
-1732@901Mhz, 1152@600Mhz
+1732
 \end_layout
 
 \end_inset
@@ -4454,7 +5601,7 @@ Quadro K6000
 \begin_inset Text
 
 \begin_layout Plain Layout
-12GB (DDR5)
+12GB
 \end_layout
 
 \end_inset
@@ -4481,7 +5628,7 @@ Quadro K6000
 \begin_inset Text
 
 \begin_layout Plain Layout
-~0.17
+0.17
 \end_layout
 
 \end_inset
@@ -4490,7 +5637,7 @@ Quadro K6000
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.286-0.23
+0.286
 \end_layout
 
 \end_inset
@@ -4528,7 +5675,7 @@ GTX1080
 \begin_inset Text
 
 \begin_layout Plain Layout
-12GB (DDR5)
+12GB
 \end_layout
 
 \end_inset
@@ -4577,8 +5724,35 @@ GTX1080
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - GPU Resourcenverteilung bei parallelen Trainings
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Relative Leistung Nvidia GPUs (Stand 2018).
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
+ auf double 
+\begin_inset Quotes gld
+\end_inset
+
+fused multiply add (FMA)
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+GPU Resourcenverteilung bei parallelen Trainings
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:GPU-Resourcenverteilung-ParalleleTrainigns"
@@ -4590,9 +5764,10 @@ name "sec:GPU-Resourcenverteilung-ParalleleTrainigns"
 
 \begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -5528,14 +6703,11 @@ Benchmark der besten Verteilung mehrerer Trainings mit 5000 Samples auf
 \end_layout
 
 \begin_layout Standard
-1000x1000
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -6359,14 +7531,11 @@ Benchmark der besten Verteilung mehrerer Trainings mit 1000 Samples auf
 \end_layout
 
 \begin_layout Standard
-500x500
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -7469,8 +8638,8 @@ Benchmark der besten Verteilung mehrerer Trainings mit 1000 Samples auf
 
 \end_layout
 
-\begin_layout Section
-Kapitel 5 - Benchmark Rückwärtsdiff.
+\begin_layout Subsection
+Benchmark Rückwärtsdiff.
  Likelihood 
 \begin_inset CommandInset label
 LatexCommand label
@@ -7483,6 +8652,7 @@ name "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -7540,7 +8710,138 @@ rms
 \end_layout
 
 \begin_layout Section
-Kapitel 6 - Zusätzliche Abbildungen der Fanstufenoptimierung
+Kapitel 6
+\end_layout
+
+\begin_layout Subsection
+Testfunktion ZDT3
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ZDT3"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hier dargestellt ist eine oft verwendete Testfunktion namens ZDT3 (siehe
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "zitzler2000comparison"
+
+\end_inset
+
+).
+ Die Testfunktionen 
+\begin_inset Formula $f_{1}\left(\vec{x}\right)$
+\end_inset
+
+ und 
+\begin_inset Formula $f_{2}\left(\vec{x}\right)$
+\end_inset
+
+ mit der Variable 
+\begin_inset Formula $\vec{x}\in\mathbb{R^{\textrm{k}}}$
+\end_inset
+
+ wird wie folgt berechnet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align}
+f_{1}\left(\vec{x}\right) & =x_{0}\label{eq:Testfunktion}\\
+f_{2}\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+g\left(\vec{x}\right) & =\left(1+\frac{9}{k-1}\overset{k}{\underset{i=2}{\sum}}\left(x_{i}-0.5\right)^{2}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+h\left(\vec{x}\right) & =\left(2-\sqrt{\frac{x_{1}}{g}}\right)-\frac{x_{1}}{g}\sin\left(10\pi x_{1}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ZDT3"
+
+\end_inset
+
+ ist die Testfunktion dargestellt, es wurden zwei Variablen 
+\begin_inset Formula $\vec{x}=\left\{ \vec{x}\in\mathbb{R}^{k}|k=2\right\} $
+\end_inset
+
+ verwendet.
+ Bei der Funktion handelt es sich um einen Paraboloid mit überlagerter Sinusschw
+ingung.
+ Diese Funktion hat einige lokale Minima und kann auf beliebig viele Dimensionen
+ angewandt werden und eignet sich daher für analytische Optimierungs-Tests.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/ZDT3.eps
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ZDT3"
+
+\end_inset
+
+Plot der Testfunktion mit zwei Variablen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Zusätzliche Abbildungen der Fanstufenoptimierung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnahngKapitel-6"
@@ -7554,7 +8855,7 @@ name "sec:AnahngKapitel-6"
 \begin_inset Float figure
 wide false
 sideways true
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -7607,6 +8908,7 @@ key "Reimer2016"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -7618,6 +8920,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/kriginghotornot_CRISP.eps
+	scale 70
 
 \end_inset
 
@@ -7657,9 +8960,9 @@ reference "subsec:CRISP-Testfall"
 
 \end_layout
 
-\begin_layout Section
-Kapitel 6 - Optimierung von Casing-Treatments eines transsonischen Verdichters
- Co-Kriging Auswertung
+\begin_layout Subsection
+Optimierung von Casing-Treatments eines transsonischen Verdichters Co-Kriging
+ Auswertung
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnahngKapitel-6-1"
@@ -7684,6 +8987,7 @@ reference "sec:Laufzeit-Analysesoftware-für-Kri"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -7732,6 +9036,7 @@ reference "subsec:ASME-Veröffentlichung:-Optimieru"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -7784,7 +9089,7 @@ reference "subsec:ASME-Veröffentlichung:-Optimieru"
 
 \begin_layout Standard
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 R-Matrix Bildungsvorschrift, mit 2 Ableitungen pro Punkt
@@ -7949,1828 +9254,6 @@ bei Gauss:
 \begin_layout Plain Layout
 r-Vektor Bildungsvorschrift: Wie RMatrix Zeile/Spalte 1 nur mit Inputvektor
  gebildet
-\end_layout
-
-\begin_layout Section
-Korrelationsfunktionen
-\end_layout
-
-\begin_layout Plain Layout
-Test
-\end_layout
-
-\begin_layout Subsection*
-Gauss (Theta quadrat, um negative Thetas direkt zu vermeiden.
- Der RPROP muss dann nicht mehr nach unten begrenzt werden):
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(\theta_{k}^{2}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta\lambda^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\theta_{d}\left|x_{1d}-x_{2d}\right|^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\lambda} & =2\lambda\delta_{ij}\Rightarrow\frac{\partial R}{\partial\lambda}=2\lambda E
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Schlecht, da die Ableitung bei 
-\begin_inset Formula $\theta_{d}=0$
-\end_inset
-
- auch Null ist.
- Ein Gradientenverfahren kommt dort also nicht mehr von selbst raus.
-\end_layout
-
-\begin_layout Plain Layout
-Daher wird eine andere Funktion verwendet:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta e^{\lambda}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{d}}\left|x_{1d}-x_{2d}\right|^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
--e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k\neq l\\
-e^{\theta_{k}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k=l
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Algorithmisch besser:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
--e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\frac{\partial f}{\partial x_{2}^{k}} & k\neq l\\
-\left(e^{\theta_{k}}-\left[\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\right]^{2}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & k=l
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Falls 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(\overrightarrow{x}_{2},\overrightarrow{x}_{2}\right)}{\partial x_{2}^{k}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}\partial x_{1}^{l}} & =\begin{cases}
-0 & k\neq l\\
-e^{\theta_{k}} & k=l
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Berechnet sind in der vorherigen Funktion bereits
-\begin_inset Formula 
-\begin{align*}
-e^{\theta_{k}},f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right),\left(x_{1k}-x_{2k}\right),e^{\theta_{k}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Diese Werte können einfach übergeben werden und man spart dadurch 2x die
- exp Funktion, eine Differenz, und 2 Multiplikationen
-\end_layout
-
-\begin_layout Plain Layout
-Nebenrechnung
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\frac{\partial}{\partial x_{2}^{l}}\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(\frac{\partial}{\partial x_{2}^{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(\frac{\partial\left(x_{1k}-x_{2k}\right)}{\partial x_{2}^{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(x_{1k}-x_{2k}\right)\frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)}{\partial x_{2}^{k}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}\left(-f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}} & =-e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}-1\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Erste Ableitung nach Theta ableiten:
-\end_layout
-
-\begin_layout Plain Layout
-x1 k=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(-e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{l}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-x1 k!=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =-\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{p}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =\frac{1}{2}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{p}+\theta_{k}}\left(x_{1p}-x_{2p}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-x2 k=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =\left(x_{1k}-x_{2k}\right)\left(-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}+f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\left(1-\frac{1}{2}\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-x2 k!=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}e^{\theta_{k}+\theta_{p}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Zweite Ableitung nach Theta ableiten:
-\end_layout
-
-\begin_layout Plain Layout
-k=l=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{p}\partial x_{2}^{p}\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial\theta_{p}}\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}2e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+\left(e^{\theta_{p}}-\left(x_{1p}-x_{2p}\right)^{2}e^{2\theta_{p}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left[\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(x_{1d}-x_{2d}\right)^{2}\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-k=l!=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{k}}-\left(x_{1k}-x_{2k}\right)^{2}e^{2\theta_{k}}\right)\left(e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}e^{\theta_{p}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)\left(x_{1p}-x_{2p}\right)^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-k!=l; k=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\left(\frac{\partial}{\partial\theta_{k}}e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =-e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\left(e^{\theta_{k}}*f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)+e^{\theta_{k}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-k!=l; l=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{l}}\left(e^{\theta_{l}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}+\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-k!=l; k!=p; l!=p
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{p}}\left(x_{1p}-x_{2p}\right)^{2}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =\frac{1}{2}e^{\theta_{l}+\theta_{k}+\theta_{p}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Wenn x1=x2:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\theta_{l}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{p}\partial x_{1}^{p}\theta_{p}} & =e^{\theta_{p}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{k}\theta_{p}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{k}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{l}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial x_{1}^{k}\partial x_{1}^{l}\theta_{p}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-Exponential Ansatz:
-\begin_inset Formula 
-\begin{align*}
-f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)}+\delta e^{\lambda}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left|x_{1d}-x_{2d}\right|^{p}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\frac{\partial}{\partial p}\left(\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\frac{\partial}{\partial p}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)log\left(\left|x_{1k}-x_{2k}\right|\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Kubischer Spline:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-f\left(x_{1},x_{2}\right) & =\overset{N}{\underset{j=1}{\prod}}p_{j}+\delta e^{\lambda}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\xi_{j} & =e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
-1-\frac{3}{a}\xi_{j}^{2}+\frac{1+a}{a^{2}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
-\frac{1}{1-a}\left(1-\xi_{j}\right)^{3} & ,a<\xi_{j}<1\\
-0 & ,\xi_{j}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\theta_{j}} & =\frac{\partial p_{j}}{\partial\theta_{j}}\overset{N}{\underset{i\neq j}{\prod}}p_{i}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
--\frac{6}{a}\left|x_{1j}-x_{2j}\right|^{2}e^{2\theta_{j}}+3\frac{1+a}{a^{2}}\left|x_{1j}-x_{2j}\right|^{3}e^{3\theta_{j}} & ,0\leq\xi_{j}\leq a\\
--\frac{3}{1-a}\left|x_{1j}-x_{2j}\right|e^{\theta_{j}}\left(1-\left|x_{1j}-x_{2j}\right|e^{\theta_{j}}\right)^{2} & ,a<\xi_{j}<1\\
-0 & ,\xi_{j}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
-3\xi_{j}^{2}\left(\frac{1+a}{a^{2}}\xi_{j}-\frac{2}{a}\right) & ,0\leq\xi_{j}\leq a\\
--\frac{3}{1-a}\xi_{j}\left(1-\xi_{j}\right)^{2} & ,a<\xi_{j}<1\\
-0 & ,\xi_{j}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial a} & =\overset{N}{\underset{j=1}{\sum}}\left(\frac{\partial p_{j}}{\partial a}\overset{N}{\underset{i\neq j}{\prod}}p_{i}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{j}}{\partial a} & =\begin{cases}
-\frac{3}{a^{2}}\xi_{j}^{2}-\frac{a+2}{a^{3}}\xi_{j}^{3} & ,0\leq\xi_{j}\leq a\\
-\frac{1}{\left(1-a\right)^{2}}\left(1-\xi_{j}\right)^{3}, & a<\xi_{j}<1\\
-0 & ,\xi_{j}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Kubischer Spline nach x
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}} & =\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
-1-\frac{3}{a}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{2}+\frac{1+a}{a^{2}}\left(e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,0\leq\xi_{j}\leq a\\
-\frac{1}{1-a}\left(1-e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|\right)^{3} & ,a<\xi_{j}<1\\
-0 & ,\xi_{j}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
--\frac{3}{a}2e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1+\frac{1+a}{a^{2}}3e^{2\theta_{k}}\left|x_{1k}-x_{2k}\right|{}^{2}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1 & ,0\leq\xi_{k}\leq a\\
-\frac{1}{1-a}3\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\left(-e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)1\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
--\frac{3}{a}e^{\theta_{k}}2\left|x_{1k}-x_{2k}\right|e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1)+\frac{1+a}{a^{2}}3e^{2\theta_{k}}\left|x_{1k}-x_{2k}\right|{}^{2}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1) & ,0\leq\xi_{k}\leq a\\
-\frac{1}{1-a}3\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\left(-e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)(-1)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi-2\right) & ,0\leq\xi_{k}\leq a\\
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2} & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-2te Ableitung Kubischer Spline nach x
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}} & =\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}} & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{2\theta_{k}}\frac{\partial}{\partial x_{2}^{k}}\left[\left|x_{1k}-x_{2k}\right|\left(\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-2\right)\right] & ,0\leq\xi_{k}\leq a\\
--\frac{3}{1-a}e^{\theta_{k}}sgn\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial x_{2}^{k}}\left[\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)^{2}\right] & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}} & =\begin{cases}
--\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}\xi_{k}-1\right] & ,0\leq\xi_{k}\leq a\\
--\frac{6}{1-a}e^{2\theta_{k}}\left[\left(1-\xi_{k}\right)\right] & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}} & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial p_{l}}{\partial x_{2}^{l}} & =\begin{cases}
--sgn\left(x_{1l}-x_{2l}\right)\frac{3}{a}e^{\theta_{l}}\xi\left(\frac{1+a}{a}\xi_{l}-2\right) & ,0\leq\xi_{l}\leq a\\
-sgn\left(x_{1l}-x_{2l}\right)\frac{3}{1-a}e^{\theta_{l}}\left(1-\xi_{l}\right)^{2} & ,a<\xi_{l}<1\\
-0 & ,\xi_{l}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}} & =\frac{6}{a}e^{2\theta_{k}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}} & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Kubischer Spline nach Theta, erste Ableitung:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-p_{j}=0\Longrightarrow & \frac{\partial f}{\partial\theta_{p}}=0
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{k}} & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{p}} & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial p_{p}}{\partial\theta_{p}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =\frac{12}{a}e^{2\theta_{k}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Kubischer Spline nach Theta, zweite Ableitung:
-\end_layout
-
-\begin_layout Plain Layout
-p=k=l
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-p!=k=l
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{k}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial^{2}p_{k}}{\partial x_{2}^{k}\partial x_{1}^{k}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-p=k!=l
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-p=l ; k!=l
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-p!=k!=l
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq l;j\neq p}{\prod}}p_{j}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Kubischer Spline nach a, erste Ableitung:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial a} & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-Für pj != 0, wenn pj = 0 ist die ganze Ableitung 0
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Formula 
-\begin{align*}
- & =\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial p_{j}}{\partial a}}{p_{j}}\right)\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =-\frac{6}{a^{2}}e^{2\theta_{k}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{k}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}x_{1}^{l}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial f\left(x_{1},x_{1}\right)}{\partial x_{1}^{k}}\right) & =0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Kubischer Spline nach a, zweite Ableitung:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\left[\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-= & \frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-=\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j} & \left[\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Produktableitungen nach Theta
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\xi_{k} & =e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
-\frac{\partial}{\partial\theta_{k}}\left(-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-1\right]\right) & ,0\leq\xi_{k}\leq a\\
--\frac{\partial}{\partial\theta_{k}}\left(\frac{6}{1-a}e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
--\frac{6}{a}\frac{\partial}{\partial\theta_{k}}\left(\frac{1+a}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--\frac{6}{1-a}\frac{\partial}{\partial\theta_{k}}\left(e^{2\theta_{k}}-e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
--\frac{6}{a}\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-2e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--\frac{6}{1-a}\left(2e^{2\theta_{k}}-3e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
--\frac{6}{a}e^{2\theta_{k}}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-2\right) & ,0\leq\xi_{k}\leq a\\
--\frac{6}{1-a}e^{2\theta_{k}}\left(2-3\xi_{k}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
-\frac{\partial}{\partial\theta_{k}}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi_{k}-2\right)\right) & ,0\leq\xi_{k}\leq a\\
--\frac{\partial}{\partial\theta_{k}}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\frac{\partial}{\partial\theta_{k}}\left(\frac{1+a}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-2e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\left(\frac{\partial}{\partial\theta_{k}}\left(e^{\theta_{k}}\right)\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)+e^{\theta_{k}}\frac{\partial}{\partial\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)+e^{\theta_{k}}\left(1-\xi_{k}\right)\frac{\partial}{\partial\theta_{k}}\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}\left(e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-\xi_{k}\right)-2e^{\theta_{k}}\xi_{k}\left(1-\xi_{k}\right)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}\left|x_{1k}-x_{2k}\right|\left(\frac{3\left(1+a\right)}{a}e^{3\theta_{k}}\left|x_{1k}-x_{2k}\right|-4e^{2\theta_{k}}\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)\left(\left(1-\xi_{k}\right)-2\xi_{k}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{3\left(1+a\right)}{a}\xi_{k}-4\right) & ,0\leq\xi_{k}\leq a\\
--sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)\left(1-3\xi_{k}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial\theta_{p}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
-0 & ,0\leq\xi_{k}\leq a\\
-0 & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Produktableitungen nach a
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right) & =\begin{cases}
-\frac{\partial}{\partial a}\left(-\frac{6}{a}e^{2\theta_{k}}\left[\frac{1+a}{a}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-1\right]\right) & ,0\leq\xi_{k}\leq a\\
--\frac{\partial}{\partial a}\left(\frac{6}{1-a}e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
--6e^{2\theta_{k}}\frac{\partial}{\partial a}\left(\frac{1+a}{a^{2}}e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|-\frac{1}{a}\right) & ,0\leq\xi_{k}\leq a\\
--e^{2\theta_{k}}\left(1-e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|\right)\frac{\partial}{\partial a}\left(\frac{6}{1-a}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
--6e^{2\theta_{k}}\frac{1}{a^{2}}\left(1-\frac{2+a}{a}\xi_{k}\right) & ,0\leq\xi_{k}\leq a\\
--e^{2\theta_{k}}\frac{6\left(1-\xi_{k}\right)}{\left(a-1\right)^{2}} & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
-\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}\xi_{k}-2\right)\right) & ,0\leq\xi_{k}\leq a\\
--\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right) & =\begin{cases}
-\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\xi_{k}\left(\frac{3\left(1+a\right)}{a^{2}}\xi_{k}-\frac{6}{a}\right)\right) & ,0\leq\xi_{k}\leq a\\
--\frac{\partial}{\partial a}\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-\begin_inset Formula 
-\begin{align*}
- & =\begin{cases}
-sgn\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\xi_{k}\left(-3\frac{\left(2+a\right)}{a^{3}}\xi_{k}+\frac{6}{a^{2}}\right) & ,0\leq\xi_{k}\leq a\\
--\left(sgn\left(x_{1k}-x_{2k}\right)\frac{3}{\left(a-1\right)^{2}}e^{\theta_{k}}\left(1-\xi_{k}\right)^{2}\right) & ,a<\xi_{k}<1\\
-0 & ,\xi_{k}>1
-\end{cases}
-\end{align*}
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section

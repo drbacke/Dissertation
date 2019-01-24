@@ -799,6 +799,32 @@ Die für das Trainingsverfahren notwendigen Ableitungen sehen für die gauss'sch
 
 \end_layout
 
+\begin_layout Standard
+Die restlichen Gleichungen aller umgesetzten Modellfunktionen und auch deren
+ Ableitungen nach Hyperparametern und Ort sind in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kubische-Spline-Korrelationsfunk"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Exponential-Korrelationsfunktion"
+
+\end_inset
+
+ und Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Gauss-Korrelationsfunktion-mit"
+
+\end_inset
+
+ zu finden.
+\end_layout
+
 \begin_layout Subsubsection*
 Kovarianzfunktion CO-Kriging
 \begin_inset CommandInset label
@@ -4473,12 +4499,63 @@ reference "subsec:CRISP-Testfall"
 
 ) zusammengestellt.
  
+\end_layout
+
+\begin_layout Itemize
+Trainingsfunktion: 
+\begin_inset Formula $\dot{m}_{OP1}$
+\end_inset
+
+ (Massenstrom Betriebspunkt 1)
+\end_layout
+
+\begin_layout Itemize
+Stützstellen (niedrige / hohe Güte): 300 / 500
+\end_layout
+
+\begin_layout Itemize
+Testdatenbasis: 400 Stützstellen hoher Güte
+\end_layout
+
+\begin_layout Itemize
+Maximal 1000 Trainingsiterationen
+\end_layout
+
+\begin_layout Itemize
+20 Threads auf zwei Intel(R) Xeon(R) CPU E5-2650 v3
+\end_layout
+
+\begin_layout Itemize
+Pro Testfall 10 aufeinanderfolgende Trainings
+\end_layout
+
+\begin_layout Itemize
+Das Initialisierungsverfahren, ist das 
+\begin_inset Quotes gld
+\end_inset
+
+Initialisierung auf Basis vorhandener Kriging Modelle
+\begin_inset Quotes grd
+\end_inset
+
+ aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:UltraRestart"
+
+\end_inset
+
+.
+ Das Verfahren nutzt 5 bereits trainierte Kriging Modelle
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap table
 lines 7
-placement o
+placement O
 overhang 0in
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4569,58 +4646,6 @@ Mittlere Trainingszeit für alle durchgeführten Trainings.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Itemize
-Trainingsfunktion: 
-\begin_inset Formula $\dot{m}_{OP1}$
-\end_inset
-
- (Massenstrom Betriebspunkt 1)
-\end_layout
-
-\begin_layout Itemize
-Stützstellen (niedrige / hohe Güte): 300 / 500
-\end_layout
-
-\begin_layout Itemize
-Testdatenbasis: 400 Stützstellen hoher Güte
-\end_layout
-
-\begin_layout Itemize
-Maximal 1000 Trainingsiterationen
-\end_layout
-
-\begin_layout Itemize
-20 Threads auf zwei Intel(R) Xeon(R) CPU E5-2650 v3
-\end_layout
-
-\begin_layout Itemize
-Pro Testfall 10 aufeinanderfolgende Trainings
-\end_layout
-
-\begin_layout Itemize
-Das Initialisierungsverfahren, ist das 
-\begin_inset Quotes gld
-\end_inset
-
-Initialisierung auf Basis vorhandener Kriging Modelle
-\begin_inset Quotes grd
-\end_inset
-
- aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:UltraRestart"
-
-\end_inset
-
-.
- Das Verfahren nutzt 5 bereits trainierte Kriging Modelle
-\end_layout
-
-\begin_layout Standard
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4644,6 +4669,42 @@ reference "subsec:UltraRestart"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 40
+placement O
+overhang 0in
+width "45col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/RandomRestartVergleich.eps
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ergebnisse-des-Testfalls."
+
+\end_inset
+
+Ergebnisse des Testfalls.
+ Dargestellt sind die Ergebnisse des Likelihoods, der Trainingszeit und
+ des Testfehlers über den Trainingsiterationen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Der Testfehler ist bei allen Verfahren auf einem ähnlich gutem Niveau (der
  Mittelwert des Massenstroms liegt bei 514 kg/s).
  Das RPROP2 Verfahren zeigt insgesamt den besten Testfehler.
@@ -4747,45 +4808,6 @@ Initialisierung auf Basis vorhandener Kriging Modelle
  Für den Ordinary- und Gradient-Enhanced-Modus der Kriging-Software wird
  allerdings das RPROP-Verfahren verwendet, da dieses bei einer geringeren
  Anzahl von Hyperparametern zeitlich besser abschneidet.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/RandomRestartVergleich.eps
-	scale 60
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Ergebnisse-des-Testfalls."
-
-\end_inset
-
-Ergebnisse des Testfalls.
- Dargestellt sind die Ergebnisse des Likelihoods, der Trainingszeit und
- des Testfehlers über den Trainingsiterationen.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -5417,47 +5439,6 @@ reference "chap:Verteiltes-Rechnen-1"
  wird dieser Punkt noch genauer erklärt.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/Point.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Klassenstruktur-der-Klasse"
-
-\end_inset
-
-Klassenstruktur der Klasse Point, welche eine Stützstelle beschreibt
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Paragraph*
 CorrelationFunction
 \begin_inset CommandInset label
@@ -5470,40 +5451,6 @@ name "par:CorrelationFunction"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/CorrelationFunction.eps
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Klassenstruktur-der-Kovarianzfun"
-
-\end_inset
-
-Klassenstruktur der Kovarianzfunktionsklassen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5530,7 +5477,7 @@ CorrelationFunction
 
  legt den Aufbau der Kovarianzklassen fest und in den Spezialisierungen
  sind die Implementierungen der einzelnen Kovariansfunktionen.
- Innerhalb dieser Software sind bisher die 
+ Im Rahmen dieser Arbeit wurden die 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5538,14 +5485,7 @@ Gauss
 \begin_inset Quotes grd
 \end_inset
 
- (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Überleitung-Modellfunktion"
-
-\end_inset
-
-), und die 
+, 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5553,14 +5493,38 @@ Spline
 \begin_inset Quotes grd
 \end_inset
 
- (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "lophaven2002aspects"
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Exponential
+\begin_inset Quotes grd
+\end_inset
+
+ Kovarianzfunktionen umgesetzt.
+ Die Gleichungen der Funktionen und auch deren Ableitungen nach Hyperparametern
+ und Ort sind in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kubische-Spline-Korrelationsfunk"
 
 \end_inset
 
-) Kovarianzfunktionen umgesetzt.
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Exponential-Korrelationsfunktion"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Gauss-Korrelationsfunktion-mit"
+
+\end_inset
+
+ zu finden.
  Der Name 
 \begin_inset Quotes gld
 \end_inset
@@ -5820,41 +5784,6 @@ name "par:DensityFunction---Implementierun"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/Density.eps
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Vereinfachtes-UML-Diagramm"
-
-\end_inset
-
-Vereinfachtes UML Diagramm der verschiedenen Verfahren innerhalb der Kriging-Sof
-tware und deren Anbindung an das Server Interface
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6012,42 +5941,6 @@ AutoOpti Schnittstelle
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
-	scale 50
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Vereinfachtes-UML-Diagramm-1"
-
-\end_inset
-
-Vereinfachtes UML Diagramm der MetaModel Klasse, welche eine Anbindung an
- AutoOpti ermöglicht.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6123,39 +6016,6 @@ Minimierungsverfahren
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/MinimizerInterface.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UML-Diagramm-der-Klasse"
-
-\end_inset
-
-UML-Diagramm der Klasse MinimizerInterface und deren Spezialisierungen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Die abstrakte Klasse 
 \begin_inset Quotes gld
 \end_inset
@@ -6558,49 +6418,7 @@ reference "eq:LogLikelihood"
 ) eines Kriging-Modells sind viele komplexe Matrixoperationen notwendig.
  Die Laufzeiten von Vorhersage und Training hängen hauptsächlich von diesen
  Matrixoperationen ab.
- 
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0in
-width "55col%"
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/Matrix.eps
-	lyxscale 70
-	scale 40
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-UML Diagramm der Matrix Klassen und deren Anbindung an das SaveableOnServer
- Interface
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:MatrixKlasseUML"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Weiterhin werden diese Modelle innerhalb verschiedenster Hardware-Architekturen
+ Weiterhin werden diese Modelle innerhalb verschiedenster Hardware-Architekturen
  verwendet, bspw.
  AMD/Intel CPUs und NVidia GPUs.
  Für jede dieser Hardwarearchitekturen gibt es verschiedene Hersteller-Bibliothe
@@ -6675,7 +6493,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
+<lyxtabular version="3" rows="4" columns="5">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -6705,7 +6523,7 @@ m
 \begin_inset Text
 
 \begin_layout Plain Layout
-isSymmetric
+isSym
 \end_layout
 
 \end_inset
@@ -6723,7 +6541,7 @@ frei
 \begin_inset Text
 
 \begin_layout Plain Layout
-Matrix Daten
+Matrix
 \end_layout
 
 \end_inset
@@ -6777,7 +6595,7 @@ x Byte
 </cell>
 </row>
 <row>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -6788,7 +6606,21 @@ status open
 
 $
 \backslash
-underbrace{512Bit Header}$
+underbrace{
+\backslash
+qquad
+\backslash
+qquad
+\backslash
+qquad
+\backslash
+qquad
+\backslash
+qquad
+\backslash
+qquad
+\backslash
+qquad}_{512Bit Header}$
 \end_layout
 
 \end_inset
@@ -6825,6 +6657,17 @@ underbrace{512Bit Header}$
 
 \end_inset
 </cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -6836,6 +6679,42 @@ underbrace{512Bit Header}$
 \end_inset
 
  
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -7156,6 +7035,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
+	scale 45
 
 \end_inset
 
@@ -7410,6 +7290,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
+	scale 41
 
 \end_inset
 
@@ -7417,7 +7298,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-des"
 
+\end_inset
+
+UML Diagramm des SaveAbleOnServer Interface
 \end_layout
 
 \end_inset
@@ -7542,43 +7429,6 @@ Server
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/uml_net_interface_server.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UML-Diagramm-der"
-
-\end_inset
-
-UML Diagramm der Server-Klassen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 Die hier beschriebene Server Software ist ein eigenständiges Programm, welches
  auf einem Rechner ausgeführt wird und dann auf Aufgaben wartet.
  Solange es keine Aufgaben erfüllt, verbraucht es praktisch keine Kapazitäten
@@ -9667,15 +9517,15 @@ key "Smith1995"
 
  beschriebene Algorithmus ist allerdings nur schwer parallelisierbar und
  auch für SIMD Architekturen nur schlecht geeignet.
- In Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Beschleunigter-BackChodec"
+ In der hier entwickelten Matrix Klasse, wurde eine SIMD-beschleunigte Version
+ des von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smith1995"
 
 \end_inset
 
- wird eine parallelisierte und SIMD-beschleunigte Variante des Algorithmus
- nach Smith präsentiert.
+ beschriebenen Algorithmus entwickelt.
  
 \end_layout
 
@@ -10407,7 +10257,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -12494,28 +12344,6 @@ reference "fig:Anteile-der-Kovarianzfunktionen"
 \end_inset
 
  - Ersatzmodell Nummer 9) erkannt werden.
- 
-\end_layout
-
-\begin_layout Standard
-Ein weiteres Beispiel aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Kopplung-mehrerer-Ersatzmodelle:"
-
-\end_inset
-
- entspricht dem Gegenteiligen Fall.
- Die Berechnung der maximale mechanische Dehnung des Rotors, war in beiden
- Gütestufen identisch.
- Dies konnte ebenfalls in der entsprechenden Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Anteile-der-Kovarianzfunktionen-1"
-
-\end_inset
-
- (Ersatzmodell Nummer 6) erkannt werden.
  
 \end_layout
 
