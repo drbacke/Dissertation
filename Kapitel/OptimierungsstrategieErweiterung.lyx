@@ -1293,12 +1293,22 @@ und
  Da für die Bewertung einer Gütestufe viele Werte denkbar sind (beispielsweise
  ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), werden
  diese durch den Begriff des Informationszugewinns zusammengefasst.
- Für den Informationszugewinn gilt: 
-\begin_inset Formula $I_{g+1}\leq I_{g}$
+ Eine nähere Definition der Informationszugewinns folgt im Abschnitt 
+\begin_inset Quotes gld
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand nameref
+reference "par:Nach-der-Optimierung"
+
+\end_inset
+
+
+\begin_inset Quotes grd
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
@@ -1398,7 +1408,7 @@ Während der Optimierung auf dem Ersatzmodell
 \begin_layout Standard
 Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
  freier Parameter 
-\begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
  für einen vielversprechenden Member vor.
@@ -1409,11 +1419,13 @@ Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
 
 \begin_layout Standard
 Am Ende einer Optimierung sind nur die Paretorang 1 Member der höchsten
- Gütestufe von Interesse, da das Vertrauensniveau für diese am höchste ist.
+ Gütestufe von Interesse, da das Vertrauensniveau für diese am höchsten
+ ist.
  Aus diesem Grund bringt ein neuer Member niedriger Gütestufe keinen direkten
  Optimierungsfortschritt, sondern nur eine Reduktion der Varianz der Ersatzmodel
-le und kann damit im übernächsten Optimierungsschritt einen Fortschritt
- erzielen, da die Vorhersagen der Ersatzmodelle dann möglicherweise etwas
+le.
+ Dadurch kann dann im übernächsten Optimierungsschritt ein Fortschritt erzielt
+ werden, da die Vorhersagen der Ersatzmodelle dann möglicherweise etwas
  besser geworden sind (vorausgesetzt der übernächste Member wird dann mit
  der höchsten Gütestufen berechnet).
  Für die Umsetzung müsste geschätzt werden, inwiefern ein Member hoher oder
@@ -1599,7 +1611,7 @@ szeit.
 \end_inset
 
  wählt dann die Gütestufe 
-\begin_inset Formula $g_{max}\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g_{best}\in J=\{0,...,m_{f}\}$
 \end_inset
 
 mit dem höchsten Verhältnis von 
@@ -1612,7 +1624,7 @@ mit dem höchsten Verhältnis von
 \begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{max}\in J|\frac{I_{g}(\vec{x_{0}})}{t_{g}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\forall g\neq j\}\label{eq:Entscheidungsfunktion}
+f_{dec}(\vec{x_{0}})= & \{g_{best}\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\forall g_{best}\neq j\}\label{eq:Entscheidungsfunktion}
 \end{alignat}
 
 \end_inset
@@ -1667,15 +1679,17 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
  Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
  weniger stark reduziert.
  Dieses Verhalten lässt sich für eine Entscheidung heranziehen.
- Oftmals wird angenommen, dass die Unsicherheit auf Null reduziert wird,
- wenn an dieser Stelle ein Sample hoher Güte bekannt ist.
- 
+ Die Größe der Reduktion ist ein sehr komplexe Funktion, die von zahlreichen
+ Faktoren abhängt: Dem verwendeten Ersatzmodell, der Gütestufe, ersatzmodellspez
+ifischen Parametern, den Abstand von 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
+\end_inset
+
+ zu allen anderen bekannten Stützstellen, usw.
 \end_layout
 
 \begin_layout Standard
-Bei einem Ersatzmodell welches mehrere Gütestufen verarbeiten kann, verändert
- sich die Situation.
- Um einen Eindruck davon zu bekommen, wird in Abbildung 
+Um einen Eindruck der Varianzreduktion zu bekommen, wird in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:BeispielSinusHFLF"
@@ -1778,22 +1792,6 @@ Um den Informationszugewinn zu modellieren ist die Reduktion der Varianz
 \end_layout
 
 \begin_layout Standard
-Das innerhalb dieser Arbeit verwendete CO-Kriging (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Die-Kriging-Verfahren"
-
-\end_inset
-
-) kann prinzipiell für jede der verwendeten Gütestufen Vorhersagen treffen.
- Während des Optimierungsprozesses sind in diesem Fall nur die Vorhersagen
- der höchsten Gütestufe von Interesse.
- Aus diesem Grund wird im weiteren Verlauf grundlegend von Vorhersagen der
- höchsten Gütestufe ausgegangen.
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset label
 LatexCommand label
 name "BedingteVarianzDefinition"
@@ -1864,7 +1862,7 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
 \begin_inset Formula $t_{j}\in\mathbb{R}$
 \end_inset
 
- für die jeweilige Gütestufe 
+ für eine Gütestufe 
 \begin_inset Formula $j$
 \end_inset
 
@@ -1882,13 +1880,29 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
 \end_inset
 
 .
- Der dritte und damit letzte Teil beinhaltet die Berechnung der Prozesskette.
- Für diesen Teil benötigen die Gütestufen auch jeweils unterschiedliche
- Zeiten welche mit 
+ Der dritte und damit letzte Teil beinhaltet die Berechnung der Prozesskette
+ 
 \begin_inset Formula $t_{pr,j}\in\mathbb{R}$
 \end_inset
 
- bezeichnet werden.
+ .
+ Die Zeiten 
+\begin_inset Formula $t_{train}\in\mathbb{R}$
+\end_inset
+
+ und 
+\begin_inset Formula $t_{opti}\in\mathbb{R}$
+\end_inset
+
+ sind unabhängig von den Gütestufen, 
+\begin_inset Formula $t_{pr,j}\in\mathbb{R}$
+\end_inset
+
+ hingegen ist abhängig von der Gütestufe 
+\begin_inset Formula $j$
+\end_inset
+
+ .
  Damit können die jeweiligen Erzeugungszeiten definiert werden, wobei die
  genaue Berechnung dieser Zeiten wird in Kapitel 
 \begin_inset CommandInset ref
@@ -1930,7 +1944,7 @@ reference "eq:Entscheidungsfunktion"
 , ergibt sich eine Entscheidungsfunktion für ein Ersatzmodell:
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g\in J|\frac{I_{g|g}(\vec{x_{0}})}{t_{g}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\forall g\neq j\}\label{eq:Entscheidungsfunktion-1}
+f_{dec}(\vec{x_{0}})= & \{g_{best}\in J|\frac{I_{g|g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\forall g_{best}\neq j\}\label{eq:Entscheidungsfunktion-1}
 \end{alignat}
 
 \end_inset
@@ -1993,26 +2007,14 @@ Flowparameter
 
 \end_inset
 
-Gleichung 
+Damit kann Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:asdsa"
 
 \end_inset
 
- für den Informationszugewinn an einer Stelle 
-\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
-\end_inset
-
- für eine Gütestufe 
-\begin_inset Formula $g$
-\end_inset
-
- unter der Bedingung das eine Stützstelle der Gütestufe 
-\begin_inset Formula $j$
-\end_inset
-
- bekannt ist, wird damit für mehrere Ersatzmodelle erweitert zu:
+ erweitert werden zu:
 \end_layout
 
 \begin_layout Standard
@@ -2023,7 +2025,7 @@ reference "eq:asdsa"
 
 \end_inset
 
-Mit dieser Formulierung, lässt sich die Entscheidungsfunktion aus Gleichung
+Mit dieser Formulierung lässt sich die Entscheidungsfunktion aus Gleichung
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2031,7 +2033,8 @@ reference "eq:Entscheidungsfunktion-1"
 
 \end_inset
 
- weiterverwenden, wobei die Bestimmung der Gewichte folgend erläutert wird:
+ für viele Ersatzmodelle weiterverwenden, wobei die Bestimmung der Gewichte
+ folgend erläutert wird:
 \end_layout
 
 \begin_layout Standard
@@ -2203,8 +2206,8 @@ Für den ersten Punkt gilt: Je höher die Wahrscheinlichkeit eine Nebenbedingung
 Die Zielfunktionen untereinander werden gleich gewichtet.
  Letztlich bleibt dann noch die Frage offen, wie Zielfunktionen und Nebenbedingu
 ngen zueinander gewichtet werden (Punkt 2).
- Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung der Nebenbeding
-ungen an.
+ Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung aller Nebenbedi
+ngungen an.
  Geht man davon aus, dass diese unabhängig sind, so lässt sich die Gesamtwahrsch
 einlichkeit für die Erfüllung aller Nebenbedingungen als Produkt der Einzelwahrs
 cheinlichkeiten darstellen 
@@ -2245,9 +2248,7 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_inset
 
  detailliert beschrieben.
- Das hier gezeigten Kriterium kann ohne weiteres auf viele Gütestufen angewandt
- werden.
- Hierfür müssen alle möglichen Gütestufenpaaren gegeneinander bewertet werden.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -2311,11 +2312,7 @@ Die Formulierung
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $g\in J$
-\end_inset
-
-, 
-\begin_inset Formula $J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
 \end_inset
 
  an einer beliebigen Stelle 
@@ -2331,10 +2328,10 @@ Die Formulierung
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $j\in J$
+\begin_inset Formula $j\in$
 \end_inset
 
-, 
+
 \begin_inset Formula $J=\{0,...,m_{f}\}$
 \end_inset
 
@@ -2373,7 +2370,7 @@ Die lokale Änderungen der Gewichtungen
 \end_inset
 
  soll an dieser Stelle unberücksichtigt bleiben.
- Die lokale Varianzreduktion liefert naturgemäß den größten Beitrag, daher
+ Da die lokale Varianzreduktion naturgemäß den größten Beitrag liefert,
  ist anzunehmen, dass das Kriterium meist zu keiner anderen Entscheidung
  führt.
  In Anhang 
@@ -2384,8 +2381,8 @@ reference "sec:globalVarianzEntscheidungBsp"
 \end_inset
 
  wird ein Beispiel gezeigt, in dem eine solche Formulierung zu einer anderen
- Entscheidung führen würde, allerdings war die Konstruktion eines solchen
- Beispiels äußerst schwierig.
+ Entscheidung führt, allerdings war die Konstruktion eines solchen Beispiels
+ äußerst schwierig.
  
 \end_layout
 
@@ -2412,8 +2409,10 @@ name "sec:Theroretische-Beschleunigung-ein"
 
 \begin_layout Standard
 In diesem Abschnitt soll beschrieben werden, wie die Beschleunigung zwischen
- einer Single- und Multifidelity Optimierung zu berechnen und zu bewerten
- ist.
+ einer Multifidelity Optimierung im Vergleich zu einer Single-Fidelity Optimieru
+ng zu berechnen und zu bewerten ist.
+ Insbesondere soll die maximal mögliche Beschleunigung unter bestimmten
+ Voraussetzungen realistisch eingeschätzt werden.
  
 \end_layout
 
@@ -2543,7 +2542,7 @@ reference "fig:Zeitstrahlen-von-zwei"
 ungs- und Optimierungsphase.
  Der untere Zeitstrahl stellt eine Multifidelity-Optimierung dar.
  Diese besitzt einen zusätzlichen Low-Fidelity Initialsierungsteil.
- Soll mit der Multifidelity-Optimierung eine Beschleunigung gegenübebr der
+ Soll mit der Multifidelity-Optimierung eine Beschleunigung gegenüber der
  High-Fidelity Optimierung erreicht werden, so ergibt sich eine maximal
  mögliche Optimierungzeit.
  
@@ -2560,8 +2559,8 @@ reference "fig:Zeitstrahlen-von-zwei-1"
  zeigt dieselbe Optimierung, allerdings mit einen erheblich größerem LF-Initiali
 sierunganteil.
  Die mögliche Optimierungzeit für die Multifidelity Optimierung schrumpft
- damit enorm und damit ist auch die mögliche Beschleunigung gegenüber der
- High-Fidelity-Optimierung stark begrenzt.
+ enorm und damit ist auch die mögliche Beschleunigung gegenüber der High-Fidelit
+y-Optimierung stark begrenzt.
  
 \end_layout
 
