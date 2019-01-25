@@ -1674,8 +1674,8 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_inset
 
  voraus.
- Fügt man einem solchen Ersatzmodell an einem unbekannten Ort ein neues
- Sample hinzu, so sollte die vorhersagte Varianz dort reduziert werden.
+ Fügt man einem solchen Ersatzmodell an einem unbekannten Ort eine neue
+ Stützstelle hinzu, so sollte die vorhersagte Varianz dort reduziert werden.
  Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
  weniger stark reduziert.
  Dieses Verhalten lässt sich für eine Entscheidung heranziehen.
@@ -1699,33 +1699,33 @@ reference "fig:BeispielSinusHFLF"
  ein einfaches Beispiel gezeigt.
  Die blaue gestrichelte Kurve stellt die reale Funktion dar, in diesem Fall
  eine Sinus Schwingung.
- Die Samples hoher Güte werden durch rote Quadrate dargestellt und die Samples
- niedriger Güte durch blaue Dreiecke.
- Den Samples niedriger Güte wurde ein normalverteilter Fehler hinzugefügt.
+ Die Stützstellen hoher Güte werden durch rote Quadrate dargestellt und
+ die Stützstellen niedriger Güte durch blaue Dreiecke.
+ Den Stützstellen niedriger Güte wurde ein normalverteilter Fehler hinzugefügt.
  Da es sich nur um ein qualitatives Beispiel handelt, soll auf die verwendete
  Gleichung verzichtet werden.
  Bei dem verwendeten Ersatzmodell handelt es sich um ein CO-Kriging wie
  es im nächsten Kapitel vorgestellt wird.
- Die rote Kurve stellt die Vorhersage dieser Funktion anhand von den Samples
- hoher und niedriger Güte dar.
+ Die rote Kurve stellt die Vorhersage dieser Funktion anhand von den Stützstelle
+n hoher und niedriger Güte dar.
  Im unteren Diagramm wird die vorhergesagte Unsicherheit des Ersatzmodells
  in Form einer Standardabweichung dargestellt.
- Die schwarze gestrichelte Linie zeigt die Standardabweichung ohne ein Sample
- an der markierten Stelle 
+ Die schwarze gestrichelte Linie zeigt die Standardabweichung ohne eine
+ Stützstelle an der markierten Stelle 
 \begin_inset Formula $\vec{x_{0}}$
 \end_inset
 
- und die rote Kurve die Standardabweichung mit einem zusätzlichen Sample
+ und die rote Kurve die Standardabweichung mit einer zusätzlichen Stützstelle
  niedriger Güte.
  
 \end_layout
 
 \begin_layout Standard
 Wichtig ist hierbei, dass sich die vorhergesagte Standardabweichung beim
- Hinzufügen eines Samples niedriger Güte reduziert.
+ Hinzufügen eines Stützstellen niedriger Güte reduziert.
  Es bleibt in der Regel also eine Restunsicherheit bestehen.
- Beim Hinzufügen eines Samples der höchsten Güte wird die Standardabweichung
- im Normalfall mit Null vorhergesagt.
+ Beim Hinzufügen eines Stützstellen der höchsten Güte wird die Standardabweichun
+g im Normalfall mit Null vorhergesagt.
  Die Reduzierung der Standardabweichung ist also je nach Gütestufe unterschiedli
 ch groß, wobei die niedrigeren Gütestufen eine größere Restunsicherheit
  aufweisen als die höheren.
@@ -1764,7 +1764,7 @@ name "fig:BeispielSinusHFLF"
 \end_inset
 
 Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
- von Samples verschiedener Gütestufen
+ von Stützstellen verschiedener Gütestufen
 \end_layout
 
 \end_inset
@@ -1824,7 +1824,7 @@ Die Vorhersage der Varianz einer Gütestufe
 \end_inset
 
  bezeichnet.
- Eine effiziente Möglichkeit die Varianz 
+ Eine effiziente Möglichkeit die bedingte Varianz 
 \begin_inset Formula $\sigma_{g|j}^{2}$
 \end_inset
 
@@ -1836,16 +1836,16 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_inset
 
  beschrieben.
- Der Informationszugewinn für eine Stelle 
-\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
-\end_inset
-
- einer Gütestufe 
+ Der Informationszugewinn einer Gütestufe 
 \begin_inset Formula $g$
 \end_inset
 
  unter der Bedingung das eine Stützstelle der Gütestufe 
 \begin_inset Formula $j$
+\end_inset
+
+ für eine Stelle 
+\begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
  bekannt ist, kann damit als Reduktion der vorhergesagten Varianz modelliert
@@ -1902,7 +1902,7 @@ Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
 \begin_inset Formula $j$
 \end_inset
 
- .
+.
  Damit können die jeweiligen Erzeugungszeiten definiert werden, wobei die
  genaue Berechnung dieser Zeiten wird in Kapitel 
 \begin_inset CommandInset ref
@@ -1944,7 +1944,7 @@ reference "eq:Entscheidungsfunktion"
 , ergibt sich eine Entscheidungsfunktion für ein Ersatzmodell:
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g|g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{g|j}(\vec{x_{0}})}{t_{j}}\}\label{eq:Entscheidungsfunktion-1}
+f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{\sigma_{g}^{2}-\sigma_{g|g_{best}}^{2}}{t_{train}+t_{opti}+t_{pr,g_{best}}}\geq\frac{\sigma_{g}^{2}-\sigma_{g|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\}\label{eq:Entscheidungsfunktion-1}
 \end{alignat}
 
 \end_inset
@@ -1993,28 +1993,27 @@ Flowparameter
 \begin_inset Quotes grd
 \end_inset
 
- und 
+ (Definition Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:OptimierungsBegriffe"
+
+\end_inset
+
+) und 
 \begin_inset Formula $c\in\mathbb{N}$
 \end_inset
 
  Nebenbedingungen existiert ein Ersatzmodell.
  Um diese in der Entscheidungsfunktion zu berücksichtigen bietet sich eine
- gewichtete Summe an: 
-\begin_inset Formula 
-\begin{align}
-\frac{I}{t}= & \sum_{i}^{c+z}\frac{w_{i}}{\sum_{j}^{c+z}w_{j}}=\frac{1}{\sum_{j}^{c+z}w_{j}}\sum_{i}^{c+z}w_{i}\frac{I_{i}}{t_{i}}\label{eq:Gewichtung}
-\end{align}
-
-\end_inset
-
-Damit kann Gleichung 
+ gewichtete Summe an und Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:asdsa"
 
 \end_inset
 
- erweitert werden zu:
+ erweitert sich zu:
 \end_layout
 
 \begin_layout Standard
@@ -2102,9 +2101,9 @@ reference "par:Behandlung-von-Nebenbedingungen"
 
 \end_inset
 
- beschrieben, ist die Erfüllung der Nebenbedingungen das wichtigste Kriterium.
- Die eigentlichen Zielfunktionen werden nur zweitrangig behandelt, bis die
- Nebenbedingungen erfüllt sind.
+ beschrieben, wird die Erfüllung der Nebenbedingungen vorrangig behandelt.
+ Die eigentlichen Zielfunktionen werden zweitrangig behandelt, bis die Nebenbedi
+ngungen erfüllt sind.
  
 \end_layout
 
@@ -2127,9 +2126,9 @@ reference "sec:Trace-Erich"
  vorgegriffen.
  Anhand dieses Beispiels lässt sich der Wechsel von Restriktionen zu Zielfunktio
 nen sehr gut darstellen.
- Die grüne Kurve stellt den summierten Restriktionswert dar, ein Wert von
- Null bedeutet also die Erfüllung aller Restriktionen und ein Wert größer
- Null die Nichterfüllung mindestens einer Nebenbedingung.
+ Die grüne Kurve stellt den summierten Restriktionswert dar.
+ Wobei ein Wert von Null die Erfüllung aller Restriktionen bedeutet und
+ ein Wert größer Null die Nichterfüllung mindestens einer Nebenbedingung.
  Die rote Kurve beschreibt den kummulierten Volumenzugewinn und kann somit
  als Optimierungsfortschritt bezogen auf die Zielfunktionen angesehen werden.
  
@@ -2208,25 +2207,17 @@ Die Zielfunktionen untereinander werden gleich gewichtet.
 ngen zueinander gewichtet werden (Punkt 2).
  Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung aller Nebenbedi
 ngungen an.
- Geht man davon aus, dass diese unabhängig sind, so lässt sich die Gesamtwahrsch
-einlichkeit für die Erfüllung aller Nebenbedingungen als Produkt der Einzelwahrs
-cheinlichkeiten darstellen 
-\begin_inset Formula $\prod_{i=1}^{c}P_{i}$
-\end_inset
-
-.
- Mit dieser Gesamtwahrscheinlichkeit lassen sich dann auch die Zielfunktionen
- und Nebenbedingungen zueinander gewichten.
  Daraus ergibt sich:
 \begin_inset Formula 
 \begin{align}
-\frac{I_{g|j}}{t_{g}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\label{eq:GewichteCrit}\\
-\frac{I_{g|j}}{t_{g}} & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\\
-\frac{I_{g|j}}{t_{g}} & =\frac{1}{T_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right.\label{eq:IzuT}\\
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\nonumber \\
+ & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\nonumber \\
+ & =\frac{1}{T_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right.\label{eq:IzuT}\\
  & +\left.\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right]\nonumber \\
-\\
+\nonumber \\
 w_{i} & =\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \label{eq:TimeCrit}\\
-T_{j} & =t_{train}+t_{opti}+t_{pr,j}
+w_{i} & =1\,\forall i\in\left\{ c,...,z\right\} \\
+T_{j} & =t_{train}+t_{opti}+t_{pr,j}\label{eq:Times}
 \end{align}
 
 \end_inset
@@ -2256,8 +2247,21 @@ Globale Varianzreduktion
 \end_layout
 
 \begin_layout Standard
-Die bisher vorgestellten Kriterien beziehen sich alle auf einen lokalen
- Ort 
+Das Kriterium welches durch Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:IzuT"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:asdsa-1"
+
+\end_inset
+
+ gegebn ist, bezieht sich auf einen lokalen Ort 
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
@@ -2272,7 +2276,7 @@ Die bisher vorgestellten Kriterien beziehen sich alle auf einen lokalen
  Um dies zu erreichen muss die Formulierung aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:StandardAbRedulktion"
+reference "eq:IzuT"
 
 \end_inset
 
@@ -2323,7 +2327,7 @@ Die Formulierung
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
- ein Sample 
+ eine Stützstelle 
 \begin_inset Formula $y_{j}\left(\vec{x}_{0}\right)\in\mathbb{R}$
 \end_inset
 
@@ -2342,33 +2346,58 @@ reference "eq:IzuT"
 , die Gewichte und Zeiten bleiben wie in den Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:GewichteCrit"
+reference "eq:IzuT"
 
 \end_inset
 
- & 
+ - 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:TimeCrit"
+reference "eq:Times"
 
 \end_inset
 
 :
 \begin_inset Formula 
 \begin{align}
-\frac{I_{g|j}}{t_{g}} & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}I_{g|j}\left(\vec{x_{0}}\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}I_{g|j}\left(\vec{x_{0}}\right)\right]
+\frac{I_{g|j}}{t_{g}} & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}I_{g|j}\left(\vec{x_{0}}\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}I_{g|j}\left(\vec{x_{0}}\right)\right]\label{eq:globalesKrit}
 \end{align}
 
 \end_inset
 
-Die lokale Änderungen der Gewichtungen 
+Die lokalen Änderungen der Gewichtungen 
 \begin_inset Formula $w_{i}\in\mathbb{R}$
 \end_inset
 
  soll an dieser Stelle unberücksichtigt bleiben.
- Da die lokale Varianzreduktion naturgemäß den größten Beitrag liefert,
- ist anzunehmen, dass das Kriterium meist zu keiner anderen Entscheidung
- führt.
+ Es ist anzunehmen, dass das Kriterium meist zu keiner anderen Entscheidung
+ führt als das lokale aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:IzuT"
+
+\end_inset
+
+.
+ Um dies zu testen wurden einige analytische Beispiele erzeugt und das globale
+ Kriterium aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:globalesKrit"
+
+\end_inset
+
+ berechnet.
+ Es konnte jedoch nur ein Beispiel generiert werden, in dem das Kriterium
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:globalesKrit"
+
+\end_inset
+
+ zu einer anderen Entscheidung führt als das lokale.
+ In allen anderen Fällen ist die Entscheidung immer gleich gewesen.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2376,10 +2405,7 @@ reference "sec:globalVarianzEntscheidungBsp"
 
 \end_inset
 
- wird ein Beispiel gezeigt, in dem eine solche Formulierung zu einer anderen
- Entscheidung führt, allerdings war die Konstruktion eines solchen Beispiels
- äußerst schwierig.
- 
+ sind die Ergebnisse dieses Beispiels dargestellt.
 \end_layout
 
 \begin_layout Standard
