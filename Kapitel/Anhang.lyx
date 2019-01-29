@@ -2633,6 +2633,37 @@ Kapitel 5
 \end_layout
 
 \begin_layout Subsection
+Ableitungen des Kovarianzmodells nach den Rauschtermen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Ableitungen-des-Kovarianzmodells"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Im Fall des Co-Krigings mit den zwei Rauschtermen 
+\begin_inset Formula $\lambda_{diff},\lambda_{2}\in\mathbb{R}$
+\end_inset
+
+ sehen die partiellen Ableitungen wie folgt aus: 
+\begin_inset Formula 
+\begin{align}
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 1\nonumber \\
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\nonumber \\
+\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}=\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\label{eq:KovarianzfunktionenCoKrigingAbleitungDiag}\\
+\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 0\nonumber \\
+\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 1\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
 Likelihood Schätzer Erwartungswerte und Varianz 
 \begin_inset CommandInset label
 LatexCommand label

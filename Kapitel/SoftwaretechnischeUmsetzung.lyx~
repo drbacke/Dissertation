@@ -83,23 +83,11 @@ name "chap:Implementierung-der-DLR-Kriging-"
 \end_layout
 
 \begin_layout Standard
-In diesem Kapitel wird die Implementierung der MultiFidelity-Verfahren (siehe
- Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Multifidelity-Optimierungsstrate"
-
-\end_inset
-
- und 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Die-Kriging-Verfahren"
-
-\end_inset
-
-) in die AutoOpti-Software erläutert.
- Dabei werden im ersten Teil die verwendete Modellierung der Kovarianzfunktion
+Im Rahmen dieser Arbeit wurde eine Kriging-Software entwickelt und die Implement
+ierung eines Multifidelity-Verfahrens in AutoOpti vorgenommen.
+ In diesem Kapitel sollen daher die wichtigsten Entwicklungen dargestellt
+ werden.
+ Hierfür werden im ersten Teil die verwendete Modellierung der Kovarianzfunktion
  und auch die Behandlung von verrauschten Funktionen beschrieben.
  Weiterhin wird eine mögliche Regularisierung der Kovarianzmatrix beschrieben.
  Darauf folgend wird das Training der Kriging-Modelle mithilfe verschiedener
@@ -111,24 +99,37 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Nach Beschreibung des Trainings, wird ein Vergleich des hier entwickelten
- Kriging-Verfahrens zu anderen Verfahren angestellt.
+Da die Verwendung eines Kriging-Verfahrens innerhalb einer größeren Optimierung
+ numerisch sehr aufwendig ist, wurden zahlreichen Methoden entwickelt und
+ umgesetzt, welche die numerischer Effizienz steigern.
+ Diese Methoden werden in den Abschnitten 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Umsetzung-der-Entscheidungsfunkt"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Numerische-Effizienz-steigern"
+
+\end_inset
+
+ vorgestellt.
  
 \end_layout
 
 \begin_layout Standard
-Da die Verwendung eines Kriging-Verfahrens innerhalb einer größeren Optimierung
- numerisch sehr aufwendig ist, behandelt ein großer Abschnitt einige Möglichkeit
-en die numerischer Effizienz zu steigern.
- Im Vergleich zu Standard-Implementierungen wie Sie z.B.
- in Matlab vorzufinden sind, konnte eine deutliche Effizienzsteigerung erreicht
- werden.
- Besonderes Augenmerk liegt hierbei auf einer sehr großen Anzahl an Stützstellen
- und sehr vielen Parametern.
-\end_layout
-
-\begin_layout Standard
-Als letzter Punkt wird eine Analysesoftware vorgestellt.
+Als letzter Punkt wird eine in dieser Arbeit entwickelte Analysesoftware
+ vorgestellt.
  Mit dieser ist es möglich während einer laufenden Optimierungen die Ersatzmodel
 le auf Plausibilität und Effizienz zu überprüfen und evtl.
  Fehler aufzudecken.
@@ -174,7 +175,7 @@ reference "chap:Die-Kriging-Verfahren"
 \end_inset
 
  nicht bekannt ist und damit auch nicht die Kovarianzfunktion, bedient man
- sich parametrisierten Kovarianzmodellen in der Form 
+ sich parametrisierter Kovarianzmodelle in der Form 
 \begin_inset Formula $cov_{g_{1},g_{2}}\left(\vec{x}_{1},\vec{x_{2}}\right)$
 \end_inset
 
@@ -186,7 +187,8 @@ reference "chap:Die-Kriging-Verfahren"
 Diese Funktionen müssen jedem möglichen Punktepaar eine Kovarianz zuordnen.
  Weiterhin muss die daraus resultierende Matrix positiv definit und symmetrisch
  sein, was die Wahl einer geeigneten Funktion erschwert.
- Das folgende Beispiel zeigt eine beispielhafte Kovarianzmatrix 
+ Das folgende Beispiel zeigt den Aufbau eine beispielhafte Kovarianzmatrix
+ 
 \begin_inset Formula $\mathbf{\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}}$
 \end_inset
 
@@ -198,7 +200,7 @@ Diese Funktionen müssen jedem möglichen Punktepaar eine Kovarianz zuordnen.
 \begin_inset Formula $g\in\left\{ 1,...,s\right\} $
 \end_inset
 
- :
+:
 \begin_inset Formula 
 \begin{equation}
 \mathbf{Cov}=\left[\begin{array}{c|cccc}
@@ -217,17 +219,17 @@ Um ein solches Modell praktisch nutzbar zu machen, müssen drei verschiedene
 \end_layout
 
 \begin_layout Enumerate
-Die Ortsabhängigkeit der Kovarianzfunktion muss definiert werden.
- Beispielsweise kann diese nur abhängig vom Radius sein oder nur durch den
- Verbindungsvektor 
+Die Definition der ortsabhängigkeit der Kovarianzfunktion.
+ Beispielsweise kann diese nur abhängig vom Radius (radiale Basisfunktionen)
+ sein oder nur durch den Verbindungsvektor 
 \begin_inset Formula $\vec{h}=\vec{x}_{1}-\vec{x_{2}}$
 \end_inset
 
  beschrieben werden.
  Es gibt auch Modelle, welche eine Abhängigkeit von der absoluten Lage im
  Raum ermöglichen.
- Diese benötigen allerdings eine erhebliche Anzahl an Parametern (siehe
- 
+ Diese benötigen allerdings eine erhebliche Anzahl an Ersatzmodell-spezifischen
+ Parametern (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "schmidt2003bayesian"
@@ -244,8 +246,8 @@ Es wird ein parametrisiertes Modell für die Kovarianzfunktion benötigt,
 \end_layout
 
 \begin_layout Enumerate
-Die darin verwendeten Parameter, müssen in einem Trainingsverfahren kalibrierbar
- sein.
+Die darin verwendeten Parameter müssen in einem Trainingsverfahren kalibriert
+ werden können.
 \end_layout
 
 \begin_layout Standard
@@ -412,10 +414,8 @@ name "subsec:Kovarianz-parametrisiertes-Model"
 \end_layout
 
 \begin_layout Standard
-Wie bereits beschrieben, wird für das Kriging Verfahren ein parametrisches
- Kovarianz-Modell benötigt.
- Die hier beschriebenen Kovarianzmodelle sind alle im Rahmen dieser Arbeit
- in die Software implementiert worden.
+Die hier beschriebenen parametrisierten Kovarianzmodelle sind alle im Rahmen
+ dieser Arbeit in die Software implementiert worden.
  Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -491,7 +491,7 @@ Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Kovarianz
 \begin_inset Formula $cov(\vec{h})$
 \end_inset
 
- aufgetragen, diese nimmt mit steigender Distanz in der Regel ab.
+ aufgetragen, diese nimmt mit steigender Distanz ab.
  
 \end_layout
 
@@ -627,9 +627,9 @@ nden räumlichen Zusammenhang und ist als nicht parametrisches Verfahren
 \end_layout
 
 \begin_layout Standard
-Typischerweise greift man aber auf parametrisierte Modellfunktionen zurück,
+Typischerweise wird auf parametrisierte Modellfunktionen zurückgegriffen,
  welche an die vorhandenen Stützstellen bestmöglich angepasst werden.
- Dadurch kommt diese Art des Verfahrens mit weniger Stützstellen aus, als
+ Dadurch kommt diese Art des Verfahrens mit weniger Stützstellen aus als
  eine empirische Schätzung, ist dafür allerdings eingeschränkter was die
  Form der Funktion angeht.
  Diese Funktionen müssen allerdings positiv semidefinit sein (vgl.
@@ -755,8 +755,7 @@ reference "sec:SoftwaretechnKorrelationsfunktionen"
 \end_layout
 
 \begin_layout Standard
-Setzt man bspw.
- die Kovarianzfunktion aus Gleichung 
+Setzt man die Kovarianzfunktion aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:ExpoKorrelationsfunktion"
@@ -870,10 +869,10 @@ reference "eq:ExpoKovarianzfunktion"
 , so erhält man:
 \begin_inset Formula 
 \begin{align}
-cov_{1,1}(\vec{x}_{1},\vec{x}_{2})= & a^{2}\sigma_{2}^{2}c_{2}(\vec{h})\nonumber \\
+cov_{1,1}(\vec{x}_{1},\vec{x}_{2})= & a^{2}\sigma_{2}^{2}c_{2}(\vec{h})\\
  & +\lambda_{diff}\delta(\vec{h})+\sigma_{diff}^{2}c_{diff}(\vec{h})\nonumber \\
 cov_{1,2}(\vec{x}_{1},\vec{x}_{2})= & a\sigma_{2}^{2}c_{2}(\vec{h})\label{eq:KovarianzfunktionenCoKrigingGauss}\\
-cov_{2,2}(\vec{x}_{1},\vec{x}_{2})= & \lambda_{2}\delta(\vec{h})+\sigma_{2}^{2}c_{2}(\vec{h})\nonumber 
+cov_{2,2}(\vec{x}_{1},\vec{x}_{2})= & \lambda_{2}\delta(\vec{h})+\sigma_{2}^{2}c_{2}(\vec{h})
 \end{align}
 
 \end_inset
@@ -901,11 +900,12 @@ Betrachtet man sich die Gleichung für die Korrelationen
 \end_inset
 
  kann sehr große oder sehr kleine Werte annehmen.
- Es sollten daher numerische Grenzen für die 
+ Damit diese Werte noch durch die gewählte Fließkommagenauigkeit dargestellt
+ werden können, sollten daher numerische Grenzen für 
 \begin_inset Formula $\theta_{l}$
 \end_inset
 
- Werte gelten.
+ gelten.
 \end_layout
 
 \begin_layout Standard
@@ -917,7 +917,7 @@ Um diese Werte zu bestimmen bietet sich ein einfacher numerischer Testfall
 \end_inset
 
  bestimmt.
- Die gefundenen Grenzen lagen bei 
+ Die gefundenen Grenzen für eine 64Bit Fließkommzahl liegen bei 
 \begin_inset Formula $\theta\in\mathbb{R}|5<\theta_{l}<-34$
 \end_inset
 
@@ -1185,13 +1185,9 @@ CO-Kriging
 \end_layout
 
 \begin_layout Standard
-Im Falle des CO-Krigings ist, bedingt durch die unterschiedlichen Gütestufen,
- die Kovarianzmatrix partitioniert.
- 
-\end_layout
-
-\begin_layout Standard
-Der Ansatz aus dem Ordinary-Kriging ist mit dieser partitionierten Matrix
+Im Falle des CO-Krigings ist die Kovarianzmatrix partitioniert, bedingt
+ durch die unterschiedlichen Gütestufen.
+ Der Ansatz aus dem Ordinary-Kriging ist mit dieser partitionierten Matrix
  nicht mehr möglich, dennoch ist es möglich den maximalen Eigenwert 
 \begin_inset Formula $\Xi_{max}\left(\mathbf{Cov}\right)$
 \end_inset
@@ -1224,7 +1220,7 @@ reference "eq:KovarianzfunktionenCoKrigingGauss"
  aus, so ergibt sich die Spur als Summe der Diagonaleinträge wie folgt:
 \begin_inset Formula 
 \begin{align}
-spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\sigma_{diff}^{2}c_{diff}\left(\vec{0}\right)+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}c_{2}\left(\vec{0}\right)+\lambda_{2}\right)
+spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}c_{2}(\vec{0})+\sigma_{diff}^{2}c_{diff}(\vec{0})+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}c_{2}(\vec{0})+\lambda_{2}\right)
 \end{align}
 
 \end_inset
@@ -1234,11 +1230,11 @@ spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}c_{2
 
 \begin_layout Standard
 Da die Korrelationen der Diagonalen den Wert Eins besitzen,
-\begin_inset Formula $c_{2}\left(\vec{0}\right)=1$
+\begin_inset Formula $c_{2}(\vec{0})=1$
 \end_inset
 
  und 
-\begin_inset Formula $c_{diff}\left(\vec{0}\right)=1$
+\begin_inset Formula $c_{diff}(\vec{0})=1$
 \end_inset
 
 , gilt für die Spur der Matrix:
@@ -1331,8 +1327,8 @@ Die Werte
 \begin_inset Formula $\sigma_{2}^{2},\sigma_{diff}^{2},a$
 \end_inset
 
- werden während des Trainings oftmals verändert, dadurch ändert sich natürlich
- auch die untere Grenze des Diagonalaufschlags 
+ werden während des Trainings oftmals verändert, dadurch ändert sich auch
+ die untere Grenze des Diagonalaufschlags 
 \begin_inset Formula $\lambda_{min}$
 \end_inset
 
@@ -1344,7 +1340,7 @@ reference "eq:DiagonalSchätzungCoKriging"
 \end_inset
 
 ) permanent.
- Prinzipiell sind zwei Lösungen möglich:
+ Für dieses Problem sind zwei Lösungen möglich:
 \end_layout
 
 \begin_layout Enumerate
@@ -1387,19 +1383,20 @@ reference "sec:COKrigingTraining"
 
 \end_inset
 
-) Berücksichtigung finden.
- 
+) Berücksichtigung finden, was einen hohen Aufwand bedeutet.
 \end_layout
 
 \begin_layout Standard
 Aus diesem Grund wird die zweite Variante gewählt, also die untere Grenze
  nur initial eingestellt und dann nicht mehr verändert.
- Es sei denn es treten numerische Probleme während des Trainings auf, dann
- wird in der Software eine entsprechende Exception geworfen und in der Software
- abgefangen.
- Daraufhin wird der letzte Iterationsschritt wiederholt und der Diagonalaufschla
-g so lange erhöht, bis die numerischen Probleme verschwinden.
- Gelingt selbst dies nicht, wird ein Fehler ausgegeben und abgebrochen.
+ Es sei denn, es treten numerische Probleme während des Trainings auf, dann
+ wird in der Software eine entsprechende Exception geworfen.
+ Diese wird abgefangen und der letzte Iterationsschritt mit einem höheren
+ Diagonalaufschlag wiederholt.
+ Dies wird so lange wiederholt bis die numerischen Probleme verschwinden
+ oder eine Obergrenze an Wiederholungen erreicht ist.
+ Ist diese Obergrenze erreicht, wird ein Fehler ausgegeben und das Training
+ abgebrochen.
  
 \end_layout
 
@@ -1429,7 +1426,7 @@ Bei Vernachlässigung des Diagonalaufschlags
 \begin_inset Formula $\lambda$
 \end_inset
 
-, ist das bisher beschriebene Kriging-Verfahren rein interpolierend.
+ ist das beschriebene Kriging-Verfahren rein interpolierend.
  In einigen Fällen ist allerdings ein approximierendes Verhalten gewünscht.
  Ein solches Verhalten entspricht dem in Kapitel 
 \begin_inset CommandInset ref
@@ -1463,16 +1460,16 @@ ags
 
  und in dessen Bedeutung.
  Da es sich bei dem Diagonalaufschlag in diesem Fall um eine Varianz handelt
- die einem zufälligen Rauschen entspricht, siehe Kapitel 
+ die einem zufälligen Rauschen entspricht (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Kovarianz-parametrisiertes-Model"
 
 \end_inset
 
-.
- Zudem ist der Diagonalaufschlag für diesen Fall als Hyperparameter zu behandeln
- und muss daher mit trainiert werden.
+).
+ Deswegen ist der Diagonalaufschlag für diesen Fall als Hyperparameter zu
+ behandeln und muss daher mit trainiert werden.
  Die Umsetzung soll folgend gezeigt werden.
  
 \end_layout
@@ -1496,27 +1493,15 @@ reference "chap:MinimierungsverfahrenTraining"
 
 ) zu verwenden, müssen noch die Ableitungen der Kovarianzfunktionen nach
  den Rauschtermen gebildet werden.
- Im Fall des Co-Krigings mit den zwei Rauschtermen 
-\begin_inset Formula $\lambda_{diff},\lambda_{2}\in\mathbb{R}$
-\end_inset
-
- sehen die partiellen Ableitungen wie folgt aus: 
-\begin_inset Formula 
-\begin{align}
-\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 1\nonumber \\
-\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{1}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\\
-\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}=\frac{cov\left(Z_{1}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 0\label{eq:KovarianzfunktionenCoKrigingAbleitungDiag}\\
-\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{diff}}= & 0\nonumber \\
-\frac{cov\left(Z_{2}\left(\vec{x}_{1}\right),Z_{2}\left(\vec{x}_{2}\right)\right)}{\partial\lambda_{2}}= & 1
-\end{align}
+ Diese sind in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Ableitungen-des-Kovarianzmodells"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Mit diesen Ableitungen ist das Maximum Likelihood Verfahren (siehe Kapitel
+ zu finden.
+ Mit diesen Ableitungen ist das Maximum Likelihood Verfahren (siehe Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1558,14 +1543,15 @@ reference "fig:Kriging_RauschFunktion"
 .
  Jeder eingezeichnete Punkt entspricht einer Stützstelle, wobei jede Stützstelle
  an einem anderen Ort ist.
- Mit Hilfe dieser Stützstellen wird dann ein Ordinary-Kriging trainiert
- und dann für den entsprechenden Wertebereich Vorhersagen
+ Mit Hilfe dieser Stützstellen wird ein Ordinary-Kriging trainiert und dann
+ für den entsprechenden Wertebereich Vorhersagen getroffen.
+ 
 \begin_inset Wrap figure
 lines 17
 placement o
 overhang 0in
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1598,7 +1584,6 @@ Konstante Funktion mit normalverteiltem Rauschen
 
 \end_inset
 
- getroffen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4552,7 +4537,7 @@ reference "subsec:UltraRestart"
 \begin_layout Standard
 \begin_inset Wrap table
 lines 7
-placement o
+placement O
 overhang 0in
 width "50col%"
 status collapsed

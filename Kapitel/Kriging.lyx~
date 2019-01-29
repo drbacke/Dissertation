@@ -83,13 +83,15 @@ name "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Da die in dieser Arbeit entwickelte Kriging-Software einen sehr hohen Anwendungs
-bezug hat und auch industriell eingesetzt werden soll, wurde bei der mathematisc
-hen Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnisc
-he Umsetzbarkeit gelegt.
+Da die in dieser Arbeit entwickelte Kriging-Software einen hohen Anwendungsbezug
+ hat und auch industriell eingesetzt werden soll, wurde bei der mathematischen
+ Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnische
+ Umsetzbarkeit gelegt.
  Dieser Punkt wird in der einschlägigen Literatur oftmals außer Acht gelassen,
  was die Effizienz der Software sowie die Generalisierbarkeit negativ beeinfluss
 t.
+ Innerhalb der hier entwickelten Software wurden alle folgend beschriebenen
+ Kriging-Verfahren umgesetzt.
  
 \end_layout
 
@@ -131,7 +133,7 @@ key "kbiqb1953statistical"
  basiert.
  Das Verfahren wurde später nach ihm benannt.
  Der französische Mathematiker Georges Matheron (1963) entwickelte aus Kriges
- Arbeit, schließlich die Kriging Theorie 
+ Arbeit schließlich die Kriging Theorie 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "matheron1963principles"
@@ -419,7 +421,7 @@ Die Kovarianzen
 \end_layout
 
 \begin_layout Standard
-Im Folgenden soll diese drei Schätzer hergeleitet werden.
+Im Folgenden sollen diese drei Schätzer hergeleitet werden.
  Die Herleitung soll dabei so allgemein gehalten werden, dass alle drei
  Schätzer für das Co-, Ordinary- und Gradient-Enhanced-Kriging ohne Änderungen
  anwendbar sind.
@@ -1133,7 +1135,7 @@ key "forrester2007multi"
 \end_inset
 
 .
- Der erste Schritt besteht darin, die notwendigen Kovarianzfunktionen zu
+ Der erste Schritt besteht darin die notwendigen Kovarianzfunktionen zu
  definieren (siehe Abschnitte 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1230,7 +1232,7 @@ Der Prozess hoher Güte
  unkorreliert sind, also gilt:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right) & =0\nonumber \\
+cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right) & =0\\
 cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0\label{eq:KovarianzUnkorreliert}
 \end{align}
 
@@ -1260,7 +1262,7 @@ reference "sec:Co-Kriging-KovarianzfunktionHerleitung"
 ):
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{1}\left(\vec{x}\right),Z_{1}(\vec{x}^{'})\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)\\
+cov\left(Z_{1}\left(\vec{x}\right),Z_{1}(\vec{x}^{'})\right)= & a^{2}cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)+cov\left(Z_{diff}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)\label{eq:asd-1}\\
 cov\left(Z_{1}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)= & acov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\\
 cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\mathrm{=} & cov\left(Z_{2}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right)\label{eq:KovarianzFunktionenalleDrei}
 \end{align}
@@ -1537,9 +1539,8 @@ m\,Eintr\ddot{a}ge\\
 
 Die effiziente Verwendung dieses Verfahrens innerhalb von Turbmaschinenoptimieru
 ngen stellt ein aktuelles Forschungsthema dar.
- Grundlegend kann für diese Verfahren gesagt werden, dass eine effiziente
- Erzeugung der partiellen Ableitungen notwendig ist, um diese gewinnbringend
- einsetzen zu können.
+ Um diese gewinnbringend einsetzen zu können, ist eine effiziente Erzeugung
+ der partiellen Ableitungen notwendig.
  Daher beschäftigt sich ein großer Teil der aktuellen Forschung mit diesem
  Thema.
  Für weitere Informationen sei der Leser auf 
@@ -1674,24 +1675,19 @@ key "Kennedy2000"
 .
  Aus diesem Grund sollen innerhalb dieses Abschnittes die Gemeinsamkeiten
  und Unterschiede herausgestellt werden.
- Beispielsweise gleichen sich die Kovarianzmodelle, siehe Kapitel 
+ Beispielsweise gleichen sich die Kovarianzmodelle (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:COKrigingKovarianzmodell"
 
 \end_inset
 
-.
- Damit gleichen sich auch der Aufbau der Kovarianzmatrix 
+) und damit auch der Aufbau der Kovarianzmatrix 
 \begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
 \end_inset
 
  und im Wesentlichen auch der Aufbau des Erwartungswertvektors 
 \begin_inset Formula $\vec{F}$
-\end_inset
-
- und des Stützstellenvektors 
-\begin_inset Formula $\vec{y}_{s}$
 \end_inset
 
  (siehe Kapitel 
@@ -1702,6 +1698,10 @@ reference "eq:FVektorGEK"
 \end_inset
 
 ).
+ und des Stützstellenvektors 
+\begin_inset Formula $\vec{y}_{s}$
+\end_inset
+
  Die Unterschiede in den Verfahren können durch folgende Punkte zusammengefasst
  werden:
 \end_layout
@@ -1788,8 +1788,9 @@ key "forrester2007multi"
 
 \end_deeper
 \begin_layout Enumerate
-In dem hier beschriebenen Modell werden die Hyperparameter Sätze als ganzes
- trainiert und sind damit nicht mehr unabhängig, siehe Kapitel 
+In dem hier entwickelten Modell werden die Hyperparameter-Sätze vollständig
+ auf einmal trainiert und sind damit nicht mehr unabhängig, siehe Kapitel
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:MinimierungsverfahrenTraining"
@@ -1797,7 +1798,7 @@ reference "chap:MinimierungsverfahrenTraining"
 \end_inset
 
 .
- Das hat folgende Auswirkungen
+ Das hat folgende Auswirkungen:
 \end_layout
 
 \begin_deeper
@@ -1807,7 +1808,7 @@ Die Punkteverteilung kann beliebig verteilt sein: An einem Punkt hoher Güte
 \end_layout
 
 \begin_layout Enumerate
-Der Hyperparameterraum ist deutlich größer, und das Modell aus 
+Der Hyperparameterraum ist deutlich größer und das Modell aus 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
@@ -1839,23 +1840,14 @@ x zerlegt werden muss und der zu trainierende Hyperparameterraum deutlich
  größer ist.
  In den hier betrachteten Anwendungsfällen sind die Prozesskettenzeiten
  allerdings so erheblich, dass die Trainingszeit immernoch keine wesentliche
- Rolle spielt.
- Siehe Kapitel 
+ Rolle spielt (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Reale-Turbomaschinen-Optimierung-1"
 
 \end_inset
 
-.
- Bei sehr schnellen Prozessketten kann die Strategie von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- allerdings wieder sinnvoller sein.
+).
 \end_layout
 
 \end_deeper
@@ -1872,10 +1864,56 @@ key "han2012alternative"
 tionen beschrieben.
  Die bedeutet, dass drei verschiedene Hyperparametersätze gleichzeitig trainiert
  werden.
- Dies führt allerdings zu erheblichen numerischen Problemen.
+ Dies entspricht den Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovHighHighBeschreibung-1"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovLowLowBeschreibung"
+
+\end_inset
+
+.
+ In dieser und in der Arbeit von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kennedy2000"
+
+\end_inset
+
+ werden zusätzliche Annahmen über die Kovarianz getroffen, wodurch sich
+ die Gleichungen vereinfachen und diese Probleme vermieden werden (siehe
+ Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:asd-1"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzFunktionenalleDrei"
+
+\end_inset
+
+).
+ Das in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "han2012alternative"
+
+\end_inset
+
+ beschrieben Vorgehen führt dadurch zu erheblichen numerischen Problemen.
  Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
- nicht mehr gesichert ist.
- Praktisch ist das Verfahren damit nicht anwendbar.
+ nicht mehr gesichert und damit das Verfahren praktisch nicht mehr nutzbar
+ ist.
  Um dieses Problem zu umgehen, wurde in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1887,7 +1925,7 @@ key "han2009improving"
  zu verwenden.
  Verglichen mit einem Ordinary-Kriging welches alle Fidelity Samples beinhaltet,
  besteht der Unterschied dann nur noch in einer eigenen globalen Varianz
- und einem eigenen globalen Erwartungswert für die verschiedenen Fidelities.
+ und einem eigenen globalen Erwartungswert für die verschiedenen Gütestufen.
  Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun
 g zwischen den Gütestufen dargestellt werden.
  Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging Modells

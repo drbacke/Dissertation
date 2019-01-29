@@ -1035,7 +1035,8 @@ Integration in die bestehende Optimierungssoftware AutoOpti
 \end_layout
 
 \begin_layout Itemize
-Unterstützung einer HPC-Rechnerarchitektur mit GPUs
+Unterstützung einer HPC-Rechnerarchitektur mit GPUs (Graphics Processing
+ Unit)
 \end_layout
 
 \begin_layout Itemize
@@ -1203,31 +1204,29 @@ mfang und die Geschwindigkeit wie für eine industrienahe Umgebung benötigt
 
 \begin_layout Standard
 Weitergehend wird die Software über eine prozessinterne synchrone Parallelisieru
-ng durch Threads verfügen und auch moderne Befehlssatzerweiterungen wie
- SSE unterstützen.
+ng durch Threads verfügen und moderne Befehlssatzerweiterungen wie SSE unterstüt
+zen.
  Eine weitere Möglichkeit der Beschleunigung ist die prozessweite Parallelisieru
-ng, damit sollen die notwendigen Berechnungen auch über Rechnergrenzen hinaus
+ng.
+ Damit sollen die notwendigen Berechnungen auch über Rechnergrenzen hinaus
  (bspw.
  auf einem Rechencluster) parallelisierbar sein.
- Hierfür wurde im Rahmen dieser Arbeit ein asynchrones Client/Server System
+ Hierfür wurde im Rahmen dieser Arbeit ein asynchrones Client-/Server-System
  entwickelt, welches die Nutzung verschiedener Hardware-Architekturen über
  Rechnergrenzen hinweg erlaubt.
  Zudem soll die praktische Anwendbarkeit und der Nutzen eines solchen Verfahrens
  überprüft werden.
- Weiterhin soll die Verwendung von GPUs (Graphics Processing Unit) möglich
- sein, womit die notwendigen Berechnungen für das Ersatzmodell beschleunigt
- werden sollen.
- Vergleicht man diese Punkte mit den Softwarepaketen welche in der Literatur
+ Weiterhin soll die Verwendung von GPUs möglich sein, womit die notwendigen
+ Berechnungen für das Ersatzmodell beschleunigt werden sollen.
+ Vergleicht man diese Punkte mit den Softwarepaketen, welche in der Literatur
  beschrieben werden, so kann diese Art der Umsetzung nicht wiedergefunden
  werden.
  Insbesondere ein asynchrones Client/Server System zur Parallelisierung
- und ebenfalls der Mischbetrieb unterschiedlicher Architekturen ist für
- diese Anwendung nicht in der Literatur zu finden.
- 
+ und ebenfalls der Mischbetrieb unterschiedlicher Architekturen.
 \end_layout
 
 \begin_layout Standard
-Der zweite Punkt umfasst die Erweiterung der bestehen Optimierungssoftware
+Der zweite Punkt umfasst die Erweiterung der bestehenden Optimierungssoftware
  AutoOpti.
  Grundsätzlich müssen allgemeine Schnittstellen zwischen Optimierer und
  Ersatzmodellen definiert und umgesetzt werden.
@@ -1238,7 +1237,7 @@ Der zweite Punkt umfasst die Erweiterung der bestehen Optimierungssoftware
  beobachtet und analysiert werden, um die entsprechende Entscheidung treffen
  zu können.
  Die Optimierungssoftware muss außerdem die Daten verschiedener Güte speichern,
- auswerten können und zudem die Verwaltung von unterschiedlichen Prozessketten
+ auswerten können und zudem die Verwaltung unterschiedlicher Prozessketten
  für die jeweiligen Gütestufen übernehmen.
  Die hier vorgestellten Ansätze einer Entscheidungsfunktion sind ebenfalls
  neuartig und unterscheiden sich von anderen Multifidelity-Ansätzen.
@@ -1253,11 +1252,11 @@ Der dritte Punkt umfasst erste analytische Tests, in denen einzelne Komponenten
 \end_layout
 
 \begin_layout Standard
-Der vierte und letzte Punkt ist die Beschreibung einiger bereits durchgeführten
+Der vierte und letzte Punkt ist die Beschreibung einiger bereits durchgeführter
  Anwendungen des gesamten Verfahrens in umfangreichen industriehnahen Turbomasch
 inenoptimierungen.
  Es sollen insbesondere die Eignung von Multifidelity-Optimierungen für
- verschiedenen Anwendungen verglichen werden.
+ verschiedene Anwendungen verglichen werden.
  
 \end_layout
 

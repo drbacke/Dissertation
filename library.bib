@@ -2108,6 +2108,17 @@ die Ergebnisse und auch der Geschwindigkeitszuwachs best{\"a}tigt werden konnten
   Url                      = {http://elib.dlr.de/85734/}
 }
 
+@InProceedings{schmitz2011,
+  Title                    = {NOVEL APPROACH FOR LOSS AND FLOW-TURNING PREDICTION USING OPTIMIZED SURROGATE MODELS IN TWO-DIMENSIONAL COMPRESSOR DESIGN},
+  Author                   = {Andreas Schmitz and Marcel Aulich and Eberhard Nicke},
+  Booktitle                = {ASME Turbo Expo 2011: Power for Land, Sea and Air},
+  Year                     = {2011},
+
+  Abstract                 = {wo-dimensional (2D) streamline curvature methods are still an important tool in modern compressor design. In the past most of the streamline curvature methods made use of empirical correlations to approximate the blade row losses and deviation functions on which the accuracy of streamline curvature methods mainly depend. These empirical correlations are just accurate for a small set of geometric airfoil design parameters for which they where obtained and the prediction of airfoil performance at high Mach numbers or at off-design condition is inaccurate. Nowadays, a new approach is needed to consider highly customized, modern airfoil geometries with an increased number of design parameters. A new method with the possibility to predict the performance of these highly customized airfoils also at off-design condition and high Mach numbers is presented in this paper. This method uses a large airfoil database together with optimized surrogate models to accurately predict airfoil performance. The database consists of approximately 106 randomly created airfoils with randomly created inflow conditions and the airfoil performance which results from the 2D Euler-boundary layer code MISES. The airfoil geometry in this database is described by ten geometrical parameters, e.g. stagger angle, chord length etc.. The flow condition is described by four flow parameters such as the relative inflow Mach number, MVDR, relative inflow angle and Reynolds number. Airfoil performance is represented by total pressure loss and flow-turning. This database was used to train neural networks that provides the relationship between the geometrical/flow parameters and the airfoil performance. The topology of the neural networks was optimized to achieve a model which represents this highly nonlinear functionality at best. This model was integrated in the DLR's in-house streamline curvature tool ACDC which is based on the equations of M{\"O}NIG et al. , GALLIMORE. The code allows viscous throughflow calculations taking into account radial mixing by turbulent diffusion, endwall boundary layers and a model for tip clearance based on the work of DENTON and KR{\"O}GER},
+  Keywords                 = {Throughflow, 2D solver, neural networks, compressor design, loss, flow turning, total pressure loss},
+  Url                      = {https://elib.dlr.de/78594/}
+}
+
 @Article{schmitzasme2011,
   Title                    = {{Novel Approach for Loss and Flow-Turning Prediction Using Optimized Surrogate Models in Two-Dimensional Compressor Design}},
   Author                   = {Schmitz, A and Aulich, M and Nicke, E},
@@ -2134,6 +2145,21 @@ die Ergebnisse und auch der Geschwindigkeitszuwachs best{\"a}tigt werden konnten
   Author                   = {Schnell, R},
   School                   = {Technische Universit{\{}{\"{a}}{\}}t Berlin, Universit{\{}{\"{a}}{\}}tsbibliothek (Diss.-Stelle)},
   Year                     = {2004}
+}
+
+@InProceedings{schnoes2015,
+  Title                    = {Automated Calibration of Compressor Loss and Deviation Correlations},
+  Author                   = {Markus Schnoes and Eberhard Nicke},
+  Booktitle                = {ASME Turbo Expo 2015: Turbine Technical Conference and Exposition},
+  Year                     = {2015},
+
+  Abstract                 = {Throughout preliminary design of multistage axial compressors performance prediction is based on fast 2D throughflow codes incorporating models for loss, deviation and secondary flow effects. To achieve high solution quality these models have to be calibrated on experimental or simulation data. Particularly 2D cascade loss and deviation correlations are of major importance. Correlations available in literature are mostly based on data from early cascade wind tunnel tests of NACA-65 and DCA profile families. In general, calibrations for state-of-the-art airfoil shapes are not published.
+
+This paper describes a methodology to re-calibrate parameters of well-known empirical loss and deviation correlations to CFD simulations of compressor cascades. Correlations describing choke incidence, on- and off-design loss and deviation are presented, resolving dependencies on inlet flow angle, Mach number, Reynolds number and MVDR. Based on a set of loss and deviation polars, nonlinear least-squares problems are solved to determine the empirical parameters. By including shock losses and choking incidence, the model is suited for subsonic as well as supersonic inlet conditions.
+
+Results of the calibration process are shown for two state-of-the-art compressor cascades. The overall model is evaluated on a sub- and a transonic compressor as well as on a transonic fan comparing throughflow results with 3D CFD and experimental data. A high level of automation makes the methodology applicable to arbitrary profile families or in combination with programs for parametric airfoil design.},
+  Keywords                 = {Compressors, Calibration, Throughflow, Correlations, Empirical},
+  Url                      = {https://elib.dlr.de/100262/}
 }
 
 @MastersThesis{schu2014,
