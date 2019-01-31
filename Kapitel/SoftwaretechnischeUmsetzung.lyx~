@@ -2000,14 +2000,6 @@ Die beiden gezeigt Lösungen haben denselben Likelihood Wert, werden vom
  Trainingsverfahren also als gleichwertig angesehen.
  Welche Lösung letztlich vom Training gewählt wird, hängt hauptsächlich
  von der gewählten Initialisierung ab.
- In Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Initialisierung-der-Hyperparamet"
-
-\end_inset
-
- werden verschiedene Möglichkeiten der Initialisierung beschrieben.
  
 \end_layout
 
@@ -2110,7 +2102,7 @@ reference "fig:RauschBeiespielDiagonalaufschlagVarianz"
 \end_inset
 
  zeigt für verschiedene Diagonalaufschläge den resultierenden Likelihood-Wert,
- wobei hier ein kleiner Likelihood ein besseres Ergebnis darstellt.
+ wobei ein kleiner Likelihood ein besseres Ergebnis darstellt.
  Das Ergebnis zeigt, dass der Likelihood-Wert für einem Diagonalaufschlag
  im Bereich von 
 \begin_inset Formula $\lambda>0\land\lambda<1$
@@ -2193,8 +2185,7 @@ name "fig:RauschBeispielVarianzDiag"
 Das hier gezeigte Verhalten entspricht also den Erwartungen.
  Allerdings kann dies bei einer geringeren Datenlage oder einer komplexeren
  Funktion dazu führen, dass der Diagonalaufschlag deutlich überschätzt wird.
- Die praktische Erfahrung zeigt auch genau ein solches Verhalten.
- Aus diesem Grund sollte das Training des Diagonalaufschlags als nur optionale
+ Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
  Funktion des Trainings verfügbar sein.
  
 \end_layout
@@ -2261,15 +2252,22 @@ name "chap:MinimierungsverfahrenTraining"
 \begin_layout Standard
 In diesem Kapitel wird das Trainingsverfahren für alle Kriging-Modelle beschrieb
 en.
- Dafür wird im ersten Teil das Maximum-Likelihood Verfahren vorgestellt,
- dieses liefert ein Maß für die Güte des Modells unter Berücksichtigung
+ Dafür wird im ersten Teil das Maximum-Likelihood Verfahren vorgestellt.
+ Dieses liefert ein Maß für die Güte des Modells unter Berücksichtigung
  der eingestellten Hyperparameter.
  
 \end_layout
 
 \begin_layout Standard
-Ziel des Trainingsverfahrens ist es, die optimalen Hyperparameter zu finden
- die diesen Term maximieren.
+Ziel des Trainingsverfahrens ist es, die Hyperparameter der Kovarianz-Modellfunk
+tion (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+) zu finden die diesen Term maximieren.
  Zu diesem Zweck werden diverse numerische Minimierungsverfahren und auch
  mögliche Initialisierungsverfahren vorgestellt.
  
@@ -2294,22 +2292,6 @@ name "sec:COKrigingTraining"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Um ein Kriging-Modell vollständig aufzustellen, müssen sinnvolle Werte für
- die benötigten Hyperparameter der Kovarianz-Modellfunktion (siehe Kapitel
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Kovarianzmatrix"
-
-\end_inset
-
-) gefunden werden.
- Für diesen Zweck wird sehr häufig die Maximum-Likelihood-Methode angewandt,
- welche in diesem Abschnitt erläutert wird.
- 
 \end_layout
 
 \begin_layout Standard
@@ -2338,11 +2320,11 @@ ung
 \end_inset
 
  darstellt und 
-\begin_inset Formula $\vec{Z}=(\vec{Z}_{0},...,\vec{Z}_{g},...\vec{Z}_{mf})^{T}\in\mathbb{R}{}^{m_{f}}$
+\begin_inset Formula $\vec{Z}=(\vec{Z}_{0},...,\vec{Z}_{g},...\vec{Z}_{mf})^{T}$
 \end_inset
 
  den Vektor mit einem Zufallsprozess 
-\begin_inset Formula $\vec{Z}_{g}\in\mathbb{R}{}^{n_{g}}$
+\begin_inset Formula $\vec{Z}_{g}=\left(Z_{g,1},...,Z_{g,n_{g}}\right)^{T}$
 \end_inset
 
  für jede Gütestufe 
@@ -2393,7 +2375,7 @@ f_{D}(\vec{Z},\vec{F}(\vec{h}),\mathbf{Cov}\mathrm{(\vec{h})})= & \frac{1}{\left
 
 
 \shape italic
-Es gilt: Bei Kenntnis der Realisierungen 
+Es gilt: Bei Kenntnis der Stützstellen 
 \begin_inset Formula $\vec{y}_{s}$
 \end_inset
 
@@ -2401,7 +2383,7 @@ Es gilt: Bei Kenntnis der Realisierungen
 \begin_inset Formula $\vec{h}$
 \end_inset
 
- dann am plausibelsten, wenn der Dichtefunktionswert 
+ für diese dann am plausibelsten, wenn der Dichtefunktionswert 
 \begin_inset Formula $f_{D}$
 \end_inset
 
@@ -2414,7 +2396,7 @@ Es gilt: Bei Kenntnis der Realisierungen
 \end_layout
 
 \begin_layout Standard
-Daraus ergibt sich dann die sogenannte Likelihood-Funktion 
+Daraus ergibt sich dann die Likelihood-Funktion 
 \begin_inset Formula $L(\vec{h})$
 \end_inset
 
@@ -2493,19 +2475,18 @@ Im weiteren Verlauf wird der Term kurz mit
 \begin_inset Formula $\log(L)$
 \end_inset
 
- bezeichnet.
- Die Ableitung nach einem beliebigen Hyperparameter 
+ bezeichnet, wobei die Ableitung nach einem beliebigen Hyperparameter 
 \begin_inset Formula $h_{l}$
 \end_inset
 
- sieht dann wie folgt aus, die vollständige Herleitung ist in Anhang 
+ wie folgt aussieht (die vollständige Herleitung ist in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Differentiation-der-Likelihood-Funktion"
 
 \end_inset
 
- zu finden:
+ zu finden):
 \begin_inset Formula 
 \begin{align}
 \frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)\label{eq:AbleitungLogLikelihood}
@@ -2712,20 +2693,19 @@ key "forrester2007multi,LeGratiet,Kennedy2000"
 ) wählen einen Co-Kriging Ansatz, welcher an jedem Punkt hoher Güte einen
  Punkt niedriger Güte fordert.
  Damit können die Gütestufen in einem abgestuften Verfahren trainiert werden,
- womit diese Problemstellung weg-fällt.
- Es ist allerdings eine iterative Bestimmung möglich, diese Art der Bestimmung
- wird in Anhang 
+ womit diese Problemstellung wegfällt.
+ Es ist allerdings eine iterative Bestimmung möglich, welche in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Iterative-VarianzbestimmungTraining"
 
 \end_inset
 
- beschrieben und bringt allerdings viele numerische Probleme mit sich und
- wurde aus diesem Grund nicht verwendet.
- Innerhalb dieses Verfahrens wurden die Varianzen als zusätzlicher Hyperparamete
-r innerhalb des Trainings freigegeben und werden dann über das Training
- bestimmt.
+ beschrieben wird.
+ Diese bringt allerdings viele numerische Probleme mit sich und wurde aus
+ diesem Grund nicht verwendet.
+ Daher wurden die Varianzen als zusätzlicher Hyperparameter freigegeben
+ und werden dann über das Training bestimmt.
  Die Ableitung des Likelihood-Terms aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2752,7 +2732,7 @@ Um das Training starten zu können, ist eine geeignete Initialisierung der
  Hyperparameter von großer Bedeutung.
  Diese kann die Konvergenz und auch die Stabilität der Minimierung stark
  beeinflussen.
- Innerhalb dieser Arbeit wurden mehrere Ansätze entwickelt, um eine geeignete
+ Innerhalb dieser Arbeit wurden mehrere Ansätze entwickelt um eine geeignete
  Initialisierung zu finden.
  
 \end_layout
@@ -2762,8 +2742,8 @@ Allgemeine Vorbemerkungen und Definitionen
 \end_layout
 
 \begin_layout Standard
-Ein wichtiger Punkt ist die initiale Menge an Daten, die für eine sinnvolle
- Schätzung der Hyperparameter notwendig ist.
+Ein wichtiger Punkt ist eine sinnvolle Anzahl an Stützstellen mit der eine
+ Optimierung initialisiert wird.
  In 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2780,30 +2760,32 @@ key "Jin2001"
 
 \end_inset
 
- hingegen zeigt, dass je nach Funktion auch dreimal die Anzahl der Parameter
- genügt, um vernünftige Schätzungen zu erwarten.
- Oftmals sind die Prozessketten allerdings so langwierig oder die Konvergenzrate
- sehr schlecht, so dass sehr aufwendige Initialisierungen wie sie 
+ hingegen zeigt, dass je nach Funktion auch die dreifache Anzahl der Parameter
+ genügt um vernünftige Schätzungen zu erwarten.
+ Letztlich ist keine einfache Aussage möglich, da die benötigte Anzahl der
+ Stützstellen zu stark von der abzubildenden Funktion abhängt.
+ Weiterhin sind die Prozessketten oftmals so langwierig oder die Konvergenzrate
+ so niedrig, dass sehr aufwendige Initialisierungen wie sie 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "gibbs1997efficient"
 
 \end_inset
 
- vorschlägt nicht möglich sind.
- Eine sehr gute Möglichkeit, um die Datenlage zu beurteilen ist die Nutzung
- der hier entwickelten Kriging-Analysesoftware, siehe 
+ vorschlägt zeitlich nicht möglich sind.
+ Eine sehr gute Möglichkeit um die Datenlage zu beurteilen ist die Nutzung
+ der hier entwickelten Kriging-Analysesoftware ( siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Laufzeit-Analysesoftware-für-Kri"
 
 \end_inset
 
-.
+).
  So kann in der Initialisierungsphase regelmäßig ein Training durchgeführt
  und Beurteilt werden.
  Besonders der Verlauf des Likelihood-Terms über der Optimierungslaufzeit
- eignet sich, um erkennen zu können ob eine ausreichende Anzahl von Stützstellen
+ eignet sich um erkennen zu können ob eine ausreichende Anzahl von Stützstellen
  vorhanden ist oder nicht.
  
 \end_layout
@@ -2813,9 +2795,9 @@ Normalisierung der Daten
 \end_layout
 
 \begin_layout Standard
-Die innerhalb dieser Arbeit entwickelte Software nimmt intern eine Normalisierun
-g der Daten vor.
- Dabei werden die Funktionswerte 
+Die innerhalb dieser Arbeit entwickelte Software nimmt intern eine Standardisier
+ung der Daten vor.
+ Dabei werden sowohl die Funktionswerte 
 \begin_inset Formula $\overrightarrow{y}_{s}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
 
@@ -2836,16 +2818,18 @@ var[x_{i}]=1
 
 \end_inset
 
-Ändert sich jedoch die Datenbasis für das Training und damit auch die Normalisie
-rungskonstanten, so müssen die Hyperparameter neu standardisiert werden,
- in Anhang 
+Soll ein Training auf Basis eines älteren Trainings mit einer veränderten
+ Datenbasis initialisiert werden, so ändern sich die Konstanten für die
+ Standardisierung.
+ Dadurch müssen die Hyperparameter (re)standardisiert werden.
+ In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Renormalisierung-der-Hyperparame"
 
 \end_inset
 
- wird eine solche (Re)standardisierung beschrieben.
+ wird ein solches Verfahren beschrieben.
  
 \end_layout
 
@@ -3086,15 +3070,15 @@ reference "sec:RegularisierungUndRauschen"
 
 \end_inset
 
- beschriebenen Hyperparameter lassen sich in Kategorien aufteilen, diese
- sind in Tabelle 
+ beschriebenen Hyperparameter lassen sich in Kategorien aufteilen, welche
+ in Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Kategorien-von-Hyperparametern"
 
 \end_inset
 
- aufgelistet.
+ aufgelistet sind.
  
 \end_layout
 
@@ -3112,8 +3096,8 @@ reference "subsec:Regularisierung"
 
 \end_inset
 
- beschriebene Verfahren verwendet und wird daher innerhalb dieses Abschnittes
- nicht weiter beschrieben.
+ beschriebene Verfahren verwendet.
+ Die Initialisierung der anderen Gruppen wird folgend beschrieben.
  
 \end_layout
 
@@ -3138,8 +3122,8 @@ key "schmitz2013"
 \end_inset
 
  beschrieben.
- Dafür wird für die Hyperparameter nur ein konstanter Wert verwendet und
- obere und untere Grenzen 
+ Dafür wird für alle Hyperparameter nur ein Wert verwendet und eine obere
+ und untere Grenzen 
 \begin_inset Formula $\theta_{min},\theta_{max}\in\mathbb{R}$
 \end_inset
 
@@ -3153,8 +3137,8 @@ key "schmitz2013"
 
 \end_inset
 
-Danach werden zwischen diesen Grenzen einige Werte ausprobiert und der Likelihoo
-d Term berechnet und letztlich der Satz mit dem besten Likelihood-Term gewählt.
+Danach werden zwischen diesen Grenzen einige Werte ausprobiert und der Hyperpara
+meter mit dem besten Likelihood-Term gewählt.
  Zur Bestimmung der minimalen und maximalen Grenze wird ein in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3178,7 +3162,7 @@ name "subsec:RandomInit"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Möglichkeit zur Initialisierung der Hyperparameter, liegt in
+Eine weitere Möglichkeit zur Initialisierung der Hyperparameter liegt in
  der zufälligen Erzeugung von Parametersätzen.
  Hierfür werden eine gewisse Anzahl an zufälligen Hyperparametersätzen erzeugt
  und mit der Likelihood-Funktion bewertet.
@@ -3193,7 +3177,7 @@ Eine weitere Möglichkeit zur Initialisierung der Hyperparameter, liegt in
 Die zufällige Variation wird mit einer Gleichverteilung realisiert.
  Letztlich wir dann der Parametersatz gewählt, welcher die die beste Likelihood
  Funktion aufweist.
- Die Wahrscheinlichkeit einen sinnvollen Parametersatz zu finden, ist bei
+ Die Wahrscheinlichkeit einen sinnvollen Parametersatz zu finden ist bei
  diesem Verfahren allerdings sehr klein.
  
 \end_layout
@@ -3385,12 +3369,12 @@ Kategorien von Hyperparametern und die verwendete Suchbreite
 
 \end_inset
 
-Um das zufällige Initialisierungsverfahren zu beschleunigen, kann nur ein
- Wert für die Korrelationslängen einer Gütestufe 
+Um das zufällige Initialisierungsverfahren zu beschleunigen, wird jeweils
+ nur ein Wert für die Korrelationslängen einer Gütestufe 
 \begin_inset Formula $k\in\{1,...,s\}$
 \end_inset
 
- angenommen werden:
+ angenommen:
 \begin_inset Formula 
 \begin{equation}
 \theta_{k}=\theta_{i,k}\forall i\in\{1,...,o\}
@@ -3415,8 +3399,8 @@ Die Standardabweichung
 \begin_inset Formula $\sigma_{search}$
 \end_inset
 
- der Normalverteilung gibt in diesem Fall die Suchbreite an, je größer der
- Wert, desto weiträumiger wird gesucht.
+ der Normalverteilung gibt in diesem Fall die Suchbreite an.
+ Je größer der Wert, desto weiträumiger wird gesucht.
  Der Skalierungsfaktor 
 \begin_inset Formula $a$
 \end_inset
@@ -3436,7 +3420,7 @@ g mit
 \end_inset
 
  belegt.
- Die Initialisierung der Prozessvarianz folgt aufgrund der Normalisierung
+ Die Initialisierung der Prozessvarianz folgt aufgrund der Standardisierung
  aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3507,16 +3491,13 @@ Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
 
 \end_inset
 
-Das Kriging Modell wird in der Regel innerhalb einer Optimierung verwendet.
- Dies bedeutet im Normalfall, dass mehrfach trainiert wird und so die Hyperparam
-eter neu bestimmt werden.
- Grundsätzlich wäre es sinnvoll die Hyperparameter aus den letzten trainierten
- Modellen zur Initialisierung zu verwenden.
- Als einfacher Ansatz wäre es z.B.
- möglich die Hyperparameter aus dem letzten Training zu Initialisierung
- zu verwenden.
- Diese Art der Wiederverwendung von alten Trainings ist für das Kriging
- Verfahren ohne Probleme möglich.
+Innerhalb einer Optimierung werden permanent neue Stützstellen berechnet.
+ Deswegen wird regelmäßig neu trainiert und damit neue Hyperparameter bestimmt.
+ In Annahme, dass sich die Hyperparameter bei ausreichender Datenlage nicht
+ mehr wesentlich ändern, ist es sinnvoll die Hyperparameter aus den bereits
+ trainierten Modellen zur Initialisierung zu verwenden.
+ Diese Art der Wiederverwendung von alten Modellen ist für das Kriging Verfahren
+ ohne Probleme möglich.
  
 \end_layout
 
@@ -3546,28 +3527,29 @@ Im ersten Fall besteht die Gefahr, dass das Training durch die ungünstige
 \end_layout
 
 \begin_layout Standard
-Der zweite Fall ist insbesondere am Anfang der Optimierung interessant,
- denn am Anfang hat man in der Regel nur wenig Samples zur Verfügung und
- damit ist es dem Kriging Training noch nicht möglich die richtigen Hyperparamet
-er für die Kovarianzfunktion zu schätzen.
- Diese Fälle treten erfahrungsgemäß leider sehr häufig auf, deshalb sollte
- man auf diese Art der Initialisierung verzichten.
+Der zweite Fall ist insbesondere am Anfang der Optimierung interessant.
+ Da am Anfang meist nur wenig Samples verfügbar sind und damit ist die Schätzung
+ der Hyperparameter noch stark variieren kann.
+ 
 \end_layout
 
 \begin_layout Standard
 Eine rein zufällige Initialisierung hat allerdings den Nachteil, dass die
- Trainingszeit enorm steigt und die Modelle im Laufe der Optimierung sehr
- unterschiedlich ausfallen können.
- Eine andere Möglichkeit der Initialisierung ist eine Mischform zwischen
- zufälliger Initialisierung und der Verwendung alter Modelle.
- In diesem Fall soll ein Kriterium darüber entscheiden, ob ein altes Kriging
- Modell verwendet werden soll oder eine zufällige Initialisierung durchgeführt
- werden soll.
- Zudem ist es sinnvoll nicht nur das letzte Kriging Modell zu betrachten,
- sondern noch weitere Modelle die während der Optimierung entstanden sind.
- Dies macht insbesondere Sinn, da das Ausprobieren eines vorhandenen Hyperparame
-ter Satz im Vergleich zum Training nur einen Bruchteil der Zeit benötigt
- und man so einzelne 
+ Trainingszeit enorm steigt und die Qualität der Modelle im Laufe der Optimierun
+g sehr unterschiedlich ausfallen kann.
+ Um diesen Problemen zu begegnen wurde innerhalb dieser Arbeit ein neues
+ Initialisierungsverfahren entwickelt.
+ Dieses stellt eine hybride Form der zufälligen Initialisierung und der
+ Verwendung alter Modelle dar.
+ Ein Kriterium entscheidet darüber, ob ein altes Kriging-Modell verwendet
+ wird oder eine zufällige Initialisierung durchgeführt wird.
+ Hierfür werden die Likelihood-Werte einiger älteren Modelle mit den neuen
+ Daten berechnet und das Modell mit dem besten Wert gewählt.
+ Wobei eine minimale Verbesserung erwartet wird, bei nicht-erreichen dieser,
+ wird die zufällige Initialisierung gestartet.
+ Dies macht insbesondere Sinn, da die Berechnung des Likelihood-Terms eines
+ vorhandenen Hyperparameter Satz im Vergleich zum gesamten Training nur
+ einen Bruchteil der Zeit benötigt und man so einzelne 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3681,29 +3663,20 @@ dann initType = random
 \end_layout
 
 \begin_layout Standard
-Der Algorithmus startet mit dem Speichern der Dateinamen der letzten 20
- Kriging Modelle aus der laufenden Optimierung (Zeile 2).
+Der Algorithmus startet mit dem auslesen der Dateinamen der letzten 20 Kriging
+ Modelle aus der laufenden Optimierung (Zeile 2).
  Sind noch keine 20 Kriging Modelle erzeugt worden, soll die Initialisierung
  zufällig erfolgen (Zeile 3-6).
- In der darauffolgenden for Schleife erfolgt nun die Bewertung der einzelnen
- Kriging Modelle.
- Für die Bewertung muss zuerst der alte Likelihood Wert ausgelesen werden,
- dies geschieht in Zeile 10.
- Im nächsten Schritt muss der Likelihood mit der aktuellen Datenbasis neu
- berechnet werden, in der Regel sind an dieser Stelle einige Member zur
- Datenbasis hinzugekommen.
- Dieser Schritt ist numerisch auch der aufwendigste, eine effiziente Methode
- diese Funktion zu berechnen wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Inverse-durch-Gleichungssysteme"
-
-\end_inset
-
- beschrieben.
- In der darauffolgenden If-Abfrage geht darum das beste Modell der 20 eingelesen
-en Kriging Modelle zu finden.
- Hierfür wird einfach der kleinste Likelihood verwendet (siehe Kapitel 
+ Wobei dieser Wert einstellbar ist.
+ In der darauf folgenden Schleife findet die Bewertung der einzelnen Kriging
+ Modelle statt.
+ Für die Bewertung muss erst der alte Likelihood Wert ausgelesen werden.
+ Dies geschieht in Zeile 10.
+ Im nächsten Schritt wird der Likelihood Wert mit der aktuellen Datenbasis
+ neu berechnet.
+ In der darauffolgenden If-Abfrage geht darum, das beste Modell der 20 eingelese
+nen Kriging Modelle zu finden.
+ Hierfür wird der beste Likelihood Wert gesucht (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:COKrigingTraining"
@@ -3711,25 +3684,58 @@ reference "sec:COKrigingTraining"
 \end_inset
 
 ).
- Zudem ist eine weitere Bedingung, dass der neu berechnete Likelihood kleiner
- sein muss, als der bereits eingelesene aus dem vorhergehenden Modell.
- Die Überlegung hierbei ist, dass wenn ein neues Sample eingefügt wird und
- dieses nicht in die angenommene Verteilung passt, die Hyperparameter vollständi
-g neu eingestellt werden müssen.
- Im umgekehrten Fall, sollte der Likelihood kleiner werden, da dieser linear
- mit der Sample Anzahl sinkt.
- Als letzte Bedingung ist eine absolute Grenze für den Likelihood Wert angegeben
-, diese basiert rein auf Erfahrungswerten und soll sicherstellen, dass grundsätz
-lich zu schlechte Modelle zufällig initialisiert werden.
- Dies ist meistens am Anfang einer Optimierung der Fall, wenn noch nicht
- genügend Daten vorhanden sind, um die Kovarianzfunktion ausreichend gut
- zu schätzen.
- In diesem Fall ist eine zufällige Initialisierung ebenfalls günstiger.
- Dieses Verfahren wird in der hier vorgestellten Implementierung als Standard
- verwendet und hat sich erfahrungsgemäß als sehr stabil und schnell erwiesen.
- Folgende Abbildung zeigt das Verfahren in Anwendung einer Testoptimierung,
- auf der Ordinate ist der erreichte Likelihoodterm (kleiner ist besser)
- und auf der Abzisse der Optimierungsschritt.
+ Zudem gilt die Bedingung, dass der neu berechnete Likelihood kleiner sein
+ muss, als der bereits eingelesene aus dem vorhergehenden Modell.
+ Die Überlegung ist hierbei, dass eine neue Stützstelle, welche nicht in
+ die bisher angenommene Verteilung passt, den Likelihood Wert verschlechtert
+ und die Hyperparameter neu eingestellt werden müssen.
+ Als letzte Bedingung ist eine absolute Grenze für den Likelihood Wert angegeben.
+ Diese basiert auf Erfahrungswerten und soll sicherstellen, dass zu schlechte
+ Modelle neu initialisiert werden.
+ Dies ist oft am Anfang einer Optimierung der Fall, wenn noch nicht genügend
+ Daten vorhanden sind.
+ Dieses Verfahren wird in der hier entwickelten Software als Standard verwendet.
+ 
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RestartRandomLikelihood"
+
+\end_inset
+
+ zeigt einen Vergleich der unterschiedlichen Initialisierungsverfahren anhand
+ des Beispiels aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Analytische-Optimierungsbeispiel"
+
+\end_inset
+
+.
+ Auf der Ordinate ist der erreichte Likelihoodterm (kleiner ist besser)
+ und auf der Abzisse der entsprechende Optimierungsschritt dargestellt.
+ Durch die Initialsierung mit älteren Modellen wird ein erheblicher Zeitvorteil
+ beim Training erreicht ohne Einbußen im Likelihood-Term.
+ Weiterhin wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Vergleich-QuasiNewton-/"
+
+\end_inset
+
+ ein Vergleich zwischen verschiedenen Trainingsverfahren angestellt, bei
+ dem die hier beschriebene Initialisierung gewinnbringend verwendet wurde.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Reale-Turbomaschinen-Optimierung-1"
+
+\end_inset
+
+ werden weitere Anwendungen gezeigt in denen das Verfahren verwendet wurde.
  
 \end_layout
 
@@ -3745,10 +3751,8 @@ name "subsec:Minimierungsverfahren"
 \end_layout
 
 \begin_layout Standard
-Innerhalb des Kriging Modells wurden zwei verschiedene mehrdimensionale
- Minimierungsverfahren eingesetzt.
- Beide Verfahren waren bereits in einer institutseigenen Software Bibliothek
- verfügbar.
+Innerhalb der hier entwickelten Software werden zwei verschiedene Minimierungsve
+rfahren eingesetzt, welche im Folgenden beschrieben werden.
  
 \end_layout
 
@@ -3775,7 +3779,7 @@ key "riedmiller1993direct,NNSchiffmann"
 
  und ist ein Verfahren erster Ordnung.
  Besonderheit des Verfahrens ist, dass es nur das Vorzeichen der partiellen
- Ableitungen verwendet und nicht den Wert selbst.
+ Ableitungen verwendet und nicht die Werte selbst.
  
 \end_layout
 
@@ -3824,8 +3828,7 @@ Die Schrittweite wird in jedem Iterationsschritt für jeden Hyperparameter
 
 .
  Ist die entsprechende partielle Ableitung aus dem letzten Schritt multipliziert
- mit dem jetzigen Schritt größer als Null, wird die Schrittweite erhöht,
- indem die Schrittweite 
+ mit dem jetzigen Schritt größer als Null, wird die Schrittweite
 \family roman
 \series medium
 \shape up
@@ -3838,7 +3841,7 @@ Die Schrittweite wird in jedem Iterationsschritt für jeden Hyperparameter
 \noun off
 \color none
 \lang english
-
+ 
 \begin_inset Formula $\gamma_{i}^{t}$
 \end_inset
 
@@ -3855,11 +3858,11 @@ Die Schrittweite wird in jedem Iterationsschritt für jeden Hyperparameter
 \noun default
 \color inherit
 \lang ngerman
- multipliziert wird mit 
+ mit 
 \begin_inset Formula $\eta^{+}$
 \end_inset
 
-.
+ multipliziert und dadurch erhöht.
  Wenn die partielle Ableitung aus dem letzten Schritt multipliziert mit
  dem jetzigen Schritt kleiner als Null ist, dann wird die Schrittweite verkleine
 rt durch Multiplikation mit 
@@ -3884,11 +3887,10 @@ rt durch Multiplikation mit
 
 \end_inset
 
-Bei sehr flachen Bereichen der zu minimierenden Funktion, wo die partiellen
- Ableitungen nur sehr klein sind, würden andere Gradientenverfahren nur
- sehr langsam bis gar nicht mehr vorwärts kommen.
- Da dieses Verfahren allerdings die Größe der Gradienten überhaupt nicht
- berücksichtigt, kann dies nicht passieren.
+In sehr flachen Bereichen der zu minimierenden Funktion bietet dieses Verfahren
+ große Vorteile gegenüber anderen gradienten basierten Verfahren.
+ Da in solchen Bereichen die Größe der Gradienten sehr klein ist, das RPROP-Verf
+ahren die Größe aber nicht berücksichtigt.
  Das ist bei der Likelihood Funktion von besonderem Vorteil, da diese bereits
  durch Ihre Definition sehr viele flache Gebiete aufweist.
  
@@ -3906,8 +3908,8 @@ name "subsec:RPROP2"
 \end_layout
 
 \begin_layout Standard
-Ein sehr großes Problem bei dem RPROP-Verfahren ist, dass es relativ viele
- Iterationen benötigt bis es konvergiert.
+Ein Nachteil des RPROP-Verfahren ist, dass es relativ viele Iterationen
+ benötigt bis es konvergiert.
  In jedem Iterationsschritt muss zum einen der Dichtefunktionswert der Likelihoo
 d Funktion berechnet werden (siehe Kapitel 
 \begin_inset CommandInset ref
@@ -3938,18 +3940,13 @@ reference "subsec:Ableitung-LikelihoodRueckMode"
 \end_inset
 
 .
- Für jeden dieser 
+ Die Anzahl der Hyperparameter 
 \begin_inset Formula $o$
 \end_inset
 
- Hyperparameter muss dann jeweils eine partielle Ableitung gebildet werden.
- Ist die Anzahl der Hyperparameter 
-\begin_inset Formula $o$
-\end_inset
-
- sehr groß, wie es im Co-Kriging oft der Fall ist, dann übersteigt der Aufwand
- für die Berechnung der partiellen Ableitungen den Aufwand für die Bestimmung
- des Likelihood-Terms.
+ist also grundsätzlich deutlich höher als bei einem Ordinary-Kriging.
+ Aus diesem Grund kann es passieren, dass der Hauptaufwand dann in der Berechnun
+g der partiellen Ableitungen des Likelihood-Terms liegt.
  Diesen Umstand kann man sich innerhalb des RPROP-Verfahrens zunutze machen:
 \end_layout
 
@@ -3978,9 +3975,9 @@ reference "subsec:RPROP"
 
  zu erreichen.
  Eine gute Möglichkeit ist es verschiedene Lernraten auszuprobieren, dadurch
- müssen zwar mehr Dichtefunktionsauswertungen gemacht werden.
+ müssen zwar mehr Likelihood-Auswertungen gemacht werden.
  Im Gegenzug werden aber deutlich weniger Iterationen benötigt und damit
- auch weniger Berechnungen der partiellen Ableitungen.
+ auch weniger Berechnungen von partiellen Ableitungen.
  In einem Fall wie dem Co-Kriging kann eine solche Vorgehensweise zu einer
  deutlichen Beschleunigung führen.
  Der folgende Pseudo-Programmcode zeigt die Umsetzung des neuen Verfahrens:
@@ -4114,8 +4111,8 @@ Schleife von eta_minusFact=0.9 bis eta_minusFact<=1.1 Schrittweite 0.2
 \end_layout
 
 \begin_layout Standard
-In einem Iterationsschritt, wird dann zuerst der Dichtefunktionswert  mit
- den bisherigen Lernraten 
+In einem Iterationsschritt, wird dann zuerst der Likelihood-Wert  mit den
+ bisherigen Lernraten 
 \begin_inset Formula $\eta^{+},\eta^{-}$
 \end_inset
 
@@ -4124,13 +4121,13 @@ In einem Iterationsschritt, wird dann zuerst der Dichtefunktionswert  mit
 \begin_inset Formula $\eta^{+}$
 \end_inset
 
- leicht erhöht und auch verringert und der Dichtefunktionswert bestimmt.
+ leicht erhöht und auch verringert und der Likelihood-Wert bestimmt.
  Sollte sich das neue 
 \begin_inset Formula $\eta^{+}$
 \end_inset
 
- nicht geändert haben, so wird sich die Berechnung der Dichtefunktion gespart.
- Gewählt wird die Lernrate mit dem geringsten Dichtefunktionswert.
+ nicht geändert haben, so wird die Berechnung des Likelihood-Werts gespart.
+ Gewählt wird die Lernrate mit dem geringsten Likelihood-Wert.
  Für die Lernrate 
 \begin_inset Formula $\eta^{-}$
 \end_inset
@@ -4299,9 +4296,9 @@ Ergebnisse beider Verfahren im direkten Vergleich.
 
 \end_inset
 
-Für diese Art der Lernratenregelung sind maximal 4 neue Dichtefunktionsauswertun
-gen notwendig, im Gegenzug hat man allerdings eine deutliche Verringerung
- der Iterationsanzahl und muss somit deutlich weniger partielle Ableitungen
+Für diese Art der Lernratenregelung sind maximal 4 neue Likelihood-Auswertungen
+ notwendig, im Gegenzug hat man allerdings eine deutliche Verringerung der
+ Iterationsanzahl und muss somit deutlich weniger partielle Ableitungen
  bestimmen.
  Diese sollte insbesondere für das CO-Kriging von großem Vorteil sein.
 \end_layout
@@ -4320,8 +4317,8 @@ key "Lengyel-Kampmann2015"
  113 freie Parameter und für das CO-Kriging somit 228 Hyperparameter (130*2
  und 2x die Prozessvarianzen der Kovarianzfunktionen) und die Datenbasis
  enthielt zu diesem Zeitpunkt 373 Member.
- Das CO-Kriging wurde mit zufälligen Hyperparametern initialisiert und 10x
- mit dem RPROP Verfahren trainiert und 10x mit dem neuen RPROP2 Verfahren.
+ Das CO-Kriging wurde mit zufälligen Hyperparametern initialisiert und jeweils
+ 10x mit dem RPROP/RPROP2 Verfahren trainiert und verglichen.
  Die Vorhersagen der fertig trainierten Ersatzmodelle wurden dann anhand
  einer Testdatenbasis validiert und ein mittlerer Vorhersagefehler bestimmt.
  Tabelle 
@@ -4360,7 +4357,7 @@ name "fig:RPROP_2_Verlauf"
 
 \end_inset
 
-Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
+Gemittelter Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
 \end_layout
 
 \end_inset
@@ -4370,11 +4367,10 @@ Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
 
 \end_inset
 
-Man kann sehen, dass das RPROP Verfahren in diesem Beispiel die 1.86 fache
- Zeit benötigt um Konvergenz zu erreichen.
- Dies wird hauptsächlich durch die deutlich geringere Iterationsanzahl erreicht.
- Die mittleren Fehler sind in etwa vergleichbar, die etwas geringeren Fehler
- beim RPROP2 sind mit hoher Wahrscheinlichkeit zufälliger Natur.
+Das RPROP Verfahren benötigt in diesem Beispiel die 1.86 fache Zeit um Konvergenz
+ zu erreichen.
+ Dies wird hauptsächlich durch die geringere Iterationsanzahl erreicht.
+ Die mittleren Fehler sind in etwa vergleichbar.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4382,20 +4378,15 @@ reference "fig:RPROP_2_Verlauf"
 
 \end_inset
 
- zeigt nochmal den gemittelten Trainingsverlauf beider Verfahren.
+ zeigt den gemittelten Trainingsverlauf beider Verfahren.
  Die rote und schwarze Kurve stellt den mittleren Dichtefunktionswert über
  den Iterationsschritten dar.
  Die Fehlerbalken sind die Standardabweichungen der verschiedenen Trainings.
- Auch hier lässt sich gut erkennen, dass das RPROP2 Verfahren eine deutlich
- schnelleren Konvergenzverlauf hat, insbesondere am Anfang.
- Dies wird durch die schneller eingestellten Deltas erreicht.
- 
-\end_layout
-
-\begin_layout Standard
-Bei einem Verfahren wie dem Co-Kriging wo grundsätzlich eine hohe Anzahl
- an Hyperparametern zu erwarten ist, ist es sinnvoll ein solches Verfahren
- einzusetzen.
+ Es lässt sich erkennen, dass das RPROP2 Verfahren einen deutlich schnelleren
+ Konvergenzverlauf besitzt, insbesondere am Anfang.
+ Bei einem Verfahren wie dem Co-Kriging wo eine hohe Anzahl an Hyperparametern
+ zu erwarten ist, kann dieses Verfahren einen deutlichen Geschwindigkeitszuwachs
+ bringen.
 \end_layout
 
 \begin_layout Subsection*
@@ -4413,15 +4404,16 @@ name "subsec:Quasi-Newton"
 Das zweite implementierte Minimierungsverfahren ist ein Verfahren höherer
  Ordnung namens Quasi Newton.
  Basis für diese Art der mehrdimensionalen Minimierung ist eine Taylor Approxima
-tion zweiten Grades, wobei 
+tion zweiten Grades.
+ Sei 
 \begin_inset Formula $t$
 \end_inset
 
- der Iterationsschritt ist und 
+ der Iterationsschritt und 
 \begin_inset Formula $\mathbf{H}$
 \end_inset
 
- die Hesse Matrix: 
+ die Hesse Matrix, so gilt: 
 \begin_inset Formula 
 \begin{align*}
 f\left(\vec{\theta}\right) & \approx f\left(\vec{\theta}_{t}\right)+\left(\vec{\theta}-\vec{\theta}_{t}\right)^{T}\nabla f\left(\vec{\theta}_{k}\right)+\frac{1}{2}\left(\vec{\theta}-\vec{\theta}_{t}\right)^{T}\mathbf{H}\left(\vec{\theta}_{t}\right)\left(\vec{\theta}-\vec{\theta}_{t}\right)
@@ -4468,7 +4460,14 @@ key "press2007numerical,gill1981practical,gill2007numerical"
 \end_layout
 
 \begin_layout Subsection*
-Vergleich QuasiNewton / RPROP / RPROP2 und Initialisierungsverfahren
+Vergleich QuasiNewton / RPROP / RPROP2 und Initialisierungsverfahren 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Vergleich-QuasiNewton-/"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4540,7 +4539,7 @@ lines 7
 placement O
 overhang 0in
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4659,7 +4658,7 @@ lines 40
 placement O
 overhang 0in
 width "45col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -4690,8 +4689,10 @@ Ergebnisse des Testfalls.
 
 \end_inset
 
-Der Testfehler ist bei allen Verfahren auf einem ähnlich gutem Niveau (der
- Mittelwert des Massenstroms liegt bei 514 kg/s).
+Der Testfehler ist bei allen Verfahren auf einem ähnlich guten Niveau: Der
+ Mittelwert des Massenstroms liegt bei 514 kg/s und der Testfehler liegt
+ damit bei ca.
+ 1%.
  Das RPROP2 Verfahren zeigt insgesamt den besten Testfehler.
  Das Quasi-Newton Verfahren zeigt bei Iteration 4 einen starken kurzfristigen
  Anstieg des Testfehlers.
@@ -4706,21 +4707,21 @@ reference "subsec:COKrigingKovarianzmodell"
 
 \end_inset
 
-) falsch eingeschätzt und die Ergebnisse dadurch verzerrt.
+) einmalig falsch eingeschätzt, wodurch dieser Ausreißer zu erklären ist.
  Der genaue Trainingsverlauf (hier nicht dargestellt) lässt auf ein lokales
  Minimum in der Likelihood Funktion schließen.
- Zu diesem Zeitpunkt war noch die zufällige Initialsierung aktiviert.
+ Zu diesem Zeitpunkt war noch die zufällige Initialisierung aktiviert.
  Nachdem die 
 \begin_inset Quotes gld
 \end_inset
 
-Initialsierung auf Basis vorhandener Kriging Modelle
+Initialisierung auf Basis vorhandener Kriging Modelle
 \begin_inset Quotes grd
 \end_inset
 
  aktiviert wurde, blieb der Testfehler bei allen Verfahren nahezu konstant.
  Der Anstieg des Testfehlers beim Quasi-Newton Verfahren lässt deshalb auf
- eine schlechte Initialsierung als Ursache schließen.
+ eine einmalig schlechte Initialisierung als Ursache schließen.
 \end_layout
 
 \begin_layout Standard
@@ -4740,17 +4741,18 @@ zufälligen
 \begin_inset Quotes grd
 \end_inset
 
- Phase noch sehr stark, in Tabelle 
+ Phase noch sehr stark.
+ Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Mittlere-Trainingszeit-für"
 
 \end_inset
 
- werden die mittleren Trainingszeiten aufgelistet.
- Das RPROP2 Verfahren bietet einen Zeitersparnis von ca.
- 20% gegenüber dem RPROP Verfahren und das QuasiNewton Verfahren einen Zeiterspa
-rnis von ca.
+ zeigt die gemessenen mittleren Trainingszeiten.
+ Das RPROP2 Verfahren bietet eine Zeitersparnis von ca.
+ 20% gegenüber dem RPROP Verfahren und das QuasiNewton Verfahren eine Zeiterspar
+nis von ca.
  74% gegenüber dem RPROP Verfahren.
  Nach der 
 \begin_inset Quotes gld
@@ -4771,11 +4773,11 @@ Fazit
 
 \begin_layout Standard
 Dieses Testbeispiel zeigt zum einen die Robustheit der beiden RPROP-Verfahren
- gegenüber dem Quasi-Newton Verfahren und zum anderen den enormen Nutzen
- des in dieser Arbeit entwickelten Intialisierungsverfahrens.
- Das Initialisierungsverfahren verbessert zum einen die Trainingszeit erheblich
- und zum anderen sorgt es auch für ein deutlich besseren Likelihood-Verlauf
- in allen Verfahren.
+ gegenüber dem Quasi-Newton Verfahren und zum anderen den Nutzen des in
+ dieser Arbeit entwickelten Intialisierungsverfahrens.
+ Das Initialisierungsverfahren verbessert zum einen die Trainingszeit und
+ zum anderen sorgt es auch für ein stabileren Likelihood-Verlauf in allen
+ Verfahren.
  
 \end_layout
 
@@ -4815,13 +4817,13 @@ reference "subsec:Entscheidungsfunktion"
 
 \end_inset
 
-) benötigt die Berechnung einiger Variablen, deren numerische Bestimmung
- von zentraler Bedeutung ist, was die Effizienz und Stabilität des Verfahrens
- angeht.
+) benötigt die Berechnung einiger Variablen.
+ Die numerische Bestimmung dieser Werte ist von zentraler Bedeutung, was
+ die Effizienz und Stabilität des Verfahrens angeht.
 \end_layout
 
 \begin_layout Standard
-Insbesondere ist hierbei die bedingte Varianz 
+Insbesondere sind hierbei die bedingte Varianz 
 \begin_inset Formula $\sigma_{g|j}^{2}\left(\vec{x}\right)=\sigma_{g}^{2}\left(\vec{x}\right)\mid y_{j}\left(\vec{x}\right)\in\mathbb{R}$
 \end_inset
 
@@ -4836,7 +4838,7 @@ reference "BedingteVarianzDefinition"
 \begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}$
 \end_inset
 
- von Bedeutung.
+ von besonderer Bedeutung.
  Wie die genaue Berechnung innerhalb der hier entwickelten Software funktioniert
 , soll in diesem Abschnitt erläutert werden.
 \end_layout
@@ -4846,11 +4848,11 @@ Bedingten Varianzen
 \end_layout
 
 \begin_layout Standard
-Eine Möglichkeit die bedingten Varianzen abzuschätzen ist es, Vorhersagen
+Eine Möglichkeit die bedingten Varianzen abzuschätzen ist es zuerst Vorhersagen
  niedriger Güte mit dem Ersatzmodell zu treffen und mit diesen Vorhersagen
- das Ersatzmodell neu zu trainieren und wieder neue Vorhersagen zu treffen.
+ das Ersatzmodell neu zu trainieren um wieder neue Vorhersagen zu treffen.
  Diese Vorgehensweise ist softwaretechnisch allerdings sehr aufwendig und
- fehleranfällig.
+ auch fehleranfällig.
 \end_layout
 
 \begin_layout Standard
@@ -4859,7 +4861,7 @@ Eine einfachere Möglichkeit ist es die Varianz
 \end_inset
 
  mithilfe einer bedingten Normalverteilung zu berechnen.
- Hierfür ist die bedingte Kovarianz 
+ Hierfür wird die bedingte Kovarianz 
 \begin_inset Formula $\left.cov\left(Z_{g}\left(\vec{x}\right),Z_{j}\left(\vec{x}\right)\right)\right|\vec{y_{s}},\vec{w}$
 \end_inset
 
@@ -4878,7 +4880,7 @@ reference "eq:KovarianzPredictor"
 \begin_inset Formula $\vec{x}\in\mathbb{R}^{k}$
 \end_inset
 
- unter der Bedingung aller bekannten Daten 
+ unter der Bedingung der Kenntnis aller bekannten Daten 
 \begin_inset Formula $\vec{y_{s}}$
 \end_inset
 
@@ -4886,8 +4888,8 @@ reference "eq:KovarianzPredictor"
 \begin_inset Formula $\vec{w}$
 \end_inset
 
- .
- So gilt für 
+ benötigt.
+ Ist diese bekannt, so gilt für 
 \begin_inset Formula $\sigma_{g|j}^{2}\left(\vec{x}\right)$
 \end_inset
 
@@ -4904,7 +4906,9 @@ reference "eq:KovarianzPredictor"
 
 \end_inset
 
-
+Damit lässt sich die bedingte Kovarianz einfach und effizient bestimmen
+ und für eine Anwendung wie die Entscheidungsfunktion sinnvoll nutzen.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -4913,7 +4917,7 @@ Berechnung der Zeiten
 
 \begin_layout Standard
 Grundlegend gibt es für die Entscheidungsfunktion drei verschiedene Zeiten,
- welche berechnet werden müssen.
+ welche bestimmt werden müssen.
  
 \end_layout
 
@@ -4942,15 +4946,16 @@ Die Prozesskettenzeit
 \end_layout
 
 \begin_layout Standard
-Die Zeiten zu bestimmen ist kein großes Problem, da diese innerhalb der
- Optimierung gemessen und gespeichert werden.
- So hat man zumindest die vergangenen Zeiten und kann damit Schätzungen
- anstellen.
+Die Zeiten innerhalb der Optimierung werden gemessen und gespeichert.
+ Auf Basis dieser Messungen können Schätzungen über den weiteren Verlauf
+ angestellt werden.
  Da diese Zeiten innerhalb der Optimierung sehr stark schwanken können und
- weiterhin einen sehr erheblichen Anteil in der Entscheidungsfunktion besitzen,
- ist es sinnvoll einen Mittelwert aus den vergangenen Zeiten zu bilden.
- Allerdings stellt sich dabei die Frage, wie viele vergangene Zeiten in
- das Mittel aufgenommen werden sollen.
+ diese Schwankungen einen wesentlichen Einfluss auf die Entscheidungsfunktion
+ haben können, ist es sinnvoll einen Mittelwert aus den vergangenen Zeiten
+ zu bilden.
+ Dieser hat eine glättende Wirkung auf solche Schwankungen.
+ Allerdings stellt sich dabei die Frage, wie viele Werte für das Mittel
+ verwendet werden sollen.
  Hierbei sollte unterschieden werden: 
 \end_layout
 
@@ -4960,10 +4965,10 @@ Die Prozesskettenzeit
 \end_inset
 
  ändert sich während einer laufenden Optimierung in der Regel nur unwesentlich,
- da die Prozesskette sich während der Optimierung nicht ändert.
- Bei CFD-Optimierungn ist oftmals eine kleine Reduktion der Prozesskettenzeit
- zum Ende einer Optimierung zu beobachten, da die Member sich dem Optimum
- nähern und somit schneller konvergieren.
+ da sich die Prozesskette während der Optimierung nicht ändert.
+ Bei CFD-Optimierungen ist oftmals eine kleine Reduktion der Prozesskettenzeit
+ zum Ende einer Optimierung zu beobachten, da Member nahe dem Optimum oftmals
+ schneller konvergieren.
  Allerdings ist dies nicht immer der Fall und die zeitliche Differenz nicht
  ausschlaggebend.
  Aus diesem Grund wird in der hier entwickelten Software, das Mittel aus
@@ -5002,7 +5007,7 @@ Die Trainingszeit
  ändern sich im Verlauf der Optimierung stetig.
  Typischerweise wachsen diese mit steigender Stützstellenanzahl an.
  Verwendet man bswp.
- eine Restart Methode wie die in dieser Arbeit entwickelte (siehe Kapitel
+ eine Restart Methode, wie die in dieser Arbeit entwickelte (siehe Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5010,13 +5015,14 @@ reference "subsec:UltraRestart"
 
 \end_inset
 
-), dann kann die Trainingszeit schlagartig fallen.
- Aufgrund dieser starken zeitlichen Schwankungen ist es sinnvoller, für
- den Mittelwert der Zeit nur eine kleine Anzahl 
+), dann kann die Trainingszeit aber auch schnell fallen.
+ Aufgrund dieser zeitlichen Schwankungen ist es sinnvoller sollte eine kleinere
+ Anzahl 
 \begin_inset Formula $m$
 \end_inset
 
- an bereits gemessenen Zeiten zu verwenden: 
+ an bereits gemessenen Zeiten verwendet werden, um mögliche Änderungen schneller
+ abzubilden: 
 \end_layout
 
 \begin_layout Standard
@@ -5028,16 +5034,16 @@ t_{opti} & =\frac{1}{m}\stackrel[i=1]{i\leq m}{\sum}t_{opti,(n-i)}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Standardeinstellung in der hier entwickelten Software ist eine Anzahl von
  
 \begin_inset Formula $m=15$
 \end_inset
 
-, diese hat sich für die meisten Anwendungen als günstig erwiesen.
+ und für die Prozesskettenzeiten 
+\begin_inset Formula $n=100$
+\end_inset
+
+.
  
 \end_layout
 
@@ -5054,11 +5060,11 @@ name "par:Minimale-Menge-an"
 
 \begin_layout Standard
 Es kann vorkommen, dass die HF und LF Funktionen so stark korreliert sind,
- dass die Entscheidungsunktion sich nur noch für die Prozessketten niedriger
- Güte entscheidet.
- Grundlegend ist dieses Verhalten auch sinnvoll und erwünscht.
+ dass sich die Entscheidungsunktion nur noch für Member niedriger Güte entscheid
+et.
+ Prinzipiell ist dieses Verhalten auch sinnvoll und erwünscht.
  Jedoch interessiert den Anwender letztendlich das Ergebnis hoher Güte.
- Aus diesem Grund wird der Volume-Gain-Term im Raum hoher Güte berechnet.
+ Aus diesem Grund wird der Volumenzugewinn im Raum hoher Güte berechnet.
  Um es kurz zu beschreiben: 
 \shape italic
 Mit einem Member niedriger Güte kann kein Volumenzugewinn erreicht werden,
@@ -5067,16 +5073,15 @@ Mit einem Member niedriger Güte kann kein Volumenzugewinn erreicht werden,
 \end_layout
 
 \begin_layout Standard
-Aus diesem Grund ist es sinnvoll eine Mindestrate von Membern hoher Güte
- vorzugeben.
+Aus diesem Grund kann es sinnvoll sein eine Mindestrate von Membern hoher
+ Güte vorzugeben.
  In der hier entwickelten Software wird dafür ein prozentualer Anteil hoher
  Güte (HFProzent Soll) vorgegeben.
  Wird dieser Anteil unterschritten, so soll ein Member hoher Güte erzwungen
  werden.
- Um die Entscheidungsfunktion aber nicht vollständig zu umgehen, soll bei
- besonders aussichtsreichen Membern weiterhin möglich sein, einen Member
- niedriger Güte zu berechnen.
- 
+ Bei besonders aussichtsreichen Membern niedriger Güte, kann dieser Zwang
+ allerdings auch umgangen werden.
+ Die Entscheidungsfunktion wird so also nur teilweise ausgehebelt.
 \end_layout
 
 \begin_layout Standard
@@ -5086,32 +5091,33 @@ Die Grundidee ist es, die Grenze für das Entscheidungskriterium (KriteriumGrenz
  Dafür werden als erstes die aktuellen Anteile hoher Güte bestimmt (HFProzentIst
 ) und dann das Maximum der letzten 10 berechneten Entscheidungskriterien
  (Kriterium10Max) bestimmt.
- Die neue Grenze für das Kriterium wird dann so entschieden:
+ Die neue Grenze für das Kriterium wird dann folgendermaßen entschieden:
 \end_layout
 
 \begin_layout Itemize
-Ist die Differenz zwischen Soll und Ist HF Prozentsatz größer als 0% aber
- kleiner als 5% 
+Ist die Differenz zwischen Soll- und Ist-Wert des Mindestprozentsatz größer
+ als 0% aber kleiner als 5% 
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
 Setze das Kriterium auf das Maximum der letzten 10.
- Die Wahrscheinlichkeit für einen HF Member ist also sehr hoch, bekommt
- das Entscheidungskriterium aber einen Member welcher einen höheren Wert
- als die letzten 10 hatte, so kann trotzdem nochmal ein LF Member erzeugt
- werden.
- Die soll verhindern, dass besonders gute LF Member verworfen werden.
+ Die Wahrscheinlichkeit für einen Member hoher Güte ist also sehr hoch,
+ bekommt das Entscheidungskriterium aber einen Member welcher einen höheren
+ Wert als die letzten 10 hatte, so kann trotzdem nochmal ein Member niedriger
+ Güte erzeugt werden.
+ 
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-Ist die Differenz zwischen Soll und Ist HF Prozentsatz größer als 5% 
+Ist die Differenz zwischen Soll- und Ist-Wert des Mindestprozentsatz größer
+ als 5% 
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Erzwinge einen HF Member
+Erzwinge einen Member hoher Güte
 \end_layout
 
 \end_deeper
@@ -5196,7 +5202,7 @@ Wenn (HFProzentSoll-HFProzentIst>0.05)
 \end_layout
 
 \begin_layout Paragraph
-Umschalten auf HF bei einem sehr guten Ersatzmodell
+Dauerhaftes Umschalten auf hohe Güte bei einem sehr guten Ersatzmodell
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Umschalten-auf-HF"
@@ -5208,34 +5214,15 @@ name "par:Umschalten-auf-HF"
 
 \begin_layout Standard
 Die Vorhersagefehler der Ersatzmodelle gehen bei ausreichender Anzahl an
- Stützstellen nahezu gegen 0.
- Dieser Zustand kann für einzelne Ersatzmodelle vorkommen, wenn eine sehr
- hohe Anzahl an Stützstellen erreicht wurde oder wenn die zu lernende Funktion
- besonders einfach ist.
+ Stützstellen nahezu gegen Null.
  Trifft zusätzlich der Umstand ein, dass die Korrelation zwischen hoher
  und niedriger Güte extrem hoch ist, so könnte es passieren, dass die Entscheidu
-ngsfunktion sich zu oft für die Prozesskette niedriger Güte entscheidet.
+ngsfunktion sich nur noch für die Prozesskette niedriger Güte entscheidet.
+ Aus diesem Grund sollen die Ersatzmodelle, welche eine gewisse Güte erreicht
+ haben, nicht mehr in die Entscheidungsfunktion einfließen.
+ Um ein solches Verhalten zu verwirklichen wird vor dem eigentlichen Aufruf
+ der Entscheidungsfunktion der Quotient aus vorhersagter Standardabweichung
  
-\end_layout
-
-\begin_layout Standard
-Um die Problematik zu verdeutlichen soll ein Gedankenexperiment helfen:
- Angenommen es soll eine Funktion optimiert werden, welche von dem Ersatzmodell
- bereits nach der Initialisierungsphase perfekt gelernt wurde.
- Zusätzlich sind die niedrige und hohe Gütestufe nahezu vollständig korreliert,
- die niedriger Gütestufen ist aber deutlich schneller.
- Der Optimierungsalgorithmus wäre also in der Lage, das Optimum sofort finden
- zu können.
- Typischerweise möchte der Anwender aber das hochwertigste Ergebnis, da
- dieses das Vertrauenswürdigste darstellt.
- Die Entscheidungsfunktion sollte also bei ausreichender Genauigkeit eher
- zu Entscheidungen hoher Güte tendieren.
-\end_layout
-
-\begin_layout Standard
-Um ein solches Verhalten automatisiert zu verwirklichen wird vor dem eigentliche
-n Aufruf der Entscheidungsfunktion der Quotient aus vorhersagter Standardabweich
-ung 
 \begin_inset Formula $\sigma_{h}\left(\vec{x}\right)$
 \end_inset
 
@@ -5251,25 +5238,18 @@ ung
 \end_layout
 
 \begin_layout Standard
-Für diesen Fall wurde die Standardabweichung gegenüber der Varianz bevorzugt,
- da diese in der Größenordnung der Funktion selbst liegt und somit für den
- Anwender einfacher zu interpretieren ist.
-\end_layout
-
-\begin_layout Standard
 Der Anwender hat nun die Möglichkeit eine Grenze für dieses Verhältnis anzugeben.
  Wird diese Unterschritten, so wird diese Funktion nicht für die Entscheidung
- berücksichtigt und erhöht somit nicht den Wert des Entscheidungskriteriums.
+ berücksichtigt.
  Werden dadurch bspw.
- alle Funktionen nicht berücksichtigt, so würde das Kriterium Null werden
- und sich zugunsten der hochwertigeren Prozesskette entscheiden.
+ alle Funktionen nicht berücksichtigt, so würde die hochwertigste Prozesskette
+ verwendet.
+ 
 \end_layout
 
 \begin_layout Standard
-Typische Werte sind 1%, allerdings ist dieser Wert sehr Anwendungs- und
- Anwender-spezifisch.
- Der Anwender hat so auch die Möglichkeit die Optimierung frühzeitig in
- Richtung hoher Güte zu bringen, indem er diesen Wert erhöht.
+Die Standardeinstellung liegt bei 1%, allerdings ist dieser Wert sehr Anwendungs
+- und Anwender-spezifisch.
  
 \end_layout
 
@@ -5286,10 +5266,9 @@ name "sec:Numerische-Effizienz-steigern"
 
 \begin_layout Standard
 Innerhalb dieses Abschnittes sollen die wichtigsten softwaretechnischen
- Entwicklungen, welche im Rahmen dieser Arbeit entstanden sind, vorgestellt
- werden.
+ Entwicklungen dieser Arbeit vorgestellt werden.
  Hierzu zählen z.B.
- der Modulare Aufbau der Software, der es ermöglicht verschiedene Verfahren
+ der modulare Aufbau der Software, der es ermöglicht verschiedene Verfahren
  wie Supporting-Vector-Machines und alle Kriging-Verfahren innerhalb einer
  Software unterzubringen und so Redundanzen zu vermeiden.
  
@@ -5298,24 +5277,24 @@ Innerhalb dieses Abschnittes sollen die wichtigsten softwaretechnischen
 \begin_layout Standard
 Weiterhin wurden zahlreiche Anstrengungen unternommen um die Software möglichst
  effizient zu gestalten.
- Hierzu zählt eine eigene Matrix-Klasse, welche zahlreiche Architekturen
+ Hierzu zählen eine eigene Matrix-Klasse, welche zahlreiche Architekturen
  abdeckt wie z.B.
- GPUs, Intel MKL Bibkiotheken und OpenMP mit AVX/SSE Beschleunigung.
- Dadurch ist es möglich, die Software sehr flexibel auf unterschiedlichen
+ GPUs, Intel MKL und OpenMP mit AVX/SSE Beschleunigung.
+ Dadurch ist es möglich die Software sehr flexibel auf unterschiedlichen
  Systemen einzusetzen und die vorhandene Prozessorarchitektur effizient
  zu nutzen.
  Weiterhin wurde eine Netzwerkbibliothek entwickelt, welche es ermöglicht
  zahlreiche numerische Operationen asynchron auf mehrere Rechner zu verteilen,
  unabhängig von der Architektur.
- Das System ist zudem stark ausfallsicher: Fällt ein Server aus, übernimmt
- ein anderer dessen Aufgaben.
+ Das System ist zudem ausfallsicher: Fällt ein Server aus, übernimmt ein
+ anderer dessen Aufgaben.
  
 \end_layout
 
 \begin_layout Standard
-Neben diesen beschriebenen Maßnahmen werden noch einige andere Entwicklungen
+Neben diesen beschriebenen Maßnahmen, werden noch einige andere Entwicklungen
  beschrieben, die den Einsatz der Kriging-Software für den Bereich des Turbomasc
-hinendesigns im industriellen Umfeld effizient nutzbar macht.
+hinendesigns im industriellen Umfeld effizient nutzbar machen.
  
 \end_layout
 
@@ -5331,31 +5310,33 @@ name "subsec:Softwarearchitektur-und-Laufzeit"
 \end_layout
 
 \begin_layout Standard
-Zahlreiche in der Literatur vorgestellten Ansätze (siehe 
+Zahlreiche in der Literatur vorgestellten Umsetzungen der Kriging-Verfahren
+ (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LeGratiet,forrester2007multi"
 
 \end_inset
 
-) sind oftmals in Matlab oder ähnlichen Umgebungen umgesetzt, dadurch entstehen
- oftmals Schwächen in der Performance und insbesondere der Benutzerfreundlichkei
-t.
- Das hier entwickelte Verfahren ist objektorientiert, verwendet moderne
- Interface basierte Programmierung Dies ermöglicht eine sehr große Flexibilität
- und Modularität in der Software, was bereits an den zahlreichen integrierten
- Verfahren und nutzbaren Architekturen zu sehen ist.
+) sind oftmals in Matlab oder ähnlichen Umgebungen umgesetzt.
+ Die Implementierung des Verfahrens ist dadurch sehr einfach, allerdings
+ entstehen dabei Schwächen in der Performance, Erweiterbarkeit und insbesondere
+ der Benutzerfreundlichkeit.
+ Das hier entwickelte Verfahren wurde von Anfang an auf Erweiterbarkeit
+ und Modularität ausgelegt.
+ Hierfür kommen Objektorientierung und moderne Interface basierte Programmierung
+ zum Einsatz.
+ Dies ermöglicht eine sehr große Flexibilität und Modularität in der Software,
+ was bereits an den zahlreichen integrierten Verfahren und nutzbaren Architektur
+en zu sehen ist.
  Die gewählte Programmiersprache ist C++, wobei der GCC-Compiler ab Version
  4.7 unterstützt wird.
  Eine Kompilierung mit dem Intel Compiler ist ebenfalls ab Version 12.1 möglich.
  Weiterhin werden die Messaging-Middleware-ZeroMQ und die Boost Bibliothek
  Version 1.62 benötigt.
- 
-\end_layout
-
-\begin_layout Standard
-Im folgenden sollen die wichtigsten Klassen benannt und kurz beschrieben
- werden.
+ Um einen Einblick in das die Softwarearchitektur zu bekommen, werden im
+ Folgenden die wichtigsten Klassen benannt und deren Funktionsweise kurz
+ beschrieben.
  
 \end_layout
 
@@ -5383,7 +5364,7 @@ reference "fig:Klassenstruktur-der-Klasse"
  Ein Objekt dieser Klasse beinhaltet alle Parameter, Funktionswerte und
  ggf.
  partielle Ableitungen (Gradient-Enhanced-Kriging).
- Die partiellen Ableitungen werden als assoziatives Datenfeld gespeichert,
+ Die partiellen Ableitungen werden als assoziatives Datenfeld gespeichert
  um die Zuordnung zu den Parametern zu gewährleisten und um unvollständige
  Daten zuzulassen.
  Der Zugriff auf Variablen, Funktionswerte und partielle Ableitungen erfolgt
@@ -5461,7 +5442,7 @@ CorrelationFunction
 \end_inset
 
  legt den Aufbau der Kovarianzklassen fest und in den Spezialisierungen
- sind die Implementierungen der einzelnen Kovariansfunktionen.
+ sind die Implementierungen der einzelnen Kovariansfunktionen enthalten.
  Im Rahmen dieser Arbeit wurden die 
 \begin_inset Quotes gld
 \end_inset
@@ -5510,23 +5491,7 @@ reference "subsec:Gauss-Korrelationsfunktion-mit"
 \end_inset
 
  zu finden.
- Der Name 
-\begin_inset Quotes gld
-\end_inset
-
-CorrelationFunction
-\begin_inset Quotes grd
-\end_inset
-
- mag hier etwas verwirrend sein, da es sich eigentlich um Kovarianzfunktionen
- handelt.
- Diese ungünstige Namensgebung ist historisch entstanden und kann nur mit
- großem Aufwand geändert werden, aus diesem Grund wurde bisher darauf verzichtet.
- 
-\end_layout
-
-\begin_layout Standard
-Für ein Co-Kriging gibt es die Spezialisierung 
+ Für ein Co-Kriging gibt es die Spezialisierung 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5545,7 +5510,14 @@ CorrelationFunctionLinearCombination
 \begin_inset Formula $a$
 \end_inset
 
- abgebildet werden: 
+ abgebildet werden (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:COKrigingKovarianzmodell"
+
+\end_inset
+
+): 
 \end_layout
 
 \begin_layout Enumerate
@@ -5571,7 +5543,8 @@ CorrelationFunctionLinearCombination
 
 \begin_layout Standard
 Innerhalb des Programms werden also nur zwei Kovarianzmodellfunktionen mit
- eigenen Hyperparametersätze benötigt, die dritte 
+ eigenen Hyperparametern benötigt.
+ Die dritte Funktion 
 \begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
@@ -5615,7 +5588,7 @@ CorrelationContainer
 \begin_inset Quotes grd
 \end_inset
 
- übernommen, welche im folgenden noch erläutert wird.
+ übernommen, welche noch erläutert wird.
  
 \end_layout
 
@@ -5664,15 +5637,19 @@ CovMatrixDer
 \end_inset
 
  geschrieben, welche jeweils als Referenz übergeben werden.
- Im Falle eine Gradient-Enhanced-Krigings werden die benötigten Kovarianzfunktio
-nen der vorgegebenen partiellen Ableitungen direkt mit bestimmt und ebenfalls
- in die Matrix geschrieben.
- Die Position der jeweiligen Einträge in der Matrix wird in einer internen
- Map gespeichert, welche zu Anfang des Programms erzeugt wird und den Objekten
- bekannt ist.
- Auf diese Weise übergibt man der Kovarianzfunktion nur zwei Objekte der
- Point Klasse und die Kovarianzfunktion schreibt die korrekten Ergebnisse
+ Durch die unterschiedlichen Verfahren, wie z.B.
+ dem Gradient-Enhanced- oder dem Co-Kriging können die Kovarianzmatrizen
+ unterschiedliche Strukturen aufweisen.
+ Die Position der unterschiedlichen Einträge der Matrix wird daher festgelegt
+ und in einem internen assoziativen Container gespeichert.
+ Dieser wird zu Anfang des Programms erzeugt und allen Objekten die Zugriff
+ auf die Matrizen nehmen zur Verfügung gestellt.
+ Auf diese Weise werden der Kovarianzfunktion nur zwei Objekte der Point
+ Klasse übergeben und die Kovarianzfunktion schreibt die korrekten Ergebnisse
  direkt an die korrekte Stelle der entsprechenden Matrix.
+ Hierdurch wird der Aufbau der Matrix zentral gespeichert, was mögliche
+ Änderungen vereinfacht.
+ Zudem ist damit eine effiziente asynchrone Parallelisierung möglich.
  Weiterhin wird in Abschnitt 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5712,7 +5689,8 @@ CorrelationFunction
 
 ).
  Alle weiteren Zugriffe auf die Kovarianzfunktionen erfolgen immer über
- ein Objekt dieser Klasse und niemals direkt.
+ ein Objekt dieser Klasse und niemals direkt, wodurch Redundanzen vermieden
+ werden.
  Weiterhin wird die Zuordnung der Kovarianzobjekte auf entsprechende Gütestufenp
 aare von dieser Klasse übernommen.
  Dies bedeutet konkret, dass das Aufstellen der Kovarianzmatrizen immer
@@ -5738,7 +5716,7 @@ Neben der Steuerung der Kovarianzfunktionen übernimmt diese Klasse auch
  Grund in einer übergeordneten Instanz verwaltet werden.
  Diese übergeordnete Instanz ist der CorrelationContainer.
  Ebenfalls stellen die Diagonalaufschläge eine Besonderheit dar und werden
- aus diesem Grund ebenfalls dort zentral verwaltet.
+ dort ebenfalls zentral verwaltet.
  
 \end_layout
 
@@ -5788,7 +5766,7 @@ DensityFunction
  Diese Klassenstruktur soll es ermöglichen unterschiedlichste Interpolations/Kla
 ssifikations-Verfahren innerhalb des Programms umsetzen zu können.
  Prinzipiell lassen sich mit dieser Klassenstruktur alle Arten von Verfahren
- einbinden, die folgende Merkmale aufweisen:
+ einbinden, die die folgenden Merkmale aufweisen:
 \end_layout
 
 \begin_layout Itemize
@@ -5856,10 +5834,9 @@ calcDensityDerivative
 \end_inset
 
  gibt alle Ableitungen der Bewertungsfunktion nach allen Hyperparametern
- in Form einer Matrix zurück.
- Die Matrix hat in der Regel nur eine Dimension eines Vektors.
- Die Methode createAndInvertCovMat soll die Kovarianzmatrix erzeugen und
- eine notwendige Invertierung oder Zerlegung vornehmen.
+ in Form eines Vektors zurück.
+ Die Methode createAndInvertCovMat erzeugt die Kovarianzmatrix und nimmt
+ die notwendige Invertierung oder Zerlegung vor.
  Bisher implementierte Spezialisierungen sind:
 \end_layout
 
@@ -5878,8 +5855,8 @@ Supporting Vector Machines
 \end_inset
 
 .
- Diese wurden im Rahmen einer studentischen Bachelorarbeit implementiert,
- weitere Informationen sind in 
+ Diese wurden im Rahmen einer studentischen Bachelorarbeit implementiert.
+ Weitere Informationen sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "schu2014"
@@ -5915,10 +5892,10 @@ CorrelationClassificator
 
  sollen hier nicht weiter thematisiert werden, da sie nicht Teil dieser
  Arbeit waren.
- Dennoch soll damit gezeigt werden, dass die hier etablierte Klassenstruktur
- es mit wenig Aufwand ermöglicht zahlreiche Verfahren zu implementieren.
- Zumindest wenn eine gewisse Ähnlichkeit zum Kriging-Verfahren vorhanden
- ist.
+ Dennoch kann damit gezeigt werden, dass die hier etablierte Klassenstruktur
+ es mit wenig Aufwand ermöglicht zahlreiche Verfahren zu implementieren
+ und vorhandene Softwarestrukturen effizient wiederzuverwenden.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -5935,7 +5912,7 @@ reference "fig:Vereinfachtes-UML-Diagramm-1"
 
  zeigt den Aufbau der Schnittstelle zwischen AutoOpti und externen Ersatzmodelle
 n.
- Die Klasse MetaModel in innerhalb des Programms 
+ Die Klasse MetaModel ist innerhalb des Programms 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5979,20 +5956,14 @@ NNInterface
  bezieht sich das Wort Interface in diesem Fall auf die Schnittstelle zwischen
  den verschiedenen Programmen und ist nicht, wie im sonst üblich, im Sinne
  einer objektorientierten Interface Programmierung gemeint.
- Das Kriging-Interface stellt hier auch die Schnittstellen zwischen den
- Programmiersprachen C und C++ dar, da AutoOpti in C geschrieben wurde und
- das gesamte Kriging in C++.
+ Da die Software AutoOpti in C geschrieben wurde, stellt das Kriging-Interface
+ damit also auch die Schnittstelle zwischen den Programmiersprachen C und
+ C++ dar.
  Es finden dort zahlreiche Übersetzungen von C-Strukturen in C++-Objekte
  usw.
  statt.
  Die exakte Funktionsweise stellt allerdings keinen Mehrwert für diese Arbeit
  dar und soll daher nicht weiter beschrieben werden.
- 
-\end_layout
-
-\begin_layout Standard
-Über diese Schnittstelle sind das hier beschrieben Kriging-Verfahren angebunden
- und eine DLR-Neuronale-Netzwerk Entwicklung.
  
 \end_layout
 
@@ -6009,9 +5980,9 @@ MinimizerInterface
 \begin_inset Quotes grd
 \end_inset
 
- beschreibt die Schnittstelle für ein Minimierungsverfahren.
- Fünf Minimierungsverfahren implementieren diese Schnittstelle.
- Die gesamte Struktur wird in dem UML-Diagramm in Abbildung 
+ beschreibt die Schnittstelle für ein Minimierungsverfahren, wobei fünf
+ Spezialisierungen diese Schnittstelle implementieren.
+ Die Struktur wird in dem UML-Diagramm in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:UML-Diagramm-der-Klasse"
@@ -6044,9 +6015,9 @@ reference "sec:Initialisierung-der-Hyperparamet"
 
  beschrieben, wobei es sich dabei um zufällige Initialisierungsverfahren
  handelt.
- Die Software macht allerdings keinen Unterschied zwischen einem Trainings-
- und Initialisierungsverfahren, beide Verfahren wären also auch als Trainingsver
-fahren zulässig und umgekehrt.
+ Weiterhin macht die Software keinen Unterschied zwischen einem Trainings-
+ und Initialisierungsverfahren, beide Verfahren sind also auch als Trainingsverf
+ahren zulässig und umgekehrt.
  Die Spezialisierungen 
 \begin_inset Quotes gld
 \end_inset
@@ -6079,7 +6050,11 @@ reference "subsec:Minimierungsverfahren"
 \end_inset
 
  dar.
- Die Schnittstelle 
+ 
+\end_layout
+
+\begin_layout Standard
+Für alle diese Verfahren schreibt die Schnittstelle 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6087,7 +6062,7 @@ MinimizerInterface
 \begin_inset Quotes grd
 \end_inset
 
- schreibt zwei 
+ zwei 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6104,8 +6079,8 @@ callMinimizer: Mit diesem Aufruf wird das Verfahren gestartet und das Minimum
 \end_layout
 
 \begin_layout Itemize
-MinimizerInterface (Konstruktor): Diesem Konstruktor muss Objekt vom Typ
- 
+MinimizerInterface (Konstruktor): Diesem Konstruktor muss ein Objekt vom
+ Typ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6226,7 +6201,11 @@ calcDensity
 \end_inset
 
  aufgerufen und der Funktionswert bestimmt.
- Die Methode 
+ 
+\end_layout
+
+\begin_layout Standard
+Die Methode 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6236,11 +6215,15 @@ saveFunction
 
  beschreibt das Verhalten des Verfahrens, wenn ein Iterationsschritt nicht
  erfolgreich war.
- Zum Beispiel, wenn die Zerlegung der Matrix nicht funktioniert hat.
- In der Regel wird die Schrittweite halbiert und der letzte Schritt nochmal
- ausgeführt oder der Diagonalaufschlag erhöht.
+ Beispielsweise, wenn die Zerlegung der Matrix nicht funktioniert.
+ In solch einem Fall wird die Schrittweite halbiert und der letzte Schritt
+ nochmal ausgeführt und der Diagonalaufschlag erhöht.
  Wenn keine dieser Maßnahmen greift, wird das Minimierungsverfahren abgebrochen.
- Die Methode 
+ 
+\end_layout
+
+\begin_layout Standard
+Die Methode 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6252,7 +6235,11 @@ convergenceCheck
  Typischerweise gilt das Verfahren als konvergiert, wenn sich die Funktionswerte
  seit einer bestimmten Anzahl an Iterationen nicht mehr verändert oder verbesser
 t haben.
- Die Methode 
+ 
+\end_layout
+
+\begin_layout Standard
+Die Methode 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6268,11 +6255,10 @@ constraintFunctionDerivative
 \begin_inset Quotes grd
 \end_inset
 
- gibt einen Restriktionsterm, bzw.
+ geben einen Restriktionsterm, bzw.
  dessen Ableitung zurück.
  Diese Methode ist allerdings nur optional, falls diese nicht implementiert
- werden soll, so muss ein konstanter Integer Wert von 0 zurückgeben werden
- womit die Restriktionen dann ignoriert werden.
+ werden soll, so muss ein konstanter Integer Wert von 0 zurückgeben werden.
  Die Methode 
 \begin_inset Quotes gld
 \end_inset
@@ -6283,10 +6269,6 @@ functions
 
  bekommt eine Liste von Variablensätzen und wertet diese dann parallel aus.
  
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -6339,9 +6321,9 @@ function
  Hiermit ist es möglich aus einer Methode eines beliebigen Objekts ein allgemein
 es Funktionsobjekt zu machen, welches ebenfalls polymorphe Eigenschaften
  besitzt und somit austauschbar ist.
- In diesem Fall ist es möglich ein Funktionsobjekt zu erzeugen, welche der
- Schnittstelle MinimizerInterface entspricht.
- Damit lassen sich alle Spezialisierungen von 
+ Damit ist es möglich ein Funktionsobjekt zu erzeugen, welche der Schnittstelle
+ MinimizerInterface entspricht und wodurch sich alle Spezialisierungen von
+ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6349,7 +6331,7 @@ MinimizerInterface
 \begin_inset Quotes grd
 \end_inset
 
- in der externen Bibliothek elegant nutzen.
+ in der externen Bibliothek elegant nutzen lassen.
  
 \end_layout
 
@@ -6439,13 +6421,13 @@ Matrix
 \begin_inset Quotes grd
 \end_inset
 
- wird hauptsächlich die Speicherverwaltung und Zugriffsmethoden auf eine
+ werden hauptsächlich die Speicherverwaltung und Zugriffsmethoden auf eine
  beliebige Matrix Klasse vorgegeben.
  Durch diese einheitliche Speicherverwaltung ist die Austauschbarkeit der
  einzelnen Spezialisierungen erst möglich.
  Diese Klasse ist also keine abstrakte Klasse, sondern vererbt einige Methoden
  und auch Attribute an die Sub-Klassen.
- Die Klasse implementiert auch das Interface 
+ Weiterhin implementiert die Klasse das Interface 
 \shape italic
 
 \begin_inset Quotes gld
@@ -6751,10 +6733,11 @@ reference "tab:128Bit-Speicherausrichtung-1"
 \end_inset
 
  ist die Struktur ersichtlich.
- Neben den eigentlichen Matrixeinträgen sind hier in den ersten Feldern
- noch zusätzliche Informationen, wie Zeilen-, Spaltenanzahl und ein Symmetriefla
-g gespeichert.
- Dies ermöglicht eine einfache Serialisierung der Daten für das Netzwerksystem.
+ Neben den eigentlichen Matrixeinträgen sind in den ersten Feldern noch
+ zusätzliche Informationen, wie Zeilen-, Spaltenanzahl und ein Symmetrieflag
+ gespeichert.
+ Diese Art der Speicherung ermöglicht eine einfache Serialisierung der Daten
+ für das Netzwerksystem.
  Zusätzlich sind noch 320Bit freier Speicher verfügbar, dies hat zwei Gründe:
  
 \end_layout
@@ -6819,9 +6802,9 @@ key "dagum1998openmp"
 
 .
  Alle Algorithmen sind im Rahmen dieser Arbeit umgesetzt worden und bieten
- für die meisten CPU-Architekturen eine hohe Effizienz, der wesentliche
- Vorteil liegt hier allerdings in der Unabhängigkeit gegenüber einzelner
- Hersteller.
+ für die meisten CPU-Architekturen eine hohe Effizienz.
+ Wobei der wesentliche Vorteil allerdings in der Unabhängigkeit gegenüber
+ einzelner Hersteller liegt.
  
 \end_layout
 
@@ -6895,7 +6878,7 @@ reference "sec:Verwendung-von-GPGPU"
 \end_layout
 
 \begin_layout Standard
-Der Aufbau und einige Methode der 
+Der Aufbau und einige Methoden der 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6911,14 +6894,14 @@ MKLMatrix
 \begin_inset Quotes grd
 \end_inset
 
- innerhalb der studentischen Arbeit 
+ sind innerhalb der studentischen Arbeiten 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kueppers2016,kueppers2016b"
 
 \end_inset
 
- entwickelt wurden.
+ entwickelt worden.
  Diese studentische Arbeit wurde im Rahmen dieser Dissertation betreut und
  angeleitet.
  Die Methoden zur Rückwärtsdifferenzierung der Cholesky Zerlegung (siehe
@@ -6954,14 +6937,14 @@ name "chap:Verteiltes-Rechnen-1"
 \end_layout
 
 \begin_layout Standard
-Im Rahmen dieser Arbeit wurde eine umfangreiche Bibliothek entwickelt, welche
- es ermöglicht  Matrix-Operationen asynchron auf mehrere Rechner zu verteilen.
+In dieser Arbeit wurde eine umfangreiche Bibliothek entwickelt, welche es
+ ermöglicht  Matrix-Operationen asynchron auf mehrere Rechner zu verteilen.
  Die Rechner können dabei unterschiedliche Architektur besitzen, bspw.
  ist eine gleichzeitige Nutzung von Servern mit GPUs und konventionellen
  CPUs möglich.
  Theoretisch können so auch Rechnungen über das Internet verteilt werden,
- wobei das System zur Zeit nicht dafür ausgelegt ist da es nicht den notwendigen
- Sicherheitsstandards entspricht.
+ wobei das System zur Zeit nicht dafür ausgelegt ist, da es nicht den notwendige
+n Sicherheitsstandards entspricht.
  Hierfür müssten noch Verschlüsselungsalgorithmen, ein Benutzersystem und
  Absicherungen gegenüber 
 \begin_inset Quotes gld
@@ -6971,33 +6954,37 @@ Remote-Exploits
 \begin_inset Quotes grd
 \end_inset
 
- eingeführt werden, um Missbrauch zu vermeiden.
- Ein wichtiger Punkt bei der Entwicklung war die Vermeidung von MPI-Bibliotheken.
+ eingeführt werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Ein wichtiger Punkt bei der Entwicklung war die Vermeidung von MPI-Bibliotheken.
  Die Gründ dafür lagen in den zahlreichen inkompatiblen MPI-Umsetzungen,
- der inkompatibeln Verisonen innerhalb einzelner MPI Pakete und der zwangsweisen
+ der inkompatibeln Versionen innerhalb einzelner MPI-Pakete und der zwangsweisen
  Synchronität der Netzwerkkommunikation.
  Die Asynchronität war hierbei der wichtigste Punkt, dies liegt daran, dass
  Optimierungen oftmals über Wochen laufen und es durchaus vorkommt, dass
  einzelnen Rechenknoten ausfallen.
  Verwendet man MPI, so fällt die gesamte Rechnung damit aus.
  Bei einer asynchronen Umsetzung, übernimmt ein anderer Knoten die Aufgaben
- des ausgefallenen.
+ des Ausgefallenen, praktisch ohne zeitlichen Verzug.
  
 \end_layout
 
 \begin_layout Standard
 Nach der anfänglichen Entwicklung wurde im Rahmen dieser Dissertation die
- Bachelorarbeit von Kueppers (siehe 
+ Bachelorarbeit 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kueppers2016"
 
 \end_inset
 
-) betreut und angeleitet.
+ betreut und angeleitet.
  In dieser wurde der Client um weitere Matrixoperationen erweitert, der
- Scheduler auf ein Round Robin Verfahren erweitert, weitere Klassen Serialisiert
- und die Fehlertoleranz erhöht.
+ Scheduler auf ein Round-Robin Verfahren umgestellt, weitere Klassen serialisier
+t und die Fehlertoleranz erhöht.
  Nach Abschluss der Bachelorarbeit wurde eine gemeinsame Abhandlung 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -7005,7 +6992,7 @@ key "kueppers2016b"
 
 \end_inset
 
- im Rahmen des DGLR Kongress veröffentlicht.
+ im Rahmen des DGLR-Kongress veröffentlicht.
  
 \end_layout
 
@@ -7054,13 +7041,12 @@ reference "fig:Schematische-Darstellung-der"
 
  zeigt den schematischen Aufbau der etablierten Client-/Server-Verbindungen.
  Der Client stellt das auszuführende Programm dar, welches die zu berechnenden
- Probleme stellt.
- In diesem Fall handelt es sich dabei um das Kriging, dieses muss eine Client-Kl
-asse implementieren und auch aufrufen.
+ Probleme beinhaltet.
+ In diesem Fall handelt es sich dabei um die hier entwickelte Kriging-Software,
+ welche dafür eine Client-Klasse implementieren muss.
  Die Client Klasse wird im späterem Verlauf dieses Abschnitts erklärt.
- Auf der anderen Seite sind mehrere Server die jeweils einen Dämon-Prozess
- starten, welche dann im Hintergrund laufen, einen Netzwerk-Port öffnen
- und auf Aufgaben des Clients warten.
+ Auf der anderen Seite sind mehrere Server, die jeweils einen Dämon-Prozess
+ starten, einen Netzwerk-Port öffnen und auf Aufgaben des Clients warten.
  Die Server-Programme können auf CPUs sowie GPUs rechnen und verbrauchen
  im Wartemodus praktisch keine Resourcen.
  
@@ -7097,8 +7083,8 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
 \end_layout
 
 \begin_layout Standard
-Steht auf Client-Seite eine Aufgabe an, so wird diese dort in kleinere Teilaufga
-ben zerlegt und auf einem 
+Steht auf Client-Seite eine Aufgabe an, so wird diese in kleinere Teilaufgaben
+ zerlegt und auf einem 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7120,7 +7106,7 @@ Round-Robin
 
  Scheduler verteilt diese Aufgaben dann nach und nach an die verbundenen
  Server, sofern diese bereit sind.
- Die Server erledigen diese Teilaufgabe und senden dieses an den Client
+ Die Server erledigen diese Teilaufgabe und senden das Ergebnis an den Client
  zurück und stehen dann für neue Aufgaben zur Verfügung.
  Die Größe dieser Pakete/Teilaufgaben wird jeweils vom Scheduler bestimmt
  und ist wichtig für die Effizienz des Verfahrens, die genaue Aufteilung
@@ -7154,7 +7140,7 @@ Die Server-Software müssen auf den entsprechenden Rechnern gestartet werden.
 \end_layout
 
 \begin_layout Enumerate
-Der Client wird gestartet und belegt die zu addierenden Matrizen.
+Der Client wird gestartet und belegt lokal die zu addierenden Matrizen.
 \end_layout
 
 \begin_layout Enumerate
@@ -7162,13 +7148,13 @@ Der Client verbindet sich mit beiden Servern
 \end_layout
 
 \begin_layout Enumerate
-Der Client startet für jeden Server einen Überwachungsthread, welcher in
- regelmäßigen Abständen einen Ping sendet um zu überprüfen ob der jeweilige
- Server noch verfügbar ist.
+Der Client startet für jeden Server einen Überwachungsthread.
+ Dieser sendet in regelmäßigen Abständen einen Ping und überprüft so, ob
+ der jeweilige Server noch verfügbar ist.
 \end_layout
 
 \begin_layout Enumerate
-Der Client startet die Matrix-Addition mit einem Befehl.
+Der Client startet die Netzwerk-Matrix-Addition mit einem Befehl.
 \end_layout
 
 \begin_deeper
@@ -7187,13 +7173,13 @@ Intern: Alle Teil-Matrix-Additions Befehle werden auf den Stack vom Client
 \end_layout
 
 \begin_layout Enumerate
-Intern: Der Client startet den Scheduler, dieser verteilt dann alle Teilaufgaben
- der Reihe nach
+Intern: Der Client startet den Scheduler, dieser nimmt die Aufgaben vom
+ Stack und sendet diese an die Server
 \end_layout
 
 \begin_layout Enumerate
-Intern: Jeder Server speichert die Teilmatrizen in ein neue Matrix und konvertie
-rt diese in den Typ 
+Intern: Jeder Server addiert und speichert die Teilmatrizen auf seinem lokalen
+ Speicher in ein neue Matrix und konvertiert diese in den Typ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7204,56 +7190,19 @@ SaveableOnServer
  
 \end_layout
 
+\begin_layout Enumerate
+Intern: Jeder Server sendet danach die Teilergebnisse serialisiert zurück
+ und ist dann wieder bereit für die nächste Aufgabe
+\end_layout
+
+\begin_layout Enumerate
+Intern: Die Schritte b-f werden solange wiederholt, bis der Stack leer ist.
+\end_layout
+
 \end_deeper
 \begin_layout Enumerate
-Der Client sammelt alle Teilergebnisse ein, wandelt diese in Matrix Objekte
- um und setzt die Teilmatrizen zu einer Gesamtmatrix zusammen
-\end_layout
-
-\begin_layout Standard
-Besonders bei einer Multifidelity-Optimierung oder einer gradientenunterstützte-
-Optimierung kann das Training zum Flaschenhals der ganzen Optimierung werden.
- Prinzipiell sind hier zwei Fälle zu unterscheiden:
-\end_layout
-
-\begin_layout Enumerate
-Multifidelity-Optimierung mit Nutzung eines Co-Kriging: Anzahl an zu trainierend
-en Hyperparameter ist sehr hoch (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:COKrigingKovarianzmodell"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Enumerate
-Gradientenunterstützte Optimierung mit Nutzung eines Gradient-Enhanced-Kriging
- (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Gradient-Enhanced-Kriging"
-
-\end_inset
-
-): Die Kovarianzmatrix kann sehr groß werden, durch die zusätzlichen partiellen
- Ableitungen.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
+Hat der Client alle Teilergebnisse, wandelt er diese in Matrix Objekte um
+ und setzt die Teilmatrizen zu einer Gesamtmatrix zusammen
 \end_layout
 
 \begin_layout Paragraph
@@ -7319,8 +7268,8 @@ SaveableOnServer
 \end_layout
 
 \begin_layout Itemize
-getSerializedData: Ein typloser Datenstrom mit allen benötigten Daten, um
- die Klasse zu beschreiben.
+getSerializedData: Ein typloser Datenstrom mit allen benötigten Daten, die
+ das Objekt beschreiben.
  Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7328,28 +7277,21 @@ reference "tab:128Bit-Speicherausrichtung-1"
 
 \end_inset
 
- beschreibt einen solchen Datenstrom, mit diesem ist ein vollständiges Matrix-Ob
-jekt beschrieben.
+ beschreibt einen solchen Datenstrom, mit diesem ist z.B.
+ ein vollständiges Matrix-Objekt beschrieben.
  
 \end_layout
 
 \begin_layout Itemize
-setSerializedData: Ein leeres Objekt eines Typs welches das Interface 
-\begin_inset Quotes gld
-\end_inset
-
-SaveableOnServer
-\begin_inset Quotes grd
-\end_inset
-
- implementiert, kann über diese Methode einen Datenstrom erhalten.
+setSerializedData: Ein leeres Objekt kann über diese Methode einen Datenstrom
+ erhalten und deserialisieren.
  Dieser Datenstrom wird dann wieder zerlegt und in die entsprechenden Attribute
  kopiert oder verschoben.
  
 \end_layout
 
 \begin_layout Itemize
-getBaseType: Der Ursprungstyp der Objekts (z.B.
+getBaseType: Der Ursprungstyp des Objekts (z.B.
  Matrix) als String.
  
 \end_layout
@@ -7362,9 +7304,10 @@ freeMem: Der belegte Speicher des Objekts wird vollständig geleert.
 Die Serialisierung und Deserialisierung ist in diesem Fall also über das
  Interface sichergestellt.
  Die korrekte Implementierung der (De-)Serialisierung allerdings nicht,
- dies ist mit der Programmiersprache C++ allerdings auch nicht möglich.
- Bei korrekter Implementierung ist es mit diesem System möglich komplette
- Objekte über das Netzwerk zu verschicken.
+ diese Art der Zusicherung ist mit der Programmiersprache C++ allerdings
+ auch nicht möglich.
+ Bei einer korrekten Implementierung ist es mit diesem System möglich vollständi
+ge Objekte über das Netzwerk zu verschicken.
  Das besondere dabei ist, dass diese Objekte auf dem Server Typunabhängig
  gespeichert werden und dadurch sehr flexibel miteinander interagieren können.
  
@@ -7437,9 +7380,8 @@ ZMQServer
  Klasse.
  Diese enthält genau zwei Verbindungen, eine zur hauptsächlichen Kommunikation
  mit dem Client und eine Ping-Verbindung.
- Die Ping-Verbindung sendet in regelmäßigen Abständen kleine Netzwerk-Pings
- und der Client weiß damit, dass der Server noch funktioniert.
- 
+ Die Ping-Verbindung sendet in regelmäßigen Abständen Netzwerk-Pings und
+ teilt dem Client dadurch mit, dass der Server noch läuft.
 \end_layout
 
 \begin_layout Standard
@@ -7452,7 +7394,15 @@ ZMQServer
 \end_inset
 
  die Verwaltung der virtuellen Variablen bereit.
- Hierfür ist ein assoziativer Container in Form einer Map namens 
+ Hierfür ist ein assoziativer Container in Form einer 
+\begin_inset Quotes gld
+\end_inset
+
+Map
+\begin_inset Quotes grd
+\end_inset
+
+ namens 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7486,7 +7436,9 @@ MatrixServerFunctions
 
  stellt alle Methoden bereit, welche vom Client benötigt werden und hat
  Zugriff auf den Variablen-Container.
- Die Berechnung einer Matrix Addition der Matrizen 
+ Beispielsweise die Berechnung einer Matrix Addition.
+ Um die Typkonvertierungen zu verstehen, wird folgend eine Addition der
+ Matrizen 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7502,7 +7454,7 @@ mat2
 \begin_inset Quotes grd
 \end_inset
 
- auf einem Server würde wie folgt ablaufen:
+ auf Serverseite beschrieben:
 \end_layout
 
 \begin_layout Enumerate
@@ -7520,8 +7472,8 @@ SaveableOnServer
 \end_layout
 
 \begin_layout Enumerate
-Der ZMQServer erhält diese Objekte und speicher die Objekte und kann diese
- dann in der 
+Der ZMQServer erhält diese Objekte und speichert diese in dem Container
+ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7529,11 +7481,11 @@ vars
 \begin_inset Quotes grd
 \end_inset
 
- Map mit dem vorgesehenen Namen speichern.
+ mit dem vorgesehenen Namen
 \end_layout
 
 \begin_layout Enumerate
-Der Client ruft über das Netzwerkprotokoll den Befehl auf, die Matrizen
+Der Client ruft über das Netzwerkprotokoll den Befehl auf, die Netzwerk-Matrizen
  
 \begin_inset Quotes gld
 \end_inset
@@ -7550,7 +7502,7 @@ mat2
 \begin_inset Quotes grd
 \end_inset
 
- zu addieren und in 
+ zu addieren und in der Netzwerk-Matrix 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7570,7 +7522,8 @@ matrixAddition
 \begin_inset Quotes grd
 \end_inset
 
- Methode auf, als Parameter werden nur die Namen 
+ Methode auf.
+ Als Parameter werden nur die Strings 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7611,7 +7564,7 @@ to
 \begin_inset Quotes grd
 \end_inset
 
- belegt werden, welche die zu addierenden Zeilen beschreiben.
+ belegt werden, welche den Index der zu addierenden Zeilen beschreibt.
  Damit könnte auch nur ein Teil der Matrix addiert werden.
 \end_layout
 
@@ -7658,7 +7611,15 @@ mat3
 \end_inset
 
  gespeichert werden.
- Dieses wird per Typumwandlung wieder in ein 
+ Das Objekt 
+\begin_inset Quotes gld
+\end_inset
+
+mat3
+\begin_inset Quotes grd
+\end_inset
+
+ wird wieder in ein 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7715,13 +7676,6 @@ Matrix
  
 \end_layout
 
-\begin_layout Standard
-Bei mehreren Servern würde die Typumwandlung genauso verlaufen, es würden
- dann nur Teilmatrizen übertragen werden oder nur Teilrechnungen ausgeführt
- werden.
- 
-\end_layout
-
 \begin_layout Paragraph
 Messaging Middleware ZeroMQ
 \end_layout
@@ -7729,8 +7683,8 @@ Messaging Middleware ZeroMQ
 \begin_layout Standard
 ZeroMQ ist eine asynchrone Messaging-Bibliothek, welche eine hocheffiziente
  Nachrichtenübermittlung anbietet.
- ZeroMQ ist für Problemstellungen entwickelt worden, welche eine hoch optimierte
- und schnelle Datenübertragung benötigen.
+ ZeroMQ ist für Problemstellungen entwickelt worden, welche eine sehr schnelle
+ Datenübertragung mit sehr kurzen Verzögerungen benötigen.
  Für weitere Informationen sei auf 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -7747,7 +7701,7 @@ Ausfallsicherheit
 
 \begin_layout Standard
 Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
- sind, existiert neben jeder Haupt- verbindung eine zusätzliche Ping-Verbindung
+ sind, existiert neben jeder Hauptverbindung eine zusätzliche Ping-Verbindung
  zu jedem bekannten Server.
  Diese wiederum öffnen analog zum Client auch einen zusätzlichen Socket,
  der lediglich für die Verwaltung des periodischen Pingsignals zuständig
@@ -7761,7 +7715,12 @@ Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
  der Server bereits anderweitig vergeben ist.
  Auch Ausfälle eines Servers während der Programmlaufzeit können so vom
  Client erkannt werden.
- 
+ Der Server würde dann aus dem Pool freier Server entfernt werden und somit
+ beim Round-Robin Verfahren nicht mehr berücksichtigt.
+ Hat der Server bereits ein Paket erhalten und dieses nicht abgeschlossen,
+ so legt der Client dieses erneut auf den Stack.
+ Mit diesem Verfahren ist eine sehr starke und flexible Ausfallsicherheit
+ gegeben.
 \end_layout
 
 \begin_layout Paragraph
@@ -7814,7 +7773,7 @@ key "kueppers2016b,kueppers2016"
 Bei einem verteilten System leidet die Geschwindigkeit der Operationen oft
  erheblich, da für die Kommunikation und die Verwaltung der Teilberechnungen
  ein großer Anteil der Rechenzeit aufgewendet wird.
- Meist steigt der Aufwand mit steigender Server-Anzahl und lohnt sich erst
+ Meist steigt der Aufwand mit höherer Server-Anzahl und lohnt sich erst
  ab einer gewissen Problemgröße.
  Abbildung 
 \begin_inset CommandInset ref
@@ -7846,16 +7805,16 @@ reference "sec:ZDT3"
 \end_layout
 
 \begin_layout Standard
-Man kann sehen, dass der Verlust eine 1:1 Verbindung sehr klein ist, der
+Man kann sehen, dass der Verlust einer 1:1 Verbindung sehr klein ist, der
  Verlust über die reine Netzwerkkommunikation ist also als gering einzustufen.
  Bei einer Anzahl von 2-3 Servern ist der Verlust ab einer Stützstellenanzahl
  von 2000 ebenfalls sehr klein.
  Mit zunehmender Anzahl an Servern nimmt dann auch der Verlust auch weiter
- zu, dieses Verhalten ist allerdings auch so zu erwarten.
- Die Problemstellung ist für eine so hohe Anzahl an so leistungsstarken
- Rechnern noch zu klein, dennoch lässt sich bei 7 Servern eine maximale
- Beschleunigung des Faktors 5 erreichen, also 71% der Rechenleistung werden
- effektiv genutzt.
+ zu.
+ Dieses Verhalten ist allerdings auch so zu erwarten, da die Problemstellung
+ für eine so hohe Anzahl an leistungsstarken Rechnern noch zu klein ist.
+ Dennoch lässt sich bei 7 Servern eine maximale Beschleunigung des Faktors
+ 5 erreichen, also 71% der Rechenleistung werden effektiv genutzt.
  Bedenkt man weiterhin die Flexibilität und Ausfallsicherheit des System,
  so ist der Einsatz bei entsprechend großen Problemen sehr lohnenswert.
  
@@ -7999,9 +7958,8 @@ reference "eq:AbleitungsKorrGauss2"
 \end_inset
 
 ) derselbe ist, macht es Sinn diesen zu puffern und bei Bedarf wiederzuverwenden.
- Da der Abruf aus dem RAM deutlich schneller ist, als die erneute Berechnung
- der Exponentialfunktion, beschleunigt dies die Berechnung der Ableitungsmatrize
-n erheblich.
+ Der Vorteil liegt dabei darin, dass ein Abruf aus dem RAM deutlich schneller
+ ist als die erneute Berechnung der Exponentialfunktion.
 \end_layout
 
 \begin_layout Paragraph*
@@ -8027,7 +7985,7 @@ key "fmath2018"
 \end_layout
 
 \begin_layout Paragraph*
-Streaming SIMD Extensions (SSE)
+SSE und AVX - SIMD Instruktionen
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Streaming-SIMD-Extensions"
@@ -8042,8 +8000,11 @@ name "subsec:Streaming-SIMD-Extensions"
 Die Streaming SIMD Extensions (SSE) sind eine von Intel entwickelte Befehlssatze
 rweiterung der x86-Architektur.
  Mit Einführung des Pentium-III-(Katmai)-Prozessors wurde diese 1999 vorgestellt.
- Aufgabe der SSE Befehle ist es Programme durch Parallelisierung auf Instruktion
-slevel zu beschleunigen, auch SIMD (Single Instruction Multiple Data) genannt.
+ Aufgabe der SSE-Befehle ist es Programme durch Parallelisierung auf Instruktion
+slevel zu beschleunigen.
+ Diese Art der Parallelisierung wird auch SIMD (Single Instruction Multiple
+ Data) genannt und ist der Vorgehensweise der massiv parallelen Berechnung
+ auf Grafikkarten ähnlich.
  Die SSE-Befehlssatzerweiterung umfasst ursprünglich 70 Instruktionen und
  8 neue Register, genannt XMM0 bis XMM7.
  Ursprünglich wurden die 128
@@ -8052,17 +8013,18 @@ slevel zu beschleunigen, auch SIMD (Single Instruction Multiple Data) genannt.
 
 Bit breiten Register allerdings nicht in einem Schritt verarbeitet.
  Bei heutigen CPUs (z.B.
- Intel Core CPUs) werden die Register in einem Schritt verarbeitet, zudem
- wurde die Anzahl der Register von 8 auf 16 erhöht.
+ Intel Core CPUs) werden die Register in einem Schritt verarbeitet und die
+ Anzahl der Register stetig erhöht.
  
 \end_layout
 
 \begin_layout Standard
 Es gibt zahlreiche Umsetzungen der SSE Befehle.
- Diese reichen von SSE bis SSE5, wobei ab SSE3 AMD und Intel jeweils eigene
- Implementationen der SSE Architektur vornahmen.
- Der Nachfolger von SSE heißt AVX (Advanced Vector Extensions) und verbreitert
- die Register auf 16x
+ Diese reichen von SSE Version 1 bis 5, wobei ab SSE Version 3 AMD und Intel
+ jeweils eigene Implementationen dieser Architektur vornahmen.
+ Der momentane Nachfolger von SSE heißt AVX (Advanced Vector Extensions)
+ und wird wieder gemeinsam von AMD und Intel verfolgt.
+ Dieser verbreitert die Register auf 16x
 \begin_inset space ~
 \end_inset
 
@@ -8070,7 +8032,22 @@ Es gibt zahlreiche Umsetzungen der SSE Befehle.
 \begin_inset space ~
 \end_inset
 
-Bit.
+Bit (AVX Version 1) zudem besitz jeder Prozessorkern eigene AVX-Einheiten
+ welche wiederum eine eigene Taktfrequenz haben.
+ In modernen CPUs kann jede AVX-Einheit eine FMA (fused multiply add) Operation
+ in der Form 
+\begin_inset Formula $a\leftarrow a(b+c)$
+\end_inset
+
+ in einem Takt ausführen, wodurch die theoretische Rechenleistung nochmals
+ erheblich ansteigt.
+ Der Parallelisierungsgrad und damit auch die Performance aktueller CPUs
+ wird heutzutage also nicht nur über die Anzahl der Kerne und deren Kernfrequenz
+ bestimmt, sondern maßgeblich durch die Breite, Frequenz und dem Befehlssatz
+ der SIMD-Einheiten.
+ Da diese Operationen allerdings nicht in jeder Anwendung effizient genutzt
+ werden können, macht dies die Auswahl von modernen CPUs zu einer sehr komplexen
+ und anwendungsspezifischen Angelegenheit.
  
 \end_layout
 
@@ -8297,8 +8274,8 @@ name "par:Einschub-Speicherausrichtung"
 \begin_layout Standard
 
 \shape italic
-In aktuellen C++ Compilern wird eine Speicherausrichtung von 128Bit im Normalfal
-l gewährleistet.
+In aktuellen C++ Compilern wird eine Speicherausrichtung von 128Bit gewährleiste
+t.
  Tabelle 
 \shape default
 
@@ -8758,8 +8735,8 @@ reference "fig:PunkteFilterBeispiel"
  rechts zu sehen.
  Die lokale Anhäufung in der Mitte ist praktisch nicht mehr vorhanden und
  die Verteilung der Punkte ist sehr gleichmäßig.
- Die Laufzeit des Filters ist im Vergleich zur restlichen Laufzeit zu vernachläs
-sigen.
+ Weiterhin ist der Algorithmus sehr schnell, sodass die Laufzeit des Filters
+ im Vergleich zur restlichen Laufzeit zu vernachlässigen ist.
 \end_layout
 
 \begin_layout Subsection
@@ -8782,7 +8759,7 @@ reference "subsec:Cholesky-Zerlegung"
 \end_inset
 
 ) können lineare Gleichungssysteme sehr effizient gelöst werden.
- Dies kann man sich zunutze machen, um bei der Likelihood Berechnung auf
+ Dies kann man sich zunutze machen um bei der Likelihood Berechnung auf
  die direkte Bestimmung der Inversen verzichten.
  Das Maximum des Likelihoodterm (siehe 
 \begin_inset CommandInset ref
@@ -8872,7 +8849,8 @@ Bei der Cholesky Zerlegung wird die Matrix
 \end_inset
 
  in ein Produkt aus einer unteren Dreicksmatrix und deren Transponierten
- zerlegt, die Dreiecksmatrix 
+ zerlegt.
+ Die Dreiecksmatrix 
 \begin_inset Formula $\mathbf{L}$
 \end_inset
 
@@ -8987,8 +8965,8 @@ reference "subsec:SpurApprox"
 
 \end_inset
 
- bereits erwähnt, ist es bei der Berechnung des Likelihood Terms möglich
- auf die Invertierung der Kovarianzmatrix zu verzichten.
+ beschrieben, ist es bei der Berechnung des Likelihood Terms möglich auf
+ die Invertierung der Kovarianzmatrix zu verzichten.
  Bei der Bestimmung der partiellen Ableitungen des Likelihood Terms nach
  den Hyperparametern ist dies allerdings schwieriger.
  Die Bestimmung der partiellen Ableitungen folgt dem folgenden Berechnungsschema
@@ -9041,32 +9019,43 @@ Punkt a bedeutet vom Aufwand die Aufstellung der symmetrischen Matrix
 
  und kann zudem sehr gut parallelisiert werden.
  Die Bestimmung der einzelnen Ableitungen der Kovarianzmatrix hängt stark
- von dem verwendeten Kriging Modell und der verwendeten Korrelationsfunktion
+ von dem verwendeten Kriging Modell und der verwendeten Kovarianzfunktion
  ab.
  Beim Gradient Enhanced Kriging können diese Einzelableitungen komplexer
  werden und damit auch vom numerischen Aufwand teurer.
- Dennoch können in der Regel sehr viele Teile aus der Aufstellung der Kovarianzm
-atrix wiederverwendet werden, was den Aufwand erheblich reduziert und daher
- eher unerheblich macht.
- 
+ Im Falle des Co-Krigings ist die Anzahl der Hyperparameter allerdings erheblich
+ höher, wodurch die Bildung der Matrizen 
+\begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
+\end_inset
+
+ dann wieder mehr ins Gewicht fällt.
+ In Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:RPROP2"
+
+\end_inset
+
+ wird für diesen Fall ein erweitertes RPROP-Verfahren beschrieben.
 \end_layout
 
 \begin_layout Standard
 Punkt b ist vom Aufwand her nahezu vernachlässigbar.
- In der Regel wurde der Vektor 
+ Der Vektor 
 \begin_inset Formula $\left(\vec{y}_{s}-\beta_{1}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}$
 \end_inset
 
- bereits in der Likelihood Berechnung bestimmt und es muss nur noch eine
- Vektor Matrix Multiplikation durchgeführt werden.
+ muss bereits in der Likelihood Berechnung bestimmt werden und dann bleibt
+ nur noch eine Vektor Matrix Multiplikation bestehen.
+ 
 \end_layout
 
 \begin_layout Standard
 Punkt c ist der aufwendigste Teil, da nur für diesen Teil die Inverse bestimmt
  werden muss.
- Die Inverse wird natürlich außerhalb dieser Schleife nur einmal berechnet,
- dennoch könnte man ohne diesen Teil vollständig auf die direkte Berechnung
- der Inversen verzichten.
+ Die Inverse wird außerhalb dieser Schleife nur einmal berechnet, dennoch
+ könnte man ohne diesen Teil vollständig auf die direkte Berechnung der
+ Inversen verzichten.
  Ist die Inverse bestimmt, liegt die Komplexität zur Berechnung der Spur
  bei 
 \begin_inset Formula $\mathcal{O}\left(n^{2}\right)$
@@ -9077,8 +9066,7 @@ Punkt c ist der aufwendigste Teil, da nur für diesen Teil die Inverse bestimmt
 \end_layout
 
 \begin_layout Standard
-Der Hauptaufwand liegt also in der Berechnung der Inversen.
- Der genaue Ablauf zur Bestimmung der Inversen folgt dem Schema aus Kapitel
+Der genaue Ablauf zur Bestimmung der Inversen folgt dem Schema aus Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9086,8 +9074,7 @@ reference "subsec:Cholesky-Zerlegung"
 
 \end_inset
 
-.
- Grundlegend besteht dieses Schema aus zwei Schritten:
+ und besteht aus zwei Schritten:
 \end_layout
 
 \begin_layout Enumerate
@@ -9128,26 +9115,9 @@ Vorwärts- und Rückwärtseinsetzen insgesamt:
 
 \begin_layout Standard
 Der Hauptaufwand liegt also bei der Vorwärts- und Rückwärtssubstitution.
- Wobei sich diese für den Fall einer Invertierung hervorragend parallelisieren
- lässt.
- Da man das Vorwärts- und Rückwärtseinsetzen bei der Invertierung über 
-\begin_inset Formula $n$
-\end_inset
-
- Vektoren macht, kann man die Berechnung über die Vektoren parallelisieren.
- SIMD Routinen sind hier besonders effizient, da für jeden Vektor immer
- dieselbe Routine durchlaufen wird und nur die Daten sich ändern.
- Eine GPU, SSE oder AVX Beschleunigung ist hier also besonders anzustreben.
- Denkbar ist aber auch eine Parallelisierung auf Prozessebene, diese ließe
- sich nach demselben Schema aufteilen und die Teile dann natürlich auch
- über SIMD Befehle beschleunigen.
- 
-\end_layout
-
-\begin_layout Standard
-Ein kompletter Verzicht auf die Vorwärts- und Rückwärtssubstitution wäre
- dennoch erstrebenswert, da diese den größten Teil des Aufwands ausmacht.
- 
+ Aber auch wenn sich diese Schritte hervorragend parallelisieren lassen,
+ ist ein kompletter Verzicht auf die Vorwärts- und Rückwärtssubstitution
+ dennoch erstrebenswert.
 \end_layout
 
 \begin_layout Standard
@@ -9172,8 +9142,8 @@ ation bieten.
  Dieser Ansatz bietet die Möglichkeit auf die Vor- und Rückwärtssubstitution
  zu verzichten, allerdings werden rückwärtsdifferenzierte Algorithmen des
  Cholesky Algorithmus und auch der Vor- und Rückwärtssubstitution benötigt.
- Für diese Algorithmen gibt es keine performante Implementation über Bibliotheke
-n.
+ Für diese Algorithmen gibt es zudem keine performante Implementation über
+ Bibliotheken.
  
 \end_layout
 
@@ -9197,21 +9167,26 @@ key "Toal2011"
  Die Vorwärts- und Rückwärtssubstitution muss dennoch durchgeführt werden.
  Diese stellt grundlegend auch den Hauptanteil bei der Berechnung des Likelihood
 s und der Ableitungen dar.
- Weiterhin müssen für jedes Kovarianzmodell eigene Algorithmen aufgestellt
- werden, was den Enticklungsaufwand stark erhöht.
+ Weiterhin müssen für jedes Kovarianzmodell neu Algorithmen aufgestellt
+ werden, was den Entwicklungsaufwand stark erhöht.
 \end_layout
 
 \begin_layout Standard
 \noindent
-Eine andere Möglichkeit bietet die alleinige Rückwärtsdifferentiation der
- Determinante der Kovarianzmatrix.
+Eine andere in dieser Arbeit entwickelte Möglichkeit bietet die alleinige
+ Rückwärtsdifferentiation der Determinante der Kovarianzmatrix.
  Dieser Ansatz bietet einen Geschwindigkeitsvorteil und zudem den Vorteil,
- dass der Quellcode sich nur minimal ändert und damit für alle Kriging-Verfahren
- und auch Kovarianzfunktionen gilt.
+ dass sich der Quellcode nur minimal ändert und für alle Kriging-Verfahren
+ wie auch Kovarianzfunktionen gilt.
  Es wird allerdings eine rückwärtsdifferenzierte Version des Cholesky Algorithmu
 s benötigt.
  Für diese bestehen mittlerweile aber sehr effiziente BLAS-Implementierungen.
- Der grundlegende Ansatz ist die Bestimmung der folgenden Ableitung:
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Der grundlegende Ansatz ist die Bestimmung der folgenden Ableitung:
 \begin_inset Formula 
 \begin{align}
  & \frac{\partial\left(ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)}{\partial h_{l}}\label{eq:lnDetCovRuckmodus}
@@ -9232,12 +9207,11 @@ ln\left(det\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right) 
 
 \end_inset
 
-Daraus ergibt sich die folgende Verkettung, welche die Cholesky Zerlegung
- berücksichtigt 
+Daraus ergibt sich die folgende Verkettung, wobei 
 \begin_inset Formula $f_{chol}$
 \end_inset
 
-
+ die Cholesky Zerlegung darstellt: 
 \begin_inset Formula 
 \begin{align}
  & \frac{\partial\left(ln\left(det\left(f_{chol}\left(\mathbf{\mathbf{\mathbf{Cov}}}\left(h_{l}\right)\right)\right)\right)\right)}{\partial h_{l}}
@@ -9323,9 +9297,9 @@ daraus resultieren die Jacobi Matrizen
 \end_layout
 
 \begin_layout Standard
-Es gilt nun sich zu überlegen, wie man die hier gezeigte mehrdimensionale
- Kettenregel möglichst effizient bestimmen kann.
- Berechnet man die vollständige Summe, dann wäre die Komplexität für die
+Wesentlich ist es nun, die gezeigte mehrdimensionale Kettenregel möglichst
+ effizient zu bestimmen.
+ Wird die vollständige Summe berechnet, dann wäre die Komplexität für die
  Berechnung der Ableitung bei 
 \begin_inset Formula $\mathcal{O}\left(n^{4}\right)$
 \end_inset
@@ -9334,26 +9308,25 @@ Es gilt nun sich zu überlegen, wie man die hier gezeigte mehrdimensionale
  Der Aufwand wäre also deutlich größer als über die Bestimmung der Inversen.
  Benötigt wird also ein Algorithmus, welcher die notwendigen Terme der mehrdimen
 sionalen Kettenregel ohne große Matrizen berechnen kann.
- Als erste Vereinfachung kann man sich versuchen die einzelnen Jacobi Vektoren
- zu bestimmen.
+ Hierfür werden folgend die einzelnen Jacobi Vektoren betrachtet.
  Der Vektor 
 \begin_inset Formula $D_{cov}$
 \end_inset
 
- entspricht einfach nur allen Einträgen der Matrix 
+ entspricht allen Einträgen der Matrix 
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
 \end_inset
 
- und ist im Kriging daher bekannt.
- Als nächstes kann man den Vektor 
+ und ist daher bekannt.
+ Als nächstes kann der Vektor 
 \begin_inset Formula $D_{flndet}$
 \end_inset
 
- bestimmen, da man die Funktion 
+ bestimmt werden, da die Funktion 
 \begin_inset Formula $f_{lndet}$
 \end_inset
 
- kennt:
+ bekannt ist:
 \begin_inset Formula 
 \begin{align}
 D_{flndet}^{T} & =\left(\begin{array}{c}
@@ -9379,9 +9352,8 @@ D_{flndet}^{T} & =\left(\begin{array}{c}
 
 \end_inset
 
-Die Bestimmung des Vektors kann auch als Diagonalmatrix interpretiert werden
- welche sehr schnell aus der Cholesky zerlegten Matrix bestimmt werden kann.
- 
+Der Vektor kann auch als Diagonalmatrix interpretiert werden.
+ Diese kann sehr schnell aus der Cholesky zerlegten Matrix bestimmt werden:
 \begin_inset Formula 
 \begin{align}
 \bar{D}_{flndet}= & \left[\begin{array}{ccc}
@@ -9418,17 +9390,12 @@ Die Komplexität liegt somit nur noch bei
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-Als nächsten Schritt muss man sich nun überlegen, wie man den mittleren
- Teil der Kettenregel (
+ Als nächsten Schritt muss der mittlere Teil der Kettenregel (
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{L_{i,i}}}}}{\partial\mathbf{\mathbf{\mathbf{C_{k,m}}}}}$
 \end_inset
 
-) bestimmen kann.
- Hierfür gibt es prinzipiell zwei Möglichkeiten:
+) bestimmt werden.
+ Hierfür gibt es zwei Möglichkeiten:
 \end_layout
 
 \begin_layout Enumerate
@@ -9458,7 +9425,7 @@ Man geht von den Werten
 \begin_layout Standard
 Grundsätzlich sollten beide Vorgehensweise vom numerischen Aufwand gleichwertig
  sein.
- Da man allerdings für jeden der Hyperparameter 
+ Da allerdings für jeden der Hyperparameter 
 \begin_inset Formula $h_{l}$
 \end_inset
 
@@ -9466,15 +9433,15 @@ Grundsätzlich sollten beide Vorgehensweise vom numerischen Aufwand gleichwertig
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{C_{k,m}}}}{\partial h_{l}}$
 \end_inset
 
- bestimmen muss und damit wiederum 
+ bestimmt werden muss und damit wiederum 
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{L_{i,i}}}}}{\partial\mathbf{\mathbf{\mathbf{C_{k,m}}}}}$
 \end_inset
 
-, muss man also die vorwärts differenzierte Cholesky Zerlegung 
+, muss also die vorwärts differenzierte Cholesky Zerlegung 
 \begin_inset Formula $o$
 \end_inset
 
--mal aufrufen.
+-mal aufgerufen werden.
  In Fall 2 ist dies nicht so, denn die Berechnung ist unabhängig von der
  Anzahl der Hyperparameter.
  Aus diesem Grund verspricht der rückwärtsdifferenzierte Fall einen Vorteil
@@ -9511,6 +9478,7 @@ key "Smith1995"
 \end_inset
 
  beschriebenen Algorithmus entwickelt.
+ Dieser soll aber nicht weiter beschrieben werden.
  
 \end_layout
 
@@ -9532,29 +9500,13 @@ Vergleich zwischen der Invertierung und der Rückwärtsdifferenzierung
 \end_layout
 
 \begin_layout Standard
-Bei dem hier vorgestelltem Algorithmus handelt es sich prinzipiell nicht
- um eine klassische Rückwärtsdifferenzierung wie z.B.
- in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "toal2009adjoint"
-
-\end_inset
-
-.
- Diese differenzieren die gesamte Ableitung des Likelihoods rückwärts.
- Diese Algorithmen haben jedoch den Nachteil, dass der Quellcode deutlich
- komplexer und schwerer zu warten ist, insbesondere wenn man mehrere Korrelation
-sfunktionen und Verfahren anbietet.
- In beiden Fällen ist es aber nicht direkt ersichtlich, dass die Rückwärtsdiffer
-enzierte Methode die schneller ist.
- Die Vermutung ist allerdings, dass die Algortihmen der Rückwärtsdifferenzierung
- weniger Operationen benötigen und sich besser beschleunigen lassen.
+In diesem Abschnitt soll ein Vergleich zwischen der Invertierung und Rückwärtsdi
+fferenzierung anhand eines Benchmarks erfolgen.
  Ein direkter Vergleich der benötigten Operationen innerhalb der Algorithmen
- ist allerdings so gut wie unmöglich, da meist sehr stark optimierte Bibliotheke
-n wie die Intel MKL oder ATLAS Bibliothek verwendet werden.
+ ist in diesem Fall so gut wie unmöglich, da stark optimierte Bibliotheken
+ wie die Intel MKL oder ATLAS Bibliothek verwendet werden.
  Diese bedienen sich oft komplexer Algorithmen wie z.B.
- den Strassen Algorithmus, welcher eine Matrix Multiplikation mit einer
+ den Strassen-Algorithmus, welcher eine Matrix Multiplikation mit einer
  Komplexität von 
 \begin_inset Formula $\mathcal{O}\left(n^{log_{2}7}\right)$
 \end_inset
@@ -9562,19 +9514,17 @@ n wie die Intel MKL oder ATLAS Bibliothek verwendet werden.
  berechnen kann.
  Oft werden die Algorithmen je nach Matrix Größe umgeschaltet, sodass sich
  die echte Komplexität kaum noch bestimmen lässt.
- In der Regel wird diese auch nicht dokumentiert.
+ Die verwendeten Algorithmen werden meist auch nicht dokumentiert.
  Dennoch lässt sich davon ausgehen, dass diese Bibliotheken das aktuelle
  Maximum an Geschwindigkeit darstellen, sodass eine gute und auch realistische
  Vergleichbarkeit gewährleistet ist.
- Aus diesem Grund sollen in diesem Abschnitt die Unterschiede der Verfahren
- über Benchmarks ermittelt werden.
  
 \end_layout
 
 \begin_layout Standard
 Betrachtet man den Teil der Berechnung zur Bestimmung der Ableitung des
- Likelihoods nach den Hyperparameter, in dem sich die beiden Verfahren untersche
-iden, so handelt es sich prinzipiell nur um Gleichung 
+ Likelihoods in dem sich die beiden Verfahren unterscheiden, so handelt
+ es sich dabei um Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:lnDetCovRuckmodus"
@@ -9595,11 +9545,14 @@ tern abgeleitete Kovarianzmatrix ist bekannt
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
 \end_inset
 
- und auch die Cholesky-zerlegte Matrix 
+ sowie die Cholesky-zerlegte Kovarianzmatrix 
 \begin_inset Formula $\mathbf{L}$
 \end_inset
 
- ist bekannt.
+.
+ Um eine bessere Vergleichbarkeit zu gewährleisten werden auch die Zwischenschri
+tte der Algorithmen gemessen und verglichen.
+ Daher werden folgend die Abläufe beider Verfahren in 5 Schritte aufgeteilt:
 \end_layout
 
 \begin_layout Paragraph
@@ -9660,7 +9613,6 @@ Das Matrixprodukt
 \end_inset
 
  Operationen.
- Durch die Spur kann man sparen, es gibt keine BLAS Routine dafür.
  
 \end_layout
 
@@ -9736,15 +9688,14 @@ Benchmark
 
 \begin_layout Standard
 Folgend wird ein zeitlicher Vergleich über ein Benchmark angestellt.
- Als Benchmark dienten zufällig erzeugte Testdaten aus der ZDT3 Funktion
- (siehe Kapitel 
+ Die Stützstellen wurden aus der ZDT3 Funktion (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:ZDT3"
 
 \end_inset
 
-) mit jeweils 8 Parametern.
+) mit jeweils 8 Parametern zufällig erzeugt.
  Es wurden jeweils 10 Kriging Iterationen durchgeführt und die Zeiten für
  die Erzeugung der partiellen Ableitungen des Likelihoods gemessen.
  Berechnet wurde der Testfall auf zwei Xeon E5 2640 v3 mit insgesamt 16
@@ -9813,8 +9764,10 @@ reference "fig:Vergleich-der-Zeiten"
  1.5x schneller als der Vorwärtsmodus.
  Die folgenden Abbildungen zeigen die Zeiten der verschiedenen Schritte
  im Vergleich.
- Die Zeiten der Schritte 1 und 4 sind identisch und werden daher nicht gezeigt,
- die Ergebnisse können aber im Anhang 
+ Die größten Unterschiede können in Schritt 2-3 und Schritt 5 gesehen werden,
+ in beiden Fällen ist der Rückwärtsmodus schneller.
+ Die Zeiten der Schritte 1 und 4 sind identisch und werden daher nicht gezeigt.
+ Die Ergebnisse können aber im Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
@@ -9822,9 +9775,8 @@ reference "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"
 \end_inset
 
  gefunden werden.
- Unterschiede können in Schritt 2-3 und Schritt 5 gesehen werden, in beiden
- Fällen ist der Rückwärtsmodus schneller.
- 
+ Anhand dieses Beispiels kann gezeigt werden, dass der Rückwärtsmodus in
+ allen durchgeführten Testfällen besser abgeschnitten hat.
 \end_layout
 
 \begin_layout Subsection
@@ -9839,35 +9791,33 @@ name "subsec:SpurApprox"
 \end_layout
 
 \begin_layout Standard
-Wie bereits beschrieben ist es bei der Bestimmung der partiellen Ableitungen
- nach den Hyperparametern des Likelihood Terms deutlich schwieriger auf
- die Invertierung zu verzichten.
- Dies liegt an der Bestimmung der Ableitung der Determinante nach den Hyperparam
-etern.
- 
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial L\left(\vec{h}\right)}{\partial h_{l}}= & -\textrm{Spur}\left(\mathbf{\mathbf{Cov}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\right)+\left(\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{\mathbf{Cov}}}^{-1}\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)
-\end{align*}
-
-\end_inset
-
-Wie bereits Spur in Kapitel 
+Wie bereits in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Ableitung-LikelihoodRueckMode"
 
 \end_inset
 
- beschrieben, liegt die Schwierigkeit in der Berechnung der Spur.
- Die Spur einer Matrix lässt sich laut 
+ beschrieben, liegt die Schwierigkeit der Bestimmung der partiellen Ableitung
+ des Likelihood-Terms in der Berechnung der Spur.
+ Ein approximatives Verfahren um die Spur einer Matrix 
+\begin_inset Formula $R$
+\end_inset
+
+ zu schätzen wird in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Avron2011,hutchinson1989stochastic,MarkGibbs1997"
 
 \end_inset
 
- statistisch schätzen:
+ beschrieben.
+ Das Verfahren funktioniert mithilfe eines Zufallszahlen-Vektors 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+.
+ 
 \begin_inset Formula 
 \[
 Spur\left(R\right)\approx E\left[\vec{d}^{T}R\vec{d}\right]
@@ -9901,14 +9851,14 @@ N\left(0,1\right)
 
 \end_inset
 
-Die Approximation benötigt leider einen sehr großen Zufallsvektor 
+Dabei gilt: Je mehr Zufallszahlen dieser Vektor beinhaltet, desto genauer
+ die Schätzung.
+ Die Approximation benötigt daher einen sehr großen Zufallsvektor 
 \begin_inset Formula $\vec{d}$
 \end_inset
 
  um eine ausreichende Genauigkeit zu erhalten.
  Dies macht die Methode letztlich wieder ineffizient.
- Zudem bleibt immer eine Restunsicherheit in den partiellen Ableitungen
- die sich negativ auf das Training auswirken kann.
  
 \end_layout
 
@@ -9940,13 +9890,13 @@ key "Cook2012"
 \series default
 .
  Meistens werden solche GPUs als Zusatzkarten für Rechner angeboten und
- verfügen oftmals über eigenen schnellen onboard-Speicher.
+ verfügen über eigenen schnellen onboard-Speicher.
  Der Unterschied zwischen einer konventionellen CPU und einer GPU besteht
  hauptsächlich in der Architektur der Prozessoren.
  Während CPUs bis zu ca.
  20 (nach heutigem Stand) hochgetaktete Kerne besitzen und komplexe (bis
  zu 3-Schichtige) Cache Strukturen, so sind GPUs meist mit mehreren tausend
- niedrig getakteten Kernen ausgestattet.
+ niedrig getakteten Kernen und einer sehr breiten Speicheranbindung ausgestattet.
  
 \begin_inset Float table
 wide false
@@ -10215,18 +10165,13 @@ Anzahl der Rechneneinheiten für verschiedene CPUs / GPUs
 
 \end_inset
 
-Auch die Cache Struktur fällt bei GPUs deutlich simpler aus.
- Weiterhin ist die sehr direkte Anbindung des Speichers auf der Platine
- der GPU selbst oftmals ein Vorteil.
+Weiterhin ist die sehr direkte Anbindung des Speichers auf der Platine der
+ GPU selbst oftmals ein Vorteil.
  Durch immer größer werdende SIMD (Single Instruction Multiple Data) Einheiten
  in modernen CPUs (bspw.
  AVX512 mit 512 breiten Registern) verschwindet der Unterschied allerdings
- zusehends, wie die folgende Tabelle zeigt.
- 
-\end_layout
-
-\begin_layout Standard
-Tabelle 
+ zusehends.
+ Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:CoresCPUGPU"
@@ -10273,17 +10218,14 @@ Typischer Aufbau eines Bus-Systems
 
 Auch auf programmiertechnischer Seite verschwindet der Unterschied zwischen
  CPU und GPU.
- So ist der Aufwand eine einfache Matrixoperation (wie z.B.
- eine Matrixmultiplikation) zu programmieren, die die entsprechende Hardware
+ So ist der Aufwand um eine einfache Matrixoperation (wie z.B.
+ eine Matrixmultiplikation) zu programmieren, welche die entsprechende Hardware
  vollständig ausnutzt, zu einer Expertenaufgabe geworden.
  Dieser Umstand gilt für CPUs und GPUs gleichermaßen.
  Aus diesem Grund bieten sowohl Intel als auch NVidia zahlreiche hardwareoptimie
 rte Bibliotheken für alle Arten von Rechenoperationen an.
-\end_layout
-
-\begin_layout Standard
-Allerdings gibt es Unterschiede zwischen GPU und CPU bei dem Transfer von
- Daten.
+ Allerdings gibt es Unterschiede zwischen einer GPU und CPU bei dem Transfer
+ von Daten.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -10335,17 +10277,17 @@ GPU kopiert Matrix A zurück in den RAM (typische Transferraten von 15GB/sec)
 \end_layout
 
 \begin_layout Standard
-Wie man erkennt, kann der PCIe Bus mit 15GB/sec (Stand 2017) zum Flaschenhals
- der Operation werden.
- Die Beschleunigung der Rechnung auf der Karte selbst, muss den Overhead
+Dabei kann der PCIe Bus mit 15GB/sec (Stand 2017) zum Flaschenhals der Operation
+ werden.
+ Die Beschleunigung der Rechnung auf der Karte selbst muss den Overhead
  des Transfers überwiegen.
  Erst dann lohnt sich der Einsatz einer solchen GPU.
  
 \end_layout
 
 \begin_layout Standard
-Ob der praktische Einsatz für ein Kriging-Verfahren wie es in AutoOpti verwendet
- wird sinnvoll ist, soll innerhalb dieses Abschnittes beleuchtet werden.
+Ob der praktische Einsatz für das hier entwickelte Kriging-Verfahren sinnvoll
+ ist, soll innerhalb dieses Abschnittes betrachtet werden.
  In 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -10356,11 +10298,12 @@ key "Toal2016"
  wird die Verwendung von GPUs innerhalb eines Kriging-Verfahren bereits
  als gewinnbringend beschrieben.
  Innerhalb dieser Arbeit wurden allerdings nur kleine Matrizen betrachtet
- (n<1000), die verwendete Bibliothek nicht beschrieben, die Overhead-Anteile
- nicht beschrieben und auch die Fließkommagenauigkeit wurde nicht angegeben.
+ (n<1000) und die verwendete Bibliothek nicht beschrieben.
+ Weiterhin werden die Overhead-Anteile nicht beschrieben und auch die Fließkomma
+genauigkeit wurde nicht angegeben.
  Dies kann von Bedeutung sein, da eine höhere Genauigkeit (von 64Bit) bei
  einigen GPUs zu massiven Leistungseinbrüchen führt.
- Weiterhin stellt sich auch die Frage, ob es während einer Optimierung möglich
+ Zudem stellt sich auch die Frage, ob es während einer Optimierung möglich
  und sinnvoll ist, mehrere Trainings auf einer GPU durchzuführen.
  Folgend sollen diese Fragestellungen betrachtet werden.
 \end_layout
@@ -10370,8 +10313,8 @@ Umgesetzte Algorithmen
 \end_layout
 
 \begin_layout Standard
-Wie bereits erwähnt, ist es nicht sinnvoll alle Algorithmen als GPU-Version
- umzusetzen, da diese durch den Transfer letztlich langsamer wären.
+Es ist nicht sinnvoll alle Algorithmen als GPU-Version umzusetzen, da diese
+ durch den Transfer letztlich langsamer wären.
  Aus diesem Grund sind in der 
 \begin_inset Quotes gld
 \end_inset
@@ -10425,14 +10368,14 @@ Lösen eines Gleichungssystem mit zerlegter Matrix
 \end_layout
 
 \begin_layout Standard
-Die genaue Umsetzung ist in 
+Die genaue Umsetzung wird in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kueppers2016,kueppers2016b,Kueppers2016c"
 
 \end_inset
 
- beschrieben.
+ beschrieben und soll hier nicht weiter thematisiert werden.
  
 \end_layout
 
@@ -10441,8 +10384,8 @@ Fließkommagenauigkeit
 \end_layout
 
 \begin_layout Standard
-Innerhalb eines Kriging Verfahrens ist es praktisch unerlässlich die numerischen
- Berechnung mit doppelter Fließkommagenauigkeit (64Bit) durchzuführen.
+Innerhalb des Kriging Verfahrens ist es unerlässlich die numerische Berechnung
+ mit doppelter Fließkommagenauigkeit (DP 64Bit) durchzuführen.
  Aus diesem Grund sollte die Leistung der einzelnen GPU-Architekturen berücksich
 tigt werden.
  In Tabelle 
@@ -10452,17 +10395,14 @@ reference "tab:Vergleich-der-Rechenleistung"
 
 \end_inset
 
- sind alle NVidia Architekturen der letzten Jahre gelistet.
+ wird die Rechenleistung bei 64Bit (DP) und 32Bit (SP) Genauigkeit von verschied
+enen NVidia Architekturen der letzten Jahre verglichen.
 \begin_inset Wrap table
 lines 0
 placement o
 overhang 0col%
 width "50col%"
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -10701,10 +10641,10 @@ Wirtschaftliche Betrachtung
 \end_layout
 
 \begin_layout Standard
-Neben der reinen Rechenleistung sollten auch wirtschaftliche Aspekte Berücksicht
-igt werden.
- Insbesondere spielen der Straßenpreis und auch der Stromverbrauch eine
- sehr wichtige Rolle.
+Neben der reinen Rechenleistung müssen auch wirtschaftliche Aspekte berücksichti
+gt werden.
+ Insbesondere spielen der Anschaffungspreis und auch der Stromverbrauch
+ eine sehr wichtige Rolle.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -10713,14 +10653,15 @@ reference "sec:Wirtschaftliche-Betrachtung-CPUGPU"
 \end_inset
 
  ist ein tabellarischer Vergleich zwischen verschiedenen GPUs und CPUs angestell
-t worden, besonders wichtig sind dabei die Werte Watt/GFlop und GFlop/Euro.
+t worden.
+ Besonders wichtig dabei sind die Werte Watt/GFlop und GFlop/Euro.
  Hier ist schnell ersichtlich, dass in beiden Punkten der Einsatz von GPUs
  rentabel ist.
  Allerdings beruht der Vergleich auf der theoretischen Rechenleistung, welche
  nicht immer erreicht werden kann.
  Die oftmals vertretene Meinung, dass viele Algorithmen aufgrund der schlechten
  Parallelisierbarkeit besser auf CPUs ausführbar sind, stimmt nur noch bedingt
- (siehe Tabelle 
+ bis garnicht (siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:CoresCPUGPU"
@@ -10732,11 +10673,13 @@ reference "tab:CoresCPUGPU"
 \end_layout
 
 \begin_layout Standard
-Der Energieverbrauch pro Rechenleistung ist mittlerweile ein sehr wichtiges
- Kriterium für die Auswahl einer geeigneten CPU/GPU für einen Supercomputer.
- Dies wird sehr schnell klar, wenn man sich die leistungsstärksten Supercomputer
- ansieht (Stand Juni 2018), da diese bereits mehrere Megawatt an Leistung
- benötigen:
+Der Energieverbrauch pro Rechenleistung ist neben der reinen Rechenleistung
+ ein sehr wichtiges Kriterium für die Auswahl einer geeigneten CPU/GPU Kombinati
+on für einen Supercomputer.
+ Betrachtet man den Energiebedarf der aktuell leistungsstärksten Supercomputer
+ (Stand Juni 2018), wird dieser Punkt sehr schnell klar, da der Energiebedarf
+ bereits mehrere Megawatt übeschritten hat.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -11162,8 +11105,9 @@ Weiterhin ist erkennbar, dass der Anteil an GPUs stark zugenommen hat, was
  von Intel, so liegt der Energiebedarf bei 0.04Watt/GFlop (V100) im Vergleich
  zu 0.134 Watt/GFlop (Platinum 8180).
  Der in TaihuLight-Supercomputer stellt hier eine Ausnahme dar und verwendet
- die in China entwickelten SunWay Prozessoren, diese Entscheidung hatte
- allerdings politisch motivierte Hintergründe (siehe 
+ die in China entwickelten SunWay Prozessoren.
+ Diese Entscheidung hatte allerdings politisch motivierte Hintergründe (siehe
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "USRegu2015"
@@ -11171,17 +11115,10 @@ key "USRegu2015"
 \end_inset
 
 ).
- Die Supercomputer in Deutschland sind vergleichsweise ineffizient was Leistung
- und Verbrauch angeht, da meist keine Beschleunigerkarten verwendet werden.
- Der globale Trend zeigt allerdings eine deutliche Zunahme, wie Abbildung
+ Die Supercomputer in Deutschland sind im globalen Vergleich eher ineffizient
+ was Leistung und Verbrauch angeht, da bisher nur selten Beschleunigerkarten
+ verwendet werden.
  
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Top500GPUAnteile"
-
-\end_inset
-
- zeigt.
 \end_layout
 
 \begin_layout Paragraph*
@@ -11191,14 +11128,13 @@ Benchmarks
 \begin_layout Standard
 Innerhalb dieses Abschnittes sollen einige Benchmark-Ergebnisse der entwickelten
  Kriging-Software gezeigt werden.
- Im ersten Teil geht es um die Ausnutzung der theoretischen Rechenleistung,
- damit soll die Frage geklärt werden, ob es möglich ist die voll Kapazität
- einer GPU innerhalb eines Kriging Verfahrens zu nutzen.
- Danach sollen die Overhead-Anteile in Abhängigkeit der Matrixgröße, für
+ Im ersten Teil geht es um die Ausnutzung der theoretischen Rechenleistung.
+ Dort soll die Frage geklärt werden, ob es möglich ist, die volle Rechenkapazitä
+t einer GPU für das hier entwickelte Kriging Verfahren zu nutzen.
+ Danach sollen die Overhead-Anteile in Abhängigkeit der Matrixgröße für
  ein Training gezeigt werden.
- Als letzter Punkt soll dann die Nutzung mehrerer Trainings auf einer GPU
- gezeigt werden.
- 
+ Der letzte Punkt zeigt die Machbarkeit und Effizienz der parallelen Nutzung
+ mehrerer gleichzeitiger Trainings auf einer GPU.
 \end_layout
 
 \begin_layout Subparagraph*
@@ -11286,7 +11222,7 @@ Erreichte Beschleunigung
 \begin_inset Text
 
 \begin_layout Plain Layout
-1x
+1
 \end_layout
 
 \end_inset
@@ -11295,7 +11231,7 @@ Erreichte Beschleunigung
 \begin_inset Text
 
 \begin_layout Plain Layout
-1x
+1
 \end_layout
 
 \end_inset
@@ -11315,7 +11251,7 @@ Erreichte Beschleunigung
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.55x
+2.55
 \end_layout
 
 \end_inset
@@ -11324,7 +11260,7 @@ Erreichte Beschleunigung
 \begin_inset Text
 
 \begin_layout Plain Layout
-2.58x
+2.58
 \end_layout
 
 \end_inset
@@ -11344,7 +11280,7 @@ Nvidia K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.11x
+3.11
 \end_layout
 
 \end_inset
@@ -11353,7 +11289,7 @@ Nvidia K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-3.6x
+3.1
 \end_layout
 
 \end_inset
@@ -11373,7 +11309,7 @@ Nvidia K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-6.22x
+6.22
 \end_layout
 
 \end_inset
@@ -11382,7 +11318,7 @@ Nvidia K40
 \begin_inset Text
 
 \begin_layout Plain Layout
-6.21x
+6.21
 \end_layout
 
 \end_inset
@@ -11402,7 +11338,7 @@ Nvidia K80
 \begin_inset Text
 
 \begin_layout Plain Layout
-6.3x
+6.3
 \end_layout
 
 \end_inset
@@ -11411,7 +11347,7 @@ Nvidia K80
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.32x
+5.32
 \end_layout
 
 \end_inset
@@ -11434,7 +11370,7 @@ name "tab:SollIstBenchmarksGPU"
 
 \end_inset
 
-Theoretische und erreichte Werte der Benchmarks 
+Theoretische und erreichte Beschleunigung des Benchmarks 
 \end_layout
 
 \end_inset
@@ -11454,12 +11390,8 @@ Die Ergebnisse zeigen, dass bei nahezu allen Benchmarks die theoretische
  auf einer Platine und stellt somit einen Sonderfall dar.
  Die theoretischen Werte liegen bei dieser Karte mit hoher Wahrscheinlich
  niedriger.
- 
-\end_layout
-
-\begin_layout Standard
-Grundsätzlich lässt sich aber sagen, dass die Rechenkapazität der GPUs für
- ein Kriging Verfahren sehr gut Nutzbar ist.
+ Grundsätzlich lässt sich aber sagen, dass die Rechenkapazität der GPUs
+ für ein Kriging Verfahren sehr gut nutzbar ist.
  
 \end_layout
 
@@ -11502,12 +11434,12 @@ Overhead-Anteile bei einem Kriging-Training mit einer GPU (Nvidia K6000)
 
 \end_inset
 
-Wie bereits beschrieben, muss im Vergleich zu einer CPU, ein zusätzlicher
- Transfer durchgeführt werden und eine Initialisierung durchlaufen werden.
+Im Vergleich zu einer CPU muss ein zusätzlicher Transfer durchgeführt und
+ eine Initialisierung durchlaufen werden.
  Beides schmälert die Rechenleistung der GPU.
- Daher soll folgend ein Benchmark gezeigt werden, in dem die Anteile der
- Initialisierung und des Transfers im Vergleich zu der Rechenzeit ins Verhältnis
- gesetzt werden.
+ Daher wird folgend ein Benchmark gezeigt, in dem die Anteile der Initialisierun
+g und des Transfers im Vergleich zu der Rechenzeit ins Verhältnis gesetzt
+ werden.
  Bei dem Beispiel handelt es sich um dasselbe wie in Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11547,13 +11479,13 @@ GPU Resourcenverteilung bei parallelen Trainings
 Aufgrund der besonderen Beschaffenheit von GPUs, stellt sich die Frage,
  inwiefern diese Zusatzkarten Multiprozessfähig sind.
  Besonders wichtig ist hierbei der Punkt, wie die Karten damit umgehen,
- wenn mehrere Prozesse sich die Resource teilen.
- Also bspw.
- mehrere Trainings auf einer GPU gleichzeitig ausgeführt werden.
+ wenn mehrere Prozesse sich die Ressource teilen.
+ Also in diesem Fall mehrere Trainings auf einer GPU gleichzeitig ausgeführt
+ werden.
  Die Schwierigkeit liegt dabei in der Übertragung auf die GPU und auch in
- der Ausführung der unterschiedlichen Prozess auf einer Karte, da diese
- sehr stark auf einen Prozess ausgelegt sind, welcher den GPU-Speicher linear
- durchläuft und so die volle Bandbreite des Speichers nutzen kann.
+ der Ausführung der unterschiedlichen Prozesse auf einer Karte.
+ GPUs sind sehr stark auf einen Prozess ausgelegt, welcher den GPU-Speicher
+ linear durchläuft und so die volle Bandbreite des Speichers nutzen kann.
 \end_layout
 
 \begin_layout Standard
@@ -11681,6 +11613,7 @@ Das Ergebnis zeigt, dass die Geschwindigkeit nahezu linear mit Anzahl der
  besser nutzen lassen.
  Jedoch kann der GPU-RAM eine Beschränkung darstellen, so wie es bei 4 gleichzei
 tigen Trainings auf einer K40 bei 15000 Stützstellen zu sehen ist.
+ Die Karten sind also für diesen Fall sehr gut geeignet.
  
 \end_layout
 
@@ -11695,6 +11628,7 @@ reference "sec:GPU-Resourcenverteilung-ParalleleTrainigns"
 \end_inset
 
  zu finden.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -11704,13 +11638,15 @@ Nvidia K40 / K6000 Bios
 \begin_layout Standard
 Für die Benchmarks standen über das NVidia-PSG Cluster K40 und K80 GPUs
  zur Verfügung.
- Danach war innerhalb des Instituts für Antriebstechnik jedoch nur noch
- eine NVidia Quadro K6000 vorhanden, grundsätzlich besitzen die GPUs dieselben
- Prozessoren (GK110) und RAM (GDDR5 384Bit ECC).
- Zwischen den GPUs konnte ein Leistungsunterschied von ca.
- 30% festgestellt werden.
- Der Unterschied in den Karten ist rein durch das GPU-Bios festgelegt, und
- entsteht durch den sogenannten 
+ Nach der Durchführung war innerhalb des Instituts für Antriebstechnik nur
+ noch eine NVidia Quadro K6000 vorhanden.
+ Damit war eine Vergleichbarkeit weiterer Tests nur schwer möglich.
+ Allerdings besitzen die GPUs dieselben Prozessoren (GK110) und auch denselben
+ RAM (GDDR5 384Bit ECC).
+ Dennoch wurde zwischen den GPUs ein Leistungsunterschied von ca.
+ 30% festgestellt.
+ Der Unterschied in den Karten ist nur durch das GPU-Bios festgelegt und
+ entsteht durch den sogenannten internen 
 \begin_inset Quotes gld
 \end_inset
 
@@ -11718,8 +11654,9 @@ PowerTable
 \begin_inset Quotes grd
 \end_inset
 
-, in diesem sind die elektrischen-Leistungen für die verschiedenen Taktfrequenzb
-ereiche der GPU festgelegt.
+.
+ In diesem sind die elektrischen-Leistungen für die verschiedenen Taktfrequenzbe
+reiche der GPU festgelegt.
  Die Werte der maximalen Leistung der K6000 liegen deutlich unter der K40,
  daher ist des der Karte nicht gestattet die volle Taktfrequenz zu erreichen.
  Durch das NVFlash-Tool ist es möglich das Bios der GPU zu manipulieren.
@@ -11728,6 +11665,7 @@ ereiche der GPU festgelegt.
  Bei der K6000 wurde dies durchgeführt und die Leistungswerte entsprechend
  der K40 angepasst.
  So war es möglich weitere Benchmarks mit der K6000 auf K40 Niveau durchzuführen.
+ 
 \end_layout
 
 \begin_layout Section
@@ -11744,17 +11682,17 @@ name "sec:Laufzeit-Analysesoftware-für-Kri"
 \begin_layout Standard
 Während einer Optimierung werden mehrere Ersatzmodelle trainiert, wobei
  das Training sehr häufig durchgeführt wird.
- Aus diesem Grund ist es von großer Bedeutung, die Ersatzmodelle während
- einer Optimierung stetig zu überwachen.
- Besonderer Wert sollte dabei auf folgende Punkte gelegt werden:
+ Aus diesem Grund ist es von großer Bedeutung, die Ersatzmodelle stetig
+ zu überwachen.
+ Besonders wichtig sind hierbei folgende Punkte:
 \end_layout
 
 \begin_layout Itemize
-Güte der einzelnen Ersatzmodelle 
+Die Güte der einzelnen Ersatzmodelle 
 \end_layout
 
 \begin_layout Itemize
-Trainingszeit
+Die benötigte Trainingszeit
 \end_layout
 
 \begin_layout Itemize
@@ -11767,10 +11705,10 @@ Um eine solche Überwachung übersichtlich zu gestalten, wurde im Rahmen dieser
  Arbeit eine Software entwickelt, welche den aktuellen Stand der Ersatzmodelle
  und die Entwicklung grafisch darstellt.
  Das Programm wurde in der Programmiersprache Python geschrieben und erzeugt
- nach Ausführung eine PDF Datei.
+ nach Ausführung eine PDF-Datei.
  Folgend sollen einige der wichtigsten grafischen Ausgaben gezeigt und deren
  Einsatz erläutert werden.
- Als Beispiel wird dafür das Mukoko Projekt verwendet, welches in Kapitel
+ Als Beispiel wird dafür das Mukoko-Projekt verwendet, welches in Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11848,17 +11786,12 @@ reference "fig:KhonFehlerVorhersage"
 \end_inset
 
  zeigt den typischen Verlauf eines solchen Vorhersagefehlers.
- In blau dargestellt sind die Vorhersagen der Stützstellen und in rot die
+ In blau sind die Vorhersagen der Stützstellen dargestellt und in rot die
  nachgerechneten Werte.
  Die angezeigten Fehlerbalken entsprechen der vorhergesagten Standardabweichung.
  Die X-Achse stellt die jeweilige Optimierungsiteration dar.
  Die grüne Kurve beschreibt die absolute Differenz zwischen Vorhersage und
  realem Wert.
- In dieser Abbildung ist erkennbar, dass zu anfang der Optimierung die vorherges
-agte Standardabweichung zu hoch ist, da nahzu keiner der echten Werte innerhalb
- der Fehlerbalken liegt.
- Erst nach ca.
- 40 Iterationen ist eine Besserung erkennbar.
 \end_layout
 
 \begin_layout Subsection*
@@ -11867,7 +11800,7 @@ Zeitlicher Verlauf des Likelihood-Werts
 
 \begin_layout Standard
 Der Verlauf des Likelihood-Werts ist eine sehr gute Möglichkeit das Training
- der Ersatzmodelle zu begutachten, sowie fehlerhafte Daten aufzudecken.
+ der Ersatzmodelle zu begutachten und auch um fehlerhafte Daten aufzudecken.
  In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11919,10 +11852,10 @@ reference "fig:KhonGobalConvergence"
 
  rechts, ist ab Iteration 1000 ein Ausreißer im Verlauf des Likelihood-Plots
  zu sehen.
- Dieser Ausreißer wurde während der laufenden Optimierung bemerkt und es
- konnte ein Fehler in den Daten festgestellt werden.
+ Dieser Ausreißer wurde während der laufenden Optimierung bemerkt und konnte
+ auf einen systematischen Fehler in der Prozesskette zurückgeführt werden.
  Dieser resultierte aus einer Prozesskettenänderung während der Laufzeit
- und führet zu fehlerhaften Daten.
+ und führte zu fehlerhaften Daten.
  Der Fehler konnte während der Laufzeit behoben werden und die Optimierung
  mit wenig Zeitverlust fortgesetzt werden.
  Ohne diese grafische Darstellung wäre es in der damaligen Optimierung zu
@@ -12024,36 +11957,26 @@ Hyperparameter-Matrix aus einer laufenden Optimierung
 
 \end_inset
 
-Die eingestellten Hyperparameter von allen Ersatzmodellen während einer
- Optimierung zu überprüfen ist aufgrund der bloßen Anzahl bereits sehr schwierig.
+Während einer Optimierung die eingestellten Hyperparameter aller Ersatzmodellen
+ zu überprüfen, ist aufgrund der bloßen Anzahl bereits sehr schwierig.
  Betrachtet man bspw.
- die Mukoko Optimierung, so wurden 38 Ersatzmodelle verwendung und 158 Parameter
-, was zu über 6000 Hyperparametern führt.
- Dennoch ist es zumindest möglich eine Plausibilitäts-Überprüfung durchzuführen.
+ die Mukoko Optimierung, so wurden 38 Ersatzmodelle und 158 Parameter vewendet,
+ was zu über 6000 Hyperparametern führt.
+ Dennoch ist es zumindest möglich eine grafische Plausibilitäts-Überprüfung
+ durchzuführen.
  Hierfür müssen die Optimierungsparameter und auch die Ersatzmodelle sinnvoll
- numeriert werden.
+ nummeriert werden.
  Bspw.
  sollten alle Parameter von einem Rotor in einer Reihe vorkommen oder die
  Aerodynamischen und Strukturmechanischen Ersatzmodelle jeweils in einer
  Gruppierung sein.
- Typischerweise wird eine solche Gruppierung naturgemäß von den Anwendern
- gewählt, da diese oft die übersichtlichste Darstellung bietet.
+ Meist wird eine solche Gruppierung naturgemäß von den Anwendern gewählt,
+ da diese oft die übersichtlichste Darstellung bietet.
 \end_layout
 
 \begin_layout Standard
-Versteht man die Hyperparameter eines Ersatzmodells als eine 
-\begin_inset Quotes gld
-\end_inset
-
-Gewichtung
-\begin_inset Quotes grd
-\end_inset
-
- des Parameters, so kann man diese nach Größe einfärben.
- In dem gewählten Plot, stellt grün einen hohen Wert dar und rot einen sehr
- niedrigen.
- Damit lässt sich eine grafische Matrix erzeugen wie sie exemplarisch in
- Abbildung 
+Werden die Hyperparameter nach Größe eingefärbt, so lässt sich eine grafische
+ Matrix erzeugen wie sie exemplarisch in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Hyperparameter-Matrix-aus-einer"
@@ -12061,10 +11984,14 @@ reference "fig:Hyperparameter-Matrix-aus-einer"
 \end_inset
 
  gezeigt wird.
+ In dem gewählten Plot, stellt grün einen hohen Wert dar und rot einen sehr
+ niedrigen.
+ Wobei ein sehr niedriger Wert darauf schließen lässt, dass der Parameter
+ im Kriging-Modell nicht verwendet wird.
  Innerhalb dieses Plots sind grüne und rote/gelbe Blöcke zu erkennen.
  Bspw.
- sieht man, dass die Statoren 1&2 für die Strukturmechanik keine Rolle zu
- spielen scheinen.
+ ist daran erkennbar, dass die Statoren 1&2 für die Strukturmechanik keine
+ Rolle zu spielen scheinen.
  Diese Information ist plausibel, da keine strukturmechanische Bewertung
  der Statoren durchgeführt wurde.
  Weiterhin kann man zwischen Rotor 1 und Rotor 2 alternierende grüne/rote
@@ -12072,12 +11999,8 @@ reference "fig:Hyperparameter-Matrix-aus-einer"
  Auch diese Information ist plausibel, da die freien Variablen für Rotor
  1 natürlich nur einen sehr geringen Einfluss auf die strukturmechanischen
  Ergebnisse von Rotor 2 haben sollten.
- 
-\end_layout
-
-\begin_layout Standard
-Mithilfe dieser einfachen Informationen ist es zumindest grob möglich, die
- Plausibilität der Ersatzmodelle auf einfache Weise zu überprüfen.
+ Mithilfe dieser simplen Informationen ist es zumindest ungefähr möglich,
+ die Plausibilität der Ersatzmodelle auf einfache Weise zu überprüfen.
  
 \end_layout
 
