@@ -82,8 +82,29 @@ name "chap:Reale-Turbomaschinen-Optimierung-1"
 
 \end_layout
 
+\begin_layout Standard
+Innerhalb dieses Kapitels werden zahlreichen Anwendungen des hier entwickelten
+ Verfahrens gezeigt.
+ Im ersten Abschnitt werden analytische Tests des Co-Krigings und des gesamten
+ Multifidelity-Optimierungsverfahrens gezeigt.
+ Darauf folgend wird ein Vergleich zwischen dem Multifidelity- und Single-Fideli
+ty-Verfahren an einer aeromechanischen Fanstufen-Optimierung gezeigt.
+ Als letztes werden dann Anwendungen gezeigt, in denen das hier entwickelte
+ Verfahren bereits verwendet wurde.
+ 
+\end_layout
+
 \begin_layout Section
 Analytische Testfälle
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt wird zuerst ein einfacher Testfall vorgestellt, welcher
+ die Funktion des Co-Kriging Ersatzmodells zeigt.
+ Im zweiten Teil werden dann die Ergebnisse einer analytische Testoptimierung
+ gezeigt und zahlreiche Tests des Multifidelity-Verfahrens durchgeführt
+ und die Ergebnisse dargestellt.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -140,8 +161,8 @@ Eindimensionales analytisches Beispiel mit zwei Gütestufen.
 \end_layout
 
 \begin_layout Standard
-Der erste analytische Testfall ist ein bekanntes Beispiel aus der Literatur
- (siehe 
+Der erste analytische Testfall ist beschrieben durch eine bekannte Testfunktion
+ aus der Literatur (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "forrester2007multi,LeGratiet"
@@ -163,7 +184,7 @@ reference "sec:VergleicheCoKrigingAndere"
 \end_inset
 
  beschrieben, ist es mit dem hier verwendeten Trainingsverfahren möglich
- die Punkte verschiedener Güte frei zu verteilen.
+ die Punkte verschiedener Gütestufen frei zu verteilen.
  Aus diesem Grund wurden für dieses Beispiel bewusst die Stützstellen niedriger
  Güte an den Stellen hoher Güte weggelassen und auch die Abstände der Punkte
  niedriger Güte variiert (vgl.
@@ -175,7 +196,7 @@ key "forrester2007multi,LeGratiet"
 \end_inset
 
 ).
- Folgend werden die Gleichungen 
+ Die Testfunktion ist durch die Gleichungen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:1DCOKrigingTestfall"
@@ -190,9 +211,9 @@ reference "eq:1DCOKrigingTestfall"
 \begin_inset Formula $f_{lf}\left(x\right)$
 \end_inset
 
- gezeigt.
- Die Funktion niedriger Güte stellt eine verzerrte Form der Funktion hoher
- Güte dar.
+ definiert.
+ Die Funktion niedriger Güte stellt dabei eine verzerrte Form der Funktion
+ hoher Güte dar.
  
 \end_layout
 
@@ -224,7 +245,8 @@ reference "eq:KovarianzFunktionenalleDrei"
 \end_inset
 
 ) ist, dass die Daten hoher Güte aus den Daten niedriger Güte entspringen.
- Die Eignung dieses analytischen Testfalls ist daher nicht optimal.
+ Die Eignung dieses analytischen Testfalls ist daher nicht optimal, da dieser
+ genau umgekehrt definiert ist.
  Ein Vorteil liegt laut 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -259,7 +281,7 @@ reference "wrap:Eindimensionales-analytisches-Be"
 \end_inset
 
  zeigt zum einen die Funktionen und auch gewählten Stützstellen und zum
- anderen die Vorhersagen des Ordinary-Kriging und des Co-Kriging Verfahrens.
+ anderen die Vorhersagen des Ordinary- und des Co-Kriging Verfahrens.
  Wobei das Ordinary-Kriging nur die Stützstellen hoher Güte zur Verfügung
  hatte.
  Das Co-Kriging kann die Funktion nahezu fehlerfrei darstellen, was auf
@@ -320,27 +342,28 @@ reference "wrap:Eindimensionales-analytisches-Be-1"
 
 \end_inset
 
- sind die Ergebnisse des trainierten Skalierungsfaktor 
+ werden die Ergebnisse des trainierten Skalierungsfaktors 
 \begin_inset Formula $a$
 \end_inset
 
- unter verschiedenen Skalierungsfaktoren 
+ mit den verschiedenen Skalierungsfaktoren 
 \begin_inset Formula $A$
 \end_inset
 
- zu sehen.
+ verglichen.
  Hiermit ist es möglich, dass Trainingsergebnis zu verifizieren.
- Der Einfachheit halber werden die Reziprokwerte 
+ Der Einfachheit halber werden direkt die Reziprokwerte 
 \begin_inset Formula $\frac{1}{a}$
 \end_inset
 
- dargestellt, da diese direkt mit dem eingestellten Skalierungsfaktor 
+ dargestellt, da diese mit dem eingestellten Skalierungsfaktor 
 \begin_inset Formula $A$
 \end_inset
 
  übereinstimmen sollten.
  Wie man erkennen kann, stimmen die trainierten Ergebnisse alle sehr gut
- mit dem eingestellten Faktoren der Funktion überein.
+ mit dem eingestellten Faktoren der Funktion überein, der Fehler liegt im
+ Bereich des numerischen Rauschens.
  
 \end_layout
 
@@ -349,10 +372,10 @@ Zusammenfassend kann man feststellen, dass sich dieser einfache analytische
  Test mit dem Co-Kriging Verfahren sehr gut abbilden lässt.
  Auch wenn dieser Test nicht mit einer Turbomaschinenoptimierung vergleichbar
  ist, so lassen sich die Funktionsweise und auch die Leistungsfähigkeit
- dieses Verfahrens damit sehr gut darstellen.
+ dieses Verfahrens damit sehr gut demonstrieren.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Analytische Optimierungsbeispiele
 \begin_inset CommandInset label
 LatexCommand label
@@ -375,8 +398,8 @@ Testfälle, welche das Zusammenspiel von Co-Kriging und Entscheidungsfunktion
 \end_layout
 
 \begin_layout Enumerate
-Testfälle, welche Grenzfälle darstellen und das hier entwickelte Multifidelity-V
-erfahren in besonderer Weise beanspruchen.
+Testfälle, welche Grenzfälle des Verfahrens darstellen und das hier entwickelte
+ Multifidelity-Verfahren in besonderer Weise beanspruchen.
 \end_layout
 
 \begin_layout Standard
@@ -391,7 +414,7 @@ reference "tab:Auflistung-der-Optimierungstestf"
  gehören und die Testfälle 3&4 zu der zweiten.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
 Definition der Testfälle 
 \end_layout
 
@@ -466,23 +489,22 @@ reference "tab:Auflistung-der-Optimierungstestf"
  Die zweite und dritte Spalte beschreibt die jeweilige Funktion hoher und
  niedriger Güte.
  Die analytischen Funktionen wurden so programmiert, dass ein zeitlicher
- Faktor zwischen Hoher und niedriger Güte von 
+ Faktor zwischen hoher und niedriger Güte von 
 \begin_inset Formula $\frac{t_{hf}}{t_{lf}}\approx70$
 \end_inset
 
  erreicht wurde.
- Für jeden Testfall wurde zusätzlich eine Referenzoptimierung durchgeführt,
- hierbei handelt es sich um eine 
+ Für jeden Testfall wurde zusätzlich eine Referenzoptimierung durchgeführt.
+ Dabei handelt es sich um eine 
 \begin_inset Quotes gld
 \end_inset
 
-Single Fidelity
+Single-Fidelity
 \begin_inset Quotes grd
 \end_inset
 
  Optimierung, welche das Ordinary-Kriging Verfahren verwendet.
- Alle hier verwendeten Kriging-Verfahren stammen aus derselben Software,
- welche im Rahmen dieser Arbeit entwickelt wurde.
+ Alle verwendeten Kriging-Verfahren stammen aus der hier entwickelten Software.
 \end_layout
 
 \begin_layout Standard
@@ -765,25 +787,25 @@ Auflistung der Optimierungstestfälle
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Testfall 1 - Entscheidungsfunktion bei unterschiedlichen Informationsgehalt
  der niedrigen Güte
 \end_layout
 
 \begin_layout Standard
-Dieser Testfall soll das Verhalten der Entscheidungsfunktion bei unterschiedlich
- stark verrauschter Funktion niedriger Güte 
+Dieser Testfall soll das Verhalten der Entscheidungsfunktion bei einer verrausch
+ten Funktion niedriger Güte 
 \begin_inset Formula $f_{lf}\left(\vec{x}\right)$
 \end_inset
 
- testen.
+ bestimmen.
  Die Funktion hoher Güte ist in diesem Fall die Funktion 
 \begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
 
 .
- Die Funktion niedriger Güte ist definiert durch dieselbe Funktion, allerdings
- mit einem gleichverteilten Rauschen belegt 
+ Die Funktion niedriger Güte ist zusätzlich mit einem gleichverteilten Rauschen
+ belegt 
 \begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a=0,b=1.0\right)$
 \end_inset
 
@@ -814,7 +836,7 @@ Dieser Testfall soll das Verhalten der Entscheidungsfunktion bei unterschiedlich
 \end_layout
 
 \begin_layout Standard
-Um einen Eindruck von dem Rauschen zu bekommen, ist in Abbildung 
+Um einen Eindruck des Rauschens zu bekommen, ist in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Exemplarische-Funktion-niedriger"
@@ -830,13 +852,12 @@ reference "fig:Exemplarische-Funktion-niedriger"
 \end_inset
 
  dargestellt.
- Die Anzahl der freien Variablen ist für diese Darstellung allerdings auf
- zwei reduziert.
+ Die Anzahl der freien Variablen ist für diese Darstellung auf zwei reduziert.
  
 \end_layout
 
 \begin_layout Standard
-Ein stärkeres Rauschen in der Funktion niedriger Güte sollte sich im Co-Kriging
+Ein stärkeres Rauschen in der Funktion niedriger Güte muss sich im Co-Kriging
  durch einen höheren Rauschterm 
 \begin_inset Formula $\lambda_{2}$
 \end_inset
@@ -849,21 +870,20 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
 \end_inset
 
 ) ausdrücken.
- Dadurch sollte die Varianz der Modellfunktion niedriger Güte 
+ Dadurch hat die Varianz der Modellfunktion niedriger Güte 
 \begin_inset Formula $cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
- ein grundlegend höheres Niveau haben und der Erwartungswert niedriger Güte
- approximiert/geglättet werden.
+ ein grundlegend höheres Niveau und der Erwartungswert niedriger Güte wird
+ approximiert und damit geglättet.
  Das Kovarianzmodell hoher Güte 
 \begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
  sollte davon unberührt bleiben.
- Der Informationsgehalt der Daten niedriger Güte sollte also mit steigendem
- Rauschen für das Co-Kriging sinken.
- Die Entscheidungsfunktion sollte den Optimierungsverlauf bei einem größeren
- Rauschen schneller in Richtung hohe Güte lenken.
+ Der Informationsgehalt der Daten niedriger Güte sinkt also mit steigendem
+ Rauschen, weshalb die Entscheidungsfunktion den Optimierungsverlauf bei
+ einem größeren Rauschen schneller in Richtung hoher Güte lenkt.
  
 \end_layout
 
@@ -881,8 +901,8 @@ reference "eq:TimeCrit"
 \end_inset
 
 ).
- Dieses Verhalten ist in einer realen Anwendung auch sinnvoll, bei einem
- analytischen Testfall allerdings nicht.
+ Dieses Verhalten ist in einer realen Anwendung auch sinnvoll, bei diesem
+ analytischen Testfall allerdings unerwünscht.
  
 \end_layout
 
@@ -947,19 +967,19 @@ reference "tab:Anzahl-der-jeweiligen"
 \begin_inset Formula $i_{bestH},i_{bestL}$
 \end_inset
 
- die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt,
- der Index 
+ die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt
+ und der Index 
 \begin_inset Formula $H,L$
 \end_inset
 
- steht jeweils für hohe und niedrige Güte.
+ für hohe und niedrige Güte steht.
  Diese beiden Werte werden maßgeblich durch die Entscheidungsfunktion bestimmt.
  
 \begin_inset Formula $i_{initH},i_{initL}$
 \end_inset
 
- geben die Anzahl der Member der Initialisierung an.
- Die Definition des Beschleunigungsfaktors 
+ geben die Anzahl der Member der Initialisierung an und die Definition des
+ Beschleunigungsfaktors 
 \begin_inset Formula $t_{fact}$
 \end_inset
 
@@ -972,7 +992,8 @@ reference "sec:Theroretische-Beschleunigung-ein"
 
  zu finden.
  Dieser beschreibt den zeitlichen Faktor zwischen der Referenzoptimierung
- und der jeweiligen Testoptimierung, 
+ und der jeweiligen Testoptimierung.
+ Ein Faktor von 
 \begin_inset Formula $t_{fact}>1$
 \end_inset
 
@@ -985,9 +1006,9 @@ reference "sec:Theroretische-Beschleunigung-ein"
 \end_layout
 
 \begin_layout Standard
-Alle Optimierungen hatten dieselben 60 Initialisierungsmember hoher Güte,
- wobei die Multifidelity Optimierungen initial 200 Member niedriger Güte
- zur Verfügung hatten.
+Alle Optimierungen starten mit denselben 60 Initialisierungsmembern hoher
+ Güte, wobei die Multifidelity-Optimierungen weitere 200 Member niedriger
+ Güte zur Verfügung hatten.
  Alle Parametersätze der Initialisierungsmember wurden zufällig erzeugt.
  
 \end_layout
@@ -1020,29 +1041,35 @@ Vergleicht man die Beschleunigungsfaktoren
 \end_layout
 
 \begin_layout Standard
-Den genauen Verlauf des Entscheidungskriteriums kann man in Abbildung 
+In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Verlauf-des-Kriteriums"
 
 \end_inset
 
- finden.
- Gezeigt wird der Wert des Entscheidungskriteriums (siehe Gleichungen 
+ wird der Verlauf des Entscheidungskritieriums gezeigt.
+ Dieses ist definiert als Quotient des Informationszugewinns pro Zeit 
+\begin_inset Formula $\frac{I_{0|1}}{t_{1}}\frac{t_{0}}{I_{0|0}}$
+\end_inset
+
+ für die niedrigere Gütestufe 
+\begin_inset Formula $\frac{I_{0|1}}{t_{1}}$
+\end_inset
+
+ und die hohe Gütestufe 
+\begin_inset Formula $\frac{I_{0|0}}{t_{0}}$
+\end_inset
+
+ (siehe Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:criteriumWeighted"
+reference "eq:IzuT"
 
 \end_inset
 
--
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:TimeCrit"
-
-\end_inset
-
-) über der Member Nummer.
+).
+ Gezeigt wird der Wert des Entscheidungskriteriums über der Member Nummer.
  Die schwarze Linie beschreibt die Entscheidungsgrenze: Liegt der Wert des
  Kriteriums darüber, so wird ein Member niedriger Güte berechnet und darunter
  einer hoher Güte.
@@ -1053,22 +1080,8 @@ reference "eq:TimeCrit"
  niedriger Güte vorschlagen.
  Weiterhin muss der Wert des Kriteriums in etwa mit dem Wert des zeitlichen
  Quotienten übereinstimmen.
- Dies liegt daran, dass der Quotient der Standardabweichungen aus Gleichung
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:criteriumWeighted"
-
-\end_inset
-
- 
-\begin_inset Formula $\left(\frac{\sigma_{h}-\sigma_{hl}}{\sigma_{h}-\sigma_{hh}}\right)=1$
-\end_inset
-
- zu Eins werden muss, da die Funktionen und damit auch die Standardabweichungen
- identisch sind.
- Damit bleibt dann nur noch der Zeitquotient übrig, da in diesem Testfall
- die Trainingszeit 
+ Denn es bleibt nur noch der Zeitquotient übrig, da in diesem Testfall die
+ Trainingszeit 
 \begin_inset Formula $t_{train}$
 \end_inset
 
@@ -1076,12 +1089,13 @@ reference "eq:criteriumWeighted"
 \begin_inset Formula $t_{opti}$
 \end_inset
 
- auf 0 gesetzt wurden, bleiben nur noch die Prozesskettenzeiten 
-\begin_inset Formula $t_{prh},t_{prl}$
+ auf 0 gesetzt wurden, bleiben letztlich sogar nur die Prozesskettenzeiten
+ 
+\begin_inset Formula $t_{pr0},t_{pr1}$
 \end_inset
 
 : 
-\begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{prh}}{t_{train}+t_{opti}+t_{prl}}=\frac{t_{prh}}{t_{prl}}$
+\begin_inset Formula $T=\frac{t_{train}+t_{opti}+t_{pr0}}{t_{train}+t_{opti}+t_{pr1}}=\frac{t_{pr0}}{t_{pr1}}$
 \end_inset
 
  (vgl.
@@ -1096,11 +1110,12 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_layout
 
 \begin_layout Standard
-Die realen Werte lagen am Ende der Optimierung bei einer durchschnittlichen
+Die gemessenen Werte lagen am Ende der Optimierung bei einer durchschnittlichen
  Prozesskettenzeit von 
 \begin_inset Formula $\frac{t_{prh}}{t_{prl}}=\frac{5.087522}{0.0783920}=64.464$
 \end_inset
 
+.
  Das Kriterium der Entscheidungsfunktion lag bei 
 \begin_inset Formula $f_{dec}(M)=64.81$
 \end_inset
@@ -1115,10 +1130,10 @@ reference "fig:Verlauf-des-Kriteriums"
 
 \end_inset
 
- zeigt dieses Verhalten auch nochmals deutlich, das Kriterium ist nach einer
- anfänglichen Initialisierungsphase nahezu konstant und entscheidet sich
- erst nach Erreichen einer sehr hohen Genauigkeit für die Prozesskette hoher
- Güte (siehe Kapitel 
+ zeigt dieses Verhalten nochmals deutlich.
+ Das Kriterium ist nach einer anfänglichen Initialisierungsphase nahezu
+ konstant und entscheidet sich erst nach Erreichen einer sehr hohen Genauigkeit
+ für die Prozesskette hoher Güte (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Umschalten-auf-HF"
@@ -1130,9 +1145,10 @@ reference "par:Umschalten-auf-HF"
 \end_layout
 
 \begin_layout Standard
-Die beiden anderen Optimierungen 1b und 1c springen jeweils früher auf die
- Prozesskette hoher Güte um, zudem sinkt auch der Anteil an berechneten
- Membern niedriger Güte mit steigendem Rauschen der Funktion.
+Die beiden anderen Optimierungen 1b und 1c wechseln jeweils früher auf die
+ Prozesskette hoher Güte.
+ Zudem sinkt auch der Anteil an berechneten Membern niedriger Güte mit steigende
+m Rauschen der Funktion.
  Dieser 
 \begin_inset Quotes gld
 \end_inset
@@ -1534,19 +1550,19 @@ on für die Testfälle 0a - 0d.
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Ergebnisse - Testfall 2 - Einfluss der Optimierungs-Initialisierung
 \end_layout
 
 \begin_layout Standard
 Dieser Testfall soll den Einfluss der Initialisierung bei einer komplexen
- LF Funktion zeigen.
- Komplexe LF Funktion bezieht sich in diesem Fall darauf, dass alle Kovarianzmod
-ellparameter benötigt werden, um diese Funktion darstellen zu können.
- Weiterhin sind die Minima der Funktion niedriger und hoher Güte nicht an
- demselben Ort.
- Als Startdatenbasis wurde eine sehr kleine Menge von HF Stützstellen gewählt
- und die Menge an LF Stützstellen variiert.
+ Funktion niedriger Güte zeigen.
+ Komplex bezieht sich in diesem Fall darauf, dass alle Kovarianzmodellparameter
+ benötigt werden, um diese Funktion darstellen zu können.
+ Weiterhin sind die Minima der Funktion niedriger und hoher Güte an verschiedene
+n Orten.
+ Als Startdatenbasis wurde eine sehr kleine Menge von Stützstellen hoher
+ Güte gewählt und die Menge an Stützstellen niedriger Güte variiert.
  Die verwendete Entscheidungsfunktion ist die in dieser Arbeit entwickelte
  
 \begin_inset Quotes gld
@@ -1567,7 +1583,7 @@ reference "subsec:Entscheidungsfunktion"
 \end_layout
 
 \begin_layout Standard
-Ziel ist es, zu zeigen wie das Verfahren bei unterschiedlichen Initialisierungen
+Ziel ist es zu zeigen wie das Verfahren bei unterschiedlichen Initialisierungen
  reagiert.
  Hierbei ist das Zusammenspiel von Entscheidungsfunktion und auch Co-Kriging
  von erheblicher Bedeutung.
@@ -2401,7 +2417,7 @@ Konvergenz des Skalierungsfaktors a für Testfall a und d.
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Ergebnisse - Testfall 3 - Hohe und niedrige Güte vollständig unkorreliert
 \end_layout
 
