@@ -17,7 +17,6 @@
 \usepackage{verbatim}
 \usepackage{ifthen}
 \usepackage{ifpdf} 
-\usepackage{algorithmic} 
 
 \usepackage{lscape}     %% supplies a landscape environment 
 
@@ -887,6 +886,10 @@ In Optimierung / Erweiterung nch auf die Einleitung Stand der Technik beziehen
 
 \begin_layout Itemize
 Deckblatt RUB !!
+\end_layout
+
+\begin_layout Paragraph
+Letzter Stand: Aerodynamische Auswertung
 \end_layout
 
 \begin_layout Chapter*

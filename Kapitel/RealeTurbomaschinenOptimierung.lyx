@@ -5746,26 +5746,26 @@ Werte der Zielfunktionen und Nebenbedingungen der einzelnen Member.
 
 \end_inset
 
-In diesem Abschnitt sollen die in Abbildung 
+In diesem Abschnitt werden die in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Paretofront-der-besten"
 
 \end_inset
 
- mit 1,2,3 markierten Member aerodynamisch bewertet werden.
+ mit 1,2,3 markierten Member aerodynamisch bewertet.
  Da es sich um ein Benchmark der Optimierungsverfahren handelt, liegt der
- Fokus bei dieser Auswertung mehr auf den Unterschieden zwischen den verschieden
-en Ergebnissen.
- Es soll herausgestellt werden, dass die Multifidelity-Optimierungen einem
- fortgeschrittenerem Optimierungsstand entsprechen.
+ Fokus bei dieser Auswertung auf den Unterschieden zwischen den verschiedenen
+ Ergebnissen.
+ Es soll herausgestellt werden, dass die Member der Multifidelity-Optimierungen
+ einem fortgeschritteneren Optimierungsstand entsprechen.
  
 \end_layout
 
 \begin_layout Standard
-Die Auswertung der Member erfolgte nach 800.000 Sekunden Optimierungslaufzeit,
+Die Member wurden nach nach 800.000 Sekunden Optimierungslaufzeit ausgewertet,
  wobei die Optimierungen zu diesem Zeitpunkt noch nicht vollständig konvergiert
- waren.
+ sind.
  Die erreichten Zielfunktionswerte und Nebenbedingungen sind in Tabelle
  
 \begin_inset CommandInset ref
@@ -5829,8 +5829,8 @@ reference "fig:Relative-Lage-der"
  ist die relative Lage der einzelnen Nebenbedingungen für jeden Member zu
  erkennen.
  Die obere und untere Linie beschreiben die jeweiligen Intervallgrenzen.
- Die Multifidelity Member (1,2) liegen öfter an Grenzen von Nebenbedingungen
- als der High-Fidelity Member (3).
+ Die Multifidelity Member 1 und 2 liegen häufiger an Grenzen von Nebenbedingunge
+n als High-Fidelity Member 3.
  Der Grund dafür liegt an dem größeren Optimierungsfortschritt.
  Der Optimierer geht z.B.
  mit der mechanischen Dehnung bis an die obere Grenze und nutzt somit das
@@ -5851,10 +5851,10 @@ reference "fig:Radiale-Verteilung-des"
  zeigt die radialen Verteilungen der Stufe und des Rotors.
  Beim Totaldruckverhältnis ist bei beiden Multifidelity-Membern eine Lastumverte
 ilung zu erkennen: Im Bereich von ca.
- 90% relativen Massenstrom wurde der Rotor etwas entlastet und im mittleren
+ 90% relativen Massenstroms wurde der Rotor etwas entlastet und im mittleren
  Bereich dafür stärker belastet.
  Beide Rotoren erreichen dadurch einen höheren Wirkungsgrad im Bereich über
- 80% relativen Massenstrom.
+ 80% relativen Massenstroms.
  Im Bereich zwischen 15%-40% ist der Wirkungsgrad im Vergleich zu Member
  3 etwas niedriger.
  
@@ -5872,9 +5872,9 @@ reference "fig:Radiale-Verteilung-des-1"
  Umlenkung haben.
  Member 1 besitzt allerdings die niedrigeren Totaldruckverluste und kann
  dadurch den Gesamtwirkungsgrad nochmals erhöhen.
- Member 2 lenkt im gehäusenahen Bereich etwas stärker um, wahrscheinlich
- um auf die geänderten Zuströmbedingungen durch den Rotor zu reagieren und
- die geforderte Abströmung von max.
+ Member 2 lenkt im gehäusenahen Bereich etwas stärker um und reagiert damit
+ auf die geänderten Zuströmbedingungen durch den Rotor.
+ Das erlaubt es Member 2 die geforderte Abströmung von max.
  3° einzuhalten.
  Die Verluste sind auf einem leicht höherem Niveau als bei Member 1, aber
  niedriger als die von Member 3.
@@ -6024,7 +6024,9 @@ d erhöht werden ohne einen nennenswerten Einbruch im Totaldruckverhältnis.
  Allerdings wurde für die Statoren keine mechanische Nebenbedingung berücksichti
 gt, bei einer so schmalen Bauweise könnte die Struktur allerdings an ihre
  Belastungsgrenzen kommen.
- 
+ Insgesamt zeigen die Multifidelity-Member bei der hier gezeigten Problemstellun
+g einen höheren Optimierungsfortschritt, sowohl was Nebenbedingungen als
+ auch Zielfunktionen angeht.
 \end_layout
 
 \begin_layout Section
@@ -6039,8 +6041,9 @@ name "sec:Übersicht-der-bisherigen"
 \end_layout
 
 \begin_layout Standard
-Hier soll ein kurzer Überblick gegeben werden, in welchen Projekten das
- hier entwickelte Multifidelity-Verfahren bereits Anwendung gefunden hat.
+Innerhalb dieses Abschnitts wird ein kurzer Überblick gegeben, in welchen
+ Forschungs- und Industrieprojekten das hier entwickelte Multifidelity-Verfahren
+ bereits Anwendung gefunden hat.
 \end_layout
 
 \begin_layout Subsection
@@ -6051,7 +6054,7 @@ Design of a counter rotating fan using a multidisciplinary and multifidelity
 \begin_layout Standard
 Im Rahmen des EU-Projekts COBRA wurde eine gegenläufige Fanstufe ausgelegt
  und optimiert.
- An dem Projekt beteiligen sich die Institutionen DLR, ONERA, COMOTI and
+ An dem Projekt beteiligten sich die Institutionen DLR, ONERA, COMOTI and
  Safran Aircraft Engines.
  Innerhalb dieses Projekts wurde eine sehr komplexe Multifidelity-Optimierung
  mit der hier entwickelten Multifidelity-Software erfolgreich durchgeführt
@@ -6105,15 +6108,12 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-Beide Rotoren wurden jeweils durch 5 Profilschnitte beschrieben, die Parametrisi
-erung dieser Profilschnitte entspricht auch dem Großteil der Parameter.
+Beide Rotoren wurden jeweils durch 5 Profilschnitte beschrieben und die
+ Parametrisierung dieser Profilschnitte entspricht auch dem Großteil der
+ Parameter.
  Neben der Profilparametrisierung wurde auch die Drehzahl beider Rotoren
  in sehr engen Grenzen freigegeben.
- 
-\end_layout
-
-\begin_layout Standard
-Insgesamt ergibt sich damit eine Gesamtzahl von 112 freien Parametern.
+ Insgesamt ergibt sich damit eine Gesamtzahl von 112 freien Parametern.
  
 \end_layout
 
@@ -6134,16 +6134,17 @@ Es wurden zwei Gütestufen verwendet, diese unterschieden sich durch die
 
 \begin_layout Standard
 Die Entwicklung der Entscheidungsfunktion war zu diesem Zeitpunkt noch nicht
- abgeschlossen, daher wurde die in Gleichung 
+ abgeschlossen, daher wurde eine vereinfachte Version der in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:VarianzEntscheidung"
+reference "par:Entschedungsfunktion"
 
 \end_inset
 
- beschriebene Entscheidungsfunktion genutzt.
- Die Ergebnisse dieser Optimierung trugen auch wesentlich zur Weiterentwicklung
- der in dieser Arbeit beschriebenen 
+ beschriebenen Entscheidungsfunktion verwendet.
+ Diese beinhaltete keine Gewichtung der Zielfunktionen und Nebenbedingungen.
+ Die Ergebnisse und Erfahrungen dieser Optimierung trugen wesentlich zur
+ Weiterentwicklung der in dieser Arbeit beschriebenen 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6163,9 +6164,8 @@ Ergebnisse
 Die gesamte Optimierung hatte eine Laufzeit von ca.
  1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
  DLR durchgeführt.
- Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
- variiert, lag im Mittel aber bei ca.
- 10 Knoten.
+ Die Anzahl der verwendeten Rechenknoten lag im Mittel bei 10 Knoten, wurde
+ je nach Auslastung des Clusters variiert.
  Die Ausstattung der Knoten entspricht der aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6188,8 +6188,8 @@ s und auch der Ersatzmodelle.
 Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
  Die finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das
  Ausgangsdesign, konnte die Schallemissionen aber um 3dB senken.
- Weiterhin konnte die maximale Spannung um des zweiten Rotors um ca.
- 62% gesenkt und die dynamischen Kriterien ebenfalls alle erfüllt werden.
+ Weiterhin konnte die maximale Spannung um des zweiten Rotors um 62% gesenkt
+ und die dynamischen Kriterien ebenfalls alle erfüllt werden.
  Auch die aerodynamischen und geometrischen Restriktionen wurden allesamt
  erfüllt.
  
@@ -6203,8 +6203,8 @@ High-dimensional multi-fidelity optimisation of a 2.5 stage low pressure
 \begin_layout Standard
 Im Rahmen des wehrtechnischen Projekts Mukoko wird ein 2.5 stufiger hochbelastete
 r Niederdruckverdichter ausgelegt.
- Dieses Projekt findet in einer Kooperation zwischen dem DLR und der MTU
- statt.
+ Dieses noch laufende Projekt findet in einer Kooperation zwischen dem DLR
+ und der MTU statt.
  Während des Projekts wurde eine sehr aufwendige Multifidelity-Optimierung
  mit dem in dieser Arbeit entwickelten Verfahren durchgeführt.
  Die Ergebnisse dieser Optimierung sind bereits abgeschlossen und werden
@@ -6225,13 +6225,13 @@ Zielfunktionen und Nebenbedingungen
 \end_layout
 
 \begin_layout Standard
-Es wurden insgesamt 4 verschiedene aerodynamische Betriebspunkte OP1-OP4
+Es werden insgesamt 4 verschiedene aerodynamische Betriebspunkte OP1-OP4
  betrachtet.
- OP1 und OP3 sind pumpgrenznahe Punkte, OP2 und OP4 sind Punkte nahe des
- Sperrmassenstroms.
+ OP1 und OP3 beschreiben pumpgrenznahe Punkte und OP2 und OP4 sind Punkte
+ nahe des Sperrmassenstroms.
  OP1 und OP2 sind jeweils bei Auslegungsdrehzahl definiert und OP3 und OP4
  bei Teillast.
- Die zwei Zielfunktionen waren die Maximierung des isentropen Wirkungsgrads
+ Die zwei Zielfunktionen sind die Maximierung des isentropen Wirkungsgrads
  in OP1 und OP3.
 \end_layout
 
@@ -6241,15 +6241,16 @@ Weiterhin wurden 30 Nebenbedingungen definiert, von denen ein Großteil auf
  Die mechanischen Nebenbedingungen umfassen die Vermeidung von Kreuzungen
  zwischen Eigenfrequenzen der Schaufeln und Anregefrequenzen.
  Zudem werden zahlreiche Nebenbedingungen auf die maximale Spannung an verschied
-enen Teilen der Schaufeln definiert, die Schaufelspitzer unterliegt bswp.
- stärkeren Restriktionen aufgrund von Vogelschlagsgefahr.
+enen Teilen der Schaufeln definiert.
+ Beispielweise unterliegt die Schaufelvorderkante stärkeren Restriktionen
+ aufgrund von Vogelschlagsgefahr.
  
 \end_layout
 
 \begin_layout Standard
-Neben den mechanischen wurden auch aerodynamische Restriktionen definiert,
- diese umfassten ein möglichst axiale Abströmung, Pumpgrenzkriterien in
- zwei Betriebspunkten und mehrere Massenströme.
+Neben den mechanischen werden auch aerodynamische Restriktionen definiert.
+ Diese umfassen eine axiale Abströmung, Pumpgrenzkriterien in zwei Betriebspunkt
+en und mehrere Massenstromintervalle.
  Die initiale Geometrie erfüllte keine dieser Nebenbedingungen.
 \end_layout
 
@@ -6258,11 +6259,11 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-Die Parametrisierung umfasste die Strömungskanalgeometrie, die Anzahl der
+Die Parametrisierung umfasst die Strömungskanalgeometrie, die Anzahl der
  Schaufeln, die Parametrisierung der Rotoren mit jeweils 5 Schnitten und
  die Parametrisierung der Statoren mit jeweils 3 Schnitten.
- Insgesamt wurde damit eine Anzahl von 264 freien Parametern erreicht.
- Dies stellt eine enorme Herausforderung für das Optimierungsverfahren dar.
+ Insgesamt wurde damit eine Anzahl von 264 freien Parametern erreicht, was
+ eine enorme Herausforderung für das Optimierungsverfahren darstellt.
  
 \end_layout
 
@@ -6271,17 +6272,15 @@ Gütestufen
 \end_layout
 
 \begin_layout Standard
-Es wurden zwei Gütestufen verwendet, diese unterschieden hauptsächlich sich
+Es wurden zwei Gütestufen verwendet, diese unterscheide sich hauptsächlich
  durch die Zellen der CFD-Netze (7.600.000 gegen 400.000 Zellen) und durch
  die Anzahl der Elemente der FEM-Berechnung (43.200 gegen 10.000 Elemente).
  Weiterhin wurde eine geometrische heiß zu kalt Transformation der Schaufel
  durchgeführt.
- Das Konvergenzkriterium wurde für die niedrige Gütestufe niedriger eingestellt.
- Die Prozessketten hatten einen zeitlichen Faktor von ca.
- 7-11, wobei die Prozesskette hoher Güte ca.
- 21-34h (je nach CFD Konvergenzgeschwindigkeit) und die Prozesskette niedriger
- Güte ca.
- 3h benötigten.
+ Das Konvergenzkriterium wurde für die niedrige Gütestufe geringer eingestellt.
+ Dadurch wird ein zeitlicher Faktor von 7-11 erreicht.
+ Wobei die Prozesskette hoher Güte 21-34h (je nach CFD Konvergenzgeschwindigkeit
+) und die Prozesskette niedriger Güte 3h benötigen.
  Die Prozesskette niedriger Güte verwendete 24 CPUs während die hohe Güte
  48 CPUs zugewiesen bekam.
  Eine Erhöhung der CPUs für die niedrige Güte konnte nicht vorgenommen werden,
@@ -6290,7 +6289,7 @@ Es wurden zwei Gütestufen verwendet, diese unterschieden hauptsächlich sich
 \end_layout
 
 \begin_layout Standard
-Die verwendete Entscheidungsfunktion war die in dieser Arbeit entwickelte
+Die verwendete Entscheidungsfunktion ist die in dieser Arbeit entwickelte
  
 \begin_inset Quotes gld
 \end_inset
@@ -6315,14 +6314,13 @@ Ergebnisse
 \end_layout
 
 \begin_layout Standard
-Die Optimierung verlief in mehreren Phasen, wobei die Hauptphase die hier
- beschriebene Multifidelity-Optimierung darstellte.
+Insgesamt wurden mehrere Optimierungsphasen durchlaufen, wobei die Hauptphase
+ die hier beschriebene Multifidelity-Optimierung darstellt.
  Diese Optimierung dauerte ca.
  4.5 Monaten und wurde auf dem Cluster des Instituts für Antriebstechnik
  am DLR durchgeführt.
  Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
- variiert, lag im Mittel aber bei ca.
- 30 Knoten.
+ variiert, lag im Mittel aber bei 30 Knoten.
  Die Hardwareausstattung der Knoten entspricht der aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6334,27 +6332,27 @@ reference "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Hauptziel der Optimierung war es die Nebenbedingungen zu erfüllen bei möglichst
- geringen Wirkungsgradeinbußen, wobei der Großteil der Zeit auf die Erfüllung
- der zahlreichen Nebenbedingungen fiel.
+Hauptziel der Optimierung war es die Nebenbedingungen zu erfüllen und dies
+ bei möglichst geringen Wirkungsgradeinbußen.
+ Wobei der Großteil der Zeit auf die Erfüllung der zahlreichen Nebenbedingungen
+ fiel.
  Die finale Geometrie konnte im Vergleich zur initialen Geometrie alle Nebenbedi
 ngungen erfüllen.
  Der Wirkungsgrad konnte bei Auslegungsdrehzahl um 0.7 Prozentpunkte erhöht
  werden und bei Teillast um 2.5 Prozentpunkte.
- Das Pumpgrenzkriterium zeigte allerdings einen Verlust von ca.
- 2.5 und 2.9 Prozentpunkten in den entsprechenden Betriebspunkten, wobei dieser
- Wert noch im angegebenen Gültigkeitsintervall lag.
+ Das Pumpgrenzkriterium zeigte allerdings einen Verlust von 2.5 und 2.9 Prozentpun
+kten in den entsprechenden Betriebspunkten.
+ Beides liegt aber noch im angegebenen Gültigkeitsintervall.
  
 \end_layout
 
 \begin_layout Standard
 Eine Optimierung dieser Größenordnung mit derart langen Prozesskettenzeiten
- hätte man mit einer reinen Singlefidelity-Optimierung in dieser Form nicht
- durchgeführt.
- Allerdings kann die Frage entstehen, warum man nicht nur mit dem Modell
- niedriger Güte optimiert oder warum man nicht erst auf dem Modell niedriger
- Güte optimiert und dann mit den Ergebnissen eine Optimierung hoher Güte
- startet.
+ wäre in dieser Form nicht mit einer reinen Singlefidelity-Optimierung durchgefü
+hrt worden.
+ Allerdings kann die Frage entstehen, warum nicht nur mit dem Modell niedriger
+ Güte optimiert wurde oder erst auf dem Modell niedriger Güte optimiert
+ und dann mit den Ergebnissen eine Optimierung hoher Güte gestartet wurde.
  Diese Fragen sind leicht zu beantworten:
 \end_layout
 
@@ -6366,24 +6364,24 @@ Eine reine Optimierung niedriger Güte liefert nicht die geforderte Genauigkeit.
 \begin_layout Itemize
 Eine Optimierung erst auf niedriger Güte zu starten und die Ergebnisse dann
  als Start für eine Optimierung hoher Güte zu verwenden ist äußerst ineffizient.
- Dies liegt daran, dass man aus einer Optimierung niedriger Güte nur besonders
- gute Member mit in die Optimierung hoher Güte übernehmen würde.
- Diese müssten dann mit der Prozesskette hoher Güte neu bewertet werden
- und damit dann die Optimierung hoher Güte gestartet werden.
+ Dies liegt daran, dass aus einer Optimierung niedriger Güte nur wenige
+ besonders gute Member in die Optimierung hoher Güte eingehen würden.
+ Da diese mit der Prozesskette hoher Güte neu bewertet werden müssen und
+ mit diesen Ergebnissen die Optimierung hoher Güte gestartet werden würde.
  Dies wiederum bedeutet, dass die Optimierung hoher Güte mit einer sehr
  kleinen Startdatenbasis anfängt und große Bereiche des Parameterraums nicht
  abgedeckt sind.
- Daraus resultiert, dass die Ersatzmodelle praktisch von vorne anfangen
- müssen.
- Weiterhin führte eine Neubewertung der Member aus der niedrigen Gütestufe
- mit der hohen Gütestufe, zu einer Verschiebung der Nebenbedingungen.
+ Daraus resultiert, dass der Lernprozess der Ersatzmodelle praktisch von
+ vorne beginnt.
+ Weiterhin kann eine Neubewertung der Member aus der niedrigen Gütestufe
+ mit der hohen Gütestufe zu einer Verschiebung der Nebenbedingungen.
  
 \end_layout
 
 \begin_layout Standard
-Die Trainingszeit spielte in dieser Optimierung aufgrund der enormen Prozesskett
-enzeiten zwar eine untergeordnete Rolle.
- Dies konnte alllerdings nur durch Einsatz der in dieser Arbeit beschriebenen
+Die Trainingszeiten besaßen in dieser Optimierung aufgrund der enormen Prozesske
+ttenzeiten zwar eine untergeordnete Rolle.
+ Dies konnte allerdings nur durch Einsatz der in dieser Arbeit beschriebenen
  Verfahren erreicht werden.
  
 \end_layout
@@ -6391,8 +6389,7 @@ enzeiten zwar eine untergeordnete Rolle.
 \begin_layout Standard
 Der große Aufwand des Trainings resultiert aus den 35 Ersatzmodellen, welche
  in jedem Optimierungsschritt trainiert werden müssen.
- Weiterhin hatte jedes dieser Ersatzmodelle 533 Hyperparameter zu trainieren,
- dies entspricht einer Minimierung in einem 533-dimensionalen Raum.
+ Weiterhin mussten für jedes Ersatzmodell 533 Hyperparameter trainiert werden.
  Das in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6400,7 +6397,7 @@ reference "sec:Initialisierung-der-Hyperparamet"
 
 \end_inset
 
- beschrieben 
+ beschriebene Initialisierungsverfahren 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6408,8 +6405,7 @@ Initialisierung auf Basis bereits vorhandener Kriging Modelle
 \begin_inset Quotes grd
 \end_inset
 
- Initialisierungsverfahren stabilisierte und beschleunigte das Trainingsverfahre
-n.
+ stabilisierte und beschleunigte das Trainingsverfahren am meisten.
  
 \end_layout
 
@@ -6434,7 +6430,7 @@ reference "subsec:RPROP2"
  Insbesondere die Bestimmung der partiellen Ableitungen des Likelihood-Terms
  sind bei 533 Parametern ein erheblicher Zeitaufwand.
  Ohne diese Techniken hätte das Training der Ersatzmodelle zu einem Flaschenhals
- in der Optimierung werden können.
+ der Optimierung werden können.
  
 \end_layout
 
@@ -6447,7 +6443,7 @@ Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren
 Im Rahmen des AG-Turbo COOREFLEX-turbo 1.2.4d Projekts wurden die 8 hinteren
  Stufen einer 13-stufige Verdichterkonfiguration mit dem in dieser Arbeit
  vorgestellten Multifidelity-Verfahren optimiert.
- Hauptziel dieses Vorhabens war es, eine hoch belastete, für hohen Wirkungsgrad
+ Hauptziel dieses Vorhabens ist es, eine hoch belastete, für hohen Wirkungsgrad
  und hohe Stabilität optimierte Konfiguration eines Gasturbinenverdichters
  zu untersuchen und für dessen hintere Stufen Designerkenntnisse, -Regeln
  und –Richtlinien zu erarbeitet.
@@ -6501,7 +6497,7 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-In dieser Optimierung wurden insgesamt 350 Parameter freigegegen.
+In dieser Optimierung wurden insgesamt 350 Parameter freigegeben.
  Ein Großteil davon entfiel auf die Schaufelparametrisierung.
  Der Rest der Parameter wurde für eine Gehäusekonturierung verwendet.
  
@@ -6528,7 +6524,7 @@ Die Prozessketten hatten insgesamt einen zeitlichen Faktor von ca.
 \end_layout
 
 \begin_layout Standard
-Da die in Kapitel 
+Da sich die in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Entscheidungsfunktion"
@@ -6536,7 +6532,7 @@ reference "subsec:Entscheidungsfunktion"
 \end_inset
 
  beschriebenen Entscheidungsfunktionen zu diesem Zeitpunkt noch in der Entwicklu
-ng waren, wurde diese Optimierung mit einer initialen Datenbasis niedriger
+ng befanden, wurde diese Optimierung mit einer initialen Datenbasis niedriger
  Güte gestartet und danach nur noch Member hoher Güte erzeugt.
  
 \end_layout
@@ -6546,12 +6542,10 @@ Ergebnisse
 \end_layout
 
 \begin_layout Standard
-Die gesamte Optimierung hatte eine Laufzeit von ca.
- 1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
- DLR durchgeführt.
+Die gesamte Optimierung hatte eine Laufzeit von 1 Monat und wurde auf dem
+ Cluster des Instituts für Antriebstechnik am DLR durchgeführt.
  Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
- variiert, lag im Mittel aber bei ca.
- 10 Knoten.
+ variiert, lag im Mittel aber bei 10 Knoten.
  Die Ausstattung der Knoten entspricht der aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6574,8 +6568,8 @@ key "goinis2018"
  was dem Multifidelity-Verfahren zugute kam.
  Die Optimierung wurde in drei Phasen durchgeführt.
  In der ersten Phase wurden aus der Referenzgeometrie Mutationen in beiden
- Gütestufen erzeugt, um eine initialie Datenbasis für die Ersatzmodelle
- zu generieren.
+ Gütestufen erzeugt um eine initialie Datenbasis für die Ersatzmodelle zu
+ generieren.
  Nach dieser initialen Phase, wurden hauptsächlich Member niedriger Güte
  berechnet.
  In der dritten und letzten Phase wurde dann auf Member hoher Güte umgestellt.
@@ -6610,7 +6604,7 @@ key "verheij2017multi"
  getestet.
  Ziel dieses Tests war es eine Gesetzmäßigkeit zu finden, wann sich der
  Einsatz eines Multifidelity-Verfahrens lohnt oder nicht.
- Zu diesem Zweck, wurden verschiedene Variationen der niedrigen Prozesskette
+ Zu diesem Zweck wurden verschiedene Variationen der niedrigen Prozesskette
  durchgeführt und die Ergebnisse mit einer Referenzoptimierung verglichen.
  
 \end_layout
@@ -6703,7 +6697,7 @@ Eine Wiederholung
 
 \begin_deeper
 \begin_layout Itemize
-In 3 Optimierungen wurde die Anzahl an Zellen reduziert auf bis zu 223.000
+In 3 Optimierungen wurde die Anzahl an Zellen auf bis zu 223.000 reduziert
 \end_layout
 
 \begin_layout Itemize
@@ -6758,8 +6752,8 @@ Die Erzeugung der Member erfolgte nur zu ca.
  Die anderen 50% wurden mit rein genetischen Algorithmen erzeugt.
  Dadurch geht der generelle Einfluss und damit auch die mögliche Beschleunigung
  durch die Ersatzmodelle verloren oder relativiert sich zumindest.
- Grundsätzlich ist diese Strategie sinnvoll, um durch eine gewissen Zufallskompo
-nente ein robusteres Optimierungsergebnis zu erhalten.
+ Grundsätzlich ist diese Strategie sinnvoll um ein robusteres Optimierungsergebn
+is zu erhalten.
  Genau hier liegt allerdings der Vorteil in der Multifidelity-Optimerung:
  Durch die 
 \begin_inset Quotes gld
@@ -6770,8 +6764,7 @@ günstige
 \end_inset
 
  Abtastung des Raums mit dem Modell niedriger Güte ist dies nicht mehr nötig.
- Das Multifidelity-Verfahren liefert ein robustes Ergebnis bei weniger Zeit,
- zumindest in den in dieser Arbeit beschriebenen Testfällen.
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -6783,34 +6776,32 @@ Die Initialisierung der Testfälle war vollständig zufällig.
 
 \begin_layout Itemize
 Die Optimierungen wurden jeweils nur einmal durchgeführt.
- Vergleicht man bspw.
- die in dieser Arbeit durchgeführte Fanstufenoptimierung (siehe Kapitel
- 
+ Vergleicht man beispielsweise die in dieser Arbeit durchgeführte Fanstufenoptim
+ierung (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:CRISP-Testfall"
 
 \end_inset
 
-), so sind dort die Schwankungen der Optimierungswiederholungen erheblich,
- obwohl alle Optimierungen mit derselben Startdatenbasis durchgeführt werden.
- Eine solche Optimierung ist ein stark stochastisch geprägtes Verfahren.
- Daher sind mehrere Wiederholungen unerlässlich, um eine fundierte Aussage
+), so sind dort die Schwankungen der Optimierungswiederholungen erheblich.
+ Obwohl alle Optimierungen mit derselben Startdatenbasis durchgeführt wurden.
+ Daher sind mehrere Wiederholungen unerlässlich um eine fundierte Aussage
  treffen zu können.
 \end_layout
 
 \begin_layout Itemize
 Das Ersatzmodelltraining wurde nur nach jedem fünften konvergierten Member
  durchgeführt.
- Dies führt insbesondere am Anfang einer Optimierung, zu einer verlangsamten
+ Dies führt insbesondere am Anfang einer Optimierung zu einer verlangsamten
  Anpassung der Hyperparameter und damit zu einer Verlangsamung der Optimierung
  selbst.
  
 \end_layout
 
 \begin_layout Itemize
-Die Anzahl an gleichzeitig rechnenden Slaves variiert, das ändert ebenfalls
- stark das Ergebnis.
+Die Anzahl an gleichzeitig rechnenden Slaves wurde variiert, was ebenfalls
+ das Ergebnis beeinflusst.
 \end_layout
 
 \begin_layout Itemize
@@ -6830,19 +6821,17 @@ g hingegen mit 80 Startmember und 400 Member niedriger Güte.
  Die Single-Fidelity Optimierung startete also mit einem Zeitverzug von
  80 Membern und die Multifideltiy-Optimierung mit einem Zeitverzug von 280
  Membern.
- Dies entspricht einer 3.5 fach längeren Initialisierungsphase, zudem ist
- die Länge der Initialisierungsphase mit 280 Membern hoher Güte sehr lang.
+ Dies entspricht einer 3.5 fach längeren Initialisierungsphase.
+ Zudem ist die Länge der Initialisierungsphase mit 280 Membern hoher Güte
+ sehr lang.
  Die Verlangsamung der Optimierung ist für diese beiden Testfälle also erklärbar.
  
 \end_layout
 
 \begin_layout Standard
-Fazit: Erneute Tests sind geplant, in denen die genetiche Komponente vollständig
- ausgeschaltet werden soll und ein günstigeres Verhältnis an initialen Membern
- gewählt wird.
- Als Hilfestellung wird die Formel aus Kapitel X verwendet, um besonders
- ungünstige initialierisungsen zu vermeiden..
- Weiterhin wird die Kopplung mit einem Vorauslegungsverfahren aktuell getestet.
+Fazit: Erneute Tests sind geplant, in denen die genetische Komponente vollständi
+g ausgeschaltet werden soll und ein günstigeres Verhältnis an initialen
+ Membern gewählt wird.
  
 \end_layout
 
@@ -6881,8 +6870,8 @@ tell und numerisch untersucht wurde.
  Die numerische Studie wurde mithilfe des in dieser Arbeit entwickelten
  Multifidelity-Optimierungsverfahrens durchgeführt und soll in diesem Abschnitt
  kurz zusammengefasst werden.
- Der Fokus soll allerdings stärker auf der Anwendung des Multifidelty-Verfahrens
- liegen.
+ Der Fokus liegt allerdings stärker auf der Anwendung des Multifidelty-Verfahren
+s.
 \end_layout
 
 \begin_layout Paragraph
@@ -6896,7 +6885,7 @@ Es wurden insgesamt 5 verschiedene aerodynamische Betriebspunkte OP1-OP5
  OP3, OP4 und OP5 lagen auf der 90% Drehzahllinie bei jeweils verschiedenen
  Massenströmen.
  Der Betriebspunkt OP5 wurde für jede Simulation an die numerische Pumpgrenze
- iteriert, der genaue Ablauf dieses Verfahrens wird in 
+ iteriert und der genaue Ablauf dieses Verfahrens wird in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "goinis2016optimizing"
@@ -6919,7 +6908,7 @@ key "goinis2016optimizing"
 \end_layout
 
 \begin_layout Enumerate
-Isentrope Wikrungsgrad des Verdichters in OP2
+Isentroper Wikrungsgrad des Verdichters in OP2
 \end_layout
 
 \begin_layout Enumerate
@@ -6939,17 +6928,13 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-Die Parametrisierung umfasste zum einen die Rotor Geometrie, es wurden Profilpar
-ameter auf 6 unterschiedlichen radialen Höhen freigegeben.
- Über dem Rotor wurde eine Gehäusekonturierung ermöglicht, diese wurde mit
- 6 Spline Punkten aufgelöst.
+Die Parametrisierung umfasste zum einen die Rotor Geometrie, für welche
+ Profilparameter auf 6 unterschiedlichen radialen Höhen freigegeben wurden.
+ Weiterhin wurde über dem Rotor eine Gehäusekonturierung ermöglicht, welche
+ mit 6 Spline Punkten aufgelöst wurde.
  Neben der Gehäusekonturierung und den Profilparametern wurde eine Umfangsnut
  definiert und 6 Parametern beschrieben.
- 
-\end_layout
-
-\begin_layout Standard
-Insgesamt wurde eine Anzahl von 70 Parametern erreicht.
+ Insgesamt wurde damit eine Anzahl von 70 Parametern erreicht.
 \end_layout
 
 \begin_layout Paragraph
@@ -6958,17 +6943,16 @@ Gütestufen
 
 \begin_layout Standard
 Die in dieser Optimierung verwendeten Gütestufen unterscheiden sich nicht
- durch die Güte der CFD-Netze wie in den meisten hier vorgestellten Beispielen,
- sondern durch die Anzahl der Betriebspunkte und einer einfacheren Pumpgrenzabsc
-hätzung.
+ durch die Güte der CFD-Netze, sondern durch die Anzahl der Betriebspunkte
+ und einer einfacheren Pumpgrenzabschätzung.
 \end_layout
 
 \begin_layout Standard
-Während in der hohen Gütestufen 5 Betriebspunkte berechnet werden und einer
- davon durch eine numerische Pumpgrenzbestimmung besonders aufwendig ist,
- werden für die niedrige Gütestufen nur 3 Betriebspunkte festgelegt.
- Weiterhin wird in der niedrigen Gütestufen auf die Pumpgrenzbestimmung
- verzichtet, stattdessen wird ein fester pumpgrenznaher Massenstrom eingestellt.
+Während in der hohen Gütestufen 5 Betriebspunkte berechnet wurden und einer
+ davon durch eine numerische Pumpgrenzbestimmung besonders aufwendig war,
+ wurden für die niedrige Gütestufe nur 3 Betriebspunkte festgelegt.
+ Weiterhin wurde in der niedrigen Gütestufen auf die Pumpgrenzbestimmung
+ verzichtet und stattdessen ein fester pumpgrenznaher Massenstrom eingestellt.
  
 \end_layout
 
@@ -6998,12 +6982,11 @@ Besonders interessant ist das Verhalten der Co-Kriging Ersatzmodelle für
  die Pumpgrenzabschätzung.
  Für den pumpgrenznahen Betriebspunkt niedriger Güte wurde ein Massenstrom
  festgelegt.
- Das Modell hoher Güte wurde der Massenstrom über die Pumpgrenzbestimmung
- innerhalb des CFD-Solvers bestimmt.
- Das Co-Kriging Ersatzmodell für den Massenstrom bekommt also einmal variierende
- Massenströme hoher Güte und einen konstanten Massenstrom für alle Stützstellen
- niedriger Güte.
- Die Daten niedriger Güte liefer also keinerlei Information.
+ Im Gegensatz dazu wurde für die hohe Güte die Pumpgrenzbestimmung des CFD-Solve
+rs verwendet.
+ Dieses Verfahren bestimmt die numerische Pumpgrenze iterativ.
+ Die Daten niedriger Güte enthalten also praktisch keine Aussage über die
+ numerische Pumpgrenze.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7012,18 +6995,19 @@ reference "sec:AnahngKapitel-6-1"
 \end_inset
 
  sind einige Ergebnisse der Co-Kriging Analysesoftware dargestellt.
- Besonders interessant ist Abbildung 
+ In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Anteile-der-Kovarianzfunktionen"
 
 \end_inset
 
-, Ersatzmodell Nummer 9 beschreibt das Massenstrom-Ersatzmodell für den
- erwähnten pumpgrenznahen Betriebspunkt.
- Man kann sehen, dass die niedrige Güte vollständig ausgeschaltet wurde,
- was auch dem erwarteten Verhalten entspricht.
- 
+ - Ersatzmodell Nummer 9 ist das Massenstrom-Ersatzmodell für den erwähnten
+ pumpgrenznahen Betriebspunkt zu sehen.
+ Es ist erkennbar, dass die niedrige Güte vom Ersatzmodell ausgeschaltet
+ wurde.
+ Dies entspricht auch dem erwarteten Verhalten.
+  
 \end_layout
 
 \begin_layout Standard
