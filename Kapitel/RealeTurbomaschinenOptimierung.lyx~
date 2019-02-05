@@ -6980,13 +6980,6 @@ Optimierung des Rotors
 \begin_layout Standard
 Besonders interessant ist das Verhalten der Co-Kriging Ersatzmodelle für
  die Pumpgrenzabschätzung.
- Für den pumpgrenznahen Betriebspunkt niedriger Güte wurde ein Massenstrom
- festgelegt.
- Im Gegensatz dazu wurde für die hohe Güte die Pumpgrenzbestimmung des CFD-Solve
-rs verwendet.
- Dieses Verfahren bestimmt die numerische Pumpgrenze iterativ.
- Die Daten niedriger Güte enthalten also praktisch keine Aussage über die
- numerische Pumpgrenze.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7006,7 +6999,8 @@ reference "fig:Anteile-der-Kovarianzfunktionen"
  pumpgrenznahen Betriebspunkt zu sehen.
  Es ist erkennbar, dass die niedrige Güte vom Ersatzmodell ausgeschaltet
  wurde.
- Dies entspricht auch dem erwarteten Verhalten entspricht.
+ Die Co-Kriging Ersatzmodelle finden also keinen Zusammenhang zwischen der
+ numerischen Pumpgrenze und einem festen pumpgrenznahen Punkt.
  
 \end_layout
 
@@ -7020,10 +7014,10 @@ reference "fig:Anteile-der-Kovarianzfunktionen"
 
 \end_inset
 
- handelt es sich dabei um das Ersatzmodell Nummer 10, dieses weist eine
- sehr hohe Gewichtung der niedrigen Gütestufe auf.
- Das Ersatzmodell scheint also die Daten niedrige Güte in großem Maße zu
- gewichten.
+ ist das Totaldruckverhältnis durch Ersatzmodell Nummer 10 beschrieben.
+ Dieses weist eine sehr hohe Gewichtung der niedrigen Gütestufe auf.
+ Was darauf schließen lässt, dass die Daten niedrige Güte in großem Maße
+ gewichtet wurden.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7033,13 +7027,16 @@ reference "fig:Vergleich-von-Vorhersage"
 
  zeigt alle Vorhersagen und die dazugehörigen Realwerte des Totaldrucks
  an.
- Die blaue Linie beschreibt die Ideallinie, in diesem Fall würden Vorhersagen
- und Realwerte perfekt übereinstimmen.
+ Die blaue Linie beschreibt die Ideallinie.
  In rot dargestellt sind die letzten 25 Vorhersagen und in grün alle übrigen.
  Damit lässt sich feststellen, ob die letzten Vorhersagen besser geworden
  sind.
- Die Abbildung zeigt grundsätzlich ein sehr gutes Ergebniss, die Vorhersagen
- liegen alle gleichmäßig verteilt mit einer kleinen Streuung um die Echtwerte.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Vorhersagen liegen alle gleichmäßig verteilt mit einer kleinen Streuung
+ um die Echtwerte.
  Dies lässt darauf schließen, dass das Ersatzmodell keine Verzerrungen wie
  z.B.
  eine Erwartungswertverschiebung aufweist.
@@ -7057,8 +7054,8 @@ Nach Abschluss der Optimierungen wurde versucht die Einzelergebnisse der
 \end_layout
 
 \begin_layout Standard
-Zusammengefasst resultierten die einzelnen Optimierungen in folgenden Ergebnisse
-n:
+Die Ergebnisse der einzelnen Optimierungen lassen sich in drei Punkten zusammenf
+assen:
 \end_layout
 
 \begin_layout Enumerate
@@ -7083,12 +7080,10 @@ Die Optimierung der Gehäusekontur resultierte in einer Erhöhung der Pumpgrenze
 \end_layout
 
 \begin_layout Standard
-Diese Optimierung dauerte ca.
- X Monate und wurde auf dem Cluster des Instituts für Antriebstechnik am
- DLR durchgeführt.
+Diese Optimierung dauerte 4 Monate und wurde auf dem Cluster des Instituts
+ für Antriebstechnik am DLR durchgeführt.
  Die Anzahl der verwendeten Rechenknoten wurde je nach Auslastung des Clusters
- variiert, lag im Mittel aber bei ca.
- 10 Knoten.
+ variiert und lag im Mittel bei 10 Knoten.
  Die Hardwareausstattung der Knoten entspricht der aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7105,8 +7100,8 @@ Application of an Algorithmically Differentiated Turbomachinery Flow Solver
 \end_layout
 
 \begin_layout Standard
-Eine Anwendung der in dieser Arbeit entwickelten Kriging-Software ist in
- 
+Eine weitere Anwendung der in dieser Arbeit entwickelten Kriging-Software
+ ist in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Backhaus"
@@ -7114,15 +7109,15 @@ key "Backhaus"
 \end_inset
 
  zu finden.
- Diese Arbeit beschäftigt sich mit der algorithmischen differenzierung von
- CFD-Codes, womit ist möglich ist unter relativ geringem numerischen Aufwand
- partielle Ableitungen für zahlreiche Funktionale wie z.B.
+ Diese Arbeit beschäftigt sich mit der algorithmischen Differenzierung von
+ CFD-Codes.
+ Damit ist es möglich, unter relativ geringem numerischen Aufwand, partielle
+ Ableitungen für zahlreiche Funktionale, wie z.B.
  den Wirkungsgrad zu erhalten.
- Die so gewonnenen partiellen Ableitungen flossen dann in die in dieser
- Arbeit entwickelten Gradient-Enhanced-Kriging-Software ein und konnten
- eine Benchmarkoptimierung so beschleunigen.
+ Die gewonnenen partiellen Ableitungen flossen dann in die Gradient-Enhanced-Kri
+ging-Software ein und konnten eine Benchmarkoptimierung so beschleunigen.
  Durch die Verwendung der partiellen Ableitungen werden die Kovarianzmatrizen
- des Kriging-Verfahren bereits nach wenigen Membern sehr groß und damit
+ des Kriging-Verfahren allerdings nach wenigen Membern sehr groß und damit
  das Training entsprechend aufwändig.
  Aus diesem Grund sind die in dieser Arbeit zahlreichen Beschleunigungsverfahren
  aus Kapitel 

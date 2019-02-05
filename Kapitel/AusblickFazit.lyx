@@ -78,19 +78,19 @@ Zusammenfassung und Ausblick
 \begin_layout Standard
 Ziel dieser Arbeit ist es ein industriell einsetzbares und erweiterbares
  Multifidelity-Optimierungsverfahren zu entwickeln und zu testen.
- Weiterhin sollen die speziellen Anforderungen im Bereich der Turbomaschinenentw
-icklung und der Softwaretechnik berücksichtigt werden.
- Die speziellen Herausforderungen bei der Optimierung von Turbomaschinen
- sind meist mehrere Zielfunktionen und Nebenbedingungen, hochdimensionale
+ Zusätzlich müssen die speziellen Anforderungen im Bereich der Turbomaschinenent
+wicklung und der Softwaretechnik berücksichtigt werden.
+ Die Herausforderungen bei der Optimierung von Turbomaschinen sind die Existenz
+ mehrerer Zielfunktionen und zahlreicher Nebenbedingungen sowie hochdimensionale
  Suchräume und sehr laufzeitintensive Prozessketten, welche nicht immer
  Ergebnisse liefern.
- Das hier vorgestellte Multifidelity-Optimierungsverfahren soll dafür sorgen,
- dass die hochdimensionalen Suchräume effizienter abgetastet werden und
- damit die Laufzeit der Optimierungen deutlich reduziert werden kann.
+ Das hier vorgestellte Multifidelity-Optimierungsverfahren sorgt dafür,
+ dass hochdimensionale Suchräume effizienter abgetastet werden und damit
+ die Laufzeit der Optimierungen deutlich reduziert wird.
  Hierfür werden schnellere Prozessketten niedrigerer Güte herangezogen und
  mit Hilfe der dort enthaltenen Informationen die Anzahl an teuren Prozessketten
 auswertungen reduziert.
- Die Anforderungen an das Multifidelity-Optimierungsverfahren umfassen die
+ Die Anforderungen an das Multifidelity-Optimierungsverfahren umfasst die
  folgende Punkte (vgl.
  Kapitel 
 \begin_inset CommandInset ref
@@ -111,7 +111,7 @@ Unterstützung einer HPC-Rechnerarchitektur und GPUs
 \end_layout
 
 \begin_layout Itemize
-Offene objektorientierte Softwarestruktur 
+Erweiterbare und objektorientierte Softwarestruktur 
 \end_layout
 
 \begin_layout Itemize
@@ -123,7 +123,7 @@ Hoher Automatisierungsgrad
 \end_layout
 
 \begin_layout Standard
-Um diese zu erfüllen, werden am Anfang der Arbeit (vgl.
+Um diese zu erfüllen, wurden (vgl.
  Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -150,8 +150,9 @@ reference "chap:Die-Kriging-Verfahren"
 \end_inset
 
  zusammengefasst.
- Eine Besonderheit dieses Verfahrens, ist die Möglichkeit die Punkte der
- verschiedenen Gütestufen fire verteilen zu können (siehe Kapitel 
+ Eine Besonderheit des hier entwickelten Verfahrens ist die Möglichkeit
+ die Punkte der verschiedenen Gütestufen frei im Raum verteilen zu können
+ (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:VergleicheCoKrigingAndere"
@@ -163,14 +164,14 @@ reference "sec:VergleicheCoKrigingAndere"
 \end_layout
 
 \begin_layout Standard
-Eine zentrale Anforderung ist die Nutzung einer offenen und objektorientierten
- Softwarestruktur.
+Weiterhin ist eine der zentralen Anforderungen die Nutzung einer erweiterbaren
+ und objektorientierten Softwarestruktur.
  Um dies umzusetzen wird eine moderne Interface-basierte Programmierung
- gewählt, wobei die verwendete Programmiersprache C++ ist.
- Die Nutzung dieser Softwarearchitektur ermöglicht die effiziente Implementierun
-g von unterschiedlichen Verfahren wie z.B.
+ verwendet, wobei die genutzte Programmiersprache C++ ist.
+ Diese Art der Softwarearchitektur ermöglicht die effiziente Implementierung
+ von unterschiedlichen Verfahren wie z.B.
  Ordinary-, Gradient-Enhanced-, Co-Kriging und Klassifikatoren wie z.B.
- Supporting-Vector Machines innerhalb einer Software.
+ Supporting-Vector Machines innerhalb eines Programms.
  Der Vorteil dabei liegt darin, dass viele Softwaremodule geteilt werden
  können und so Redundanzen vermieden, die Übersichtlichkeit erhöht und die
  Fehleranfälligkeit reduziert werden.
@@ -178,18 +179,18 @@ g von unterschiedlichen Verfahren wie z.B.
 \end_layout
 
 \begin_layout Itemize
-Durch die Implementierung eines definierten Interfaces wird ein Netzwerkaustausc
-h von Objekten ermöglicht.
+Durch die Implementierung eines hier entwickelten Interfaces wird ein Netzwerkau
+stausch von vollständigen Objekten ermöglicht.
  
 \end_layout
 
 \begin_layout Itemize
-Minimierungsverfahren sind generalisiert und allgemein nutzbar
+Mehrere Minimierungsverfahren wurden generalisiert und sind allgemein nutzbar
 \end_layout
 
 \begin_layout Itemize
-Matrixoperationen sind generalisiert auf unterschiedlichsten Architekturen
- (GPUs, Intel(c) MKL, OpenMP) nutz- und austauschbar
+Die hier entwickelte Matrix-Klasse ist generalisiert auf unterschiedlichsten
+ Architekturen (GPUs, Intel(c) MKL, OpenMP) nutz- und austauschbar
 \end_layout
 
 \begin_layout Standard
@@ -211,8 +212,8 @@ de Rolle.
  bringen als die Nutzung selbst kostet.
  Dieses Verhältnis kann gesteigert werden, indem die Ersatzmodelle selbst
  möglichst effizient gestaltet werden.
- Um dies zu erreichen sind die entwickelten Ersatzmodelle in der Lage, viele
- moderne Hardwarebeschleunigungen nutzen zu können.
+ Um dies zu erreichen sind die entwickelten Ersatzmodelle in der Lage viele
+ moderne Hardwarebeschleunigungen zu nutzen.
  Besonders erwähnt seien hier Advanced Vector Extensions (siehe Kapitel
  
 \begin_inset CommandInset ref
@@ -242,23 +243,35 @@ reference "subsec:Matrixoperationen"
 \begin_layout Standard
 Weiterhin sind zahlreiche Maßnahmen innerhalb des Verfahrens selbst zur
  Beschleunigung des Trainings umgesetzt.
- Hierzu zählen die Initialisierungsmethoden 
+ Hierzu zählen: 
+\end_layout
+
+\begin_layout Itemize
+Die zahlreichen Initialisierungsmethoden des Trainingsverfahrens 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Initialisierung-der-Hyperparamet"
 
 \end_inset
 
-, ein weiter entwickeltes RPROP-Trainingsverfahren, welches speziell an
- das Co-Kriging angepasst ist 
+
+\end_layout
+
+\begin_layout Itemize
+Ein in dieser Arbeit entwickeltes RPROP-Trainingsverfahren, angepasst an
+ das Co-Kriging (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Minimierungsverfahren"
 
 \end_inset
 
-, die in dieser Arbeit entwickelte Matrix-Klasse mit zahlreichen Beschleunigungs
-verfahren und der Möglichkeit verschiedene Architekturen zu nutzen (siehe
+)
+\end_layout
+
+\begin_layout Itemize
+Die in dieser Arbeit entwickelte Matrix-Klasse mit zahlreichen Beschleunigungsve
+rfahren und der Möglichkeit verschiedene Architekturen zu nutzen (siehe
  Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -266,37 +279,48 @@ reference "subsec:Matrixoperationen"
 
 \end_inset
 
-), effiziente Umsetzung der Kovarianzfunktionen 
+) 
+\end_layout
+
+\begin_layout Itemize
+Eine effiziente Umsetzung der Kovarianzfunktionen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:SoftwaretechnKorrelationsfunktionen"
 
 \end_inset
 
-, Reduktion von Stützstellen 
+
+\end_layout
+
+\begin_layout Itemize
+Die automatisierte Reduktion von Stützstellen 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Reduktion-von-Stützstellen"
 
 \end_inset
 
- auf Basis eines Kriging-Modells, zahlreiche Mehtoden zur effizienten Berechnung
- des Likelihood-Terms und dessen Ableitung 
+ auf Basis eines Kriging-Modells
+\end_layout
+
+\begin_layout Itemize
+Zahlreiche Methoden zur effizienten Berechnung des Likelihood-Terms und
+ dessen Ableitungen (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Ableitung-LikelihoodRueckMode"
 
 \end_inset
 
-, 
+ und 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:SpurApprox"
 
 \end_inset
 
-.
- 
+)
 \end_layout
 
 \begin_layout Standard
@@ -329,8 +353,9 @@ Erweiterung des bisherigen Optimierungsverfahrens
 \end_layout
 
 \begin_layout Standard
-Neben der Entwicklung des Ersatzmodells ist auch die Integration des Multifideli
-ty-Verfahrens innerhalb der bereits bestehen Software AutoOpti erfolgt.
+Neben der Entwicklung des Ersatzmodells war auch die Integration des Multifideli
+ty-Verfahrens innerhalb der bereits bestehen Software AutoOpti eine wichtige
+ Aufgabe.
  Um dies zu verwirklichen ist eine neue Schnittstelle in AutoOpti etabliert
  worden, welche die Anbindung und Nutzung von unterschiedlichen Ersatzmodellen
  innerhalb von AutoOpti ermöglicht (siehe Kapitel 
@@ -345,7 +370,8 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
  worden.
  Diese umfassen bswp.
  die Datenbankhaltung und Prozesskettensteuerung welche auf mehrere Gütestufen
- erweitert worden sind, alle weiteren Änderungen sind in Kapitel 
+ erweitert worden sind und die Kopplung von C99 und C++ Standard.
+ Alle weiteren Änderungen werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Änderungen-des-Optimierungsproze"
@@ -368,10 +394,11 @@ reference "subsec:Entscheidungsfunktion"
 ) ist ebenfalls ein wesentlicher Punkt dieser Arbeit.
  Diese trifft während der Laufzeit einer Optimierung die Entscheidung, welche
  Gütestufe als nächstes berechnet werden soll.
- Die Entscheidung wird dabei möglichst optimal getroffen und bezieht Prozesskett
-enlaufzeiten, Trainings- und Optimierungszeiten, den lokalen Informationsgehalt
- der Gütestufen und die Gewichtung der unterschiedlichen Nebenbedingungen
- mit ein.
+ Die Entscheidung wird dabei so getroffen, dass diese den Optimierungsverlauf
+ möglichst günstig beeinflusst.
+ Hierfür werden Prozesskettenlaufzeiten, Trainings- und Optimierungszeiten,
+ der lokale Informationsgehalt der Gütestufen und die Gewichtung der unterschied
+lichen Nebenbedingungen mit einbezogen.
  Der theoretische Hintergrund hierzu wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -403,7 +430,7 @@ reference "sec:Laufzeit-Analysesoftware-für-Kri"
 
 ).
  Der Fokus liegt dabei auf der schnellen und einfachen Erkennung von möglichen
- Problemen.
+ Problemen für einen Optimierungsanwender.
  
 \end_layout
 
@@ -417,12 +444,12 @@ Das hauptsächliche Ziel dieser Arbeit ist es ein in einer industriellen
  Neben der eigentlichen Entwicklung der Software, ist das Testen und die
  direkte Anwendung einer der wichtigsten Punkte dieser Arbeit.
  Erst dadurch ist es möglich eine Software zu entwickeln, welche die notwendige
- Stabilität und Benutzerfreundlichkeit bietet um in einer Industrie- und
+ Stabilität und Benutzerfreundlichkeit bietet, um in einer Industrie- und
  Forschungsumgebung Anwendung finden zu können.
  Hierfür wurde die entwickelte Software in zahlreichen komplexen Anwendungen
  in Forschung und Industrie verwendet und betreut.
- Die gewonnenen Erkenntnisse wurden für die Weiterentwicklung des Verfahrens
- benutzt.
+ Die gewonnenen Erkenntnisse und Erfahrungen wurden für die Weiterentwicklung
+ des Verfahrens benutzt.
  Eine Übersicht aller Anwendungen ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -469,14 +496,14 @@ reference "subsec:CRISP-Testfall"
  Innerhalb dieser Optimierungsreihe sollte der Geschwindigkeitsvorteil des
  hier entwickelten Multifidelity-Verfahrens gegenüber einer konventionellen
  Single-Fidelity Optimierung gezeigt werden.
- Hierfür wurden die Optimierungeun mehrfach wiederholt um Zufälligkeiten
+ Hierfür wurden die Optimierungen mehrfach wiederholt um Zufälligkeiten
  abzubilden und auch die Robustheit des Verfahrens messen zu können.
  Als Hauptergebnis konnte die gesamte Optimierungszeit durch das neue Verfahren
  in etwa halbiert werden.
  Neben der reinen Beschleunigung kann auch beobachtet werden, dass die Multifide
 lity-Optimierungen alle zu demselben guten Ergebniss führen.
- Die Single-Fidelity Optimierungen zeigen stärkere Schwankungen zu schlechteren
- Ergebnissen hin.
+ Die Single-Fidelity Optimierungen zeigten stärkere Schwankungen bei den
+ Ergebnissen.
  Die Multifidelity-Optimierungen haben in dieser Anwendung also robuster
  zu dem bestmöglichen Ergebnis geführt.
  
@@ -487,8 +514,7 @@ Aktuelle Entwicklungen
 \end_layout
 
 \begin_layout Standard
-Die Software sowie das Verfahren werden natürlich auch nach dieser Arbeit
- weiterentwickelt.
+Die Software sowie das Verfahren werden nach dieser Arbeit weiterentwickelt.
  Bereits zum jetzigen Zeitpunkt sind einige dieser Entwicklungen besonders
  interessant und aussichtsreich.
  Besonders die Nutzung des Co-Kriging Modells außerhalb von reinen Multifidelity
@@ -498,16 +524,19 @@ Die Software sowie das Verfahren werden natürlich auch nach dieser Arbeit
  z.B.
  geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
  Entwicklung.
- Dies kann bspw.
- dazu führen, dass komplette Optimierungen mit kleineren Veränderungen neu
- gestartet werden müssen, ohne dass die alten Daten verwendet werden können.
+ Dies kann z.B.
+ dazu führen, dass komplette Optimierungen aufgrund kleinerer Veränderungen
+ neu gestartet werden müssen, ohne dass die alten Daten verwendet werden
+ können.
  Mithilfe des Co-Krigings können die Daten von älteren Optimierungen als
  niedrige Güte in einer neuen Optimierung weiterverwendet werden.
- Je nach Ähnlichkeit der Optimierungen, kann der Zugewinn hier sehr hoch
- sein.
+ Je nach Ähnlichkeit der Optimierungen, kann der Zugewinn dabei sehr hoch
+ sein ohne dabei ein großes Risiko einzugehen, da die Daten bereits vorhanden
+ sind.
  Eine solche Option existiert zum momentanen Zeitpunkt bereits innerhalb
  von AutoOpti, befindet sich allerdings noch in der Testphase.
- Die bisherigen Ergebnisse sind aber sehr aussichtsreich.
+ Die bisherigen Ergebnisse sind aber sehr aussichtsreich und werden demnächst
+ veröffentlicht.
  
 \end_layout
 
@@ -522,8 +551,8 @@ egenauigkeit.
  gelernt, verallgemeinert und damit Vorhersagen getroffen werden.
  Ein großer Vorteil liegt dabei in der Unabhängigkeit der Vorhersagen von
  den Parametern.
- Dies kommt dadurch zustande, da das Neuronale-Netzwerk als Input die gesamte
- 3D-Geometrie verwendet.
+ Dies ist möglich, da die Neuronalen-Netzwerke als Input die gesamte 3D-Geometri
+e verwenden.
  Erste Arbeiten solcher Vorhersagen sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -551,11 +580,11 @@ reference "subsec:EVG"
 
 \end_inset
 
-) nicht machbar ist.
+) nicht anwendbar ist.
  Eine mögliche Lösung hierfür bietet die Nutzung eines Co-Krigings.
  Die Vorhersagen des Neuronalen Netzwerks könnten so als niedrige Gütestufe
  verwendet und die Kriging-Vorhersagen so verbessert werden.
- Man verspricht sich davon, durch die 
+ Man verspricht sich durch die 
 \begin_inset Quotes gld
 \end_inset
 
@@ -565,10 +594,11 @@ günstigen
 
  Vorhersagen des Neuronalen Netzwerks den Suchraum bereits effektiv abtasten
  zu können und optimalen Regionen so früh zu lokalisieren.
- Hiermit sollte die Anzahl an freien Parametern deutlich erhöht werden können.
- Dieses Verfahren befindet sich allerdings noch in einem sehr frühen Stadium.
- Es finden zwar bereits erste kleinere Machbarkeitsstudien statt, allerdings
- ist zu diesem Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
+ Hiermit kann die Anzahl an freien Parametern deutlich erhöht werden.
+ Dieses Verfahren befindet sich allerdings noch in einem sehr frühen Entwicklung
+sstadium.
+ Es finden zwar bereits erste Machbarkeitsstudien statt, allerdings ist
+ zu diesem Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
 \end_layout
 
 \begin_layout Standard
@@ -580,11 +610,11 @@ reference "chap:Verteiltes-Rechnen-1"
 \end_inset
 
  beschriebene Netzwerkbibliothek weiterentwickelt.
- Hier liegt das Ziel darin, die Bibliothek so zu erweitern, dass diese freie
- Rechnerkapazitäten für größeren Anwendungen automatisch nutzen kann.
- In einem ersten Schritt innerhalb des internen Netzwerkes und auf lange
- Sicht möglicherweise auch auf das Internet ausgedehnt, in Anlehnung an
- das SETI@home Programm (siehe 
+ Hier liegt das Ziel darin, die Bibliothek so zu erweitern, dass freie Rechnerka
+pazitäten für größeren Anwendungen automatisch genutzt werden können.
+ Zuerst innerhalb eines internen Netzwerkes und auf lange Sicht möglicherweise
+ auch auf das Internet ausgedehnt, in Anlehnung an das SETI@home Programm
+ (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "korpela2001seti"
