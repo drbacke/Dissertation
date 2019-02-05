@@ -107,7 +107,7 @@ Gütestufen in der Turbomaschinenauslegung
 \end_layout
 
 \begin_layout Standard
-Um die Idee hinter einem Multifidelity-Verfahren zu verstehen, ist es sinnvoll
+Um die Idee hinter einem Multifidelity-Verfahren zu verstehen ist es sinnvoll,
  einen exemplarischen Ablauf einer manuellen Turbomaschinenauslegung zu
  zeigen (vgl.
  
@@ -120,7 +120,7 @@ key "Domercq2006"
 ).
  Denn erfahrungsgemäß werden innerhalb von Turbomaschinenauslegungen grundsätzli
 ch mehrere Gütestufen verwendet.
- Diese gewinnbringend in einem Optimierungsverfahren zu nutzen erscheint
+ Diese gewinnbringend in einem Optimierungsverfahren zu nutzen, erscheint
  daher sinnvoll.
  
 \end_layout
@@ -130,12 +130,12 @@ Die Vorgehensweise bei einer solchen Auslegung ist es, die Dimensionalität
  und die Komplexität der Problemstellung stetig zu erhöhen.
  Zu Anfang einer Auslegung sind viele Randbedingungen durch die geplante
  Anwendung der Maschine festgelegt.
- Bei einem Verdichter können dies Anforderungen an den Betriebsbereich,
+ Bei einem Verdichter können diese Anforderungen an den Betriebsbereich
  bestimmte Massenströme und geforderte Druckverhältnisse sein.
  Damit können dann die ungefähren geometrischen Ausmaße und auch die benötigte
  Stufenanzahl geschätzt werden.
- Aufbauend auf diesen Schätzungen wird dann ein rotationssymmetrischer Strömungs
-kanal bestimmt.
+ Aufbauend auf diesen Schätzungen wird ein rotationssymmetrischer Strömungskanal
+ bestimmt.
  Hierfür finden 2D-Throughflow-Verfahren Anwendung, welche ein Meridianströmungs
 feld auf der S2-Ebene (siehe 
 \begin_inset CommandInset citation
@@ -177,8 +177,8 @@ key "Howard1992"
 
 \begin_layout Standard
 Nachdem der Strömungskanal und auch die aerodynamischen Kenngrößen für die
- Schaufelreihen bestimmt worden sind, wird versucht Schaufelgeometrien zu
- finden, welche diese vorher bestimmten Kenngrößen erfüllen.
+ Schaufelreihen bestimmt worden sind, versucht man Schaufelgeometrien zu
+ finden, welche die vorher bestimmten Kenngrößen erfüllen.
  Hierfür finden entweder S1-Schnittverfahren wie z.B.
  MISES 
 \begin_inset CommandInset citation
@@ -192,15 +192,13 @@ key "Drela2008"
 \end_layout
 
 \begin_layout Standard
-Ist dieser Schritt ebenfalls abgeschlossen, kann die entstandene Geometrie
- durch ein 3D-Navier-Stokes-Simulationsverfahren aerodynamisch bewertet
- werden.
- Damit können erstmals komplexere dreidimensionale Strömungsphänomene aufgelöst
- werden.
- Wobei für 3D-Simulationsverfahren ebenfalls unterschiedliche Modelle und
+Ist dieser Schritt abgeschlossen, kann die entstandene Geometrie durch ein
+ 3D-Navier-Stokes-Simulationsverfahren aerodynamisch bewertet werden.
+ Damit können erstmals komplexere, dreidimensionale Strömungsphänomene aufgelöst
+ werden, wobei für 3D-Simulationsverfahren unterschiedliche Modelle und
  damit auch Genauigkeiten existieren.
- Beispielsweise können diese Verfahren eine Strömung zeitlich aufgelöst
- oder zeitlich gemittelt wiedergeben.
+ So können diese Verfahren eine Strömung zeitlich aufgelöst oder zeitlich
+ gemittelt wiedergeben.
  
 \end_layout
 
@@ -219,8 +217,9 @@ Aufgrund des beschriebenen stufenweisen Aufbaus einer solchen Auslegung,
  diese normalerweise auch mit einer größeren Ungenauigkeit behaftet.
  Die High-Fidelity Prozesskette hingegen ist deutlich aufwendiger, dafür
  aber genauer.
- Ein mögliches Beispiel wäre die 3D-Optimierung eines Triebwerksverdichters,
- mit dem Ziel bei gleichbleibenden Druckverhältnis den Wirkungsgrad zu erhöhen.
+ Ein mögliches Beispiel wäre die 3D-Optimierung eines Triebwerksverdichters
+ mit dem Ziel, bei gleichbleibendem Druckverhältnis den Wirkungsgrad zu
+ erhöhen.
  Eine solche Optimierung erfordert im Normalfall eine Voruntersuchung des
  Rechennetzes.
  Auf der einen Seite soll das Rechennetz so grob wie möglich sein, um möglichst
@@ -233,7 +232,7 @@ en Phänomene mit ausreichender Genauigkeit abbilden zu können.
 \begin_layout Standard
 Wünschenswert wäre es allerdings, Rechennetze mit verschiedener Güte in
  einer Optimierung zu verwenden und zwar so, dass das Optimierungsverfahren
- möglichst viel Zeit einspart durch die maximale Nutzung aller Informationen.
+ durch die maximale Nutzung aller Informationen möglichst viel Zeit einspart.
  Beispielsweise könnte ein grobes (Low-Fidelity) und ein feines Netz (High-Fidel
 ity) zur Verfügung gestellt werden.
  Die Erfahrung zeigt, dass bei Optimierungen mit groben Rechennetzen der
@@ -248,16 +247,16 @@ key "forrester2007multi"
 ).
  Die Güte der mit groben Netzen erzeugten Verdichterkennfelder sinkt aber
  insbesondere nahe der Stabilitätsgrenze.
- Wird ein solchen Ergebnis mit einem feinen Netz nachgerechnet, so ergeben
+ Wird ein solches Ergebnis mit einem feinen Netz nachgerechnet, so ergeben
  sich oftmals systematische Abweichungen der Verdichterkenngrößen, wie z.B.
- Sperrmassenstrom, Wirkungsgrad, Druckverhältnis etc..
- Derartige Differenzen erfordern oft aufwändige händische Auslegungsiterationen.
+ Sperrmassenstrom, Wirkungsgrad, Druckverhältnis etc.
+ Derartige Differenzen erfordern oft aufwendige händische Auslegungsiterationen.
  
 \end_layout
 
 \begin_layout Standard
 In der folgenden Aufzählung sollen einige Beispiele für verschiedene Gütestufen
- im Bereich der Turbomaschinenauslegung gegeben werden:
+ im Bereich der Turbomaschinenauslegung widergegeben werden:
 \end_layout
 
 \begin_layout Itemize
@@ -335,7 +334,7 @@ name "fig:Beispielhafte-Geometrischen-Vari"
 
 \end_inset
 
-Beispielhafte Geometrischen Variationen des DCA ähnlichen Profils
+Beispielhafte Geometrische Variationen des DCA-ähnlichen Profils
 \end_layout
 
 \end_inset
@@ -350,8 +349,8 @@ Beispielhafte Geometrischen Variationen des DCA ähnlichen Profils
 \end_inset
 
 Um einen Eindruck von den unterschiedlichen Gütestufen innerhalb aerodynamischer
- Simulationsverfahren zu bekommen, soll folgend ein einfaches aber aussagekräfti
-ges Beispiel gezeigt werden.
+ Simulationsverfahren zu bekommen, soll folgend ein einfaches, aber aussagekräft
+iges Beispiel gezeigt werden.
  Dafür wird ein DCA ähnliches Verdichterprofil (Double Circular Arc, siehe
  
 \begin_inset CommandInset citation
@@ -718,7 +717,7 @@ reference "fig:VerlustpolarenMisesMufi"
  bei deutlich kürzerer Laufzeit.
  Zusammenfassend lässt sich sagen, dass das gezeigte Beispiel die starken
  Ähnlichkeiten der Gütestufen zeigt, welche sich innerhalb eines Multifidelity-V
-erfahrens sehr effizient nutzen lassen.
+erfahrens effizient nutzen lassen.
  
 \end_layout
 
@@ -763,8 +762,8 @@ Beispiel für verschiedene Simulationsverfahren
 \end_layout
 
 \begin_layout Standard
-Neben der Verwendung von verschiedenen Gütestufen innerhalb eines Simulationsver
-fahren, lassen sich auch unterschiedliche Simulationsverfahren koppeln.
+Neben der Verwendung verschiedener Gütestufen innerhalb eines Simulationsverfahr
+ens, lassen sich auch unterschiedliche Simulationsverfahren koppeln.
  Vorraussetzung dafür ist, dass beide Verfahren den gleichen Parametrisierungsve
 ktor haben.
  
@@ -779,10 +778,10 @@ key "Schnos2017"
 
 \end_inset
 
- vergleicht in seiner Arbeit die Ergebnisse zweier Simulationsverfahren
+ vergleichen in seiner Arbeit die Ergebnisse zweier Simulationsverfahren
  für dieselbe Profilgeometrie.
- Verwendet wird das bereits beschriebenen 2D-Euler-Grenzschichtverfahren
- Mises und der 3D-Navier-Stokes-Strömungslöser TRACE (siehe 
+ Verwendet werden das bereits erwähnte 2D-Euler-Grenzschichtverfahren MISES
+ und der 3D-Navier-Stokes-Strömungslöser TRACE (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kugeler2005,NURNBERGERPHD"
@@ -836,7 +835,7 @@ name "fig:rig250VergleichMisesTrace"
 
 \end_inset
 
-Vergleich zwischen dem 2D-CFD Verfahren Mises und dem 3D-CFD Verfahren TRACE
+Vergleich zwischen dem 2D-CFD-Verfahren MISES und dem 3D-CFD-Verfahren TRACE
  anhand eines transsonischen Verdichterprofils
 \end_layout
 
@@ -857,9 +856,9 @@ Vergleich zwischen dem 2D-CFD Verfahren Mises und dem 3D-CFD Verfahren TRACE
 \begin_layout Standard
 Die vorangestellten Beispiele lassen allerdings keine allgemeine Aussage
  über die Nutzbarkeit unterschiedlicher Simulationsverfahren innerhalb von
- Multifidelity Optimierungen zu, da die Funktionalen Zusammenhänge zwischen
+ Multifidelity-Optimierungen zu, da die funktionalen Zusammenhänge zwischen
  den Gütestufen sehr unterschiedlich ausfallen können und vom jeweiligen
- Anwendungsfall und den verwendeten Simulationsverfahren abhängen.
+ Anwendungsfall sowie den verwendeten Simulationsverfahren abhängen.
  Zudem können die Funktionale auch so große Unterschiede aufweisen, dass
  die Daten nur sehr schwach korreliert sind und der Einsatz eines Mutlifidelity-
 Verfahrens dann nicht mehr lohnenswert ist.
@@ -872,8 +871,8 @@ Verfahrens dann nicht mehr lohnenswert ist.
 
 \begin_layout Standard
 Zusammenfassend ist die Verwendung unterschiedlicher Gütestufen innerhalb
- eines Simulationsverfahrens in den meisten Fällen der einfachere Weg.
- Da in diesem Fall meist eine gemeinsame Parametrisierung besteht und auch
+ eines Simulationsverfahrens in den meisten Fällen der einfachere Weg, da
+ in diesem Fall meist eine gemeinsame Parametrisierung besteht und auch
  die Erzeugung verschiedener Gütestufen in der Regel mit weniger Aufwand
  verbunden ist.
  
@@ -975,7 +974,7 @@ reference "subsec:Grundlegender-Optimierungsprozes"
  Grundlegend wurde bei der Entwicklung ein besonderer Wert darauf gelegt,
  die bisherigen Prozesse möglichst wenig zu ändern.
  Einfachheitshalber sind in der Abbildung nur zwei Gütestufen dargestellt.
- Die Strategie bietet aber die Option mehrere Gütestufen zu verwenden.
+ Die Strategie bietet aber die Option, mehrere Gütestufen zu verwenden.
  
 \end_layout
 
@@ -1097,23 +1096,22 @@ Darstellung des Multifidelity-Optimierungsprozess
 \begin_layout Standard
 Die in AutoOpti verwendeten Ersatzmodelle müssen vor der Verwendung trainiert
  werden.
- Dies dient zur Bestimmung von ersatzmodellspezifischen Parametern welche
+ Dies dient zur Bestimmung von ersatzmodellspezifischen Parametern, welche
  mithilfe der vorhandenen Daten eingestellt werden.
  An dieser Vorgehensweise ändert sich bei der hier vorgestellten Multifidelity-O
 ptimierung nichts.
  Die größte Änderung liegt in der Verwendung eines anderen Ersatzmodells,
  welches die verschiedenen Gütestufen verwerten kann.
  Die Entwicklung der Software des neuen Ersatzmodells und dessen Qualifizierung
- für den industrienahen Einsatz ist unter mitunter einer der Kernpunkte
- dieser Arbeit.
- Zur Anwendung kommt ein Co-Kriging Verfahren (siehe 
+ für den industrienahen Einsatz ist einer der Kernpunkte dieser Arbeit.
+ Zur Anwendung kommt ein Co-Kriging-Verfahren (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
 
 \end_inset
 
-), dessen theoretische Grundlagen in Kapitel 
+), dessen theoretische Grundlage in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Die-Kriging-Verfahren"
@@ -1121,7 +1119,6 @@ reference "chap:Die-Kriging-Verfahren"
 \end_inset
 
  beschrieben werden.
- 
 \end_layout
 
 \begin_layout Paragraph*
@@ -1146,11 +1143,11 @@ Die Prozesskette wird in AutoOpti als Liste von nacheinander auszuführenden
  Prozessen hinterlegt und bei Bedarf mit einem Parametersatz gestartet.
  Die resultierenden Ergebnisse werden dann an den Master-Prozess kommuniziert.
  Alle dafür notwendigen Programme und Dateien werden typischerweise vom
- Benutzer in einem Template Ordner hinterlegt.
+ Benutzer in einem Template-Ordner hinterlegt.
  Soll die Prozesskette gestartet werden, so kopiert der Slave-Prozess diesen
- Template Ordner, trägt den vorgegebenen Satz freier Parameter ein und startet
+ Template-Ordner, trägt den vorgegebenen Satz freier Parameter ein und startet
  dann die jeweiligen Prozesse nacheinander.
- Im Falle einer Multifidelity Optimierung, muss für jede Gütestufe eine
+ Im Falle einer Multifidelity-Optimierung, muss für jede Gütestufe eine
  eigene Prozesskette und ein eigener Template Ordner angelegt werden.
  An der eigentlichen Prozesskettensteuerung muss also nichts verändert werden.
  
