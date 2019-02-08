@@ -169,7 +169,7 @@ Stand der Forschung
 \begin_layout Standard
 Industriell genutzte Optimierungsverfahren für den Turbomaschinenbereich
  sind schon seit längerer Zeit ein umfangreiches Forschungsgebiet und Thema
- zahlreicher Arbeiten und Forschungsbeiträge.
+ zahlreicher wissenschaftlicher Arbeiten.
  Eine vollständige Übersicht der vorhandenen Literatur ist daher nahezu
  unmöglich.
  Dennoch soll dem Leser ein kurzer Überblick über einige aktuelle Forschungsarbe
@@ -179,8 +179,8 @@ iten im Bereich der Turbomaschinenoptimierung gegeben werden.
 
 \begin_layout Standard
 Bei Optimierungen im Turbomaschinenbereich handelt es sich meist um nichtlineare
- mehrdimensionale multidisziplinäre Mehrziel-Optimierungsprobleme mit einer
- hohen Zahl an Nebenbedingungen.
+, mehrdimensionale, multidisziplinäre Mehrziel-Optimierungsprobleme mit
+ einer hohen Zahl an Nebenbedingungen.
  Es werden oftmals Geometrien für Turbomaschinenkomponenten gesucht, welche
  einen besonders hohen Wirkungsgrad aufweisen.
  In der Regel unter Einhaltung aerodynamischer, mechanischer, akustischer
@@ -279,12 +279,12 @@ key "Sozio2013"
  stellt ein aktuelles und industrienahes Beispiel dar.
  Innerhalb dieser Arbeit wird ein Auslegungsprozess für gegenläufige Axialturbin
 en auf Basis eines evolutionären Algorithmus vorgestellt.
- Dieser erzeugt ausgehend von eindimensionalen Kenngrößen eine dreidimensionale
+ Dieser erzeugt ausgehend von eindimensionalen Kenngrößen eine dreidimensionale,
  aerodynamisch optimierte Geometrie.
  Hierfür nutzt dieser mehrere seriell ausgeführte evolutionäre Optimierungen.
  Sozio et.
  al.
- konnten mit ihrem Auslegungsprozess eine dreidimensionale aerodynamisch
+ konnten mit ihrem Auslegungsprozess eine dreidimensionale, aerodynamisch
  sinnvolle Geometrie einer mehrstufigen Axialturbine erzeugen.
  
 \end_layout
@@ -301,15 +301,15 @@ Beschleunigung von Optimierungen mit Ersatzmodellen:
 
 \begin_layout Standard
 Bei Ersatzmodellen handelt es sich um Interpolations- oder Approximationsverfahr
-en, welche während einer Optimierung verwendet werden, um Vorhersagen über
- unbekannte Parametersätze zu machen und damit besonders vielversprechende
- Parametersätze schneller als bei der Verwendung einer reinen Evolutionsstrategi
-e zu finden.
+en, welche während einer Optimierung Vorhersagen über unbekannte Parametersätze
+ machen können.
+ So können besonders vielversprechende Parametersätze schneller gefunden
+ werden als bei der Verwendung einer reinen Evolutionsstrategie.
  
 \end_layout
 
 \begin_layout Standard
-Der Übersichtsbeitrag von Queipo et al.
+Die Arbeit von Queipo et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -317,10 +317,14 @@ key "Queipo2005"
 
 \end_inset
 
- befasst sich unter anderem mit initialen Sampling-Prozessen, der Auswahl
- richtiger Ersatzmodelle für verschiedene Anwendungen und deren Verwendung
- innerhalb von multidisziplinären Optimierungen.
- Eine weitere sehr interessante Übersichtsarbeit bietet Simpson et al.
+ befasst sich unter anderem mit der Initialisierung von Optimierungen, der
+ Auswahl richtiger Ersatzmodelle für verschiedene Anwendungen und deren
+ Verwendung innerhalb von multidisziplinären Optimierungen und bietet damit
+ einen sehr umfassenden Überblick über dieses Themengebiet.Betr
+\end_layout
+
+\begin_layout Standard
+In dem Beitrag von Simpson et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -328,9 +332,8 @@ key "Simpson2008"
 
 \end_inset
 
-.
- In diesem Beitrag wird die historische Entwicklung von ersatzmodellgestützten
- multidisziplinären Optimierungen innerhalb der letzten 20 Jahre beschrieben.
+ wird die historische Entwicklung von ersatzmodellgestützten multidisziplinären
+ Optimierungen innerhalb der letzten 20 Jahre beschrieben.
  Simpson et al.
  kommen zu dem Schluss, dass Herausforderungen wie der 
 \begin_inset Quotes gld
@@ -405,7 +408,8 @@ key "Verstraete2008"
  beschrieben.
  Verstraete et al.
  kommen zu dem Schluss, dass die Berücksichtigung mehrerer Betriebspunkte
- eine verbesserte Charakteristik des Betriebsverhaltens (vgl.
+ den Wirkungsgrad steigert und gleichzeitig eine verbesserte Charakteristik
+ des Betriebsverhaltens (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -413,8 +417,7 @@ key "Verstraete2014"
 
 \end_inset
 
-, Seite 9) erzeugt, bei gesteigertem Wirkungsgrad.
- 
+, Seite 9) erzeugt.
 \end_layout
 
 \begin_layout Standard
@@ -432,9 +435,8 @@ key "AULICH"
  evolutionärer Algorithmus, welcher im Deutschen Zentrum für Luft- und Raumfahrt
  entwickelt wird.
  Beim Ordinary-Kriging handelt es sich um ein robustes statistisches Interpolati
-onsverfahren.
- Ein statistisches Interpolationsverfahren sagt nicht nur den reinen Funktionswe
-rt voraus, sondern eine statistische Verteilung dessen.
+onsverfahren das nicht nur den reinen Funktionswert voraussagt, sondern
+ auch eine statistische Verteilung dessen.
  Praktisch bedeutet dies, dass eine Abschätzung über den Fehler der Vorhersage
  gemacht werden kann.
  Historisch sind die ersten Ansätze statistischer Ersatzmodelle innerhalb
@@ -461,7 +463,7 @@ key "sacks1989design"
 
  zu finden.
  Die erste Erwähnung der Nutzung dieser Verfahren innerhalb einer globalen
- Optimierung ist in dem Seminarbeitrag 
+ Optimierung ist in dem Seminarbeitrag von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kushner1964new"
@@ -488,15 +490,6 @@ key "Jones1998,Jones2001"
  Dieses Verfahren ermöglicht eine gute Balance zwischen der Exploration
  und Exploitation von statistischen Ersatzmodellen innerhalb globaler Optimierun
 gen.
- Weitere aktuelle Beiträge zu Anwendungen dieses Verfahrens sind z.B.
- in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "keane2006statistical,AULICH,Sacks2007,Sacks2007a,forrester2009recent"
-
-\end_inset
-
- zu finden.
  Die Arbeit von Voß et al.
  
 \begin_inset CommandInset citation
@@ -505,12 +498,11 @@ key "Voss2014"
 
 \end_inset
 
- beschreibt die Anwendung einer solchen EGO-Optimierung.
- In diesem Beitrag wird eine aeromechanische Optimierung eines existierenden
- transsonischen Radialverdichterlaufrades beschrieben.
+ nutzt einen solchen EGO-Algorithmus innerhalb einer aeromechanischen Optimierun
+g eines existierenden transsonischen Radialverdichterlaufrades.
  Die durchgeführte Optimierung übertrifft den Wirkungsgrad der ursprünglichen
  Geometrie um ca.
- 2% und auch der Sperrmassenstrom ist um ca.
+ 2% und auch der Sperrmassenstrom wurde um ca.
  7% gesteigert.
  Die darauf aufbauende Arbeit von Elfert et al.
  
@@ -525,8 +517,8 @@ key "Elfert2016"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Anwendung des EGO-Algorithmus wird in der Arbeit von Lepot
- et al.
+Eine weitere Nutzung des EGO-Algorithmus wird in der Arbeit von Lepot et
+ al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -537,7 +529,15 @@ key "Lepot2011"
  dargestellt.
  Es wird die aeromechanische Optimierung eines gegenläufigen offenen Rotors
  unter Berücksichtigung von akustischen Kriterien beschrieben.
- 
+ Weitere aktuelle Beiträge zu Anwendungen dieses Verfahrens sind z.B.
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "keane2006statistical,AULICH,Sacks2007,Sacks2007a,forrester2009recent"
+
+\end_inset
+
+ zu finden.
 \end_layout
 
 \begin_layout Standard
@@ -569,10 +569,9 @@ key "Baert2015"
 \end_inset
 
  wird ein Verfahren zur Optimierung von kontinuierlichen und nicht kontinuierlic
-hen Designparametern auf Basis von Ersatzmodellen vorgestellt und an einem
- Bypass-Kanal getestet.
- Nicht kontinuierliche Designparameter, sind z.B.
- ganzzahlige Parameter wie Schaufelzahlen.
+hen Designparametern (z.B.
+ ganzzahlige Parameter wie Schaufelzahlen) auf Basis von Ersatzmodellen
+ vorgestellt und an einem Bypass-Kanal getestet.
  Baert et al.
  kommen zu dem Schluss, dass diese Art von Ansatz wichtige Design-Entscheidungen
  in die Optimierung integriert (vgl.
@@ -583,8 +582,8 @@ key "Baert2015"
 
 \end_inset
 
-, Seite 11-12) und belegen dies mit der erfolgreichen Optimierung eines
- Bypass-Kanals.
+, Seite 11-12) und belegen dies mit der erfolgreichen Optimierung des Bypass-Kan
+als.
 \end_layout
 
 \begin_layout Standard
@@ -604,7 +603,7 @@ key "Chahine2012"
  Dieses Ergebnis ist allerdings verwunderlich, da die Verwendung von Ersatzmodel
 len zur Beschleunigung von evolutionären Optimierungsverfahren als besonders
  effizientes Verfahren gilt.
- Es gilt aber zu beachten, dass die Effizienz neuronaler Netzwerke äußerst
+ Es sei aber zu beachten, dass die Effizienz neuronaler Netzwerke äußerst
  abhängig von deren Aufbau und Struktur ist.
  Dies ist Gegenstand zahlreicher aktueller Forschungsarbeiten im Bereich
  des maschinellen Lernens, siehe z.B.
@@ -627,8 +626,8 @@ key "Silver2016"
  erhöht.
  Dies erfordert in der Regel einen erfahrenen Anwender zur Überwachung solcher
  Optimierungen.
- Innerhalb dieser Arbeit werden Möglichkeiten der Automatisierung und auch
- der Analyse gezeigt, die diese Verfahren auch einem breiterem Anwenderbereich
+ Innerhalb dieser Arbeit werden Möglichkeiten der Automatisierung und der
+ Analyse gezeigt, die diese Verfahren auch einem breiteren Anwenderbereich
  zugänglich machen sollen.
 \end_layout
 
@@ -637,17 +636,17 @@ Gradienteninformation in Optimierungen:
 \end_layout
 
 \begin_layout Standard
-Weiterhin beschäftigen sich viele aktuelle Forschungsbeiträge mit der Verwendung
- von Gradienteninformation in Optimierungen.
- Moderne Strömungslöser und die dazugehörige Software, wie z.B.
- Rechennetzgeneratoren, gestatten immer häufiger die Berechnung partieller
- Ableitungen von Funktionalen, wie z.B.
+Viele aktuelle Forschungsbeiträge beschäftigen sich mit der Verwendung von
+ Gradienteninformation in Optimierungen.
+ Moderne Strömungslöser gestatten immer häufiger die effiziente Berechnung
+ partieller Ableitungen von Funktionalen, wie z.B.
  Wirkungsgrad nach geometrischer Deformation.
- Die numerischen Kosten für die Bestimmung mehrerer partieller Ableitungen
- befinden sich hierbei in einer ähnlichen Größenordnung wie die Strömungslösung
- selbst.
- Die Nutzung dieser Gradienteninformation kann innerhalb einer Optimierung
- direkt verwendet werden.
+ Auch die dazugehörige Software (z.B.
+ Rechennetzgeneratoren) bieten diese Möglichkeit zunehmend.
+ Die numerischen Kosten für die Bestimmung der partiellen Ableitungen befinden
+ sich hierbei in einer ähnlichen Größenordnung wie die Strömungslösung selbst.
+ In einer Optimierung mit wenig Funktionalen und vielen Parametern, können
+ diese Gradienteninformationen gewinnbringend verwendet werden.
  Dies wird erreicht, indem von einem beliebigen Startpunkt in Gradientenrichtung
  abgestiegen wird und somit schnell ein Minimum gefunden werden kann.
  Eine andere Möglichkeit ist die Verwendung von Ersatzmodellen.
@@ -673,7 +672,7 @@ key "Willeke2015"
  mithilfe eines Gradientenabstiegverfahrens optimiert und mit einem rein
  evolutionären Algorithmus vergleicht.
  Bei dem angestellten Vergleich konnte sich das Gradientenverfahren als
- das schnellere Verfahren behaupten.
+ das schnellere behaupten.
  Weiterhin schreiben Willeke et al., dass die Sorge in ein lokales Minimum
  zu geraten in dem analysierten Testfall nicht relevant ist, da der verwendete
  Ansatz in sehr kurzer Zeit eine ausreichende Verbesserung erzielen konnte

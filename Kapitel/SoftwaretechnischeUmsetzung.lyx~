@@ -12167,7 +12167,7 @@ Setzt man die beiden Terme ins Verhältnis
 \begin_inset Formula $LF_{perc}=\frac{a^{2}\sigma_{2}^{2}}{a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}}$
 \end_inset
 
- so erhält man eine einfache Abschätzung des Anteils der Kovarianzfunktion
+, so erhält man eine einfache Abschätzung des Anteils der Kovarianzfunktion
  niedriger Güte 
 \begin_inset Formula $cov_{2,2}$
 \end_inset

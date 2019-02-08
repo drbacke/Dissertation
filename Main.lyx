@@ -908,23 +908,46 @@ Kurzfassung
 addcontentsline{toc}{chapter}{Kurzfassung}
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-abstract 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Abstract}
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Das Ziel dieser Arbeit ist die Entwicklung eines industriell einsetzbaren
+ Multifidelity-Optimierungsverfahrens.
+ Dieses ist speziell auf die Problemstellungen in der Turbomaschinenentwicklung
+ angepasst.
+ Die Herausforderungen bei der Optimierung von Turbomaschinen sind die Existenz
+ mehrerer Zielfunktionen und zahlreicher Nebenbedingungen, sowie hochdimensional
+e Suchräume und sehr laufzeitintensive Prozessketten.
+ Das hier vorgestellte Multifidelity-Optimierungsverfahren sorgt dafür,
+ dass hochdimensionale Suchräume effizienter abgetastet werden und damit
+ die Laufzeit der Optimierungen deutlich reduziert wird.
+ Hierfür werden schnellere Prozessketten niedrigerer Güte herangezogen und
+ mit Hilfe der dort enthaltenen Informationen die Anzahl an teuren Prozessketten
+auswertungen reduziert.
+\end_layout
+
+\begin_layout Standard
+Um dies zu erreichen wird zum einen die Entwicklung einer hocheffizienten,
+ flexiblen und modularisierten Ersatzmodellsoftware vorgestellt und zum
+ anderen die Entwicklung einer vollständig automatisierten Multifidelity-Optimie
+rungsstrategie.
+ Weiterhin unterstützt die entwickelte Software zahlreiche moderne Hardwarearchi
+tekturen und ist auch für den Betrieb innerhalb einer Großrechnerumgebung
+ ausgelegt.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin wird das entwickelte Verfahren zahlreichen Tests unterzogen, welche
+ die Vorteile dieses Verfahrens belegen.
+ Neben diesen Tests wurde das hier entwickelte Verfahren zudem für zahlreichen
+ Anwendungen aus Industrie und Forschung verwendet.
+ Die dort gewonnenen Ergebnisse und Erkenntnisse werden innerhalb dieser
+ Arbeit vorgestellt.
+ 
 \end_layout
 
 \begin_layout Standard

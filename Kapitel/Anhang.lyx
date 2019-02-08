@@ -147,7 +147,7 @@ Auswerteebenen eines exemplarischen Verdichtergitters
 \end_layout
 
 \begin_layout Standard
-Totaldruckverlust:
+Definition des Totaldruckverlustbeiwerts in massenstromgemittelter Form:
 \end_layout
 
 \begin_layout Standard
@@ -199,24 +199,21 @@ name "sec:globalVarianzEntscheidungBsp"
 \end_layout
 
 \begin_layout Standard
-Testfunktion, in der die Hauptinformation bereits im Low-Fidelity Modell
- enthalten ist:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
-f_{high} & =2x+0.1\sin\left(20x\right)
-\end{align*}
+Die eindimensionale Testfunktion ist wie folgt definiert und wird in Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Darstellung-der-Testfunktion"
 
 \end_inset
 
-
+ dargestellt:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
+f_{high} & =2x+0.1\sin\left(20x\right)\\
 f_{low} & =0.1\sin\left(20x\right)+0.2
 \end{align*}
 
@@ -235,6 +232,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/GlobalVarianceDecision/1DBeispiel_Funktion.png
+	lyxscale 40
 	scale 25
 
 \end_inset
@@ -243,7 +241,13 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Darstellung-der-Testfunktion"
 
+\end_inset
+
+Darstellung der Testfunktion hoher und niedriger Güte
 \end_layout
 
 \end_inset
@@ -257,112 +261,16 @@ status open
 \end_layout
 
 \begin_layout Standard
-Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/GlobalVarianceDecision/1D_Original.png
-	scale 20
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Co-Kriging-Vorhersage-des-1"
 
 \end_inset
 
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Dieselbe Vorhersage mit einem zusätzlichen HF Sample an der Stelle x=0.35
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/GlobalVarianceDecision/1D_WithHigh.png
-	scale 20
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/GlobalVarianceDecision/1D_WithLow.png
-	scale 20
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+ zeigt die Co-Kriging Vorhersage der Funktion bei 11 Stützstellen hoher
+ und 7 niedriger Güte.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -374,7 +282,8 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/GlobalVarianceDecision/1D_absFehler_Deviation.png
+	filename ../images/GlobalVarianceDecision/1D_Original.png
+	lyxscale 40
 	scale 20
 
 \end_inset
@@ -383,6 +292,79 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Co-Kriging-Vorhersage-des-1"
+
+\end_inset
+
+Co-Kriging Vorhersage des Erwartungswerts und der Standardabweichung bei
+ 11 Stützstellen hoher und 7 niedriger Güte
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:asdasdsadasd"
+
+\end_inset
+
+ zeigt die vorhergesagte Funktion und die Standardabweichung nach dem Hinzufügen
+ einer Stützstelle hoher Güte bei 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+.
+ Die vorhergesagte Standardabweichung wird lokal auf Null reduziert.
+ Allerdings wird auch die umliegende 
+\begin_inset Formula $x\neq0.35$
+\end_inset
+
+ Standardabweichung reduziert.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithHigh.png
+	lyxscale 40
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:asdasdsadasd"
+
+\end_inset
+
+Co-Kriging Vorhersage nach dem Hinzufügen einer Stützstelle hoher Güte bei
+ 
+\begin_inset Formula $x=0.35$
+\end_inset
+
 
 \end_layout
 
@@ -397,7 +379,276 @@ status collapsed
 \end_layout
 
 \begin_layout Standard
-Die Vorhersage mit 11 High-Fidelity und 7 Low-Fidelity Samples:
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Co-Kriging-Vorhersage-des"
+
+\end_inset
+
+ zeigt die vorhergesagte Funktion und die Standardabweichung nach dem Hinzufügen
+ einer Stützstelle niedriger Güte bei 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+.
+ Die vorhergesagte Standardabweichung wird lokal und global (
+\begin_inset Formula $x\neq0.35$
+\end_inset
+
+) reduziert.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_WithLow.png
+	lyxscale 40
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Co-Kriging-Vorhersage-des"
+
+\end_inset
+
+Co-Kriging Vorhersage nach dem hinzufügen einer Stützstelle nierdriger Güte
+ bei 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vorhergesagte-Standardabweichung"
+
+\end_inset
+
+ wird die Reduktion der Standardabweichung für alle Fälle verglichen.
+ Weiterhin ist auch der gemessene absolute Fehler dargestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/GlobalVarianceDecision/1D_absFehler_Deviation.png
+	lyxscale 40
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vorhergesagte-Standardabweichung"
+
+\end_inset
+
+Vorhergesagte Standardabweichung und absoluter Fehler nach dem hinzufügen
+ einer Stützstelle hoher oder niedriger Güte bei 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Die Standardabweichungen der Testfälle werden wie folgt bezeichnet 
+\begin_inset Formula $\sigma_{h}(x)$
+\end_inset
+
+,
+\begin_inset Formula $\sigma_{h|h}(x)$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma_{h|l}(x)$
+\end_inset
+
+.
+ Wobei der Index 
+\begin_inset Formula $h$
+\end_inset
+
+ für die Referenzfunktion ohne Stützstelle am Ort 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+ bezeichnet.
+ Die Indizes 
+\begin_inset Formula $h|h$
+\end_inset
+
+ und 
+\begin_inset Formula $h|l$
+\end_inset
+
+ beschreiben die Standardabweichungen unter Kenntnis einer Stützstelle hoher
+ oder niedriger Güte am Ort 
+\begin_inset Formula $x=0.35$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Wird das Integral der Standardabweichungen für die verschiedenen Testfälle
+ über dem Raum (von 0-1 in diesem Fall) gebildet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+C_{h} & =\intop_{0}^{1}\sigma_{h}(x)dx\\
+C_{h|h} & =\intop_{0}^{1}\sigma_{h|h}(x)dx\\
+C_{h|l} & =\intop_{0}^{1}\sigma_{h|l}(x)dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Und dieses mit der lokalen Reduktion der Standardabweichungen verglichen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+L_{h|h} & =\sigma_{h}(0.35)-\sigma_{h|h}(0.35)\\
+L_{h|l} & =\sigma_{h}(0.35)-\sigma_{h|l}(0.35)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Als Vergleich dient das gemessene Fehlerintegral zwischen Vorhersage 
+\begin_inset Formula $f^{*}$
+\end_inset
+
+ und echter Funktion 
+\begin_inset Formula $f$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+F_{h} & =\intop_{0}^{1}\left|f_{h}^{*}(x)-f_{h}(x)\right|dx\\
+F_{h|h} & =\intop_{0}^{1}\left|f_{h|h}^{*}(x)-f_{h}(x)\right|dx\\
+F_{h|l} & =\intop_{0}^{1}\left|f_{h|l}^{*}(x)-f_{h}(x)\right|dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Berechnete-Ergebnisse-der"
+
+\end_inset
+
+ werden die Ergebnisse aller gemessenen Werte dargestellt.
+ Basierend auf diesen Werten könnte eine Entscheidungsfunktion wie sie in
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Entscheidungsfunktion"
+
+\end_inset
+
+ vorgestellt wird verwendet werden.
+ Zusätzlich müssten allerdings noch die Zeiten für die Ausführung der jeweiligen
+ Gütestufen berechnet werden, diese sollen für dieses Beispiel allerdings
+ unberücksichtigt bleiben.
+ Eine Entscheidungsfunktion würde anhand der hier gezeigten Werte dann denjenige
+n aussuchen, welche die meiste Reduktion verspricht.
+ Im Falle des lokalen Kriterium, berechnet sich die Reduktion 
+\begin_inset Formula $\Delta\sigma$
+\end_inset
+
+ für die jeweilige Gütestufe wie folgt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Delta\sigma_{h|h} & =\sigma_{h}(0.35)-L_{h|h}=0.000234\\
+\Delta\sigma_{h|l} & =\sigma_{h}(0.35)-L_{h|l}=0.000103
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für das globale Kriterium berechnet sich die Reduktion analog:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\Delta\sigma_{h|h} & =C_{h}-C_{h|h}=0.000137\\
+\Delta\sigma_{h|l} & =C_{h}-C_{h|l}=0.000195
+\end{align*}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -409,19 +660,20 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="5">
+<lyxtabular version="3" rows="4" columns="6">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Samples
+Global
 \end_layout
 
 \end_inset
@@ -430,7 +682,7 @@ Samples
 \begin_inset Text
 
 \begin_layout Plain Layout
-Fehlerintegral (x über 0-1)
+
 \end_layout
 
 \end_inset
@@ -439,7 +691,7 @@ Fehlerintegral (x über 0-1)
 \begin_inset Text
 
 \begin_layout Plain Layout
-Dev Integral
+Lokal
 \end_layout
 
 \end_inset
@@ -448,7 +700,7 @@ Dev Integral
 \begin_inset Text
 
 \begin_layout Plain Layout
-Dev lokal x=0.35
+
 \end_layout
 
 \end_inset
@@ -457,6 +709,15 @@ Dev lokal x=0.35
 \begin_inset Text
 
 \begin_layout Plain Layout
+Fehlerintegral
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -468,7 +729,10 @@ Dev lokal x=0.35
 \begin_inset Text
 
 \begin_layout Plain Layout
-Original
+\begin_inset Formula $C_{h}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -477,7 +741,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.000183472470246
+0.000296
 \end_layout
 
 \end_inset
@@ -486,7 +750,10 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.000295987939791
+\begin_inset Formula $\sigma_{h}(0.35)$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -495,7 +762,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0002337432566266
+0.000234
 \end_layout
 
 \end_inset
@@ -504,7 +771,19 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $F_{h}$
+\end_inset
 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000184
 \end_layout
 
 \end_inset
@@ -515,7 +794,10 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-+HF
+\begin_inset Formula $C_{h|h}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -524,7 +806,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.000115168572795
+0.000159
 \end_layout
 
 \end_inset
@@ -533,7 +815,10 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.000159359003548
+\begin_inset Formula $L_{h|h}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -542,7 +827,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0000000298023224
+0.000000
 \end_layout
 
 \end_inset
@@ -551,7 +836,19 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $F_{h|h}$
+\end_inset
 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000115
 \end_layout
 
 \end_inset
@@ -562,7 +859,10 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-+LF
+\begin_inset Formula $C_{h|l}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -571,7 +871,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-5.96393583479e-05
+0.000101
 \end_layout
 
 \end_inset
@@ -580,7 +880,10 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.000101191138483
+\begin_inset Formula $L_{h|l}$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -589,7 +892,7 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.0001315242093663
+0.000131
 \end_layout
 
 \end_inset
@@ -598,7 +901,19 @@ Original
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $F_{h|l}$
+\end_inset
 
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.000060
 \end_layout
 
 \end_inset
@@ -612,7 +927,13 @@ Original
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Berechnete-Ergebnisse-der"
 
+\end_inset
+
+Berechnete Ergebnisse der unterschiedlichen Fehlerbewertungskriterien.
 \end_layout
 
 \end_inset
@@ -622,8 +943,23 @@ Original
 
 \end_inset
 
-In diesem Fall würden das lokale und globale Kriterium zu einer anderen
- Entscheidung führen.
+
+\end_layout
+
+\begin_layout Standard
+Die Entscheidungsfunktion würde sich hier immer für die größere Reduktion
+ entscheiden.
+ Im Falle das lokalen Kriteriums würde die hohe Güte gewählt und das globale
+ Kriterium die niedrige Güte.
+ Eine Entscheidung auf Basis des Fehlerintegrals ginge ebenfalls zugunsten
+ der niedrigen Gütestufe.
+ Das untermauert nochmals die Ergebnisse der globalen Entscheidung.
+ Die Ersatzmodelle wurden nach Hinzufügen einer neuen Stützstelle allerdings
+ nicht neu trainiert, dies könnte zu einer Änderung der hier gezeigten Situation
+ führen.
+ Innerhalb einer realen Optimierung wird bei Ausführung der hier gezeigten
+ Entscheidungsfunktion ebenfalls nicht gemacht, da es zu zeitaufwendig ist.
+ 
 \end_layout
 
 \begin_layout Section
@@ -642,6 +978,11 @@ name "subsec:Gauss-Korrelationsfunktion-mit"
 \end_layout
 
 \begin_layout Standard
+Die hier gezeigten Ableitungen sind für die Entwicklung der unterschiedlichen
+ Kriging-Verfahren nötig und können in anderen Arbeiten dieser Richtung
+ hilfreich sein.
+ Aus diesem Grund werden die Ergebnisse der Ableitungen hier aufgelistet.
+ 
 \begin_inset Formula 
 \begin{align*}
 f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{2}\right)}+\delta e^{\lambda}
@@ -669,14 +1010,7 @@ Ableitungen der Hyperparameter
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Erste Ableitungen nach dem Ort
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
@@ -685,9 +1019,6 @@ Erste Ableitungen nach dem Ort
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{2}^{k}} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)\right)
@@ -695,14 +1026,7 @@ Erste Ableitungen nach dem Ort
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Zweite Ableitungen nach dem Ort
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}} & =\begin{cases}
@@ -714,9 +1038,6 @@ Zweite Ableitungen nach dem Ort
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{1}\right)}{\partial x_{1}^{k}\partial x_{1}^{l}} & =\begin{cases}
@@ -727,14 +1048,7 @@ e^{\theta_{k}} & k=l
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Ableitungen nach Ort und Hyperparameter
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\theta_{k}} & =-e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
@@ -743,9 +1057,6 @@ Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\theta_{p}} & =\frac{1}{2}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(e^{\theta_{p}+\theta_{k}}\left(x_{1p}-x_{2p}\right)^{2}\right)
@@ -754,9 +1065,6 @@ Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{2}^{k}\theta_{k}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1k}-x_{2k}\right)e^{\theta_{k}}\left(1-\frac{1}{2}\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)
@@ -765,9 +1073,6 @@ Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}e^{\theta_{k}+\theta_{p}}\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
@@ -775,14 +1080,7 @@ Ableitungen nach Ort und Hyperparameter
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Zweite Ableitungen nach Ort und Hyperparameter
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{p}\partial x_{2}^{p}\theta_{p}} & =e^{\theta_{p}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left[\left(1-\left(x_{1p}-x_{2p}\right)^{2}2e^{\theta_{p}}\right)-\frac{1}{2}e^{\theta_{p}}\left(1-\left(x_{1p}-x_{2p}\right)^{2}e^{\theta_{p}}\right)\left(x_{1d}-x_{2d}\right)^{2}\right]
@@ -791,9 +1089,6 @@ Zweite Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{k}\theta_{p}} & =-\frac{1}{2}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)e^{\theta_{k}}e^{\theta_{p}}\left(1-\left(x_{1k}-x_{2k}\right)^{2}e^{\theta_{k}}\right)\left(x_{1p}-x_{2p}\right)^{2}
@@ -802,9 +1097,6 @@ Zweite Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{k}} & =-e^{\theta_{l}+\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{k}}\left(x_{1k}-x_{2k}\right)^{2}\right)
@@ -813,9 +1105,6 @@ Zweite Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)\frac{\partial}{\partial\theta_{l}}\left(e^{\theta_{l}}f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\right)
@@ -824,9 +1113,6 @@ Zweite Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{l}} & =-e^{\theta_{k}+\theta_{l}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(1-\frac{1}{2}e^{\theta_{l}}\left(x_{1l}-x_{2l}\right)^{2}\right)
@@ -835,9 +1121,6 @@ Zweite Ableitungen nach Ort und Hyperparameter
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial x_{1}^{k}\partial x_{2}^{l}\theta_{p}} & =\frac{1}{2}e^{\theta_{l}+\theta_{k}+\theta_{p}}\left(x_{1l}-x_{2l}\right)\left(x_{1k}-x_{2k}\right)f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(x_{1p}-x_{2p}\right)^{2}
@@ -860,6 +1143,11 @@ name "subsec:Exponential-Korrelationsfunktion"
 \end_layout
 
 \begin_layout Standard
+Die hier gezeigten Ableitungen sind für die Entwicklung der unterschiedlichen
+ Kriging-Verfahren nötig und können in anderen Arbeiten dieser Richtung
+ hilfreich sein.
+ Aus diesem Grund werden die Ergebnisse der Ableitungen hier aufgelistet.
+ 
 \begin_inset Formula 
 \begin{align*}
 f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)}+\delta e^{\lambda}
@@ -868,9 +1156,6 @@ f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\o
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial\theta_{d}} & =f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)\left(-\frac{1}{2}e^{\theta_{k}}\left|x_{1d}-x_{2d}\right|^{p}\right)
@@ -879,9 +1164,6 @@ f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\o
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\frac{\partial}{\partial p}\left(\overset{k}{\sum}\left(e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|^{p}\right)\right)\right)
@@ -890,9 +1172,6 @@ f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\o
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\frac{\partial}{\partial p}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)\right)
@@ -901,9 +1180,6 @@ f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\o
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial p} & =\left(f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right)-\delta e^{\lambda}\right)\left(-\frac{1}{2}\overset{k}{\sum}e^{\theta_{k}}\left(\left|x_{1k}-x_{2k}\right|^{p}\right)log\left(\left|x_{1k}-x_{2k}\right|\right)\right)
@@ -912,9 +1188,6 @@ f\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =e^{-\frac{1}{2}\o
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
@@ -937,6 +1210,11 @@ name "subsec:Kubische-Spline-Korrelationsfunk"
 \end_layout
 
 \begin_layout Standard
+Die hier gezeigten Ableitungen sind für die Entwicklung der unterschiedlichen
+ Kriging-Verfahren nötig und können in anderen Arbeiten dieser Richtung
+ hilfreich sein.
+ Aus diesem Grund werden die Ergebnisse der Ableitungen hier aufgelistet.
+ 
 \begin_inset Formula 
 \begin{align*}
 f\left(x_{1},x_{2}\right) & =\overset{N}{\underset{j=1}{\prod}}p_{j}+\delta e^{\lambda}
@@ -945,9 +1223,6 @@ f\left(x_{1},x_{2}\right) & =\overset{N}{\underset{j=1}{\prod}}p_{j}+\delta e^{\
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \xi_{j} & =e^{\theta_{j}}\left|x_{1j}-x_{2j}\right|
@@ -971,9 +1246,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial\theta_{j}} & =\frac{\partial p_{j}}{\partial\theta_{j}}\overset{N}{\underset{i\neq j}{\prod}}p_{i}
@@ -982,9 +1254,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection*
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial p_{j}}{\partial\theta_{j}} & =\begin{cases}
@@ -997,9 +1266,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial a} & =\overset{N}{\underset{j=1}{\sum}}\left(\frac{\partial p_{j}}{\partial a}\overset{N}{\underset{i\neq j}{\prod}}p_{i}\right)
@@ -1008,9 +1274,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection*
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial p_{j}}{\partial a} & =\begin{cases}
@@ -1023,9 +1286,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial f}{\partial\lambda} & =e^{\lambda}\delta\Rightarrow\frac{\partial R}{\partial\lambda}=e^{\lambda}E
@@ -1064,9 +1324,6 @@ p_{j}\left(\overrightarrow{x}_{1},\overrightarrow{x}_{2}\right) & =\begin{cases}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection*
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial p_{k}}{\partial x_{1}^{k}} & =\begin{cases}
@@ -1079,9 +1336,6 @@ sgn\left(x_{1k}-x_{2k}\right)\frac{3}{a}e^{\theta_{k}}\xi_{k}\left(\frac{1+a}{a}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial p_{k}}{\partial x_{2}^{k}} & =\begin{cases}
@@ -1098,9 +1352,6 @@ sgn\left(x_{1k}-x_{2k}\right)\frac{3}{1-a}e^{\theta_{k}}\left(1-\xi_{k}\right)^{
 
 \begin_layout Subsubsection*
 Zweite Ableitung nach Ort
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{k}} & =\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
@@ -1124,9 +1375,6 @@ Zweite Ableitung nach Ort
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}} & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
@@ -1135,9 +1383,6 @@ Zweite Ableitung nach Ort
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection*
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial p_{l}}{\partial x_{2}^{l}} & =\begin{cases}
@@ -1154,9 +1399,6 @@ sgn\left(x_{1l}-x_{2l}\right)\frac{3}{1-a}e^{\theta_{l}}\left(1-\xi_{l}\right)^{
 
 \begin_layout Subsubsection*
 Erste Ableitung nach Hyperparametern:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial\theta_{k}} & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
@@ -1165,9 +1407,6 @@ Erste Ableitung nach Hyperparametern:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
@@ -1184,9 +1423,6 @@ Erste Ableitung nach Hyperparametern:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial p_{p}}{\partial\theta_{p}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
@@ -1194,10 +1430,6 @@ Erste Ableitung nach Hyperparametern:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Zweite Ableitung nach Hyperparametern:
 \end_layout
 
@@ -1214,9 +1446,6 @@ p=k=l
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial^{2}p_{k}}{\partial x_{1}^{k}\partial x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}
@@ -1224,10 +1453,6 @@ p=k=l
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 p!=k=l
 \begin_inset Formula 
 \begin{align*}
@@ -1237,9 +1462,6 @@ p!=k=l
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial^{2}p_{k}}{\partial x_{2}^{k}\partial x_{1}^{k}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq p}{\prod}}p_{j}
@@ -1256,9 +1478,6 @@ p=k!=l
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial\theta_{k}}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
@@ -1266,10 +1485,6 @@ p=k!=l
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 p=l ; k!=l
 \begin_inset Formula 
 \begin{align*}
@@ -1279,9 +1494,6 @@ p=l ; k!=l
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial\theta_{l}}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}
@@ -1289,10 +1501,6 @@ p=l ; k!=l
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 p!=k!=l
 \end_layout
 
@@ -1305,9 +1513,6 @@ p!=k!=l
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial p_{k}\partial p_{l}}{\partial x_{1}^{k}\partial x_{2}^{l}}\frac{\partial p_{p}}{\partial\theta_{p}}\overset{N}{\underset{j=1;j\neq k;j\neq l;j\neq p}{\prod}}p_{j}
@@ -1320,9 +1525,6 @@ p!=k!=l
 
 \begin_layout Subsubsection*
 Ableitung nach Ort und a:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}\partial a} & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
@@ -1331,9 +1533,6 @@ Ableitung nach Ort und a:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
@@ -1342,11 +1541,6 @@ Ableitung nach Ort und a:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
@@ -1355,11 +1549,6 @@ Ableitung nach Ort und a:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\noindent
-\align center
 \begin_inset Formula 
 \begin{align*}
  & =\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial p_{j}}{\partial a}}{p_{j}}\right)\right)
@@ -1367,10 +1556,6 @@ Ableitung nach Ort und a:
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsubsection*
 Zweite Ableitung nach Ort nach a abgeleitet:
 \end_layout
 
@@ -1383,9 +1568,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)
@@ -1394,9 +1576,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\right)\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)
@@ -1405,9 +1584,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
  & =\overset{N}{\underset{j=1;j\neq k}{\prod}}p_{j}\left[\frac{\partial}{\partial a}\left(\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\right)+\frac{\partial p_{k}^{2}}{\partial x_{1}^{k}x_{2}^{k}}\left(\overset{N}{\underset{j=1;j\neq k}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
@@ -1416,9 +1592,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \frac{\partial}{\partial a}\left(\frac{\partial^{2}f\left(x_{1},x_{2}\right)}{\partial x_{1}^{k}x_{2}^{l}}\right) & =\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
@@ -1427,9 +1600,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 = & \frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\frac{\partial}{\partial a}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j}\right)
@@ -1438,9 +1608,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 =\overset{N}{\underset{j=1;j\neq k;j\neq l}{\prod}}p_{j} & \left[\frac{\partial}{\partial a}\left(\frac{\partial p_{l}}{\partial x_{2}^{l}}\right)\frac{\partial p_{k}}{\partial x_{1}^{k}}+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial}{\partial a}\left(\frac{\partial p_{k}}{\partial x_{1}^{k}}\right)+\frac{\partial p_{l}}{\partial x_{2}^{l}}\frac{\partial p_{k}}{\partial x_{1}^{k}}\left(\overset{N}{\underset{j=1;j\neq k;j\neq l}{\sum}}\frac{\frac{\partial}{\partial a}p_{j}}{p_{j}}\right)\right]
@@ -1453,9 +1620,6 @@ Zweite Ableitung nach Ort nach a abgeleitet:
 
 \begin_layout Subsubsection*
 Produktableitungen nach Theta
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \xi_{k} & =e^{\theta_{k}}\left|x_{1k}-x_{2k}\right|
@@ -1717,26 +1881,13 @@ name "subsec:AnhangLikelihoodCOKrigingBsp"
 \end_layout
 
 \begin_layout Standard
-Die Dichtefunktion eines CO-Kriging Modells der folgenden Parabelfunktion.
- Die Low-Fidelity Funktion wurde für jedes Sample mit einem zufälligen Wert
- zwischen -0.1 und 0.1 gestört und zusätzlich um einen konstanter Wert von
- 10 verschoben.
-\end_layout
-
-\begin_layout Standard
+Folgend wird die Likelihood-Funktion eines CO-Kriging Modells eine Parabelfunkti
+on dargestellt.
+ Die Low-Fidelity Funktion wurde für jede Stützstelle mit einem zufälligen
+ Wert zwischen -0.1 und 0.1 gestört und zusätzlich verschoben.
 \begin_inset Formula 
 \begin{align*}
-f_{high}\left(x\right) & =x^{2}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{align*}
+f_{high}\left(x\right) & =x^{2}\\
 f_{low}\left(x\right) & =x^{2}+Random\left(-0.1,0.1\right)-10
 \end{align*}
 
@@ -1750,8 +1901,8 @@ Auf den Achsen sind die Hyperparameter
 \begin_inset Formula $\theta_{low},\theta_{err}$
 \end_inset
 
- zu sehen und der entsprechende Dichtefunktionswert der Likelihoodfunktion
- ist farbig dargestellt.
+ zu sehen und der entsprechende Wert der Likelihood-Funktion ist auf der
+ Z-Achse zu erkennen und zusätzlich noch farbig dargestellt.
  In den verschiedenen Diagrammen wurden die Varianzen 
 \begin_inset Formula $\sigma_{err}^{2},\sigma_{low}^{2}$
 \end_inset
@@ -1760,26 +1911,17 @@ Auf den Achsen sind die Hyperparameter
 \begin_inset Formula $cov_{err},cov_{low}$
 \end_inset
 
- verändert (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovarianzMatrixCOKriging"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
-Dieses Beispiel ist interessant, da man die Hyperparameter und die Varianzen
- 
-\begin_inset Formula $\sigma_{err}^{2},\sigma_{low}^{2}$
-\end_inset
-
- des CO-Kriging Modells in irgendeiner Form initialisieren muss.
- Beim Ordinary Kriging sind es nur die Hälfte der Hyperparameter und die
- Varianzen werden über einen Maximum Likelihood Schätzer bestimmt.
+ verändert.
+ Grundlegend ist für diese Likelihood-Funktion eine Abflachung zu den Rändern
+ zu erkennen.
+ Dieses Verhalten ist sehr typisch und ebenfalls wichtig, für Gradienten-basiert
+e Trainingsverfahren, da in diesen Bereichen die Gradienten sehr klein werden
+ können.
+ Weiterhin ist zu erkennen, dass die Form der Funktion sehr stark auf die
+ Änderung der Prozessvarianzen reagiert und das globale Minimum ebenfalls
+ sehr flach ist.
+ Das Auffinden des Minimums ist bei dieser Art von Funktion also eine sehr
+ schwierige Aufgabe und erfordert ein robustes Trainingsverfahren.
  
 \end_layout
 
@@ -1812,32 +1954,6 @@ status open
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Das Produkt der Inversen und der Korrelationsmatrix, ergibt die Einheitsmatrix.
- Da die Einheitsmatrix n Diagonalelemente besitzt, welche alle den Wert
- 1.0 haben, muss die Spur der multiplizierten Matrizen n ergeben.
- Gibt es numerische Ungenauigkeiten innerhalb der Invertierung, wird dieser
- Wert wahrscheinlich von n abweichen.
- Dies wird überprüft und bei Überschreitung eines Grenzwertes wird ebenfalls
- eine Exception geworfen.
- Diese wird mit allen anderen unbekannten Exceptions in Zeile 21 gefangen
- und als Reaktion ein sehr hoher Likelihood Wert zurückgegeben.
- 
-\end_layout
-
-\begin_layout Standard
-Nachdem alle Vektoren und Werte berechnet sind, wird in Zeile 26 die eigentliche
- Likelihood Funktion berechnet (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Likelihood Funktion"
-
-\end_inset
-
-) und zurückgegeben.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -2036,10 +2152,14 @@ name "subsec:Kovarianz-zwischen-Vorhersagen"
 \begin_inset Formula 
 \begin{align*}
 cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\right)\right) & =cov\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}}),\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right)\\
- & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
- & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
- & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left(\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)*\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right)\\
+ & =E\left[\left(\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\right.\\
+ & \left.\left(\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\sum_{j=1}^{s}\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right[\\
+ & =E\left[\sum_{i=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\right.\\
+ & \left.\sum_{j=1}^{s}\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
+ & =E\left[\sum_{i=1}^{s}\sum_{j=1}^{s}\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\right.\\
+ & \left.\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
+ & =\sum_{i=1}^{s}\sum_{j=1}^{s}E\left[\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})-E\left[\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}})\right]\right)\right.\\
+ & \left.\left(\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})-E\left[\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right]\right)\right]\\
  & \Leftrightarrow\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\vec{Z}_{i}^{T}\vec{w}_{1i}(g_{1},\vec{x_{1}}),\vec{Z}_{j}^{T}\vec{w}_{2j}(g_{2},\vec{x_{2}})\right)\\
  & =\sum_{i=1}^{s}\sum_{j=1}^{s}cov\left(\sum_{l=1}^{n_{i}}Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1},\vec{x_{1}}),\sum_{m=1}^{n_{i}}Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2},\vec{x_{2}})\right)\\
  & =\sum_{i=1}^{s}\sum_{j=1}^{s}\sum_{l=1}^{n_{i}}\sum_{m=1}^{n_{i}}cov\left(Z_{i}\left(\vec{x_{l}}\right)w_{1i,l}(g_{1},\vec{x_{1}}),Z_{j}\left(\vec{x_{m}}\right)w_{2j,m}(g_{2},\vec{x_{2}})\right)\\
@@ -2075,9 +2195,6 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 
 \begin_layout Standard
 Die Gewichtsvektoren sehen folgendermaßen aus:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \vec{w_{1}}(g_{1},\vec{x_{1}}) & =\mathbf{Cov}^{-1}\vec{c_{1}}(g_{1},\vec{x_{2}})-\frac{\mathbf{Cov}^{-1}\vec{F}\vec{F}^{T}\mathbf{Cov}^{-1}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\vec{c_{1}}(g_{1},\vec{x_{2}})+\frac{\mathbf{Cov}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\beta_{g_{1}}
@@ -2980,6 +3097,12 @@ Likelihood Schätzer Varianzen im CO-Kriging
 \end_layout
 
 \begin_layout Standard
+Im Folgenden wird versucht die Kriging Varianzen eines Co-Kriging Modells
+ mit 2 Gütestufen analytisch zu schätzen.
+ Der Ansatz erfolgt über folgende Block-Matrix
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \[
 \mathbf{Cov}=\left[\begin{array}{cc}
@@ -2991,6 +3114,10 @@ a\sigma_{low}^{2}corr_{low} & \sigma_{low}^{2}corr_{low}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Teilt man diese in 4 Submatrizen auf, so ergibt sich:
 \end_layout
 
 \begin_layout Standard
@@ -3036,7 +3163,7 @@ a\sigma_{low}^{2}C_{21} & \sigma_{low}^{2}C_{22}
 \end_layout
 
 \begin_layout Standard
-Oben links:
+Betrachtet man nur den oberen linken Block der Matrix:
 \end_layout
 
 \begin_layout Standard
@@ -3075,10 +3202,11 @@ Oben links:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\mathbf{Cov^{-1}}\vec{G}=\\
+\left[\begin{array}{cc}
 \left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & -\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\\
 -C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1} & C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}
-\end{array}\right]\left[\begin{array}{cc}
+\end{array}\right] & \left[\begin{array}{cc}
 \vec{1} & \vec{0}\\
 \vec{0} & \vec{1}
 \end{array}\right]
@@ -3092,7 +3220,8 @@ Oben links:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\mathbf{Cov^{-1}}\vec{G}=\\
+\left[\begin{array}{cc}
 \left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & -\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\vec{1}\\
 -C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & \left(C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\right)\vec{1}
 \end{array}\right]
@@ -3106,7 +3235,8 @@ Oben links:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-\vec{G}^{T}\mathbf{Cov^{-1}}\vec{G}= & \left[\begin{array}{cc}
+\vec{G}^{T}\mathbf{Cov^{-1}}\vec{G}=\\
+\left[\begin{array}{cc}
 \vec{1}^{T}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & -\vec{1}^{T}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\vec{1}\\
 -\vec{1}^{T}C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}\vec{1} & \vec{1}^{T}\left(C_{22}^{-1}+C_{22}^{-1}C_{12}\left(C_{11}-C_{12}C_{22}^{-1}C_{12}\right)^{-1}C_{12}C_{22}^{-1}\right)\vec{1}
 \end{array}\right]
@@ -3115,10 +3245,6 @@ Oben links:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Vorausgesetzt man kennt die Low Varianz bereits:
 \end_layout
 
 \begin_layout Subsection
@@ -3133,7 +3259,7 @@ name "sec:Vereinfachung-der-Vorhersageglei"
 \end_layout
 
 \begin_layout Standard
-An dieser Stelle stellt sich die Frage, inwiefern 
+An dieser Stelle wird die Frage geklärt, inwiefern 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -3989,10 +4115,6 @@ Bei der Cholesky Zerlegung wird die symmetrische und positiv definite Matrix
 
  in ein Produkt aus einer unteren Dreicksmatrix und deren Transponierten
  zerlegt:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathbf{L}\mathbf{L}^{T} & =\mathbf{R}
@@ -4000,11 +4122,6 @@ Bei der Cholesky Zerlegung wird die symmetrische und positiv definite Matrix
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 Die Zerlegung kann nun verwendet werden, um durch Vor- und Rückwärtseinsetzen
  lineare Gleichungssysteme in der Form 
 \begin_inset Formula $\mathbf{R}\overrightarrow{x}=b$
@@ -4012,10 +4129,6 @@ Die Zerlegung kann nun verwendet werden, um durch Vor- und Rückwärtseinsetzen
 
  zu lösen.
  Hierfür wird zuerst vorwärts eingesetzt:
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathbf{L}\overrightarrow{y} & =\overrightarrow{b}
@@ -4023,20 +4136,11 @@ Die Zerlegung kann nun verwendet werden, um durch Vor- und Rückwärtseinsetzen
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 und dann durch Rückwärtseinsetzen kann der gesuchte Vektor 
 \begin_inset Formula $\overrightarrow{x}$
 \end_inset
 
  erhalten werden: 
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Formula 
 \begin{align*}
 \mathbf{L}^{T}\overrightarrow{x} & =\overrightarrow{y}
@@ -4045,9 +4149,6 @@ und dann durch Rückwärtseinsetzen kann der gesuchte Vektor
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
 \Longrightarrow & \mathbf{R}\overrightarrow{x}=\mathbf{L}\mathbf{L}^{T}\overrightarrow{x}=\mathbf{L}\overrightarrow{y}=\overrightarrow{b}
@@ -4055,11 +4156,6 @@ und dann durch Rückwärtseinsetzen kann der gesuchte Vektor
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\noindent
 ersetzt man nun 
 \begin_inset Formula $\overrightarrow{x}$
 \end_inset
@@ -4101,17 +4197,6 @@ Ein weiterer Vorteil der Zerlegung ist, dass die Determinante der Matrix
 
  mit der Zerlegung einfach durch Multiplikation der Diagonalelemente der
  zerlegten Matrix gewonnen werden kann:
-\end_layout
-
-\begin_layout Standard
-\noindent
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RueckDiffLikelihoodBenchmarkSingleTimes"
-
-\end_inset
-
-
 \begin_inset Formula 
 \begin{align*}
 det\left(\mathbf{R}\right) & =\overset{n}{\underset{i=1}{\prod}}L_{i,i}^{2}
@@ -4739,8 +4824,8 @@ E5-2695v2
 
 \begin_layout Plain Layout
 Relative Leistung aktueller Prozessoren (Stand 2018).
- Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
- auf double 
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich auf
+ 64Bit Gleitkommawerte mit 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5110,8 +5195,8 @@ GFlops/€
 
 \begin_layout Plain Layout
 Relative Leistung Intel GPUs (Stand 2018).
- Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
- auf double 
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich auf
+ 64Bit Gleitkommawerte mit 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5760,8 +5845,8 @@ GTX1080
 
 \begin_layout Plain Layout
 Relative Leistung Nvidia GPUs (Stand 2018).
- Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich immer
- auf double 
+ Die theoretische Rechenleistung (mit GFlops bezeichnet) bezieht sich auf
+ 64Bit Gleitkommawerte mit 
 \begin_inset Quotes gld
 \end_inset
 
@@ -7686,7 +7771,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+17.7s
 \end_layout
 
 \end_inset
@@ -7742,7 +7827,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+16.2s
 \end_layout
 
 \end_inset
@@ -7798,7 +7883,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+16s
 \end_layout
 
 \end_inset
@@ -7854,7 +7939,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+15.1s
 \end_layout
 
 \end_inset
@@ -7910,7 +7995,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+12.31s
 \end_layout
 
 \end_inset
@@ -7966,7 +8051,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+11.3s
 \end_layout
 
 \end_inset
@@ -8022,7 +8107,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+10.8s
 \end_layout
 
 \end_inset
@@ -8078,7 +8163,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+10.5s
 \end_layout
 
 \end_inset
@@ -8134,7 +8219,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+7.7s
 \end_layout
 
 \end_inset
@@ -8190,7 +8275,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+6.5s
 \end_layout
 
 \end_inset
@@ -8246,7 +8331,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+5.9s
 \end_layout
 
 \end_inset
@@ -8302,7 +8387,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+5.7s
 \end_layout
 
 \end_inset
@@ -8358,7 +8443,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+5.2s
 \end_layout
 
 \end_inset
@@ -8414,7 +8499,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+4.4s
 \end_layout
 
 \end_inset
@@ -8470,7 +8555,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+3.7s
 \end_layout
 
 \end_inset
@@ -8526,7 +8611,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+3.1s
 \end_layout
 
 \end_inset
@@ -8582,7 +8667,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2.7s
 \end_layout
 
 \end_inset
@@ -8638,7 +8723,7 @@ Zeit gesamt
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2.4s
 \end_layout
 
 \end_inset
@@ -8656,7 +8741,7 @@ Zeit gesamt
 
 \begin_layout Plain Layout
 Benchmark der besten Verteilung mehrerer Trainings mit 1000 Samples auf
- 2 verschiedene GPUs
+ 2 verschiedenen GPUs
 \end_layout
 
 \end_inset
@@ -8890,14 +8975,14 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/3D_Netz_HighFidelity.png
+	filename ../images/ErgebnissKapitel/3D_Netz_HighFidelity.png
 	scale 35
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/3D_Netz_LowFidelity.png
+	filename ../images/ErgebnissKapitel/3D_Netz_LowFidelity.png
 	scale 35
 
 \end_inset
@@ -8925,10 +9010,6 @@ key "Reimer2016"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
