@@ -672,10 +672,10 @@ key "Willeke2015"
  mithilfe eines Gradientenabstiegverfahrens optimiert und mit einem rein
  evolutionären Algorithmus vergleicht.
  Bei dem angestellten Vergleich konnte sich das Gradientenverfahren als
- das schnellere Verfahren behaupten.
+ das schnellere behaupten.
  Weiterhin schreiben Willeke et al., dass die Sorge in ein lokales Minimum
- zu geraten in dem analysierten Testfall nicht relevant ist, da der verwendete
- Ansatz in sehr kurzer Zeit eine ausreichende Verbesserung erzielen konnte
+ zu geraten, in dem analysierten Testfall nicht relevant ist, da der verwendete
+ Ansatz in sehr kurzer Zeit eine ausreichende Verbesserung erzielen kann
  (vgl.
  
 \begin_inset CommandInset citation
@@ -688,22 +688,21 @@ key "Willeke2015"
 \end_layout
 
 \begin_layout Standard
-Ein weiterer Vergleich wird in dem Beitrag von Tang 
+In dem Beitrag von Tang 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Tang2016"
 
 \end_inset
 
- angestellt.
- Verglichen wird eine ersatzmodellgestützte Optimierung mit einem Gradientenabst
-iegsverfahren.
+ wird eine ersatzmodellgestützte Optimierung mit einem Gradientenabstiegsverfahr
+en verglichen.
  Das verwendete Ersatzmodell basiert auf radialen Basisfunktionen, welche
- vorhandene Gradienteninformation verarbeiten können.
+ die vorhandene Gradienteninformation verarbeiten können.
  Tang kommt in seiner Arbeit zu dem Schluss, dass das reine Abstiegsverfahren
  sehr schnell ein lokales Minimum findet und sich nicht sehr weit von der
  initialen Geometrie wegbewegt.
- Das ersatzmodellgestützte Verfahren konnte in derselben Zeit die Region
+ Das ersatzmodellgestützte Verfahren konnte im selben Zeitraum die Region
  des globalen Optimums auffinden (vgl.
  
 \begin_inset CommandInset citation
@@ -718,7 +717,7 @@ key "Tang2016"
 \begin_layout Standard
 Erwähnenswert sind innerhalb der Verfahren der gradientenbasierten Optimierung
  auch die sogenannten One-Shot-Verfahren.
- Im Gegensatz zu den klassischen Optimierungsverfahren wird hier innerhalb
+ Im Gegensatz zu den klassischen Optimierungsverfahren wird dabei innerhalb
  des Iterationsverfahrens einer Strömungssimulation eine optimale Geometrie
  gesucht.
  Hierfür sind innerhalb der Lösung ebenfalls Gradienteninformationen notwendig
@@ -757,14 +756,14 @@ Multifidelity-Verfahren:
 \begin_layout Standard
 Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
  entwickelt.
- Dieses Verfahren ist in der Lage, während einer Optimierung verschiedene
- Gütestufen von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
+ Das in der Lage ist, während einer Optimierung verschiedene Gütestufen
+ von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
  Mögliche Gütestufen sind z.B.
  die örtliche Diskretisierung eines zu simulierenden Strömungskanals in
  der Form eines Rechengitters.
  Mit steigender Anzahl der Zellen eines Rechengitters werden Strömungsphänomene
  besser aufgelöst, was allerdings mit einer erheblich gesteigerten Rechenzeit
- bezahlt werden muss.
+ einhergeht.
  Der Anwender muss vor einer Optimierung immer einen Kompromiss zwischen
  Genauigkeit und Geschwindigkeit treffen.
  
@@ -774,15 +773,15 @@ Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
 In der Regel sind die Gütestufen stark korreliert, oftmals aber verzerrt,
  verschoben oder skaliert.
  Es ist also ein Ersatzmodell notwendig, welches die Ergebnisse der verschiedene
-n Gütestufen verarbeiten kann und die Transferfunktion zwischen den Gütestufen
- automatisch auffindet.
+n Gütestufen verarbeiten kann und die Transferfunktion zwischen diesen automatis
+ch auffindet.
  Die einfachste Möglichkeit eines solchen Ersatzmodells stellen sogenannte
  Brückenfunktionen dar.
- Eine solche Brückenfunktion wird aus zwei Ersatzmodellen gebildet, wobei
- das eine nur die niedrigere Stufe darstellt und das andere die Differenz
- zwischen hoher und niedriger Stufe wiedergibt.
+ Eine solche Brückenfunktion wird aus zwei Ersatzmodellen gebildet.
+ Das eine stellt die niedrigere Stufe dar und das andere die Differenz zwischen
+ hoher und niedriger Stufe.
  Addiert man die Vorhersagen beider Modelle, so bekommt man eine Vorhersage
- für die höchste Gütestufe unter Berücksichtigung der Niedrigeren.
+ für die höchste Gütestufe.
  Je nach Komplexität der Differenzfunktion können bereits mit sehr wenigen
  Daten der höherwertigen Funktion gute Vorhersagen aus den Daten niedriger
  Güte gewonnen werden.
@@ -830,8 +829,8 @@ Efficient-Global-Optimization
 \begin_inset Quotes grd
 \end_inset
 
- Verfahren verwenden.
- Es gibt bereits Umsetzungen des CO-Kriging Verfahrens, wobei die Meisten
+-Verfahren verwenden.
+ Es gibt bereits Umsetzungen des CO-Kriging Verfahrens, wobei die meisten
  auf der Arbeit von Kennedy und O'Hagan 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1014,7 +1013,7 @@ Da die Anforderungen an die Turbomaschinenindustrie und damit auch an die
  entsprechenden Optimierungen stetig steigen, werden zukünftig leistungsfähigere
  Optimierungsverfahren benötigt.
  Durch das Multifidelity-Verfahren sollen insbesondere die hochdimensionalen
- Suchräume effizienter abgetastet werden können und dadurch auch der Aufwand
+ Suchräume effizienter abgetastet werden können und dadurch der Aufwand
  durch die numerisch aufwendigen Prozessketten akzeptabel werden.
  
 \end_layout
@@ -1069,7 +1068,7 @@ Weiterhin werden Optimierungen im Turbomaschinendesign aufgrund der komplexen
  Die innerhalb dieser Arbeit entwickelte Software muss in einer solchen
  Umgebung lauffähig sein.
  In den letzten Jahren ist besonders im HPC-Bereich die Verwendung von GPUs
- (graphics processing unit, siehe Kapitel 
+ (Graphics Processing Unit, siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Verwendung-von-GPGPU"
@@ -1091,9 +1090,7 @@ reference "subsec:Streaming-SIMD-Extensions"
  Da das in dieser Arbeit entwickelte Optimierungsverfahren selbst sehr aufwendig
  ist und eventuelle Rechenzeiten den Optimierungsverlauf empfindlich stören
  könnten, soll die hier entwickelte Software durch aktuelle GPUs optional
- beschleunigt werden.
- Zudem sollen aktuelle GPUs mit diesem Verfahren getestet und auf Eignung
- überprüft werden.
+ beschleunigt werden und auf Eignung überprüft werden.
  
 \end_layout
 

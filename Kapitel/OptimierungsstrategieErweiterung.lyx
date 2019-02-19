@@ -96,8 +96,8 @@ reference "chap:Optimierungsstrategie"
 \end_layout
 
 \begin_layout Standard
-Im ersten Teil dieses Kapitels sollen allgemeine Grundlagen, sowie die Vorteile
- und Grenzen einer solchen Strategie ausgearbeitet werden.
+Im ersten Teil dieses Kapitels werden allgemeine Grundlagen sowie die Vorteile
+ und Grenzen einer solchen Strategie ausgearbeitet.
  Darauf aufbauend wird im zweiten Teil dieses Kapitels die Umsetzung und
  Neuentwicklungen dieses Verfahrens beschrieben.
 \end_layout
@@ -128,8 +128,8 @@ ch mehrere Gütestufen verwendet.
 \begin_layout Standard
 Die Vorgehensweise bei einer solchen Auslegung ist es, die Dimensionalität
  und die Komplexität der Problemstellung stetig zu erhöhen.
- Zu Anfang einer Auslegung sind viele Randbedingungen durch die geplante
- Anwendung der Maschine festgelegt.
+ Zu Anfang sind viele Randbedingungen durch die geplante Anwendung der Maschine
+ festgelegt.
  Bei einem Verdichter können diese Anforderungen an den Betriebsbereich
  bestimmte Massenströme und geforderte Druckverhältnisse sein.
  Damit können dann die ungefähren geometrischen Ausmaße und auch die benötigte
@@ -179,7 +179,7 @@ key "Howard1992"
 Nachdem der Strömungskanal und auch die aerodynamischen Kenngrößen für die
  Schaufelreihen bestimmt worden sind, versucht man Schaufelgeometrien zu
  finden, welche die vorher bestimmten Kenngrößen erfüllen.
- Hierfür finden entweder S1-Schnittverfahren wie z.B.
+ Hierfür werden entweder S1-Schnittverfahren wie z.B.
  MISES 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -187,7 +187,7 @@ key "Drela2008"
 
 \end_inset
 
- Anwendung oder es werden bereits bestehende Profildatenbanken verwendet.
+ angewendet oder man greift auf bereits bestehende Profildatenbanken zurück.
  
 \end_layout
 
@@ -211,8 +211,8 @@ Für alle diese Verfahren gilt, dass eine höhere Genauigkeit meist durch
 \end_layout
 
 \begin_layout Standard
-Aufgrund des beschriebenen stufenweisen Aufbaus einer solchen Auslegung,
- existieren meist eine Low-Fidelity- und eine High-Fidelity-Prozesskette.
+Aufgrund dieses stufenweisen Aufbaus einer solchen Auslegung, existieren
+ meist eine Low-Fidelity- und eine High-Fidelity-Prozesskette.
  Die Low-Fidelity-Prozesskette ist zwar sehr schnell berechnet, jedoch ist
  diese normalerweise auch mit einer größeren Ungenauigkeit behaftet.
  Die High-Fidelity Prozesskette hingegen ist deutlich aufwendiger, dafür
@@ -342,33 +342,27 @@ Beispielhafte Geometrische Variationen des DCA-ähnlichen Profils
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 Um einen Eindruck von den unterschiedlichen Gütestufen innerhalb aerodynamischer
- Simulationsverfahren zu bekommen, soll folgend ein einfaches, aber aussagekräft
-iges Beispiel gezeigt werden.
- Dafür wird ein DCA ähnliches Verdichterprofil (Double Circular Arc, siehe
- 
+ Simulationsverfahren zu bekommen dient folgend die Berechnung eines DCA-ähnlich
+en Verdichterprofils (Double Circular Arc, siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Lieblein1955"
 
 \end_inset
 
-) mit einem 2D-Strömungslöser vom MIT namens MISES (siehe 
+) mit MISES (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Drela2008"
 
 \end_inset
 
-) berechnet.
- Es werden geometrische Variationen von diesem Profil erzeugt und diese
- dann mit verschiedenen Gütestufen aerodynamisch simuliert.
+) als einfaches aber aussagekräftiges Beispiel.
+ Zuerst werden geometrische Variationen vom Verdichterprofil erzeugt und
+ anschließend mit verschiedenen Gütestufen aerodynamisch simuliert.
  Dafür werden zwei Parameter variiert, zum einen der Staffelungswinkel 
 \begin_inset Formula $\beta_{st}$
 \end_inset
@@ -482,10 +476,6 @@ placement o
 overhang 0col%
 width "50col%"
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \align center
@@ -691,10 +681,6 @@ Randbedingungen für den Testfall
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
  Abbildung 
@@ -778,10 +764,16 @@ key "Schnos2017"
 
 \end_inset
 
- vergleichen in seiner Arbeit die Ergebnisse zweier Simulationsverfahren
+ vergleichen in ihrer Arbeit die Ergebnisse zweier Simulationsverfahren
  für dieselbe Profilgeometrie.
- Verwendet werden das bereits erwähnte 2D-Euler-Grenzschichtverfahren MISES
- und der 3D-Navier-Stokes-Strömungslöser TRACE (siehe 
+ Die verwendeten Strömungslöser sind MISES (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Drela2008"
+
+\end_inset
+
+) und der 3D-Navier-Stokes-Strömungslöser TRACE (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kugeler2005,NURNBERGERPHD"
@@ -789,15 +781,15 @@ key "Kugeler2005,NURNBERGERPHD"
 \end_inset
 
 ).
- Verglichen werden die Verlustpolaren des Mittelschnittprofils des ersten
- Rotors des RIG250 Verdichters (siehe 
+ Aerodynamisch werden die Verlustpolaren des Rotor 1-Mittelschnittprofils
+ vom RIG250-Verdichters (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Schonweitz2013"
 
 \end_inset
 
-).
+) verglichen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -805,11 +797,11 @@ reference "fig:rig250VergleichMisesTrace"
 
 \end_inset
 
- zeigt die mit den beiden Verfahren berechneten Verlustpolaren und den Abströmwi
-nkel als Funktion des Staffelungswinkels.
- Während die Verlustpolare eine sehr ähnliche Charakteristik aufweist, sind
- beim Verlauf des Abströmwinkels deutliche Unterschiede im berechneten Verhalten
- zu erkennen.
+ zeigt die berechneten Verlustpolaren und den Abströmwinkel als Funktion
+ des Staffelungswinkels.
+ Während die Verlustpolaren eine sehr ähnliche Charakteristik aufweisen,
+ sind beim Verlauf des Abströmwinkels deutliche Unterschiede im berechneten
+ Verhalten zu erkennen.
  
 \end_layout
 
@@ -844,10 +836,6 @@ Vergleich zwischen dem 2D-CFD-Verfahren MISES und dem 3D-CFD-Verfahren TRACE
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -856,9 +844,10 @@ Vergleich zwischen dem 2D-CFD-Verfahren MISES und dem 3D-CFD-Verfahren TRACE
 \begin_layout Standard
 Die vorangestellten Beispiele lassen allerdings keine allgemeine Aussage
  über die Nutzbarkeit unterschiedlicher Simulationsverfahren innerhalb von
- Multifidelity-Optimierungen zu, da die funktionalen Zusammenhänge zwischen
- den Gütestufen sehr unterschiedlich ausfallen können und vom jeweiligen
- Anwendungsfall sowie den verwendeten Simulationsverfahren abhängen.
+ Multifidelity-Optimierungen zu.
+ da die funktionalen Zusammenhänge zwischen den Gütestufen sehr unterschiedlich
+ ausfallen können und vom jeweiligen Anwendungsfall sowie den verwendeten
+ Simulationsverfahren abhängen.
  Zudem können die Funktionale auch so große Unterschiede aufweisen, dass
  die Daten nur sehr schwach korreliert sind und der Einsatz eines Mutlifidelity-
 Verfahrens dann nicht mehr lohnenswert ist.
@@ -1071,7 +1060,7 @@ name "fig:MufiProzess"
 
 \end_inset
 
-Darstellung des Multifidelity-Optimierungsprozess
+Darstellung des Multifidelity-Optimierungsprozesses
 \end_layout
 
 \end_inset
