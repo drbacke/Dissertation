@@ -418,9 +418,9 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
 \begin_layout Standard
 Neben dem eigentlichen Optimierungsverfahren wurde zusätzlich eine grafische
- Analyse-Software für die hier entwickelten Kriging-Modelle geschrieben.
- Diese analysiert die während einer laufenden Optimierung erzeugten Kriging-Mode
-lle und deren Vorhersagen und stellt die Ergebnisse in übersichtlicher und
+ Analyse-Software für die hier entwickelten Krigingmodelle geschrieben.
+ Diese analysiert die während einer laufenden Optimierung erzeugten Krigingmodel
+le und deren Vorhersagen und stellt die Ergebnisse in übersichtlicher und
  einfacher Form dar (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref

@@ -120,10 +120,6 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/1DCOKrigingAnalytisch.eps
 	scale 30
@@ -148,10 +144,6 @@ Eindimensionales analytisches Beispiel mit zwei Gütestufen.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -6044,11 +6036,21 @@ name "sec:Übersicht-der-bisherigen"
 Innerhalb dieses Abschnitts wird ein kurzer Überblick gegeben, in welchen
  Forschungs- und Industrieprojekten das hier entwickelte Multifidelity-Verfahren
  bereits Anwendung gefunden hat.
+ Dabei entspricht jede Überschrift der Unterabschnitte den Titeln der jeweiligen
+ Projekte oder Forschungsarbeiten.
+ 
 \end_layout
 
 \begin_layout Subsection
+\begin_inset Quotes gld
+\end_inset
+
 Design of a counter rotating fan using a multidisciplinary and multifidelity
  optimisation under high level of restrictions
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6196,8 +6198,15 @@ Der enorme Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden:
 \end_layout
 
 \begin_layout Subsection
+\begin_inset Quotes gld
+\end_inset
+
 High-dimensional multi-fidelity optimisation of a 2.5 stage low pressure
  compressor
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6435,8 +6444,15 @@ reference "subsec:RPROP2"
 \end_layout
 
 \begin_layout Subsection
+\begin_inset Quotes gld
+\end_inset
+
 Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren
  unter Berücksichtigung des Realgaseinflusses
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6582,7 +6598,15 @@ key "goinis2018"
 \begin_layout Subsection
 
 \size normal
-Testanwendung bei Siemens 
+\begin_inset Quotes gld
+\end_inset
+
+Multi-fidelity Method for Aerodynamic Shape Optimisation of Axial Compressor
+ Blades
+\begin_inset Quotes grd
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Anwendung-bei-Siemens"
@@ -6836,7 +6860,14 @@ g ausgeschaltet werden soll und ein günstigeres Verhältnis an initialen
 \end_layout
 
 \begin_layout Subsection
-Optimierung von Casing-Treatments eines transsonischen Verdichters
+\begin_inset Quotes gld
+\end_inset
+
+Optimizing Surge Margin and Efficiency of a Transonic Compressor
+\begin_inset Quotes grd
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:ASME-Veröffentlichung:-Optimieru"
@@ -7095,8 +7126,15 @@ reference "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Subsection
+\begin_inset Quotes gld
+\end_inset
+
 Application of an Algorithmically Differentiated Turbomachinery Flow Solver
  to the Optimization of a Fan Stage
+\begin_inset Quotes grd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7117,8 +7155,8 @@ key "Backhaus"
  Die gewonnenen partiellen Ableitungen flossen dann in die Gradient-Enhanced-Kri
 ging-Software ein und konnten eine Benchmarkoptimierung so beschleunigen.
  Durch die Verwendung der partiellen Ableitungen werden die Kovarianzmatrizen
- des Kriging-Verfahren allerdings nach wenigen Membern sehr groß und damit
- das Training entsprechend aufwändig.
+ des Kriging-Verfahren allerdings nach wenigen Membern bereits sehr groß
+ und damit das Training entsprechend aufwändig.
  Aus diesem Grund sind die in dieser Arbeit zahlreichen Beschleunigungsverfahren
  aus Kapitel 
 \begin_inset CommandInset ref
