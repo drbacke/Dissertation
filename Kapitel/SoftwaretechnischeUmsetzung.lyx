@@ -763,9 +763,6 @@ Die für das Trainingsverfahren notwendigen Ableitungen sehen für die gauss'sch
 \end_inset
 
 ) wie folgt aus:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 \frac{\partial cov(\vec{h})}{\partial\theta_{a}} & =-\frac{1}{2}\sigma^{2}e^{\theta_{a}}\left|h_{a}\right|^{2}\left(e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\right)\label{eq:AbleitungKorrGauss}\\
@@ -896,7 +893,7 @@ Um diese Werte zu bestimmen, bietet sich ein einfaches numerisches Testprogramm
  automatisch bestimmt.
  Beispielsweise wurden für eine 64Bit-Fließkommzahl folgende Grenzen bestimmt:
  
-\begin_inset Formula $\theta\in\mathbb{R}|5<\theta_{l}<-34$
+\begin_inset Formula $\theta\in\mathbb{R}|5>\theta_{l}>-34$
 \end_inset
 
 .
@@ -1503,27 +1500,6 @@ Rauschterm Beispiel
 \end_layout
 
 \begin_layout Standard
-In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Kriging_RauschFunktion"
-
-\end_inset
-
- wird ein einfaches Beispiel gezeigt, welches die Wirkung von unterschiedlichen
- Rauschtermen auf die Vorhersage darstellt.
- Es handelt sich um eine konstante Null-Funktion mit einem normalverteilten
- Rauschen, welche den Erwartungswert Null und die Standardabweichung Eins
- besitzt: 
-\begin_inset Formula $f\left(x\right)=\mathcal{N}\left(0,1\right)$
-\end_inset
-
-.
- Jeder eingezeichnete Punkt entspricht einer Stützstelle, wobei jede Stützstelle
- an einem anderen Ort ist.
- Mithilfe dieser Stützstellen wird ein Ordinary-Kriging trainiert und dann
- für den entsprechenden Wertebereich Vorhersagen getroffen.
- 
 \begin_inset Wrap figure
 lines 17
 placement o
@@ -1556,12 +1532,28 @@ Konstante Funktion mit normalverteiltem Rauschen
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Kriging_RauschFunktion"
 
 \end_inset
 
+ wird ein einfaches Beispiel gezeigt, welches die Wirkung von unterschiedlichen
+ Rauschtermen auf die Vorhersage darstellt.
+ Es handelt sich um eine konstante Null-Funktion mit einem normalverteilten
+ Rauschen, welche den Erwartungswert Null und die Standardabweichung Eins
+ besitzt: 
+\begin_inset Formula $f\left(x\right)=\mathcal{N}\left(0,1\right)$
+\end_inset
+
+.
+ Jeder eingezeichnete Punkt entspricht einer Stützstelle, wobei jede Stützstelle
+ an einem anderen Ort ist.
+ Mithilfe dieser Stützstellen wird ein Ordinary-Kriging trainiert und dann
+ für den entsprechenden Wertebereich Vorhersagen getroffen.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3410,12 +3402,38 @@ name "subsec:UltraRestart"
 \end_layout
 
 \begin_layout Standard
+Innerhalb einer Optimierung werden permanent neue Stützstellen berechnet.
+ Deswegen wird regelmäßig neu trainiert und damit neue Hyperparameter bestimmt.
+ In Annahme, dass sich die Hyperparameter bei ausreichender Datenlage nicht
+ mehr wesentlich ändern, ist es sinnvoll die Hyperparameter aus den bereits
+ trainierten Modellen zur Initialisierung zu verwenden.
+ Diese Art der Wiederverwendung von alten Modellen ist für das Kriging Verfahren
+ ohne Probleme möglich.
+ 
+\end_layout
+
+\begin_layout Standard
+Bei der Wiederverwendung alter Hyperparametersätz müssen jedoch zwei Problemstel
+lungen beachtet werden:
+\end_layout
+
+\begin_layout Enumerate
+Das letzte Modell befindet sich in einem lokalen Minimum der Likelihood
+ Funktion
+\end_layout
+
+\begin_layout Enumerate
+Die Hyperparameter der Kovarianz Funktion(en) sind noch nicht richtig eingestell
+t
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 31
 placement o
 overhang 0in
 width "45col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3458,32 +3476,6 @@ Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
 
 \end_inset
 
-Innerhalb einer Optimierung werden permanent neue Stützstellen berechnet.
- Deswegen wird regelmäßig neu trainiert und damit neue Hyperparameter bestimmt.
- In Annahme, dass sich die Hyperparameter bei ausreichender Datenlage nicht
- mehr wesentlich ändern, ist es sinnvoll die Hyperparameter aus den bereits
- trainierten Modellen zur Initialisierung zu verwenden.
- Diese Art der Wiederverwendung von alten Modellen ist für das Kriging Verfahren
- ohne Probleme möglich.
- 
-\end_layout
-
-\begin_layout Standard
-Bei der Wiederverwendung alter Hyperparametersätz müssen jedoch zwei Problemstel
-lungen beachtet werden:
-\end_layout
-
-\begin_layout Enumerate
-Das letzte Modell befindet sich in einem lokalen Minimum der Likelihood
- Funktion
-\end_layout
-
-\begin_layout Enumerate
-Die Hyperparameter der Kovarianz Funktion(en) sind noch nicht richtig eingestell
-t
-\end_layout
-
-\begin_layout Standard
 Im ersten Fall besteht die Gefahr, dass das Training durch die ungünstige
  Initialisierung in einem lokalen Minimum bleibt und so nicht die optimalen
  Hyperparameter findet.
@@ -3870,6 +3862,165 @@ name "subsec:RPROP2"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0in
+width "45col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RPROP
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RPROP2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zeit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+346.3s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+186s
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittl.
+ Fehler
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0201
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0149
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Iterationen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+781
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+398
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Ergebnisse-beider-Verfahren"
+
+\end_inset
+
+Ergebnisse beider Verfahren im direkten Vergleich.
+ Die Ergebnisse stellen den Mittelwert der 10 durchgeführten Trainings dar.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Ein Nachteil des RPROP-Verfahrens ist, dass es relativ viele Iterationen
  benötigt bis es konvergiert.
  In jedem Iterationsschritt muss zum einen der Dichtefunktionswert der Likelihoo
@@ -4072,6 +4223,41 @@ Schleife von eta_minusFact=0.9 bis eta_minusFact<=1.1 Schrittweite 0.2
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0in
+width "45col%"
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../images/RPROP2/Vergleich.png
+	scale 17
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RPROP_2_Verlauf"
+
+\end_inset
+
+Gemittelter Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Als erstes der initiale Likelihood-Wert mit den bisherigen Lernraten 
 \begin_inset Formula $\eta^{+},\eta^{-}$
 \end_inset
@@ -4098,165 +4284,6 @@ Als erstes der initiale Likelihood-Wert mit den bisherigen Lernraten
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap table
-lines 0
-placement o
-overhang 0in
-width "45col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-RPROP
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-RPROP2
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Zeit
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-346.3s
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-186s
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Mittl.
- Fehler
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.0201
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.0149
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Iterationen
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-781
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-398
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Ergebnisse-beider-Verfahren"
-
-\end_inset
-
-Ergebnisse beider Verfahren im direkten Vergleich.
- Die Ergebnisse stellen den Mittelwert der 10 durchgeführten Trainings dar.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Für diese Art der Lernratenregelung sind maximal 4 neue Likelihood-Auswertungen
  notwendig, im Gegenzug hat man allerdings eine deutliche Verringerung der
  Iterationsanzahl und muss somit weniger partielle Ableitungen bestimmen.
@@ -4292,41 +4319,6 @@ reference "tab:Ergebnisse-beider-Verfahren"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0in
-width "45col%"
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/RPROP2/Vergleich.png
-	scale 17
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RPROP_2_Verlauf"
-
-\end_inset
-
-Gemittelter Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Das RPROP-Verfahren benötigt in diesem Beispiel die 1.86-fache Zeit, um Konvergen
 z zu erreichen.
  Dies wird hauptsächlich durch die geringere Iterationsanzahl erreicht.
@@ -4495,11 +4487,11 @@ reference "subsec:UltraRestart"
 
 \begin_layout Standard
 \begin_inset Wrap table
-lines 7
+lines 5
 placement O
 overhang 0in
-width "50col%"
-status open
+width "40col%"
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4609,48 +4601,8 @@ reference "subsec:UltraRestart"
 
 , da ab diesem Zeitpunkt genügend alte Krigingmodelle vorhanden sind.
  Dieser Übergang wird mit einer gestrichelten Linie gekennzeichnet.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 40
-placement O
-overhang 0in
-width "45col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/RandomRestartVergleich.eps
-	scale 60
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Ergebnisse-des-Testfalls."
-
-\end_inset
-
-Ergebnisse des Testfalls.
- Dargestellt sind die Ergebnisse des Likelihoods, der Trainingszeit und
- des Testfehlers über den Trainingsiterationen.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Der Testfehler ist bei allen Verfahren auf einem ähnlich guten Niveau: Der
- Mittelwert des Massenstroms liegt bei 514 kg/s und der Testfehler liegt
+ Der Testfehler ist bei allen Verfahren auf einem ähnlich guten Niveau:
+ Der Mittelwert des Massenstroms liegt bei 514 kg/s und der Testfehler liegt
  damit bei ca.
  1%.
  Das RPROP2-Verfahren zeigt insgesamt den besten Testfehler.
@@ -4681,17 +4633,47 @@ Initialisierung auf Basis vorhandener Krigingmodelle
  aktiviert wurde, blieb der Testfehler bei allen Verfahren nahezu konstant.
  Der Anstieg des Testfehlers beim Quasi-Newton-Verfahren lässt deshalb auf
  eine einmalig schlechte Initialisierung als Ursache schließen.
-\end_layout
-
-\begin_layout Standard
-Die Verläufe des Likelihood-Terms ähneln sich bei den RPROP-Verfahren sehr
+ Die Verläufe des Likelihood-Terms ähneln sich bei den RPROP-Verfahren sehr
  stark, beide Verfahren finden bereits in der Phase zufälliger Initialisierung
  direkt den optimalen Likelihood-Term.
  Das Quasi-Newton-Verfahren ist in dieser Phase noch sehr instabil.
  
+\begin_inset Wrap figure
+lines 40
+placement O
+overhang 0in
+width "45col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/RandomRestartVergleich.eps
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ergebnisse-des-Testfalls."
+
+\end_inset
+
+Ergebnisse des Testfalls.
+ Dargestellt sind die Ergebnisse des Likelihoods, der Trainingszeit und
+ des Testfehlers über den Trainingsiterationen.
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Die Trainingszeiten zwischen den Verfahren variieren in der 
 \begin_inset Quotes gld
 \end_inset
@@ -4929,9 +4911,6 @@ Die Prozesskettenzeit
 
  die Anzahl aller bisher berechneten Member der betrachteten Gütestufe angibt.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 t_{pr}=\frac{1}{n}\stackrel[i=1]{i\leq n}{\sum}t_{pr,i}
@@ -4969,9 +4948,6 @@ reference "subsec:UltraRestart"
 
  an bereits gemessenen Zeiten verwendet werden, um mögliche Änderungen schneller
  abzubilden: 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 t_{train} & =\frac{1}{m}\stackrel[i=1]{i\leq m}{\sum}t_{train,(n-i)}\\
@@ -6923,41 +6899,6 @@ key "kueppers2016b"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
-	scale 45
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Schematische-Darstellung-der"
-
-\end_inset
-
-Schematische Darstellung der Client/Server Verbindungen und des Round-Robin
- Schedulers
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7009,6 +6950,41 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 11
+placement O
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
+	scale 45
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schematische-Darstellung-der"
+
+\end_inset
+
+Schematische Darstellung der Client/Server Verbindungen und des Round-Robin
+ Schedulers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Steht auf Client-Seite eine Aufgabe an, wird sie in kleinere Teilaufgaben
  zerlegt und auf einem 
 \begin_inset Quotes gld
@@ -7127,44 +7103,6 @@ Netzwerkobjekte
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
-	scale 41
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:UML-Diagramm-des"
-
-\end_inset
-
-UML Diagramm des SaveAbleOnServer Interface
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Alle Objekte, die potenziell über das Netzwerk übertragen werden und als
  virtuelle Variable auf Servern zur Verfügung stehen, müssen das Interface
  
@@ -7211,6 +7149,40 @@ freeMem: Der belegte Speicher des Objekts wird vollständig geleert.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 12
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/UML/SaveableIOnServer.eps
+	scale 41
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:UML-Diagramm-des"
+
+\end_inset
+
+UML Diagramm des SaveAbleOnServer Interface
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Die Serialisierung und Deserialisierung ist in diesem Fall über das Interface
  sichergestellt.
  Die korrekte Implementierung der (De-)Serialisierung aber nicht, da diese
@@ -7636,12 +7608,47 @@ Geschwindigkeit bei mehreren Servern
 \end_layout
 
 \begin_layout Standard
+Bei einem verteilten System leidet die Geschwindigkeit der Operationen oft
+ erheblich, da für die Kommunikation und die Verwaltung der Teilberechnungen
+ ein großer Anteil der Rechenzeit aufgewendet wird.
+ Meist steigt der Aufwand mit höherer Server-Anzahl und lohnt sich erst
+ ab einer gewissen Problemgröße.
+ Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beschleunigungsfaktor-eines-Krig"
+
+\end_inset
+
+ zeigt die Messung des zeitlichen Faktors eines Kriging-Trainings bei steigender
+ Server-Anzahl und unterschiedlichen Problemgrößen.
+ Das Training wurde auf dem DLR-AT-Cluster ausgeführt (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Laufzeitumgebung"
+
+\end_inset
+
+).
+ Als Testfall dienten die zufälligen Stützstellen der in Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ZDT3"
+
+\end_inset
+
+ beschriebenen ZDT3-Funktion mit 20 freien Variablen.
+ Eine Anzahl an Servern von 0 stellt ein lokales Training dar und eine Anzahl
+ von 1 eine 1:1 Verbindung.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
 overhang 0col%
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -7679,41 +7686,6 @@ key "kueppers2016b,kueppers2016"
 
 \end_inset
 
-Bei einem verteilten System leidet die Geschwindigkeit der Operationen oft
- erheblich, da für die Kommunikation und die Verwaltung der Teilberechnungen
- ein großer Anteil der Rechenzeit aufgewendet wird.
- Meist steigt der Aufwand mit höherer Server-Anzahl und lohnt sich erst
- ab einer gewissen Problemgröße.
- Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beschleunigungsfaktor-eines-Krig"
-
-\end_inset
-
- zeigt die Messung des zeitlichen Faktors eines Kriging-Trainings bei steigender
- Server-Anzahl und unterschiedlichen Problemgrößen.
- Das Training wurde auf dem DLR-AT-Cluster ausgeführt (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Laufzeitumgebung"
-
-\end_inset
-
-).
- Als Testfall dienten die zufälligen Stützstellen der in Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:ZDT3"
-
-\end_inset
-
- beschriebenen ZDT3-Funktion mit 20 freien Variablen.
- Eine Anzahl an Servern von 0 stellt ein lokales Training dar und eine Anzahl
- von 1 eine 1:1 Verbindung.
-\end_layout
-
-\begin_layout Standard
 Man kann sehen, dass der Verlust einer 1:1 Verbindung sehr klein ist, womit
  die Verzögerung durch die Netzwerkkommunikation als gering einzustufen
  ist.
@@ -8859,8 +8831,7 @@ reference "subsec:Ableitung-LikelihoodRueckMode"
 \end_layout
 
 \begin_layout Subsection
-Ableitung Likelihood: Verzicht auf Vor- und Rückwärtssubstitution - Rückwärtsdif
-ferentiation der Cholesky-Zerlegung 
+Ableitung Likelihood: Verzicht auf Vor- und Rückwärtssubstitution
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Ableitung-LikelihoodRueckMode"
@@ -11654,16 +11625,16 @@ Vorhersagefehler
 
 \begin_layout Standard
 \begin_inset Wrap figure
-lines 13
+lines 0
 placement o
 overhang 0in
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/khonprediction.pdf
-	scale 50
+	filename ../images/khonprediction.png
+	scale 18
 	BoundingBox 0bp 0bp 563bp 376bp
 
 \end_inset
@@ -11844,16 +11815,18 @@ Hyperparameter auf Plausibilität überprüfen
 \end_layout
 
 \begin_layout Standard
+Die Überwachung der Hyperparameter während einer laufenden Optimierung ist
+ aufgrund der hohen Anzahl schwierig.
+ Betrachtet man bspw.
+ die Mukoko Optimierung, so wurden 38 Ersatzmodelle und 158 Parameter vewendet,
+ was zu über 6000 Hyperparametern führt.
+ 
 \begin_inset Wrap figure
 lines 0
 placement o
-overhang 0col%
+overhang 0in
 width "50col%"
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -11882,21 +11855,12 @@ Hyperparameter-Matrix aus einer laufenden Optimierung
 
 \end_inset
 
-Die Überwachung der Hyperparameter während einer laufenden Optimierung ist
- aufgrund der hohen Anzahl schwierig.
- Betrachtet man bspw.
- die Mukoko Optimierung, so wurden 38 Ersatzmodelle und 158 Parameter vewendet,
- was zu über 6000 Hyperparametern führt.
- Dennoch ist es zumindest möglich, eine grafische Plausibilitäts-Überprüfung
+Dennoch ist es zumindest möglich, eine grafische Plausibilitäts-Überprüfung
  durchzuführen.
  Hierfür müssen die Optimierungsparameter und auch die Ersatzmodelle sinnvoll
  nummeriert werden, bspw.
  sollten alle Parameter eines Rotors durchlaufend nummeriert werden.
- 
-\end_layout
-
-\begin_layout Standard
-Werden die Hyperparameter nach Größe eingefärbt, so lässt sich eine grafische
+ Werden die Hyperparameter nach Größe eingefärbt, so lässt sich eine grafische
  Matrix erzeugen, wie sie exemplarisch in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -12074,9 +12038,6 @@ reference "eq:KovarianzfunktionenCoKrigingGauss"
 \end_inset
 
 , so ergibt sich:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{align}
 cov_{1,1}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}\\
@@ -12085,43 +12046,22 @@ cov_{2,2}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Setzt man die beiden Terme ins Verhältnis 
+Der Quotient 
 \begin_inset Formula $LF_{perc}=\frac{a^{2}\sigma_{2}^{2}}{a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}}$
 \end_inset
 
-, so erhält man eine einfache Abschätzung des Anteils der Kovarianzfunktion
- niedriger Güte 
-\begin_inset Formula $cov_{2,2}$
-\end_inset
-
- an der Kovarianz hoher Güte 
-\begin_inset Formula $cov_{1,1}$
-\end_inset
-
- bei voller Korrelation.
- Geht man bspw.
- von den Extremfällen aus:
+ beschreibt das gewünschte Verhältnis der Gütestufen bei voller Korrelation.
+ Um die Funktionsweise zu erläutern, werden folgend zwei Extremfälle betrachtet:
 \end_layout
 
 \begin_layout Enumerate
 Hohe und niedrige Güte unkorreliert
 \end_layout
 
+\begin_deeper
 \begin_layout Enumerate
-Hohe und niedrige Güte identisch
-\end_layout
-
-\begin_layout Standard
-Ergeben sich folgende Werte:
-\end_layout
-
-\begin_layout Enumerate
-Dieser Fall wird beim Training durch den Skalierungsfaktor gelöst, dieser
- wird auf Null gesetzt und damit eine vollständige Unkorreliertheit erreicht.
+Zur Darstellung dieses Falls wird der Skalierungsfaktor auf Null gesetzt
+ und damit eine vollständige Unkorreliertheit erreicht.
  Der Anteil der Kovarianzfunktion niedriger Güte wäre dann: 
 \begin_inset Formula $LF_{perc}=\frac{0\sigma_{2}^{2}}{0\sigma_{2}^{2}+\sigma_{diff}^{2}}=0$
 \end_inset
@@ -12129,6 +12069,12 @@ Dieser Fall wird beim Training durch den Skalierungsfaktor gelöst, dieser
  
 \end_layout
 
+\end_deeper
+\begin_layout Enumerate
+Hohe und niedrige Güte identisch
+\end_layout
+
+\begin_deeper
 \begin_layout Enumerate
 Sind beide Funktionen identisch, so wird die Differenzkovarianzfunktion
  nicht benötigt und im Training durch 
@@ -12143,6 +12089,7 @@ Sind beide Funktionen identisch, so wird die Differenzkovarianzfunktion
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 Die Gewichtung der beiden Kovarianzfunktionen durch die Hyperparameter 
 \begin_inset Formula $\vec{\theta}\in\mathbb{R^{\textrm{k}}}$
@@ -12165,19 +12112,8 @@ reference "subsec:ASME-Veröffentlichung:-Optimieru"
 
 \end_inset
 
- wird ein erfolgreiches Beispiel aus einer Optimierung eines transsonischen
- Verdichters gezeigt.
- Bei einigen Ersatzmodellen dieser Optimierung war bekannt, dass einige
- Daten niedriger Güte keinen Korrelation zu den Daten hoher Güte aufweisen
- können.
- Dies konnte in der entsprechenden Grafik (siehe Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Anteile-der-Kovarianzfunktionen"
-
-\end_inset
-
- - Ersatzmodell Nummer 9) erkannt werden.
+ wird eine Anwendung des hier beschriebenen Verhälnisses aus einer Optimierung
+ eines transsonischen Verdichters gezeigt.
  
 \end_layout
 

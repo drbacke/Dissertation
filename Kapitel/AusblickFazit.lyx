@@ -77,21 +77,21 @@ Zusammenfassung und Ausblick
 
 \begin_layout Standard
 Ziel dieser Arbeit ist es ein industriell einsetzbares und erweiterbares
- Multifidelity-Optimierungsverfahren zu entwickeln und zu testen.
- Zusätzlich müssen die speziellen Anforderungen im Bereich der Turbomaschinenent
-wicklung und der Softwaretechnik berücksichtigt werden.
+ Multifidelity-Optimierungsverfahren unter Berücksichtigung der Anforderungen
+ im Bereich der Turbomaschinenauslegung und der Softwaretechnik zu entwickeln
+ und zu testen.
  Die Herausforderungen bei der Optimierung von Turbomaschinen sind die Existenz
  mehrerer Zielfunktionen und zahlreicher Nebenbedingungen sowie hochdimensionale
  Suchräume und sehr laufzeitintensive Prozessketten, welche nicht immer
  Ergebnisse liefern.
  Das hier vorgestellte Multifidelity-Optimierungsverfahren sorgt dafür,
- dass hochdimensionale Suchräume effizienter abgetastet werden und damit
- die Laufzeit der Optimierungen deutlich reduziert wird.
+ dass hochdimensionale Suchräume effizienter abgetastet werden können und
+ damit die Laufzeit der Optimierungen deutlich reduziert wird.
  Hierfür werden schnellere Prozessketten niedrigerer Güte herangezogen und
  mit Hilfe der dort enthaltenen Informationen die Anzahl an teuren Prozessketten
 auswertungen reduziert.
- Die Anforderungen an das Multifidelity-Optimierungsverfahren umfasst die
- folgende Punkte (vgl.
+ Die Anforderungen an das Multifidelity-Optimierungsverfahren umfassen die
+ folgenden Punkte (vgl.
  Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -123,7 +123,7 @@ Hoher Automatisierungsgrad
 \end_layout
 
 \begin_layout Standard
-Um diese zu erfüllen, wurden (vgl.
+Um diese zu erfüllen, werden mehrere Ziele definiert (vgl.
  Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -131,7 +131,7 @@ reference "sec:Anforderungen-und-Zielsetzung"
 
 \end_inset
 
-) mehrere Ziele definiert:
+):
 \end_layout
 
 \begin_layout Paragraph
@@ -139,9 +139,9 @@ Entwicklung eines CO-Kriging-Ersatzmodells
 \end_layout
 
 \begin_layout Standard
-Ein wesentlicher Punkt dieser Arbeit ist die Entwicklung eines Co-Kriging
- Ersatzmodells, denn erst auf Basis eines solchen Ersatzmodells ist eine
- Multifidelity-Strategie sinnvoll umsetzbar.
+Ein wesentlicher Punkt dieser Arbeit ist die Entwicklung eines Co-Kriging-Ersatz
+modells, denn erst auf dessen Basis ist eine Multifidelity-Strategie effizient
+ umsetzbar.
  Die theoretischen Hintergründe werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -166,15 +166,15 @@ reference "sec:VergleicheCoKrigingAndere"
 \begin_layout Standard
 Weiterhin ist eine der zentralen Anforderungen die Nutzung einer erweiterbaren
  und objektorientierten Softwarestruktur.
- Um dies umzusetzen wird eine moderne Interface-basierte Programmierung
- verwendet, wobei die genutzte Programmiersprache C++ ist.
+ Dafür wird eine moderne Interface-basierte Programmierung in der Programmierspr
+ache C++ gewählt.
  Diese Art der Softwarearchitektur ermöglicht die effiziente Implementierung
- von unterschiedlichen Verfahren wie z.B.
+ unterschiedlicher Verfahren, wie z.B.
  Ordinary-, Gradient-Enhanced-, Co-Kriging und Klassifikatoren wie z.B.
  Supporting-Vector Machines innerhalb eines Programms.
- Der Vorteil dabei liegt darin, dass viele Softwaremodule geteilt werden
- können und so Redundanzen vermieden, die Übersichtlichkeit erhöht und die
- Fehleranfälligkeit reduziert werden.
+ Der Vorteil liegt darin, dass viele Softwaremodule geteilt werden können
+ und so Redundanzen vermieden, die Übersichtlichkeit erhöht und die Fehleranfäll
+igkeit reduziert werden.
  Weiterhin profitieren folgende Module besonders von dieser Architektur:
 \end_layout
 
@@ -185,12 +185,12 @@ stausch von vollständigen Objekten ermöglicht.
 \end_layout
 
 \begin_layout Itemize
-Mehrere Minimierungsverfahren wurden generalisiert und sind allgemein nutzbar
+Mehrere Minimierungsverfahren wurden generalisiert und sind allgemein nutzbar.
 \end_layout
 
 \begin_layout Itemize
 Die hier entwickelte Matrix-Klasse ist generalisiert auf unterschiedlichsten
- Architekturen (GPUs, Intel(c) MKL, OpenMP) nutz- und austauschbar
+ Architekturen (GPUs, Intel(c) MKL, OpenMP) nutz- und austauschbar.
 \end_layout
 
 \begin_layout Standard
@@ -209,12 +209,12 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
 Neben der Softwarearchitektur spielt die Effizienz der Software eine entscheiden
 de Rolle.
  Innerhalb einer Optimierung müssen die Ersatzmodelle einen höheren Zeitgewinn
- bringen als die Nutzung selbst kostet.
- Dieses Verhältnis kann gesteigert werden, indem die Ersatzmodelle selbst
- möglichst effizient gestaltet werden.
+ bringen als die Nutzung selbst erfordert.
+ Dieses Verhältnis kann gesteigert werden, indem die Ersatzmodelle möglichst
+ effizient gestaltet werden.
  Um dies zu erreichen sind die entwickelten Ersatzmodelle in der Lage viele
  moderne Hardwarebeschleunigungen zu nutzen.
- Besonders erwähnt seien hier Advanced Vector Extensions (siehe Kapitel
+ Besonders erwähnt seien hier Advanced-Vector-Extensions (siehe Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -241,8 +241,8 @@ reference "subsec:Matrixoperationen"
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind zahlreiche Maßnahmen innerhalb des Verfahrens selbst zur
- Beschleunigung des Trainings umgesetzt.
+Weiterhin sind zahlreiche Maßnahmen innerhalb des Verfahrens zur Beschleunigung
+ des Trainings umgesetzt.
  Hierzu zählen: 
 \end_layout
 
@@ -325,7 +325,7 @@ reference "subsec:SpurApprox"
 
 \begin_layout Standard
 Neben diesen Maßnahmen wurde zusätzlich eine unabhängige Softwarebibliothek
- entwickelt, welche die asynchrone Verteilung von verschiedensten Operationen
+ entwickelt, welche die asynchrone Verteilung verschiedener Operationen
  auf mehrere Rechner erlaubt (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -337,14 +337,13 @@ reference "chap:Verteiltes-Rechnen-1"
  Mit dieser Bibliothek konnten die wesentlichen Matrix-Operationen parallelisier
 t werden.
  Das System ist vollständig asynchron und ermöglicht es auch, die Aufgaben
- auf unterschiedliche Archtitekturen zu verteilen.
- Beispielsweise Server mit GPUs und CPUs oder auch verschieden starke Server
- im Mischbetrieb zu verwenden.
+ auf unterschiedliche Archtitekturen zu verteilen, bspw.
+ Server mit GPUs und CPUs oder auch verschieden starke Server im Mischbetrieb
+ zu verwenden.
  Die dafür nötige Lastverteilung übernimmt ein Scheduler.
  Zudem kann das System Ausfälle einzelner Server kompensieren und die Aufgaben
  dann zeitnah an andere Server verteilen.
- Dies ist ein erheblicher Vorteil gegenüber z.B.
- den meisten MPI-basierten Systemen.
+ Dies ist ein erheblicher Vorteil gegenüber den meisten MPI-basierten Systemen.
  
 \end_layout
 
@@ -356,8 +355,8 @@ Erweiterung des bisherigen Optimierungsverfahrens
 Neben der Entwicklung des Ersatzmodells war auch die Integration des Multifideli
 ty-Verfahrens innerhalb der bereits bestehen Software AutoOpti eine wichtige
  Aufgabe.
- Um dies zu verwirklichen ist eine neue Schnittstelle in AutoOpti etabliert
- worden, welche die Anbindung und Nutzung von unterschiedlichen Ersatzmodellen
+ Um dies zu verwirklichen, ist eine neue Schnittstelle in AutoOpti etabliert
+ worden, welche die Anbindung und Nutzung unterschiedlicher Ersatzmodelle
  innerhalb von AutoOpti ermöglicht (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -366,11 +365,12 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
 \end_inset
 
 ).
- Weiterhin sind zahlreichen Anpassungen innerhalb von AutoOpti vorgenommen
- worden.
- Diese umfassen bswp.
- die Datenbankhaltung und Prozesskettensteuerung welche auf mehrere Gütestufen
- erweitert worden sind und die Kopplung von C99 und C++ Standard.
+ Weiterhin sind zahlreiche Anpassungen innerhalb von AutoOpti vorgenommen
+ worden, bswp.
+ die Datenbankhaltung und Prozesskettensteuerung mussten auf mehrere Gütestufen
+ erweitert werden.
+ Zudem mussten zahlreiche Anpassungen vorgenommen werden um den C99 und
+ C++ Standard koppeln zu können.
  Alle weiteren Änderungen werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -439,9 +439,9 @@ Testen des entwickelten Verfahrens
 \end_layout
 
 \begin_layout Standard
-Das hauptsächliche Ziel dieser Arbeit ist es ein in einer industriellen
+Das hauptsächliche Ziel dieser Arbeit ist es, ein in einer industriellen
  Umgebung nutzbares Multifidelity-Verfahren zu entwickeln.
- Neben der eigentlichen Entwicklung der Software, ist das Testen und die
+ Neben der eigentlichen Entwicklung der Software ist das Testen und die
  direkte Anwendung einer der wichtigsten Punkte dieser Arbeit.
  Erst dadurch ist es möglich eine Software zu entwickeln, welche die notwendige
  Stabilität und Benutzerfreundlichkeit bietet, um in einer Industrie- und
@@ -449,7 +449,7 @@ Das hauptsächliche Ziel dieser Arbeit ist es ein in einer industriellen
  Hierfür wurde die entwickelte Software in zahlreichen komplexen Anwendungen
  in Forschung und Industrie verwendet und betreut.
  Die gewonnenen Erkenntnisse und Erfahrungen wurden für die Weiterentwicklung
- des Verfahrens benutzt.
+ des Verfahrens eingesetzt.
  Eine Übersicht aller Anwendungen ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -495,17 +495,17 @@ reference "subsec:CRISP-Testfall"
  eine aeromechanische Optimierungsreihe einer modernen Fanstufe zu finden.
  Innerhalb dieser Optimierungsreihe sollte der Geschwindigkeitsvorteil des
  hier entwickelten Multifidelity-Verfahrens gegenüber einer konventionellen
- Single-Fidelity Optimierung gezeigt werden.
- Hierfür wurden die Optimierungen mehrfach wiederholt um Zufälligkeiten
+ Singlefidelity-Optimierung gezeigt werden.
+ Hierfür wurden die Optimierungen mehrfach wiederholt, um Zufälligkeiten
  abzubilden und auch die Robustheit des Verfahrens messen zu können.
  Als Hauptergebnis konnte die gesamte Optimierungszeit durch das neue Verfahren
  in etwa halbiert werden.
  Neben der reinen Beschleunigung kann auch beobachtet werden, dass die Multifide
 lity-Optimierungen alle zu demselben guten Ergebniss führen.
- Die Single-Fidelity Optimierungen zeigten stärkere Schwankungen bei den
+ Die Singlefidelity-Optimierungen zeigten stärkere Schwankungen bei den
  Ergebnissen.
- Die Multifidelity-Optimierungen haben in dieser Anwendung also robuster
- zu dem bestmöglichen Ergebnis geführt.
+ Die Multifidelity-Optimierungen haben in dieser Anwendung robuster zu dem
+ bestmöglichen Ergebnis geführt.
  
 \end_layout
 
@@ -516,43 +516,42 @@ Aktuelle Entwicklungen
 \begin_layout Standard
 Die Software sowie das Verfahren werden nach dieser Arbeit weiterentwickelt.
  Bereits zum jetzigen Zeitpunkt sind einige dieser Entwicklungen besonders
- interessant und aussichtsreich.
- Besonders die Nutzung des Co-Kriging Modells außerhalb von reinen Multifidelity
--Optimierungen ist ein neues Feld und ermöglicht einige interessante Ansätze.
- Beispielsweise die Wiederverwendung von älteren Optimierungen.
- Eine typische Problemstellung in der Entwicklung von Turbomaschinen, sind
- z.B.
- geänderte Randbedingungen oder geänderte Parametrisierung während der laufenden
- Entwicklung.
- Dies kann z.B.
- dazu führen, dass komplette Optimierungen aufgrund kleinerer Veränderungen
- neu gestartet werden müssen, ohne dass die alten Daten verwendet werden
- können.
+ aussichtsreich.
+ Insbesondere die Nutzung des Co-Kriging-Modells außerhalb von reinen Multifidel
+ity-Optimierungen ist ein neues Feld und ermöglicht vielversprechende Ansätze,
+ wie z.B.
+ die Wiederverwendung von älteren Optimierungen.
+ Eine typische Problemstellung in der Entwicklung von Turbomaschinen sind
+ bspw.
+ geänderte Randbedingungen oder eine geänderte Parametrisierung während
+ der laufenden Entwicklung.
+ Dies kann unter anderem dazu führen, dass komplette Optimierungen aufgrund
+ kleinerer Veränderungen neu gestartet werden müssen, ohne dass die alten
+ Daten verwendet werden können.
  Mithilfe des Co-Krigings können die Daten von älteren Optimierungen als
  niedrige Güte in einer neuen Optimierung weiterverwendet werden.
- Je nach Ähnlichkeit der Optimierungen, kann der Zugewinn dabei sehr hoch
+ Je nach Ähnlichkeit der Optimierungen kann der Zugewinn dabei sehr hoch
  sein ohne dabei ein großes Risiko einzugehen, da die Daten bereits vorhanden
  sind.
  Eine solche Option existiert zum momentanen Zeitpunkt bereits innerhalb
  von AutoOpti, befindet sich allerdings noch in der Testphase.
- Die bisherigen Ergebnisse sind aber sehr aussichtsreich und werden demnächst
- veröffentlicht.
+ Die bisherigen Ergebnisse sind aussichtsreich und werden demnächst veröffentlic
+ht.
  
 \end_layout
 
 \begin_layout Standard
-Eine weitere interessante Nutzung des Co-Kriging Modells ist, die Kopplung
- von komplexen nicht statistischen Ersatzmodellen zur Verbesserung der Vorhersag
-egenauigkeit.
- Hier sind insbesondere Deep-Learning Verfahren gemeint.
- Dabei handelt es sich um Neuronale Netzwerke mit einem komplexen Aufbau
- und einer sehr hohen Anzahl an Zwischenschichten.
- Mithilfe dieser Neuronalen Netzwerke sollen komplette 3D-Strömungslösungen
+Eine weitere Nutzung des Co-Kriging Modells ist die Kopplung von komplexen,
+ nicht statistischen Ersatzmodellen zur Verbesserung der Vorhersagegenauigkeit.
+ Hier sind insbesondere Deep-Learning-Verfahren gemeint.
+ Dabei handelt es sich um neuronale Netzwerke mit einem komplexen Aufbau
+ und einer hohen Anzahl an Zwischenschichten.
+ Mithilfe dieser neuronalen Netzwerke sollen komplette 3D-Strömungslösungen
  gelernt, verallgemeinert und damit Vorhersagen getroffen werden.
  Ein großer Vorteil liegt dabei in der Unabhängigkeit der Vorhersagen von
  den Parametern.
- Dies ist möglich, da die Neuronalen-Netzwerke als Input die gesamte 3D-Geometri
-e verwenden.
+ Dies ist möglich, da die Neuronalen-Netzwerke die gesamte 3D-Geometrie
+ als Input verwenden.
  Erste Arbeiten solcher Vorhersagen sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -560,12 +559,16 @@ key "aulich2019"
 
 \end_inset
 
- zu finden.
- Innerhalb einer Optimierung ist die Anwendung solcher Neuronalen Netzwerke
- bisher nur schwer möglich, da eine Optimierung auf einem solchen Neuronalen
- Netzwerk zum jetzigen Zeitpunkt noch zu aufwendig ist.
- Zudem bieten solche Neuronalen Netzwerke bisher noch keine Unsicherheitsvorhers
-age an, sodass ein 
+ zu finden, wobei eine wesentliche Schwierigkeit bei der Verwendung von
+ vollständigen 3D-Geometrien deren Vielfältigkeit darstellt: Bei der Entwicklung
+ von Turbomaschinen werden zahlreiche unterschiedliche Geometrien mit unterschie
+dlichen physikalischen Größen simuliert, bspw.
+ Verdichterbeschaufelungen, komplexe Turbinenschaufeln mit Kühlkanälen oder
+ Brennkammern etc..
+ Alle diese verschiedenen Komponenten mithilfe von Deep-Learning Verfahren
+ vorherzusagen, stellt einen enormen Entwicklungsaufwand dar.
+ Zudem bieten solche neuronalen Netzwerke bisher noch keine nutzbare Unsicherhei
+tsvorhersage an, sodass ein 
 \begin_inset Quotes gld
 \end_inset
 
@@ -581,9 +584,9 @@ reference "subsec:EVG"
 \end_inset
 
 ) nicht anwendbar ist.
- Eine mögliche Lösung hierfür bietet die Nutzung eines Co-Krigings.
- Die Vorhersagen des Neuronalen Netzwerks könnten so als niedrige Gütestufe
- verwendet und die Kriging-Vorhersagen so verbessert werden.
+  Eine mögliche Lösung hierfür bietet die Nutzung eines Co-Krigings.
+ Die Vorhersagen des neuronalen Netzwerks könnten so als niedrige Gütestufe
+ verwendet und die Kriging-Vorhersagen damit verbessern.
  Man verspricht sich durch die 
 \begin_inset Quotes gld
 \end_inset
@@ -595,14 +598,13 @@ günstigen
  Vorhersagen des Neuronalen Netzwerks den Suchraum bereits effektiv abtasten
  zu können und optimalen Regionen so früh zu lokalisieren.
  Hiermit kann die Anzahl an freien Parametern deutlich erhöht werden.
- Dieses Verfahren befindet sich allerdings noch in einem sehr frühen Entwicklung
-sstadium.
- Es finden zwar bereits erste Machbarkeitsstudien statt, allerdings ist
- zu diesem Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
+ Dieses Verfahren befindet sich noch in einem sehr frühen Entwicklungsstadium.
+ Es finden zwar erste Machbarkeitsstudien statt, allerdings ist zu diesem
+ Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
 \end_layout
 
 \begin_layout Standard
-Die in Kapitel 
+Zukünftig wird die in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Verteiltes-Rechnen-1"
@@ -612,9 +614,8 @@ reference "chap:Verteiltes-Rechnen-1"
  beschriebene Netzwerkbibliothek weiterentwickelt.
  Hier liegt das Ziel darin, die Bibliothek so zu erweitern, dass freie Rechnerka
 pazitäten für größeren Anwendungen automatisch genutzt werden können.
- Zuerst innerhalb eines internen Netzwerkes und auf lange Sicht möglicherweise
- auch auf das Internet ausgedehnt, in Anlehnung an das SETI@home Programm
- (siehe 
+ Zuerst innerhalb eines internen Netzwerkes und langfristig auch auf das
+ Internet ausgedehnt, in Anlehnung an das SETI@home Programm (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "korpela2001seti"
@@ -629,7 +630,7 @@ key "korpela2001seti"
 Neben den bisher benannten Weiterentwicklungen sollen auch Multifidelity-Anwendu
 ngen in Verbindung mit Vorauslegungsverfahren getestet werden.
  Insbesondere sind hier 2D-Strömungslöser interessant, welche innerhalb
- von Sekunden globale Performance Daten liefern können.
+ von Sekunden globale Performance-Daten liefern können.
  Hierbei muss allerdings untersucht werden, inwiefern die Funktionale durch
  die niedrige Güte abgebildet werden können und ob das Co-Kriging die Differenzf
 unktion abbilden kann.

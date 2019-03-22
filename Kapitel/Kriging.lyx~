@@ -309,7 +309,7 @@ Angenommen es existiert ein Programm (bspw.
 \end_layout
 
 \begin_layout Standard
-Da alle Kriging-Modelle statistische Interpolationsverfahren darstellen,
+Da alle Krigingmodelle statistische Interpolationsverfahren darstellen,
  werden die Stützstellen der einzelnen Gütestufen 
 \begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
@@ -1549,6 +1549,34 @@ key "Krueger2013,han2009improving"
 \end_inset
 
  verwiesen.
+ 
+\end_layout
+
+\begin_layout Section
+Anwendung der Verfahren
+\end_layout
+
+\begin_layout Standard
+Kurze Beschreibung, erst Training mit den vorhandenen Daten damit bestimmt
+ man die Hyperparameter und das Modell ist eingestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+Damit können dann Vorhersagen für beliebige Orte getroffen werden+ Unsicherheits
+vorhersage und Kovarianz zwischen zwei Vorhersabge, 
+\end_layout
+
+\begin_layout Standard
+Für das Co-Kriging können alle diese Vorhersagen auch für die unterscheidlichen
+ Gütestufen getroffen werden.
+\end_layout
+
+\begin_layout Standard
+Herausfordernd dabei ist das Training durch die notwendige Invertierung
+ der Maitrx cov.
+ Weiterhin kann es dabei zu numerischen instabilitäten kommen, die es zu
+ verhindern gilt.
  
 \end_layout
 

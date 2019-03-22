@@ -792,76 +792,8 @@ description "Anzahl der verwendeten Ersatzmodelle innerhalb einer Optimierung"
 \begin_layout Standard
 
 \series bold
-\size largest
-Noch einbaue n: (10dimensions Samples minimum) (3dimensions Samples minimum
- in vielen Fällen)
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
 \size huge
 TODO:
-\end_layout
-
-\begin_layout Itemize
-Eigene Entwicklungen besser kennzeichnen, besonders zum DLR abgrenzen, ganzen
- Text nochmal durchgehen
-\end_layout
-
-\begin_layout Itemize
-Bezug zu den Turbomaschinenoptimierungen und die speziellen Optimierungen
- des Codes dafür nochmal mehr herausheben !!!!!
-\end_layout
-
-\begin_layout Itemize
-Korrekturen/Wünsche von Prof Gottschalk
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Anfang kann gekürzt werden, alles was es bereits gibt.
- EVG erklärung z.B.
- Mehr auf meine Sachen konzentrieren
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Anhang aufräumen, Aufteilen in Subkaptiel.
- Herleiotun
-\begin_inset Box Frameless
-position "t"
-hor_pos "c"
-has_inner_box 1
-inner_pos "t"
-use_parbox 0
-use_makebox 0
-width "100col%"
-special "none"
-height "1in"
-height_special "totalheight"
-thickness "0.4pt"
-separation "3pt"
-shadowsize "4pt"
-framecolor "black"
-backgroundcolor "none"
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-geun, Definitionen von Begriffen usw.
 \end_layout
 
 \begin_layout Itemize
@@ -877,15 +809,47 @@ Bilder / Layout
 \end_layout
 
 \begin_layout Itemize
-Kapitel 4,5,6, Fazit selbst nochmal lesen und prüfen
-\end_layout
-
-\begin_layout Itemize
-In Optimierung / Erweiterung nch auf die Einleitung Stand der Technik beziehen
-\end_layout
-
-\begin_layout Itemize
 Deckblatt RUB !!
+\end_layout
+
+\begin_layout Itemize
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:KhonFehlerVorhersage"
+
+\end_inset
+
+ ersetzen durch ein besseres und typischeres Beispiel
+\end_layout
+
+\begin_layout Itemize
+Abstract auf Englisch
+\end_layout
+
+\begin_layout Itemize
+Alle Abbildungen nochmal prüfen
+\end_layout
+
+\begin_layout Itemize
+Seiten sparen
+\end_layout
+
+\begin_layout Itemize
+Abbildungen Einheiten
+\end_layout
+
+\begin_layout Itemize
+Kapitel 3 Laufzeiten ein Beispiel einfügen.
+ 
+\end_layout
+
+\begin_layout Itemize
+Member -> Individuen
+\end_layout
+
+\begin_layout Itemize
+Flowparameter? Am Anfang rechtfertigen?
 \end_layout
 
 \begin_layout Chapter*

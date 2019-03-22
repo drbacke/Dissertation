@@ -1553,6 +1553,47 @@ key "Krueger2013,han2009improving"
 \end_layout
 
 \begin_layout Section
+Anwendung der Verfahren
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Kurze Beschreibung, erst Training mit den vorhandenen Daten damit bestimmt
+ man die Hyperparameter und das Modell ist eingestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Damit können dann Vorhersagen für beliebige Orte getroffen werden+ Unsicherheits
+vorhersage und Kovarianz zwischen zwei Vorhersabge, 
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Für das Co-Kriging können alle diese Vorhersagen auch für die unterscheidlichen
+ Gütestufen getroffen werden.
+\end_layout
+
+\begin_layout Standard
+
+\color magenta
+Herausfordernd dabei ist das Training durch die notwendige Invertierung
+ der Maitrx cov.
+ Weiterhin kann es dabei zu numerischen instabilitäten kommen, die es zu
+ verhindern gilt.
+ 
+\end_layout
+
+\begin_layout Standard
+Verweise zu den jeweiligen Kapiteln mit den Lösungen.
+ 
+\end_layout
+
+\begin_layout Section
 Ähnlichkeit zwischen Bedingter Normalverteilung und Kriging
 \end_layout
 

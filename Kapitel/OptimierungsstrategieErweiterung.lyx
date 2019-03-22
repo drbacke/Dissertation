@@ -319,172 +319,12 @@ Beispiel für verschiedene Gütestufen innerhalb eines Simulationsverfahrens
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 15
-placement O
-overhang 0in
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Profiles.eps
-	scale 55
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Beispielhafte-Geometrischen-Vari"
-
-\end_inset
-
-Beispielhafte Geometrische Variationen des DCA-ähnlichen Profils
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Um einen Eindruck von den unterschiedlichen Gütestufen innerhalb aerodynamischer
- Simulationsverfahren zu bekommen dient folgend die Berechnung eines DCA-ähnlich
-en Verdichterprofils (Double Circular Arc, siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Lieblein1955"
-
-\end_inset
-
-) mit MISES (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Drela2008"
-
-\end_inset
-
-) als einfaches aber aussagekräftiges Beispiel.
- Zuerst werden geometrische Variationen vom Verdichterprofil erzeugt und
- anschließend mit verschiedenen Gütestufen aerodynamisch simuliert.
- Dafür werden zwei Parameter variiert, zum einen der Staffelungswinkel 
-\begin_inset Formula $\beta_{st}$
-\end_inset
-
-, der in diesem Fall als eine Festkörperdrehung des Profils verstanden werden
- kann und zum anderen der Vorderkantenradius 
-\begin_inset Formula $r_{LE}$
-\end_inset
-
-.
- In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Beispielhafte-Geometrischen-Vari"
-
-\end_inset
-
- werden zwei dieser möglichen Variationen dargestellt.
- Innerhalb dieses Beispiels werden zwei verschiedene Netzauflösungen miteinander
- verglichen.
- Ein grobes Netz mit ca.
- 920 Zellen und ein feines Netz 16680 Zellen.
- Die Berechnung mit dem groben Netz ist ca.
- 10x schneller als die Berechnung mit dem feinen Netz.
- Die beiden Rechennetze werden in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:MisesTestcase_Netze"
-
-\end_inset
-
- für eine mögliche Geometrie dargestellt.
- 
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/LF_Mesh.eps
-	lyxscale 50
-	scale 30
-	BoundingBox 0bp 0bp 500bp 550bp
-	clip
-	rotateAngle 270
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../images/HF_Mesh.pdf
-	lyxscale 50
-	scale 30
-	BoundingBox 0bp 0bp 500bp 550bp
-	clip
-	rotateAngle 270
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:MisesTestcase_Netze"
-
-\end_inset
-
-Darstellung der untersuchten Rechengitterauflösungen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Die betrachtete Strömungsgröße ist der massenstromgemittelte Totaldruckverlustbe
-iwert 
-\begin_inset Formula $\omega$
-\end_inset
-
- (siehe Anhang 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:AnhangAerodynamische-Größen"
-
-\end_inset
-
-).
- In Tabelle 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:MisesTestRandbedingungen"
-
-\end_inset
-
- werden die wichtigsten Randbedingungen für den Testfall aufgelistet.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap table
 lines 0
 placement o
 overhang 0col%
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -692,7 +532,168 @@ Randbedingungen für den Testfall
 
 \end_inset
 
- Abbildung 
+Um einen Eindruck von den unterschiedlichen Gütestufen innerhalb aerodynamischer
+ Simulationsverfahren zu bekommen dient folgend die Berechnung eines DCA-ähnlich
+en Verdichterprofils (Double Circular Arc, siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lieblein1955"
+
+\end_inset
+
+) mit MISES (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Drela2008"
+
+\end_inset
+
+) als einfaches aber aussagekräftiges Beispiel.
+ Zuerst werden geometrische Variationen vom Verdichterprofil erzeugt und
+ anschließend mit verschiedenen Gütestufen aerodynamisch simuliert.
+ 
+\begin_inset Wrap figure
+lines 15
+placement O
+overhang 0in
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/MultifidelityKapitel/Profiles.eps
+	scale 55
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Beispielhafte-Geometrischen-Vari"
+
+\end_inset
+
+Beispielhafte Geometrische Variationen des DCA-ähnlichen Profils
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Dafür werden zwei Parameter variiert, zum einen der Staffelungswinkel 
+\begin_inset Formula $\beta_{st}$
+\end_inset
+
+, der in diesem Fall als eine Festkörperdrehung des Profils verstanden werden
+ kann und zum anderen der Vorderkantenradius 
+\begin_inset Formula $r_{LE}$
+\end_inset
+
+.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Beispielhafte-Geometrischen-Vari"
+
+\end_inset
+
+ werden zwei dieser möglichen Variationen dargestellt.
+ Innerhalb dieses Beispiels werden zwei verschiedene Netzauflösungen miteinander
+ verglichen.
+ Ein grobes Netz mit ca.
+ 920 Zellen und ein feines Netz 16680 Zellen.
+ Die Berechnung mit dem groben Netz ist ca.
+ 10x schneller als die Berechnung mit dem feinen Netz.
+ Die beiden Rechennetze werden in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:MisesTestcase_Netze"
+
+\end_inset
+
+ für eine mögliche Geometrie dargestellt.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/LF_Mesh.eps
+	lyxscale 50
+	scale 30
+	BoundingBox 0bp 0bp 500bp 550bp
+	clip
+	rotateAngle 270
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/HF_Mesh.pdf
+	lyxscale 50
+	scale 30
+	BoundingBox 0bp 0bp 500bp 550bp
+	clip
+	rotateAngle 270
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:MisesTestcase_Netze"
+
+\end_inset
+
+Darstellung der untersuchten Rechengitterauflösungen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Die betrachtete Strömungsgröße ist der massenstromgemittelte Totaldruckverlustbe
+iwert 
+\begin_inset Formula $\omega$
+\end_inset
+
+ (siehe Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:AnhangAerodynamische-Größen"
+
+\end_inset
+
+).
+ In Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:MisesTestRandbedingungen"
+
+\end_inset
+
+ werden die wichtigsten Randbedingungen für den Testfall aufgelistet.
+\end_layout
+
+\begin_layout Standard
+Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:VerlustpolarenMisesMufi"
@@ -714,10 +715,8 @@ reference "fig:VerlustpolarenMisesMufi"
  Ähnlichkeiten der Gütestufen zeigt, welche sich innerhalb eines Multifidelity-V
 erfahrens effizient nutzen lassen.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1665,9 +1664,6 @@ szeit.
 \end_inset
 
 :
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{alignat}{1}
 f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\}\label{eq:Entscheidungsfunktion}
@@ -2199,7 +2195,7 @@ Weiterhin sind die verschiedenen Nebenbedingungen unterschiedlich schwer
 \end_layout
 
 \begin_layout Enumerate
-Gewichtung der einzelnen Nebenbedinungen über die Einzelwahrscheinlichkeiten
+Gewichtung der einzelnen Nebenbedingungen über die Einzelwahrscheinlichkeiten
  
 \begin_inset Formula $w_{i}=\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} $
 \end_inset
@@ -2544,21 +2540,42 @@ reference "eq:Maxium"
 \end_layout
 
 \begin_layout Standard
+::::: wenn die niedrige Gütestufe gleich der hohen Gütestufe ist.
+ In diesem Fall müsste dieselbe Anzahl an Individuen ausreichen 
+\begin_inset Formula $i_{best}=i_{bestL}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+1\right)}\label{eq:Maxium}
+max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+\frac{t_{l}}{t_{h}}i_{best}+1\right)}\label{eq:Maxium}
 \end{equation}
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+Der Grenzwert dieser Funktion ist das Verhältnis von 
+\begin_inset Formula $\underset{i_{best}\rightarrow\infty}{\lim}max(t_{fact})=\frac{t_{h}}{t_{l}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Dieser Wert kann aber aus folgenden Gründen praktisch nicht erreicht werden:
 \end_layout
 
 \begin_layout Itemize
 Die Stützstellen aus der Intitialisierungsphase liegen oft nicht in der
  Nähe des Optimums.
- Daher müssen meistens noch einige Stützstellen ereugt werden, bis die Umgebung
- des Optimums entsprechend aufgelöst wird.
+ Daher müssen meistens noch einige Stützstellen erzeugt werden, bis die
+ Umgebung des Optimums entsprechend aufgelöst wird.
 \end_layout
 
 \begin_layout Itemize

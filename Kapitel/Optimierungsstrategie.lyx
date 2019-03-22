@@ -541,42 +541,12 @@ PF\coloneqq\left\{ \left.\hat{M}\in M_{all}\right|P\left(\hat{M}\right)=1\right\
 \end_layout
 
 \begin_layout Standard
-Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Paretorang-und-Paretofront"
-
-\end_inset
-
- zeigt exemplarisch die verschiedenen Paretoränge einer fiktiven Optimierung
- mit den beiden Zielfunktionen 
-\begin_inset Formula $fitness_{1}$
-\end_inset
-
- und 
-\begin_inset Formula $fitness_{2}$
-\end_inset
-
-.
- Die Punkte markieren die bereits berechneten Member.
- An den zwei hervorgehobenen Membern werden die Paretoränge mithilfe von
- Bereichslinien erklärt.
- Der eingezeichnete Paretorang 1 Member wird von keinem anderen dominiert.
- Im Gegensatz dazu wird der gezeigte Paretorang 3 Member von 2 anderen dominiert
-, da diese in beiden Zielfunktionen besser sind.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement O
 overhang 0in
 width "50col%"
 status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -610,13 +580,31 @@ key "Reimer2016"
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Paretorang-und-Paretofront"
 
 \end_inset
 
+ zeigt exemplarisch die verschiedenen Paretoränge einer fiktiven Optimierung
+ mit den beiden Zielfunktionen 
+\begin_inset Formula $fitness_{1}$
+\end_inset
 
+ und 
+\begin_inset Formula $fitness_{2}$
+\end_inset
+
+.
+ Die Punkte markieren die bereits berechneten Member.
+ An den zwei hervorgehobenen Membern werden die Paretoränge mithilfe von
+ Bereichslinien erklärt.
+ Der eingezeichnete Paretorang 1 Member wird von keinem anderen dominiert.
+ Im Gegensatz dazu wird der gezeigte Paretorang 3 Member von 2 anderen dominiert
+, da diese in beiden Zielfunktionen besser sind.
 \end_layout
 
 \begin_layout Standard
@@ -945,46 +933,8 @@ reference "fig:OptiStandardProcess"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/Opti.eps
-	width 40page%
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:OptiStandardProcess"
-
-\end_inset
-
-Prozesskette des genetischen Algorithmus in AutoOpti
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
- Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwa
-ltung sowie die Erzeugung neuer Member unabhängig voneinander agieren.
+Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwal
+tung sowie die Erzeugung neuer Member unabhängig voneinander agieren.
  Um solch ein asynchrones Verfahren umzusetzen, bedient sich AutoOpti eines
  Master-/Slave-Ansatzes.
  Hierfür sind grundlegend zwei verschiedene Arten von Prozessen vorgesehen:
@@ -1025,6 +975,40 @@ reference "fig:OptiStandardProcess"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/Opti.eps
+	width 40page%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:OptiStandardProcess"
+
+\end_inset
+
+Prozesskette des genetischen Algorithmus in AutoOpti
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Der hier beschriebe initiale Schritt ist in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1232,8 +1216,8 @@ reference "eq:Dominanz"
 ) muss daher erweitert werden zu:
 \begin_inset Formula 
 \begin{align}
-M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\\
- & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\label{eq:Domianzn}
+M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\label{eq:Domianzn}\\
+ & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
 \end{align}
 
 \end_inset
