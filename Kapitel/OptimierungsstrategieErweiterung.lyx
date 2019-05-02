@@ -90,7 +90,8 @@ reference "chap:Optimierungsstrategie"
 
 \end_inset
 
- beschriebenen Strategie basierend auf der Nutzung von verschiedenen Gütestufen.
+ beschriebenen Strategie basierend auf der Nutzung von Prozessketten verschieden
+er Gütestufen.
  Diese Art der Optimierungsstrategie wird Multifidelity-Optimierung genannt.
  
 \end_layout
@@ -98,8 +99,8 @@ reference "chap:Optimierungsstrategie"
 \begin_layout Standard
 Im ersten Teil dieses Kapitels werden allgemeine Grundlagen sowie die Vorteile
  und Grenzen einer solchen Strategie ausgearbeitet.
- Darauf aufbauend wird im zweiten Teil dieses Kapitels die im Rahmen dieser
- entwickelte Umsetzung und Neuentwicklungen dieses Verfahrens beschrieben.
+ Darauf aufbauend wird im zweiten Teil dieses Kapitels die entwickelte Umsetzung
+ und Neuentwicklungen dieses Verfahrens beschrieben.
  Die Entwicklung der hier beschriebenen Entscheidungsfunktion stellt neben
  den in Kapitel 
 \begin_inset CommandInset ref
@@ -117,8 +118,8 @@ Gütestufen in der Turbomaschinenauslegung
 
 \begin_layout Standard
 Um die Idee hinter einem Multifidelity-Verfahren zu verstehen ist es sinnvoll,
- einen exemplarischen Ablauf einer manuellen Turbomaschinenauslegung zu
- zeigen (vgl.
+ einen exemplarischen Ablauf einer manuellen, aerodynamischen Turbomaschinenausl
+egung zu zeigen (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -139,8 +140,8 @@ Die Vorgehensweise bei einer solchen Auslegung ist es, die Dimensionalität
  und die Komplexität der Problemstellung stetig zu erhöhen.
  Zu Anfang sind viele Randbedingungen durch die geplante Anwendung der Maschine
  festgelegt.
- Bei einem Verdichter können diese Anforderungen an den Betriebsbereich
- bestimmte Massenströme und geforderte Druckverhältnisse sein.
+ Bei einem Verdichter können diese Anforderungen bestimmte Massenströme
+ und geforderte Druckverhältnisse sein.
  Damit können dann die ungefähren geometrischen Ausmaße und auch die benötigte
  Stufenanzahl geschätzt werden.
  Aufbauend auf diesen Schätzungen wird ein rotationssymmetrischer Strömungskanal
@@ -196,75 +197,31 @@ key "Drela2008"
 
 \end_inset
 
- angewendet oder man greift auf bereits bestehende Profildatenbanken zurück.
- 
-\end_layout
+ angewendet oder man greift auf bereits bestehende Profildatenbanken zurück
+ (siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "käters20001999,köller1999entwicklung"
 
-\begin_layout Standard
-Ist dieser Schritt abgeschlossen, kann die entstandene Geometrie durch ein
- 3D-Navier-Stokes-Simulationsverfahren aerodynamisch bewertet werden.
+\end_inset
+
+).
+ Ist dieser Schritt abgeschlossen, kann eine 3D-Blattgeometrie mittels der
+ voroptimierten Profilschnitte aufgebaut und durch ein 3D-Navier-Stokes-Simulati
+onsverfahren aerodynamisch bewertet werden.
  Damit können erstmals komplexere, dreidimensionale Strömungsphänomene aufgelöst
- werden, wobei für 3D-Simulationsverfahren unterschiedliche Modelle und
- damit auch Genauigkeiten existieren.
- So können diese Verfahren eine Strömung zeitlich aufgelöst oder zeitlich
- gemittelt wiedergeben.
- 
-\end_layout
-
-\begin_layout Standard
-Für alle diese Verfahren gilt, dass eine höhere Genauigkeit meist durch
- einen starken Anstieg der benötigten Rechenleistung bezahlt werden muss.
- Innerhalb einer Optimierung muss aus diesem Grund immer ein Kompromiss
- zwischen Genauigkeit und Geschwindigkeit eingegangen werden.
+ werden.
  
 \end_layout
 
 \begin_layout Standard
 Aufgrund dieses stufenweisen Aufbaus einer solchen Auslegung, existieren
- meist eine Low-Fidelity- und eine High-Fidelity-Prozesskette.
- Die Low-Fidelity-Prozesskette ist zwar sehr schnell berechnet, jedoch ist
- diese normalerweise auch mit einer größeren Ungenauigkeit behaftet.
- Die High-Fidelity Prozesskette hingegen ist deutlich aufwendiger, dafür
- aber genauer.
- Ein mögliches Beispiel wäre die 3D-Optimierung eines Triebwerksverdichters
- mit dem Ziel, bei gleichbleibendem Druckverhältnis den Wirkungsgrad zu
- erhöhen.
- Eine solche Optimierung erfordert im Normalfall eine Voruntersuchung des
- Rechennetzes.
- Auf der einen Seite soll das Rechennetz so grob wie möglich sein, um möglichst
- viel Zeit einzusparen.
- Auf der anderen Seite muss es aber noch fein genug sein, um die zu untersuchend
-en Phänomene mit ausreichender Genauigkeit abbilden zu können.
- 
-\end_layout
-
-\begin_layout Standard
-Wünschenswert wäre es allerdings, Rechennetze mit verschiedener Güte in
- einer Optimierung zu verwenden und zwar so, dass das Optimierungsverfahren
- durch die maximale Nutzung aller Informationen möglichst viel Zeit einspart.
- Beispielsweise könnte ein grobes (Low-Fidelity) und ein feines Netz (High-Fidel
-ity) zur Verfügung gestellt werden.
- Die Erfahrung zeigt, dass bei Optimierungen mit groben Rechennetzen der
- Verlauf der Zielfunktion bereits gut wiedergegeben wird (vgl.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "forrester2007multi"
-
-\end_inset
-
-).
- Die Güte der mit groben Netzen erzeugten Verdichterkennfelder sinkt aber
- insbesondere nahe der Stabilitätsgrenze.
- Wird ein solches Ergebnis mit einem feinen Netz nachgerechnet, so ergeben
- sich oftmals systematische Abweichungen der Verdichterkenngrößen, wie z.B.
- Sperrmassenstrom, Wirkungsgrad, Druckverhältnis etc.
- Derartige Differenzen erfordern oft aufwendige händische Auslegungsiterationen.
- 
-\end_layout
-
-\begin_layout Standard
-In der folgenden Aufzählung sollen einige Beispiele für verschiedene Gütestufen
+ meist eine Prozesskette niedriger und eine Prozesskette hoher Güte.
+ Die Prozesskette niedriger Güte ist zwar sehr schnell berechnet, jedoch
+ ist diese normalerweise auch mit einer größeren Ungenauigkeit behaftet.
+ Die Prozesskette hoher Güte hingegen ist deutlich aufwendiger, dafür aber
+ genauer.
+ In der folgenden Aufzählung sollen einige Beispiele für verschiedene Gütestufen
  im Bereich der Turbomaschinenauslegung widergegeben werden:
 \end_layout
 
@@ -310,7 +267,7 @@ Zeitlich gemittelt oder zeitlich aufgelöste Simulationen
 \end_layout
 
 \begin_layout Itemize
-Dimensionalität: 1D-, 2D-Strömungslöser oder 3D-Strömungslöser
+Dimensionalität: 1D-, 2D- oder 3D-Strömungslöser
 \end_layout
 
 \end_deeper
@@ -723,7 +680,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Differenzfunkion_HF_LF_Mises.pdf
+	filename /home/schm_ad/Diss/images/MultifidelityKapitel/Differenzfunkion_HF_LF_Mises.eps
 	scale 80
 
 \end_inset
@@ -738,7 +695,8 @@ name "fig:VerlustpolarenMisesMufi"
 
 \end_inset
 
-Verlustpolaren für zwei verschiedene Vorderkantenradien
+Verlustpolaren für zwei verschiedene Vorderkantenradien.
+ 
 \end_layout
 
 \end_inset
@@ -860,33 +818,12 @@ Die vorangestellten Beispiele lassen allerdings keine allgemeine Aussage
  die Daten nur sehr schwach korreliert sind und der Einsatz eines Mutlifidelity-
 Verfahrens dann nicht mehr lohnenswert ist.
  
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-Zusammenfassend ist die Verwendung unterschiedlicher Gütestufen innerhalb
- eines Simulationsverfahrens in den meisten Fällen der einfachere Weg, da
- in diesem Fall meist eine gemeinsame Parametrisierung besteht und auch
- die Erzeugung verschiedener Gütestufen in der Regel mit weniger Aufwand
- verbunden ist.
- 
-\end_layout
-
-\begin_layout Standard
-Im Gegensatz dazu bietet die Nutzung unterschiedlicher Simulationsverfahren
- meist schnellere Prozesse niedriger Güte und ist damit zeitlich attraktiver.
- Dafür sind die funktionalen Zusammenhänge geringer oder komplexer und können
- daher schlechter genutzt werden.
- 
-\end_layout
-
-\begin_layout Standard
-Letztlich muss für jeden einzelnen Fall eine Abwägung gemacht werden, inwiefern
- die verwendeten Gütestufen für einen Einsatz innerhalb einer Multifidelity-Opti
-mierung geeignet sind oder auch nicht.
+Letztlich muss für jeden Einzelfall untersucht werden, inwiefern die verwendeten
+ Gütestufen für einen Einsatz innerhalb einer Multifidelity-Optimierung
+ geeignet sind oder auch nicht.
  In Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -915,15 +852,15 @@ name "sec:Multifidelity-OptimierungsstrateAutoOpti"
 \begin_layout Standard
 Innerhalb dieses Abschnitts soll die in dieser Arbeit entwickelte Multifidelity-
 Optimierungsstrategie beschrieben werden.
- Das Verfahren wurde in der Optimierungssoftware AutoOpti eingebunden.
- Die Basis für diese neue Strategie ist das in Kapitel 
+ Das Verfahren wurde in die Optimierungssoftware AutoOpti eingebunden, welches
+ in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Automatisierte-Optimierung-imDLR"
 
 \end_inset
 
- beschriebene Verfahren.
+ beschrieben wird.
  Die notwendigen Änderungen an dem grundlegenden Optimierungs-Prozess und
  der Datenhaltung werden im folgenden Unterkapitel 
 \begin_inset CommandInset ref
@@ -943,7 +880,8 @@ reference "subsec:Entscheidungsfunktion"
  ein besonderes Augenmerk auf die im Rahmen dieser Arbeit entwickelte Entscheidu
 ngsfunktion gelegt.
  Diese Funktion soll während einer laufenden Optimierung automatisiert entscheid
-en können, mit welcher Gütestufe der nächste Member berechnet werden soll.
+en können, mit welcher Gütestufe das nächste Individuum berechnet werden
+ soll.
  Da die Entscheidungsfunktion einen sehr großen Einfluss auf die Effizienz
  einer Multifidelity-Optimierung hat, wird innerhalb dieses Kapitels ein
  effizientes automatisiertes Verfahren vorgestellt.
@@ -968,23 +906,15 @@ reference "subsec:Grundlegender-Optimierungsprozes"
 
 \end_inset
 
- vorgestellten Optimierungsprozesses dar.
- Grundlegend wurde bei der Entwicklung ein besonderer Wert darauf gelegt,
- die bisherigen Prozesse möglichst wenig zu ändern.
- Einfachheitshalber sind in der Abbildung nur zwei Gütestufen dargestellt.
- Die Strategie bietet aber die Option, mehrere Gütestufen zu verwenden.
- 
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
+ vorgestellten Optimierungsprozesses dar und ist schematisch für den Spezialfall
+ von zwei Gütestufen in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:MufiProzess"
 
 \end_inset
 
- wird der umgesetzte Multifidelity-Optimierungsprozess dargestellt.
+ dargestellt.
  Die Veränderungen zu dem in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -992,7 +922,7 @@ reference "subsec:Grundlegender-Optimierungsprozes"
 
 \end_inset
 
- beschriebenen Prozess sind in rot markiert.
+ beschriebenen Prozess sind in rot markiert und werden im Folgenden beschrieben.
  
 \end_layout
 
@@ -1088,14 +1018,12 @@ Darstellung des Multifidelity-Optimierungsprozesses
 \end_layout
 
 \begin_layout Paragraph*
-Änderungen am Training der Ersatzmodelle
+Änderungen am Training der Ersatzmodelle:
 \end_layout
 
 \begin_layout Standard
 Die in AutoOpti eingesetzten Ersatzmodelle müssen vor der Verwendung trainiert
  werden.
- Dies dient zur Bestimmung von ersatzmodellspezifischen Parametern, welche
- mithilfe der vorhandenen Daten eingestellt werden.
  Bei der hier vorgestellten Multifidelity-Strategie liegt die hauptsächliche
  Neuerung in der Verwendung eines anderen Ersatzmodells, welches die verschieden
 en Gütestufen verwerten kann.
@@ -1119,47 +1047,15 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Paragraph*
-Änderungen an der Datenbank
+Bewertung der Individuen:
 \end_layout
 
 \begin_layout Standard
-Die bewerteten Member der verschiedenen Gütestufen werden in getrennten
- Datenbanken gespeichert.
- Eine Bewertung der niedrigeren Stufen wird nicht vorgenommen, es wird also
- kein Paretorang oder ähnliche Kriterien berechnet.
- Die Daten der niedrigeren Stufen werden nur zur Verbesserung der Vorhersagegena
-uigkeit der Ersatzmodelle herangezogen.
-\end_layout
-
-\begin_layout Paragraph*
-Änderungen an der Prozesskette
-\end_layout
-
-\begin_layout Standard
-Die Prozesskette wird in AutoOpti als Liste von nacheinander auszuführenden
- Prozessen hinterlegt und bei Bedarf mit einem Parametersatz gestartet.
- Die resultierenden Ergebnisse werden dann an den Master-Prozess kommuniziert.
- Alle dafür notwendigen Programme und Dateien werden typischerweise vom
- Benutzer in einem Template-Ordner hinterlegt.
- Soll die Prozesskette gestartet werden, so kopiert der Slave-Prozess diesen
- Template-Ordner, trägt den vorgegebenen Satz freier Parameter ein und startet
- dann die jeweiligen Prozesse nacheinander.
- Im Falle einer Multifidelity-Optimierung, muss für jede Gütestufe eine
- eigene Prozesskette und ein eigener Template Ordner angelegt werden.
- An der eigentlichen Prozesskettensteuerung muss also nichts verändert werden.
- 
-\end_layout
-
-\begin_layout Paragraph*
-Bewertung der Member
-\end_layout
-
-\begin_layout Standard
-Für eine Multi-Fidelity-Optimierung stellt sich die Frage, wie man die Gütebesti
-mmung der Member durchführt.
- Beispielsweise die Bestimmung des Paretorangs oder des Volumenzugewinns.
- Grundsätzlich erscheint es sinnvoll, dafür nur die High-Fidelity-Member
- zu verwenden, da der Vergleich zwischen verschiedenen Fidelities sehr schwer
+Für eine Multifidelity-Optimierung stellt sich die Frage, wie man die Gütebestim
+mung der Individuen durchführt, bspw.
+ die Bestimmung des Paretorangs oder des Volumenzugewinns.
+ Grundsätzlich erscheint es sinnvoll, dafür nur die Individuen hoher Güte
+ zu verwenden, da der Vergleich zwischen verschiedenen Gütestufen sehr schwer
  fällt.
  Außerdem interessiert den Anwender in der Regel nur das hochwertigste Ergebnis.
 \end_layout
@@ -1167,16 +1063,41 @@ mmung der Member durchführt.
 \begin_layout Standard
 Aus diesen Gründen wird die Gütebestimmung nur an der höchsten Gütestufe
  durchgeführt.
- Das wiederum bedeutet, dass nur Member der höchsten Stufe einen direkten
+ Das wiederum bedeutet, dass nur Individuen der höchsten Stufe einen direkten
  Optimierungsfortschritt in Form eines Volumenzugewinns bringen können.
- Low-Fidelity-Member können also nur indirekten Einfluss auf den Optimierungsfor
-tschritt nehmen, indem sie das Ersatzmodell verbessern und den weiteren
+ Individuen niedriger Güte können also nur indirekten Einfluss auf den Optimieru
+ngsfortschritt nehmen, indem sie das Ersatzmodell verbessern und den weiteren
  Optimierungsverlauf so günstig beeinflussen.
  
 \end_layout
 
 \begin_layout Paragraph*
-Optimierung auf den Ersatzmodellen
+Änderungen an der Datenbank:
+\end_layout
+
+\begin_layout Standard
+Die bewerteten Individuen der verschiedenen Gütestufen werden in getrennten
+ Datenbanken gespeichert.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Änderungen an der Prozesskette:
+\end_layout
+
+\begin_layout Standard
+Die Prozesskette wird in AutoOpti als Liste von nacheinander auszuführenden
+ Prozessen hinterlegt und bei Bedarf mit einem Parametersatz gestartet.
+ Alle dafür notwendigen Programme und Dateien werden vom Benutzer in einem
+ Template-Ordner hinterlegt.
+ Im Falle einer Multifidelity-Optimierung, muss für jede Gütestufe eine
+ eigene Prozesskette und ein eigener Template Ordner angelegt werden.
+ An der eigentlichen Prozesskettensteuerung muss also nichts verändert werden.
+ 
+\end_layout
+
+\begin_layout Paragraph*
+Optimierung auf den Ersatzmodellen:
 \end_layout
 
 \begin_layout Standard
@@ -1184,30 +1105,20 @@ Wie auch bei einer Optimierung mit nur einer Gütestufe, wird nach erfolgreichem
  Training eine eigene Optimierung auf den Ersatzmodellen gestartet.
  An diesem Punkt ändert sich nichts, da die Optimierung auf dem Ersatzmodell
  nur auf der höchsten Gütestufe stattfindet.
- Diese Strategie bietet außerdem den Vorteil, dass an der Optimierung auf
- dem Ersatzmodell praktisch keine Änderungen vorgenommen werden müssen und
- dennoch die Informationen der niedrigeren Gütestufen indirekt einfließen.
+ 
 \end_layout
 
 \begin_layout Paragraph*
-Entscheidungsfunktion
+Entscheidungsfunktion:
 \end_layout
 
 \begin_layout Standard
-Bevor ein neuer Member mittels Prozesskette bewertet wird, muss entschieden
+Bevor ein neues Individuum mittels Prozesskette bewertet wird, muss entschieden
  werden, mit welcher Gütestufe dieser berechnet wird.
  Dies wird durch die Entscheidungsfunktion festgelegt und hat eine fundamentale
  Bedeutung für die Optimierungsbeschleunigung und die effektive Nutzung
  der neuen Ersatzmodelle.
- Die Entwicklung einer solchen Entscheidungsfunktion ist ein Kernthema dieser
- Arbeit und wird in Abschnitt 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Entscheidungsfunktion"
-
-\end_inset
-
- ausführlich erläutert.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1225,11 +1136,11 @@ name "subsec:Entscheidungsfunktion"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Entscheidungsfunktionen.pdf
+	filename ../images/MultifidelityKapitel/Entscheidungsfunktionen.eps
 	scale 60
 
 \end_inset
@@ -1244,7 +1155,7 @@ name "fig:Mglichkeiten-der-Membererzeugun"
 
 \end_inset
 
-Möglichkeiten der Membererzeugung mit mehreren Fidelities
+Möglichkeiten der Individuenerzeugung mit mehreren Gütestufen
 \end_layout
 
 \end_inset
@@ -1254,9 +1165,9 @@ Möglichkeiten der Membererzeugung mit mehreren Fidelities
 
 \end_inset
 
-Ein wichtiger Punkt bei der Durchführung einer Multi-Fidelity-Optimierung
+Ein wichtiger Punkt bei der Durchführung einer Multifidelity-Optimierung
  ist die Entscheidung, mit welcher Prozesskette und damit Gütestufe ein
- neu erzeugter Member berechnet werden soll.
+ neu erzeugtes Individuum berechnet werden soll.
  Dieser Punkt stellt neben der Thematik in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1265,14 +1176,14 @@ reference "chap:Implementierung-der-DLR-Kriging-"
 \end_inset
 
  ein zentrales Thema dieser Arbeit dar.
- Aus diesem Grund wird folgend eine Übersicht über die möglichen Entscheidungsfu
-nktionen gegeben und darauf aufbauend die hier entwickelte Strategie beschrieben.
+ Aus diesem Grund wird folgend eine Übersicht über mögliche Entscheidungsfunktio
+nen gegeben und darauf aufbauend die hier entwickelte Strategie beschrieben.
  
 \end_layout
 
 \begin_layout Standard
 Eine Gütestufe wird mit dem Index 
-\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{1,...,s\}$
 \end_inset
 
  gekennzeichnet, wobei eine niedrigere Gütestufe einen höheren Index besitzt.
@@ -1287,25 +1198,24 @@ Eine Gütestufe wird mit dem Index
 \end_inset
 
 .
- Es wird davon ausgegangen, dass ein Member höherer Güte einen niedrigeren
+ Es wird davon ausgegangen, dass ein Individuum höherer Güte einen niedrigeren
  Fehler hat, aber länger für die Ausführung benötigt.
  Es gilt also 
-\begin_inset Formula $F_{g+1}\geq F_{g}$
+\begin_inset Formula $F_{g}\leq F_{g+1}$
 \end_inset
 
 und 
-\begin_inset Formula $t_{g+1}<t_{g}$
+\begin_inset Formula $t_{g}\geq t_{g+1}$
 \end_inset
 
 .
- Weiterhin wird der Begriff des Informationszugewinns 
+ Da für die Bewertung einer Gütestufe viele Kriterien denkbar sind (beispielswei
+se ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), werden
+ diese durch den Begriff des Informationszugewinns 
 \begin_inset Formula $I_{g}$
 \end_inset
 
- eingeführt.
- Da für die Bewertung einer Gütestufe viele Werte denkbar sind (beispielsweise
- ein erwarteter Fehler oder ein erwarteter Optimierungsfortschritt), werden
- diese durch den Begriff des Informationszugewinns zusammengefasst.
+ zusammengefasst.
  Eine nähere Definition des Informationszugewinns folgt im Abschnitt 
 \begin_inset Quotes gld
 \end_inset
@@ -1325,14 +1235,12 @@ reference "par:Nach-der-Optimierung"
 \end_layout
 
 \begin_layout Standard
-Da für die genaue Berechnung dieser Werte verschiedene Möglichkeiten bestehen,
- wird darauf erst im späteren Verlauf dieses Abschnitts eingegangen.
- Allerdings muss auf Basis dieser Werte 
+Auf Basis dieser Werte 
 \begin_inset Formula $(I_{g},F_{g},t_{g})$
 \end_inset
 
- während einer laufenden Multifidelity-Optimierung permanent eine Entscheidung
- getroffen werden, welche Prozesskette als nächstes durchlaufen wird.
+ wird während einer laufenden Multifidelity-Optimierung permanent eine Entscheid
+ung getroffen, welche Prozesskette als nächstes durchlaufen werden soll.
  Benötigt wird also eine Entscheidungsfunktion 
 \begin_inset Formula $f$
 \end_inset
@@ -1363,40 +1271,40 @@ Benutzergesteuerte Entscheidungsfunktionen
 
 \begin_layout Standard
 Eine häufig verwendete Methode ist es, vor dem Beginn der eigentlichen Optimieru
-ng einen festen Datensatz an Low-Fidelity-Membern zu erzeugen und diese
+ng einen festen Datensatz an Individuen niedriger Güte zu erzeugen und diese
  dem Ersatzmodelltraining hinzuzufügen.
- Während der Optimierung wird dann nur noch die High-Fidelity-Prozesskette
+ Während der Optimierung wird dann nur noch die Prozesskette hoher Güte
  verwendet.
- Durch die anfangs hinzugefügten Low-Fidelity-Member kann das Ersatzmodell
+ Durch die anfangs hinzugefügten Individuen niedriger Güte kann das Ersatzmodell
  verbessert werden, was dann zu einer Beschleunigung der Optimierung führt.
  Diese Methode ist sehr einfach umzusetzen, wird aber nur am Anfang der
  Optimierung einen signifikanten Zugewinn bringen.
  Zudem muss die Beschleunigung der Optimierung größer sein als die anfangs
- investierte Arbeit für die Erzeugung der Low-Fidelity Member.
- In einem sehr ungünstigen Fall kann diese Methodik sogar zu einer Verlangsamung
- der Optimierung führen.
+ investierte Arbeit für die Erzeugung der Individuen niedriger Güte.
  
 \end_layout
 
 \begin_layout Standard
-Die einfachste Variante einer Entscheidungsfunktion ist die Vorgabe einer
- Gesetzmäßigkeit durch den Anwender.
+Die einfachste Variante einer nicht trivialen Entscheidungsfunktion ist
+ die Vorgabe einer Gesetzmäßigkeit durch den Anwender.
  Hier wird der Verlauf der Optimierung bzw.
  die vorhandenen Informationen über die Güte des Ersatzmodells nicht berücksicht
 igt.
- Sinnvoll erscheint es am Anfang einer Optimierung relativ viele Low-Fidelity-Me
-mber zu erzeugen um den groben Funktionsverlauf darzustellen und dann gegen
- Ende nur noch High-Fidelity-Member zu erzeugen.
+ Sinnvoll erscheint es am Anfang einer Optimierung relativ viele Individuen
+ niedriger Güte zu erzeugen um den groben Funktionsverlauf darzustellen
+ und dann gegen Ende nur noch Individuen hoher Güte zu erzeugen.
  Hierbei ist zu berücksichtigen, dass auch am Anfang einer Optimierung eine
- minimale Anzahl von High- und Low-Fidelity-Member erforderlich ist, um
- ein initiales Ersatzmodell zu trainieren.
+ minimale Anzahl von Individuen aller Gütestufen erforderlich ist, um ein
+ initiales Ersatzmodell zu trainieren.
  Die praktische Umsetzung erfolgt dann über die Vorgabe der gewünschten
- Wahrscheinlichkeit einen Member niedriger Güte zu erzeugen in Abhängigkeit
+ Wahrscheinlichkeit ein Individuum niedriger Güte zu erzeugen in Abhängigkeit
  des Optimierungsfortschritts.
- Diese Art der Entscheidung hängt stark von den gewählten Parametern ab
- und die Wahl dieser ist selbst für einen erfahrenen Anwender schwierig.
- Zudem bieten diese einen geringen bis keinen Automatisierungsgrad und sind
- daher für industrienahe Anwendungen ungeeignet.
+ Der Erfolg dieser Art von Entscheidung hängt stark von den gewählten Parametern
+ und dem vorliegenden Optimierungsproblem ab, sodass die Wahl dieser selbst
+ für einen erfahrenen Anwender schwierig ist.
+ Zudem bieten benutzergesteuerte Entscheidungsfunktionen einen geringen
+ bis keinen Automatisierungsgrad und sind daher für industrienahe Anwendungen
+ ungeeignet.
  Aus diesen Gründen soll diese Art der Entscheidung nicht weiter betrachtet
  werden.
 \end_layout
@@ -1441,7 +1349,7 @@ Nach der Optimierung auf dem Ersatzmodell
 \end_layout
 
 \begin_layout Paragraph*
-Während der Optimierung auf dem Ersatzmodell
+Während der Optimierung auf dem Ersatzmodell:
 \end_layout
 
 \begin_layout Standard
@@ -1450,24 +1358,24 @@ Die Optimierung auf dem Ersatzmodell schlägt in der Regel einen neuen Vektor
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
- für einen vielversprechenden Member vor.
+ für einen vielversprechendes Individuum vor.
  Eine sinnvolle Strategie ist es, während dieser Optimierung auf dem Ersatzmodel
 l die Wahl der Gütestufe einfließen zu lassen.
  Ein solches Verfahren ist allerdings schwer umsetzbar:
 \end_layout
 
 \begin_layout Standard
-Am Ende einer Optimierung sind nur die Paretorang 1 Member der höchsten
+Am Ende einer Optimierung sind nur die Paretorang 1 Individuen der höchsten
  Gütestufe von Interesse, da das Vertrauensniveau für diese am höchsten
  ist.
- Aus diesem Grund bringt ein neuer Member niedriger Gütestufe keinen direkten
- Optimierungsfortschritt, sondern nur eine Reduktion der Varianz der Ersatzmodel
-le.
+ Aus diesem Grund bringt ein neues Individuum niedriger Gütestufe keinen
+ direkten Optimierungsfortschritt, sondern nur eine Reduktion der Varianz
+ der Ersatzmodelle.
  Durch die verbesserten Ersatzmodelle kann im übernächsten Optimierungsschritt
  ein Fortschritt erzielt werden.
  Um diese Verbesserung berechnen zu können muss geschätzt werden, inwiefern
- ein Member hoher oder niedriger Gütestufe (die ebenfalls geschätzt werden
- müssen) den Optimierungsfortschritt im übernächsten Optimierungsschritt
+ ein Individuum hoher oder niedriger Gütestufe (die ebenfalls geschätzt
+ werden müssen) den Optimierungsfortschritt im übernächsten Optimierungsschritt
  beeinflusst.
  
 \end_layout
@@ -1506,7 +1414,7 @@ key "huang2006sequential"
 \end_layout
 
 \begin_layout Standard
-Eine vielversprechendere Strategie ist es, einen Member mit hohem erwarteten
+Eine vielversprechendere Strategie ist es, ein Individuum mit hohem erwarteten
  Optimierungsfortschritt zu suchen und erst dann zu entscheiden mit welcher
  Gütestufe dieser berechnet werden soll.
  Diese Art der Strategie wird im nächsten Abschnitt 
@@ -1526,7 +1434,7 @@ Nach der Optimierung auf dem Ersatzmodell
 \end_layout
 
 \begin_layout Paragraph*
-Nach der Optimierung auf dem Ersatzmodell
+Nach der Optimierung auf dem Ersatzmodell:
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Nach-der-Optimierung"
@@ -1539,18 +1447,18 @@ name "par:Nach-der-Optimierung"
 \begin_layout Standard
 Die hier beschrieben Strategie setzt nach der Optimierung auf dem Ersatzmodell
  an.
- Innerhalb dieser wird ein Member mit hohem erwarteten Optimierungsfortschritt
- ausgewählt.
+ Innerhalb dieser wird ein Individuum mit hohem erwarteten Optimierungsfortschri
+tt ausgewählt.
  Daraufhin muss entschieden werden, mit welcher Gütestufe 
-\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{1,...,s\}$
 \end_inset
 
- dieser Member 
+ dieses Individuum 
 \begin_inset Formula $M$
 \end_inset
 
  berechnet werden soll.
- Der übergebene Member 
+ Das übergebene Individuum 
 \begin_inset Formula $M$
 \end_inset
 
@@ -1567,16 +1475,16 @@ Die hier beschrieben Strategie setzt nach der Optimierung auf dem Ersatzmodell
 \end_inset
 
  Ersatzmodelle mit den zugehörigen Varianzen 
-\begin_inset Formula $\vec{\sigma}^{2*}\in\mathbb{R}^{q}$
+\begin_inset Formula $\vec{\sigma^{2}}^{*}\in\mathbb{R}^{q}$
 \end_inset
 
 .
- Weiterhin ist die Zeit für die Erzeugung eines Members 
+ Weiterhin ist die Zeit für die Erzeugung eines Individuums 
 \begin_inset Formula $t_{g}$
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J$
 \end_inset
 
  bekannt.
@@ -1590,21 +1498,21 @@ Die hier beschrieben Strategie setzt nach der Optimierung auf dem Ersatzmodell
 Im Folgenden wird erst allgemeingültig die Funktionsweise einer geeigneten
  Entscheidungsfunktion erläutert und darauf aufbauend eine konkrete Umsetzung
  gezeigt.
- Hierfür ist ein Maß für den Zugewinn an Information durch einen neuen Member
+ Hierfür ist ein Maß für den Zugewinn an Information durch ein neues Individuum
  notwendig.
  Informationszugewinn wird in diesem Zusammenhang als Überbegriff für alle
  möglichen Bewertungskriterien (wie z.B.
  Reduktion der Ersatzmodellunsicherheit, Zuwachs im erwarteten Volumenzugewinn,
  etc.) verwendet.
  Daher wird eine Größe 
-\begin_inset Formula $I_{g}\in\left\{ I_{0},...,I_{m_{f}}\right\} $
+\begin_inset Formula $I_{g}\in\left\{ I_{0},...,I_{s}\right\} $
 \end_inset
 
  wobei 
 \begin_inset Formula $0\leq I_{g}<\infty$
 \end_inset
 
- definiert, welche den Informationszugewinn durch einen Member beschreibt.
+ definiert, welche den Informationszugewinn durch ein Individuum beschreibt.
  Ein Informationszugewinn von 
 \begin_inset Formula $I_{g}=0$
 \end_inset
@@ -1616,7 +1524,7 @@ Im Folgenden wird erst allgemeingültig die Funktionsweise einer geeigneten
 \end_inset
 
 .
- Außerdem gibt es für jede Fidelity jeweils nur einen Informationszugewinn,
+ Außerdem gibt es für jede Gütestufe jeweils nur einen Informationszugewinn,
  jedoch viele Zielfunktionale und Nebenbedingungen, also eine Abbildung
  in der Form 
 \begin_inset Formula $\mathbb{R}^{c+z}\rightarrow\mathbb{R}$
@@ -1652,11 +1560,11 @@ szeit.
 \end_inset
 
  für beliebig viele Gütestufen 
-\begin_inset Formula $m_{f}$
+\begin_inset Formula $s$
 \end_inset
 
  wählt dann die Gütestufe 
-\begin_inset Formula $g_{best}\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g_{best}\in J=\{1,...,s\}$
 \end_inset
 
  mit dem höchsten Verhältnis von 
@@ -1666,7 +1574,7 @@ szeit.
 :
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_{best}}}\geq\frac{I_{j}(\vec{x_{0}})}{t_{j}}\}\label{eq:Entscheidungsfunktion}
+f_{dec}(\vec{x_{0}})= & \underset{j\in J}{\arg\max}\left(\frac{I_{j}(\vec{x_{0}})}{t_{j}}\right)\label{eq:Entscheidungsfunktion}
 \end{alignat}
 
 \end_inset
@@ -1675,7 +1583,12 @@ f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{I_{g_{best}}(\vec{x_{0}})}{t_{g_
 \end_layout
 
 \begin_layout Standard
-Um eine solche Entscheidungsfunktion umsetzen zu können, müssen 
+Die gewählte Gütestufe wird wie folgt definiert: 
+\begin_inset Formula $g_{best}\coloneqq f_{dec}(\vec{x_{0}})$
+\end_inset
+
+.
+ Um eine solche Entscheidungsfunktion umsetzen zu können, müssen 
 \begin_inset Formula $I_{g}(\vec{x_{0}})$
 \end_inset
 
@@ -1700,17 +1613,17 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
  gezeigt.
  Weiterhin ist die Modellierung des Informationszugewinns ein sehr wichtiger
  Punkt.
- Dafür eignen sich statistischer Ersatzmodelle, diese sagen neben einem
- Erwartungswert für einen unbekannten Ort 
+ Statistische Ersatzmodelle sagen neben einem Erwartungswert für einen unbekannt
+en Ort 
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
  auch eine Unsicherheit in Form einer Varianz 
-\begin_inset Formula $\vec{\sigma}^{2*}\in\mathbb{R}$
+\begin_inset Formula $\sigma^{2*}\in\mathbb{R}$
 \end_inset
 
  oder Standardabweichung 
-\begin_inset Formula $\vec{\sigma}^{*}\in\mathbb{R}$
+\begin_inset Formula $\sigma^{*}\in\mathbb{R}$
 \end_inset
 
  voraus.
@@ -1718,7 +1631,8 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
  Stützstelle hinzu, so wird die vorhergesagte Varianz dort reduziert.
  Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
  weniger stark reduziert.
- Dieses Verhalten lässt sich für eine Entscheidung heranziehen.
+ Dieses Verhalten lässt sich für eine Entscheidung heranziehen indem man
+ den Informationszugewinn als Varianzreduktion definiert.
  Die Größe der Reduktion ist eine sehr komplexe Funktion, die von zahlreichen
  Faktoren abhängt: dem verwendeten Ersatzmodell, der betrachteten Gütestufe,
  ersatzmodellspezifischen Parametern, dem Abstand von 
@@ -1800,7 +1714,9 @@ name "fig:BeispielSinusHFLF"
 \end_inset
 
 Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
- von Stützstellen verschiedener Gütestufen
+ von Stützstellen verschiedener Gütestufen (LF bedeutet niedrige- und HF
+ hohe Güte).
+ 
 \end_layout
 
 \end_inset
@@ -1814,11 +1730,10 @@ Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
 \end_layout
 
 \begin_layout Standard
-Um den Informationszugewinn zu modellieren, ist die Reduktion der Varianz
- ein geeignetes Maß.
- Folgend soll ein Entscheidungskriterium für ein Ersatzmodell auf Basis
- dieser Varianzreduktion vorgestellt werden, im weiteren Verlauf des Kapitels
- wird dieses dann auf viele Ersatzmodelle erweitert:
+Folgend soll ein Entscheidungskriterium für ein einzelnes Ersatzmodell auf
+ Basis dieser Varianzreduktion vorgestellt werden.
+ Im weiteren Verlauf des Kapitels wird diese dann auf viele Ersatzmodelle
+ erweitert.
 \end_layout
 
 \begin_layout Standard
@@ -1849,7 +1764,7 @@ Die Vorhersage der Varianz einer Gütestufe
 \begin_inset Formula $j$
 \end_inset
 
- wird die Varianz mit 
+ wird die bedingte Varianz mit 
 \begin_inset Formula $\sigma_{g|j}^{2}=\sigma_{g}^{2}\left(\vec{x}_{0}\right)\mid y_{j}\left(\vec{x}_{0}\right)\in\mathbb{R}$
 \end_inset
 
@@ -1888,7 +1803,7 @@ I_{g|j}\left(\vec{x_{0}}\right)= & \sigma_{g}^{2}-\sigma_{g|j}^{2}\label{eq:Stan
 \end_inset
 
 Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
- eines neuen Members 
+ eines neuen Individuums 
 \begin_inset Formula $t_{j}\in\mathbb{R}$
 \end_inset
 
@@ -1974,7 +1889,7 @@ reference "eq:Entscheidungsfunktion"
 , ergibt sich eine Entscheidungsfunktion für ein Ersatzmodell:
 \begin_inset Formula 
 \begin{alignat}{1}
-f_{dec}(\vec{x_{0}})= & \{g_{best},j\in J|\frac{\sigma_{g}^{2}-\sigma_{g|g_{best}}^{2}}{t_{train}+t_{opti}+t_{pr,g_{best}}}\geq\frac{\sigma_{g}^{2}-\sigma_{g|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\}\label{eq:Entscheidungsfunktion-1}
+f_{dec}(\vec{x_{0}})= & \underset{j\in J}{\arg\max}\left(\frac{\sigma_{g}^{2}-\sigma_{g|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\right)\label{eq:Entscheidungsfunktion-1}
 \end{alignat}
 
 \end_inset
@@ -2051,16 +1966,7 @@ reference "eq:asdsa"
 
 \end_inset
 
-Mit dieser Formulierung lässt sich die Entscheidungsfunktion aus Gleichung
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Entscheidungsfunktion-1"
-
-\end_inset
-
- für viele Ersatzmodelle weiterverwenden.
- Für die Bestimmung der Gewichte 
+Für die Bestimmung der Gewichte 
 \begin_inset Formula $\vec{w}\in\mathbb{R}^{c+z}$
 \end_inset
 
@@ -2182,7 +2088,7 @@ Weiterhin sind die verschiedenen Nebenbedingungen unterschiedlich schwer
 \begin_inset Formula $P_{i}\in\mathbb{R}$
 \end_inset
 
- über die Ersatzmodellvorhersagen und die bekannten Intervallgrenzen der
+ über die Ersatzmodellvorhersage und die bekannten Intervallgrenzen der
  Nebenbedingung geschätzt werden.
  Zudem gilt dann, dass die Gesamtwahrscheinlichkeit zur Erfüllung aller
  Nebenbedingungen über das Produkt der Einzelwahrscheinlichkeiten 
@@ -2200,11 +2106,19 @@ Gewichtung der einzelnen Nebenbedingungen über die Einzelwahrscheinlichkeiten
 \begin_inset Formula $w_{i}=\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} $
 \end_inset
 
-
+.
+ Je höher die Wahrscheinlichkeit ist eine Nebenbedingung zu erfüllen, desto
+ niedriger ist das Gewicht der Nebenbedingung.
+ Wenn z.B.
+ die Wahrscheinlichkeit bei 100% liegt, so ist diese Nebenbedingung für
+ die Entscheidung unerheblich, da diese unabhängig von der Entscheidung
+ erfüllt wird.
+ 
 \end_layout
 
 \begin_layout Enumerate
-Gewichtung Zielfunktionen zu Nebenbedingungen über die Gesamtwahrscheinlichkeit.
+Gewichtung aller Zielfunktionen zu allen Nebenbedingungen über die Gesamtwahrsch
+einlichkeit zur Erfüllung aller Nebenbedingungen.
  
 \end_layout
 
@@ -2227,16 +2141,6 @@ Nebenbedingungen
 
 \end_deeper
 \begin_layout Standard
-Für den ersten Punkt gilt: Je höher die Wahrscheinlichkeit ist eine Nebenbedingu
-ng zu erfüllen, desto niedriger ist das Gewicht der Nebenbedingung.
- Wenn z.B.
- die Wahrscheinlichkeit bei 100% liegt, so ist diese Nebenbedingung für
- die Entscheidung unerheblich, da diese unabhängig von der Entscheidung
- erfüllt wird.
- 
-\end_layout
-
-\begin_layout Standard
 Die Zielfunktionen untereinander werden gleich gewichtet.
  Letztlich bleibt dann noch die Frage offen, wie Zielfunktionen und Nebenbedingu
 ngen zueinander gewichtet werden (Punkt 2).
@@ -2257,11 +2161,16 @@ T_{j} & =t_{train}+t_{opti}+t_{pr,j}\label{eq:Times}
 
 \end_inset
 
+Mit dieser Formulierung kann die Entscheidungsfunktion (siehe Gleichung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion"
 
-\end_layout
+\end_inset
 
-\begin_layout Standard
-Die algorithmische und softwaretechnische Umsetzung des Verfahrens wird
+) dann verwendet werden.
+ Die algorithmische und softwaretechnische Umsetzung des Verfahrens wird
  in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2348,7 +2257,7 @@ Die Formulierung
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $g\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $g\in J=\{1,...,s\}$
 \end_inset
 
  an einer beliebigen Stelle 
@@ -2364,7 +2273,7 @@ Die Formulierung
 \end_inset
 
  der Gütestufe 
-\begin_inset Formula $j\in J=\{0,...,m_{f}\}$
+\begin_inset Formula $j\in J=\{1,...,s\}$
 \end_inset
 
  bekannt ist.
@@ -2397,29 +2306,36 @@ reference "eq:Times"
 
 \end_inset
 
-Die lokalen Änderungen der Gewichtungen 
-\begin_inset Formula $w_{i}\in\mathbb{R}$
-\end_inset
-
- soll an dieser Stelle unberücksichtigt bleiben.
- Es ist anzunehmen, dass das Kriterium meist zu keiner anderen Entscheidung
- führt als das lokale aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:IzuT"
-
-\end_inset
-
-.
- Um dies zu testen, wurden einige eindimensionale analytische Beispiele
- erzeugt und das globale Kriterium aus Gleichung 
+Um zu testen, inwiefern sich eine globale Entscheidungsfunktion gemäß Gleichunge
+n 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:globalesKrit"
 
 \end_inset
 
- berechnet.
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion"
+
+\end_inset
+
+ von einer lokalen gemäß Gleichungen 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:IzuT"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion"
+
+\end_inset
+
+ unterscheidet, wurden einige eindimensionale analytische Beispiele untersucht.
  Von 10 unterschiedlichen Beispielen konnte jedoch nur eins generiert werden,
  in dem das Kriterium 
 \begin_inset CommandInset ref
@@ -2429,7 +2345,8 @@ reference "eq:globalesKrit"
 \end_inset
 
  zu einer anderen Entscheidung führt als das lokale.
- In allen anderen Fällen ist die Entscheidung immer gleich gewesen.
+ In allen anderen Fällen liefern die globale und lokale Entscheidungsfunktion
+ immer ein identisches Ergebnis.
  In Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2441,12 +2358,19 @@ reference "sec:globalVarianzEntscheidungBsp"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Schwierigkeit liegt in der numerischen Berechnung der Integrale,
- hierfür bietet sich eine Monte-Carlo-Integration an.
+Die größte Schwierigkeit zur Nutzung einer globalen Entscheidungsfunktion
+ gemäß Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:globalesKrit"
+
+\end_inset
+
+ liegt in der numerischen Berechnung der Integrale.
  Da die Dimension der Parameterräume und auch die Anzahl der Zielfunktionen
  und Nebenbedingungen bei typischen Turbomaschinenoptimierungen sehr hoch
- ist, ist die Berechnung eines solchen Integrals mit einem enormen Aufwand
- verbunden.
+ ist, ist die Berechnung eines solchen Integrals mit einem enormen numerischen
+ Aufwand verbunden.
  
 \end_layout
 
@@ -2462,29 +2386,29 @@ name "sec:Theroretische-Beschleunigung-ein"
 \end_layout
 
 \begin_layout Standard
-In diesem Abschnitt wird beschrieben, wie die Beschleunigung zwischen einer
- Multifidelity-Optimierung im Vergleich zu einer Single-Fidelity-Optimierung
- zu berechnen und zu bewerten ist.
+In diesem Abschnitt wird beschrieben, wie die Beschleunigung einer Multifidelity
+-Optimierung gegenüber einer Single-Fidelity-Optimierung zu berechnen und
+ zu bewerten ist.
  Insbesondere wird erklärt, wie die maximal mögliche Beschleunigung unter
- bestimmten Voraussetzungen realistisch eingeschätzt werden kann.
+ bestimmten Voraussetzungen realistisch eingeschätzt werden kann und von
+ welchen Faktoren diese abhängt.
  
 \end_layout
 
 \begin_layout Standard
-Mit Gleichung 
+Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:tFact"
+reference "eq:tFact-1"
 
 \end_inset
 
- ist es möglich, einen zeitlichen Faktor 
+ beschreibt den zeitlichen Faktor 
 \begin_inset Formula $t_{fact}$
 \end_inset
 
- zu berechnen.
- Dieser beschreibt den zeitlichen Faktor zwischen einer Single-Fidelity-Referenz
-optimierung und einer Multifidelity-Optimierung.
+ zwischen einer Single-Fidelity-Referenzoptimierung und einer Multifidelity-Opti
+mierung.
  
 \begin_inset Formula $t_{fact}>1$
 \end_inset
@@ -2494,26 +2418,13 @@ optimierung und einer Multifidelity-Optimierung.
 \end_inset
 
  eine Verlangsamung.
- Wobei 
-\begin_inset Formula $i_{bestH},i_{bestL}$
-\end_inset
-
- die Anzahl der Member ab der Initialisierung bis zur Konvergenz angibt,
- der Index 
-\begin_inset Formula $H,L$
-\end_inset
-
- steht jeweils für hohe und niedrige Güte.
  
-\begin_inset Formula $i_{initH},i_{initL}$
-\end_inset
+\end_layout
 
- geben die Anzahl der Member der Initialisierung der jeweiligen Optimierung
- an.
- 
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact}
+t_{fact}=\frac{t_{HF,Referenz}}{t_{MF}}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact-1}
 \end{equation}
 
 \end_inset
@@ -2522,7 +2433,22 @@ t_{fact}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_
 \end_layout
 
 \begin_layout Standard
-Das theoretische Beschleunigungsmaximum 
+\begin_inset Formula $i_{bestH},i_{bestL}$
+\end_inset
+
+ beschreiben die Anzahl der Individuen ab der Initialisierung bis zur Konvergenz
+, der Index 
+\begin_inset Formula $H,L$
+\end_inset
+
+ steht jeweils für hohe und niedrige Güte.
+ 
+\begin_inset Formula $i_{initH},i_{initL}$
+\end_inset
+
+ geben die Anzahl der Individuen der Initialisierung der jeweiligen Optimierung
+ an.
+ Das theoretische Beschleunigungsmaximum 
 \begin_inset Formula $max(t_{fact})$
 \end_inset
 
@@ -2533,14 +2459,9 @@ reference "eq:Maxium"
 
 \end_inset
 
-) einer Multifidelity-Optimierung ist dann erreicht, wenn die Optimierung
- nach der Initialisierungsphase mit nur einem zusätzlichem Member das Optimum
- findet.
- 
-\end_layout
-
-\begin_layout Standard
-::::: wenn die niedrige Gütestufe gleich der hohen Gütestufe ist.
+) einer Multifidelity-Optimierung ist dann erreicht, wenn die niedrige Gütestufe
+ gleich der hohen Gütestufe ist und das Optimum mit einem Individuum gefunden
+ wurde.
  In diesem Fall müsste dieselbe Anzahl an Individuen ausreichen 
 \begin_inset Formula $i_{best}=i_{bestL}$
 \end_inset
@@ -2556,19 +2477,12 @@ max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\fr
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Der Grenzwert dieser Funktion ist das Verhältnis von 
 \begin_inset Formula $\underset{i_{best}\rightarrow\infty}{\lim}max(t_{fact})=\frac{t_{h}}{t_{l}}$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Dieser Wert kann aber aus folgenden Gründen praktisch nicht erreicht werden:
+.
+ Dieser Wert kann aber aus folgenden Gründen praktisch nicht erreicht werden:
 \end_layout
 
 \begin_layout Itemize
@@ -2593,55 +2507,35 @@ Zudem hängt die Beschleunigung vom Informationsgehalt der Funktion niedriger
 \end_layout
 
 \begin_layout Standard
-Was allerdings aus Gleichung 
+Was aus Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:tFact"
+reference "eq:tFact-1"
 
 \end_inset
 
  ersichtlich ist, ist die Wichtigkeit der Auswahl der initialen Anzahl an
- Membern niedriger Güte.
- Diese sollte mit dem zeitlichen Faktor 
+ Individuen niedriger Güte.
+ Diese sollte mit dem Faktor 
 \begin_inset Formula $\frac{t_{l}}{t_{h}}$
 \end_inset
 
  korrelieren, da der initiale Zeitverlust sonst zu hoch ist und durch die
  Multifidelity-Optimierung nicht mehr aufgeholt werden kann.
- 
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Zeitstrahlen-von-zwei"
 
 \end_inset
 
- sind zwei Zeitstrahlen zu erkennen.
- Der obere zeigt eine High-Fidelity-Optimierung und der untere eine Multifidelit
-y-Optimierung.
- Diese besitzt einen zusätzlichen Low-Fidelity Initialsierungsteil.
+ verdeutlicht diese Problematik.
+ Der obere Zeitstrahl zeigt eine High-Fidelity-Optimierung und der untere
+ eine Multifidelity-Optimierung.
+ Diese besitzt einen zusätzlichen Initialsierungsteil niedriger Güte.
  Soll mit der Multifidelity-Optimierung eine Beschleunigung gegenüber der
  High-Fidelity-Optimierung erreicht werden, so ergibt sich eine maximal
  mögliche Optimierungzeit.
- 
-\end_layout
-
-\begin_layout Standard
-Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Zeitstrahlen-von-zwei-1"
-
-\end_inset
-
- zeigt dieselbe Optimierung, allerdings mit einem größeren LF-Initialisierungant
-eil.
- Die mögliche Optimierungzeit für die Multifidelity-Optimierung schrumpft
- und damit ist auch die mögliche Beschleunigung gegenüber der High-Fidelity-Opti
-mierung stark begrenzt.
  
 \end_layout
 
@@ -2651,14 +2545,13 @@ Um eine optimale Initialisierung zu erreichen, sind folgende Punkte von
 \end_layout
 
 \begin_layout Enumerate
-Die Prozesskettengeschwindigkeit der niedrigen Güte.
- Je schneller diese ist, desto mehr initiale Member sollten berechnet werden.
+Die Prozesskettengeschwindigkeit der niedrigen Güte: Je schneller diese
+ ist, desto mehr initiale Individuen sollten berechnet werden.
 \end_layout
 
 \begin_layout Enumerate
-Die Korrelation zwischen den Gütestufen.
- Nur bei ausreichendem Zusammenhang können die Stützstellen niedriger Güte
- gewinnbringend verwendet werden.
+Die Korrelation zwischen den Gütestufen: Nur bei ausreichendem Zusammenhang
+ können die Stützstellen niedriger Güte gewinnbringend verwendet werden.
  
 \end_layout
 
@@ -2671,28 +2564,19 @@ g vorhanden.
 \end_layout
 
 \begin_layout Standard
-Wie lassen sich diese drei Punkte abschätzen und damit eine initiale Anzahl
- an Membern berechnen?
+Zumindest die ersten beiden genannten Punkte lassen sich bereits vor dem
+ Start einer Optimierung relativ gut abschätzen:
 \end_layout
 
 \begin_layout Enumerate
-Prozesskettengeschwindigkeit ist in der Regel bekannt oder kann einfach
- gemessen werden.
+Die Prozesskettengeschwindigkeit ist in der Regel bekannt oder kann während
+ einer Optimierung einfach gemessen werden.
 \end_layout
 
 \begin_layout Enumerate
 Die Korrelation der Gütestufen kann mit einer geringen Anzahl an Stützstellen
  abgeschätzt werden oder ist unter Umständen bereits bekannt.
  Oftmals reicht hier eine grobe Schätzung aus.
- 
-\end_layout
-
-\begin_layout Enumerate
-Die Komplexität kann über eine geschätzte Gesamtlaufzeit der Optimierung
- abgebildet werden.
- Dies stellt zwar kein direktes Maß dar, aber typischerweise werden sehr
- komplexe Optimierungen mit einer großen Laufzeit versehen und weniger komplexe
- mit einer geringeren Laufzeit.
  
 \end_layout
 
@@ -2723,7 +2607,7 @@ name "fig:Zeitstrahlen-von-zwei"
 
 Die Zeitstrahlen von zwei fiktiven Optimierungen.
  Der obere entspricht einer Single-Fidelity-Optimierung und der untere einer
- Mulitfidelity-Optimierung.
+ Multifidelity-Optimierung.
  Gekennzeichnet sind die Zeitabschnitte der jeweiligen Initialisierungsphasen
  und des Zeitabschnittes, in dem die Multifidelity-Optimierung noch eine
  Beschleunigung erreichen kann.
@@ -2732,171 +2616,6 @@ Die Zeitstrahlen von zwei fiktiven Optimierungen.
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/MultifidelityKapitel/BeschleunigungVerz_2.pdf
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Zeitstrahlen-von-zwei-1"
-
-\end_inset
-
-Die Zeitstrahlen von zwei fiktiven Optimierungen.
- Der obere entspricht einer Single-Fidelity-Optimierung und der untere einer
- Mulitfidelity-Optimierung mit einer langen Initialisierungsphase.
- Gekennzeichnet sind die Zeitabschnitte der jeweiligen Initialisierungsphasen
- und des Zeitabschnittes, in dem die Multifidelity-Optimierung noch eine
- Beschleunigung erreichen kann.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\color magenta
-WEG
-\end_layout
-
-\begin_layout Plain Layout
-Mit diesen Werten kann eine sinnvolle initiale Anzahl an Member geschätzt
- werden: 
-\end_layout
-
-\begin_layout Enumerate
-Schätzung einer maximalen Gesamtlaufzeit: 
-\begin_inset Formula $t_{max}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $t_{l}$
-\end_inset
-
- und 
-\begin_inset Formula $t_{h}$
-\end_inset
-
- bekannt.
- Damit ergibt sich die maximale Anzahl an Membern für eine HF Optimierung
- 
-\begin_inset Formula $i_{max}=\frac{t_{max}}{t_{h}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Festlegung der prozentualen Dauer der gewünschten Initialisierungsphase:
- 
-\begin_inset Formula $p_{init}=\frac{t_{init}}{t_{max}}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Anzahl an Membern für die Initialsierungsphase: 
-\begin_inset Formula $i_{init}=p_{init}\,i_{max}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Berechnung des Korrelationskoeffizienten zwischen niedriger und hoher Gütestufe
- 
-\begin_inset Formula $c$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $i_{l,Init}=0.5\frac{t_{h}}{t_{l}}c\,i_{init}$
-\end_inset
-
- und 
-\begin_inset Formula $i_{h,Init}=i_{init}-i_{l,Init}\frac{t_{l}}{t_{h}}$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Plain Layout
-Weiterhin sind Abschätzungen der maximalen Gesamtlaufzeit und eine Festlegung
- der prozentualen initialen Phase notwendig.
- Diese Schätzungen sind für einen erfahrenen Anwender aber im Bereich des
- möglichen.
- Sinnvolle Werte für 
-\begin_inset Formula $p_{init}$
-\end_inset
-
- liegen bei 7-10% diese Werte basieren auf Mittelwerten von bisher durchgeführte
-n Optimierungen, welche eine gute Beschleunigung erreichen konnten.
- Damit wird eine gleichmäßige Aufteilung der initial Verfügbaren Zeit vorgenomme
-n unter Berücksichtigung der Korrelation und des zeitlichen Faktors.
- Dies stellt allerdings nur eine Schätzformel dar, welche den Anwendern
- helfen soll besonders ungünstige Initialisierungsverhältnisse zu vermeiden.
- 
-\end_layout
-
-\begin_layout Subparagraph*
-Keine Korrelation
-\end_layout
-
-\begin_layout Plain Layout
-Wenn die Gütestufen keine Korrelation besitzen, so wäre der Anteil der intialen
- Member niedriger Güte 
-\begin_inset Formula $i_{l,Init}=0$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subparagraph*
-Volle Korrelation
-\end_layout
-
-\begin_layout Plain Layout
-Wenn die Gütestufen volle Korrelation besitzen, so würden beide Gütestufen
- dieselbe Zeit für die Erzeugung von initialen Stützstellen bekommen.
 \end_layout
 
 \end_inset

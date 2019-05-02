@@ -949,16 +949,14 @@ Berechnete Ergebnisse der unterschiedlichen Fehlerbewertungskriterien.
 \begin_layout Standard
 Die Entscheidungsfunktion würde sich hier immer für die größere Reduktion
  entscheiden.
- Im Falle das lokalen Kriteriums würde die hohe Güte gewählt und das globale
- Kriterium die niedrige Güte.
+ Im Falle des lokalen Kriteriums würde die hohe Güte gewählt und im Falle
+ des globalen Kriteriums die niedrige Güte.
  Eine Entscheidung auf Basis des Fehlerintegrals ginge ebenfalls zugunsten
  der niedrigen Gütestufe.
  Das untermauert nochmals die Ergebnisse der globalen Entscheidung.
  Die Ersatzmodelle wurden nach Hinzufügen einer neuen Stützstelle allerdings
  nicht neu trainiert, dies könnte zu einer Änderung der hier gezeigten Situation
  führen.
- Innerhalb einer realen Optimierung wird bei Ausführung der hier gezeigten
- Entscheidungsfunktion ebenfalls nicht gemacht, da es zu zeitaufwendig ist.
  
 \end_layout
 
@@ -1881,8 +1879,8 @@ name "subsec:AnhangLikelihoodCOKrigingBsp"
 \end_layout
 
 \begin_layout Standard
-Folgend wird die Likelihood-Funktion eines CO-Kriging Modells eine Parabelfunkti
-on dargestellt.
+Folgend wird die Likelihood-Funktion eines CO-Kriging Modells einer Parabel
+ dargestellt.
  Die Low-Fidelity Funktion wurde für jede Stützstelle mit einem zufälligen
  Wert zwischen -0.1 und 0.1 gestört und zusätzlich verschoben.
 \begin_inset Formula 
@@ -1897,12 +1895,11 @@ f_{low}\left(x\right) & =x^{2}+Random\left(-0.1,0.1\right)-10
 \end_layout
 
 \begin_layout Standard
-Auf den Achsen sind die Hyperparameter 
+Auf der X- und Y-Achse sind die Hyperparameter 
 \begin_inset Formula $\theta_{low},\theta_{err}$
 \end_inset
 
- zu sehen und der entsprechende Wert der Likelihood-Funktion ist auf der
- Z-Achse zu erkennen und zusätzlich noch farbig dargestellt.
+ zu erkennen und auf der Z-Achse der entsprechende Likelihood-Wert.
  In den verschiedenen Diagrammen wurden die Varianzen 
 \begin_inset Formula $\sigma_{err}^{2},\sigma_{low}^{2}$
 \end_inset
@@ -2870,7 +2867,7 @@ Sei
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(\vec{h}\right)=cov\left(\vec{0}\right)-2\gamma\left(\vec{h}\right)\label{eq:DistanzabhängigkeitBehauptung}
+cov\left(\triangle\vec{x}\right)=cov\left(\vec{0}\right)-2\gamma\left(\triangle\vec{x}\right)\label{eq:DistanzabhängigkeitBehauptung}
 \end{equation}
 
 \end_inset
@@ -2907,7 +2904,7 @@ Daraus ergibt sich die notwendige Umformung:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align}
-cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-\mu^{2}= & E\left[Z(\vec{0}+\vec{h})^{2}\right]
+cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0}+\triangle\vec{x})\right)-\mu^{2}= & E\left[Z(\vec{0}+\triangle\vec{x})^{2}\right]
 \end{align}
 
 \end_inset
@@ -2918,7 +2915,7 @@ Außerdem wird folgende Umformung nötig:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]=cov\left(Z\left(\vec{0}+\vec{h}\right),Z(\vec{0})\right)+\mu^{2}
+E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]=cov\left(Z\left(\vec{0}+\triangle\vec{x}\right),Z(\vec{0})\right)+\mu^{2}
 \end{equation}
 
 \end_inset
@@ -2929,12 +2926,12 @@ Beweis:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)= & E\left[\left(Z(\vec{0}+\vec{h})-E\left[Z(\vec{0}+\vec{h})\right]\right)\left(Z(\vec{0})-E\left[Z(\vec{0})\right]\right)\right]\\
-= & E\left[\left(Z(\vec{0}+\vec{h})-\mu\right)\left(Z(\vec{0})-\mu\right)\right]\\
-= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})-Z(\vec{0}+\vec{h})\mu-\mu Z(\vec{0})+\mu^{2}\right]\\
-= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]-\mu E\left[Z(\vec{0}+\vec{h})\right]-\mu E\left[Z(\vec{0})\right]+\mu^{2}\\
-= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]-\mu^{2}\\
-cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+\mu^{2}= & E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]
+cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0})\right)= & E\left[\left(Z(\vec{0}+\triangle\vec{x})-E\left[Z(\vec{0}+\triangle\vec{x})\right]\right)\left(Z(\vec{0})-E\left[Z(\vec{0})\right]\right)\right]\\
+= & E\left[\left(Z(\vec{0}+\triangle\vec{x})-\mu\right)\left(Z(\vec{0})-\mu\right)\right]\\
+= & E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})-Z(\vec{0}+\triangle\vec{x})\mu-\mu Z(\vec{0})+\mu^{2}\right]\\
+= & E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]-\mu E\left[Z(\vec{0}+\triangle\vec{x})\right]-\mu E\left[Z(\vec{0})\right]+\mu^{2}\\
+= & E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]-\mu^{2}\\
+cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0})\right)+\mu^{2}= & E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]
 \end{align*}
 
 \end_inset
@@ -2957,17 +2954,17 @@ reference "eq:DistanzabhängigkeitBehauptung"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-2\gamma\left(\vec{0},\vec{0}+\vec{h}\right) & =\frac{1}{2}var\left[Z(\vec{0}+\vec{h})-Z(\vec{0})\right]\\
- & =\frac{1}{2}E\left[\left(\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)-E\left[Z(\vec{0}+\vec{h})-Z(\vec{0})\right]\right)^{2}\right]\\
- & =E\left[\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)^{2}-2\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
- & =E\left[\left(Z(\vec{0}+\vec{h})-Z(\vec{0})\right)^{2}\right]\\
- & =E\left[Z(\vec{0}+\vec{h})^{2}-2Z(\vec{0}+\vec{h})Z(\vec{0})+Z(\vec{0}){}^{2}\right]\\
- & =E\left[Z(\vec{0}+\vec{h})^{2}\right]-2E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]+E\left[Z(\vec{0}){}^{2}\right]\\
- & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-\mu^{2}-2E\left[Z(\vec{0}+\vec{h})Z(\vec{0})\right]+cov\left(Z(\vec{0}),Z(\vec{0})\right)-\mu^{2}\\
- & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-2cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+2\mu^{2}+cov\left(Z(\vec{0}),Z(\vec{0})\right)-2\mu^{2}\\
- & =cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0}+\vec{h})\right)-2cov\left(Z(\vec{0}+\vec{h}),Z(\vec{0})\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
- & =cov\left(\vec{h}\right)-2cov\left(\vec{h}\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
- & =cov\left(Z(\vec{0}),Z(\vec{0})\right)-cov\left(\vec{h}\right)
+2\gamma\left(\vec{0},\vec{0}+\triangle\vec{x}\right) & =\frac{1}{2}var\left[Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right]\\
+ & =\frac{1}{2}E\left[\left(\left(Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right)-E\left[Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right]\right)^{2}\right]\\
+ & =E\left[\left(Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right)^{2}-2\left(Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right)\left(\mu-\mu\right)+\left(\mu-\mu\right)^{2}\right]\\
+ & =E\left[\left(Z(\vec{0}+\triangle\vec{x})-Z(\vec{0})\right)^{2}\right]\\
+ & =E\left[Z(\vec{0}+\triangle\vec{x})^{2}-2Z(\vec{0}+\triangle\vec{x})Z(\vec{0})+Z(\vec{0}){}^{2}\right]\\
+ & =E\left[Z(\vec{0}+\triangle\vec{x})^{2}\right]-2E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]+E\left[Z(\vec{0}){}^{2}\right]\\
+ & =cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0}+\triangle\vec{x})\right)-\mu^{2}-2E\left[Z(\vec{0}+\triangle\vec{x})Z(\vec{0})\right]+cov\left(Z(\vec{0}),Z(\vec{0})\right)-\mu^{2}\\
+ & =cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0}+\triangle\vec{x})\right)-2cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0})\right)+2\mu^{2}+cov\left(Z(\vec{0}),Z(\vec{0})\right)-2\mu^{2}\\
+ & =cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0}+\triangle\vec{x})\right)-2cov\left(Z(\vec{0}+\triangle\vec{x}),Z(\vec{0})\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
+ & =cov\left(\triangle\vec{x}\right)-2cov\left(\triangle\vec{x}\right)+cov\left(Z(\vec{0}),Z(\vec{0})\right)\\
+ & =cov\left(Z(\vec{0}),Z(\vec{0})\right)-cov\left(\triangle\vec{x}\right)
 \end{align*}
 
 \end_inset
@@ -3264,12 +3261,12 @@ An dieser Stelle wird die Frage geklärt, inwiefern
 \end_inset
 
  und der Likelihood Schätzer für 
-\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times m_{f}}}}$
+\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times s}}}$
 \end_inset
 
  zusammenhängen.
  Der Likelihood Schätzer für 
-\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times m_{f}}}}$
+\begin_inset Formula $\vec{\tilde{\beta}}\in\mathbb{R^{\mathrm{1\times s}}}$
 \end_inset
 
  sieht wie folgt aus: 
@@ -3293,7 +3290,7 @@ Der Vektor
 
  lässt sich folgendermaßen umformulieren, wobei die Definition der Matrix
  
-\begin_inset Formula $G\in\mathbb{R^{\mathrm{n\times m_{f}}}}$
+\begin_inset Formula $G\in\mathbb{R^{\mathrm{n\times s}}}$
 \end_inset
 
  in Gleichung 
@@ -3708,6 +3705,46 @@ Die Formel lässt sich damit weiterhin vereinfachen:
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Grundbegriffe der Informatik
+\end_layout
+
+\begin_layout Standard
+Klasse
+\end_layout
+
+\begin_layout Standard
+Geheimnissprinzip
+\end_layout
+
+\begin_layout Standard
+Methoden (Getter und Setter Methoden)
+\end_layout
+
+\begin_layout Standard
+Attribute
+\end_layout
+
+\begin_layout Standard
+Objekt -> Instanz und Instantiierung
+\end_layout
+
+\begin_layout Standard
+UML Diagramm
+\end_layout
+
+\begin_layout Standard
+SIMD
+\end_layout
+
+\begin_layout Standard
+CPU-Cache (Levels)
+\end_layout
+
+\begin_layout Standard
+Interface basierte Programmierung
 \end_layout
 
 \begin_layout Subsection
@@ -8850,6 +8887,8 @@ key "zitzler2000comparison"
 \end_inset
 
 ).
+ Diese Funktion besitzt zwei Zielfunktionen und zeichnet sich durch eine
+ nicht zusammenhängende Paretofront aus.
  Die Testfunktionen 
 \begin_inset Formula $f_{1}\left(\vec{x}\right)$
 \end_inset
@@ -8869,7 +8908,7 @@ key "zitzler2000comparison"
 \begin_inset Formula 
 \begin{align}
 f_{1}\left(\vec{x}\right) & =x_{0}\label{eq:Testfunktion}\\
-f_{2}\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)
+f_{2}\left(\vec{x}\right) & =h\left(\vec{x}\right)*g\left(\vec{x}\right)\label{eq:ZDT3-2}
 \end{align}
 
 \end_inset
@@ -8907,15 +8946,16 @@ reference "fig:ZDT3"
 
 \end_inset
 
- ist die Testfunktion dargestellt, es wurden zwei Variablen 
-\begin_inset Formula $\vec{x}=\left\{ \vec{x}\in\mathbb{R}^{k}|k=2\right\} $
+ ist die nicht triviale zweite Zielfunktion im Fall 
+\begin_inset Formula $\vec{x}\in\mathbb{R}^{k},k=2$
 \end_inset
 
- verwendet.
+ dargestellt.
  Bei der Funktion handelt es sich um einen Paraboloid mit überlagerter Sinusschw
 ingung.
- Diese Funktion hat einige lokale Minima und kann auf beliebig viele Dimensionen
- angewandt werden und eignet sich daher für analytische Optimierungs-Tests.
+ Diese Funktion hat einige lokale Minima.
+ Weiterhin kann diese auf beliebig viele Dimensionen angewandt werden und
+ eignet sich daher für analytische Optimierungs-Tests.
 \end_layout
 
 \begin_layout Standard
@@ -9185,784 +9225,6 @@ reference "subsec:ASME-Veröffentlichung:-Optimieru"
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-R-Matrix Bildungsvorschrift, mit 2 Ableitungen pro Punkt
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|cccccccccc}
- & x1 & x2 & x3 & x1/p1 & x1/p2 & x2/p1 & x2/p2 & x2/p3 & x3/p1 & x3/p2\\
-\hline x1 & f\left(x_{1,}x_{1}\right) & f\left(x_{1,}x_{2}\right) & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x2 & f\left(x_{2,}x_{1}\right) & f\left(x_{2,}x_{2}\right) & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x3 & f\left(x_{3,}x_{1}\right) & f\left(x_{3,}x_{2}\right) & f\left(x_{3,}x_{3}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
-x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
-x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
-x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
-x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
-x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{2}}\\
-x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{2}}
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Durch Zeilen/Spaltentausch, kommt die für den Rechner effizientere Matrix:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|cccccccccc}
- & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2 & x2/p3 & x3 & x3/p1 & x3/p2\\
-\hline x1 & f\left(x_{1,}x_{1}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
-x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
-x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{2,}x_{2}\right) & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
-x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
-x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{3}\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
-x3 & f\left(x_{3,}x_{1}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{3,}x_{2}\right) & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{3,}x_{3}\right) & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{1}\partial x_{3}^{2}}\\
-x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{3}\right)}{\partial x_{3}^{2}\partial x_{3}^{2}}
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Invariante Ausdrücke eingefügt:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|cccccccccc}
- & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2 & x2/p3 & x3 & x3/p1 & x3/p2\\
-\hline x1 & 1+e^{\lambda} & 0 & 0 & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{3}} & f\left(x_{1,}x_{3}\right) & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x1/p1 & 0 & e^{\theta_{1}} & 0 & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{1}\partial x_{3}^{2}}\\
-x1/p2 & 0 & 0 & e^{\theta_{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{3}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{1,}x_{3}\right)}{\partial x_{1}^{2}\partial x_{3}^{2}}\\
-x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & 1+e^{\lambda} & 0 & 0 & 0 & f\left(x_{2,}x_{3}\right) & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{3}^{2}}\\
-x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & 0 & e^{\theta_{1}} & 0 & 0 & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{1}\partial x_{3}^{2}}\\
-x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & 0 & 0 & e^{\theta_{2}} & 0 & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{2}\partial x_{3}^{2}}\\
-x2/p3 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{3}\partial x_{1}^{2}} & 0 & 0 & 0 & e^{\theta_{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{1}} & \frac{\partial f\left(x_{2,}x_{3}\right)}{\partial x_{2}^{3}\partial x_{3}^{2}}\\
-x3 & f\left(x_{3,}x_{1}\right) & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{1}^{2}} & f\left(x_{3,}x_{2}\right) & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{2}^{3}} & 1+e^{\lambda} & 0 & 0\\
-x3/p1 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{1}\partial x_{2}^{3}} & 0 & e^{\theta_{1}} & 0\\
-x3/p2 & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{3,}x_{1}\right)}{\partial x_{3}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}} & \frac{\partial f\left(x_{3,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{3}^{2}\partial x_{2}^{3}} & 0 & 0 & e^{\theta_{2}}
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|cccccc}
- & x1 & x2 & x1/p2 & x1/p1 & x2/p2 & x2/p1\\
-\hline x1 & f\left(x_{1,}x_{1}\right) & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}}\\
-x2 & f\left(x_{2,}x_{1}\right) & f\left(x_{2,}x_{2}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}}\\
-x1/p2 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}}\\
-x1/p1 & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{1}\right)}{\partial x_{1}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}}\\
-x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{2}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}}\\
-x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{2}\right)}{\partial x_{2}^{1}\partial x_{2}^{1}}
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|cccccc}
- & x1 & x1/p1 & x1/p2 & x2 & x2/p1 & x2/p2\\
-\hline x1 & 1+e^{\lambda} & 0 & 0 & f\left(x_{1,}x_{2}\right) & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{2}^{2}}\\
-x1/p1 & 0 & e^{\theta_{1}} & 0 & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{1}\partial x_{2}^{2}}\\
-x1/p2 & 0 & 0 & e^{\theta_{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{1}} & \frac{\partial f\left(x_{1,}x_{2}\right)}{\partial x_{1}^{2}\partial x_{2}^{2}}\\
-x2 & f\left(x_{2,}x_{1}\right) & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{2}} & 1+e^{\lambda} & 0 & 0\\
-x2/p1 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}} & 0 & e^{\theta_{1}} & 0\\
-x2/p2 & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}} & \frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{2}} & 0 & 0 & e^{\theta_{2}}
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-f(x,y)=f(y,x) & \Longrightarrow Matrix\,\,ist\,\,symmetrisch
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die 2ten Ableitungen sind unabhängig von der Reihenfolge der Ableitung:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{2}\partial x_{1}^{1}}=\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}\partial x_{1}^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-bei Gauss:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{1}^{1}}=-\frac{\partial f\left(x_{2,}x_{1}\right)}{\partial x_{2}^{1}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-r-Vektor Bildungsvorschrift: Wie RMatrix Zeile/Spalte 1 nur mit Inputvektor
- gebildet
-\end_layout
-
-\begin_layout Section
-Konditionierung als Nebenbedinung für das Training
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\kappa & =\left|\frac{\Xi_{max}\left(R\right)}{\Xi_{min}\left(R\right)}\right|
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Da R immer positiv definit sein muss
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\kappa & =\frac{\Xi_{max}\left(R\right)}{\Xi_{min}\left(R\right)}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Der betragsmäßig maximale Eigenwerte kann mit dem Mises / Potenzverfahren
- gut gefunden werden.
- Um den minimalen zu finden nutzt man folgenden Zusammenhang:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\Xi_{min}\left(R\right)= & \frac{1}{\Xi_{max}\left(R^{-1}\right)}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula $\Xi_{max}\left(R^{-1}\right)$
-\end_inset
-
- kann mit dem Mises Verfahren ohne Probleme gefunden werden.
-\end_layout
-
-\begin_layout Plain Layout
-Die Ableitung der Konditionierung nach den Hyperparametern:
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial\kappa}{\partial\theta} & =\frac{\frac{\partial\Xi_{max}}{\partial\theta}\Xi_{min}-\Xi_{max}\frac{\partial\Xi_{min}}{\partial\theta}}{\Xi_{min}^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Eigenwerte werden wie folgt abgeleitet:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-R\vec{x} & =\Xi\vec{x}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\left(R\vec{x}\right)^{T} & =\left(\Xi\vec{x}\right)^{T}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\vec{x}^{T}R^{T} & =\Xi\vec{x}^{T}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial R\vec{x}}{\partial\theta} & =\frac{\partial\Xi\vec{x}}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial R}{\partial\theta}\vec{x}+R\frac{\partial\vec{x}}{\partial\theta} & =\frac{\partial\Xi}{\partial\theta}\vec{x}+\Xi\frac{\partial\vec{x}}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta} & =\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}+\vec{x}^{T}\Xi\frac{\partial\vec{x}}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-da die Matrix symmetrisch ist
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-R^{T} & =R
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}-\vec{x}^{T}R^{T}\frac{\partial\vec{x}}{\partial\theta}=\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}+\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}-\vec{x}^{T}R\frac{\partial\vec{x}}{\partial\theta}=\vec{x}^{T}\frac{\partial\Xi}{\partial\theta}\vec{x}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}=\frac{\partial\Xi}{\partial\theta}\vec{x}^{T}\vec{x}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\vec{x}^{T}\frac{\partial R}{\partial\theta}\vec{x}}{\vec{x}^{T}\vec{x}}=\frac{\partial\Xi}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial\kappa}{\partial\theta} & =\frac{\frac{\vec{x}_{max}^{T}\frac{\partial R}{\partial\theta}\vec{x}_{max}}{\vec{x}_{max}^{T}\vec{x}_{max}}\Xi_{min}-\Xi_{max}\frac{\vec{x}_{min}^{T}\frac{\partial R}{\partial\theta}\vec{x}_{min}}{\vec{x}_{min}^{T}\vec{x_{min}}}}{\Xi_{min}^{2}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Eigenwerte nach dem Diagonalaufschlag abgeleitet:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\partial R\vec{x}}{\partial\lambda} & =\frac{\partial\Xi\vec{x}}{\partial\lambda}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-\frac{\vec{x}^{T}Ee^{\lambda}\vec{x}}{\vec{x}^{T}\vec{x}}=\frac{\partial\Xi}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-e^{\lambda}=\frac{\partial\Xi}{\partial\theta}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Die Gradienten der Nebenbedingung können hier sehr große werden und die
- Nebenbedingung tendiert dann immer gegen eine Einheitsmatrix für R.
- Zudem ist der Berechnungsaufwand relativ hoch und der Gradient basiert
- auf der Inversen, was widerum zu Fehlern führen kann.
-\end_layout
-
-\begin_layout Section
-Checksumme:
-\end_layout
-
-\begin_layout Plain Layout
-Eine einfache Checksumme, ob die Diagonale der Einheitsmatrix entspricht.
- Wenn die Invertierung nicht funktioniert hat, kommen hier typischerweise
- Werte > 0 raus.
- Dies ist ein schneller Check um die Qualität der Invertierung zu überprüfen.
- Da die Ableitung allerdings auch auf der Inversen beruht, ist es nicht
- möglich einen Gradienten für die Nebenbedinung zu finden.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-Spur\left(RR^{-1}\right) & -N=0
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-CO-Kriging
-\end_layout
-
-\begin_layout Subsection
-Braunschweiger Model:
-\end_layout
-
-\begin_layout Plain Layout
-Ansatz von den Braunschweigern 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "han2012alternative"
-
-\end_inset
-
-, nur für 2 Fidelities:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-Z^{*}\left(\vec{x}_{0}\right)=\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-Z^{*}\left(\vec{x}_{0}\right)=\sum_{i=1}^{n_{all}}w_{i}Z\left(\vec{x}_{i}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z\left(\vec{x}_{0}\right)-Z^{*}\left(\vec{x}_{0}\right)\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Annahme der Braunschweiger:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z_{i=1}\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-E\left[Z^{*}\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-BLUE:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-E\left[Z^{*}\left(\vec{x}_{0}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-E\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}E\left[Z\left(\vec{x}_{i,j}\right)\right]-\textrm{E}\left[Z_{i=1}\left(\vec{x}_{0}\right)\right]=0
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}=1
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-MSE:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[\left(Z_{i=1}\left(\vec{x}_{0}\right)-\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z\left(\vec{x}_{i,j}\right)\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}-2Z_{i=1}\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}+\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}\right]-\textrm{E}\left[2Z_{i=1}\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{E}\left[\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Einschub, Verschiebungssatz:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-E\left[XY\right]=Cov\left[X,Y\right]+E\left[X\right]E\left[Y\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Ergibt:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{E}\left[Z_{i=1}{}^{2}\right]-2\left(Cov\left(Z_{i=1},\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)+\textrm{E}\left[Z_{i=1}\right]\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]\right)+\textrm{E}\left[\left(\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)^{2}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\textrm{MSE}\left[F\left(\vec{x}_{0}\right)\right]=\textrm{Var}\left[Z_{i=1}\right]+E\left[Z_{i=1}\right]{}^{2}-2Cov\left(Z_{i=1},\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right)-2\textrm{E}\left[Z_{i=1}\right]\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{Var}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]+\textrm{E}\left[\sum_{i=1}^{m_{f}}\sum_{j=1}^{n_{i}}w_{i,j}Z_{i,j}\right]^{2}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R=\left[\begin{array}{c|ccccc}
- & x1_{h} & x2_{h} & x1_{l} & x2_{l} & x3_{l}\\
-\hline x1_{h} & f\left(x_{1h,}x_{1h}\right) & f\left(x_{1h,}x_{2h}\right) & f\left(x_{1h,}x_{1l}\right) & f\left(x_{1h,}x_{2l}\right) & f\left(x_{1h,}x_{3l}\right)\\
-x2_{h} & f\left(x_{2h,}x_{1h}\right) & f\left(x_{2h,}x_{2h}\right) & f\left(x_{2h,}x_{1l}\right) & f\left(x_{2h,}x_{2l}\right) & f\left(x_{2h,}x_{3l}\right)\\
-x1_{l} & f\left(x_{1l,}x_{1h}\right) & f\left(x_{1l,}x_{2h}\right) & f\left(x_{1l,}x_{1l}\right) & f\left(x_{1l,}x_{2l}\right) & f\left(x_{1l,}x_{3l}\right)\\
-x2_{l} & f\left(x_{2l,}x_{1h}\right) & f\left(x_{2l,}x_{2h}\right) & f\left(x_{2l,}x_{1l}\right) & f\left(x_{2l,}x_{2l}\right) & f\left(x_{2l,}x_{3l}\right)\\
-x3_{l} & f\left(x_{3l,}x_{1h}\right) & f\left(x_{3l,}x_{2h}\right) & f\left(x_{3l,}x_{1l}\right) & f\left(x_{3l,}x_{2l}\right) & f\left(x_{3l,}x_{3l}\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Effizienz
-\end_layout
-
-\begin_layout Plain Layout
-Likelihood nach ys ableiten, um unwichtige Member rauszufiltern, ORdinary
- Kriging:
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\begin_inset Formula 
-\begin{align*}
-\log(N)= & -n\log\left(\sigma^{2}\right)-\log\left(\det(\mathbf{\mathbf{R}})\right)-\frac{1}{\sigma^{2}}\left(\vec{y}_{s}-\frac{\vec{y}_{s}^{T}\mathbf{R}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\overrightarrow{F}\right)^{T}\mathbf{\mathbf{R}}^{-1}\left(\vec{y}_{s}-\frac{\vec{y}_{s}^{T}\mathbf{R}^{-1}\vec{F}}{\vec{F}^{T}\mathbf{R}^{-1}\vec{F}}\overrightarrow{F}\right)
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Spur schätzen 
-\begin_inset Formula 
-\[
-Spur\left(R\right)=E\left[\vec{d}^{T}R\vec{d}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-Spur\left(R\right)\approx\frac{1}{N}\sum\vec{d}^{T}R\vec{d}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-\vec{d}=\left[\begin{array}{c}
-N\left(0,1\right)\\
-\vdots\\
-N\left(0,1\right)
-\end{array}\right]
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Invertierung teilweise sparen:
-\end_layout
-
-\begin_layout Plain Layout
-Beim Quasi Newton Line-Search keine Gradienten berechnen und dadurch kann
- dort auf die Invertierung verzichtet werden.
- Stattdessen lösen wir das durch die Cholesky Zerlegung und einem LGS.
-\end_layout
-
-\begin_layout Plain Layout
-Nur bei einem äußeren QN Schritt, wird die Matrix invertiert und dann der
- Gradient damit berechnet.
-\end_layout
-
-\begin_layout Plain Layout
-Randomized Algorithms for Estimating the Trace of an Implicit Symmetric
- Positive Semi-Deﬁnite Matrix
-\end_layout
-
-\begin_layout Plain Layout
-A stochastic estimator of the trace of the influence matrix for laplacian
- smoothing splines M.F.
- Hutchinson a
-\end_layout
-
-\begin_layout Plain Layout
-Efficient Implementation of Gaussian Processes, Mark Gibbs David J.C.
- MacKay
 \end_layout
 
 \end_inset

@@ -83,10 +83,10 @@ name "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Da die in dieser Arbeit entwickelte Kriging-Software einen hohen Anwendungsbezug
- hat und auch industriell eingesetzt werden soll, wurde bei der mathematischen
- Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnische
- Umsetzbarkeit gelegt.
+Da die in dieser Arbeit entwickelte Ersatzmodell-Software einen hohen Anwendungs
+bezug hat und auch industriell eingesetzt werden soll, wurde bei der mathematisc
+hen Herleitung ein besonderes Augenmerk auf eine möglichst gute softwaretechnisc
+he Umsetzbarkeit gelegt.
  Dieser Punkt wird in der einschlägigen Literatur oftmals außer Acht gelassen,
  was die Effizienz der Software sowie die Generalisierbarkeit negativ beeinfluss
 t.
@@ -103,6 +103,8 @@ Im ersten Abschnitt wird ein kurzer Überblick über die Historie und die
  das Co-Kriging) Gültigkeit besitzen.
  Anschließen werden die Unterschiede in den Kriging-Unterverfahren und deren
  Umsetzung beschrieben.
+ Im letzten Abschnitt wird die hier entwickelte Umsetzung des Kriging-Verfahrens
+ mit anderen Verfahren aus der Literatur verglichen.
  
 \end_layout
 
@@ -123,14 +125,15 @@ Unter Kriging versteht man spezielle statistische Verfahren zur Interpolation
  Der Name des Verfahrens stammt von dem südafrikanischen Bergbauingenieur
  Daniel Krige (1951).
  Dieser versuchte eine optimale Interpolationsmethode für den Bergbau zu
- entwickeln, die auf der räumlichen Abhängigkeit von Messpunkten 
+ entwickeln, die auf der räumlichen Abhängigkeit von Messpunkten basiert
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "kbiqb1953statistical"
 
 \end_inset
 
- basiert.
+.
  Das Verfahren wurde später nach ihm benannt.
  Der französische Mathematiker Georges Matheron (1963) entwickelte aus Kriges
  Arbeit die Kriging-Theorie 
@@ -159,6 +162,28 @@ key "shepard1968two"
 \end_layout
 
 \begin_layout Itemize
+Statistische Verfahren wie das Kriging können zusätzlich zum Funktionswert
+ auch eine Unsicherheit vorhersagen.
+ Dies kann innerhalb einer Optimierung ausgenutzt werden.
+ Weitere Erläuterungen dazu können in den Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Optimierungsstrategie"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Multifidelity-Optimierungsstrate"
+
+\end_inset
+
+ gefunden werden.
+ 
+\end_layout
+
+\begin_layout Itemize
 Die Initialisierung ist sehr einfach, d.h.
  das Verfahren liefert so gut wie immer plausible Ergebnisse, unabhängig
  von irgendwelchen Startparametern.
@@ -172,9 +197,7 @@ Die Initialisierung ist sehr einfach, d.h.
 
 \begin_layout Itemize
 Das Extrapolationsverhalten ist bei einer Optimierung robust, da das Kriging-Ver
-fahren in diesem Fall einen globalen Erwartungswert mit hoher Varianz liefert
- und der Optimierungsalgorithmus nicht in diese Bereiche gehen wird.
- 
+fahren in diesem Fall einen globalen Erwartungswert mit hoher Varianz liefert.
 \end_layout
 
 \begin_layout Itemize
@@ -214,31 +237,9 @@ key "Krueger2013"
 \end_layout
 
 \begin_layout Itemize
-Die Kriging-Verfahren sind sehr vielfältig, beispielsweise ist die Nutzung
- von Gradienteninformationen (Gradient Enhanced Kriging) oder verschiedener
- Güteklassen (CO-Kriging) möglich.
- 
-\end_layout
-
-\begin_layout Itemize
-Statistische Verfahren wie das Kriging können zusätzlich zum Funktionswert
- auch eine Unsicherheit vorhersagen.
- Dies kann innerhalb einer Optimierung ausgenutzt werden.
- Weitere Erläuterungen dazu können in den Kapiteln 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Optimierungsstrategie"
-
-\end_inset
-
- und 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Multifidelity-Optimierungsstrate"
-
-\end_inset
-
- gefunden werden.
+Die Kriging-Verfahren sind sehr vielfältig.
+ Beispielsweise ist die Nutzung von Gradienteninformationen (Gradient Enhanced
+ Kriging) oder verschiedener Güteklassen (CO-Kriging) möglich.
  
 \end_layout
 
@@ -253,11 +254,72 @@ name "sec:Co-Kriging"
 
 \end_layout
 
+\begin_layout Standard
+Dieses Kapitel bietet eine kompakte Herleitung der hier verwendeten Kriging-Grun
+dgleichungen und setzt einige grundlegende Kenntnisse im Bereich der multivariat
+en Statistik voraus.
+ Einen guten Einstieg in diese Thematik bieten die Arbeiten von 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lophaven2002aspects"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "mackay1998introduction"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Allgemeine Vorbemerkungen und Definitionen
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 17
+placement o
+overhang 0in
+width "45col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /home/schm_ad/Diss/images/KrigingKapitel/Konfiinterval.eps
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Kriging-Erwartungswert--und"
+
+\end_inset
+
+Kriging Erwartungswert- und Varianz-Vorhersage für eine eindimensionale
+ Funktion mit einer Gütestufe.
+ Die Varianz ist als 99% (
+\begin_inset Formula $3\sigma$
+\end_inset
+
+) Konfidenzintervall eingezeichnet.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Angenommen es existiert ein Programm (bspw.
  ein Strömungslöser), welches in 
 \begin_inset Formula $s$
@@ -274,37 +336,6 @@ Angenommen es existiert ein Programm (bspw.
 \end_inset
 
  berechnet.
- Weiterhin wird ein Informationsgehalt 
-\begin_inset Formula $I_{i}$
-\end_inset
-
- der jeweiligen Gütestufe 
-\begin_inset Formula $i\in\left\{ 1,...,s\right\} $
-\end_inset
-
- definiert, der bei steigender Gütezahl sinkt 
-\begin_inset Formula $I_{i}>I_{i+1},i\in\left\{ 1,...,s-1\right\} $
-\end_inset
-
-.
- Die erste Gütestufe ist somit die hochwertigste.
- Ebenfalls wird die Annahme getroffen, dass eine Gütestufe 
-\begin_inset Formula $i$
-\end_inset
-
- mehr Zeit 
-\begin_inset Formula $t_{i},i\in\left\{ 1,...,s\right\} $
-\end_inset
-
- zum Berechnen eines Outputs 
-\begin_inset Formula $y_{i},i\in\left\{ 1,...,s\right\} $
-\end_inset
-
- benötigt als eine niedrigere: 
-\begin_inset Formula $t_{i}>t_{i+1},i\in\left\{ 1,...,s-1\right\} $
-\end_inset
-
-.
  
 \end_layout
 
@@ -338,7 +369,7 @@ n Erwartungswert
 \end_layout
 
 \begin_layout Subsection*
-Bedingung für die Nutzung innerhalb einer AutoOpti Optimierung
+Verwendung der Kriging-Verfahren in einer Optimierung
 \begin_inset CommandInset label
 LatexCommand label
 name "par:DreiKrigingGleichungen"
@@ -349,8 +380,8 @@ name "par:DreiKrigingGleichungen"
 \end_layout
 
 \begin_layout Standard
-Für die Nutzung des Kriging-Verfahrens innerhalb einer Optimierung mit AutoOpti
- (siehe Kapitel 
+Für die Nutzung des Kriging-Verfahrens innerhalb einer Optimierung (siehe
+ Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Ersatzmodellbeschleunigung"
@@ -381,6 +412,22 @@ Den geschätzten bedingten Erwartungswert
 \begin_inset Formula $g$
 \end_inset
 
+, welcher durch Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KoKrigingKovarianzVorhersage-1-1"
+
+\end_inset
+
+ berechnet wird.
+ In Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Herleitung-Krige-Schätzer"
+
+\end_inset
+
+ ist die analytische Herleitung dieser Gleichungen zu finden.
  
 \end_layout
 
@@ -389,6 +436,22 @@ Die Unsicherheit der Vorhersage in Form einer Varianz:
 \begin_inset Formula $var\left[Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right]$
 \end_inset
 
+, welche durch Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:VarianzVorhersage"
+
+\end_inset
+
+ berechnet wird.
+ In Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Herleitung-Krige-Schätzer"
+
+\end_inset
+
+ ist die analytische Herleitung dieser Gleichungen zu finden.
  
 \end_layout
 
@@ -417,6 +480,188 @@ Die Kovarianzen
 \begin_inset Formula $g_{1},g_{2}\in\left\{ 1,...,s\right\} $
 \end_inset
 
+, welche durch Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzPredictor"
+
+\end_inset
+
+ berechnet wird.
+ In Abschnitt 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Herleitung-Krige-Schätzer"
+
+\end_inset
+
+ ist die analytische Herleitung dieser Gleichungen zu finden.
+ 
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Kriging-Erwartungswert--und"
+
+\end_inset
+
+ zeigt die exemplarische Vorhersage eines trainierten Kriging-Modells mit
+ einer Gütestufe (
+\begin_inset Formula $g=1)$
+\end_inset
+
+ und vier Stützstellen.
+ In schwarz eingezeichnet ist der Erwartungswert 
+\begin_inset Formula $Z_{g}^{*}\left(\vec{x}\right)$
+\end_inset
+
+ und in blau die vorhergesagte Varianz 
+\begin_inset Formula $var\left[Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right]$
+\end_inset
+
+ dargestellt als 
+\begin_inset Formula $3\sigma$
+\end_inset
+
+ Konfidenzintervall, wobei 
+\begin_inset Formula $\sigma=\sqrt{var\left[Z_{g}\left(\vec{x}\right)-Z_{g}^{*}\left(\vec{x}\right)\right]}$
+\end_inset
+
+).
+ Das Beispiel dient dazu, das grundlegende Verhalten des Kriging-Verfahren
+ zu erläutern: 
+\end_layout
+
+\begin_layout Itemize
+Das Verfahren besitzt den globalen Erwartungswert 
+\begin_inset Formula $\beta_{g}$
+\end_inset
+
+, wobei für jede Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
+ ein eigener Erwartungswert vorhanden ist.
+ Nur in der Nähe von bekannten Stützstellen ändert sich dieser Erwartungswert.
+ Die Bestimmung dieses globalen Erwartungswerts wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
+
+\end_inset
+
+ beschrieben.
+ 
+\end_layout
+
+\begin_layout Itemize
+Das Verfahren besitzt eine globale Varianz 
+\begin_inset Formula $\textrm{var}\left[Z_{g}\right]$
+\end_inset
+
+, welche sich in der Nähe von bekannten Stützstellen verringert.
+ Jede Gütestufe besitzt eine eigene globale Varianz, welche über das Trainingsve
+rfahren bestimmt wird, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Das Abstandsmaß oder die 
+\begin_inset Quotes gld
+\end_inset
+
+Wirkweite
+\begin_inset Quotes grd
+\end_inset
+
+ von Stützstellen wird während des Trainings eingestellt, siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+.
+ Das Auffinden dieser 
+\begin_inset Quotes gld
+\end_inset
+
+Wirkweiten
+\begin_inset Quotes grd
+\end_inset
+
+ ist die Hauptaufgabe des Trainingsverfahrens und wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+ beschrieben.
+\end_layout
+
+\begin_layout Itemize
+Innerhalb einer Trainingsiteration muss jeweils eine Matrix der Größe 
+\begin_inset Formula $n_{all}\times n_{all}$
+\end_inset
+
+ (
+\begin_inset Formula $n_{all}$
+\end_inset
+
+ steht für die gesamte Anzahl an Stützstellen oder partiellen Ableitungen,
+ siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Herleitung-Krige-Schätzer"
+
+\end_inset
+
+) invertiert werden.
+ Diese Operation besitzt eine Komplexität von 
+\begin_inset Formula $\mathcal{O}\left(n^{3}\right)$
+\end_inset
+
+, was das Verfahren numerisch sehr aufwändig macht.
+ Aus diesem Grund wurden im Rahmen dieser Arbeit zahlreiche Methoden entwickelt,
+ um diesen Prozess zu beschleunigen, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:MinimierungsverfahrenTraining"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Numerische-Effizienz-steigern"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Im Normalfall werden die Sützstellen interpoliert und die vorhergesagt Unsicherh
+eit ist an diesen Stellen.
+ Das Kriging-Verfahren bietet aber auch die Möglichkeit die Stützstellen
+ zu approximieren, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RegularisierungUndRauschen"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -430,6 +675,13 @@ Im Folgenden sollen diese drei Schätzer hergeleitet werden.
 
 \begin_layout Subsection
 Herleitung Krige-Schätzer
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Herleitung-Krige-Schätzer"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -463,7 +715,7 @@ key "Krueger2013"
 \end_inset
 
 .
- Die Unterschiede des hier vorgestellten Ansatzes zu den anderen Arbeiten
+ Die Unterschiede des hier vorgestellten Ansatzes zu den genannten Arbeiten
  werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -501,8 +753,7 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \begin_inset Formula $y_{i}^{*}\left(\vec{x}\right)$
 \end_inset
 
- durch eine gewichtete Summe bestimmt werden kann.
- Diese Summe wird aus den bekannten Stützstellen 
+ durch eine gewichtete Summe aus den bekannten Stützstellen 
 \begin_inset Formula $y_{i}\left(\vec{x}_{j}\right)$
 \end_inset
 
@@ -510,7 +761,8 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 \begin_inset Formula $w_{i,j}(g\vec{,x}),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
 \end_inset
 
- gebildet, wobei die Gewichte von der vorherzusagenden Gütestufe 
+ gebildet werden kann, wobei die Gewichte von der vorherzusagenden Gütestufe
+ 
 \begin_inset Formula $g$
 \end_inset
 
@@ -522,16 +774,24 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
  beschreibt die Anzahl der Stützstellen für die jeweilige Gütestufe.
  Der Einfachheit halber werden die Stützstellen wie auch die Gewichte zukünftig
  durch die folgenden Vektoren beschrieben 
-\begin_inset Formula $\vec{y}_{i}=\left(y_{i}\left(\vec{x}_{1}\right),...,y_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} $
+\begin_inset Formula 
+\begin{equation}
+\vec{y}_{i}=\left(y_{i}\left(\vec{x}_{1}\right),...,y_{i}\left(\vec{x}_{n_{i}}\right)\right)^{T},i\in\left\{ 1,...,s\right\} 
+\end{equation}
+
 \end_inset
 
  und 
-\begin_inset Formula $\vec{w}_{i}(g\vec{,x})=\left(w_{i,1}(g\vec{,x}),...,w_{i,n_{i}}(g\vec{,x})\right)^{T},i\in\left\{ 1,...,s\right\} $
+\begin_inset Formula 
+\begin{equation}
+\vec{w}_{i}(g\vec{,x})=\left(w_{i,1}(g\vec{,x}),...,w_{i,n_{i}}(g\vec{,x})\right)^{T},i\in\left\{ 1,...,s\right\} 
+\end{equation}
+
 \end_inset
 
 .
  Da die Stützstellen 
-\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right),i\in\left\{ 1,...,s\right\} ,j\in\left\{ 1,...,n_{i}\right\} $
+\begin_inset Formula $y_{i}\left(\vec{x}_{j}\right)$
 \end_inset
 
  einer Gütestufe 
@@ -720,7 +980,7 @@ Damit lässt sich folgende Minimierungsaufgabe mit Nebenbedingung stellen:
 \begin{align}
 \begin{cases}
 \min_{w_{1},...,w_{n}}\left(\textrm{var}[Z_{g}\left(\vec{x}\right)]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w}(g\vec{,x})\right)\\
-\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{k} & =0
+\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{k}=0
 \end{cases}\label{eq:Minimierungsaufgabe-1-2}
 \end{align}
 
@@ -760,28 +1020,8 @@ key "bronteijn2008taschenbuch"
 
 \begin_inset Formula 
 \[
-\nabla_{\lambda,w}\left(\textrm{var}\left[F_{g}\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=0
+\nabla_{\lambda,w}\left(\textrm{var}\left[F_{g}\left(\vec{x}\right)\right]+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=\vec{0}
 \]
-
-\end_inset
-
-Unter Berücksichtigung von Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VarianzSchaetzfehlerGewichte"
-
-\end_inset
-
- kann man das folgende Gleichungssystem ableiten, wobei 
-\begin_inset Formula $\nabla_{w}=\left(\frac{\partial}{\partial w_{1}},...,\frac{\partial}{\partial w_{n_{all}}}\right)^{T}$
-\end_inset
-
-:
-\begin_inset Formula 
-\begin{align}
-\nabla_{w}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w(g\vec{,x})}+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=\vec{0}\label{eq:MinimierungMitKovarianz-1-2}\\
-\nabla_{\lambda}\left(\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-2\overrightarrow{\textrm{c}}(g\vec{,x})^{T}\vec{w}(g\vec{,x})+\vec{w}(g\vec{,x})^{T}\mathbf{Cov}\vec{w}(g\vec{,x})+\lambda\left(\sum_{i=1}^{s}\beta_{i}\sum_{j=1}^{n_{i}}w_{i,j}(g\vec{,x})-\beta_{g}\right)\right)=0\nonumber 
-\end{align}
 
 \end_inset
 
@@ -909,22 +1149,14 @@ E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g\vec{,x})^{T}\mathbf{Cov
 
 \end_inset
 
-Verwendet man einen Likelihood-Schätzer für die 
-\begin_inset Formula $\beta_{i},i\in\left\{ 1,...,s\right\} $
-\end_inset
-
- Einträge des Vektors 
-\begin_inset Formula $\vec{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
-\end_inset
-
-, wie er in Kapitel 
+Verwendet man den Likelihood-Schätzer aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
 
 \end_inset
 
- beschrieben wird, dann gilt: 
+ so ergibt sich: 
 \begin_inset Formula 
 \[
 \mu=1
@@ -948,18 +1180,7 @@ E\left[Z_{g}^{*}\left(\vec{x}\right)\right] & =\vec{c}(g\vec{,x})^{T}\mathbf{Cov
 
 \end_inset
 
-Da bei dieser Art der Formulierung der Vektor 
-\begin_inset Formula $\vec{F}$
-\end_inset
 
- und der Wert 
-\begin_inset Formula $\beta_{g}$
-\end_inset
-
- für alle Kriging-Methoden gleich bleiben, bietet diese Art der Formulierung
- einen Vorteil bei der Vorhersage, insbesondere dann, wenn verschiedene
- Gütestufen vorhergesagt werden sollen.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -992,7 +1213,7 @@ reference "eq:VarianzSchaetzfehlerGewichte"
  des Schätzfehlers:
 \begin_inset Formula 
 \begin{align}
-\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}_{0}\right)\right]-\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{c}(g\vec{,x})+\frac{\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:VarianzVorhersage}
+\textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{c}(g\vec{,x})+\frac{\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:VarianzVorhersage}
 \end{align}
 
 \end_inset
@@ -1186,15 +1407,11 @@ reference "subsec:Kovarianz-zwischen-zwei"
 
 \end_inset
 
-Weiterhin sollen zwei verschiedene Gütestufen betrachtet werden, wobei 
-\begin_inset Formula $1$
+Weiterhin sollen zwei Gütestufen 
+\begin_inset Formula $s=2$
 \end_inset
 
- die höhere Güte beschreibt und 
-\begin_inset Formula $2$
-\end_inset
-
- die niedrigere.
+ betrachtet werden.
  Ein häufig gewählter Ansatz für ein Kovarianzmodell ist der Folgende:
 \begin_inset Formula 
 \begin{align}
@@ -1211,15 +1428,11 @@ Der Prozess hoher Güte
 \begin_inset Formula $Z_{2}$
 \end_inset
 
- modelliert, wobei 
-\begin_inset Formula $a\in\mathbb{R}$
-\end_inset
-
- den Skalierungsfaktor darstellt und einem Differenzprozess 
+ und einem Differenzprozess 
 \begin_inset Formula $Z_{diff}$
 \end_inset
 
-.
+ modelliert.
  Weiterhin wird angenommen, dass der Differenzprozess 
 \begin_inset Formula $Z_{diff}\left(\vec{x}\right)$
 \end_inset
@@ -1231,8 +1444,7 @@ Der Prozess hoher Güte
  unkorreliert sind, also gilt:
 \begin_inset Formula 
 \begin{align}
-cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right) & =0\\
-cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0\label{eq:KovarianzUnkorreliert}
+cov\left(Z_{2}\left(\vec{x}\right),Z_{diff}(\vec{x}^{'})\right)=cov\left(Z_{diff}\left(\vec{x}\right),Z_{2}(\vec{x}^{'})\right) & =0\label{eq:KovarianzUnkorreliert}
 \end{align}
 
 \end_inset
@@ -1274,7 +1486,7 @@ So sind innerhalb der Software nur noch zwei Kovarianzfunktionen
 
  zu modellieren.
  Die konkrete Modellierung und Verwendung dieser Kovarianzfunktionen innerhalb
- des Kriging-Verfahrens wird in Kapitel 
+ der Kriging-Verfahren wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Kovarianzmatrix"
@@ -1364,8 +1576,8 @@ Das Gradient-Enhanced-Kriging (GEK) ist eine Erweiterung des Ordinary-Kriging.
 \end_inset
 
  die Anzahl der gegebenen partiellen Ableitungen.
- Es müssen also auch Kovarianzen/Korrelationen zwischen den partiellen Ableitung
-en und den Funktionswerten gebildet werden können.
+ Es müssen also auch Kovarianzen zwischen den partiellen Ableitungen und
+ den Funktionswerten gebildet werden können.
  Um im Kriging Modell partielle Ableitungen verarbeiten zu können, ist es
  also notwendig, dass die Kovarianzfunktionen in der folgenden Form gebildet
  werden:
@@ -1500,7 +1712,7 @@ ertvektor
 
 , wobei an jeder entprechenden Stelle einer partiellen Ableitung eine Null
  eingetragen werden muss.
- Damit ergibt sich der Erwartungswertvektor zu:
+ Damit ergibt sich der Erwartungswertvektor für das GEK-Verfahren zu:
 \begin_inset Formula 
 \begin{align}
 \vec{F}= & \left[\begin{array}{c}
@@ -1550,142 +1762,6 @@ key "Krueger2013,han2009improving"
 
  verwiesen.
  
-\end_layout
-
-\begin_layout Section
-Anwendung der Verfahren
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Kurze Beschreibung, erst Training mit den vorhandenen Daten damit bestimmt
- man die Hyperparameter und das Modell ist eingestellt.
- 
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Damit können dann Vorhersagen für beliebige Orte getroffen werden+ Unsicherheits
-vorhersage und Kovarianz zwischen zwei Vorhersabge, 
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Für das Co-Kriging können alle diese Vorhersagen auch für die unterscheidlichen
- Gütestufen getroffen werden.
-\end_layout
-
-\begin_layout Standard
-
-\color magenta
-Herausfordernd dabei ist das Training durch die notwendige Invertierung
- der Maitrx cov.
- Weiterhin kann es dabei zu numerischen instabilitäten kommen, die es zu
- verhindern gilt.
- 
-\end_layout
-
-\begin_layout Standard
-Verweise zu den jeweiligen Kapiteln mit den Lösungen.
- 
-\end_layout
-
-\begin_layout Section
-Ähnlichkeit zwischen Bedingter Normalverteilung und Kriging
-\end_layout
-
-\begin_layout Standard
-In der hier beschriebenen Kriging-Herleitung steckt vorerst keinerlei statistisc
-he Verteilungsannahme.
- Die Herleitung basiert auf einer gewichteten Summe von bekannten Stützstellen.
- Die Normalverteilungsannahme wird erst für das Likelihood-Verfahren getroffen.
- Dennoch lässt sich eine starke Ähnlichkeit der Kriging-Vorhersagen zu einem
- bedingten Gaußprozess feststellen.
- Definiert man eine multivariat normalverteilte Zufallsvariable 
-\begin_inset Formula $Z$
-\end_inset
-
- mit dem Erwartungswertvektor 
-\begin_inset Formula $\vec{F}$
-\end_inset
-
- und der Kovarianzmatrix 
-\begin_inset Formula $\mathbf{Cov}$
-\end_inset
-
-, so kann man schreiben:
-\begin_inset Formula 
-\[
-Z\sim\mathcal{N}\left(\vec{F},\mathbf{Cov}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Ist der Zufallsvektor partiell bekannt, so ist der bedingte unbekannte Teil
- des Zufallsvektors selbst wieder multivariat verteilt.
- Wobei folgend 
-\begin_inset Formula $Z_{2}$
-\end_inset
-
- als bekannter Teil und 
-\begin_inset Formula $Z_{1}$
-\end_inset
-
- als unbekannter Teil definiert werden
-\begin_inset Formula 
-\[
-Z=\left(\begin{array}{c}
-Z_{1}\\
-Z_{2}
-\end{array}\right)\sim\mathcal{N}\left(\left(\begin{array}{c}
-F_{1}\\
-F_{2}
-\end{array}\right),\left(\begin{array}{cc}
-Cov_{11} & Cov_{12}\\
-Cov_{21} & Cov_{22}
-\end{array}\right)\right)
-\]
-
-\end_inset
-
-Daraus folgt (siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "fahrmeir2015multivariate"
-
-\end_inset
-
-):
-\begin_inset Formula 
-\[
-Z_{1}|Z_{2}\sim\mathcal{N}\left(F_{1}+Cov_{12}Cov_{22}^{-1}\left(X_{2}-F_{2}\right),Cov_{11}-Cov_{12}Cov_{22}^{-1}Cov_{21}\right)
-\]
-
-\end_inset
-
-Vergleicht man diese mit der Kriging-Gleichung für den Erwartungswert 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KoKrigingKovarianzVorhersage-1-1"
-
-\end_inset
-
- und der Gleichung für die Varianzvorhersage 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:VarianzSchaetzfehlerGewichte"
-
-\end_inset
-
-, so sind die Ähnlichkeiten trotz der unterschiedlichen Herleitungen sehr
- groß.
 \end_layout
 
 \begin_layout Section
@@ -1778,14 +1854,9 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
  Dies bietet numerische Vorteile, da hierfür nur die jeweiligen Submatrizen
  der gesamten Kovarianzmatrix invertiert werden müssen und auch der jeweilige
  Hyperparamterraum kleiner ist.
- Bedingt ist allerdings, dass an jedem bekannten Punkt niedriger Güte auch
- eine Stützstelle hoher Güte bekannt sein muss.
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Aufbauend auf der Arbeit von 
+ Dieser Ansatz bedingt allerdings, dass an jedem bekannten Punkt niedriger
+ Güte auch eine Stützstelle hoher Güte bekannt sein muss.
+ Aufbauend auf der Arbeit von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
@@ -1803,8 +1874,7 @@ key "forrester2007multi"
  In diesem wird ein Ordinary-Kriging-Modell mit den Daten niedrigerer Güte
  aufgestellt.
  Die fehlenden Punkte niedriger Güte an Stellen hoher Güte werden dann aus
- den Vorhersagen des Ordinary-Kriging Modells erzeugt.
- Der reale Prozess wird also durch einen Kriging-Prozess ersetzt.
+ den Vorhersagen des Ordinary-Kriging Modells niedriger Güte approximiert.
  Die verwendeten Vorhersagen sind allerdings mit einer Unsicherheit behaftet,
  stellen also selbst Verteilungen dar.
  Inwiefern dieser Umstand beachtet werden sollte, wird in der Arbeit von
@@ -1819,7 +1889,6 @@ key "forrester2007multi"
  
 \end_layout
 
-\end_deeper
 \begin_layout Enumerate
 In dem hier entwickelten Modell werden die Hyperparameter-Sätze vollständig
  auf einmal trainiert und sind damit nicht mehr unabhängig, siehe Kapitel
@@ -1867,11 +1936,12 @@ key "Kennedy2000"
 \end_layout
 
 \begin_layout Enumerate
-Die Trainingszeiten steigen an, da die gesamte Kovarianzmatrix zerlegt werden
- muss und der zu trainierende Hyperparameterraum deutlich größer ist.
- In den hier betrachteten Anwendungsfällen sind die Prozesskettenzeiten
- allerdings so erheblich, dass die Trainingszeit immernoch keine wesentliche
- Rolle spielt (siehe Kapitel 
+Die Trainingszeiten steigen an, da die gesamte Kovarianzmatrix Cholesky-zerlegt
+ werden muss und der zu trainierende Hyperparameterraum deutlich größer
+ ist.
+ In den hier betrachteten Turbomaschinen-Anwendungsfällen sind die Prozessketten
+zeiten allerdings so dominant, dass die Trainingszeit immernoch keine wesentlich
+e Rolle spielt (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Reale-Turbomaschinen-Optimierung-1"
@@ -1894,7 +1964,7 @@ key "han2012alternative"
  In dieser Arbeit wird ein Co-Kriging-Modell mit drei unabhängigen Kovarianzfunk
 tionen beschrieben.
  Dies bedeutet, dass drei verschiedene Hyperparametersätze gleichzeitig
- trainiert werden und entspricht damit den Gleichungen 
+ trainiert werden und entspricht damit den Gleichungen (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:CovHighHighBeschreibung-1"
@@ -1908,11 +1978,10 @@ reference "eq:CovLowLowBeschreibung"
 
 \end_inset
 
-.
+).
  Dieses Vorgehen führt dadurch zu erheblichen numerischen Problemen.
  Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
- nicht mehr gesichert und damit das Verfahren praktisch nicht mehr nutzbar
- ist.
+ nicht mehr gesichert.
  Um dieses Problem zu umgehen, wurde in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1930,30 +1999,7 @@ n beinhaltet, besteht der Unterschied nur noch in einer eigenen globalen
 g zwischen den Gütestufen dargestellt werden.
  Dies stellt jedoch eine erhebliche Vereinfachung des Co-Kriging-Modells
  dar, welche für die meisten Anwendungen nicht ausreichend ist.
- In dieser und in der Arbeit von 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kennedy2000"
-
-\end_inset
-
- werden zusätzliche Annahmen über die Kovarianz getroffen, wodurch sich
- die Gleichungen vereinfachen und numerische Probleme vermieden werden (siehe
- Gleichungen 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:asd-1"
-
-\end_inset
-
--
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:KovarianzFunktionenalleDrei"
-
-\end_inset
-
-).
+ 
 \end_layout
 
 \end_body

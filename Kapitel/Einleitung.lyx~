@@ -71,6 +71,22 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Einleitung
 \end_layout
@@ -104,17 +120,15 @@ s- und den Energiemaschinenherstellern.
 \end_layout
 
 \begin_layout Standard
-Um diesen Problemen zu begegnen, sind moderne CFD-, CSM- und Optimierungsverfahr
-en ein sehr wichtiges Werkzeug.
+Um diesen Herausforderungen zu begegnen, sind moderne CFD-, CSM- und Optimierung
+sverfahren ein sehr wichtiges Werkzeug.
  Sie erlauben es, die komplexen Strömungsvorgänge in Turbomaschinen am Computer
- zu simulieren und unter Berücksichtigung multipler Ziele und Nebenbedingungen
+ zu simulieren, strukturmechanische Kennwerte zu ermitteln und somit die
+ Turbomaschine unter Berücksichtigung multipler Ziele und Nebenbedingungen
  zu optimieren.
  Diese noch relativ neuen Werkzeuge führen zu einer Verlagerung von sehr
  kostspieligen experimentellen Untersuchungen hin zu Simulationen am Computer
  durch CSM- und CFD-Verfahren.
- Heutzutage werden experimentelle Untersuchungen vermehrt zur Validierung
- und Kalibrierung von CFD-Verfahren verwendet und finden zudem Anwendung
- im Bereich der Grundlagenforschung von Strömungsphänomenen.
  
 \begin_inset Newline newline
 \end_inset
@@ -122,7 +136,7 @@ en ein sehr wichtiges Werkzeug.
 Durch die neuen numerischen Verfahren wurden die Auslegungszyklen im Turbomaschi
 nenbereich in den letzten Jahren nicht nur beschleunigt, sondern auch robuster.
  Allerdings sind die genutzten Verfahren mit einem so hohen numerischen
- Aufwand verbunden, dass vereinfachte CFD-Modelle verwendet werden.
+ Aufwand verbunden, dass oftmals vereinfachte Modelle verwendet werden.
  Durch diese Vereinfachungen können diese Modelle allerdings nicht alle
  physikalischen Phänomene auflösen.
 \end_layout
@@ -151,14 +165,14 @@ eig entwickelt hat.
 \end_layout
 
 \begin_layout Standard
-Die wissenschaftliche Herausforderung liegt also in der Anwendung und Weiterentw
-icklung von Optimierungsstrategien und der entsprechenden Methoden, welche
- industrielle Anforderungen erfüllen.
+Die wissenschaftliche Herausforderung liegt also in der Methodenentwicklung
+ und Anwendung von Optimierungsstrategien, welche die industriellen Anforderunge
+n berücksichtigen.
  So soll es möglich werden, komplette Komponenten bzw.
  Subsysteme von Gasturbinen auszulegen und zu optimieren.
  Zu diesem Zweck wird ein effizientes Optimierungsverfahren entwickelt und
- getestet, wobei ein besonderes Augenmerk auf die industrielle HPC-Hardwareumgeb
-ung und eine hohe numerische Effizienz gelegt wird.
+ getestet, wobei ein besonderes Augenmerk auf die HPC-Hardwareumgebung und
+ eine hohe numerische Effizienz gelegt wird.
  
 \end_layout
 
@@ -189,7 +203,7 @@ Bei Optimierungen im Turbomaschinenbereich handelt es sich meist um nichtlineare
  in den letzten Jahren zahlreiche Optimierungsverfahren entwickelt und erfolgrei
 ch für die Turbomaschinenauslegung eingesetzt worden.
  Innerhalb dieses Abschnitts werden die in der Turbomaschinenforschung aktuell
- verwendeten Verfahren kurz beschrieben und mit Literatur belegt.
+ verwendeten Verfahren kurz beschrieben.
  Zu jedem Verfahren wird erst eine allgemeine Übersichtsliteratur vorgestellt
  und anschließend folgen einige Veröffentlichungen zu industrienahen Anwendungen
  dieser Verfahren aus den letzten sieben Jahren.
@@ -205,13 +219,13 @@ Als erstes werden einige allgemeine Beiträge aus dem Bereich der evolutionären
  Optimierungsalgorithmen vorgestellt.
  Bei evolutionären Optimierungsalgorithmen handelt es sich um stochastische
  Optimierungsverfahren, welche der Funktionsweise der natürlichen Evolution
- von Lebewesen nachempfunden wird.
+ von Lebewesen nachempfunden sind.
  Im Wesentlichen werden bei einem evolutionären Algorithmus aus einem vorhandene
 n Pool bekannter Daten die besten selektiert, anschließend rekombiniert
  und/oder mutiert und wieder evaluiert.
  Dieser Prozess wird solange wiederholt, bis ein zufriedenstellendes Ergebnis
  erreicht ist.
- Die Vorteile dieses Verfahrens liegen in der globalen Suche nach einem
+ Die Vorteile dieses Verfahrens liegen in der Suche nach einem globalen
  Optimum ohne dass viele Anforderungen an Zielfunktionen und Nebenbedingungen
  gestellt werden.
  Die Zielfunktion muss weder differenzierbar noch an jeder Stelle auswertbar
@@ -279,8 +293,8 @@ key "Sozio2013"
  stellt ein aktuelles und industrienahes Beispiel dar.
  Innerhalb dieser Arbeit wird ein Auslegungsprozess für gegenläufige Axialturbin
 en auf Basis eines evolutionären Algorithmus vorgestellt.
- Dieser erzeugt ausgehend von eindimensionalen Kenngrößen eine dreidimensionale,
- aerodynamisch optimierte Geometrie.
+ Dieser Prozess erzeugt ausgehend von eindimensionalen Kenngrößen eine dreidimen
+sionale, aerodynamisch optimierte Geometrie.
  Hierfür nutzt dieser mehrere seriell ausgeführte evolutionäre Optimierungen.
  Sozio et.
  al.
@@ -318,13 +332,10 @@ key "Queipo2005"
 \end_inset
 
  befasst sich unter anderem mit der Initialisierung von Optimierungen, der
- Auswahl richtiger Ersatzmodelle für verschiedene Anwendungen und deren
+ Auswahl geeigneter Ersatzmodelle für verschiedene Anwendungen und deren
  Verwendung innerhalb von multidisziplinären Optimierungen und bietet damit
- einen sehr umfassenden Überblick über dieses Themengebiet.Betr
-\end_layout
-
-\begin_layout Standard
-In dem Beitrag von Simpson et al.
+ einen sehr umfassenden Überblick über dieses Themengebiet.
+ In dem Beitrag von Simpson et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -345,8 +356,8 @@ Fluch der Dimensionen
 
  oder die Komplexität der numerischen Verfahren immer noch dieselben sind
  wie vor 20 Jahren.
- Sie heben allerdings hervor, dass die berechenbare Größe dieser Herausforderung
-en deutlich gestiegen ist (vgl.
+ Sie heben allerdings hervor, dass die Größe dieser Herausforderungen deutlich
+ gestiegen ist (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -408,8 +419,7 @@ key "Verstraete2008"
  beschrieben.
  Verstraete et al.
  kommen zu dem Schluss, dass die Berücksichtigung mehrerer Betriebspunkte
- den Wirkungsgrad steigert und gleichzeitig eine verbesserte Charakteristik
- des Betriebsverhaltens (vgl.
+ eine verbesserte Charakteristik des Betriebsverhaltens (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -432,8 +442,7 @@ key "AULICH"
  beschreibt die Optimierung einer hochbelasteten Fan-Stufe mit über 230
  Design-Parametern und zahlreichen Nebenbedingungen.
  Das dort angewendete Verfahren ist ein durch Ordinary-Kriging beschleunigter
- evolutionärer Algorithmus, welcher im Deutschen Zentrum für Luft- und Raumfahrt
- entwickelt wird.
+ evolutionärer Algorithmus.
  Beim Ordinary-Kriging handelt es sich um ein robustes statistisches Interpolati
 onsverfahren das nicht nur den reinen Funktionswert voraussagt, sondern
  auch eine statistische Verteilung dessen.
@@ -533,30 +542,11 @@ key "Lepot2011"
  in 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "keane2006statistical,AULICH,Sacks2007,Sacks2007a,forrester2009recent"
+key "keane2006statistical,Sacks2007,Sacks2007a,forrester2009recent"
 
 \end_inset
 
  zu finden.
-\end_layout
-
-\begin_layout Standard
-Die Anwendung einer ersatzmodellgestützten Optimierung zum allgemeinen Vergleich
- einer gegenläufigen und einer konventionellen Fanstufe wird in der Dissertation
- von Lengyel 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Lengyel-Kampmann2015"
-
-\end_inset
-
- dargestellt.
- Ziel war es unter Gleichverteilung von Machzahl und Totaldruckverhältnis
- den Wirkungsgrad der Stufe zu optimieren, um die optimale Wirkungsgradfläche
- aufzufinden.
- So konnten innerhalb dieser Arbeit allgemeingültige Vergleiche über die
- Effizienz einer solchen Fanstufe angestellt werden.
- 
 \end_layout
 
 \begin_layout Standard
@@ -641,20 +631,19 @@ Viele aktuelle Forschungsbeiträge beschäftigen sich mit der Verwendung von
  Moderne Strömungslöser gestatten immer häufiger die effiziente Berechnung
  partieller Ableitungen von Funktionalen, wie z.B.
  Wirkungsgrad nach geometrischer Deformation.
- Auch die dazugehörige Software (z.B.
- Rechennetzgeneratoren) bieten diese Möglichkeit zunehmend.
  Die numerischen Kosten für die Bestimmung der partiellen Ableitungen befinden
  sich hierbei in einer ähnlichen Größenordnung wie die Strömungslösung selbst.
  In einer Optimierung mit wenig Funktionalen und vielen Parametern, können
  diese Gradienteninformationen gewinnbringend verwendet werden.
- Dies wird erreicht, indem von einem beliebigen Startpunkt in Gradientenrichtung
- abgestiegen wird und somit schnell ein Minimum gefunden werden kann.
+ Dies wird dadurch erreicht, dass von einem beliebigen Startpunkt in Gradientenr
+ichtung abgestiegen wird und somit schnell ein lokales Minimum gefunden
+ werden kann.
  Eine andere Möglichkeit ist die Verwendung von Ersatzmodellen.
  Einige Ersatzmodelle können die vorhandene Gradienteninformation zur Verbesseru
-ng der Vorhersagen heranziehen und bieten den Vorteil, dass keine vollständige
- Gradienteninformation vorhanden sein muss.
- Dies ist wichtig, da in den meisten Optimierungen für einige Funktionale
- keine Gradienteninformation verfügbar ist.
+ng der Vorhersagen heranziehen und bieten den zusätzlichen Vorteil, dass
+ keine vollständige Gradienteninformation vorhanden sein muss.
+ Dies ist wichtig, da in den meisten Turbomaschinenoptimierungen für wesentliche
+ Funktionale keine Gradienteninformation verfügbar ist.
 \end_layout
 
 \begin_layout Standard
@@ -755,12 +744,12 @@ Multifidelity-Verfahren:
 
 \begin_layout Standard
 Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
- entwickelt.
- Das in der Lage ist, während einer Optimierung verschiedene Gütestufen
- von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
+ entwickelt, welches in der Lage ist, während einer Optimierung verschiedene
+ Gütestufen von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
  Mögliche Gütestufen sind z.B.
  die örtliche Diskretisierung eines zu simulierenden Strömungskanals in
- der Form eines Rechengitters.
+ der Form eines Rechengitters oder auch die Verwendung von stationärem und
+ zeitgenauen CFD-Simulationen.
  Mit steigender Anzahl der Zellen eines Rechengitters werden Strömungsphänomene
  besser aufgelöst, was allerdings mit einer erheblich gesteigerten Rechenzeit
  einhergeht.
@@ -770,8 +759,8 @@ Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
 \end_layout
 
 \begin_layout Standard
-In der Regel sind die Gütestufen stark korreliert, oftmals aber verzerrt,
- verschoben oder skaliert.
+In der Regel sind die Gütestufen korreliert, oftmals aber verzerrt, verschoben
+ oder skaliert.
  Es ist also ein Ersatzmodell notwendig, welches die Ergebnisse der verschiedene
 n Gütestufen verarbeiten kann und die Transferfunktion zwischen diesen automatis
 ch auffindet.
@@ -800,8 +789,8 @@ key "Dakota2016"
 
 \begin_layout Standard
 Ein statistisches Verfahren, welches auch komplexere Zusammenhänge beschreiben
- kann, ist das CO-Kriging-Ersatzmodell, hier sei besonders auf die grundlegenden
- Arbeiten von 
+ kann, ist das CO-Kriging-Ersatzmodell.
+ Hier sei besonders auf die grundlegenden Arbeiten von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kennedy2000"
@@ -841,8 +830,8 @@ key "Kennedy2000"
  beruhen.
  Für dieses CO-Kriging-Modell muss an jeden bekannten Ort der höchsten Gütestufe
  auch eine Stützstelle der niedrigeren Gütestufen vorhanden sein.
- Innerhalb dieser Arbeit wird eine CO-Kriging-Variation vorgestellt, die
- dies nicht benötigt.
+ Innerhalb der vorliegenden Arbeit wird eine CO-Kriging-Variation vorgestellt,
+ die dies nicht benötigt.
  
 \end_layout
 
@@ -953,7 +942,7 @@ Im Rahmen dieser Arbeit wird ein industriell einsetzbares und erweiterbares
 klung berücksichtigt.
  In diesem Abschnitt werden zuerst die Anforderungen an das entwickelte
  Verfahren herausgearbeitet und daraus folgend eine detaillierte Zielsetzung
- bestimmt.
+ abgeleitet.
 \end_layout
 
 \begin_layout Standard
@@ -1076,8 +1065,8 @@ reference "sec:Verwendung-von-GPGPU"
 \end_inset
 
 ) für komplexe Rechenaufgaben ein sehr wichtiges Thema geworden.
- Diese Zusatzkarten bieten eine im Vergleich zu herkömmlichen CPUs eine
- größere Rechenleistung bei vergleichsweise niedrigem Energieverbrauch.
+ Diese Zusatzkarten bieten eine im Vergleich zu herkömmlichen CPUs größere
+ Rechenleistung bei vergleichsweise niedrigem Energieverbrauch.
  Allerdings benötigen diese GPUs stark parallelisierte SIMD-Algorithmen
  (siehe Kapitel 
 \begin_inset CommandInset ref
@@ -1171,14 +1160,8 @@ mierung
 \begin_layout Standard
 Der erste Punkt umfasst die Entwicklung und Integration eines CO-Kriging-Ersatzm
 odells für die AutoOpti-Umgebung.
- Das Ersatzmodell soll in einer objektorientierten Sprache programmiert
- werden, hierfür wurde die Sprache C++ gewählt.
- 
-\end_layout
-
-\begin_layout Standard
-Die Erweiterbarkeit des Verfahrens spielt ebenfalls eine sehr große Rolle,
- zum einen werden alle Kriging Verfahren (Ordinary-, Gradient-Enhanced-,CO-Krigi
+ Die Erweiterbarkeit des Verfahrens spielt dabei eine sehr große Rolle.
+ Zum einen werden alle Kriging Verfahren (Ordinary-, Gradient-Enhanced-,CO-Krigi
 ng) in einer Softwarestruktur untergebracht und zum anderen werden auch
  Klassifikatoren wie z.B.
  Supporting-Vector-Machines in die Software implementiert.
@@ -1210,8 +1193,6 @@ ng.
  Hierfür wurde im Rahmen dieser Arbeit ein asynchrones Client-/Server-System
  entwickelt, welches die Nutzung verschiedener Hardware-Architekturen über
  Rechnergrenzen hinweg erlaubt.
- Zudem soll die praktische Anwendbarkeit und der Nutzen eines solchen Verfahrens
- überprüft werden.
  Weiterhin soll die Verwendung von GPUs möglich sein, womit die notwendigen
  Berechnungen für das Ersatzmodell beschleunigt werden sollen.
  Vergleicht man diese Punkte mit den Softwarepaketen, welche in der Literatur

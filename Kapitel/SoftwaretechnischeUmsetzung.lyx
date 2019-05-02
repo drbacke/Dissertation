@@ -72,7 +72,7 @@
 \begin_body
 
 \begin_layout Chapter
-Implementierung der DLR-Kriging-Verfahren 
+Implementierung der Verfahren 
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Implementierung-der-DLR-Kriging-"
@@ -134,7 +134,7 @@ Als letzter Punkt wird eine in dieser Arbeit entwickelte Analysesoftware
 \end_layout
 
 \begin_layout Section
-Modellierung der Kovarianz- und Korrelationsfunktion 
+Modellierung der Kovarianzfunktion 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Kovarianzmatrix"
@@ -195,18 +195,18 @@ Diese Funktionen müssen jedem möglichen Punktepaar eine Kovarianz zuordnen.
 \end_inset
 
  der jeweiligen Gütestufe 
-\begin_inset Formula $g\in\left\{ 1,...,s\right\} $
+\begin_inset Formula $g$
 \end_inset
 
 :
 \begin_inset Formula 
 \begin{equation}
 \mathbf{Cov}=\left[\begin{array}{c|cccc}
- & y_{0}\left(\vec{x}_{1}\right) & y_{0}\left(\vec{x}_{2}\right) & y_{1}\left(\vec{x}_{3}\right) & y_{1}\left(\vec{x}_{4}\right)\\
-\hline y_{0}\left(\vec{x}_{1}\right) & cov_{0,0}\left(\vec{x}_{1},\vec{x}_{1}\right) & cov_{0,0}\left(\vec{x}_{1},\vec{x}_{2}\right) & cov_{0,1}\left(\vec{x}_{1},\vec{x}_{3}\right) & cov_{0,1}\left(\vec{x}_{1},\vec{x}_{4}\right)\\
-y_{0}\left(\vec{x}_{2}\right) & cov_{0,0}\left(\vec{x}_{2},\vec{x}_{1}\right) & cov_{0,0}\left(\vec{x}_{2},\vec{x}_{2}\right) & cov_{0,1}\left(\vec{x}_{2},\vec{x}_{3}\right) & cov_{0,1}\left(\vec{x}_{2},\vec{x}_{4}\right)\\
-y_{1}\left(\vec{x}_{3}\right) & cov_{1,0}\left(\vec{x}_{3},\vec{x}_{1}\right) & cov_{1,0}\left(\vec{x}_{3},\vec{x}_{2}\right) & cov_{1,1}\left(\vec{x}_{3},\vec{x}_{3}\right) & cov_{1,1}\left(\vec{x}_{3},\vec{x}_{4}\right)\\
-y_{1}\left(\vec{x}_{4}\right) & cov_{1,0}\left(\vec{x}_{4},\vec{x}_{1}\right) & cov_{1,0}\left(\vec{x}_{4},\vec{x}_{2}\right) & cov_{1,1}\left(\vec{x}_{4},\vec{x}_{3}\right) & cov_{1,1}\left(\vec{x}_{4},\vec{x}_{4}\right)
+ & y_{1}\left(\vec{x}_{1}\right) & y_{1}\left(\vec{x}_{2}\right) & y_{2}\left(\vec{x}_{3}\right) & y_{2}\left(\vec{x}_{4}\right)\\
+\hline y_{1}\left(\vec{x}_{1}\right) & cov_{1,1}\left(\vec{x}_{1},\vec{x}_{1}\right) & cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right) & cov_{1,2}\left(\vec{x}_{1},\vec{x}_{3}\right) & cov_{1,2}\left(\vec{x}_{1},\vec{x}_{4}\right)\\
+y_{1}\left(\vec{x}_{2}\right) & cov_{1,1}\left(\vec{x}_{2},\vec{x}_{1}\right) & cov_{1,1}\left(\vec{x}_{2},\vec{x}_{2}\right) & cov_{1,2}\left(\vec{x}_{2},\vec{x}_{3}\right) & cov_{1,2}\left(\vec{x}_{2},\vec{x}_{4}\right)\\
+y_{2}\left(\vec{x}_{3}\right) & cov_{2,1}\left(\vec{x}_{3},\vec{x}_{1}\right) & cov_{2,1}\left(\vec{x}_{3},\vec{x}_{2}\right) & cov_{2,2}\left(\vec{x}_{3},\vec{x}_{3}\right) & cov_{2,2}\left(\vec{x}_{3},\vec{x}_{4}\right)\\
+y_{2}\left(\vec{x}_{4}\right) & cov_{2,1}\left(\vec{x}_{4},\vec{x}_{1}\right) & cov_{2,1}\left(\vec{x}_{4},\vec{x}_{2}\right) & cov_{2,2}\left(\vec{x}_{4},\vec{x}_{3}\right) & cov_{2,2}\left(\vec{x}_{4},\vec{x}_{4}\right)
 \end{array}\right]\label{eq:KovarianzmatrixBeispiel}
 \end{equation}
 
@@ -220,7 +220,7 @@ Um ein solches Modell praktisch nutzbar zu machen, müssen drei verschiedene
 Die Definition der Ortsabhängigkeit der Kovarianzfunktion, beispielsweise
  kann diese nur abhängig vom Radius (radiale Basisfunktionen) sein oder
  nur durch den Verbindungsvektor 
-\begin_inset Formula $\vec{h}=\vec{x}_{1}-\vec{x_{2}}$
+\begin_inset Formula $\triangle\vec{x}=\vec{x}_{1}-\vec{x_{2}}$
 \end_inset
 
  beschrieben werden.
@@ -275,7 +275,11 @@ key "matheron1963principles"
 ).
  Diese stellen die Basis für die Kovarianzmodellfunktionen dar und sind
  somit zentraler Bestandteil des Kriging-Verfahrens.
- Sei 
+ 
+\end_layout
+
+\begin_layout Standard
+Sei 
 \begin_inset Formula $Z\left(\vec{x}\right)$
 \end_inset
 
@@ -308,7 +312,7 @@ key "matheron1963principles"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{x_{1}}\right)\right]+\frac{1}{2}var\left[Z\left(\vec{x_{2}}\right)\right]-\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)
+cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{x_{1}}\right)\right]+\frac{1}{2}var\left[Z\left(\vec{x_{2}}\right)\right]-\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)\label{eq:CovMAsdas}
 \end{equation}
 
 \end_inset
@@ -329,25 +333,18 @@ key "Cressie1993,Ozkaya2014,akin2013praktische"
 ): 
 \begin_inset Formula 
 \begin{align}
-E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k}}}\label{eq:OrtsAbhKovStationärE}
+E\left[Z\left(\vec{x}\right)\right] & =\mu,\forall\vec{x}\in\mathbb{R^{\textrm{k}}}\label{eq:OrtsAbhKovStationärE}\\
+cov(\vec{\triangle\vec{x}}) & \coloneqq cov(\vec{x},\vec{x}+\triangle\vec{x})\label{eq:Ortsab}
 \end{align}
 
 \end_inset
 
-Weiterhin gilt dann, dass die Kovarianz nur noch abhängig von dem Verschiebevekt
-or 
-\begin_inset Formula $\vec{h}\in\mathbb{R^{\textrm{k}}};\vec{h}=\vec{x}_{1}-\vec{x}_{2}$
+Die Kovarianz ist also nur noch abhängig von dem Verschiebevektor 
+\begin_inset Formula $\triangle\vec{x}\in\mathbb{R^{\textrm{k}}};\triangle\vec{x}=\vec{x}_{1}-\vec{x}_{2}$
 \end_inset
 
- ist:
-\begin_inset Formula 
-\begin{align}
-cov(\vec{h}) & \coloneqq cov(\vec{x},\vec{x}+\vec{h})\label{eq:OrtsAbhKovStationärcov}
-\end{align}
-
-\end_inset
-
-Unter Berücksichtigung von Gleichung 
+.
+ Unter Berücksichtigung von Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:OrtsAbhKovStationärE"
@@ -357,14 +354,28 @@ reference "eq:OrtsAbhKovStationärE"
  und Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:OrtsAbhKovStationärcov"
+reference "eq:Ortsab"
 
 \end_inset
 
- folgt dann für die gesuchte Kovarianzfunktion: 
+ folgt dann für die gesuchte Kovarianzfunktion aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:CovMAsdas"
+
+\end_inset
+
+ (siehe Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Beweis:-Variogramm-Abhängigkeit"
+
+\end_inset
+
+): 
 \begin_inset Formula 
 \begin{equation}
-cov(\vec{h})=cov(\vec{0})-2\gamma(\vec{h})=\sigma^{2}-2\gamma(\vec{h})\label{eq:KovariogrammGrundformel}
+cov(\triangle\vec{x})=cov(\vec{0})-2\gamma(\triangle\vec{x})=\sigma^{2}-2\gamma(\triangle\vec{x})\label{eq:KovariogrammGrundformel}
 \end{equation}
 
 \end_inset
@@ -382,7 +393,7 @@ reference "chap:MinimierungsverfahrenTraining"
 
 ).
  Die Modellierung von 
-\begin_inset Formula $\gamma(\vec{h})$
+\begin_inset Formula $\gamma(\triangle\vec{x})$
 \end_inset
 
  wird in Abschnitt 
@@ -397,7 +408,7 @@ reference "subsec:Kovarianz-parametrisiertes-Model"
 \end_layout
 
 \begin_layout Subsection
-Kovarianz parametrisiertes Modell
+Parametrisches Kovarianzmodell
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Kovarianz-parametrisiertes-Model"
@@ -409,7 +420,7 @@ name "subsec:Kovarianz-parametrisiertes-Model"
 
 \begin_layout Standard
 Der folgende Abschnitt erläutert die parametrisierten Kovarianzmodelle,
- welche für die Nutzung eines Kriging-Verfahrens wichtig sind.
+ welche für die Nutzung eines Kriging-Verfahrens notwendig sind.
  Die Basis für ein solches Modell ist durch Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -427,7 +438,7 @@ reference "fig:Beispielhaftes-VarioKovariogramm"
  grafisch dargestellt.
  Der Einfachheit halber beschränkt sich das gezeigte Kovariogramm auf eine
  räumliche Dimension 
-\begin_inset Formula $\vec{x},\vec{h}\in\mathbb{R^{\textrm{k}}};k=1$
+\begin_inset Formula $\vec{x},\triangle\vec{x}\in\mathbb{R^{\textrm{k}}}$
 \end_inset
 
 .
@@ -435,7 +446,7 @@ reference "fig:Beispielhaftes-VarioKovariogramm"
 
 \begin_layout Standard
 \begin_inset Wrap figure
-lines 16
+lines 14
 placement o
 overhang 0in
 width "50col%"
@@ -444,7 +455,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/KrigingKapitel/KoVariogramm.eps
-	scale 40
+	scale 35
 
 \end_inset
 
@@ -471,7 +482,7 @@ name "fig:Beispielhaftes-VarioKovariogramm"
 
 Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Kovarianz
  
-\begin_inset Formula $cov(\vec{h})$
+\begin_inset Formula $cov(\triangle\vec{x})$
 \end_inset
 
  aufgetragen, diese nimmt mit steigender Distanz ab.
@@ -480,7 +491,7 @@ Auf der X-Achse ist die räumliche Distanz und auf der Y-Achse die Kovarianz
 
 \begin_layout Standard
 Empirisch ist oftmals zu beobachten, dass das Kovariogramm bei 
-\begin_inset Formula $\vec{h}=0$
+\begin_inset Formula $\triangle\vec{x}=0$
 \end_inset
 
  springt.
@@ -504,8 +515,8 @@ Nugget
  definiert:
 \begin_inset Formula 
 \[
-\delta(\vec{h})=\begin{cases}
-1 & falls\,\vec{h}=\vec{0}\\
+\delta(\triangle\vec{x})=\begin{cases}
+1 & falls\,\triangle\vec{x}=\vec{0}\\
 0 & sonst
 \end{cases}
 \]
@@ -555,7 +566,7 @@ reference "eq:KovariogrammGrundformel"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-cov(\vec{h})=\sigma^{2}+\lambda\delta(\vec{h})-2\gamma(\vec{h})\label{eq:KovarianzmodellAllgemein}
+cov(\triangle\vec{x})=\sigma^{2}+\lambda\delta(\triangle\vec{x})-2\gamma(\triangle\vec{x})\label{eq:KovarianzmodellAllgemein}
 \end{equation}
 
 \end_inset
@@ -585,7 +596,7 @@ reference "chap:MinimierungsverfahrenTraining"
 
 \begin_layout Standard
 Für die Variogrammfunktion 
-\begin_inset Formula $\gamma\left(\vec{h}\right)$
+\begin_inset Formula $\gamma\left(\triangle\vec{x}\right)$
 \end_inset
 
  muss allerdings noch ein geeignetes Modell gefunden werden.
@@ -604,7 +615,7 @@ nden räumlichen Zusammenhang und ist als nicht parametrisches Verfahren
  Es wird aber eine sehr große Anzahl an Stützstellen benötigt, um plausible
  Variogramme zu erhalten.
  Auf der anderen Seite werden keine Annahmen über den Verlauf des Variogramms
- gemacht.
+ benötigt.
  
 \end_layout
 
@@ -632,7 +643,7 @@ key "lophaven2002aspects,Sacks2007"
 :
 \begin_inset Formula 
 \begin{align}
-2\gamma(\vec{h})= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(\theta_{l}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion}
+2\gamma(\triangle\vec{x})= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(\theta_{l}\left|\triangle x_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion}
 \end{align}
 
 \end_inset
@@ -666,7 +677,7 @@ reference "chap:MinimierungsverfahrenTraining"
 ion verwendet: 
 \begin_inset Formula 
 \begin{align}
-2\gamma(\vec{h})= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion-1}
+2\gamma(\triangle\vec{x})= & \sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{p}\right)}\right)\label{eq:ExpoKorrelationsfunktion-1}
 \end{align}
 
 \end_inset
@@ -679,8 +690,19 @@ Die Benutzung der Exponentialfunktion
 \begin_inset Formula $\theta_{l}$
 \end_inset
 
- dient der numerischen Stabilität des Trainingsverfahrens, weil die Hyperparamet
-er nicht negativ werden dürfen und somit für Formulierung 
+ dient der numerischen Stabilität des Trainingsverfahrens, weil die Terme
+ 
+\begin_inset Formula $e^{\theta_{l}}\left|\triangle x_{l}\right|^{p}$
+\end_inset
+
+ in Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ExpoKorrelationsfunktion-1"
+
+\end_inset
+
+ nicht negativ werden dürfen und somit für Formulierung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:ExpoKorrelationsfunktion"
@@ -751,8 +773,8 @@ reference "eq:KovarianzmodellAllgemein"
  ein, dann folgt daraus die resultierende Kovarianzfunktion:
 \begin_inset Formula 
 \begin{align}
-cov(\vec{h}) & =\sigma^{2}+\lambda\delta(\vec{h})-\sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\right)\label{eq:ExpoKovarianzfunktion}\\
- & =\lambda\delta(\vec{h})+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\label{eq:asdasd}
+cov(\triangle\vec{x})) & =\sigma^{2}+\lambda\delta(\triangle\vec{x}))-\sigma^{2}\left(1-e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{2}\right)}\right)\label{eq:ExpoKovarianzfunktion}\\
+ & =\lambda\delta(\triangle\vec{x}))+\sigma^{2}e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{2}\right)}\label{eq:asdasd}
 \end{align}
 
 \end_inset
@@ -765,8 +787,8 @@ Die für das Trainingsverfahren notwendigen Ableitungen sehen für die gauss'sch
 ) wie folgt aus:
 \begin_inset Formula 
 \begin{align}
-\frac{\partial cov(\vec{h})}{\partial\theta_{a}} & =-\frac{1}{2}\sigma^{2}e^{\theta_{a}}\left|h_{a}\right|^{2}\left(e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\right)\label{eq:AbleitungKorrGauss}\\
-\frac{\partial cov(\vec{h})}{\partial\sigma^{2}} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}\label{eq:AbleitungsKorrGauss2}
+\frac{\partial cov(\triangle\vec{x}))}{\partial\theta_{a}} & =-\frac{1}{2}\sigma^{2}e^{\theta_{a}}\left|\triangle x_{a}\right|^{2}\left(e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{2}\right)}\right)\label{eq:AbleitungKorrGauss}\\
+\frac{\partial cov(\triangle\vec{x})}{\partial\sigma^{2}} & =e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{2}\right)}\label{eq:AbleitungsKorrGauss2}
 \end{align}
 
 \end_inset
@@ -800,7 +822,7 @@ reference "subsec:Gauss-Korrelationsfunktion-mit"
  zu finden.
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Kovarianzfunktion Co-Kriging
 \begin_inset CommandInset label
 LatexCommand label
@@ -835,20 +857,19 @@ reference "eq:ExpoKovarianzfunktion"
 \end_inset
 
  ein, wobei 
-\begin_inset Formula $c_{2}(\vec{h})=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,2}}\left|h_{l}\right|^{2}\right)}$
+\begin_inset Formula $c_{2}(\triangle\vec{x})=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,2}}\left|\triangle x_{l}\right|^{2}\right)}$
 \end_inset
 
  und 
-\begin_inset Formula $c_{diff}(\vec{h})=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,diff}}\left|h_{l}\right|^{2}\right)}$
+\begin_inset Formula $c_{diff}(\triangle\vec{x})=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l,diff}}\left|\triangle x_{l}\right|^{2}\right)}$
 \end_inset
 
 , so erhält man:
 \begin_inset Formula 
 \begin{align}
-cov_{1,1}(\vec{x}_{1},\vec{x}_{2})= & a^{2}\sigma_{2}^{2}c_{2}(\vec{h})\\
- & +\lambda_{diff}\delta(\vec{h})+\sigma_{diff}^{2}c_{diff}(\vec{h})\nonumber \\
-cov_{1,2}(\vec{x}_{1},\vec{x}_{2})= & a\sigma_{2}^{2}c_{2}(\vec{h})\label{eq:KovarianzfunktionenCoKrigingGauss}\\
-cov_{2,2}(\vec{x}_{1},\vec{x}_{2})= & \lambda_{2}\delta(\vec{h})+\sigma_{2}^{2}c_{2}(\vec{h})
+cov_{1,1}(\vec{x}_{1},\vec{x}_{2})= & a^{2}\sigma_{2}^{2}c_{2}(\triangle\vec{x})+\lambda_{diff}\delta(\triangle\vec{x})+\sigma_{diff}^{2}c_{diff}(\triangle\vec{x})\nonumber \\
+cov_{1,2}(\vec{x}_{1},\vec{x}_{2})= & a\sigma_{2}^{2}c_{2}(\triangle\vec{x})\label{eq:KovarianzfunktionenCoKrigingGauss}\\
+cov_{2,2}(\vec{x}_{1},\vec{x}_{2})= & \lambda_{2}\delta(\triangle\vec{x})+\sigma_{2}^{2}c_{2}(\triangle\vec{x})\nonumber 
 \end{align}
 
 \end_inset
@@ -856,47 +877,300 @@ cov_{2,2}(\vec{x}_{1},\vec{x}_{2})= & \lambda_{2}\delta(\vec{h})+\sigma_{2}^{2}c
 
 \end_layout
 
-\begin_layout Subsection
-Numerischen Grenzen für die Hyperparameter
+\begin_layout Subsubsection
+Aufteilung der Hyperparameter in Klassen
 \end_layout
 
 \begin_layout Standard
-Betrachtet man die Gleichung für die Korrelationen 
-\begin_inset Formula $c(\vec{h})=e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{2}\right)}$
-\end_inset
+\begin_inset Wrap table
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
 
-, so können die 
-\begin_inset Formula $\theta_{l}$
-\end_inset
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
- Werte sehr große oder kleine Werte annehmen und gehen dann in eine verkettete
- Exponentialfunktion ein.
- Der innere Teil der Exponentialfunktion 
-\begin_inset Formula $e^{\theta_{l}}$
-\end_inset
+\begin_layout Plain Layout
 
- kann sehr große oder sehr kleine Werte annehmen.
- Damit diese Werte noch durch die gewählte Fließkommagenauigkeit dargestellt
- werden können, sollten daher numerische Grenzen für 
-\begin_inset Formula $\theta_{l}$
-\end_inset
-
- gelten.
 \end_layout
 
-\begin_layout Standard
-Um diese Werte zu bestimmen, bietet sich ein einfaches numerisches Testprogramm
- an, welches die Grenzwerte für 
-\begin_inset Formula $c(\vec{h})=e^{-\frac{1}{2}e^{\theta}}$
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zeichen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anzahl 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Korrelationsl.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\vec{\theta}$
 \end_inset
 
- automatisch bestimmt.
- Beispielsweise wurden für eine 64Bit-Fließkommzahl folgende Grenzen bestimmt:
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Varianzen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Diagonalauf.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\lambda$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Skalierung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Kategorien-von-Hyperparametern"
+
+\end_inset
+
+Kategorien von Hyperparametern bei 
+\begin_inset Formula $s$
+\end_inset
+
+ Gütestufen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Die in den Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Die-Kriging-Verfahren"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:RegularisierungUndRauschen"
+
+\end_inset
+
+ beschriebenen Hyperparameter lassen sich in Kategorien aufteilen, welche
+ in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Kategorien-von-Hyperparametern"
+
+\end_inset
+
+ aufgelistet sind.
  
-\begin_inset Formula $\theta\in\mathbb{R}|5>\theta_{l}>-34$
+\end_layout
+
+\begin_layout Standard
+Diese Einteilung ist für die Initialisierung sehr wichtig, da jede dieser
+ Gruppen anders initialisiert werden muss.
+ Für die Diagonalaufschläge 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ wird das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Regularisierung"
+
+\end_inset
+
+ beschriebene Verfahren verwendet.
+ Die Initialisierung der anderen Gruppen wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Initialisierung-der-Hyperparamet"
+
+\end_inset
+
+ beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Im Falle eines Co-Krigings skaliert die Anzahl der Hyperparameter 
+\begin_inset Formula $o=sk+3s$
+\end_inset
+
+ mit der Anzahl der Gütestufen 
+\begin_inset Formula $s$
+\end_inset
+
+ und der Anzahl an freien Variablen 
+\begin_inset Formula $k$
 \end_inset
 
 .
+ Die Anzahl der Hyperparameter 
+\begin_inset Formula $o$
+\end_inset
+
+ ist also grundsätzlich deutlich höher als bei einem Ordinary-Kriging.
  
 \end_layout
 
@@ -1000,7 +1274,7 @@ reference "eq:ExpoKovarianzfunktion"
 \end_layout
 
 \begin_layout Paragraph*
-Ordinary-Kriging
+Ordinary-Kriging:
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Ordinary-Kriging"
@@ -1037,8 +1311,11 @@ Zur Bestimmung eines geeigneten Wertes ist es sinnvoll, die Konditionszahl
 \end_layout
 
 \begin_layout Standard
-Geht man weiterhin von einer Ordinary-Kriging-Kovarianzmatrix aus, so kann
- (im Falle 
+Geht man weiterhin von einer Ordinary-Kriging-Kovarianzmatrix 
+\begin_inset Formula $\mathbf{Cov}\in\mathbb{R}^{n\times n}\,mit\,Cov{}_{i,j}(\triangle\vec{x})=\lambda\delta(\triangle\vec{x})+\sigma^{2}c_{i,j}(\triangle\vec{x})$
+\end_inset
+
+ aus, so kann (im Falle 
 \begin_inset Formula $\lambda=0)$
 \end_inset
 
@@ -1047,7 +1324,7 @@ Geht man weiterhin von einer Ordinary-Kriging-Kovarianzmatrix aus, so kann
 \end_inset
 
  aus der Matrix ausgeklammert werden und die Korrelationsmatrix 
-\begin_inset Formula $\mathbf{R}\in\mathbb{R}^{n\times n}$
+\begin_inset Formula $\mathbf{R}\in\mathbb{R}^{n\times n}\,mit\,R{}_{i,j}(\triangle\vec{x})=c_{i,j}(\triangle\vec{x})$
 \end_inset
 
  bleibt:
@@ -1095,8 +1372,7 @@ reference "eq:asdasd"
 
 \end_inset
 
-Die minimalen und maximalen Eigenwerte der Einsmatrix sind für diesen Fall
- bekannt:
+Die minimalen und maximalen Eigenwerte sind für diesen Fall bekannt:
 \begin_inset Formula 
 \begin{align}
 \Xi_{min}\left(\mathbf{Cov}\right) & =0\\
@@ -1156,7 +1432,7 @@ Da die Matrix positiv definit sein muss und damit nur positive Eigenwerte
 \end_layout
 
 \begin_layout Paragraph*
-Co-Kriging
+Co-Kriging:
 \end_layout
 
 \begin_layout Standard
@@ -1167,7 +1443,7 @@ Im Falle des Co-Krigings ist aufgrund der unterschiedlichen Gütestufen die
 \begin_inset Formula $\Xi_{max}\left(\mathbf{Cov}\right)$
 \end_inset
 
- der Matrix zu schätzen.
+ der Matrix schätzen.
  Für eine diagonalisierbare Matrix gilt allgemein, dass die Summe der Eigenwerte
  
 \begin_inset Formula $\Xi_{i},i\in\left\{ 1,...,n_{all}\right\} $
@@ -1216,26 +1492,9 @@ Da die Korrelationen der Diagonalen den Wert Eins besitzen,
 \begin_inset Formula 
 \begin{align}
 \sum_{i=1}^{n_{all}}\Xi_{i}=spur\left(\mathbf{Cov}\right) & =\sum_{i=1}^{n_{1}}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+\sum_{i=1}^{n_{2}}\left(\sigma_{2}^{2}+\lambda_{2}\right)\\
- & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)
-\end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Übertragen auf Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:SpurEqSummeEigenwerte"
-
-\end_inset
-
- folgt:
-\begin_inset Formula 
-\begin{align}
-\sum_{i=1}^{n_{all}}\Xi_{i} & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)\geq n_{1}\lambda_{diff}+n_{2}\lambda_{2}\label{eq:EigenwertBedSpur}
+ & =n_{1}\left(a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}+\lambda_{diff}\right)+n_{2}\left(\sigma_{2}^{2}+\lambda_{2}\right)\\
+ & \geq n_{1}\lambda_{diff}+n_{2}\lambda_{2}\\
+ & \geq(n_{1}+n_{2})\min(\lambda_{diff},\lambda_{2})\eqqcolon(n_{1}+n_{2})\lambda_{min}
 \end{align}
 
 \end_inset
@@ -1365,18 +1624,8 @@ reference "sec:COKrigingTraining"
 Aus diesem Grund wird die zweite Variante gewählt, also die untere Grenze
  nur initial eingestellt und nur noch dann verändert, wenn numerische Probleme
  während des Trainings auftreten.
- In diesem Fall wird eine entsprechende Exception geworfen, abgefangen und
- der letzte Iterationsschritt mit einem höheren Diagonalaufschlag erneut
- durchgeführt.
- Dies wird so lange wiederholt, bis die numerischen Probleme verschwinden
- oder eine Obergrenze an Wiederholungen erreicht ist.
- Ist diese erreicht, wird ein Fehler ausgegeben und das Training abgebrochen.
- 
-\end_layout
-
-\begin_layout Standard
-Ein geeigneter Wert für die obere Grenze der Konditionszahl liegt erfahrungsgemä
-ß bei 
+ Ein geeigneter Wert für die obere Grenze der Konditionszahl liegt erfahrungsgem
+äß bei 
 \begin_inset Formula $\sim10^{9}$
 \end_inset
 
@@ -1450,15 +1699,7 @@ reference "subsec:Kovarianz-parametrisiertes-Model"
 \end_layout
 
 \begin_layout Standard
-Die Bildung der Kovarianzfunktion ist in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Kovarianzfunktion-CO-Kriging"
-
-\end_inset
-
- beschrieben.
- Um den Rauschterm innerhalb eines gradientenbasierten Trainingsverfahrens
+Um den Rauschterm innerhalb eines gradientenbasierten Trainingsverfahrens
  (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1550,8 +1791,7 @@ reference "fig:Kriging_RauschFunktion"
 \end_inset
 
 .
- Jeder eingezeichnete Punkt entspricht einer Stützstelle, wobei jede Stützstelle
- an einem anderen Ort ist.
+ Jeder eingezeichnete Punkt entspricht einer Stützstelle.
  Mithilfe dieser Stützstellen wird ein Ordinary-Kriging trainiert und dann
  für den entsprechenden Wertebereich Vorhersagen getroffen.
  Abbildung 
@@ -2161,8 +2401,8 @@ Das hier gezeigte Verhalten entspricht also den Erwartungen.
  
 \end_layout
 
-\begin_layout Subsection
-Softwaretechnische Umsetzung von Approximation und Regularisierung 
+\begin_layout Paragraph*
+Fazit:
 \end_layout
 
 \begin_layout Standard
@@ -2243,16 +2483,6 @@ reference "subsec:Kovarianzmatrix"
  
 \end_layout
 
-\begin_layout Standard
-Da einige der Minimierungsverfahren bereits vor der Entwicklung des hier
- vorgestellten Programms vorhanden waren, diese allerdings noch in der Programmi
-ersprache C entwickelt wurden, musste eine flexible Software-Schnittstelle
- entwickelt werden.
- Hierfür wurde ein spezielles Klassenmodell unter Benutzung von Boost-Funktionso
-bjekten entwickelt, welches am Ende des Kapitels kurz beschrieben wird.
- 
-\end_layout
-
 \begin_layout Subsection
 Maximum-Likelihood für alle Kriging-Verfahren
 \begin_inset CommandInset label
@@ -2265,9 +2495,8 @@ name "sec:COKrigingTraining"
 \end_layout
 
 \begin_layout Standard
-Die Maximum-Likelihood-Methode ist ein Schätzverfahren in der Statistik,
- um Parameter einer angenommenen Verteilungsfunktion bei gegebenen Realisierunge
-n zu schätzen.
+Die Maximum-Likelihood-Methode ist ein Schätzverfahren, um Parameter einer
+ angenommenen Verteilungsfunktion bei gegebenen Realisierungen zu schätzen.
  Es werden Werte für Hyperparameter gewählt, gemäß derer die Realisierung
  der bereits bekannten Daten am plausibelsten erscheint.
  
@@ -2327,7 +2556,7 @@ reference "eq:FVektor"
 
  beinhaltet alle bekannten Stützstellen.
  Daraus ergibt sich die folgende Dichtefunktion 
-\begin_inset Formula $f_{D}$
+\begin_inset Formula $L$
 \end_inset
 
  der multivariaten Normalverteilung 
@@ -2337,7 +2566,7 @@ reference "eq:FVektor"
 :
 \begin_inset Formula 
 \begin{align}
-f_{D}(\vec{Z},\vec{F}(\vec{h}),\mathbf{Cov}\mathrm{(\vec{h})})= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{Z}-\vec{F}\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{Z}-\vec{F}\right)}\label{eq:LikelihoodMultivariateNorm}
+L(\vec{Z},\vec{F}(\vec{h}),\mathbf{Cov}\mathrm{(\vec{h})})= & \frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{Z}-\vec{F}(\vec{h})\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{Z}-\vec{F}(\vec{h})\right)}\label{eq:LikelihoodMultivariateNorm}
 \end{align}
 
 \end_inset
@@ -2348,31 +2577,25 @@ Es gilt: Bei Kenntnis der Stützstellen
 \begin_inset Formula $\vec{y}_{s}$
 \end_inset
 
- sind die Hyperparameter 
+ sind diejenigen Hyperparameter 
 \begin_inset Formula $\vec{h}$
 \end_inset
 
- für diese dann am plausibelsten, wenn der Dichtefunktionswert 
-\begin_inset Formula $f_{D}$
+ am plausibelsten, welche den Dichtefunktionswert (auch Likelihood) 
+\begin_inset Formula $L$
 \end_inset
 
- der Verteilung 
+ der multivariaten Normalverteilung 
 \begin_inset Formula $\mathcal{N}\left(\vec{F},\mathbf{Cov}(\vec{h})\right)$
 \end_inset
 
- maximal wird.
- 
+ maximieren.
 \end_layout
 
 \begin_layout Standard
-Daraus ergibt sich die Likelihood-Funktion 
-\begin_inset Formula $L(\vec{h})$
-\end_inset
-
-, deren Maximum gesucht wird:
 \begin_inset Formula 
 \begin{equation}
-\max_{h_{1},...,h_{o}}L(\vec{h})=\max_{h_{1},...,h_{o}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}\right)}\right)
+\max_{h_{1},...,h_{o}}L(\vec{h})=\max_{h_{1},...,h_{o}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}(\vec{h})\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}(\vec{h})\right)}\right)
 \end{equation}
 
 \end_inset
@@ -2405,30 +2628,24 @@ key "viertl2013einfuhrung"
 \end_layout
 
 \begin_layout Standard
-Da der Logarithmus eine streng monoton wachsende Funktion ist, ist jedes
- Minimum der logarithmierten Likelihood-Funktion (Gleichung 
+Da der Logarithmus eine streng monoton wachsende Funktion ist, besitzen
+ Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:LikelihoodMultivariateNorm"
 
 \end_inset
 
-) auch ein Minimum der Likelihood-Funktion (Gleichung 
+ und Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:LikelihoodMultivariateNorm"
 
 \end_inset
 
-) selbst.
- Ebenso ist jedes Maximum der logarithmierten Likelihood-Funktion auch ein
- Maximum der Likelihood-Funktion.
- 
-\end_layout
-
-\begin_layout Standard
-Die Konstanten können ignoriert werden, da diese für das Maximum keine Rolle
- spielen, daraus folgt: 
+ das gleich Maximum.
+ Die Konstanten können ignoriert werden, da diese für das Maximum keine
+ Rolle spielen: 
 \begin_inset Formula 
 \begin{align}
 \max_{h_{1},...,h_{o}}L(\vec{h})=\max_{h_{1},...,h_{o}}\log(L(\vec{h}))= & \max_{h_{1},...,h_{o}}\left(-\log\left(\det(\mathbf{\mathbf{Cov}})\right)-\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)\right)\label{eq:LogLikelihood}
@@ -2469,8 +2686,8 @@ reference "sec:Differentiation-der-Likelihood-Funktion"
 \begin_layout Standard
 \noindent
 Damit ist es nun möglich, die unbekannten Hyperparameter mit einem geeigneten
- Minimierungsverfahren zu bestimmen.
- Einige in dieser Arbeit verwendeten Minimierungsverfahren werden in Kapitel
+ Optimierungsverfahren zu bestimmen.
+ Einige in dieser Arbeit verwendeten Optimierungsverfahren werden in Kapitel
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2497,7 +2714,7 @@ reference "subsec:AnhangLikelihoodCOKrigingBsp"
 \end_layout
 
 \begin_layout Subsection
-Likelihood-Schätzer, Erwartungswerte und Varianz 
+Likelihood-Schätzer für Erwartungswerte und Varianzen 
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
@@ -2508,7 +2725,38 @@ name "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
 \end_layout
 
 \begin_layout Standard
-Die Maximierung der Likelihood-Funktion in Abhängigkeit der Erwartungswerte
+Die Maximierung von Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LogLikelihood"
+
+\end_inset
+
+ mittels der Gradienten aus Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AbleitungLogLikelihood"
+
+\end_inset
+
+ erfordert die Kenntnis der Erwartungswerte 
+\begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
+\end_inset
+
+.
+ Durch die Bildung der Kovarianzfunktionen (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:KovarianzfunktionenCoKrigingGauss"
+
+\end_inset
+
+ ) werden auch die Varianzen und der Skalierungsfaktor benötigt.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Maximierung Likelihood-Funktion in Abhängigkeit der Erwartungswerte
  
 \begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
@@ -2532,7 +2780,7 @@ Die Maximierung der Likelihood-Funktion in Abhängigkeit der Erwartungswerte
 
  bezeichnet die Anzahl der Stützstellen aller Gütestufen.
  Das Maximum der Dichtefunktion 
-\begin_inset Formula $f_{D}$
+\begin_inset Formula $L$
 \end_inset
 
  nach dem Maximum-Likelihood-Ansatz (
@@ -2558,11 +2806,11 @@ MLE\left(\overrightarrow{F}\right)=\max_{\overrightarrow{F}}\left(\frac{1}{\left
 \end_layout
 
 \begin_layout Standard
-Führt man eine Matrix 
+Sie 
 \begin_inset Formula $\mathbf{G}\in\mathbb{R^{\mathrm{n_{all}\times s}}}$
 \end_inset
 
- ein in der Form:
+ wie folgt definiert:
 \begin_inset Formula 
 \begin{align}
 \mathbf{G}= & \overset{s\,Einträge}{\underset{\overbrace{Spalte\,k}}{\overbrace{\left[\begin{array}{ccccc}
@@ -2600,6 +2848,10 @@ n_{s}\,Eintr\ddot{a}ge\\
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Weiterhin wird der Vektor 
 \begin_inset Formula $\vec{\tilde{F}}\in\mathbb{R^{\mathrm{s\times1}}}$
 \end_inset
@@ -2645,7 +2897,7 @@ reference "subsec:Likelihood-Schätzer-Erwartungswe"
 \end_layout
 
 \begin_layout Paragraph*
-Varianz
+Varianzen, Skalierung und Diagonalaufschlag:
 \end_layout
 
 \begin_layout Standard
@@ -2682,6 +2934,7 @@ reference "eq:AbleitungLogLikelihood"
 \end_inset
 
  besitzt auch für die Varianz Gültigkeit.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -2801,274 +3054,6 @@ reference "sec:Renormalisierung-der-Hyperparame"
  
 \end_layout
 
-\begin_layout Paragraph
-Aufteilung der Hyperparameter in Klassen
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap table
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Zeichen
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Anzahl 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Korrelationsl.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\vec{\theta}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $s$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Varianzen
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $s$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Diagonalauf.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\lambda$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $s$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Skalierung
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $a$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $s-1$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Kategorien-von-Hyperparametern"
-
-\end_inset
-
-Kategorien von Hyperparametern bei 
-\begin_inset Formula $s$
-\end_inset
-
- Gütestufen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Die in den vorhergehenden Kapiteln 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Die-Kriging-Verfahren"
-
-\end_inset
-
-, 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Kovarianzmatrix"
-
-\end_inset
-
- und 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:RegularisierungUndRauschen"
-
-\end_inset
-
- beschriebenen Hyperparameter lassen sich in Kategorien aufteilen, welche
- in Tabelle 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Kategorien-von-Hyperparametern"
-
-\end_inset
-
- aufgelistet sind.
- 
-\end_layout
-
-\begin_layout Standard
-Diese Einteilung ist für die Initialisierung sehr wichtig, da jede dieser
- Gruppen anders initialisiert werden muss.
- Für die Diagonalaufschläge 
-\begin_inset Formula $\lambda$
-\end_inset
-
- wird das in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Regularisierung"
-
-\end_inset
-
- beschriebene Verfahren verwendet.
- Die Initialisierung der anderen Gruppen wird folgend beschrieben.
- 
-\end_layout
-
 \begin_layout Subsubsection*
 Abschätzung konstanter Hyperparameter 
 \begin_inset CommandInset label
@@ -3099,7 +3084,7 @@ key "schmitz2013"
  
 \begin_inset Formula 
 \begin{align}
-\theta & =\theta_{i}\forall i\in\{1,...,o\}\\
+\theta & =\theta_{i}\forall i\in\{1,...,s*k\}\\
 \theta_{min} & \leq\theta\leq\theta_{max}\nonumber 
 \end{align}
 
@@ -3142,6 +3127,10 @@ ktion aufweist.
 \end_layout
 
 \begin_layout Subsubsection*
+\begin_inset Note Note
+status open
+
+\begin_layout Subsubsection*
 Zufällige Initialisierung der Hyperparameter mit Vererbung
 \begin_inset CommandInset label
 LatexCommand label
@@ -3152,7 +3141,7 @@ name "subsec:RandomInit2"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Wrap table
 lines 0
 placement O
@@ -3390,6 +3379,11 @@ reference "eq:NormalisierungYs"
 .
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection*
 Initialisierung auf Basis bereits vorhandener Krigingmodelle
 \begin_inset CommandInset label
@@ -3493,13 +3487,9 @@ eter noch stark variiert.
 \end_layout
 
 \begin_layout Standard
-Eine rein zufällige Initialisierung hat allerdings den Nachteil, dass die
- Trainingszeit enorm steigt und die Qualität der Modelle im Laufe der Optimierun
-g sehr unterschiedlich ausfallen kann.
- Um diesen Problemen zu begegnen, wurde innerhalb dieser Arbeit ein neues
- Initialisierungsverfahren entwickelt.
- Dieses stellt eine hybride Form der zufälligen Initialisierung und der
- Verwendung alter Modelle dar.
+Das in dieser Arbeit neu entwickelte Initialisierungsverfahren stellt eine
+ hybride Form der zufälligen Initialisierung und der Verwendung alter Modelle
+ dar.
  Ein Kriterium entscheidet darüber, ob ein altes Kriging-Modell verwendet
  wird oder eine zufällige Initialisierung durchgeführt wird.
  Hierfür werden die Likelihood-Werte einiger älterer Modelle mit den neuen
@@ -3512,7 +3502,8 @@ g sehr unterschiedlich ausfallen kann.
  ins Gewicht.
  Es werden im weiteren Verlauf noch einige Beispiele gezeigt, die den Nutzen
  dieses Verfahrens belegen.
- Der in AutoOpti verwendete Algorithmus sieht wie folgt aus:
+ Der in AutoOpti verwendete Algorithmus wird durch folgenden Pseudcode beschrieb
+en:
 \begin_inset listings
 lstparams "numbers=left,basicstyle={\scriptsize},tabsize=4"
 inline false
@@ -3620,7 +3611,8 @@ dann initType = random
 Der Algorithmus startet mit dem Auslesen der Dateinamen der letzten 20 Krigingmo
 delle aus der laufenden Optimierung (Zeile 2).
  Sind noch keine 20 Krigingmodelle erzeugt worden, soll die Initialisierung
- zufällig erfolgen (Zeile 3-6), wobei dieser Wert einstellbar ist.
+ zufällig erfolgen (Zeile 3-6), wobei dieser Wert vom Anwender eingestellt
+ werden kann.
  In der darauf folgenden Schleife findet die Bewertung der einzelnen Kriging
  Modelle statt.
  Für die Bewertung muss erst der alte Likelihood-Wert ausgelesen werden.
@@ -3738,7 +3730,7 @@ key "riedmiller1993direct,NNSchiffmann"
 
 \begin_layout Standard
 Die Änderung der Hyperparameter 
-\begin_inset Formula $\theta_{i}$
+\begin_inset Formula $h_{i}$
 \end_inset
 
  für den nächsten Iterationsschritt 
@@ -3753,7 +3745,7 @@ Die Änderung der Hyperparameter
  Diese wird für jeden Hyperparameter einzeln bestimmt und in jeder Iteration
  geändert und hängt nur von dem Vorzeichen der entsprechenden partiellen
  Ableitung 
-\begin_inset Formula $\frac{\partial f}{\partial\theta_{i}}$
+\begin_inset Formula $\frac{\partial f}{\partial h_{i}}$
 \end_inset
 
  zum Zeitpunkt 
@@ -3767,7 +3759,7 @@ Die Änderung der Hyperparameter
  ab.
 \begin_inset Formula 
 \begin{align*}
-\theta_{i}^{t+1} & =\theta_{i}^{t}-\gamma_{i}^{t}\textrm{sgn}\left(\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t}\right)
+h_{i}^{t+1} & =h_{i}^{t}-\gamma_{i}^{t}\textrm{sgn}\left(\left(\frac{\partial f}{\partial h_{i}}\right)^{t}\right)
 \end{align*}
 
 \end_inset
@@ -3833,20 +3825,27 @@ Die Schrittweite wird in jedem Iterationsschritt für jeden Hyperparameter
 \begin_inset Formula 
 \begin{align*}
 \gamma_{i}^{t+1} & =\begin{cases}
-\min\left(\gamma_{i}^{t}\eta^{+},\gamma_{max}\right) & wenn\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t}\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t-1}>0\\
-\max\left(\gamma_{i}^{t}\eta^{-},\gamma_{min}\right) & wenn\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t}\left(\frac{\partial f}{\partial\theta_{i}}\right)^{t-1}<0\\
+\min\left(\gamma_{i}^{t}\eta^{+},\gamma_{max}\right) & wenn\left(\frac{\partial f}{\partial h_{i}}\right)^{t}\left(\frac{\partial f}{\partial h_{i}}\right)^{t-1}>0\\
+\max\left(\gamma_{i}^{t}\eta^{-},\gamma_{min}\right) & wenn\left(\frac{\partial f}{\partial h_{i}}\right)^{t}\left(\frac{\partial f}{\partial h_{i}}\right)^{t-1}<0\\
 \gamma_{i}^{t} & sonst
 \end{cases}
 \end{align*}
 
 \end_inset
 
-In sehr flachen Bereichen der zu minimierenden Funktion bietet dieses Verfahren
+In flachen Bereichen der zu minimierenden Funktion bietet dieses Verfahren
  große Vorteile gegenüber anderen gradienten basierten Verfahren, da in
  solchen Bereichen die Größe der Gradienten sehr klein ist und das RPROP-Verfahr
 en die Größe nicht berücksichtigt.
  Das ist bei der Likelihood Funktion von besonderem Vorteil, da diese bereits
- durch Ihre Definition sehr viele flache Gebiete aufweist.
+ durch Ihre Definition flache Gebiete aufweist, siehe Beispiel Anhang 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:AnhangLikelihoodCOKrigingBsp"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -4041,11 +4040,11 @@ reference "subsec:Ableitung-LikelihoodRueckMode"
 
 ).
  Im Falle eines Co-Krigings skaliert die Anzahl der Hyperparameter 
-\begin_inset Formula $o=m_{f}k+3m_{f}$
+\begin_inset Formula $o=sk+3s$
 \end_inset
 
  mit der Anzahl der Gütestufen 
-\begin_inset Formula $m_{f}$
+\begin_inset Formula $s$
 \end_inset
 
  und der Anzahl an freien Variablen 
@@ -4097,7 +4096,7 @@ reference "subsec:RPROP"
 
 \begin_layout Standard
 \begin_inset listings
-lstparams "basicstyle={\scriptsize},tabsize=4"
+lstparams "numbers=left,basicstyle={\scriptsize},tabsize=4"
 inline false
 status open
 
@@ -4157,11 +4156,6 @@ Schleife von eta_plusFact=0.9 bis eta_plusFact<=1.1 Schrittweite 0.2
 
 \begin_layout Plain Layout
 
-}
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -4212,11 +4206,6 @@ Schleife von eta_minusFact=0.9 bis eta_minusFact<=1.1 Schrittweite 0.2
 	wenn newDensity<density dann eta_minus=newEtaMinus
 \end_layout
 
-\begin_layout Plain Layout
-
-}
-\end_layout
-
 \end_inset
 
 
@@ -4258,7 +4247,8 @@ Gemittelter Konvergenzverlauf der beiden Verfahren anhand eines Beispiels
 
 \end_inset
 
-Als erstes der initiale Likelihood-Wert mit den bisherigen Lernraten 
+Als erstes wird der initiale Likelihood-Wert mit den bisherigen Lernraten
+ 
 \begin_inset Formula $\eta^{+},\eta^{-}$
 \end_inset
 
@@ -4273,7 +4263,7 @@ Als erstes der initiale Likelihood-Wert mit den bisherigen Lernraten
 \end_inset
 
  nicht geändert haben, so wird die Berechnung des Likelihood-Werts gespart.
- Am Ende wird die Lernrate beibehalten, welche den geringsten Likelihood-Wert
+ Am Ende wird die Lernrate beibehalten, welche den besten Likelihood-Wert
  erzielt hat.
  Für die Lernrate 
 \begin_inset Formula $\eta^{-}$
@@ -4303,7 +4293,7 @@ key "Lengyel-Kampmann2015"
  Es gab ca.
  113 freie Parameter und somit für das Co-Kriging 228 Hyperparameter (130*2
  und 2x die Prozessvarianzen der Kovarianzfunktionen).
- Die Datenbasis enthielt zu diesem Zeitpunkt 373 Member.
+ Die Datenbasis enthielt zu diesem Zeitpunkt 373 Individuen.
  Das Co-Kriging wurde mit zufälligen Hyperparametern initialisiert und jeweils
  10x mit dem RPROP/RPROP2-Verfahren trainiert und verglichen.
  Die Vorhersagen der fertig trainierten Ersatzmodelle wurden dann anhand
@@ -4353,8 +4343,8 @@ name "subsec:Quasi-Newton"
 \end_layout
 
 \begin_layout Standard
-Das zweite implementierte Minimierungsverfahren ist ein Verfahren höherer
- Ordnung namens Quasi-Newton.
+Das zweite implementierte Minimierungsverfahren ist ein Quasi-Newton Verfahren
+ höherer Ordnung.
  Basis für diese Art der mehrdimensionalen Minimierung ist eine Taylor Approxima
 tion zweiten Grades.
  Sei 
@@ -4709,7 +4699,7 @@ zufälligen
 \end_layout
 
 \begin_layout Paragraph*
-Fazit
+Fazit:
 \end_layout
 
 \begin_layout Standard
@@ -4783,7 +4773,7 @@ reference "BedingteVarianzDefinition"
 \end_layout
 
 \begin_layout Paragraph*
-Bedingte Varianzen
+Bedingte Varianzen:
 \end_layout
 
 \begin_layout Standard
@@ -4843,7 +4833,7 @@ Damit lässt sich die bedingte Kovarianz einfach und effizient bestimmen
 \end_layout
 
 \begin_layout Paragraph*
-Berechnung der Zeiten
+Berechnung der Zeiten:
 \end_layout
 
 \begin_layout Standard
@@ -4896,8 +4886,8 @@ Die Prozesskettenzeit
  ändert sich während einer laufenden Optimierung in der Regel nur unwesentlich,
  da sich die Prozesskette während der Optimierung nicht ändert.
  Bei CFD-Optimierungen ist oftmals eine kleine Reduktion der Prozesskettenzeit
- zum Ende einer Optimierung zu beobachten, da Member nahe dem Optimum oftmals
- schneller konvergieren.
+ zum Ende einer Optimierung zu beobachten, da Individuen nahe dem Optimum
+ oftmals schneller konvergieren.
  Allerdings ist dies nicht immer der Fall und die zeitliche Differenz nicht
  ausschlaggebend.
  Aus diesem Grund wird in der hier entwickelten Software das Mittel aus
@@ -4909,7 +4899,8 @@ Die Prozesskettenzeit
 \begin_inset Formula $n$
 \end_inset
 
- die Anzahl aller bisher berechneten Member der betrachteten Gütestufe angibt.
+ die Anzahl aller bisher berechneten Individuen der betrachteten Gütestufe
+ angibt.
  
 \begin_inset Formula 
 \begin{equation}
@@ -4970,7 +4961,7 @@ Standardeinstellung in der hier entwickelten Software ist eine Anzahl von
 \end_layout
 
 \begin_layout Paragraph*
-Minimale Menge an Membern hoher Güte 
+Minimale Menge an Individuen hoher Güte: 
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Minimale-Menge-an"
@@ -4982,17 +4973,16 @@ name "par:Minimale-Menge-an"
 
 \begin_layout Standard
 Es kann vorkommen, dass die Funktionen der Gütestufen so stark korreliert
- sind, dass die Entscheidungsfunktion nur noch Member niedriger Güte wählt.
+ sind, dass die Entscheidungsfunktion nur noch Individuen niedriger Güte
+ wählt.
  Prinzipiell ist dieses Verhalten auch sinnvoll und erwünscht, jedoch interessie
 rt den Anwender letztendlich das Ergebnis hoher Güte.
  Aus diesem Grund wird der Volumenzugewinn im Raum hoher Güte berechnet:
  
-\shape italic
-
 \begin_inset Quotes gld
 \end_inset
 
-Mit einem Member niedriger Güte kann kein Volumenzugewinn erreicht werden,
+Mit einem Individuum niedriger Güte kann kein Volumenzugewinn erreicht werden,
  es wird nur das Ersatzmodell verbessert.
 \begin_inset Quotes grd
 \end_inset
@@ -5001,184 +4991,80 @@ Mit einem Member niedriger Güte kann kein Volumenzugewinn erreicht werden,
 \end_layout
 
 \begin_layout Standard
-Daher kann es sinnvoll sein, eine Mindestrate von Membern hoher Güte vorzugeben.
+Daher kann es sinnvoll sein, eine Mindestrate von Individuen hoher Güte
+ vorzugeben.
  In der hier entwickelten Software wird dafür ein prozentualer Anteil hoher
- Güte (HFProzent Soll) vorgegeben.
- Wird dieser Anteil unterschritten, so soll ein Member hoher Güte erzwungen
+ Güte vorgegeben.
+ Wird dieser Anteil unterschritten, so soll ein Individuum hoher Güte erzwungen
  werden.
- Bei besonders aussichtsreichen Membern niedriger Güte kann dieser Zwang
+ Bei besonders aussichtsreichen Individuen niedriger Güte kann dieser Zwang
  allerdings auch umgangen werden.
  Die Entscheidungsfunktion wird so nur teilweise ausgehebelt.
 \end_layout
 
 \begin_layout Standard
-Die Grundidee ist es, die Grenze für das Entscheidungskriterium (KriteriumGrenze
-) auf einen höheren Wert zu setzen und damit die Wahrscheinlichkeit für
- die Wahl eines Members hoher Güte zu erhöhen.
- Dafür werden als erstes die aktuellen Anteile hoher Güte berechnet (HFProzentIs
-t) und dann das Maximum der letzten 10 berechneten Entscheidungskriterien
- (Kriterium10Max) bestimmt.
- Die neue Grenze für das Kriterium wird folgendermaßen entschieden:
+Als besonders aussichtsreich werden Individuen bezeichnet, welche einen
+ höheren Informationszugewinn pro Zeit (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:IzuT"
+
+\end_inset
+
+) aufweisen, als alle Individuen der letzten 10 Optimierungsschritte.
 \end_layout
 
-\begin_layout Itemize
-Ist die Differenz zwischen Soll- und Ist-Wert des Mindestprozentsatzes größer
- als 0%, aber kleiner als 5%: 
-\end_layout
+\begin_layout Enumerate
+Bestimmung des maximalen Informationszugewinns pro Zeit 
+\begin_inset Formula $f_{max}\coloneqq\underset{i\in\left\{ 1,...,10\right\} }{\max}\left(\left[\underset{g\in J}{\max}\left(\frac{I_{g}}{t_{g}}\right)\right]_{i}\right)$
+\end_inset
 
-\begin_deeper
-\begin_layout Itemize
-Setze das Kriterium auf das Maximum der letzten 10.
- Die Wahrscheinlichkeit für einen Member hoher Güte ist sehr hoch.
- Bekommt das Entscheidungskriterium aber einen Member, welcher einen höheren
- Wert als die letzten 10 hatte, so kann trotzdem nochmal ein Member niedriger
- Güte erzeugt werden.
+ der Gütestufe 
+\begin_inset Formula $g\in J=\{1,...,s\}$
+\end_inset
+
+ für den vergangenen Optimierungszeitschritt 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ In diesem Fall werden die letzten 10 Schritte betrachtet, wobei 
+\begin_inset Formula $i=0$
+\end_inset
+
+ den aktuellen Schritt beschreibt und 
+\begin_inset Formula $i=1$
+\end_inset
+
+ den vorhergehenden.
  
 \end_layout
 
-\end_deeper
-\begin_layout Itemize
-Ist die Differenz zwischen Soll- und Ist-Wert des Mindestprozentsatz größer
- als 5%:
-\end_layout
+\begin_layout Enumerate
+Besitzt im aktuellen Zeitschritt 
+\begin_inset Formula $i=0$
+\end_inset
 
-\begin_deeper
-\begin_layout Itemize
-Erzwinge einen Member hoher Güte
-\end_layout
+ eine Gütestufe (außer der höchsten) 
+\begin_inset Formula $g_{l}\in L=\{2,...,s\}$
+\end_inset
 
-\end_deeper
-\begin_layout Standard
-Dieser Algorithmus sorgt im Normalfall für eine gleichmäßige Berechnung
- von Membern hoher Güte.
- Bei einem besonders aussichtsreichen Member niedriger Güte kann dieser
- aber noch vorgezogen werden.
+ einen höheren Informationszugewinn pro Zeit als die letzten 10, dann wähle
+ diese Stufe.
+ Ansonsten wird ein Individuum der höchsten Stufe erzwungen.
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-lstparams "numbers=left,basicstyle={\scriptsize},showstringspaces=false,tabsize=4"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-HFProzentSoll      = holeUserInput()
-\end_layout
-
-\begin_layout Plain Layout
-
-HFProzentIst       = holeAktuellenHFAnteilInProzent()
-\end_layout
-
-\begin_layout Plain Layout
-
-Kriterium10        = holeLetze10EntscheidungsKriterien()
-\end_layout
-
-\begin_layout Plain Layout
-
-Kriterium10Max     = Maximum(Kriterium10)
-\end_layout
-
-\begin_layout Plain Layout
-
-KriteriumAktuell   = Entscheidungsfunktion()
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-KriteriumGrenze = Kriterium10Max
-\end_layout
-
-\begin_layout Plain Layout
-
-Wenn  (HFProzentIst > HFProzentSoll) oder (Kriterium10Max < 1.0) 
-\end_layout
-
-\begin_layout Plain Layout
-
-	KriteriumGrenze = 1.0
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Wenn (HFProzentSoll-HFProzentIst>0.05)
-\end_layout
-
-\begin_layout Plain Layout
-
-	KriteriumGrenze = inf	
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+Dieser Algorithmus sorgt im Normalfall für ein gleichmäßiges 
+\begin_inset Quotes gld
 \end_inset
 
-
-\end_layout
-
-\begin_layout Paragraph
-Dauerhaftes Umschalten auf hohe Güte bei einem sehr guten Ersatzmodell
-\begin_inset CommandInset label
-LatexCommand label
-name "par:Umschalten-auf-HF"
-
+Erzwingen
+\begin_inset Quotes grd
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Die Vorhersagefehler der Ersatzmodelle gehen bei ausreichender Anzahl an
- Stützstellen nahezu gegen Null.
- Trifft zusätzlich der Umstand ein, dass die Korrelation zwischen hoher
- und niedriger Güte extrem hoch ist, so könnte es passieren, dass die Entscheidu
-ngsfunktion nur noch die Prozesskette niedriger Güte wählt.
- Aus diesem Grund sollen die Ersatzmodelle, welche eine gewisse Güte erreicht
- haben, nicht mehr in die Entscheidungsfunktion einfließen.
- Um ein solches Verhalten zu verwirklichen, wird vor dem eigentlichen Aufruf
- der Entscheidungsfunktion der Quotient aus der vorhergesagten Standardabweichun
-g 
-\begin_inset Formula $\sigma_{h}\left(\vec{x}\right)$
-\end_inset
-
- und der globalen Standardabweichung aller bekannten Stützstellen 
-\begin_inset Formula $\sigma_{h,all}$
-\end_inset
-
- ins Verhältnis gesetzt: 
-\begin_inset Formula $\frac{\sigma_{h}\left(\vec{x}\right)}{\sigma_{h,all}}$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-Der Anwender hat nun die Möglichkeit, eine Grenze für dieses Verhältnis
- anzugeben.
- Wird diese unterschritten, so wird diese Funktion nicht für die Entscheidung
- berücksichtigt.
- Werden dadurch bspw.
- alle Funktionen nicht berücksichtigt, so würde die hochwertigste Prozesskette
- verwendet.
- 
-\end_layout
-
-\begin_layout Standard
-Die Standardeinstellung liegt bei 1%, allerdings ist dieser Wert sehr anwendungs
-- und anwenderspezifisch.
- 
+ von Individuen der höchsten Gütestufe, allerdings können besonders aussichtsrei
+che Individuen der niedrigeren Gütestufen so vorgezogen werden.
 \end_layout
 
 \begin_layout Section
@@ -5223,6 +5109,16 @@ Weiterhin wurde ein großer Teil der Entwicklung auf die Effizienz der Software
 Neben den genannten Maßnahmen werden noch andere Entwicklungen beschrieben,
  die den effizienten Einsatz der Kriging-Software für den Bereich des Turbomasch
 inendesigns im industriellen Umfeld aufzeigen.
+ 
+\end_layout
+
+\begin_layout Standard
+Da einige Softwarepakete bereits vor der Entwicklung des hier vorgestellten
+ Programms vorhanden waren, diese allerdings noch in der Programmiersprache
+ C entwickelt wurden, musste eine flexible Software-Schnittstelle entwickelt
+ werden.
+ Hierfür wurde ein spezielles Klassenmodell unter Benutzung von Boost-Funktionso
+bjekten entwickelt, welches ebenfalls kurz beschrieben wird.
 \end_layout
 
 \begin_layout Subsection
@@ -5274,7 +5170,7 @@ en zu sehen ist.
 \end_layout
 
 \begin_layout Paragraph*
-Point
+Point:
 \end_layout
 
 \begin_layout Standard
@@ -5339,7 +5235,7 @@ reference "chap:Verteiltes-Rechnen-1"
 \end_layout
 
 \begin_layout Paragraph*
-CorrelationFunction
+CorrelationFunction:
 \begin_inset CommandInset label
 LatexCommand label
 name "par:CorrelationFunction"
@@ -5411,71 +5307,23 @@ CorrelationFunctionLinearCombination
 
 , die Funktionsweise dieser Kovarianzfunktion soll hier kurz erläutert werden:
  Um die Kovarianzmatrix für das hier beschriebene Co-Kriging-Modell aufzustellen
-, werden drei Kovarianzfunktionen benötigt.
- Diese können wiederum über zwei Kovarianzmodellfunktionen 
-\begin_inset Formula $cov_{2}\left(\vec{h}\right),cov_{diff}\left(\vec{h}\right)$
-\end_inset
-
- und einem Skalierungsfaktor 
-\begin_inset Formula $a$
-\end_inset
-
- abgebildet werden (siehe Kapitel 
+, werden gemäß Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "subsec:COKrigingKovarianzmodell"
+reference "eq:KovarianzfunktionenCoKrigingGauss"
 
 \end_inset
 
-): 
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)=a^{2}cov_{2}\left(\vec{h}\right)+cov_{diff}\left(\vec{h}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $cov_{1,2}\left(\vec{x}_{1},\vec{x}_{2}\right)=acov_{2}\left(\vec{h}\right)$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $cov_{2,2}\left(\vec{x}_{1},\vec{x}_{2}\right)=cov_{2}\left(\vec{h}\right)$
-\end_inset
-
-
+ zwei Kovarianzmodellfunktionen mit eigenen Hyperparametern benötigt.
 \end_layout
 
 \begin_layout Standard
-Innerhalb des Programms werden also nur zwei Kovarianzmodellfunktionen mit
- eigenen Hyperparametern benötigt.
- Die dritte Funktion 
-\begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
+Konkret bedeutet dies, dass zwei Instanzen einer Kovarianzfunktion erzeugt
+ werden müssen (
+\begin_inset Formula $cov_{2}\left(\vec{x}_{1},\vec{x}_{2}\right),cov_{diff}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
 
- wird über eine Summe abgebildet.
- Konkret bedeutet dies, dass zwei Instanzen einer Kovarianzfunktion 
-\begin_inset Quotes gld
-\end_inset
-
-CorrelationFunctionGauss
-\begin_inset Quotes grd
-\end_inset
-
- oder 
-\begin_inset Quotes gld
-\end_inset
-
-CorrelationFunctionSpline
-\begin_inset Quotes grd
-\end_inset
-
- erzeugt werden müssen.
+).
  Die Kovarianzfunktion 
 \begin_inset Formula $cov_{1,1}\left(\vec{x}_{1},\vec{x}_{2}\right)$
 \end_inset
@@ -5490,7 +5338,7 @@ CorrelationFunctionLinearCombination
 
  abgebildet, indem diese die Referenzen auf die beiden bereits vorhandenen
  Kovarianzfunktionen erhält.
- Die Steuerung und Instantiierung der Objekte wird von der Klasse 
+ Die Steuerung und Instanziierung der Objekte wird von der Klasse 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5574,7 +5422,7 @@ reference "sec:SoftwaretechnKorrelationsfunktionen"
 
 \begin_layout Paragraph*
 CorrelationContainer - Behälter und Kontrolle für die benötigten Korrelationsfun
-ktionen
+ktionen:
 \end_layout
 
 \begin_layout Standard
@@ -5646,7 +5494,7 @@ Point
 
 \begin_layout Paragraph*
 DensityFunction - Implementierung unterschiedlicher Verfahren in einem Softwarep
-aket 
+aket: 
 \begin_inset CommandInset label
 LatexCommand label
 name "par:DensityFunction---Implementierun"
@@ -5818,7 +5666,7 @@ CorrelationClassificator
 \end_layout
 
 \begin_layout Paragraph*
-AutoOpti Schnittstelle
+AutoOpti Schnittstelle:
 \end_layout
 
 \begin_layout Standard
@@ -5843,7 +5691,7 @@ AutoOpti
 tion eine Anbindung an das Verfahren.
  Um die Anbindung vornehmen zu können, sind allerdings detaillierte Kenntnisse
  über die Funktionsweise von AutoOpti nötig, da der Austausch von Informationen
- über die Member-Struktur erfolgt.
+ über die Individuen-Struktur erfolgt.
  Diese Struktur beinhaltet zahlreiche verschachtelte Informationen, welche
  innerhalb der Schnittstellenimplementationen bekannt sein müssen.
  Weiterhin folgt diese Struktur einem älteren C-Standard, welcher eine Übersetzu
@@ -5878,7 +5726,7 @@ NNInterface
 \end_layout
 
 \begin_layout Paragraph*
-Minimierungsverfahren
+Minimierungsverfahren:
 \end_layout
 
 \begin_layout Standard
@@ -6311,7 +6159,7 @@ reference "fig:MatrixKlasseUML"
 \end_layout
 
 \begin_layout Subparagraph
-Matrix 
+Matrix:
 \end_layout
 
 \begin_layout Standard
@@ -6685,7 +6533,7 @@ Header-Daten
 \end_layout
 
 \begin_layout Subparagraph
-OpenMPMatrix 
+OpenMPMatrix: 
 \end_layout
 
 \begin_layout Standard
@@ -6711,7 +6559,7 @@ key "dagum1998openmp"
 \end_layout
 
 \begin_layout Subparagraph
-MKLMatrix 
+MKLMatrix: 
 \end_layout
 
 \begin_layout Standard
@@ -6733,7 +6581,7 @@ key "INTEL"
 \end_layout
 
 \begin_layout Subparagraph
-CudaMatrix 
+CudaMatrix: 
 \end_layout
 
 \begin_layout Standard
@@ -7018,7 +6866,7 @@ key "kueppers2016"
 \end_layout
 
 \begin_layout Paragraph*
-Exemplarischer Ablauf einer Matrix-Addition
+Exemplarischer Ablauf einer Matrix-Addition:
 \end_layout
 
 \begin_layout Standard
@@ -7099,7 +6947,7 @@ Hat der Client alle Teilergebnisse, wandelt er diese in Matrix-Objekte um
 \end_layout
 
 \begin_layout Paragraph
-Netzwerkobjekte
+Netzwerkobjekte:
 \end_layout
 
 \begin_layout Standard
@@ -7195,7 +7043,7 @@ Die Serialisierung und Deserialisierung ist in diesem Fall über das Interface
 \end_layout
 
 \begin_layout Paragraph
-Client
+Client:
 \end_layout
 
 \begin_layout Standard
@@ -7235,7 +7083,7 @@ ClientFunctions
 \end_layout
 
 \begin_layout Paragraph
-Server
+Server:
 \end_layout
 
 \begin_layout Standard
@@ -7558,7 +7406,7 @@ Matrix
 \end_layout
 
 \begin_layout Paragraph
-Messaging Middleware ZeroMQ
+Messaging Middleware ZeroMQ:
 \end_layout
 
 \begin_layout Standard
@@ -7577,7 +7425,7 @@ key "Dworak2011,hintjens2013zeromq"
 \end_layout
 
 \begin_layout Paragraph
-Ausfallsicherheit
+Ausfallsicherheit:
 \end_layout
 
 \begin_layout Standard
@@ -7604,7 +7452,7 @@ Damit der Client erkennen kann, welche Server aktuell im Netzwerk vorhanden
 \end_layout
 
 \begin_layout Paragraph
-Geschwindigkeit bei mehreren Servern
+Geschwindigkeit bei mehreren Servern:
 \end_layout
 
 \begin_layout Standard
@@ -7788,7 +7636,7 @@ CPU-Befehlssätze SSE/AVX verwenden
 \end_layout
 
 \begin_layout Paragraph*
-Exponentialfunktion im Voraus berechnen
+Exponentialfunktion im Voraus berechnen:
 \end_layout
 
 \begin_layout Standard
@@ -7809,12 +7657,12 @@ reference "eq:ExpoKorrelationsfunktion-1"
 \end_layout
 
 \begin_layout Paragraph*
-Puffern der Exponentialfunktion
+Puffern der Exponentialfunktion:
 \end_layout
 
 \begin_layout Standard
 Da für die Aufstellung der Kovarianzmatrix der innere Teil 
-\begin_inset Formula $e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|h_{l}\right|^{p}\right)}$
+\begin_inset Formula $e^{-\frac{1}{2}\underset{l=1}{\overset{l<=k}{\sum}}\left(e^{\theta_{l}}\left|\triangle x_{l}\right|^{p}\right)}$
 \end_inset
 
  (siehe Gleichung 
@@ -7846,7 +7694,7 @@ den.
 \end_layout
 
 \begin_layout Paragraph*
-Schnellere Exponentialfunktion 
+Schnellere Exponentialfunktion:
 \end_layout
 
 \begin_layout Standard
@@ -7867,7 +7715,7 @@ key "fmath2018"
 \end_layout
 
 \begin_layout Paragraph*
-SSE und AVX - SIMD Instruktionen
+SSE und AVX - SIMD Instruktionen:
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Streaming-SIMD-Extensions"
@@ -9555,7 +9403,7 @@ Die Bestimmung des Produkts der aus Punkt 2 berechneten Matrix und den Einträge
 \end_layout
 
 \begin_layout Paragraph
-Benchmark
+Benchmark:
 \end_layout
 
 \begin_layout Standard
@@ -11999,7 +11847,7 @@ Diese Formel stellt eine grobe Abschätzung für den Einfluss eines freien
 \end_layout
 
 \begin_layout Paragraph*
-Anteile der Differenz- und Low-Fidelity-Lovarianzfunktion 
+Anteile der Differenz- und Low-Fidelity-Kovarianzfunktion 
 \end_layout
 
 \begin_layout Standard
@@ -12026,11 +11874,11 @@ reference "eq:KovarianzfunktionenCoKrigingGauss"
 \end_inset
 
  und geht weiterhin von einer vollen Korrelation 
-\begin_inset Formula $c_{2}\left(\vec{h}\right)=1$
+\begin_inset Formula $c_{2}\left(\triangle\vec{x}\right)=1$
 \end_inset
 
 , 
-\begin_inset Formula $c_{diff}\left(\vec{h}\right)=1$
+\begin_inset Formula $c_{diff}\left(\triangle\vec{x}\right)=1$
 \end_inset
 
  aus bei gleichzeitiger Vernachlässigung des Rauschterms 
@@ -12040,8 +11888,8 @@ reference "eq:KovarianzfunktionenCoKrigingGauss"
 , so ergibt sich:
 \begin_inset Formula 
 \begin{align}
-cov_{1,1}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}\\
-cov_{2,2}\left(\vec{h}=0\right)= & a^{2}\sigma_{2}^{2}
+cov_{1,1}\left(\triangle\vec{x}=0\right)= & a^{2}\sigma_{2}^{2}+\sigma_{diff}^{2}\\
+cov_{2,2}\left(\triangle\vec{x}=0\right)= & a^{2}\sigma_{2}^{2}
 \end{align}
 
 \end_inset

@@ -253,8 +253,8 @@ name "subsec:OptimierungsBegriffe"
 
 \begin_layout Standard
 Im Folgenden werden wichtige Begrifflichkeiten zu Optimierungsverfahren
- eingeführt und zum besseren Verständnis einige Beispiele aus dem Bereich
- der Turbomaschinenauslegung erläutert.
+ eingeführt und anhand von Beispielen aus dem Bereich der Turbomaschinenauslegun
+g erläutert.
  Für weitere Informationen sei der Leser auf folgende Literaturstellen verwiesen
 : 
 \begin_inset CommandInset citation
@@ -267,20 +267,20 @@ key "miettinen2012nonlinear,ehrgott2005multicriteria,deb2014multi,marler2004surv
 \end_layout
 
 \begin_layout Paragraph*
-Zielfunktion oder Fitness
+Zielfunktion oder Fitness:
 \end_layout
 
 \begin_layout Standard
-Grundsätzlich ist es das Ziel einer Turbomaschinenoptimierung ein oder mehrere
- Zielfunktionen zu minimieren oder zu maximieren, wobei im Folgenden grundsätzli
-ch von einer Minimierung ausgegangen wird.
- Typische Zielfunktionen sind die Erhöhung des Wirkungsgrads, die Erhöhung
- des Betriebsbereichs, die Verminderung von Lärm etc.
+Grundsätzlich ist es das Ziel einer Optimierung ein oder mehrere Zielfunktionen
+ zu minimieren oder zu maximieren, wobei im Folgenden grundsätzlich von
+ einer Minimierung ausgegangen wird.
+ Typische Zielfunktionen für die Turbomaschine sind die Erhöhung des Wirkungsgra
+ds, die Erweiterung des Betriebsbereichs, die Verminderung von Lärm etc.
  
 \end_layout
 
 \begin_layout Paragraph*
-Nebenbedingung 
+Nebenbedingung: 
 \end_layout
 
 \begin_layout Standard
@@ -292,19 +292,16 @@ Nebenbedingungen werden oftmals als Gültigkeitsintervalle festgelegt, in
 \end_layout
 
 \begin_layout Paragraph*
-Region Of Interest (ROI)
+Region Of Interest (ROI):
 \end_layout
 
 \begin_layout Standard
-Ein für eine Zielfunktion festgelegtes Gültigkeitsintervall.
- Dies kann sinnvoll sein, wenn nur ein kleiner Bereich des Zielfunktionsraums
- von Interesse für den Anwender ist.
- Durch die Festlegung eines solchen Intervalls kann das Optimierungsverfahren
- gezielter suchen.
+Ein für eine Zielfunktion oder Nebenbedingung festgelegtes Gültigkeitsintervall.
+ 
 \end_layout
 
 \begin_layout Paragraph*
-Freie Variablen
+Freie Variablen:
 \end_layout
 
 \begin_layout Standard
@@ -329,15 +326,7 @@ key "AULICH"
 \end_layout
 
 \begin_layout Paragraph*
-Strömungsgröße (auch 
-\begin_inset Quotes gld
-\end_inset
-
-Flowparameter
-\begin_inset Quotes grd
-\end_inset
-
-)
+Flowparameter:
 \end_layout
 
 \begin_layout Standard
@@ -358,7 +347,7 @@ Flowparameter
 
 \begin_layout Standard
 Wird mit einem Satz freier Parameter beispielsweise eine Verdichtergeometrie
- erzeugt und diese im Anschluss dann mit einem Strömungslöser berechnet,
+ erzeugt und diese im Anschluss dann mit einem aeromechanisch bewertet,
  so entstehen durch das nachfolgende Post-Processing eine Vielzahl von Ergebnisg
 rößen.
  Oftmals werden hier hunderte bis tausende an Ergebnisgrößen pro Simulation
@@ -377,7 +366,7 @@ rößen.
 \end_layout
 
 \begin_layout Paragraph*
-Stützstelle (auch 
+Individuum (auch 
 \begin_inset Quotes gld
 \end_inset
 
@@ -385,7 +374,7 @@ Member
 \begin_inset Quotes grd
 \end_inset
 
- oder 
+, Stützstelle oder 
 \begin_inset Quotes gld
 \end_inset
 
@@ -393,7 +382,7 @@ Sample
 \begin_inset Quotes grd
 \end_inset
 
-)
+):
 \end_layout
 
 \begin_layout Standard
@@ -401,7 +390,11 @@ Ein Tupel freier Parameter
 \begin_inset Formula $\left(x_{1},....,x_{k}\right)$
 \end_inset
 
- mit zugeordneten Zielfunktionswerten 
+ mit zugeordneten Flowparametern 
+\begin_inset Formula $\left(f_{1},....,y_{z}\right)$
+\end_inset
+
+ und Zielfunktionswerten 
 \begin_inset Formula $\left(y_{1},....,y_{z}\right)$
 \end_inset
 
@@ -416,7 +409,7 @@ Ein Tupel freier Parameter
 \end_layout
 
 \begin_layout Paragraph*
-Optimierungsproblem
+Optimierungsproblem:
 \end_layout
 
 \begin_layout Standard
@@ -424,7 +417,7 @@ Ein Optimierungsproblem lässt sich mit den vorhergehenden Bezeichnungen
  wie folgt definieren:
 \begin_inset Formula 
 \begin{align}
-\underset{x_{i}\in\left[a_{i},b_{i}\right]\forall i\in\left\{ 1,...,k\right\} }{\min}\left\{ \left.\left\Vert \vec{y}\left(\vec{x}\right)\right\Vert \right|w_{j}\left(\vec{x}\right)\in\left[c_{j};d_{j}\right]\forall j\in\left\{ 1,...,c\right\} \right\} 
+\underset{x_{i}\in\left[a_{i},b_{i}\right]\forall i\in\left\{ 1,...,k\right\} }{\min}\left\{ \left.\left(y_{1}\left(\vec{x}\right),....,y_{z}\left(\vec{x}\right)\right)\right|w_{j}\left(\vec{x}\right)\in\left[c_{j};d_{j}\right]\forall j\in\left\{ 1,...,c\right\} \right\} 
 \end{align}
 
 \end_inset
@@ -434,16 +427,12 @@ Ein Optimierungsproblem lässt sich mit den vorhergehenden Bezeichnungen
 
 \begin_layout Standard
 Aus der Formulierung wird ersichtlich, dass dieser Ansatz die Möglichkeit
- bietet, mehrere Ziele 
-\begin_inset Formula $\vec{y}\left(\vec{x}\right)$
-\end_inset
-
- gleichzeitig zu verfolgen.
+ bietet, mehrere Ziele gleichzeitig zu verfolgen.
  Da die Ziele oftmals nicht gemeinsam optimiert werden können, weil diese
  z.B.
  widersprüchlich sind, fasst man sie oftmals über Gewichtungsfaktoren als
  gemeinsame Zielfunktion zusammen.
- Diese Faktoren zu bestimmen, ist allerdings sehr schwierig.
+ Diese Faktoren optimal zu bestimmen, ist im Allgemeinen sehr schwierig.
  Um dieses Problem zu umgehen wird in der Regel ein Paretorang-Gütekriterium
  verwendet.
  Damit können mehrere Ziele gleichzeitig optimiert werden, ohne diese gegeneinan
@@ -452,14 +441,13 @@ der zu gewichten und so eine Menge an optimalen Lösungen zu finden.
 \end_layout
 
 \begin_layout Paragraph*
-Paretorang und Paretofront
+Paretorang und Paretofront:
 \end_layout
 
 \begin_layout Standard
 Die Begriffe Paretorang und Paretofront sind nach dem Ökonomen und Soziologen
- Vilfredo Pareto (1848–1923) benannt.
- Weiterhin sollen die Begriffe Dominanz, Paretorang und Paretofront im Folgenden
- kurz definiert werden, vgl.
+ Vilfredo Pareto (1848–1923) benannt und sollen im Folgenden kurz definiert
+ werden, vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -468,15 +456,19 @@ key "pareto1964cours,ehrgott2005multicriteria,miettinen2012nonlinear,Voss2008"
 \end_inset
 
 .
- Man sagt, dass ein bewerteter Member 
+ Man sagt, dass ein bewertetes Individuum 
 \begin_inset Formula $M_{1}$
 \end_inset
 
- einen Member 
+ ein Individuum 
 \begin_inset Formula $M_{2}$
 \end_inset
 
- dominiert , falls bzgl.
+ dominiert 
+\begin_inset Formula $M_{1}\prec M_{2}$
+\end_inset
+
+, falls bzgl.
  aller Zielfunktionen gilt: 
 \begin_inset Formula 
 \begin{equation}
@@ -485,25 +477,11 @@ M_{1}\prec M_{2}\Longleftrightarrow y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Ein dominanter Member 
-\begin_inset Formula $M_{1}$
-\end_inset
-
- muss also in jeder Zielfunktion kleiner oder gleich sein als der Member
- 
-\begin_inset Formula $M_{2}$
-\end_inset
-
- und zusätzlich in wenigstens einer Zielfunktion kleiner.
- Mit dem Begriff der Dominanz lässt sich der Paretorang 
+Mit dem Begriff der Dominanz lässt sich der Paretorang 
 \begin_inset Formula $P$
 \end_inset
 
- eines Members definieren:
+ eines Individuums definieren:
 \begin_inset Formula 
 \begin{equation}
 P\left(M\right)\coloneqq\#\left\{ \left.\hat{M}\in M_{all}\right|\hat{M}\prec M\right\} +1
@@ -515,12 +493,16 @@ Der Operator
 \begin_inset Formula $\#$
 \end_inset
 
- gibt die Anzahl einer endlichen Menge an.
+ gibt die Anzahl einer endlichen Menge an und 
+\begin_inset Formula $M_{all}$
+\end_inset
+
+ die Menge aller bereits bewerteten Individuen.
  Die Paretofront 
 \begin_inset Formula $PF$
 \end_inset
 
- bezeichnet die Teilmenge aus der Menge aller Member 
+ bezeichnet die Teilmenge aus der Menge aller Individuen 
 \begin_inset Formula $M_{all}$
 \end_inset
 
@@ -540,79 +522,73 @@ PF\coloneqq\left\{ \left.\hat{M}\in M_{all}\right|P\left(\hat{M}\right)=1\right\
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement O
-overhang 0in
-width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/Erich/Grundlagen_Paretorang.eps
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
+\begin_layout Subsection*
+Behandlung von Nebenbedingungen
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Paretorang-und-Paretofront"
-
-\end_inset
-
-Paretorang und Paretofront einer Optimierung mit den zwei Zielfunktionen.
- Quelle: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
+name "par:Behandlung-von-Nebenbedingungen"
 
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Paretorang-und-Paretofront"
-
-\end_inset
-
- zeigt exemplarisch die verschiedenen Paretoränge einer fiktiven Optimierung
- mit den beiden Zielfunktionen 
-\begin_inset Formula $fitness_{1}$
-\end_inset
-
- und 
-\begin_inset Formula $fitness_{2}$
-\end_inset
-
-.
- Die Punkte markieren die bereits berechneten Member.
- An den zwei hervorgehobenen Membern werden die Paretoränge mithilfe von
- Bereichslinien erklärt.
- Der eingezeichnete Paretorang 1 Member wird von keinem anderen dominiert.
- Im Gegensatz dazu wird der gezeigte Paretorang 3 Member von 2 anderen dominiert
-, da diese in beiden Zielfunktionen besser sind.
 \end_layout
 
 \begin_layout Standard
-Nach dem Abschluss der Optimierung muss und kann der/die verantwortlichen
- Designer aus der Menge aller optimalen Lösungen (in diesem Fall der Paretofront
-) eine Konfiguration als Kompromiss zwischen den unterschiedlichen Zielen
- auswählen.
- 
+In AutoOpti können Gültigkeitsintervalle für alle gespeicherten physikalischen
+ Größen und Zielfunktionen angegeben werden.
+ Liegt ein berechnetes Individuum nicht innerhalb dieses Gültigkeitsbereich,
+ so wird der Abstand 
+\begin_inset Formula $d\left(M\right)$
+\end_inset
+
+ des Individuums 
+\begin_inset Formula $M$
+\end_inset
+
+ zum Gültigkeitsbereich als zusätzliches Gütekriterium herangezogen.
+ Die Definition der Dominanz (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Dominanz"
+
+\end_inset
+
+) muss daher erweitert werden zu:
+\begin_inset Formula 
+\begin{align}
+M_{1}\prec M_{2}\Longleftrightarrow & d\left(M_{1}\right)<d\left(M_{2}\right)\vee\left[d\left(M_{1}\right)\leq d\left(M_{2}\right)\wedge\right.\label{eq:Domianzn}\\
+ & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
+\end{align}
+
+\end_inset
+
+Ein Individuum 
+\begin_inset Formula $M_{1}$
+\end_inset
+
+ dominiert ein Individuum 
+\begin_inset Formula $M_{2}$
+\end_inset
+
+, wenn der Abstand zum Gültigkeitsbereich verbessert wird oder der Abstand
+ zum Gültigkeitsbereich gleich bleibt und gleichzeitig die ursprüngliche
+ Definition der Dominanz (siehe Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Dominanz"
+
+\end_inset
+
+) erfüllt wird.
+ Durch Definition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Domianzn"
+
+\end_inset
+
+ hat bei der Bestimmung des Paretorangs die Erfüllung der Nebenbedingungen
+ Vorrang vor den Zielfunktionswerten 
 \end_layout
 
 \begin_layout Section
@@ -665,8 +641,8 @@ Meist gibt es mehrere Zielfunktionen welche wiederum aus mehreren physikalischen
  Hinzu kommt, dass die unterschiedlichen Zielfunktionen meist negativ korreliert
  sind und eine große Anzahl relevanter Nebenbedingungen existiert.
  Beim Start einer Optimierung werden diese Nebenbedingungen häufig von keinem
- Member vollständig erfüllt und oftmals ist es auch nicht sicher, ob die
- Nebenbedingungen überhaupt alle erfüllbar sind.
+ Individuum vollständig erfüllt und oftmals ist es auch nicht sicher, ob
+ die Nebenbedingungen überhaupt alle erfüllbar sind.
  
 \end_layout
 
@@ -701,11 +677,12 @@ Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
 .
  Allerdings sind viele der verwendeten Programme und Simulationsverfahren
  sehr komplex und oftmals ist kein Quellcode verfügbar.
- Dadurch wird es schwer, alle partiellen Ableitungen zu erhalten, meist
- sind aber einige partielle Ableitungen verfügbar.
- Weiterhin sind einige der Funktionen nicht differenzierbar.
- Ein häufig verwendetes Beispiel ist die maximale mechanische Spannung einer
- Verdichterschaufel.
+ Dadurch wird es schwer, alle partiellen Ableitungen zu erhalten.
+ Manchmal, wie im Fall von automatisiert differenzierten Lösern, sind aber
+ einige partielle Ableitungen verfügbar.
+ Häufig werden jedoch auch nicht differenzierbare Funktionale verwendet,
+ wie z.B.
+ die maximale mechanische Spannung einer Verdichterschaufel.
  
 \end_layout
 
@@ -713,7 +690,7 @@ Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
 
 \shape italic
 Das alles führt dazu, dass das verwendete Optimierungsverfahren auch unvollständ
-ige Gradienteninformationen verarbeiten muss.
+ige Gradienteninformationen verarbeiten können muss.
  
 \end_layout
 
@@ -739,7 +716,7 @@ reference "fig:OptiStandardProcess"
  Anwender nicht direkt analysieren und nachvollziehen kann.
  In vielen Fällen benötigen diese Rechnungen sehr viel Zeit und liefern
  letztlich keine oder nur partielle Informationen.
- 
+ Dieses Verhalten darf nicht zum Abbruch der Optimierung führen.
 \end_layout
 
 \begin_layout Paragraph*
@@ -765,10 +742,7 @@ tenlaufzeiten abnehmen.
 \begin_layout Standard
 Ein Optimierungsverfahren sollte also mit so wenig Berechnungen wie möglich
  zu einem gewünschten Ergebnis führen.
- Durch die langen Prozesskettenzeiten ist es möglich sehr hochwertige Optimierun
-gsverfahren anzuwenden, auch wenn diese selbst viel Zeit in Anspruch nehmen.
- Abhilfe kann hier ein möglichst effizienter Optimierungsprozess sein, welcher
- nur sehr wenige Prozesskettenauswertungen benötigt.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -785,7 +759,11 @@ Curse of Dimensions
 \end_inset
 
  bezeichnet.
- Dieser bekannte Begriff entspringt einer Arbeit von Richard Bellman 
+ 
+\end_layout
+
+\begin_layout Standard
+Dieser bekannte Begriff entspringt einer Arbeit von Richard Bellman 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Bellman1972"
@@ -798,7 +776,7 @@ key "Bellman1972"
  bei der Verteilung von Stichproben (Sampling) oder der Optimierung.
  Geht man bspw.
  von einem Raum aus, welcher dicht mit vorhandenen Stichproben besetzt ist,
- so kann dieser durch das Hinzufügen von weiteren Dimensionen dünn besetzt
+ so kann dieser nach dem Hinzufügen von weiteren Dimensionen dünn besetzt
  sein und nur noch unzureichend beschrieben werden.
  
 \begin_inset CommandInset citation
@@ -913,7 +891,7 @@ key "Rechenberg1973"
 n (z.B.
  Differenzierbarkeit oder Stetigkeit) an die Zielfunktion stellt.
  Die Abstiegsrichtung wird durch zufällige Tastschritte in der näheren Umgebung
- bekannter Member bestimmt.
+ bekannter Individuen bestimmt.
  
 \end_layout
 
@@ -926,7 +904,7 @@ reference "fig:OptiStandardProcess"
 \end_inset
 
  zeigt den zugrundeliegenden Optimierungsablauf, bei dem es sich im Wesentlichen
- um eine Art von Kreisprozess handelt.
+ um eine Endlosschleife handelt.
  Innerhalb dieses Kreislaufes gibt es verschiedene Arten von Prozessen,
  welche über eine asynchrone Kommunikation verfügen.
  
@@ -934,15 +912,14 @@ reference "fig:OptiStandardProcess"
 
 \begin_layout Standard
 Dies bedeutet, dass die Berechnungen in der Prozesskette und die Datenbankverwal
-tung sowie die Erzeugung neuer Member unabhängig voneinander agieren.
+tung sowie die Erzeugung neuer Individuen unabhängig voneinander agieren.
  Um solch ein asynchrones Verfahren umzusetzen, bedient sich AutoOpti eines
  Master-/Slave-Ansatzes.
  Hierfür sind grundlegend zwei verschiedene Arten von Prozessen vorgesehen:
 \end_layout
 
 \begin_layout Itemize
-Der Root-Prozess ist für die Verwaltung und Steuerung der Optimierung zuständig
- und läuft auf nur einem Rechner.
+Der Root-Prozess ist für die Verwaltung und Steuerung der Optimierung zuständig.
  
 \end_layout
 
@@ -971,7 +948,7 @@ reference "fig:OptiStandardProcess"
 
 \begin_layout Paragraph*
 1.
- Initialisierungsphase
+ Initialisierungsphase:
 \end_layout
 
 \begin_layout Standard
@@ -1018,9 +995,9 @@ reference "fig:OptiStandardProcess"
 
  nicht dargestellt, da diese nur den zyklischen Teil des Optimierungsprozesses
  beschreibt.
- Während dieser Initialisierungsphase spielt die Minimierung der Zielfunktion
+ Während dieser Initialisierungsphase spielt die Minimierung der Zielfunktionen
  noch keine Rolle.
- Ziel ist es vielmehr, ein möglichst breites Spektrum an konvergenten Membern
+ Ziel ist es vielmehr, ein möglichst breites Spektrum an konvergenten Individuen
  zu erzeugen und damit einen möglichst großen Parameterbereich abzudecken.
  Hierfür bietet AutoOpti diverse Verfahren an:
 \end_layout
@@ -1042,7 +1019,7 @@ key "McKay1979"
 \end_layout
 
 \begin_layout Itemize
-Mutation eines intialen Members
+Mutation eines intialen Individuums
 \end_layout
 
 \begin_layout Standard
@@ -1061,7 +1038,7 @@ Das Latin-Hypercube-Verfahren versucht den gegebenen Parameterraum möglichst
 
 \begin_layout Standard
 Beide Verfahren erscheinen nur dann sinnvoll, wenn zumindest ein gewisser
- Prozentsatz der erzeugten Member die Prozesskette erfolgreich durchläuft.
+ Prozentsatz das erzeugte Individuum die Prozesskette erfolgreich durchläuft.
  Bei den hier behandelten Turbomaschinenoptimierungen ist dies oft aber
  nicht der Fall.
  
@@ -1069,7 +1046,7 @@ Beide Verfahren erscheinen nur dann sinnvoll, wenn zumindest ein gewisser
 
 \begin_layout Standard
 Eine mögliche Lösung bietet das dritte Verfahren.
- Dafür muss ein initialer Member bekannt sein, welcher die Prozesskette
+ Dafür muss ein initiales Individuum bekannt sein, welcher die Prozesskette
  erfolgreich durchläuft.
  Dieser initiale Parametersatz wird dann immer wieder mutiert und evaluiert.
  Da sich diese Art der Suche nur lokal um den initialen Parametersatz bewegt,
@@ -1078,30 +1055,21 @@ Eine mögliche Lösung bietet das dritte Verfahren.
  
 \end_layout
 
-\begin_layout Standard
-Die Auswahl der hier beschriebenen Verfahren und auch die Anzahl der zu
- erzeugenden Member muss der jeweilige Anwender treffen.
- Erfahrungsgemäß ist es sinnvoll, zuerst ein raumfüllendes Verfahren zu
- bevorzugen und nur bei (absehbarer) zu niedriger Erfolgsquote auf das lokale
- Verfahren zu wechseln.
- 
-\end_layout
-
 \begin_layout Paragraph*
 2.
- Erzeugung neuer Parametersätze
+ Erzeugung neuer Parametersätze:
 \end_layout
 
 \begin_layout Standard
 Der eigentliche Optimierungsprozess startet nach der Initialisierungsphase
  mit der bereits erzeugten initialen Datenbank.
  Der Root-Prozess erzeugt einen oder mehrere vielversprechende Parametersätze
- auf Basis der bereits vorhandenen Member.
+ auf Basis der bereits vorhandenen Individuen.
  Für die Erzeugung dieser neuen Parametersätze gibt es zahlreiche Verfahren,
  welche die Geschwindigkeit und den Konvergenzverlauf der Optimierung maßgeblich
  beeinflussen.
  AutoOpti nutzt hauptsächlich eine Ersatzmodel-beschleunigte Evolutionsstrategie
- zur Erzeugung neuer Member.
+ zur Erzeugung neuer Individuen.
  Diese Strategie zur Erzeugung vielversprechender Parametersätze hat sich
  in der Vergangenheit als sehr effizient und flexibel herausgestellt und
  wird in Kapitel 
@@ -1117,7 +1085,7 @@ reference "subsec:Ersatzmodellbeschleunigung"
 
 \begin_layout Paragraph*
 3.
- Verschicken neuer Parametersätze an die Slave-Prozesse
+ Verschicken neuer Parametersätze an die Slave-Prozesse:
 \end_layout
 
 \begin_layout Standard
@@ -1131,7 +1099,7 @@ Nachdem der Root-Prozess einen vielversprechenden Parametersatz generiert
 
 \begin_layout Paragraph*
 4.
- Slave-Prozesse berechnen die Prozesskette
+ Slave-Prozesse berechnen die Prozesskette:
 \end_layout
 
 \begin_layout Standard
@@ -1147,7 +1115,7 @@ Nachdem der Root-Prozess die neuen Parametersätze an die Slave-Prozesse
 
 \begin_layout Paragraph*
 5.
- Slave-Prozesse senden die Ergebnisse an den Root-Prozess
+ Slave-Prozesse senden die Ergebnisse an den Root-Prozess:
 \end_layout
 
 \begin_layout Standard
@@ -1159,17 +1127,13 @@ Die Slave-Prozesse schicken die berechneten Flowparameter zurück an den
 
 \begin_layout Paragraph*
 6.
- Auswertung der Ergebnisse durch den Root-Prozess 
+ Auswertung der Ergebnisse durch den Root-Prozess:
 \end_layout
 
 \begin_layout Standard
 Aus den vom Slave bereitgestellten Flowparametern berechnet der Root Prozess
  nun die Zielfunktionen, Nebenbedingungen und daraus auch das Gütekriterium.
- 
-\end_layout
-
-\begin_layout Standard
-Ein möglicher Gütewert wäre hier der Paretorang (siehe Kapitel 
+ Ein möglicher Gütewert wäre hier der Paretorang (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:OptimierungsBegriffe"
@@ -1177,78 +1141,9 @@ reference "subsec:OptimierungsBegriffe"
 \end_inset
 
 ).
- Nachdem diese Werte bestimmt worden sind, trägt der Root-Prozess den Member
+ Nachdem diese Werte bestimmt worden sind, trägt der Root-Prozess das Individuum
  gemäß seiner Güte in die Datenbank ein.
  Danach springt der Root-Prozess wieder zu Punkt 2.
-\end_layout
-
-\begin_layout Subsection
-Behandlung von Nebenbedingungen
-\begin_inset CommandInset label
-LatexCommand label
-name "par:Behandlung-von-Nebenbedingungen"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In AutoOpti können Gültigkeitsintervalle für alle gespeicherten physikalischen
- Größen und Zielfunktionen angegeben werden.
- Liegt ein berechneter Member nicht innerhalb dieses Gültigkeitsbereich,
- so wird der Abstand 
-\begin_inset Formula $d_{N}\left(M\right)$
-\end_inset
-
- des Members 
-\begin_inset Formula $M$
-\end_inset
-
- zum Gültigkeitsbereich als zusätzliches Gütekriterium herangezogen.
- Die Definition der Dominanz (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Dominanz"
-
-\end_inset
-
-) muss daher erweitert werden zu:
-\begin_inset Formula 
-\begin{align}
-M_{1}\prec M_{2}\Longleftrightarrow & d_{N}\left(M_{1}\right)<d_{N}\left(M_{2}\right)\vee\left[d_{N}\left(M_{1}\right)\leq d_{N}\left(M_{2}\right)\wedge\right.\label{eq:Domianzn}\\
- & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
-\end{align}
-
-\end_inset
-
-Ein Member 
-\begin_inset Formula $M_{1}$
-\end_inset
-
- dominiert einen Member 
-\begin_inset Formula $M_{2}$
-\end_inset
-
-, wenn der Abstand zum Gültigkeitsbereich verbessert wird oder der Abstand
- zum Gültigkeitsbereich gleich bleibt und gleichzeitig die ursprüngliche
- Definition der Dominanz (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Dominanz"
-
-\end_inset
-
-) erfüllt wird.
- Durch Definition 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Domianzn"
-
-\end_inset
-
- hat bei der Bestimmung des Paretorangs die Erfüllung der Nebenbedingungen
- Vorrang vor den Zielfunktionswerten 
 \end_layout
 
 \begin_layout Subsection
@@ -1265,21 +1160,21 @@ name "subsec:Ersatzmodellbeschleunigung"
 \begin_layout Standard
 Im vorhergehenden Abschnitt wurde der grundlegende Ablauf einer Optimierung
  mit AutoOpti beschrieben.
- Der Punkt der Erzeugung neuer Parametersätze wurde allerdings nur kurz
- erwähnt und soll im Folgenden genauer erklärt werden.
- Eine weit verbreitete Möglichkeit der Erzeugung neuer Member ist die Verwendung
- einer Evolutionsstrategie.
+ Der zentrale Punkt der Erzeugung neuer Parametersätze wurde allerdings
+ nur kurz erwähnt und soll im Folgenden genauer erklärt werden.
+ Eine weit verbreitete Möglichkeit der Erzeugung neuer Individuen ist die
+ Verwendung einer Evolutionsstrategie.
  Wie bereits beschrieben, verwendet die Evolutionsstrategie zufallsbasierte
- Tastschritte in der unmittelbaren Nähe bekannter Member.
+ Tastschritte in der unmittelbaren Nähe bekannter Individuen.
  Typische Operatoren um die zufallsbasierte Änderung von Parametern vorzunehmen,
  sind z.B.
- Mutation oder Kreuzung von Membern.
+ Mutation oder Kreuzung von Individuen.
  Dies führt jedoch dazu, dass die erreichten Verbesserungen eher klein sind.
  Um größere Fortschritte zu erreichen, sind meist sehr viele Tastschritte
  und damit Funktionsauswertungen notwendig.
  In der Kombination mit den großen Parameterräumen und langen Prozesskettenzeite
 n wäre eine solche Optimierung nicht mehr rentabel.
- Um den Gesamtprozess zu beschleunigen, versucht man die Membererzeugung
+ Um den Gesamtprozess zu beschleunigen, versucht man die Individuenerzeugung
  im Root-Prozess (siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1288,27 +1183,24 @@ reference "fig:OptiStandardProcess"
 \end_inset
 
 ) zu verbessern.
- Es sollen zielgerichtet neue Member erzeugt werden, die eine möglichst
- große Verbesserung der Zielfunktionen aufweisen und zusätzlich alle Nebenbeding
-ungen erfüllen.
+ Es sollen zielgerichtet neue Individuen erzeugt werden, die eine möglichst
+ große Verbesserung der Zielfunktionen versprechen und zusätzlich alle Nebenbedi
+ngungen erfüllen.
  
 \end_layout
 
 \begin_layout Standard
-Ein weit verbreitetes Mittel hierfür sind Ersatzmodelle oder auch Metamodelle,
+Ein weit verbreitetes Mittel hierfür sind Ersatzmodelle oder auch Metamodelle.
+ Dabei handelt es sich um relativ schnell auszuwertende mathematische Modelle,
  welche vorhandene Daten approximieren oder interpolieren.
- 
-\end_layout
-
-\begin_layout Standard
-Die Ersatzmodelle werden innerhalb einer Optimierung dafür verwendet, Vorhersage
-n der Zielfunktionen und Nebenbedingungen durchzuführen und damit besonders
+ Die Ersatzmodelle werden innerhalb einer Optimierung dafür verwendet, Vorhersag
+en der Zielfunktionen und Nebenbedingungen zu treffen und damit besonders
  aussichtsreiche Parametersätze zu finden.
  Die Erzeugung kann dann z.B.
  durch eine kleine Optimierung auf den Ersatzmodellen erfolgen.
- Der aussichtsreichste Member wird anschließend mit der echten Prozesskette
- nachgerechnet und danach in die Optimierungsdatenbank eingetragen und dem
- Ersatzmodell hinzugefügt.
+ Das aussichtsreichste Individuum wird anschließend mit der echten, zeitaufwendi
+gen Prozesskette nachgerechnet und danach in die Optimierungsdatenbank eingetrag
+en und den Ersatzmodellen als zusätzliche Stützstelle hinzugefügt.
  Dieses Verfahren bietet die Möglichkeit, den Optimierungsfortschritt stark
  zu beschleunigen.
  Wie stark, hängt von der Güte und Leistungsfähigkeit des verwendeten Modells
@@ -1445,16 +1337,16 @@ Jedes dieser Verfahren benötigt ein Training, welches oftmals als Lernverfahren
  bezeichnet wird.
  Es dient zur Bestimmung von ersatzmodellspezifischen Parametern, dabei
  kann es sich z.B.
- um Korrelationslängen, Gewichtungen, Skalierungsfaktoren usw.
+ um Korrelationslängen, Gewichte, Skalierungsfaktoren usw.
  handeln.
  Die Ersatzmodellparameter werden dann mithilfe der vorhandenen Daten eingestell
 t, um möglichst gute Vorhersagen zu erlangen.
  Meistens sind diese Trainingsverfahren sehr aufwendig und benötigen je
  nach Typ des Ersatzmodells und der Anzahl an Stützstellen viel Zeit.
  Nach dem Training können die Ersatzmodelle für Vorhersagen der trainierten
- Funktion verwendet werden, wobei die Vorhersagen bei z.B.
- einem Kriging-erfahren schneller sind als das Training und die Prozesskette
- (siehe Kapitel 
+ Funktion verwendet werden, wobei die benötigten Vorhersagezeiten gegenüber
+ der Trainings- oder Prozesskettenzeiten zu vernachlässigen sind (siehe
+ Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Die-Kriging-Verfahren"
@@ -1465,20 +1357,10 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Weiterhin werden in AutoOpti für jede Zielfunktion und Nebenbedingung jeweils
- ein Ersatzmodell trainiert.
+Weiterhin werden in AutoOpti für jede Zielfunktion und Nebenbedingung seperate
+ Ersatzmodelle trainiert.
  Bei zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion
  verwendeten Flowparameter ebenfalls ein Ersatzmodell trainiert.
- 
-\end_layout
-
-\begin_layout Standard
-Wie oft ein Ersatzmodell während einer Optimierung trainiert werden muss,
- hängt stark vom verwendeten Ersatzmodell ab.
- Bei dem in AutoOpti hauptsächlich verwendeten Kriging-Verfahren kann man
- jedoch sagen, dass bei ausreichender Datenlage irgendwann kein Training
- mehr vonnöten ist, da sich die Ersatzmodellparameter bei ausreichender
- Datenlage nicht mehr ändern.
  
 \end_layout
 
@@ -1495,12 +1377,7 @@ Das Training kann entweder synchron durch den Root-Prozess geschehen oder
 Bei der asynchronen Variante wird das Training in einem externen Prozess
  gestartet und der Root-Prozess verwendet für die benötigten Vorhersagen
  dann immer die jeweils vorliegenden Modelle.
- Die asynchrone Variante stellt die schnellere Methode dar und bietet auch
- eine höhere Stabilität, da der Root-Prozess durch fehlerhafte Trainings
- nicht beeinflusst wird.
- Allerdings ist der Verwaltungsaufwand höher und der externe Trainingsprozess
- muss permanent überwacht werden, da der Root-Prozess keine auftretenden
- Fehler bemerkt.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -1518,29 +1395,12 @@ len gestartet, wobei die Ersatzmodelle die Prozesskette ersetzen.
  Parametersatz zu finden, welcher die Zielfunktionen möglichst stark verbessert
  und zudem eine hohe Wahrscheinlichkeit besitzt, alle Nebenbedingungen einzuhalt
 en.
- Für die Optimierung auf den Ersatzmodellen bietet AutoOpti mehrere Verfahren
- an.
- Aufgrund der sehr schnellen Vorhersagen der Ersatzmodelle haben sich hier
- evolutionäre Algorithmen als besonders robust und effizient erwiesen.
- Da die Ersatzmodelle selbst differenzierbar sind, bietet AutoOpti auch
- die Option, gradientenbasierte Optimierungsverfahren anzuwenden.
- Allerdings bieten diese keine wesentlichen Vorteile, da der Geschwindigkeitsvor
-teil bei den schnellen Ersatzmodellvorhersagen praktisch nicht ins Gewicht
- fällt und ein evolutionärer Algorithmus eine 
-\begin_inset Quotes gld
-\end_inset
-
-globalere
-\begin_inset Quotes grd
-\end_inset
-
- Suche auf den Ersatzmodellen ermöglicht.
  
 \end_layout
 
 \begin_layout Paragraph*
 3.
- Auswahl der vielversprechendsten Member
+ Auswahl der vielversprechendsten Individuen
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:EVG"
@@ -1558,10 +1418,10 @@ Meistens werden in Turbomaschinenoptimierungen mehrere Zielfunktionen und
  Bei der Verwendung eines Gütekriteriums wie dem Paretorang würden viele
  Parametersätze mit dem Paretorang Eins erzeugt werden und könnten untereinander
  nicht weiter gewichtet werden.
- Für die Optimierung auf dem Ersatzmodell ist also ein Gütekriterium nötig,
- welches mehrere Zielfunktionen und Nebenbedingungen vereint und auch den
- zu erwartenden Optimierungsfortschritt zu einer bestehenden Paretofront
- genauer quantifizieren kann als der Paretorang.
+ Für die Optimierung auf dem Ersatzmodell ist also ein Gütekriterium zu
+ bevorzugen, welches mehrere Zielfunktionen und Nebenbedingungen vereint
+ und auch den zu erwartenden Optimierungsfortschritt zu einer bestehenden
+ Paretofront genauer quantifizieren kann als der Paretorang.
  In AutoOpti findet dafür das 
 \begin_inset Quotes gld
 \end_inset
@@ -1572,8 +1432,8 @@ Expected Volume Gain
 
  als Gütekriterium Anwendung.
  Dieses Kriterium berechnet den zu erwartenden Volumenzugewinn von einem
- vorhergesagten Member zu einer bereits vorhandenen Paretofront unter Berücksich
-tung von bereits rechnenden Membern.
+ vorhergesagten Individuum zu einer bereits vorhandenen Paretofront unter
+ Berücksichtung von bereits rechnenden Individuen.
  
 \end_layout
 
@@ -1583,7 +1443,7 @@ ten der Vorhersage.
  Bei statistischen Ersatzmodellen werden Erwartungswerte und auch Varianzen
  für die Zielgrößen vorhergesagt.
  Bleiben die Varianzen hierbei unberücksichtigt, kann dies zu einer ungeeigneten
- Member-Auswahl führen (vgl.
+ Individuen-Auswahl führen (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1605,9 +1465,10 @@ reference "chap:Die-Kriging-Verfahren"
  Da die globalen Erwartungswerte in der Regel nicht das Optimum darstellen,
  würde ohne Berücksichtigung der Varianz kein Verbesserungspotential erkannt
  werden.
- Da die Entwicklung dieses Verfahrens nicht Teil dieser Arbeit ist und eine
- adäquate Beschreibung zu viel Platz in Anspruch nehmen würde, sei der interessi
-erte Leser hierfür auf folgende Literaturstellen verwiesen: 
+ Da die Entwicklung dieses EVG-Verfahrens nicht Teil dieser Arbeit ist und
+ eine adäquate Beschreibung zu viel Platz in Anspruch nehmen würde, sei
+ der interessierte Leser hierfür auf folgende Literaturstellen verwiesen:
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AULICH,Jones1998,Jones2001,keane2006statistical,emmerich2005single,emmerich2008computation"
