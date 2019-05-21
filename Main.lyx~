@@ -32,6 +32,9 @@
 \usepackage{amsmath}  %spezielle mathematikzeichen wie doppelintegral
 \usepackage{amssymb} 
 \usepackage{fancyhdr}
+\usepackage{capt-of}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{bibgerm}
@@ -108,6 +111,9 @@
 \end_preamble
 \options AT, texfonts
 \use_default_options true
+\begin_modules
+algorithm2e
+\end_modules
 \maintain_unincluded_children false
 \language ngerman
 \language_package auto
@@ -188,12 +194,6 @@ maketitle
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-
-\size huge
-Sicher:
 \end_layout
 
 \begin_layout Standard
@@ -285,8 +285,8 @@ description "Region of Interest. Ein für die Zielfunktionen festgelegtes Gülti
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "A"
-symbol "Freie Variable"
-description "Parameter, welche der Optimierungsalgorithmus variieren darf. Meistens Geometrische Parameter wie z.B. die Länge oder Dicke einer Schaufel."
+symbol "CFD"
+description "Computational Fluid Dynamics"
 
 \end_inset
 
@@ -304,7 +304,7 @@ description "Computational Structure Mechanics"
 LatexCommand nomenclature
 prefix "A"
 symbol "EVG"
-description "Erwarteter Volumenzugewinn oder auch Expected Volume Gain"
+description "Erwarteter Volumenzugewinn, auch Expected Volume Gain oder Expected Hypervolume Improvement"
 
 \end_inset
 
@@ -357,15 +357,6 @@ LatexCommand nomenclature
 prefix "L"
 symbol "$\\vec{\\beta}$"
 description "Beta Vektor, beinhaltet alle Erwartungswerte des Modells."
-
-\end_inset
-
-
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-prefix "L"
-symbol "$m_{f}$"
-description "Anzahl der verwendenten Fidelities bei Multifidelity Verfahren"
 
 \end_inset
 
@@ -643,6 +634,30 @@ description "Gewichte eines Kriging Modells"
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "L"
+symbol "$P_{t}$"
+description "Totaldruck"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
+symbol "$T_{t}$"
+description "Totaltemperatur"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+prefix "L"
 symbol "L"
 description "Likelihood Funktion"
 
@@ -772,8 +787,8 @@ description "Allgemeiner Hyperparameter "
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "L"
-symbol "p"
-description "Druck"
+symbol "q"
+description "Anzahl der verwendeten Ersatzmodelle innerhalb einer Optimierung"
 
 \end_inset
 
@@ -781,101 +796,9 @@ description "Druck"
 \begin_inset CommandInset nomenclature
 LatexCommand nomenclature
 prefix "L"
-symbol "q"
-description "Anzahl der verwendeten Ersatzmodelle innerhalb einer Optimierung"
+symbol "w"
+description "Anzahl der Flowparameter"
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-\size largest
-Noch einbaue n: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "LeGratiet"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "box1958note"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Eifinger2013"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "forrester2009recent"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gibbs1997efficient"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "gill1981practical,gill2007numerical"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Sacks2007a"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jones1998"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "keane2006statistical"
-
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jones2001"
-
-\end_inset
-
-(10dimensions Samples minimum) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jin2001"
-
-\end_inset
-
-(3dimensions Samples minimum in vielen Fällen)
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
 \end_inset
 
 
@@ -889,47 +812,68 @@ TODO:
 \end_layout
 
 \begin_layout Itemize
-Eigene Entwicklungen besser kennzeichnen, besonders zum DLR abgrenzen, ganzen
- Text nochmal durchgehen
+Literaturverzeichnis checken
 \end_layout
 
 \begin_layout Itemize
-Korrekturen von Christian
+Abstract/Kurzfassung schreiben
 \end_layout
 
 \begin_layout Itemize
-Korrekturen/Wünsche von Prof Gottschalk
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Entscheidungsfunktion: Alles auf Varianzen umstellen !!! Auch Kapitel 5
- nicht vergessen !!!
+Bilder / Layout
 \end_layout
 
 \begin_layout Itemize
-Kriging + Entscheidungsfunktion + Kapitel 5: kovarianz zu bedingter Kovarianz
- ändern, also unter der Bedingung dass alle Samples und Geiwchte bekannt
- sind
+Deckblatt RUB !!
 \end_layout
 
 \begin_layout Itemize
-Matrix Klasse und verteilte Systeme genauer beschreiben
+Abstract auf Englisch
 \end_layout
 
 \begin_layout Itemize
-Anfang kann gekürzt werden, alles was es bereits gibt.
- EVG erklärung z.B.
- Mehr auf meine Sachen konzentrieren
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Kriging Software alle Verfahren in einem untergebracht
+Alle Abbildungen nochmal prüfen
 \end_layout
 
 \begin_layout Itemize
-RPROP globales Minimum mit QuasiNewton vergleichen
+Kapitel 3 Laufzeiten ein Beispiel einfügen.
+ Und 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Theroretische-Beschleunigung-ein"
+
+\end_inset
+
+ tRef/tMF 
+\end_layout
+
+\begin_layout Itemize
+Bilder Member -> Individuen
+\end_layout
+
+\begin_layout Itemize
+Slaves -> Knoten
+\end_layout
+
+\begin_layout Itemize
+Flowparameter? Am Anfang rechtfertigen?
+\end_layout
+
+\begin_layout Itemize
+Christian Korrektur: Seite 20 -> Gradienteninformation in Optimierungen.
+\end_layout
+
+\begin_layout Itemize
+Kapitel 5.5 An den Anfang, dass nun der detaillierte Informationstechnische
+ Aufbau der Software erläutert wird.
+ Hierfür werden grundlegende Begriffe aus der objektorientierten Programmierung
+ vorausgesetzt.
+ Kleines Tutorial wo getter Setter, Klassen, Instantiierung und Objekte
+ erläutert werden 
+\end_layout
+
+\begin_layout Itemize
+Anhang Grundbegriffe der Informatik schreiben !!!
 \end_layout
 
 \begin_layout Chapter*
@@ -952,23 +896,46 @@ Kurzfassung
 addcontentsline{toc}{chapter}{Kurzfassung}
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-abstract 
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addcontentsline{toc}{chapter}{Abstract}
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Das Ziel dieser Arbeit ist die Entwicklung eines industriell einsetzbaren
+ Multifidelity-Optimierungsverfahrens.
+ Dieses ist speziell auf die Problemstellungen in der Turbomaschinenentwicklung
+ angepasst.
+ Die Herausforderungen bei der Optimierung von Turbomaschinen sind die Existenz
+ mehrerer Zielfunktionen und zahlreicher Nebenbedingungen, sowie hochdimensional
+e Suchräume und sehr laufzeitintensive Prozessketten.
+ Das hier vorgestellte Multifidelity-Optimierungsverfahren sorgt dafür,
+ dass hochdimensionale Suchräume effizienter abgetastet werden und damit
+ die Laufzeit der Optimierungen deutlich reduziert wird.
+ Hierfür werden schnellere Prozessketten niedrigerer Güte herangezogen und
+ mit Hilfe der dort enthaltenen Informationen die Anzahl an teuren Prozessketten
+auswertungen reduziert.
+\end_layout
+
+\begin_layout Standard
+Um dies zu erreichen wird zum einen die Entwicklung einer hocheffizienten,
+ flexiblen und modularisierten Ersatzmodellsoftware vorgestellt und zum
+ anderen die Entwicklung einer vollständig automatisierten Multifidelity-Optimie
+rungsstrategie.
+ Weiterhin unterstützt die entwickelte Software zahlreiche moderne Hardwarearchi
+tekturen und ist für den Betrieb innerhalb einer Großrechnerumgebung ausgelegt.
+ 
+\end_layout
+
+\begin_layout Standard
+Weiterhin wird das entwickelte Verfahren zahlreichen Tests in Form von Optimieru
+ngen analytischer Testfunktionen unterzogen, welche die Vorteile dieses
+ Verfahrens belegen.
+ Neben diesen Tests wurde das hier entwickelte Verfahren zudem für zahlreichen
+ Anwendungen aus Industrie und Forschung verwendet.
+ Die dort gewonnenen Ergebnisse und Erkenntnisse werden innerhalb dieser
+ Arbeit vorgestellt.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1065,69 +1032,20 @@ filename "Kapitel/AusblickFazit.lyx"
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/Anhang.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/OrdinaryKriging.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/GradientEnhancedKriging.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/COKriging.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset CommandInset include
-LatexCommand include
-filename "Kapitel/Anwendung_Temp.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "library"
-options "apalike"
+options "bibtotoc,apalike"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "Kapitel/Anhang.lyx"
 
 \end_inset
 

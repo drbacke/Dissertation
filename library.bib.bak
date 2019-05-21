@@ -3,7 +3,7 @@
 
 
 @TechReport{BPp.l.c.2016,
-  Title                    = {{BP Statistical Review ofWorld Energy June 2016}},
+  Title                    = {{BP Statistical Review of World Energy June 2016}},
   Author                   = {BP p.l.c.},
   Year                     = {2016},
 
@@ -12,7 +12,7 @@
 
 @PhdThesis{Ozkaya2014,
   Title                    = {{One-shot methods for aerodynamic shape optimization}},
-  Author                   = {{\"{O}}zkaya, Emre and Gauger, Nicolas Ralph},
+  Author                   = {{\"{O}}zkaya, Emre},
   Year                     = {2014},
 
   Doi                      = {999910358173},
@@ -30,6 +30,42 @@
   Url                      = {https://dakota.sandia.gov/sites/default/files/docs/6.5/Theory-6.5.0.pdf}
 }
 
+@Article{ahmed2003,
+  Title                    = {On the Aero-Mechanical Design of Multistage Axial Compressors using Parallel Optimization Algorithms},
+  Author                   = {Ahmed, R. and Lawerenz, M.},
+  Journal                  = {16th Symposium on air breathing engines ISABE 2003},
+  Year                     = {2003},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Book{akin2013praktische,
+  Title                    = {Praktische Geostatistik: eine Einf{\"u}hrung f{\"u}r den Bergbau und die Geowissenschaften},
+  Author                   = {Akin, Hikmet and Siemes, Heinrich},
+  Publisher                = {Springer-Verlag},
+  Year                     = {2013}
+}
+
+@Misc{AIAA2005,
+  Title                    = {{Recommended Practice: The CFD General Notation System – Standard Interface Data Structures (AIAA R-101A-2005)}},
+
+  Author                   = {{American Institute of Aeronautics and Astronautics (AIAA)}},
+  Year                     = {2005},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@Book{anderson1995computational,
+  Title                    = {Computational fluid dynamics},
+  Author                   = {Anderson, John David and Wendt, J},
+  Publisher                = {Springer},
+  Year                     = {1995},
+  Volume                   = {206}
+}
+
 @InProceedings{Ashcroft_2010,
   Title                    = {{High-Order Accurate Implicit Runge-Kutta Schemes for the Simulation of Unsteady Flow Phenomena in Turbomachinery}},
   Author                   = {Ashcroft, G and Heitkamp, K and K{\"{u}}geler, E},
@@ -44,20 +80,21 @@
   Year                     = {2012}
 }
 
+@Article{aulich2019,
+  Title                    = {Surrogate Estimations of Complete Flow Fields of Fan Stage Designs via Deep Neural Networks},
+  Author                   = {Aulich, M. and Kueppers, F. and Schmitz, A. and Voß, C.},
+  Journal                  = {Proceedings of ASME Turbo Expo 2019: Turbomachinery Technical Conference and Exposition},
+  Year                     = {2019},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.12.17}
+}
+
 @InProceedings{AULICH,
   Title                    = {{High-Dimensional Constrained Multiobjective Optimization of a Fan Stage}},
   Author                   = {Aulich, M and Siller, U},
   Booktitle                = {ASME GT2011-45618},
   Year                     = {2011}
-}
-
-@Article{Aulich2014,
-  Title                    = {{Optimization Strategies demonstrated on a Transonic Centrifugal Compressor}},
-  Author                   = {Aulich, Marcel and Vo{\ss}, Christian and Raitor, Till},
-  Year                     = {2014},
-
-  File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Aulich, Vo{\ss}, Raitor - 2014 - Optimization Strategies demonstrated on a Transonic Centrifugal Compressor.pdf:pdf},
-  Keywords                 = {Fan,und Verdichter}
 }
 
 @Article{Avron2011,
@@ -111,6 +148,32 @@
   Url                      = {http://proceedings.asmedigitalcollection.asme.org/proceeding.aspx?doi=10.1115/GT2015-43254}
 }
 
+@Article{Bai2018,
+  Title                    = {Pressure Predictions of Turbine Blades with Deep Learning},
+  Author                   = {Cheng’an Bai and Chao Zhou},
+  Journal                  = {CoRR},
+  Year                     = {2018},
+  Volume                   = {abs/1806.06940},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20},
+  Url                      = {http://arxiv.org/abs/1806.06940}
+}
+
+@Book{bandemer1980theorie,
+  Title                    = {Theorie und Anwendung der optimalen Versuchsplanung},
+  Author                   = {Bandemer, H.},
+  Publisher                = {Akademie-Verlag},
+  Year                     = {1980},
+  Number                   = {Bd. 2},
+  Series                   = {Mathematische Lehrb{\"u}cher und Monographien: Mathematische Monographien},
+
+  Lccn                     = {78357897},
+  Url                      = {https://books.google.de/books?id=l1XQAAAAMAAJ}
+}
+
 @InProceedings{TRACE4,
   Title                    = {{Recent Progress in a Hybrid-Grid CFD Solver for Turbomachinery Flows}},
   Author                   = {Becker, K and Heitkamp, K and K{\"{u}}geler, E},
@@ -127,6 +190,13 @@
   Abstract                 = {"A Rand Corporation research study."},
   ISBN                     = {069107951X},
   Pages                    = {342}
+}
+
+@Book{bisplinghoff1957aeroelasticity,
+  Title                    = {Aeroelasticity},
+  Author                   = {Bisplinghoff, Raymond L and Ashley, Holt and Halfman, Robert L},
+  Publisher                = {Addisin-Wesley},
+  Year                     = {1957}
 }
 
 @Article{box1958note,
@@ -191,6 +261,35 @@
   Url                      = {http://proceedings.asmedigitalcollection.asme.org/proceeding.aspx?doi=10.1115/GT2012-68358}
 }
 
+@Article{chung2004,
+  Title                    = {Multiobjective Optimization Using Approximation Model-Based Genetic Algorithms},
+  Author                   = {Chung, H.-S. and Alonso, J. J.},
+  Journal                  = {10th AIAA/ISSMO Symposium on Multidisciplinary Analysis and Optimization AIAA 2004-4325.},
+  Year                     = {2004},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Article{Connor1994,
+  Title                    = {Recurrent neural networks and robust time series prediction},
+  Author                   = {J. T. Connor and R. D. Martin and L. E. Atlas},
+  Journal                  = {IEEE Transactions on Neural Networks},
+  Year                     = {1994},
+
+  Month                    = {März},
+  Number                   = {2},
+  Pages                    = {240-254},
+  Volume                   = {5},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1109/72.279188},
+  ISSN                     = {1045-9227},
+  Keywords                 = {filtering and prediction theory;learning (artificial intelligence);parameter estimation;recurrent neural nets;stochastic processes;time series;NARMA(p,q) model;Puget Power Electric Demand time series;outlier filtering;parameter estimation;recurrent neural networks;robust time series prediction;Autoregressive processes;Feedforward neural networks;Filtering algorithms;Least squares methods;Load forecasting;Neural networks;Parameter estimation;Predictive models;Recurrent neural networks;Robustness},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
 @Book{Cook2012,
   Title                    = {{CUDA Programming}},
   Author                   = {Cook, Shane},
@@ -207,6 +306,27 @@
   Keywords                 = {icle},
   Pages                    = {565},
   Pmid                     = {25246403}
+}
+
+@InProceedings{cox1992statistical,
+  Title                    = {A statistical method for global optimization},
+  Author                   = {Cox, Dennis D and John, Susan},
+  Booktitle                = {[Proceedings] 1992 IEEE International Conference on Systems, Man, and Cybernetics},
+  Year                     = {1992},
+  Organization             = {IEEE},
+  Pages                    = {1241--1246}
+}
+
+@Article{cressie1990origins,
+  Title                    = {The origins of kriging},
+  Author                   = {Cressie, Noel},
+  Journal                  = {Mathematical geology},
+  Year                     = {1990},
+  Number                   = {3},
+  Pages                    = {239--252},
+  Volume                   = {22},
+
+  Publisher                = {Springer}
 }
 
 @Book{Cressie1993,
@@ -233,6 +353,18 @@
   Year                     = {2004}
 }
 
+@Article{dagum1998openmp,
+  Title                    = {OpenMP: an industry standard API for shared-memory programming},
+  Author                   = {Dagum, Leonardo and Menon, Ramesh},
+  Journal                  = {IEEE computational science and engineering},
+  Year                     = {1998},
+  Number                   = {1},
+  Pages                    = {46--55},
+  Volume                   = {5},
+
+  Publisher                = {IEEE}
+}
+
 @Article{Davis1997,
   Title                    = {{Six factors which affect the condition number of matrices associated with kriging}},
   Author                   = {Davis, G and Morris, M},
@@ -248,6 +380,15 @@
   ISSN                     = {0882-8121},
   Keywords                 = {conditioning,robustness,stability},
   Url                      = {http://dx.doi.org/10.1007/BF02769650}
+}
+
+@InCollection{deb2014multi,
+  Title                    = {Multi-objective optimization},
+  Author                   = {Deb, Kalyanmoy},
+  Booktitle                = {Search methodologies},
+  Publisher                = {Springer},
+  Year                     = {2014},
+  Pages                    = {403--449}
 }
 
 @Book{delfiner2009geostatistics,
@@ -318,6 +459,34 @@
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Dworak et al. - 2011 - MIDDLEWARE TRENDS AND MARKET LEADERS 2011.pdf:pdf}
 }
 
+@Article{EG1999,
+  Title                    = {Working Range Optimization for Turbine and Compressor Blading},
+  Author                   = {W. Egartner},
+  Journal                  = {J. f. Computational and Applied Mathematics},
+  Year                     = {1999},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Article{EG1998,
+  Title                    = {Partially Reduced SQP Methods for Optimal Turbine and Compressor Blade Design},
+  Author                   = {W. Egartner and V.H. Schulz},
+  Journal                  = {ENUMATH 97},
+  Year                     = {1998},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Book{ehrgott2005multicriteria,
+  Title                    = {Multicriteria optimization},
+  Author                   = {Ehrgott, Matthias},
+  Publisher                = {Springer Science \& Business Media},
+  Year                     = {2005},
+  Volume                   = {491}
+}
+
 @Article{Eifinger2013,
   Title                    = {{Validierung eines Gradient Enhanced Kriging Verfahrens anhand einer Parameterstudie am Profilschnitt eines Fans}},
   Author                   = {Eifinger, P},
@@ -338,11 +507,45 @@
   Keywords                 = {GT2016-56546}
 }
 
+@PhdThesis{emmerich2005single,
+  Title                    = {Single-and multi-objective evolutionary design optimization assisted by gaussian random field metamodels},
+  Author                   = {Emmerich, Michael},
+  Year                     = {2005},
+
+  Journal                  = {Dissertation, LS11, FB Informatik, Universit{\"a}t Dortmund, Germany}
+}
+
+@Article{emmerich2008computation,
+  Title                    = {The computation of the expected improvement in dominated hypervolume of Pareto front approximations},
+  Author                   = {Emmerich, Michael and Klinkenberg, Jan-willem},
+  Journal                  = {Rapport technique, Leiden University},
+  Year                     = {2008},
+  Volume                   = {34},
+
+  Publisher                = {Citeseer}
+}
+
 @Article{GERDRIG250,
   Title                    = {{Experimental Investigations of a Four-Stage Axial Compressor Equipped with Casing Treatment over Two Rotor Blade Rows}},
   Author                   = {Enders, G and Dabrock, T and Voigt, C and {Dr. Nicke}, E and Johann, E},
   Journal                  = {ASME Turbo Expo},
   Year                     = {2012}
+}
+
+@InProceedings{kuesters2007,
+  Title                    = {Design and Validation of a Compressor for a New Generation of Heavy-Duty Gas Turbines},
+  Author                   = {Eulitz, F and Kuesters, B and Mildner, F and Mittelbach, Marc and Peters, A and van den Toorn, Bernd and Waltke, Ulrich and Rimmington, P and Wasdell, D},
+  Year                     = {2007},
+  Month                    = {01},
+
+  Doi                      = {10.1115/POWER2007-22100}
+}
+
+@Book{fahrmeir2015multivariate,
+  Title                    = {Multivariate statistische verfahren},
+  Author                   = {Fahrmeir, Ludwig and Hamerle, Alfred and Tutz, Gerhard},
+  Publisher                = {Walter de Gruyter GmbH \& Co KG},
+  Year                     = {2015}
 }
 
 @Misc{AGN,
@@ -352,6 +555,17 @@
   Year                     = {2013},
 
   Url                      = {http://www.agner.org/}
+}
+
+@InProceedings{forrester2006optimization,
+  Title                    = {Optimization using surrogate models and partially converged computational fluid dynamics simulations},
+  Author                   = {Forrester, Alexander IJ and Bressloff, Neil W and Keane, Andy J},
+  Booktitle                = {Proceedings of the Royal Society of London A: Mathematical, Physical and Engineering Sciences},
+  Year                     = {2006},
+  Number                   = {2071},
+  Organization             = {The Royal Society},
+  Pages                    = {2177--2204},
+  Volume                   = {462}
 }
 
 @Article{forrester2009recent,
@@ -397,6 +611,30 @@
   Year                     = {2005}
 }
 
+@InProceedings{Franke2005,
+  Title                    = {Das DLR-Verfahren TRACE: Moderne Simulationstechniken f{\"u}r Turbomaschinenstr{\"o}mungen},
+  Author                   = {Martin Franke and Edmund K{\"u}geler and Dirk N{\"u}rnberger},
+  Booktitle                = {Deutscher Luft- und Raumfahrtkongress 2005},
+  Year                     = {2005},
+  Editor                   = { DGLR},
+
+  __markedentry            = {[andreas:6]},
+  Journal                  = {DGLR-Jahrbuch},
+  Keywords                 = {CFD, Turbomaschinen},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20},
+  Url                      = {https://elib.dlr.de/22423/}
+}
+
+@Book{friedman2001elements,
+  Title                    = {The elements of statistical learning},
+  Author                   = {Friedman, Jerome and Hastie, Trevor and Tibshirani, Robert},
+  Publisher                = {Springer series in statistics New York, NY, USA:},
+  Year                     = {2001},
+  Number                   = {10},
+  Volume                   = {1}
+}
+
 @Article{GOERK12,
   Title                    = {{Aerodynamic and Mechanical Optimization of CF/PEEK Blades of a Counter Rotating Fan}},
   Author                   = {G{\"{o}}rke, Daniel and {Le Denmat}, Anne-Laure and Schmidt, Thomas and Kocian, Frank and Nicke, Eberhard},
@@ -431,6 +669,27 @@
   Abstract                 = {"A Wiley-Interscience publication."},
   ISBN                     = {0471315311},
   Pages                    = {495}
+}
+
+@Book{gere1965analysis,
+  Title                    = {Analysis of framed structures},
+  Author                   = {Gere, J.M. and Weaver, W.},
+  Publisher                = {Van Nostrand},
+  Year                     = {1965},
+  Series                   = {University series in civil engineering and applied mechanics},
+
+  Lccn                     = {lc65008645},
+  Url                      = {https://books.google.de/books?id=Rd08AAAAIAAJ}
+}
+
+@Article{Gian2006,
+  Title                    = {Hierarchical and Distributed Metamodel-Assisted Evolutionary Algorithms},
+  Author                   = {Giannakoglou, K. C. and Karakasis, M. K.},
+  Journal                  = {VKI Lecture Series},
+  Year                     = {2006},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
 }
 
 @Article{gibbs1997efficient,
@@ -476,6 +735,91 @@
   Publisher                = {Academic press}
 }
 
+@InProceedings{Glorot2010,
+  Title                    = {Understanding the difficulty of training deep feedforward neural networks},
+  Author                   = {Xavier Glorot and Yoshua Bengio},
+  Booktitle                = {Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics},
+  Year                     = {2010},
+
+  Address                  = {Chia Laguna Resort, Sardinia, Italy},
+  Editor                   = {Yee Whye Teh and Mike Titterington},
+  Month                    = {Mai},
+  Pages                    = {249--256},
+  Publisher                = {PMLR},
+  Series                   = {Proceedings of Machine Learning Research},
+  Volume                   = {9},
+
+  __markedentry            = {[andreas:6]},
+  File                     = {glorot10a.pdf:http\://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf:PDF},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20},
+  Url                      = {http://proceedings.mlr.press/v9/glorot10a.html}
+}
+
+@Article{goinis2018,
+  Title                    = {{Entwicklung und Anwendung von modernen optimierungsfähigen Auslegungsverfahren unter Berücksichtigung des Realgaseinflusses}},
+  Author                   = {Goinis, Georgios},
+  Journal                  = {Forschungsvorhaben 03ET7040R Verbundvorhaben COOREFLEX-turbo Teilvorhaben 1.2.4d},
+  Year                     = {2018},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.17}
+}
+
+@InProceedings{goinis2016optimizing,
+  Title                    = {Optimizing Surge Margin and Efficiency of a Transonic Compressor},
+  Author                   = {Goinis, Georgios and Nicke, Eberhard},
+  Booktitle                = {ASME Turbo Expo 2016: Turbomachinery Technical Conference and Exposition},
+  Year                     = {2016},
+  Organization             = {American Society of Mechanical Engineers},
+  Pages                    = {V02AT37A048--V02AT37A048}
+}
+
+@Electronic{US2009,
+  Title                    = {Code of Federal Regulations - 15 CFR Ch. VII (1–1–09 Edition) §744},
+  Author                   = {US Government},
+  Url                      = {https://www.govinfo.gov/content/pkg/CFR-2009-title15-vol2/pdf/CFR-2009-title15-vol2-sec744-2.pdf},
+  Year                     = {2009},
+
+  Owner                    = {schm_ad},
+  Timestamp                = {2019.03.04}
+}
+
+@Article{Graves2009,
+  Title                    = {A Novel Connectionist System for Unconstrained Handwriting Recognition},
+  Author                   = {A. Graves and M. Liwicki and S. Fernández and R. Bertolami and H. Bunke and J. Schmidhuber},
+  Journal                  = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  Year                     = {2009},
+
+  Month                    = {May},
+  Number                   = {5},
+  Pages                    = {855-868},
+  Volume                   = {31},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1109/TPAMI.2008.137},
+  ISSN                     = {0162-8828},
+  Keywords                 = {handwriting recognition;handwritten character recognition;hidden Markov models;image segmentation;recurrent neural nets;connectionist system;hidden Markov models;language modeling;overlapping character segmentation;recurrent neural network;unconstrained handwriting databases;unconstrained handwriting text recognition;Character recognition;Databases;Handwriting recognition;Hidden Markov models;Labeling;Recurrent neural networks;Robustness;Size measurement;Speech;Text recognition;Connectionist temporal classification;Handwriting recognition;Long Short-Term Memory;Offline handwriting recognition;Online handwriting recognition;Recurrent neural networks;Unconstrained handwriting recognition;bidirectional long short-term memory;connectionist temporal classification;hidden Markov model.;offline handwriting;online handwriting;recurrent neural networks;0},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@InProceedings{Graves2013,
+  Title                    = {Speech recognition with deep recurrent neural networks},
+  Author                   = {A. Graves and A. r. Mohamed and G. Hinton},
+  Booktitle                = {2013 IEEE International Conference on Acoustics, Speech and Signal Processing},
+  Year                     = {2013},
+  Month                    = {May},
+  Pages                    = {6645-6649},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1109/ICASSP.2013.6638947},
+  ISSN                     = {1520-6149},
+  Keywords                 = {speech recognition;connectionist temporal classification;deep recurrent neural networks;end-to-end training methods;long short-term memory RNN architecture;sequential data;speech recognition;Acoustics;Noise;Recurrent neural networks;Speech recognition;Training;Vectors;deep neural networks;recurrent neural networks;speech recognition},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
 @Book{Griewank2008,
   Title                    = {{Evaluating derivatives : principles and techniques of algorithmic differentiation}},
   Author                   = {Griewank, Andreas. and Walther, Andrea},
@@ -504,11 +848,64 @@
   Year                     = {2009}
 }
 
+@Article{He2016,
+  Title                    = {Deep Residual Learning for Image Recognition},
+  Author                   = {Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
+  Journal                  = {2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+  Year                     = {2016},
+  Pages                    = {770-778},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
 @Article{NNSchiffmann,
   Title                    = {{Neuronale Netze}},
   Author                   = {Helbig, H and Scherer, A},
   Journal                  = {Vorlesungsskript},
   Year                     = {2011}
+}
+
+@InProceedings{hemmert2019,
+  Title                    = {High-dimensional multi-fidelity optimisation of a 2.5 stage low pressure compressor},
+  Author                   = {Hemmert-Pottmann, Stefan and Voß, Christian},
+  Booktitle                = {ISABE-2019 Conference},
+  Year                     = {2019},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.17}
+}
+
+@Book{hintjens2013zeromq,
+  Title                    = {ZeroMQ: messaging for many applications},
+  Author                   = {Hintjens, Pieter},
+  Publisher                = {" O'Reilly Media, Inc."},
+  Year                     = {2013}
+}
+
+@Article{Hochreiter1997,
+  Title                    = {Long Short-Term Memory},
+  Author                   = {Hochreiter, Sepp and Schmidhuber, Jürgen},
+  Journal                  = {Neural Comput.},
+  Year                     = {1997},
+
+  Month                    = {November},
+  Number                   = {8},
+  Pages                    = {1735--1780},
+  Volume                   = {9},
+
+  __markedentry            = {[andreas:6]},
+  Acmid                    = {1246450},
+  Address                  = {Cambridge, MA, USA},
+  Doi                      = {10.1162/neco.1997.9.8.1735},
+  ISSN                     = {0899-7667},
+  Issue_date               = {November 15, 1997},
+  Numpages                 = {46},
+  Owner                    = {andreas},
+  Publisher                = {MIT Press},
+  Timestamp                = {2018.09.20},
+  Url                      = {http://dx.doi.org/10.1162/neco.1997.9.8.1735}
 }
 
 @Book{Hodges2011,
@@ -521,6 +918,21 @@
   ISBN                     = {9780521195904},
   Pages                    = {247},
   Url                      = {http://www.cambridge.org/de/academic/subjects/engineering/aerospace-engineering/introduction-structural-dynamics-and-aeroelasticity-2nd-edition?format=HB{\&}isbn=9780521195904}
+}
+
+@Article{hoerl2000,
+  Title                    = {Ridge Regression: Biased Estimation for Nonorthogonal Problems},
+  Author                   = {Arthur E. Hoerl and Robert W. Kennard},
+  Journal                  = {Technometrics},
+  Year                     = {2000},
+  Number                   = {1},
+  Pages                    = {80--86},
+  Volume                   = {42},
+
+  Abstract                 = {In multiple regression it is shown that parameter estimates based on minimum residual sum of squares have a high probability of being unsatisfactory, if not incorrect, if the prediction vectors are not orthogonal. Proposed is an estimation procedure based on adding small positive quantities to the diagonal of X′X. Introduced is the ridge trace, a method for showing in two dimensions the effects of nonorthogonality. It is then shown how to augment X′X to obtain biased estimates with smaller mean square error.},
+  ISSN                     = {00401706},
+  Publisher                = {[Taylor \& Francis, Ltd., American Statistical Association, American Society for Quality]},
+  Url                      = {http://www.jstor.org/stable/1271436}
 }
 
 @Article{Holland1975,
@@ -668,15 +1080,6 @@
   Keywords                 = {Bayesian global optimization,Kriging,Random function,Response surface,Stochastic process,Visualization}
 }
 
-@Misc{INTEL,
-  Title                    = {{Processors - Define SSE2,SSE3 and SSE4}},
-
-  Author                   = {K.A.},
-  Year                     = {2011},
-
-  Url                      = {http://www.intel.com/support/processors/sb/CS-030123.htm}
-}
-
 @Article{Kugeler2005,
   Title                    = {{Numerisches Verfahren zur genauen Analyse der K{\"{u}}hleffektivit{\"{a}}t filmgek{\"{u}}hlter Turbinenschaufeln}},
   Author                   = {K{\"{u}}geler, E.},
@@ -687,18 +1090,76 @@
   Url                      = {http://elib.dlr.de/1338/}
 }
 
+@Book{köller1999entwicklung,
+  Title                    = {Entwicklung einer fortschrittlichen Profilsystematik f{\"u}r station{\"a}re Gasturbinenverdichter: 5 Tabellen},
+  Author                   = {K{\"o}ller, U.},
+  Publisher                = {DLR, Bibliotheks- und Informationswesen},
+  Year                     = {1999},
+  Series                   = {Deutsches Zentrum f{\"u}r Luft- und Raumfahrt e.V},
+
+  Url                      = {https://books.google.de/books?id=fuEDGwAACAAJ}
+}
+
+@Other{kueppers2016,
+  Title                    = {Entwicklung und Aufbau eines verteilten Systems zur Reduktion der Rechenzeit f{\"u}r Gradienten basierte Ersatzmodell Algorithmen},
+  Abstract                 = {Zur Entwicklung neuer Konzepte f{\"u}r Turbomaschinen sind moderne Simulations- und Optimierungsverfahren, wie sie im Institut f{\"u}r Antriebstechnik des DLR verwendet werden, unerl{\"a}sslich. Innerhalb dieser Optimierungsprozesse werden verschiedene so genannte Ersatzmodelle verwendet, die im Rahmen dieses Prozesses kontinuierlich verbessert bzw. trainiert werden. F{\"u}r das Training solcher Ersatzmodelle sind allerdings diverse Matrizenoperationen notwendig, die je nach Problemgr{\"o}{\ss}e {\"a}u{\ss}erst aufwendig zu berechnen sind. Werden f{\"u}r dieses
+Training zus{\"a}tzlich Gradienteninformationen aus vorangegangen Rechnungen mit einbezogen, vergr{\"o}{\ss}ern sich die zugrunde liegenden Matrizen noch einmal erheblich, sodass die Rechenzeit des gesamten Optimierungsprozesses darunter leidet.
+Es soll im Rahmen dieser Arbeit daher erm{\"o}glicht werden, einerseits diese Matrizenoperationen in geeignetem Ma{\ss}e auf einen leistungsstarken Rechner auszulagern, der mit einer GPU zu Rechenzwecken ausgestattet ist, und andererseits parallel ausf{\"u}hrbare Teile des zugrunde liegenden Quellcodes des Ersatzmodelltrainings zu identifiziert und auf mehrere
+Recheneinheiten zu verteilen.
+Die Auslagerung bzw. Verteilung von Rechenoperationen konnte durch Erweiterung und Optimierung von bestehender Software erreicht werden, indem wichtige Teile des Ersatzmodelltrainings mithilfe eines Clients als Schnittstelle an ein geeignetes Netzwerk mit beliebig vielen Servern angebunden wurde. Je nach Problemstellung sind so Verbindungen in einer 1:1 Beziehung zu nur einem Server und 1:n zu vielen Servern m{\"o}glich. Die Ausf{\"u}hrungsdauer eines Ersatzmodelltrainings und somit die des gesamten Optimierungsprozesses konnte so durch eine bessere Auslastung von bereits zur Verf{\"u}gung stehenden Ressourcen deutlich gesenkt werden.},
+  Author                   = {Fabian K{\"u}ppers},
+  Keywords                 = {Verteiltes System, GPU, Grafikkarte, Cluster, Optimierung, Ersatzmodell, Matrizen, Matrix, Rechenoperationen, Cholesky-Zerlegung, Invertierung, IT, Algorithmen, Rechenzeit, Reduktion},
+  Month                    = {September},
+  Type                     = {Bachelorarbeit},
+  Url                      = {http://elib.dlr.de/106692/},
+  Year                     = {2016}
+}
+
+@MastersThesis{Kueppers2016c,
+  Title                    = {Auslagerung von Matrizenoperationen auf die GPU},
+  Author                   = {Fabian K{\"u}ppers},
+  School                   = {DHBW Mannheim},
+  Year                     = {2016},
+  Type                     = {Praxisbericht},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.06.06}
+}
+
+@InProceedings{kueppers2016b,
+  Title                    = {Ersatzmodelltraining f{\"u}r Turbomaschinenoptimierungen: Entwicklung eines verteilten Systems zur Auslagerung rechenintensiver Algorithmen auf GPUs},
+  Author                   = {Fabian K{\"u}ppers and Andreas Schmitz},
+  Booktitle                = {Deutscher Luft- und Raumfahrtkongress 2016},
+  Year                     = {2016},
+
+  Abstract                 = {Eine gro{\ss}e Rolle in der Entwicklung und dem Design neuer Konzepte f{\"u}r Turbomaschinen spielen moderne Optimierungs- und Simulationsverfahren. Das Institut f{\"u}r Antriebstechnik des DLR verwendet in diesem Rahmen Multifidelity- und Gradient-Enhanced-Kriging-Ersatzmodelle, welche ein aufw{\"a}ndiges Training ben{\"o}tigen. In solch einem Training sind verschiedene Matrizenoperationen der Komplexit{\"a}t O(n³) notwendig. Bei aufw{\"a}ndigen Problemstellungen kann das Kriging-Training allerdings zum Flaschenhals einer Optimierung werden. Mittelfristiges Ziel ist es, solch ein Training auch f{\"u}r sehr gro{\ss}e Matrizen ({\texttt{\char126}}20.000²) in annehmbarer Zeit umzusetzen. F{\"u}r Optimierungen wird im Institut f{\"u}r Antriebstechnik des DLR meistens ein eigenes Rechencluster mit zahlreichen Knoten verwendet. Das Kriging-Training l{\"a}sst sich aber nur teilweise auf mehrere Knoten verteilen. Die h{\"o}chste Rechenleistung bei gleichzeitig bestem Preis-/Leistungsverh{\"a}ltnis bieten derzeit GPGPUs (General Purpose Computation on Graphics Processing Unit, nachfolgend GPU). Diese sind allerdings auf dem Rechencluster derzeit nicht vorhanden. Aus diesem Grund wurde f{\"u}r das Kriging-Training ein externer Server zur Verf{\"u}gung gestellt, der solch eine GPU verwendet. Zur Auslagerung der wichtigsten Matrix-operationen in einer 1:1 Client-Server-Verbindung war dar{\"u}ber hinaus die Entwicklung einer geeigneten Netz-werkschnittstelle notwendig. Bei derzeitiger Infrastruktur konnte so ein Speedup um den Faktor 2 erreicht werden. Die gleiche Netzwerkschnittstelle wurde in einem zweiten Schritt dazu verwendet, um die parallelisierbaren Berechnungen des Kriging-Trainings unabh{\"a}ngig von der Verwendung einer GPU auf verschiedene Cluster-knoten zu verteilen. Mit solch einer Verteilung konnte ein Speedup erreicht werden, der in begrenztem Ma{\ss}e beinahe linear mit der Anzahl an Clusterknoten w{\"a}chst.},
+  Keywords                 = {Verteiltes System, GPU, Grafikkarte, Cluster, Optimierung, Ersatzmodell, Matrizen, Matrix, Rechenoperationen, Cholesky-Zerlegung, Invertierung, IT, Algorithmen, Rechenzeit, Reduktion},
+  Url                      = {http://elib.dlr.de/108417/}
+}
+
 @Book{Karlsson2006,
   Title                    = {Beyond the C++ Standard Library: An Introduction to Boost},
   Author                   = {Karlsson, B.},
   Publisher                = {Addison-Wesley},
   Year                     = {2006},
 
-  __markedentry            = {[schm_ad:6]},
   ISBN                     = {9780321133540},
   Lccn                     = {2005927496},
   Owner                    = {schm_ad},
   Timestamp                = {2018.02.06},
   Url                      = {https://books.google.de/books?id=9aRQAAAAMAAJ}
+}
+
+@Article{käters20001999,
+  Title                    = {1999 Turbomachinery Committee Best Paper Award: Development of Advanced Compressor Airfoils for Heavy-Duty Gas Turbines—Part II: Experimental and Theoretical Analysis},
+  Author                   = {Käters, Bernhard and Schreiber, Heinz-Adolf and Köler, Ulf and Mönig, Reinhard},
+  Journal                  = {Journal of Turbomachinery},
+  Year                     = {2000},
+  Number                   = {3},
+  Pages                    = {406--414},
+  Volume                   = {122},
+
+  Publisher                = {American Society of Mechanical Engineers}
 }
 
 @Article{keane2006statistical,
@@ -730,6 +1191,26 @@
   Url                      = {papers2://publication/uuid/1A69EB40-F7E9-48E1-B609-FF3A7497DBC2}
 }
 
+@Article{kiefer1974general,
+  Title                    = {General equivalence theory for optimum designs (approximate theory)},
+  Author                   = {Kiefer, Jack},
+  Journal                  = {The annals of Statistics},
+  Year                     = {1974},
+  Pages                    = {849--879},
+
+  Publisher                = {JSTOR}
+}
+
+@Article{kiefer1959optimum,
+  Title                    = {Optimum experimental designs},
+  Author                   = {Kiefer, Jack},
+  Journal                  = {Journal of the Royal Statistical Society. Series B (Methodological)},
+  Year                     = {1959},
+  Pages                    = {272--319},
+
+  Publisher                = {JSTOR}
+}
+
 @Article{henry2012,
   Title                    = {{Shock Induced Vortices in Transonic Compressors: Aerodynamic Effects and Design Correlations}},
   Author                   = {Knobbe, H and Nicke, E},
@@ -754,6 +1235,18 @@
   Pages                    = {1--12},
 
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Koerber, Bank, Brussel - 2015 - Adjoint Algorithmic Di erentiation and the derivative of the Cholesky decomposition.pdf:pdf}
+}
+
+@Article{korpela2001seti,
+  Title                    = {SETI@ HOME—massively distributed computing for SETI},
+  Author                   = {Korpela, Eric and Werthimer, Dan and Anderson, David and Cobb, Jeff and Lebofsky, Matt},
+  Journal                  = {Computing in science \& engineering},
+  Year                     = {2001},
+  Number                   = {1},
+  Pages                    = {78--83},
+  Volume                   = {3},
+
+  Publisher                = {IEEE}
 }
 
 @Book{KroegerAGTurboAbschluss,
@@ -785,6 +1278,18 @@
   Year                     = {1953}
 }
 
+@Article{kushner1964new,
+  Title                    = {A new method of locating the maximum point of an arbitrary multipeak curve in the presence of noise},
+  Author                   = {Kushner, Harold J},
+  Journal                  = {Journal of Basic Engineering},
+  Year                     = {1964},
+  Number                   = {1},
+  Pages                    = {97--106},
+  Volume                   = {86},
+
+  Publisher                = {American Society of Mechanical Engineers}
+}
+
 @Article{Lapworth2004,
   Title                    = {{DESIGN OF GAS TURBINE ENGINES USING CFD}},
   Author                   = {Lapworth, Leigh and Shahpar, Shahrokh},
@@ -793,6 +1298,40 @@
 
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Lapworth, Shahpar - 2004 - DESIGN OF GAS TURBINE ENGINES USING CFD.pdf:pdf},
   Url                      = {http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.601.5480}
+}
+
+@Book{Laurien2013,
+  Title                    = {Numerische Strömungsmechanik: Grundgleichungen, Lösungsmethoden, Softwarebeispiele},
+  Author                   = {Laurien, E. and Oertel, H.},
+  Publisher                = {Vieweg+Teubner Verlag},
+  Year                     = {2013},
+  Series                   = {Studium Technik},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@Article{LAW1995,
+  Title                    = {{Rechnergestützte Strategien zur aerodynamischen Optimierung von Turbomaschinen}},
+  Author                   = {M. Lawerenz},
+  Journal                  = {TURBOTECH-Vorhaben 1.1.2.13},
+  Year                     = {1995},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Article{lawson1979basic,
+  Title                    = {Basic linear algebra subprograms for Fortran usage},
+  Author                   = {Lawson, Chuck L and Hanson, Richard J. and Kincaid, David R and Krogh, Fred T.},
+  Journal                  = {ACM Transactions on Mathematical Software (TOMS)},
+  Year                     = {1979},
+  Number                   = {3},
+  Pages                    = {308--323},
+  Volume                   = {5},
+
+  Publisher                = {ACM}
 }
 
 @Article{LeGratiet,
@@ -806,6 +1345,18 @@
   Doi                      = {10.1137/120884122},
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Le Gratiet - 2013 - Bayesian Analysis of Hierarchical Multifidelity Codes.pdf:pdf},
   Keywords                 = {Bayesian analysis AMS subject classification 62G08,cokriging,multifidelity computer experiment,surrogate models}
+}
+
+@PhdThesis{Lengyel-Kampmann2016,
+  Title                    = {Vergleichende aerodynamische Untersuchungen von gegenl{\"a}ufigen und konventionellen Fanstufen f{\"u}r Flugtriebwerke},
+  Author                   = {Timea Lengyel-Kampmann},
+  School                   = {Ruhr-Universit{\"a}t Bochum, Universit{\"a}tsbibliothek},
+  Year                     = {2016},
+  Type                     = {Dissertation},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
 }
 
 @PhdThesis{Lengyel-Kampmann2015,
@@ -843,6 +1394,31 @@
   Url                      = {http://pia.sagepub.com/lookup/doi/10.1177/0957650911413695}
 }
 
+@InProceedings{Li2015,
+  Title                    = {Constructing long short-term memory based deep recurrent neural networks for large vocabulary speech recognition},
+  Author                   = {X. Li and X. Wu},
+  Booktitle                = {2015 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  Year                     = {2015},
+  Month                    = {April},
+  Pages                    = {4520-4524},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1109/ICASSP.2015.7178826},
+  ISSN                     = {1520-6149},
+  Keywords                 = {graphics processing units;learning (artificial intelligence);recurrent neural nets;speech recognition;RNN;acoustic modeling method;deep LSTM network;deep recurrent neural network;hierarchical model;large vocabulary speech recognition;long short-term memory;multiGPU device;telephone speech recognition task;training process;Acoustics;Computer architecture;Hidden Markov models;Recurrent neural networks;Speech;Speech recognition;Training;acoustic modeling;deep neural networks;large vocabulary speech recognition;long short-term memory;recurrent neural networks},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@Misc{Intel,
+  Title                    = {{Processors - Define SSE2,SSE3 and SSE4}},
+
+  Author                   = {Intel(R) Math Kernel Library},
+  Year                     = {2011},
+
+  Url                      = {http://www.intel.com/support/processors/sb/CS-030123.htm}
+}
+
 @Article{Lieblein1955,
   Title                    = {{Aerodynamic Design of Axial-flow Compressors. VI - Experimental Flow in Two-Dimensional Cascades}},
   Author                   = {Lieblein and Seymour},
@@ -858,6 +1434,30 @@
   Author                   = {Lieblein, S},
   Publisher                = {National Advisory Committee for Aeronautics},
   Year                     = {1957}
+}
+
+@Article{lighthill1954sound,
+  Title                    = {On sound generated aerodynamically II. Turbulence as a source of sound},
+  Author                   = {Lighthill, Michael James},
+  Journal                  = {Proc. R. Soc. Lond. A},
+  Year                     = {1954},
+  Number                   = {1148},
+  Pages                    = {1--32},
+  Volume                   = {222},
+
+  Publisher                = {The Royal Society}
+}
+
+@Article{lighthill1952sound,
+  Title                    = {On sound generated aerodynamically I. General theory},
+  Author                   = {Lighthill, Michael James},
+  Journal                  = {Proc. R. Soc. Lond. A},
+  Year                     = {1952},
+  Number                   = {1107},
+  Pages                    = {564--587},
+  Volume                   = {211},
+
+  Publisher                = {The Royal Society}
 }
 
 @Book{cam2008,
@@ -906,6 +1506,17 @@
   Abstract                 = {Die Weiterentwicklung der Methoden zur Auslegung der Meridianstr{\"{o}}mung mehrstufiger axialer Turbomaschinen mit Hilfe von mathematischen Optimierungsstrategien bildet das Ziel dieser Arbeit. Hierzu werden zun{\"{a}}chst verschiedene deterministische und stochastische Verfahren implementiert und auf ihre Funktionsf{\"{a}}higkeit verifiziert. Zun{\"{a}}chst werden nur die Hauptabmessungen des Verdichters optimiert. Die restlichen Gr{\"{o}}{\ss}en werden sukzessive hinzugenommen. Hierzu ist es notwendig, eine neue Geometriebeschreibung einzuf{\"{u}}hren. In weiteren Untersuchungen wird die Optimierung auf zus{\"{a}}tzliche Parameter wie Reaktionsgrad, Stufenarbeit usw. ausgeweitet. Zus{\"{a}}tzlich bleibt der Optimierungsprozess nicht auf den Auslegungspunkt beschr{\"{a}}nkt, sondern er wird auf weitere Betriebspunkte ausgedehnt. Anhand einfacher zwei- und mehrdimensionaler Testfunktionen wird in ersten Untersuchungen die Funktionsf{\"{a}}higkeit der erarbeiteten Optimierungsprogramme aufgezeigt. In diesem Zusammenhang erweisen sich die deterministischen Methoden, die dem Gradientenpfad folgen und zum Teil auch zus{\"{a}}tzliche Kr{\"{u}}mmungsinformationen auswerten, trotz des h{\"{o}}heren mathematischen Aufwandes als deutlich schneller. Im Anschluss an diese grundlegenden Arbeiten werden Untersuchungen zur Kopplung der Optimierungsmethoden mit dem Meridianstr{\"{o}}mungsmodell vorgestellt. Die Verbindung der aerodynamischen Rechnung mit der Optimierung erfolgt dabei durch eine Schnittstelle, {\"{u}}ber die zum einen die zu minimierende Zielfunktion und zum anderen der Vektor der Auslegungsparameter ausgetauscht werden. Um die in der Praxis wichtige M{\"{o}}glichkeit zu erhalten, auf einfachem Weg das Meridianstr{\"{o}}mungsverfahren zu ver{\"{a}}ndern und unterschiedliche Nebenbedingungen zu ber{\"{u}}cksichtigen, wurde ein Straffunktionsansatz zur Erfassung von Restriktionen gew{\"{a}}hlt.}
 }
 
+@Article{mackay1998introduction,
+  Title                    = {Introduction to Gaussian processes},
+  Author                   = {MacKay, David JC},
+  Journal                  = {NATO ASI Series F Computer and Systems Sciences},
+  Year                     = {1998},
+  Pages                    = {133--166},
+  Volume                   = {168},
+
+  Publisher                = {Springer Verlag}
+}
+
 @PhdThesis{mackay1991bayesian,
   Title                    = {{Bayesian Methods for Adaptive Models}},
   Author                   = {Mackkay, D J C},
@@ -928,6 +1539,18 @@
 
   Author                   = {{Mark Gibbs}, David J.C. MacKay},
   Year                     = {1997}
+}
+
+@Article{marler2004survey,
+  Title                    = {Survey of multi-objective optimization methods for engineering},
+  Author                   = {Marler, R Timothy and Arora, Jasbir S},
+  Journal                  = {Structural and multidisciplinary optimization},
+  Year                     = {2004},
+  Number                   = {6},
+  Pages                    = {369--395},
+  Volume                   = {26},
+
+  Publisher                = {Springer}
 }
 
 @Article{matheron1963principles,
@@ -967,6 +1590,36 @@
   Url                      = {http://www.jstor.org/stable/1268522?origin=crossref}
 }
 
+@InProceedings{meillard2017,
+  Title                    = {{Design of a counter rotating fan using a multidisciplinary and multifidelity optimisation under high level of restrictions}},
+  Author                   = {Meillard, Lionel and Cristian Mihail Stanica and Nabil Ben Nasr and William Riéra},
+  Booktitle                = {ISABE-2017- 21387},
+  Year                     = {2017},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.17}
+}
+
+@Book{miettinen2012nonlinear,
+  Title                    = {Nonlinear multiobjective optimization},
+  Author                   = {Miettinen, Kaisa},
+  Publisher                = {Springer Science \& Business Media},
+  Year                     = {2012},
+  Volume                   = {12}
+}
+
+@Article{mockus1994application,
+  Title                    = {Application of Bayesian approach to numerical methods of global and stochastic optimization},
+  Author                   = {Mockus, Jonas},
+  Journal                  = {Journal of Global Optimization},
+  Year                     = {1994},
+  Number                   = {4},
+  Pages                    = {347--365},
+  Volume                   = {4},
+
+  Publisher                = {Springer}
+}
+
 @Article{Murray2016,
   Title                    = {{Differentiation of the Cholesky decomposition}},
   Author                   = {Murray, Iain},
@@ -996,10 +1649,28 @@
   Year                     = {2004}
 }
 
+@Misc{NASAStand:Juni2018,
+  Title                    = {Isentrop Flow},
+
+  Author                   = {{National Aeronautics and Space Administration (NASA)}},
+  HowPublished             = {Online unter \url{https://www.grc.nasa.gov/www/k-12/airplane/isentrop.html}},
+  Year                     = {Stand: Juni 2018},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
 @InProceedings{Eberhard2012,
   Title                    = {{Entwicklung und Test eines gegenl{\"{a}}ufigen Fans unter Verwendung der automatisierten Optimierung in der Auslegungsphase}},
   Author                   = {Nicke, Eberhard},
   Year                     = {2012}
+}
+
+@Article{nvidia2007compute,
+  Title                    = {Compute unified device architecture programming guide},
+  Author                   = {Nvidia, CUDA},
+  Year                     = {2007}
 }
 
 @PhdThesis{Otterbach2014,
@@ -1010,6 +1681,39 @@
 
   File                     = {:Literatur/Geostatistik_mitR_Otterbach.pdf:PDF},
   Url                      = {http://nbn-resolving.de/urn/resolver.pl?urn=nbn:de:bvb:19-epub-21442-9}
+}
+
+@Book{pareto1964cours,
+  Title                    = {Cours d'{\'e}conomie politique},
+  Author                   = {Pareto, Vilfredo},
+  Publisher                = {Librairie Droz},
+  Year                     = {1964},
+  Volume                   = {1}
+}
+
+@Article{Perone2018,
+  Title                    = {Spinal cord gray matter segmentation using deep dilated convolutions},
+  Author                   = {Perone, Christian and Calabrese, Evan and Cohen-Adad, Julien},
+  Journal                  = {Scientific Reports},
+  Year                     = {2018},
+
+  Month                    = {April},
+  Volume                   = {8},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1038/s41598-018-24304-3},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20},
+  Url                      = {https://doi.org/10.1038/s41598-018-24304-3}
+}
+
+@InProceedings{perttunen1991computational,
+  Title                    = {A computational geometric approach to feasible region division in constrained global optimization},
+  Author                   = {Perttunen, Cary D},
+  Booktitle                = {Systems, Man, and Cybernetics, 1991.'Decision Aiding for Complex Systems, Conference Proceedings., 1991 IEEE International Conference on},
+  Year                     = {1991},
+  Organization             = {IEEE},
+  Pages                    = {585--590}
 }
 
 @Article{Peter2010,
@@ -1027,6 +1731,16 @@
   ISSN                     = {00457930},
   Publisher                = {Elsevier},
   Url                      = {http://linkinghub.elsevier.com/retrieve/pii/S0045793009001388}
+}
+
+@Article{Pie1999,
+  Title                    = {Three-Dimensional Blade Design by means of an Artificial Neuronal Network and Navier-Stokes solver},
+  Author                   = {S. Pierret},
+  Journal                  = {LS VKI},
+  Year                     = {1999},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
 }
 
 @PhdThesis{Pierret1999,
@@ -1061,6 +1775,39 @@
   Volume                   = {37},
 
   Publisher                = {JSTOR}
+}
+
+@Book{usr2015public,
+  Title                    = {Public papers of the Presidents of the United States - Federal Register Vol. 80 No. 32},
+  Author                   = {United States. President and United States. Federal Register Division and United States. Office of the Federal Register},
+  Publisher                = {Federal Register Division, National Archives and Records Service, General},
+  Year                     = {2015}
+}
+
+@Book{press2007numerical,
+  Title                    = {Numerical recipes 3rd edition: The art of scientific computing},
+  Author                   = {Press, William H and Teukolsky, Saul A and Vetterling, William T and Flannery, Brian P},
+  Publisher                = {Cambridge university press},
+  Year                     = {2007}
+}
+
+@Book{przemieniecki1985theory,
+  Title                    = {Theory of matrix structural analysis},
+  Author                   = {Przemieniecki, Janusz S},
+  Publisher                = {Courier Corporation},
+  Year                     = {1985}
+}
+
+@Article{pukelsheim1980linear,
+  Title                    = {On linear regression designs which maximize information},
+  Author                   = {Pukelsheim, Friedrich},
+  Journal                  = {Journal of Statistical Planning and Inference},
+  Year                     = {1980},
+  Number                   = {4},
+  Pages                    = {339--364},
+  Volume                   = {4},
+
+  Publisher                = {Elsevier}
 }
 
 @Article{Queipo2005,
@@ -1131,6 +1878,33 @@ potential effect of downstream blade rows.},
   Institution              = {ASME}
 }
 
+@Article{Rai2001,
+  Title                    = {Application of Artificial Neural Networks to the Design of Turbomachinery Airfoils},
+  Author                   = {Man Mohan Rai and Nateri K. Madavan},
+  Journal                  = {Journal of Propulsion and Power},
+  Year                     = {2001},
+
+  Month                    = {Januar-Februar},
+  Number                   = {1},
+  Volume                   = {17},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@Article{raman2000implementing,
+  Title                    = {Implementing streaming SIMD extensions on the Pentium III processor},
+  Author                   = {Raman, Srinivas K and Pentkovski, Vladimir and Keshava, Jagannath},
+  Journal                  = {IEEE micro},
+  Year                     = {2000},
+  Number                   = {4},
+  Pages                    = {47--57},
+  Volume                   = {20},
+
+  Publisher                = {IEEE}
+}
+
 @Book{Rechenberg1973,
   Title                    = {{Evolutionsstrategie; Optimierung technischer Systeme nach Prinzipien der biologischen Evolution.}},
   Author                   = {Rechenberg, Ingo},
@@ -1161,6 +1935,19 @@ potential effect of downstream blade rows.},
   Pages                    = {107}
 }
 
+@MastersThesis{Reimer2016a,
+  Title                    = {Vergleichende Optimierung eines Fans mit High- und Multi-Fidelity Verfahren},
+  Author                   = {Erich Reimer},
+  School                   = {Hochschule Aachen},
+  Year                     = {2016},
+  Month                    = {September},
+  Type                     = {Bachelorarbeit},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
 @InProceedings{riedmiller1993direct,
   Title                    = {{A direct adaptive method for faster backpropagation learning: The RPROP algorithm}},
   Author                   = {Riedmiller, Martin and Braun, Heinrich},
@@ -1186,6 +1973,23 @@ potential effect of downstream blade rows.},
   Url                      = {http://dl.acm.org/citation.cfm?doid=1654059.1654069}
 }
 
+@Article{Ruder2016,
+  Title                    = {An overview of gradient descent optimization algorithms},
+  Author                   = {Sebastian Ruder},
+  Journal                  = {CoRR},
+  Year                     = {2016},
+  Volume                   = {abs/1609.04747},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/Ruder16},
+  Eprint                   = {1609.04747},
+  Owner                    = {andreas},
+  Timestamp                = {Mon, 13 Aug 2018 16:48:10 +0200},
+  Url                      = {http://arxiv.org/abs/1609.04747}
+}
+
 @Book{Sarkka2013,
   Title                    = {{BAYESIAN FILTERING AND SMOOTHING}},
   Author                   = {S{\"{a}}rkk{\"{a}}, Simo},
@@ -1194,6 +1998,16 @@ potential effect of downstream blade rows.},
 
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/S{\"{a}}rkk{\"{a}} - 2013 - BAYESIAN FILTERING AND SMOOTHING.pdf:pdf},
   Url                      = {www.cambridge.org/sarkka.}
+}
+
+@Article{sacks1989design,
+  Title                    = {Design and analysis of computer experiments},
+  Author                   = {Sacks, Jerome and Welch, William J and Mitchell, Toby J and Wynn, Henry P},
+  Journal                  = {Statistical science},
+  Year                     = {1989},
+  Pages                    = {409--423},
+
+  Publisher                = {JSTOR}
 }
 
 @Article{Sacks2007,
@@ -1210,6 +2024,34 @@ potential effect of downstream blade rows.},
   ISBN                     = {0387954201},
   ISSN                     = {0883-4237},
   Url                      = {https://www.researchgate.net/profile/Andy{\_}Keane2/publication/259667880{\_}Design{\_}and{\_}Analysis{\_}of{\_}Noisy{\_}Computer{\_}Experiments/links/548714230cf289302e2ebf7e.pdf}
+}
+
+@Article{sacks1970statistical,
+  Title                    = {Statistical design and integral approximation},
+  Author                   = {Sacks, Jerome and Ylvisaker, Donald},
+  Journal                  = {Proc. 12th Bienn. Semin. Can. Math. Congr.(R. Pyke, ed.)},
+  Year                     = {1970},
+  Pages                    = {115--136}
+}
+
+@Article{Sak2014,
+  Title                    = {Long Short-Term Memory Based Recurrent Neural Network Architectures
+ for Large Vocabulary Speech Recognition},
+  Author                   = {Hasim Sak and
+ Andrew W. Senior and
+ Fran{\c{c}}oise Beaufays},
+  Journal                  = {CoRR},
+  Year                     = {2014},
+  Volume                   = {abs/1402.1128},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/SakSB14},
+  Eprint                   = {1402.1128},
+  Owner                    = {andreas},
+  Timestamp                = {Wed, 07 Jun 2017 14:42:49 +0200},
+  Url                      = {http://arxiv.org/abs/1402.1128}
 }
 
 @PhdThesis{marcelsauer,
@@ -1242,7 +2084,14 @@ potential effect of downstream blade rows.},
   Year                     = {2012}
 }
 
-@Standard{,
+@Book{schlichting2006grenzschicht,
+  Title                    = {Grenzschicht-theorie},
+  Author                   = {Schlichting, Hermann and Gersten, Klaus},
+  Publisher                = {Springer-Verlag},
+  Year                     = {2006}
+}
+
+@Standard{Schmid2012,
   Title                    = {Räumliche Statistik, Vorlesungsskript},
   Institution              = {LMU Institut für Statistik},
   Author                   = {Schmid, V. and Feilke, M.},
@@ -1250,6 +2099,99 @@ potential effect of downstream blade rows.},
 
   Owner                    = {schm_ad},
   Timestamp                = {2018.04.05}
+}
+
+@Article{schmidt2003bayesian,
+  Title                    = {Bayesian inference for non-stationary spatial covariance structure via spatial deformations},
+  Author                   = {Schmidt, Alexandra M and O'Hagan, Anthony},
+  Journal                  = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+  Year                     = {2003},
+  Number                   = {3},
+  Pages                    = {743--758},
+  Volume                   = {65},
+
+  Publisher                = {Wiley Online Library}
+}
+
+@PhdThesis{schmitz2019,
+  Title                    = {Multifidelity-Optimierungsverfahren für Turbomaschinen},
+  Author                   = {Andreas Schmitz},
+  School                   = {Ruhr Universität Bochum},
+  Year                     = {2019},
+  Type                     = {Dissertation},
+
+  Owner                    = {schm_ad},
+  Timestamp                = {2019.02.22}
+}
+
+@PhdThesis{Schmitz2018,
+  Title                    = {Multifidelity-Optimierungsverfahren für Turbomaschinen},
+  Author                   = {Andreas Schmitz},
+  School                   = {Ruhr Universität Bochum},
+  Year                     = {2018},
+  Type                     = {Dissertation},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@TechReport{schmitz2013,
+  Title                    = {Entwicklung eines objektorientierten und
+parallelisierten Gradient Enhanced
+Kriging Ersatzmodells},
+  Author                   = {Andreas Schmitz},
+  Institution              = {Fernuniversit{\"a}t Hagen},
+  Year                     = {2013},
+  Month                    = {September},
+
+  Abstract                 = {Zur Erf{\"u}llung der im europ{\"a}ischen Strategiedokument {"`}Flightpath 2050{"'} definierten
+Ziele in Hinblick auf die Reduzierung des Treibstoffverbrauchs und der CO2-
+Emission ist eine weitere Steigerung desWirkungsgrades von Verdichtern als zentrale
+Triebwerkskomponente erforderlich. Das Ziel ist die Auslegung und das Design von
+effizienten Verdichternmit verbesserten und neuen Auslegungstechniken sowie Simulationsverfahren.
+Diese sind elementar mit der Qualit{\"a}t der Auslegung und der Zertifizierung
+verkn{\"u}pft. Gerade durch das immer st{\"a}rkere Ausloten und Ausnutzen der
+technischen Grenzen und Detailgestaltungen steigen die Anforderungen an die Auslegungswerkzeuge
+und die rechnerische Simulation erheblich an. Insbesondere die automatisierte
+Mehrzieloptimierung der Verdichterkomponenten erm{\"o}glicht dabei das
+Auffinden der optimalen Geometrien unter Ber{\"u}cksichtigung aller wesentlichen Auslegungskriterien.
+Am Institut f{\"u}r Antriebstechnik wird daher ein solcher Optimierer namens AutoOpti
+entwickelt. Um eine Optimierung m{\"o}glichst effizient zu gestalten, werden Ersatzmodelle
+verwendet, welche die Zielfunktion modellieren und damit den Optimierungsprozess
+beschleunigen. Eines der am h{\"a}ufigsten verwendeten Ersatzmodelle ist
+das Kriging Verfahren, welches beim Institut f{\"u}r Antriebstechnik bereits zum Einsatz
+kommt. Da dieses Verfahren immer mehr an Bedeutung gewonnen hat, sollte es innerhalb
+des Rahmens dieser Arbeit komplett neu entwickelt werden. Ziel dieser Neuentwicklung
+war es, den Code zu modularisieren, um das Verfahren schnell erweitern
+und ver{\"a}ndern zu k{\"o}nnen. Zudem war es ein wichtiges Ziel, das Verfahren zu beschleunigen.
+Um den Code f{\"u}r zuk{\"u}nftige Anwendungen modularer zu gestalten, wurde das gesamte
+Programm objektorientiert in C++ geschrieben. Au{\ss}erdem wurde die Boost Bibliothek
+verwendet um mehr M{\"o}glichkeiten bei der Programmierung zu haben, beispielsweise
+bietet diese Bibliothek sehr flexible Funktionsobjekte. Durch Einsatz dieser
+Mittel und moderner Software Engineering Methoden war es m{\"o}glich, den neuen Code
+so weit zumodularisieren, dass nahezu alle Teile des Programms austauschbar und
+einfach erweiterbar sind.
+Der Code konnte um den Faktor 2 beschleunigt werden, dies wurde durch Minimierung
+der Speicherzugriffe und durch Nutzung effizienter CPU-Befehle erreicht. Zudem
+war es m{\"o}glich, ein neues Trainingsverfahren h{\"o}herer Ordnung zu implementieren.
+Die Verwendung dieses Trainingsverfahrens beschleunigte den Code nochmals
+um den Faktor 3.
+Umdie Ergebnisse zu validieren,wurde ein Test und Benchmark durchgef{\"u}hrt, in dem
+die Ergebnisse und auch der Geschwindigkeitszuwachs best{\"a}tigt werden konnten.},
+  Keywords                 = {Kriging, Gradient Enhanced Kriging, Ersatzmodelle, Surrogate Models, Optimization, Optimierung, AutoOpti},
+  Url                      = {http://elib.dlr.de/85734/}
+}
+
+@InProceedings{schmitz2011,
+  Title                    = {NOVEL APPROACH FOR LOSS AND FLOW-TURNING PREDICTION USING OPTIMIZED SURROGATE MODELS IN TWO-DIMENSIONAL COMPRESSOR DESIGN},
+  Author                   = {Andreas Schmitz and Marcel Aulich and Eberhard Nicke},
+  Booktitle                = {ASME Turbo Expo 2011: Power for Land, Sea and Air},
+  Year                     = {2011},
+
+  Abstract                 = {wo-dimensional (2D) streamline curvature methods are still an important tool in modern compressor design. In the past most of the streamline curvature methods made use of empirical correlations to approximate the blade row losses and deviation functions on which the accuracy of streamline curvature methods mainly depend. These empirical correlations are just accurate for a small set of geometric airfoil design parameters for which they where obtained and the prediction of airfoil performance at high Mach numbers or at off-design condition is inaccurate. Nowadays, a new approach is needed to consider highly customized, modern airfoil geometries with an increased number of design parameters. A new method with the possibility to predict the performance of these highly customized airfoils also at off-design condition and high Mach numbers is presented in this paper. This method uses a large airfoil database together with optimized surrogate models to accurately predict airfoil performance. The database consists of approximately 106 randomly created airfoils with randomly created inflow conditions and the airfoil performance which results from the 2D Euler-boundary layer code MISES. The airfoil geometry in this database is described by ten geometrical parameters, e.g. stagger angle, chord length etc.. The flow condition is described by four flow parameters such as the relative inflow Mach number, MVDR, relative inflow angle and Reynolds number. Airfoil performance is represented by total pressure loss and flow-turning. This database was used to train neural networks that provides the relationship between the geometrical/flow parameters and the airfoil performance. The topology of the neural networks was optimized to achieve a model which represents this highly nonlinear functionality at best. This model was integrated in the DLR's in-house streamline curvature tool ACDC which is based on the equations of M{\"O}NIG et al. , GALLIMORE. The code allows viscous throughflow calculations taking into account radial mixing by turbulent diffusion, endwall boundary layers and a model for tip clearance based on the work of DENTON and KR{\"O}GER},
+  Keywords                 = {Throughflow, 2D solver, neural networks, compressor design, loss, flow turning, total pressure loss},
+  Url                      = {https://elib.dlr.de/78594/}
 }
 
 @Article{schmitzasme2011,
@@ -1278,6 +2220,57 @@ potential effect of downstream blade rows.},
   Author                   = {Schnell, R},
   School                   = {Technische Universit{\{}{\"{a}}{\}}t Berlin, Universit{\{}{\"{a}}{\}}tsbibliothek (Diss.-Stelle)},
   Year                     = {2004}
+}
+
+@InProceedings{schnoes2015,
+  Title                    = {Automated Calibration of Compressor Loss and Deviation Correlations},
+  Author                   = {Markus Schnoes and Eberhard Nicke},
+  Booktitle                = {ASME Turbo Expo 2015: Turbine Technical Conference and Exposition},
+  Year                     = {2015},
+
+  Abstract                 = {Throughout preliminary design of multistage axial compressors performance prediction is based on fast 2D throughflow codes incorporating models for loss, deviation and secondary flow effects. To achieve high solution quality these models have to be calibrated on experimental or simulation data. Particularly 2D cascade loss and deviation correlations are of major importance. Correlations available in literature are mostly based on data from early cascade wind tunnel tests of NACA-65 and DCA profile families. In general, calibrations for state-of-the-art airfoil shapes are not published.
+
+This paper describes a methodology to re-calibrate parameters of well-known empirical loss and deviation correlations to CFD simulations of compressor cascades. Correlations describing choke incidence, on- and off-design loss and deviation are presented, resolving dependencies on inlet flow angle, Mach number, Reynolds number and MVDR. Based on a set of loss and deviation polars, nonlinear least-squares problems are solved to determine the empirical parameters. By including shock losses and choking incidence, the model is suited for subsonic as well as supersonic inlet conditions.
+
+Results of the calibration process are shown for two state-of-the-art compressor cascades. The overall model is evaluated on a sub- and a transonic compressor as well as on a transonic fan comparing throughflow results with 3D CFD and experimental data. A high level of automation makes the methodology applicable to arbitrary profile families or in combination with programs for parametric airfoil design.},
+  Keywords                 = {Compressors, Calibration, Throughflow, Correlations, Empirical},
+  Url                      = {https://elib.dlr.de/100262/}
+}
+
+@MastersThesis{schu2014,
+  Title                    = {Implementierung von Support Vector Machines in der Umgebungeines evolutionären Optimierers},
+  Author                   = {Schumacher, Timo},
+  School                   = {Duale Hochschule Baden Würtemberg},
+  Year                     = {2014},
+  Type                     = {Bachelor Thesis},
+
+  Owner                    = {schm_ad},
+  Timestamp                = {2018.11.20}
+}
+
+@Article{Schuster1997,
+  Title                    = {Bidirectional Recurrent Neural Networks},
+  Author                   = {M. Schuster and K.K. Paliwal},
+  Journal                  = {IEEE Transactions on Signal Processing},
+  Year                     = {1997},
+
+  Month                    = {November},
+  Number                   = {11},
+  Pages                    = {2673-2681},
+  Volume                   = {45},
+
+  __markedentry            = {[andreas:6]},
+  Doi                      = {10.1109/78.650093},
+  ISSN                     = {1053-587X},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20}
+}
+
+@Book{sechler1952elasticity,
+  Title                    = {Elasticity in engineering},
+  Author                   = {Sechler, Ernest Edwin},
+  Publisher                = {Dover Publications},
+  Year                     = {1952}
 }
 
 @InProceedings{Seshadri2014,
@@ -1336,6 +2329,16 @@ potential effect of downstream blade rows.},
   Year                     = {1968},
   Organization             = {ACM},
   Pages                    = {517--524}
+}
+
+@Electronic{fmath2018,
+  Title                    = {Fast approximate float function fmath},
+  Author                   = {MITSUNARI Shigeo},
+  Url                      = {http://herumi.in.coocan.jp/soft/fmath.html},
+  Year                     = {2011},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.06.05}
 }
 
 @Article{Shyy2001,
@@ -1429,6 +2432,16 @@ potential effect of downstream blade rows.},
   Url                      = {http://proceedings.asmedigitalcollection.asme.org/proceeding.aspx?doi=10.1115/GT2013-94762}
 }
 
+@Article{Spiegel2000,
+  Title                    = {Einsatz deterministischer Optimierungsverfahren bei der Vorauslegung hochbelasteter Turbomaschinen},
+  Author                   = {M.S. Spiegel},
+  Journal                  = {Herbert Utz Verlag},
+  Year                     = {2000},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
 @Article{LinAlgMu2012,
   Title                    = {Lineare Algebra fur Informatik - Sommersemester 2012},
   Author                   = {Springborn, Boris
@@ -1440,10 +2453,76 @@ Wehrheim, Jan},
   Timestamp                = {2018.02.21}
 }
 
+@Article{Srivastava2014,
+  Title                    = {Dropout: A Simple Way to Prevent Neural Networks from Overfitting},
+  Author                   = {Nitish Srivastava and Geoffrey Hinton and Alex Krizhevsky and Ilya Sutskever and Ruslan Salakhutdinov},
+  Journal                  = {Journal of Machine Learning Research},
+  Year                     = {2014},
+  Pages                    = {1929-1958},
+  Volume                   = {15},
+
+  __markedentry            = {[andreas:6]},
+  Owner                    = {andreas},
+  Timestamp                = {2018.09.20},
+  Url                      = {http://jmlr.org/papers/v15/srivastava14a.html}
+}
+
+@Article{steimann2016moderne,
+  Title                    = {Moderne Programmiertechniken und-methoden},
+  Author                   = {Steimann, Friedrich and Keller, Daniela and Aziz Safi, B},
+  Journal                  = {Skript zur Vorlesung der FernUniversit{\"a}t Hagen},
+  Year                     = {2016}
+}
+
 @Article{ModProg,
   Title                    = {{Moderne Programmiertechniken und Methoden}},
   Author                   = {Steimann, Prof. and Frenkel, M and Keller, D},
   Year                     = {2012}
+}
+
+@Article{Szegedy2016,
+  Title                    = {Inception-v4, Inception-ResNet and the Impact of Residual Connections
+ on Learning},
+  Author                   = {Christian Szegedy and
+ Sergey Ioffe and
+ Vincent Vanhoucke},
+  Journal                  = {CoRR},
+  Year                     = {2016},
+  Volume                   = {abs/1602.07261},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/SzegedyIV16},
+  Eprint                   = {1602.07261},
+  Owner                    = {andreas},
+  Timestamp                = {Wed, 07 Jun 2017 14:42:58 +0200},
+  Url                      = {http://arxiv.org/abs/1602.07261}
+}
+
+@Article{Szegedy2014,
+  Title                    = {Going Deeper with Convolutions},
+  Author                   = {Christian Szegedy and
+ Wei Liu and
+ Yangqing Jia and
+ Pierre Sermanet and
+ Scott E. Reed and
+ Dragomir Anguelov and
+ Dumitru Erhan and
+ Vincent Vanhoucke and
+ Andrew Rabinovich},
+  Journal                  = {CoRR},
+  Year                     = {2014},
+  Volume                   = {abs/1409.4842},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/SzegedyLJSRAEVR14},
+  Eprint                   = {1409.4842},
+  Owner                    = {andreas},
+  Timestamp                = {Wed, 07 Jun 2017 14:40:42 +0200},
+  Url                      = {http://arxiv.org/abs/1409.4842}
 }
 
 @InProceedings{Tang2016,
@@ -1465,6 +2544,14 @@ Wehrheim, Jan},
   Author                   = {Thornburg, Harvey},
   Journal                  = {Center for Computer Research in Music and Acoustics (CCRMA) Department of Music, Stanford University Stanford, California 94305},
   Year                     = {2006}
+}
+
+@Book{tikhonov2013numerical,
+  Title                    = {Numerical methods for the solution of ill-posed problems},
+  Author                   = {Tikhonov, Andre{\u\i} Nikolaevich and Goncharsky, AV and Stepanov, VV and Yagola, Anatoly G},
+  Publisher                = {Springer Science \& Business Media},
+  Year                     = {2013},
+  Volume                   = {328}
 }
 
 @Article{toal2009adjoint,
@@ -1507,6 +2594,29 @@ Wehrheim, Jan},
   Url                      = {https://link.springer.com/content/pdf/10.1007{\%}2Fs00366-015-0421-2.pdf}
 }
 
+@Article{trunk1979,
+  Title                    = {A Problem of Dimensionality: A Simple Example},
+  Author                   = {G. V. Trunk},
+  Journal                  = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  Year                     = {1979},
+
+  Month                    = {July},
+  Number                   = {3},
+  Pages                    = {306-307},
+  Volume                   = {PAMI-1},
+
+  Doi                      = {10.1109/TPAMI.1979.4766926},
+  ISSN                     = {0162-8828},
+  Keywords                 = {Parameter estimation;Reactive power;Error analysis;Covariance matrix;Probability;Pattern recognition;Testing;Detectors;Correlators;Gaussian distribution;Dimensionality}
+}
+
+@MastersThesis{verheij2017multi,
+  Title                    = {Multi-fidelity Method for Aerodynamic Shape Optimisation of Axial Compressor Blades},
+  Author                   = {Verheij, Lennart},
+  School                   = {Faculty of AE) Dr. ir. R. Pecnik, TU Delft},
+  Year                     = {2017}
+}
+
 @PhdThesis{Verstraete2008,
   Title                    = {{MULTIDISCIPLINARY TURBOMACHINERY COMPONENT OPTIMIZATION CONSIDERING PERFORMANCE, STRESS, AND INTERNAL HEAT TRANSFER}},
   Author                   = {Verstraete, Tom},
@@ -1527,6 +2637,23 @@ Wehrheim, Jan},
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Verstraete, Prinsier, Cosi - 2014 - Design and Off-Design Optimization of a Low Pressure Steam Turbine Radial Diffuser Using an Evolutio.pdf:pdf},
   ISBN                     = {978-0-7918-4558-5},
   Keywords                 = {Computational fluid dynamics,Design,Diffusers,Evolutionary algorithms,Optimization,Pressure,Steam turbines}
+}
+
+@Article{lep2008,
+  Title                    = {Optimization of a HP Compressor Blade and its Hub Endwall},
+  Author                   = {Vicky Iliopoulou, Ingrid Lepot and Philippe Geuzaine},
+  Journal                  = {ASME GT2008-50293},
+  Year                     = {2008},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.07.05}
+}
+
+@Book{viertl2013einfuhrung,
+  Title                    = {Einf{\"u}hrung in die Stochastik: mit Elementen der Bayes-Statistik und Ans{\"a}tzen f{\"u}r die Analyse unscharfer Daten},
+  Author                   = {Viertl, Reinhard KW},
+  Publisher                = {Springer-Verlag},
+  Year                     = {2013}
 }
 
 @Article{AutoOptiEccomas,
@@ -1727,6 +2854,24 @@ the inlet of the blade row and at both design and off-design operations.}
   Pages                    = {1991}
 }
 
+@Article{Yu2015,
+  Title                    = {Multi-Scale Context Aggregation by Dilated Convolutions},
+  Author                   = {Fisher Yu and
+ Vladlen Koltun},
+  Journal                  = {CoRR},
+  Year                     = {2015},
+  Volume                   = {abs/1511.07122},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/YuK15},
+  Eprint                   = {1511.07122},
+  Owner                    = {andreas},
+  Timestamp                = {Wed, 07 Jun 2017 14:40:43 +0200},
+  Url                      = {http://arxiv.org/abs/1511.07122}
+}
+
 @Article{Han2010,
   Title                    = {{A New Cokriging Method for Variable-Fidelity Surrogate Modeling of Aerodynamic Data}},
   Author                   = {{Z.-H. Han, R. Zimmermann}, S. G{\"{o}}rtz},
@@ -1740,6 +2885,23 @@ the inlet of the blade row and at both design and off-design operations.}
   ISBN                     = {9781600867392}
 }
 
+@Article{Zeiler2012,
+  Title                    = {{ADADELTA:} An Adaptive Learning Rate Method},
+  Author                   = {Matthew D. Zeiler},
+  Journal                  = {CoRR},
+  Year                     = {2012},
+  Volume                   = {abs/1212.5701},
+
+  __markedentry            = {[andreas:6]},
+  Archiveprefix            = {arXiv},
+  Bibsource                = {dblp computer science bibliography, https://dblp.org},
+  Biburl                   = {https://dblp.org/rec/bib/journals/corr/abs-1212-5701},
+  Eprint                   = {1212.5701},
+  Owner                    = {andreas},
+  Timestamp                = {Mon, 13 Aug 2018 16:45:57 +0200},
+  Url                      = {http://arxiv.org/abs/1212.5701}
+}
+
 @Article{Zhang,
   Title                    = {{Isothermal Combustor Prediffuser {\&} Fuel Injector Feed Arm Design Optimization Using the Prometheus Design System}},
   Author                   = {Zhang, Xu and Toal, David JJ and Keane, Andy J and Witham, Frederic and Ravikanti, Murthy and Rogers, Mark and Zedda, Marco},
@@ -1748,6 +2910,13 @@ the inlet of the blade row and at both design and off-design operations.}
 
   File                     = {:home/schm{\_}ad/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zhang et al. - 2015 - Isothermal Combustor Prediffuser {\&} Fuel Injector Feed Arm Design Optimization Using the Prometheus Design System.pdf:pdf},
   Url                      = {https://eprints.soton.ac.uk/381928/2/Isothermal{\%}2520Combustor{\%}2520Opt{\_}v2.pdf}
+}
+
+@Book{zienkiewicz2005finite,
+  Title                    = {The finite element method for solid and structural mechanics},
+  Author                   = {Zienkiewicz, Olek C and Taylor, Robert L},
+  Publisher                = {Elsevier},
+  Year                     = {2005}
 }
 
 @Article{Zimmermann2009,
@@ -1771,5 +2940,24 @@ the inlet of the blade row and at both design and off-design operations.}
   Volume                   = {8},
 
   Publisher                = {MIT Press}
+}
+
+@Electronic{Nvidia2018,
+  Title                    = {Nvidia-GPU Test Drive},
+  Url                      = {https://www.nvidia.de/data-center/tesla/gpu-test-drive/},
+  Year                     = {2018},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.06.11}
+}
+
+@Electronic{Top500,
+  Title                    = {Top500 Supercomputer Site - https://www.top500.org/statistics/list/ - Abgerufen 09/2018},
+  Month                    = {09},
+  Url                      = {https://www.top500.org/statistics/list/},
+  Year                     = {2018},
+
+  Owner                    = {andreas},
+  Timestamp                = {2018.06.11}
 }
 

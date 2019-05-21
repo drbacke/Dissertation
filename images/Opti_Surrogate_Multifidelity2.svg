@@ -627,9 +627,9 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1364"
-     inkscape:window-x="2558"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
      showborder="false"
@@ -642,7 +642,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -959,26 +959,26 @@
        sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
-       style="font-size:30.17746543999999886px;font-style:normal;font-weight:normal;line-height:125%;fill:#cb0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-       x="375.70734"
-       y="638.99951"
+       style="font-size:30.17746544px;font-style:normal;font-weight:normal;line-height:125%;fill:#cb0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="417.72946"
+       y="636.92834"
        id="text5967"
        sodipodi:linespacing="125%"
-       transform="scale(1.0355688,0.96565287)"><tspan
+       transform="scale(1.0355688,0.96565288)"><tspan
          sodipodi:role="line"
-         id="tspan5969"
-         x="375.70734"
-         y="638.99951"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none">Low Fidelity</tspan><tspan
-         sodipodi:role="line"
-         x="375.70734"
-         y="657.86041"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         x="420.13129"
+         y="636.92834"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
          id="tspan3265">Prozesskette </tspan><tspan
          sodipodi:role="line"
-         x="375.70734"
-         y="676.72131"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         x="417.72946"
+         y="655.78925"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+         id="tspan3167">niedriger Güte</tspan><tspan
+         sodipodi:role="line"
+         x="417.72946"
+         y="674.65015"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
          id="tspan5971" /></text>
     <path
        inkscape:connector-curvature="0"
@@ -1135,26 +1135,26 @@
          id="tspan5971-5-8" /></text>
     <text
        xml:space="preserve"
-       style="font-size:30.17746543999999886px;font-style:normal;font-weight:normal;line-height:125%;fill:#cb0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-       x="571.67511"
+       style="font-size:30.17746544px;font-style:normal;font-weight:normal;line-height:125%;fill:#cb0000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="614.89844"
        y="634.04089"
        id="text5967-9"
        sodipodi:linespacing="125%"
-       transform="scale(1.0355688,0.96565287)"><tspan
+       transform="scale(1.0355688,0.96565288)"><tspan
          sodipodi:role="line"
-         id="tspan5969-3"
-         x="571.67511"
+         x="617.30023"
          y="634.04089"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none">High Fidelity</tspan><tspan
-         sodipodi:role="line"
-         x="571.67511"
-         y="652.90179"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
          id="tspan3265-9">Prozesskette </tspan><tspan
          sodipodi:role="line"
-         x="571.67511"
+         x="614.89844"
+         y="652.90179"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
+         id="tspan3171">hoher Güte</tspan><tspan
+         sodipodi:role="line"
+         x="614.89844"
          y="671.7627"
-         style="font-size:15.08873271999999943px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans;fill:#cb0000;fill-opacity:1;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         style="font-size:15.08873272px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#cb0000;fill-opacity:1;font-family:Sans;-inkscape-font-specification:Sans"
          id="tspan5971-10" /></text>
     <text
        xml:space="preserve"

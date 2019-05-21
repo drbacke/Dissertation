@@ -3851,6 +3851,12 @@ Klassenstruktur der Klasse Point, welche eine Stützstelle beschreibt
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:UML-Diagramm:-CorrelationFunctio"
+
+\end_inset
+
 UML Diagramm: CorrelationFunction
 \end_layout
 
@@ -3897,6 +3903,12 @@ Klassenstruktur der Kovarianzfunktionsklassen
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:UML-Diagramm:-DensityFunction"
+
+\end_inset
+
 UML Diagramm: DensityFunction
 \end_layout
 
@@ -3927,54 +3939,6 @@ name "fig:Vereinfachtes-UML-Diagramm"
 
 Vereinfachtes UML Diagramm der verschiedenen Verfahren innerhalb der Kriging-Sof
 tware und deren Anbindung an das Server Interface
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-UML Diagramm: MetaModel
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/UML/AutoOptiInterface.eps
-	scale 45
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Vereinfachtes-UML-Diagramm-1"
-
-\end_inset
-
-Vereinfachtes UML Diagramm der MetaModel Klasse, welche eine Anbindung an
- AutoOpti ermöglicht.
- 
 \end_layout
 
 \end_inset
@@ -4254,6 +4218,95 @@ key "press2007numerical,gill2007numerical"
 \end_inset
 
  nochmals detaillierter beschrieben.
+\end_layout
+
+\begin_layout Subsection
+Likelihood: Inverse durch Gleichungssysteme ersetzen
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Bestimmung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es werden die Hilfsvektoren 
+\begin_inset Formula $\vec{e}$
+\end_inset
+
+ und 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ eingeführt:
+\begin_inset Formula 
+\begin{align*}
+\left(\vec{y}_{s}-\overrightarrow{F}\right) & =\vec{e}\\
+\mathbf{\mathbf{Cov}}^{-1}\vec{e} & =\vec{d}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Bei der Cholesky Zerlegung wird die Matrix 
+\begin_inset Formula $\mathbf{\mathbf{Cov}}$
+\end_inset
+
+ in ein Produkt aus einer unteren Dreiecksmatrix und deren Transponierten
+ zerlegt.
+ Die Dreiecksmatrix 
+\begin_inset Formula $\mathbf{L}$
+\end_inset
+
+ gilt an dieser Stelle als bekannt:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{L}\mathbf{L}^{T} & =\mathbf{\mathbf{Cov}}
+\end{align*}
+
+\end_inset
+
+Daraus folgt:
+\begin_inset Formula 
+\begin{align*}
+\mathbf{\mathbf{\left(\mathbf{L}\mathbf{L}^{T}\right)}}^{-1}\vec{e} & =\vec{d}\\
+\vec{e} & =\vec{d}\mathbf{\mathbf{\mathbf{L}\mathbf{L}^{T}}}
+\end{align*}
+
+\end_inset
+
+Führt man nun folgende Substitution ein:
+\begin_inset Formula 
+\begin{align*}
+\vec{d_{tmp}} & =\vec{d}\mathbf{\mathbf{\mathbf{L}}}\\
+\vec{e} & =\vec{d_{tmp}}\mathbf{\mathbf{\mathbf{L}^{T}}}
+\end{align*}
+
+\end_inset
+
+kann dieses Gleichungssystem durch eine einfache Rückwärtssubstitution 
+\begin_inset Formula $\vec{d}_{tmp}$
+\end_inset
+
+ gelöst werden und schließlich kann der Vektor 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ über Vorwärtseinsetzen bestimmt werden:
+\begin_inset Formula 
+\[
+\vec{d_{tmp}}=\vec{d}\mathbf{\mathbf{\mathbf{L}}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

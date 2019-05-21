@@ -142,7 +142,7 @@ Die Vorgehensweise bei einer solchen Auslegung ist es, die Dimensionalität
  festgelegt.
  Bei einem Verdichter können diese Anforderungen bestimmte Massenströme
  und geforderte Druckverhältnisse sein.
- Damit können dann die ungefähren geometrischen Ausmaße und auch die benötigte
+ Damit können dann die ungefähren geometrischen Maße und auch die benötigte
  Stufenanzahl geschätzt werden.
  Aufbauend auf diesen Schätzungen wird ein rotationssymmetrischer Strömungskanal
  bestimmt.
@@ -547,8 +547,8 @@ Dafür werden zwei Parameter variiert, zum einen der Staffelungswinkel
 \begin_inset Formula $\beta_{st}$
 \end_inset
 
-, der in diesem Fall als eine Festkörperdrehung des Profils verstanden werden
- kann und zum anderen der Vorderkantenradius 
+, der in diesem Fall eine Festkörperdrehung des Profils darstellt und zum
+ anderen der Vorderkantenradius 
 \begin_inset Formula $r_{LE}$
 \end_inset
 
@@ -1115,9 +1115,9 @@ Entscheidungsfunktion:
 \begin_layout Standard
 Bevor ein neues Individuum mittels Prozesskette bewertet wird, muss entschieden
  werden, mit welcher Gütestufe dieser berechnet wird.
- Dies wird durch die Entscheidungsfunktion festgelegt und hat eine fundamentale
+ Dies wird durch die Entscheidungsfunktion festgelegt, welche eine fundamentale
  Bedeutung für die Optimierungsbeschleunigung und die effektive Nutzung
- der neuen Ersatzmodelle.
+ der neuen Ersatzmodelle hat.
  
 \end_layout
 
@@ -1165,17 +1165,9 @@ Möglichkeiten der Individuenerzeugung mit mehreren Gütestufen
 
 \end_inset
 
-Ein wichtiger Punkt bei der Durchführung einer Multifidelity-Optimierung
+Ein zentraler Punkt bei der Durchführung einer Multifidelity-Optimierung
  ist die Entscheidung, mit welcher Prozesskette und damit Gütestufe ein
  neu erzeugtes Individuum berechnet werden soll.
- Dieser Punkt stellt neben der Thematik in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "chap:Implementierung-der-DLR-Kriging-"
-
-\end_inset
-
- ein zentrales Thema dieser Arbeit dar.
  Aus diesem Grund wird folgend eine Übersicht über mögliche Entscheidungsfunktio
 nen gegeben und darauf aufbauend die hier entwickelte Strategie beschrieben.
  
@@ -1247,12 +1239,6 @@ ung getroffen, welche Prozesskette als nächstes durchlaufen werden soll.
 
 , welche diese Entscheidung während einer laufenden Optimierung vornimmt
  und den Optimierungsverlauf möglichst günstig beeinflusst.
- Eine Entscheidungsfunktion zu finden, die einen bestmöglichen Optimierungsverla
-uf sicherstellt, ist allerdings unrealistisch.
- Hierfür müsste jeder mögliche Verlauf der gesamten Optimierung bekannt
- sein.
- Aus diesem Grund werden einige Vereinfachungen und Annahmen über die Entscheidu
-ngsfunktion getroffen.
  In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1261,8 +1247,7 @@ reference "fig:Mglichkeiten-der-Membererzeugun"
 \end_inset
 
  sind verschiedene Möglichkeiten der Entscheidungsfindung zusammengefasst
- und kategorisiert.
- Diese sollen im Folgenden beschrieben werden.
+ und kategorisiert, welche im Folgenden beschrieben werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1300,8 +1285,10 @@ igt.
  Wahrscheinlichkeit ein Individuum niedriger Güte zu erzeugen in Abhängigkeit
  des Optimierungsfortschritts.
  Der Erfolg dieser Art von Entscheidung hängt stark von den gewählten Parametern
- und dem vorliegenden Optimierungsproblem ab, sodass die Wahl dieser selbst
- für einen erfahrenen Anwender schwierig ist.
+ (z.B.
+ die Wahrscheinlichkeit für die Erzeugung einer Gütestufe zu einem bestimmten
+ Zeitpunkt der Optimierung) und dem vorliegenden Optimierungsproblem ab,
+ sodass die Wahl dieser selbst für einen erfahrenen Anwender schwierig ist.
  Zudem bieten benutzergesteuerte Entscheidungsfunktionen einen geringen
  bis keinen Automatisierungsgrad und sind daher für industrienahe Anwendungen
  ungeeignet.
@@ -1317,8 +1304,6 @@ Ersatzmodellgesteuerte Entscheidungsfunktionen
 In diesem Abschnitt werden Entscheidungsfunktionen vorgestellt, die die
  Möglichkeit bieten, die vorhandenen Informationen der Ersatzmodelle einfließen
  zu lassen.
- Beschrieben werden zwei verschiedene Arten von Entscheidungsfunktionen,
- welche sich durch ihren Ausführungszeitpunkt unterscheiden.
  Zum einen sind dies Entscheidungsfunktionen vom Typ 
 \begin_inset Quotes gld
 \end_inset
@@ -1373,7 +1358,7 @@ Am Ende einer Optimierung sind nur die Paretorang 1 Individuen der höchsten
  der Ersatzmodelle.
  Durch die verbesserten Ersatzmodelle kann im übernächsten Optimierungsschritt
  ein Fortschritt erzielt werden.
- Um diese Verbesserung berechnen zu können muss geschätzt werden, inwiefern
+ Um diese Verbesserung berechnen zu können, muss geschätzt werden, inwiefern
  ein Individuum hoher oder niedriger Gütestufe (die ebenfalls geschätzt
  werden müssen) den Optimierungsfortschritt im übernächsten Optimierungsschritt
  beeinflusst.
@@ -1383,13 +1368,8 @@ Am Ende einer Optimierung sind nur die Paretorang 1 Individuen der höchsten
 \begin_layout Standard
 Eine typische Optimierung auf dem Ersatzmodell in AutoOpti wird in der Regel
  mit 5000 Optimierungsschritten durchgeführt.
- Soll eine Abschätzung für den übernächsten Schritt erfolgen, müsste in
- jedem dieser 5000 Schritte eine weitere Optimierung mit nochmals 5000 Iteration
-en durchgeführt werden, insgesamt also 
-\begin_inset Formula $25*10^{6}$
-\end_inset
-
- Optimierungsschritte.
+ Eine Möglichkeit diese Schätzung zu realisieren ist die Durchführung einer
+ weiteren Optimierung in jedem der oben genannten 5000 Optimierungsschritte.
  Der Aufwand ist damit zu hoch.
  
 \end_layout
@@ -1414,7 +1394,7 @@ key "huang2006sequential"
 \end_layout
 
 \begin_layout Standard
-Eine vielversprechendere Strategie ist es, ein Individuum mit hohem erwarteten
+Vielversprechender scheint es zu sein, ein Individuum mit hohem erwarteten
  Optimierungsfortschritt zu suchen und erst dann zu entscheiden mit welcher
  Gütestufe dieser berechnet werden soll.
  Diese Art der Strategie wird im nächsten Abschnitt 
@@ -1458,7 +1438,7 @@ tt ausgewählt.
 \end_inset
 
  berechnet werden soll.
- Das übergebene Individuum 
+ Das gewählte Individuum 
 \begin_inset Formula $M$
 \end_inset
 
@@ -1466,7 +1446,7 @@ tt ausgewählt.
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
- und die Ersatzmodellvorhersagen 
+ mit den Ersatzmodellvorhersagen 
 \begin_inset Formula $\vec{y}^{*}\in\mathbb{R}^{q}$
 \end_inset
 
@@ -1474,7 +1454,7 @@ tt ausgewählt.
 \begin_inset Formula $q$
 \end_inset
 
- Ersatzmodelle mit den zugehörigen Varianzen 
+ Ersatzmodelle und den zugehörigen Varianzen 
 \begin_inset Formula $\vec{\sigma^{2}}^{*}\in\mathbb{R}^{q}$
 \end_inset
 
@@ -1611,10 +1591,9 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_inset
 
  gezeigt.
- Weiterhin ist die Modellierung des Informationszugewinns ein sehr wichtiger
- Punkt.
- Statistische Ersatzmodelle sagen neben einem Erwartungswert für einen unbekannt
-en Ort 
+ Für die Modellierung des Informationszugewinns eignen sich statistische
+ Ersatzmodelle, diese sagen neben einem Erwartungswert für einen unbekannten
+ Ort 
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
 
@@ -1656,22 +1635,18 @@ reference "fig:BeispielSinusHFLF"
  Die Stützstellen hoher Güte werden durch rote Quadrate dargestellt und
  die Stützstellen niedriger Güte durch blaue Dreiecke.
  Den Stützstellen niedriger Güte wurde ein normalverteilter Fehler hinzugefügt.
- Da es sich nur um ein qualitatives Beispiel handelt, soll auf die verwendete
- Gleichung verzichtet werden.
  Bei dem genutzten Ersatzmodell handelt es sich um ein CO-Kriging wie es
  im nächsten Kapitel vorgestellt wird.
  Die rote Kurve stellt die Vorhersage dieser Funktion anhand von den Stützstelle
 n hoher und niedriger Güte dar.
- Im unteren Diagramm wird die vorhergesagte Unsicherheit des Ersatzmodells
- in Form einer Standardabweichung dargestellt.
- Die schwarze gestrichelte Linie zeigt die Standardabweichung ohne eine
- Stützstelle an der markierten Stelle 
+ An der markierten Stelle 
 \begin_inset Formula $\vec{x_{0}}$
 \end_inset
 
- und die rote Kurve die Standardabweichung mit einer zusätzlichen Stützstelle
- niedriger Güte.
- 
+ erfolgte eine Vorhersage niedriger Güte.
+ Die schwarz gestrichelten Linien zeigen im oberen Diagramm die Vorhersage
+ ohne diese Stützstelle und die dazugehörige Standardabweichung im unteren
+ Diagramm.
 \end_layout
 
 \begin_layout Standard
@@ -1802,16 +1777,23 @@ I_{g|j}\left(\vec{x_{0}}\right)= & \sigma_{g}^{2}-\sigma_{g|j}^{2}\label{eq:Stan
 
 \end_inset
 
-Ein weiterer wichtiger Punkt ist die jeweils benötigte Zeit für die Erzeugung
- eines neuen Individuums 
+Zur Ausführung von Gleichung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Entscheidungsfunktion"
+
+\end_inset
+
+ werden die jeweiligen Zeiten für die Erzeugung eines neuen Individuums
+ 
 \begin_inset Formula $t_{j}\in\mathbb{R}$
 \end_inset
 
- für eine Gütestufe 
+ der Gütestufe 
 \begin_inset Formula $j$
 \end_inset
 
-.
+ benötigt.
  Diese Zeiten setzen sich im Wesentlichen aus drei Teilen zusammen.
  Der erste Teil umfasst das Training der Ersatzmodelle und benötigt die
  Zeit 
@@ -2045,17 +2027,15 @@ reference "fig:Restriktion_VolumeGain_Verlauf"
 
 \end_inset
 
- zeigt den typischen Verlauf einer solchen Optimierung.
- Als Beispiel wird die Benchmark-Optimierung aus Kapitel 
+ zeigt den typischen Verlauf einer solchen Optimierung (siehe Benchmark-Optimier
+ung Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:CRISP-Testfall"
 
 \end_inset
 
- vorgegriffen.
- Anhand dieses Beispiels lässt sich der Wechsel von Restriktionen zu Zielfunktio
-nen sehr gut darstellen.
+).
  Die grüne Kurve zeigt den summierten Restriktionswert, wobei ein Wert von
  Null die Erfüllung aller Restriktionen bedeutet und ein Wert größer Null
  die Nichterfüllung mindestens einer Nebenbedingung.
@@ -2151,12 +2131,12 @@ ngungen an.
 \begin{align}
 \frac{I_{g|j}}{t_{j}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\nonumber \\
  & =\frac{1}{t_{train}+t_{opti}+t_{pr,j}}\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\nonumber \\
- & =\frac{1}{T_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right.\label{eq:IzuT}\\
+ & =\frac{1}{t_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right.\label{eq:IzuT}\\
  & +\left.\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}(\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2})\right]\nonumber \\
 \nonumber \\
 w_{i} & =\left(1-P_{i}\right)\,\forall i\in\left\{ 1,...,c\right\} \label{eq:TimeCrit}\\
 w_{i} & =1\,\forall i\in\left\{ c,...,z\right\} \\
-T_{j} & =t_{train}+t_{opti}+t_{pr,j}\label{eq:Times}
+t_{j} & =t_{train}+t_{opti}+t_{pr,j}\label{eq:Times}
 \end{align}
 
 \end_inset
@@ -2301,7 +2281,7 @@ reference "eq:Times"
 :
 \begin_inset Formula 
 \begin{align}
-\frac{I_{g|j}}{t_{j}} & =\frac{1}{T_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}I_{g|j}\left(\vec{x_{0}}\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}I_{g|j}\left(\vec{x_{0}}\right)\right]\label{eq:globalesKrit}
+\frac{I_{g|j}}{t_{j}} & =\frac{1}{t_{j}}\left[\left(1-\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{c}w_{i}}\sum_{i}^{c}w_{i}I_{g|j}\left(\vec{x_{0}}\right)+\left(\prod_{i=1}^{c}P_{i}\right)\frac{1}{\sum_{i}^{z}w_{i}}\sum_{i}^{z}w_{i}I_{g|j}\left(\vec{x_{0}}\right)\right]\label{eq:globalesKrit}
 \end{align}
 
 \end_inset
@@ -2424,7 +2404,7 @@ mierung.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-t_{fact}=\frac{t_{HF,Referenz}}{t_{MF}}=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact-1}
+t_{fact}=\frac{t_{HF,Referenz}}{t_{MF}}=\frac{t_{h}\left(i_{best}+i_{initH}\right)}{t_{h}\left(i_{initH}+\frac{t_{l}}{t_{h}}i_{initL}+i_{bestH}+\frac{t_{l}}{t_{h}}i_{bestL}\right)}\label{eq:tFact-1}
 \end{equation}
 
 \end_inset
@@ -2472,7 +2452,7 @@ reference "eq:Maxium"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{init}\right)}{t_{h}\left(i_{init}+\frac{t_{l}}{t_{h}}i_{initL}+\frac{t_{l}}{t_{h}}i_{best}+1\right)}\label{eq:Maxium}
+max(t_{fact})=\frac{t_{h}\left(i_{best}+i_{initH}\right)}{t_{h}\left(i_{initH}+\frac{t_{l}}{t_{h}}i_{initL}+\frac{t_{l}}{t_{h}}i_{best}+1\right)}\label{eq:Maxium}
 \end{equation}
 
 \end_inset

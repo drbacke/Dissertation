@@ -109,8 +109,8 @@ key "BPp.l.c.2016"
  In beiden Bereichen stellen Turbomaschinen eine sehr wichtige technische
  Komponente dar.
  Das Thema Klimaschutz ist zunehmend in den Vordergrund gerückt.
- Die Politik stellt hier sehr hohe Anforderungen, welche bei der Auslegung
- von Turbomaschinen mit berücksichtigt werden müssen.
+ Die Gesellschaft und die Politik stellen hier sehr hohe Anforderungen,
+ welche bei der Auslegung von Turbomaschinen mit berücksichtigt werden müssen.
  Außerdem herrscht ein sehr hoher Konkurrenz- und Preisdruck unter den Triebwerk
 s- und den Energiemaschinenherstellern.
  Diese konkurrierenden Anforderungen machen die Auslegung von Turbomaschinen
@@ -143,8 +143,8 @@ nenbereich in den letzten Jahren nicht nur beschleunigt, sondern auch robuster.
 
 \begin_layout Standard
 Zur Verwendung von genaueren und damit auch komplexeren Modellen werden
- zunehmend sehr große HPC-Cluster eingesetzt, um die benötigte Rechenleistung
- zur Verfügung zu stellen.
+ zunehmend sehr große HPC-Cluster eingesetzt, welche die benötigte Rechenleistun
+g zur Verfügung zu stellen.
  Solch ein Cluster ist allerdings kostspielig und die Optimierungs- und
  CFD-Verfahren müssen auf die spezielle Hardware von solchen Clustern angepasst
  werden.
@@ -215,9 +215,7 @@ Optimierungen auf Basis der Evolutionsstrategie:
 \end_layout
 
 \begin_layout Standard
-Als erstes werden einige allgemeine Beiträge aus dem Bereich der evolutionären
- Optimierungsalgorithmen vorgestellt.
- Bei evolutionären Optimierungsalgorithmen handelt es sich um stochastische
+Bei evolutionären Optimierungsalgorithmen handelt es sich um stochastische
  Optimierungsverfahren, welche der Funktionsweise der natürlichen Evolution
  von Lebewesen nachempfunden sind.
  Im Wesentlichen werden bei einem evolutionären Algorithmus aus einem vorhandene
@@ -280,9 +278,7 @@ key "gill1981practical,gill2007numerical"
 \end_layout
 
 \begin_layout Standard
-Für den Einsatz von evolutionären Algorithmen im Bereich der Turbomaschinenoptim
-ierung gibt es zahlreiche Anwendungsbeispiele.
- Die Arbeit von Sozio et al.
+Die Arbeit von Sozio et al.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -304,9 +300,8 @@ sionale, aerodynamisch optimierte Geometrie.
 \end_layout
 
 \begin_layout Standard
-Es gibt noch eine Vielzahl von weiteren interessanten Anwendungsbeispielen.
- Da sich diese Arbeit allerdings mit dem Thema der ersatzmodellgestützen
- Optimierung befasst, soll der Fokus auf diese Thematik gelegt werden.
+Da sich diese Arbeit mit dem Thema der ersatzmodellgestützen Optimierung
+ befasst, soll der Fokus auf diese Thematik gelegt werden.
 \end_layout
 
 \begin_layout Paragraph*
@@ -471,8 +466,8 @@ key "sacks1989design"
 \end_inset
 
  zu finden.
- Die erste Erwähnung der Nutzung dieser Verfahren innerhalb einer globalen
- Optimierung ist in dem Seminarbeitrag von 
+ Die ersten Ansätze einer globalen Optimierungsstrategie auf Basis von statistis
+chen Modellen ist in dem Seminarbeitrag von 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "kushner1964new"
@@ -611,9 +606,8 @@ key "Silver2016"
  mit Ersatzmodellen sehr unterschiedlich ausfallen kann und stark von den
  verwendeten Optimierungsverfahren, Ersatzmodellen und auch deren Anwendung
  abhängt.
- Ersatzmodelle können eine Optimierung stark beschleunigen, allerdings wird
- die Komplexität des Verfahrens durch den Einsatz von Ersatzmodellen deutlich
- erhöht.
+ Die Komplexität des Verfahrens wird durch den Einsatz von Ersatzmodellen
+ deutlich erhöht.
  Dies erfordert in der Regel einen erfahrenen Anwender zur Überwachung solcher
  Optimierungen.
  Innerhalb dieser Arbeit werden Möglichkeiten der Automatisierung und der
@@ -626,8 +620,8 @@ Gradienteninformation in Optimierungen:
 \end_layout
 
 \begin_layout Standard
-Viele aktuelle Forschungsbeiträge beschäftigen sich mit der Verwendung von
- Gradienteninformation in Optimierungen.
+Viele Forschungsbeiträge beschäftigen sich mit der Verwendung von Gradienteninfo
+rmation in Optimierungen.
  Moderne Strömungslöser gestatten immer häufiger die effiziente Berechnung
  partieller Ableitungen von Funktionalen, wie z.B.
  Wirkungsgrad nach geometrischer Deformation.
@@ -746,10 +740,10 @@ Multifidelity-Verfahren:
 Innerhalb dieser Arbeit wird ein ersatzmodellgestütztes Multifidelity-Verfahren
  entwickelt, welches in der Lage ist, während einer Optimierung verschiedene
  Gütestufen von Daten mit Hilfe von Ersatzmodellen zu verarbeiten.
- Mögliche Gütestufen sind z.B.
- die örtliche Diskretisierung eines zu simulierenden Strömungskanals in
- der Form eines Rechengitters oder auch die Verwendung von stationärem und
- zeitgenauen CFD-Simulationen.
+ Mögliche Gütestufen basieren z.B.
+ auf der örtlichen Diskretisierung eines zu simulierenden Strömungskanals
+ in der Form eines Rechengitters oder auch die Verwendung von stationärem
+ und zeitgenauen CFD-Simulationen.
  Mit steigender Anzahl der Zellen eines Rechengitters werden Strömungsphänomene
  besser aufgelöst, was allerdings mit einer erheblich gesteigerten Rechenzeit
  einhergeht.
@@ -831,7 +825,7 @@ key "Kennedy2000"
  Für dieses CO-Kriging-Modell muss an jeden bekannten Ort der höchsten Gütestufe
  auch eine Stützstelle der niedrigeren Gütestufen vorhanden sein.
  Innerhalb der vorliegenden Arbeit wird eine CO-Kriging-Variation vorgestellt,
- die dies nicht benötigt.
+ die dies nicht mehr benötigt.
  
 \end_layout
 
@@ -877,11 +871,7 @@ g eines solchen Modells innerhalb einer Multifidelity-Optimierung ein sehr
  wichtiger Punkt.
  Dabei sind die Entscheidung, wann welche Gütestufe berechnet wird sowie
  die Daten- und Prozesskettenverwaltung die wesentlichen Herausforderungen.
- 
-\end_layout
-
-\begin_layout Standard
-Leider existieren zu dieser Thematik nur wenige Forschungsbeiträge.
+ Leider existieren zu dieser Thematik nur wenige Forschungsbeiträge.
  Eine akademische Anwendung bietet hier die Arbeit von Brooks 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -913,11 +903,9 @@ key "Lapworth2004"
 \end_inset
 
 .
- Die Autoren kommen zu dem Ergebnis, dass die Multifidelity-Optimierung
- bei gleicher Rechenzeit eine höhere Effizienzsteigerung erreicht.
- In der durchgeführten Multifidelity-Optimierung konnte eine Steigerung
- des Wirkungsgrads von 2.34% erreicht werden wobei die Referenzoptimierung
- eine Steigerung von 1.79% erzielte.
+ Bei gleicher Rechenzeit konnte die Multifidelity-Optimierung eine Steigerung
+ des Wirkungsgrads um 2.34% erreichen, wobei die Referenzoptimierung eine
+ Steigerung von 1.79% erzielte.
  Dieses Ergebnis lässt darauf hoffen, dass bei komplexeren industriellen
  Optimierungen ein deutlicher Geschwindigkeitszuwachs zu erwarten ist.
  
@@ -974,7 +962,7 @@ Mehrere Zielfunktionen und physikalische Disziplinen
 
 \begin_layout Itemize
 \noindent
-Mehrere Restriktionen 
+Hohe Anzahl an Restriktionen 
 \end_layout
 
 \begin_layout Itemize
@@ -998,12 +986,10 @@ Prozessketten liefern nicht immer Ergebnisse
 \end_layout
 
 \begin_layout Standard
-Da die Anforderungen an die Turbomaschinenindustrie und damit auch an die
- entsprechenden Optimierungen stetig steigen, werden zukünftig leistungsfähigere
- Optimierungsverfahren benötigt.
- Durch das Multifidelity-Verfahren sollen insbesondere die hochdimensionalen
+Durch das Multifidelity-Verfahren sollen insbesondere die hochdimensionalen
  Suchräume effizienter abgetastet werden können und dadurch der Aufwand
- durch die numerisch aufwendigen Prozessketten akzeptabel werden.
+ durch die numerisch aufwendigen Prozessketten akzeptabel werden und so
+ ein verlässlicheres Ergebnis bei der Produktentwicklung liefern.
  
 \end_layout
 
@@ -1160,10 +1146,9 @@ mierung
 \begin_layout Standard
 Der erste Punkt umfasst die Entwicklung und Integration eines CO-Kriging-Ersatzm
 odells für die AutoOpti-Umgebung.
- Die Erweiterbarkeit des Verfahrens spielt dabei eine sehr große Rolle.
- Zum einen werden alle Kriging Verfahren (Ordinary-, Gradient-Enhanced-,CO-Krigi
-ng) in einer Softwarestruktur untergebracht und zum anderen werden auch
- Klassifikatoren wie z.B.
+ In der hier beschriebenen Umsetzung werden alle Kriging Verfahren (Ordinary-,
+ Gradient-Enhanced-,CO-Kriging) in einer Softwarestruktur untergebracht
+ und zum anderen werden auch Klassifikatoren wie z.B.
  Supporting-Vector-Machines in die Software implementiert.
  Hierfür wird eine moderne Interface-basierte Programmierung verwendet.
  Die in der Literatur beschriebenen Programme beschränken sich in der Regel
@@ -1176,7 +1161,7 @@ key "Toal2016,Han2010,han2012alternative,Forrester2008"
 \end_inset
 
  umgesetzt sind und bieten daher nicht die Benutzerfreundlichkeit, den Programmu
-mfang und die Geschwindigkeit wie für eine industrienahe Umgebung benötigt
+mfang und die Geschwindigkeit die für eine industrienahe Umgebung benötigt
  wird.
  
 \end_layout
@@ -1198,8 +1183,8 @@ ng.
  Vergleicht man diese Punkte mit den Softwarepaketen, welche in der Literatur
  beschrieben werden, so kann diese Art der Umsetzung nicht wiedergefunden
  werden.
- Insbesondere ein asynchrones Client/Server System zur Parallelisierung
- und ebenfalls der Mischbetrieb unterschiedlicher Architekturen.
+ Das gilt insbesondere für ein asynchrones Client/Server System zur Parallelisie
+rung und ebenfalls für den Mischbetrieb unterschiedlicher Architekturen.
 \end_layout
 
 \begin_layout Standard
@@ -1233,8 +1218,7 @@ Der vierte und letzte Punkt ist die Beschreibung einiger bereits durchgeführter
  Anwendungen des gesamten Verfahrens in umfangreichen industriehnahen Turbomasch
 inenoptimierungen.
  Es sollen insbesondere die Eignung von Multifidelity-Optimierungen für
- verschiedene Anwendungen verglichen werden.
- 
+ verschiedene Anwendungen ausgewertet werden.
 \end_layout
 
 \end_body

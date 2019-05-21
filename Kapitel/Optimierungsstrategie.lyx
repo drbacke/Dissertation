@@ -133,8 +133,7 @@ Die Aerodynamik von Turbomaschinen kann sich auf verschiedene Baugruppen
  und gleichzeitig auch das Totaldruckverhältnis (Verhältnis vom Totaldruck
  am Austritt der Komponente zum Totaldruck am Eintritt der Komponente) maximiert.
  In der Regel werden zusätzlich Nebenbedingungen definiert, bspw.
- ein bestimmter Abströmwinkel in Umfangsrichtung und/oder ein einzuhaltender
- Betriebsbereich.
+ ein bestimmter Abströmwinkel und/oder ein einzuhaltender Betriebsbereich.
  Diese Ziele und Nebenbedingungen müssen für mehrere Betriebspunkte der
  Komponente definiert und eingehalten werden, wodurch sehr viele Nebenbedingunge
 n und zu minimierende Funktionale (Zielfunktionen) entstehen können.
@@ -195,7 +194,7 @@ anik angesehen werden.
  Diese instationären aerodynamischen Druckverteilungen können die auslösende
  Schwingung entweder dämpfen oder anfachen.
  Im letzten Fall treten selbsterregte Schwingungen auf (Eigenschwingungen)
- und die Schaufel wird aerodynamisch instabil.
+ und die Schaufel wird instabil.
  Die hierfür notwendigen Berechnungen sind allerdings mit so hohem numerischem
  Aufwand verbunden, dass diese oftmals erst nach einer Optimierung für ausgewähl
 te Geometrien durchgeführt werden.
@@ -446,8 +445,8 @@ Paretorang und Paretofront:
 
 \begin_layout Standard
 Die Begriffe Paretorang und Paretofront sind nach dem Ökonomen und Soziologen
- Vilfredo Pareto (1848–1923) benannt und sollen im Folgenden kurz definiert
- werden, vgl.
+ Vilfredo Pareto (1848–1923) benannt und werden im Folgenden kurz definiert
+ (vgl.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -455,7 +454,7 @@ key "pareto1964cours,ehrgott2005multicriteria,miettinen2012nonlinear,Voss2008"
 
 \end_inset
 
-.
+).
  Man sagt, dass ein bewertetes Individuum 
 \begin_inset Formula $M_{1}$
 \end_inset
@@ -661,8 +660,7 @@ Gradienteninformation
 \end_layout
 
 \begin_layout Standard
-Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
- Das sind die partiellen Ableitungen der Zielfunktion 
+Sind die partiellen Ableitungen der Zielfunktion 
 \begin_inset Formula $\frac{\partial y_{i}}{\partial x_{j}};i\in\left\{ 1,...,z\right\} $
 \end_inset
 
@@ -674,23 +672,15 @@ Ein weiterer wichtiger Punkt ist die Verwendung von Gradienteninformationen.
 \begin_inset Formula $x_{j};j\in\left\{ 1,...,k\right\} $
 \end_inset
 
-.
- Allerdings sind viele der verwendeten Programme und Simulationsverfahren
- sehr komplex und oftmals ist kein Quellcode verfügbar.
- Dadurch wird es schwer, alle partiellen Ableitungen zu erhalten.
- Manchmal, wie im Fall von automatisiert differenzierten Lösern, sind aber
- einige partielle Ableitungen verfügbar.
- Häufig werden jedoch auch nicht differenzierbare Funktionale verwendet,
- wie z.B.
- die maximale mechanische Spannung einer Verdichterschaufel.
- 
-\end_layout
-
-\begin_layout Standard
+ mit überschaubaren Rechenaufwand verfügbar, können diese die Optimierung
+ stark beschleunigen.
+ Allerdings sind oft nicht alle Ableitungen verfügbar, da das Funktional
+ nicht differenzierbar ist oder die Programme diese Information nicht zur
+ Verfügung stellen.
 
 \shape italic
-Das alles führt dazu, dass das verwendete Optimierungsverfahren auch unvollständ
-ige Gradienteninformationen verarbeiten können muss.
+ Das alles führt dazu, dass das verwendete Optimierungsverfahren auch unvollstän
+dige Gradienteninformationen verarbeiten können muss.
  
 \end_layout
 
@@ -1093,8 +1083,7 @@ Nachdem der Root-Prozess einen vielversprechenden Parametersatz generiert
  hat, muss dieser zur Berechnung an einen freien Slave-Prozess verschickt
  werden.
  Die Kommunikation findet bei AutoOpti über ein gemeinsames Dateisystem
- statt und beinhaltet im Wesentlichen nur einen Satz freier Variablen pro
- Slave-Prozess.
+ statt.
 \end_layout
 
 \begin_layout Paragraph*
@@ -1197,7 +1186,7 @@ Ein weit verbreitetes Mittel hierfür sind Ersatzmodelle oder auch Metamodelle.
 en der Zielfunktionen und Nebenbedingungen zu treffen und damit besonders
  aussichtsreiche Parametersätze zu finden.
  Die Erzeugung kann dann z.B.
- durch eine kleine Optimierung auf den Ersatzmodellen erfolgen.
+ durch eine zusätzliche Optimierung auf den Ersatzmodellen erfolgen.
  Das aussichtsreichste Individuum wird anschließend mit der echten, zeitaufwendi
 gen Prozesskette nachgerechnet und danach in die Optimierungsdatenbank eingetrag
 en und den Ersatzmodellen als zusätzliche Stützstelle hinzugefügt.
@@ -1339,8 +1328,8 @@ Jedes dieser Verfahren benötigt ein Training, welches oftmals als Lernverfahren
  kann es sich z.B.
  um Korrelationslängen, Gewichte, Skalierungsfaktoren usw.
  handeln.
- Die Ersatzmodellparameter werden dann mithilfe der vorhandenen Daten eingestell
-t, um möglichst gute Vorhersagen zu erlangen.
+ Die Ersatzmodellparameter werden mithilfe der vorhandenen Daten eingestellt,
+ um möglichst gute Vorhersagen zu erlangen.
  Meistens sind diese Trainingsverfahren sehr aufwendig und benötigen je
  nach Typ des Ersatzmodells und der Anzahl an Stützstellen viel Zeit.
  Nach dem Training können die Ersatzmodelle für Vorhersagen der trainierten
@@ -1357,10 +1346,18 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-Weiterhin werden in AutoOpti für jede Zielfunktion und Nebenbedingung seperate
- Ersatzmodelle trainiert.
- Bei zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion
- verwendeten Flowparameter ebenfalls ein Ersatzmodell trainiert.
+In AutoOpti werden für jede Zielfunktion und Nebenbedingung seperate Ersatzmodel
+le trainiert.
+ Bei aus mehreren 
+\begin_inset Quotes gld
+\end_inset
+
+Flowparametern
+\begin_inset Quotes grd
+\end_inset
+
+ zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion verwendeten
+ Flowparameter ebenfalls ein Ersatzmodell trainiert.
  
 \end_layout
 
@@ -1460,8 +1457,7 @@ reference "chap:Die-Kriging-Verfahren"
 \end_inset
 
  vorgestellten Kriging-Verfahren dazu, in Bereichen des Raums mit niedriger
- Stützstellendichte einen globalen Erwartungswert mit einer großen Varianz
- vorherzusagen.
+ Stützstellendichte einen Erwartungswert mit einer großen Varianz vorherzusagen.
  Da die globalen Erwartungswerte in der Regel nicht das Optimum darstellen,
  würde ohne Berücksichtigung der Varianz kein Verbesserungspotential erkannt
  werden.

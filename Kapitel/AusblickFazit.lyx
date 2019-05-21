@@ -76,7 +76,7 @@ Zusammenfassung und Ausblick
 \end_layout
 
 \begin_layout Standard
-Ziel dieser Arbeit ist es ein industriell einsetzbares und erweiterbares
+Ziel dieser Arbeit war es ein industriell einsetzbares und erweiterbares
  Multifidelity-Optimierungsverfahren unter Berücksichtigung der Anforderungen
  im Bereich der Turbomaschinenauslegung und der Softwaretechnik zu entwickeln
  und zu testen.
@@ -103,6 +103,10 @@ reference "sec:Anforderungen-und-Zielsetzung"
 \end_layout
 
 \begin_layout Itemize
+Entwicklung und Implementierung eines Multifidelity-Ersatzmodells
+\end_layout
+
+\begin_layout Itemize
 Integration des Verfahrens in die bestehende Optimierungssoftware AutoOpti
 \end_layout
 
@@ -122,26 +126,14 @@ Hohe Effizienz des Optimierungsverfahrens, insbesondere des Ersatzmodells
 Hoher Automatisierungsgrad
 \end_layout
 
-\begin_layout Standard
-Um diese zu erfüllen, werden mehrere Ziele definiert (vgl.
- Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Anforderungen-und-Zielsetzung"
-
-\end_inset
-
-):
-\end_layout
-
 \begin_layout Paragraph
-Entwicklung eines CO-Kriging-Ersatzmodells
+Entwicklung eines CO-Kriging-Ersatzmodells:
 \end_layout
 
 \begin_layout Standard
-Ein wesentlicher Punkt dieser Arbeit ist die Entwicklung eines Co-Kriging-Ersatz
-modells, denn erst auf dessen Basis ist eine Multifidelity-Strategie effizient
- umsetzbar.
+Ein wesentlicher Punkt dieser Arbeit bestand in der Entwicklung eines Co-Kriging
+-Ersatzmodells, denn erst auf dessen Basis ist eine Multifidelity-Strategie
+ effizient umsetzbar.
  Die theoretischen Hintergründe werden in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -149,7 +141,7 @@ reference "chap:Die-Kriging-Verfahren"
 
 \end_inset
 
- zusammengefasst.
+ hergeleitet.
  Eine Besonderheit des hier entwickelten Verfahrens ist die Möglichkeit
  die Punkte der verschiedenen Gütestufen frei im Raum verteilen zu können
  (siehe Kapitel 
@@ -166,8 +158,8 @@ reference "sec:VergleicheCoKrigingAndere"
 \begin_layout Standard
 Weiterhin ist eine der zentralen Anforderungen die Nutzung einer erweiterbaren
  und objektorientierten Softwarestruktur.
- Dafür wird eine moderne Interface-basierte Programmierung in der Programmierspr
-ache C++ gewählt.
+ Dafür wurde eine moderne Interface-basierte Programmierung in der Programmiersp
+rache C++ gewählt.
  Diese Art der Softwarearchitektur ermöglicht die effiziente Implementierung
  unterschiedlicher Verfahren, wie z.B.
  Ordinary-, Gradient-Enhanced-, Co-Kriging und Klassifikatoren wie z.B.
@@ -241,25 +233,26 @@ reference "subsec:Matrixoperationen"
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind zahlreiche Maßnahmen innerhalb des Verfahrens zur Beschleunigung
- des Trainings umgesetzt.
+Weiterhin wurden zahlreiche Maßnahmen innerhalb des Verfahrens zur Beschleunigun
+g des Trainings umgesetzt.
  Hierzu zählen: 
 \end_layout
 
 \begin_layout Itemize
-Die zahlreichen Initialisierungsmethoden des Trainingsverfahrens 
+Unterschiedliche Initialisierungsmethoden des Trainingsverfahrens (siehe
+ Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Initialisierung-der-Hyperparamet"
 
 \end_inset
 
-
+)
 \end_layout
 
 \begin_layout Itemize
 Ein in dieser Arbeit entwickeltes RPROP-Trainingsverfahren, angepasst an
- das Co-Kriging (
+ das Co-Kriging (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Minimierungsverfahren"
@@ -283,25 +276,25 @@ reference "subsec:Matrixoperationen"
 \end_layout
 
 \begin_layout Itemize
-Eine effiziente Umsetzung der Kovarianzfunktionen 
+Eine effiziente Umsetzung der Kovarianzfunktionen (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:SoftwaretechnKorrelationsfunktionen"
 
 \end_inset
 
-
+)
 \end_layout
 
 \begin_layout Itemize
-Die automatisierte Reduktion von Stützstellen 
+Die automatisierte Reduktion von Stützstellen (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Reduktion-von-Stützstellen"
 
 \end_inset
 
- auf Basis eines Kriging-Modells
+) auf Basis eines Kriging-Modells
 \end_layout
 
 \begin_layout Itemize
@@ -348,7 +341,7 @@ t werden.
 \end_layout
 
 \begin_layout Paragraph
-Erweiterung des bisherigen Optimierungsverfahrens
+Erweiterung des bisherigen Optimierungsverfahrens:
 \end_layout
 
 \begin_layout Standard
@@ -366,8 +359,8 @@ reference "subsec:Softwarearchitektur-und-Laufzeit"
 
 ).
  Weiterhin sind zahlreiche Anpassungen innerhalb von AutoOpti vorgenommen
- worden, bswp.
- die Datenbankhaltung und Prozesskettensteuerung mussten auf mehrere Gütestufen
+ worden.
+ Die Datenbankhaltung und Prozesskettensteuerung mussten auf mehrere Gütestufen
  erweitert werden.
  Zudem mussten zahlreiche Anpassungen vorgenommen werden um den C99 und
  C++ Standard koppeln zu können.
@@ -391,7 +384,7 @@ reference "subsec:Entscheidungsfunktion"
 
 \end_inset
 
-) ist ebenfalls ein wesentlicher Punkt dieser Arbeit.
+) war ebenfalls ein wesentlicher Punkt dieser Arbeit.
  Diese trifft während der Laufzeit einer Optimierung die Entscheidung, welche
  Gütestufe als nächstes berechnet werden soll.
  Die Entscheidung wird dabei so getroffen, dass diese den Optimierungsverlauf
@@ -399,26 +392,12 @@ reference "subsec:Entscheidungsfunktion"
  Hierfür werden Prozesskettenlaufzeiten, Trainings- und Optimierungszeiten,
  der lokale Informationsgehalt der Gütestufen und die Gewichtung der unterschied
 lichen Nebenbedingungen mit einbezogen.
- Der theoretische Hintergrund hierzu wird in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Entscheidungsfunktion"
-
-\end_inset
-
- beschrieben und die softwaretechnische Umsetzung ist in Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Umsetzung-der-Entscheidungsfunkt"
-
-\end_inset
-
- zu finden.
+ 
 \end_layout
 
 \begin_layout Standard
 Neben dem eigentlichen Optimierungsverfahren wurde zusätzlich eine grafische
- Analyse-Software für die hier entwickelten Krigingmodelle geschrieben.
+ Analyse-Software für die hier entwickelten Krigingmodelle entwickelt.
  Diese analysiert die während einer laufenden Optimierung erzeugten Krigingmodel
 le und deren Vorhersagen und stellt die Ergebnisse in übersichtlicher und
  einfacher Form dar (siehe Kapitel 
@@ -435,21 +414,21 @@ reference "sec:Laufzeit-Analysesoftware-für-Kri"
 \end_layout
 
 \begin_layout Paragraph*
-Testen des entwickelten Verfahrens 
+Testen des entwickelten Verfahrens:
 \end_layout
 
 \begin_layout Standard
-Das hauptsächliche Ziel dieser Arbeit ist es, ein in einer industriellen
- Umgebung nutzbares Multifidelity-Verfahren zu entwickeln.
- Neben der eigentlichen Entwicklung der Software ist das Testen und die
- direkte Anwendung einer der wichtigsten Punkte dieser Arbeit.
+Das Hauptziel dieser Arbeit war es, ein in einer industriellen Umgebung
+ nutzbares Multifidelity-Verfahren zu entwickeln.
+ Neben der eigentlichen Software-Entwicklung ist daher das Testen und die
+ direkte Anwendung von zentraler Bedeutung.
  Erst dadurch ist es möglich eine Software zu entwickeln, welche die notwendige
  Stabilität und Benutzerfreundlichkeit bietet, um in einer Industrie- und
  Forschungsumgebung Anwendung finden zu können.
  Hierfür wurde die entwickelte Software in zahlreichen komplexen Anwendungen
- in Forschung und Industrie verwendet und betreut.
+ in Forschung und Industrie verwendet.
  Die gewonnenen Erkenntnisse und Erfahrungen wurden für die Weiterentwicklung
- des Verfahrens eingesetzt.
+ des Verfahrens genutzt.
  Eine Übersicht aller Anwendungen ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -470,7 +449,7 @@ reference "sec:Analytische-Optimierungsbeispiel"
 \end_inset
 
  einige akademische Testfälle zu finden.
- Innerhalb dieser Testfälle sind besonders 
+ Innerhalb dieser Testfälle sind insbesondere 
 \begin_inset Quotes gld
 \end_inset
 
@@ -500,21 +479,19 @@ reference "subsec:CRISP-Testfall"
  abzubilden und auch die Robustheit des Verfahrens messen zu können.
  Als Hauptergebnis konnte die gesamte Optimierungszeit durch das neue Verfahren
  in etwa halbiert werden.
- Neben der reinen Beschleunigung kann auch beobachtet werden, dass die Multifide
-lity-Optimierungen alle zu demselben guten Ergebniss führen.
- Die Singlefidelity-Optimierungen zeigten stärkere Schwankungen bei den
- Ergebnissen.
- Die Multifidelity-Optimierungen haben in dieser Anwendung robuster zu dem
- bestmöglichen Ergebnis geführt.
+ Neben der reinen Beschleunigung konnte auch beobachtet werden, dass die
+ Multifidelity-Optimierungen alle zu demselben guten Ergebniss führten,
+ während die Singlefidelity-Optimierungen stärkere Schwankungen zeigten.
  
 \end_layout
 
 \begin_layout Paragraph
-Aktuelle Entwicklungen
+Aktuelle Entwicklungen:
 \end_layout
 
 \begin_layout Standard
-Die Software sowie das Verfahren werden nach dieser Arbeit weiterentwickelt.
+Auch nach Fertigstellung der vorliegenden Arbeit werden die hier entwickelten
+ Methoden weiter verbessert und deren Anwendungsbereich erweitert.
  Bereits zum jetzigen Zeitpunkt sind einige dieser Entwicklungen besonders
  aussichtsreich.
  Insbesondere die Nutzung des Co-Kriging-Modells außerhalb von reinen Multifidel
@@ -523,8 +500,8 @@ ity-Optimierungen ist ein neues Feld und ermöglicht vielversprechende Ansätze,
  die Wiederverwendung von älteren Optimierungen.
  Eine typische Problemstellung in der Entwicklung von Turbomaschinen sind
  bspw.
- geänderte Randbedingungen oder eine geänderte Parametrisierung während
- der laufenden Entwicklung.
+ geänderte aerodynamische Randbedingungen oder eine geänderte Parametrisierung
+ während eines Auslegungszyklus.
  Dies kann unter anderem dazu führen, dass komplette Optimierungen aufgrund
  kleinerer Veränderungen neu gestartet werden müssen, ohne dass die alten
  Daten verwendet werden können.
@@ -533,42 +510,32 @@ ity-Optimierungen ist ein neues Feld und ermöglicht vielversprechende Ansätze,
  Je nach Ähnlichkeit der Optimierungen kann der Zugewinn dabei sehr hoch
  sein ohne dabei ein großes Risiko einzugehen, da die Daten bereits vorhanden
  sind.
- Eine solche Option existiert zum momentanen Zeitpunkt bereits innerhalb
- von AutoOpti, befindet sich allerdings noch in der Testphase.
- Die bisherigen Ergebnisse sind aussichtsreich und werden demnächst veröffentlic
-ht.
  
 \end_layout
 
 \begin_layout Standard
-Eine weitere Nutzung des Co-Kriging Modells ist die Kopplung von komplexen,
- nicht statistischen Ersatzmodellen zur Verbesserung der Vorhersagegenauigkeit.
+Eine weitere potentielle Nutzung des Co-Kriging Modells ist die Kopplung
+ von komplexen, nicht statistischen Ersatzmodellen zur Verbesserung der
+ Vorhersagegenauigkeit.
  Hier sind insbesondere Deep-Learning-Verfahren gemeint.
  Dabei handelt es sich um neuronale Netzwerke mit einem komplexen Aufbau
  und einer hohen Anzahl an Zwischenschichten.
  Mithilfe dieser neuronalen Netzwerke sollen komplette 3D-Strömungslösungen
  gelernt, verallgemeinert und damit Vorhersagen getroffen werden.
  Ein großer Vorteil liegt dabei in der Unabhängigkeit der Vorhersagen von
- den Parametern.
+ den freien Optimierungsparametern.
  Dies ist möglich, da die Neuronalen-Netzwerke die gesamte 3D-Geometrie
  als Input verwenden.
- Erste Arbeiten solcher Vorhersagen sind in 
+ Erste Arbeiten zu diesem Thema sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "aulich2019"
 
 \end_inset
 
- zu finden, wobei eine wesentliche Schwierigkeit bei der Verwendung von
- vollständigen 3D-Geometrien deren Vielfältigkeit darstellt: Bei der Entwicklung
- von Turbomaschinen werden zahlreiche unterschiedliche Geometrien mit unterschie
-dlichen physikalischen Größen simuliert, bspw.
- Verdichterbeschaufelungen, komplexe Turbinenschaufeln mit Kühlkanälen oder
- Brennkammern etc..
- Alle diese verschiedenen Komponenten mithilfe von Deep-Learning Verfahren
- vorherzusagen, stellt einen enormen Entwicklungsaufwand dar.
- Zudem bieten solche neuronalen Netzwerke bisher noch keine nutzbare Unsicherhei
-tsvorhersage an, sodass ein 
+ zu finden.
+ Diese tiefen neuronalen Netzwerke bieten bisher noch keine Unsicherheitsvorhers
+age an, sodass ein 
 \begin_inset Quotes gld
 \end_inset
 
@@ -585,19 +552,8 @@ reference "subsec:EVG"
 
 ) nicht anwendbar ist.
   Eine mögliche Lösung hierfür bietet die Nutzung eines Co-Krigings.
- Die Vorhersagen des neuronalen Netzwerks könnten so als niedrige Gütestufe
+ Die Vorhersagen des neuronalen Netzwerks könnten als niedrige Gütestufe
  verwendet und die Kriging-Vorhersagen damit verbessern.
- Man verspricht sich durch die 
-\begin_inset Quotes gld
-\end_inset
-
-günstigen
-\begin_inset Quotes grd
-\end_inset
-
- Vorhersagen des Neuronalen Netzwerks den Suchraum bereits effektiv abtasten
- zu können und optimalen Regionen so früh zu lokalisieren.
- Hiermit kann die Anzahl an freien Parametern deutlich erhöht werden.
  Dieses Verfahren befindet sich noch in einem sehr frühen Entwicklungsstadium.
  Es finden zwar erste Machbarkeitsstudien statt, allerdings ist zu diesem
  Zeitpunkt noch keine belastbare Aussage über den Nutzen möglich.
@@ -632,9 +588,9 @@ ngen in Verbindung mit Vorauslegungsverfahren getestet werden.
  Insbesondere sind hier 2D-Strömungslöser interessant, welche innerhalb
  von Sekunden globale Performance-Daten liefern können.
  Hierbei muss allerdings untersucht werden, inwiefern die Funktionale durch
- die niedrige Güte abgebildet werden können und ob das Co-Kriging die Differenzf
-unktion abbilden kann.
- 
+ die niedrige Güte abgebildet werden können und ob das Co-Kriging in der
+ Lage ist, die ggf.
+ komplexe Differenzfunktion abzubilden.
 \end_layout
 
 \end_body

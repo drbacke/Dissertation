@@ -99,7 +99,7 @@ ahren umgesetzt.
 Im ersten Abschnitt wird ein kurzer Überblick über die Historie und die
  speziellen Eigenschaften der Kriging-Verfahren gegeben.
  Darauf folgt die Herleitung der allgemeinen Kriging-Vorhersage-Gleichungen,
- welche für alle Kriging-Unterverfahren (wie z.B.
+ welche für alle Kriging-Varianten (wie z.B.
  das Co-Kriging) Gültigkeit besitzen.
  Anschließen werden die Unterschiede in den Kriging-Unterverfahren und deren
  Umsetzung beschrieben.
@@ -164,8 +164,8 @@ key "shepard1968two"
 \begin_layout Itemize
 Statistische Verfahren wie das Kriging können zusätzlich zum Funktionswert
  auch eine Unsicherheit vorhersagen.
- Dies kann innerhalb einer Optimierung ausgenutzt werden.
- Weitere Erläuterungen dazu können in den Kapiteln 
+ Dies kann innerhalb einer Optimierung ausgenutzt werden (siehe Kapitel
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Optimierungsstrategie"
@@ -179,7 +179,7 @@ reference "chap:Multifidelity-Optimierungsstrate"
 
 \end_inset
 
- gefunden werden.
+).
  
 \end_layout
 
@@ -225,7 +225,7 @@ key "shepard1968two"
 , beachten eine lokale Häufung von Stützstellen nicht.
  Bei einer lokalen Häufung von Stützstellen sollten diese weniger stark
  gewichtet werden.
- Ein statistisches Verfahren wie Kriging hingegen beinhaltet die gesamte
+ Ein statistisches Verfahren wie Kriging hingegen berücksichtigt die gesamte
  räumliche Verteilung der Stützstellen 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -281,7 +281,7 @@ Allgemeine Vorbemerkungen und Definitionen
 
 \begin_layout Standard
 \begin_inset Wrap figure
-lines 11
+lines 17
 placement o
 overhang 0in
 width "45col%"
@@ -325,9 +325,8 @@ Angenommen es existiert ein Programm (bspw.
 \begin_inset Formula $s$
 \end_inset
 
- verschiedenen Gütestufen (bspw.
- verschiedene Rechennetzauflösungen) unterteilt werden kann und zu einem
- Parametersatz 
+ verschiedenen Gütestufen unterteilt werden kann und zu einem Parametersatz
+ 
 \begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
 \end_inset
 
@@ -1594,16 +1593,15 @@ Das Gradient-Enhanced-Kriging (GEK) ist eine Erweiterung des Ordinary-Kriging.
 \end_layout
 
 \begin_layout Standard
-Ein entsprechendes Modell zur quantitativen Berechnung dieser Kovarianzen,
- wie es in Kapitel 
+Um die in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Kovarianzmatrix"
 
 \end_inset
 
- vorgestellt wird, existiert in dieser Form allerdings nicht.
- Aus diesem Grund muss die Kovarianzfunktion umformuliert werden.
+ vorgestellten Kovarianzmodelle weiterhin nutzen zu können, muss die Kovarianzfu
+nktion umformuliert werden.
  Per Definition der Kovarianz ergibt sich für Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1720,7 +1718,7 @@ ertvektor
 \vdots\\
 \beta_{1}\\
 \vdots\\
-0\\
+\text{0}\\
 \vdots\\
 \text{0}
 \end{array}\right]\begin{array}{c}
@@ -1740,12 +1738,14 @@ m\,Eintr\ddot{a}ge\\
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 Die effiziente Verwendung dieses Verfahrens innerhalb von Turbmaschinenoptimieru
 ngen stellt ein aktuelles Forschungsthema dar.
  Um diese gewinnbringend einsetzen zu können, ist eine effiziente Erzeugung
  der partiellen Ableitungen notwendig.
- Daher beschäftigt sich ein großer Teil der aktuellen Forschung mit diesem
- Thema.
  Für weitere Informationen sei der Leser auf 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1792,7 +1792,7 @@ und des Erwartungswertvektors
 \begin_inset Formula $\vec{F}$
 \end_inset
 
- (siehe Kapitel 
+ (siehe Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:FVektorGEK"
