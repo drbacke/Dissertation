@@ -4560,13 +4560,22 @@ Restart
 \begin_layout Standard
 
 \shape italic
-Der zeitliche Vergleich der gemittelten Ergebnisse bringt die Erkenntniss,
- dass die Multifidelity-Optimierungen ungefähr doppelt so schnell sind wie
- die High-Fidelity Optimierungen, bei einer Zunahme der Trainingszeit von
- ca.
- 3%.
- In diesem Beispiel ist der Einsatz des Multifidelity-Verfahrens trotz der
- längeren Trainingszeiten also sehr lohnenswert.
+Die Multifidelity-Optimierungen erreichen den Volumenzugewinn der Referenz
+ bei etwa der halben Zeit bzw.
+ zum gewählten Abbruchzeitpunkt eine deutlich höheren Wert.
+ Trotz einer Vervielfachung der notwendigen Trainigszeit ist diese Art der
+ Multifidelity-Optimierung in diesem Beispiel sehr lohnenswert.
+\end_layout
+
+\begin_layout Standard
+
+\shape italic
+Diese Aussage wird für eine Vielzahl von Turbomaschinenanwendungen gelten,
+ wenn die Fidelitystufen durch die Variation der Netzauflösung erzeugt werden.
+ Diese Prozessketten sind für den Anwender schnell erzeugt und weisen eine
+ geringe Fehleranfälligkeit auf.
+ Dies wird durch eine unüberschaubare Anzahl von Veröffentlichungen zum
+ Netzeinfluss auf die Strömungsergebnisse belegt.
  
 \end_layout
 
@@ -4618,7 +4627,7 @@ reference "fig:Zeitlicher-Verlauf-des"
 \end_inset
 
  gekennzeichneten Optimierungen detaillierter betrachtet.
- Als erstes wird der Verlauf der Nebenbedingungen verglichen.
+ Als erstes wird die Entwicklung der Nebenbedingungen verglichen.
  Diese zu erfüllen, stellt einen wesentlichen Anteil der Optimierungslaufzeit
  dar.
  Abbildung 
@@ -4640,18 +4649,15 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 , welche nicht erfüllt wurden.
  Alle Restriktionen sind erfüllt, wenn dieser Term der Wert Null erreicht,
  wobei die Größenordnung des Restriktionsterms nicht normiert ist.
- Die schwarze Kurve beschreibt die High-Fidelity-Optimierung und startet
- ca.
- 35000s vor den Multifidelity-Optimierungen, da diese keine Individuen niedriger
- Güte in der Initialisierungsphase benötigt.
+ Die schwarze Kurve beschreibt die High-Fidelity-Optimierung.
  Trotz des späteren Starts erfüllen beide Multifidelity-Optimierungen die
  Restriktionen deutlich schneller und können von den zusätzlichen Individuen
  niedriger Güte profitieren.
  Optimierung 2b erzeugt zu Anfang die meisten Individuen niedriger Güte
  und erfüllt die Restriktionen am schnellsten.
- In diesem Beispiel scheint also eine klare Abhängigkeit zwischen Erfüllung
- der Nebenbedingungen und der Anzahl an berechneten Individuen niedriger
- Güte zu existieren.
+ Entsprechend den Ausführungen am Ende des letzten Abschnitts gilt in diesem
+ Beispiel eine klare Abhängigkeit zwischen Erfüllung der Nebenbedingungen
+ und der Anzahl an berechneten Individuen niedriger Güte.
  
 \end_layout
 
@@ -4756,6 +4762,7 @@ Verlauf der Entscheidungsfunktion der Optimierungen 2a und 2b.
  dar und die grünen Punkte markieren die Barriere, wobei ein Überschreiten
  der Barriere zu einem Member niedriger Güte führt und ein Unterschreiten
  zu einem hoher Güte.
+ Die unterchiedlichen Bereiche der X-Achse sind zu beachten.
 \end_layout
 
 \end_inset
@@ -4791,9 +4798,8 @@ reference "fig:Zeitlicher-Verlauf-des"
 ), der zweite bei 500.000 Sekunden und der letzte bei 800.000 Sekunden.
  Bei 300.000 Sekunden wurde nur ein einziges Individuum von der Multifidelity-Opt
 imierung gefunden, welches die Restriktionen erfüllt.
- Bereits ab diesem frühen Zeitpunkt der Optimierung überholt die Multifidelity-O
-ptimierung die High-Fidelity Optimierung, trotz der anfänglichen Verzögerung
- durch die initialen Individuen niedriger Güte.
+ Bereits ab diesem frühen Zeitpunkt ist die MF-Optimierung der HF-Optimierung
+ überlegen.
  Bei 500.000 Sekunden konnte die Multifidelity-Optimierung eine kleine Paretofron
 t aufbauen und die ersten Individuen mit sehr hohem Wirkungsgrad auffinden.
  Die High-Fidelity-Optimierung konnte zu diesem Zeitpunkt erst drei Individuen
@@ -4849,8 +4855,8 @@ name "fig:Paretofront-der-besten"
 
 \end_inset
 
-Zeitliche Entwicklung der Paretofronten der High-Fidelity-Optimierung 1
- und der Multifidelity-Optimierung 2a.
+Zeitliche Entwicklung der High-Fidelity-Optimierung 1 und der Multifidelity-Opti
+mierung 2a.
  
 \end_layout
 
@@ -4895,7 +4901,8 @@ name "fig:OptimierungenEntscheidungsfVerläfe"
 \end_inset
 
 Vergleich verschiedener Optimierungen mit unterschiedlichen Entscheidungsverläuf
-en 
+en.
+  
 \end_layout
 
 \end_inset
@@ -5508,9 +5515,9 @@ reference "tab:Werte-der-Zielfunktionen"
  aufgelistet.
  Die Individuen 1 und 3 haben jeweils den höchsten Wirkungsgrad innerhalb
  ihrer jeweiligen Optimierung.
- Individuum 2 wurde ausgehend von Individuum 3 ausgewählt und entspricht
- einer orthogonalen Verschiebung von Individuum 2 auf der High-Fidelity-Paretofr
-ont.
+ Individuum 2 wurde auf Basis von Individuum 3 ausgewählt und entspricht
+ einer orthogonalen Verschiebung von Individuum 2 ausgehend von der High-Fidelit
+y-Paretofront.
  
 \begin_inset Wrap figure
 lines 0
@@ -5564,7 +5571,7 @@ ungen als das High-Fidelity-Individuum 3.
  Der Grund dafür liegt an dem größeren Optimierungsfortschritt.
  Der Optimierer geht z.B.
  mit der mechanischen Dehnung bis an die obere Grenze und nutzt somit das
- Maximum an Belastung aus.
+ zulässige Maximum an Belastung aus.
  Bei der High-Fidelity-Optimierung wurden zu diesem Zeitpunkt erst 5 Individuen
  gefunden, welche die Nebenbedingungen überhaupt erfüllen.
  
@@ -5752,11 +5759,15 @@ reference "fig:Radiale-Verteilung-des"
 , so kann durch die kürzeren Schaufeln im gehäusenahen Bereich ohne einen
  nennenswerten Einbruch im Totaldruckverhältnis der Wirkungsgrad erhöht
  werden.
- Beim Stator hingegen ist die Sehnenlänge bei den Individuen 2 und 3 im
- mittleren Bereich deutlich kürzer.
+ Beim Stator hingegen ist die Sehnenlänge bei allen Individuen im mittleren
+ Bereich deutlich kürzer.
  Allerdings wurde für die Statoren keine mechanische Nebenbedingung berücksichti
 gt, bei einer so schmalen Bauweise könnte die Struktur an ihre Belastungsgrenzen
  kommen.
+ Bei den Statoren der Individuen 1 und 2 ist die Sehnenlänge im unteren
+ Drittel deutlich kürzer als bei Individum Drei.
+ So konnte durch die Reduktion der umströmten Fläche die Verluste reduziert
+ werden.
  Insgesamt weisen die Multifidelity-Individuen bei der hier gezeigten Problemste
 llung einen höheren Optimierungsfortschritt auf, sowohl was Nebenbedingungen
  als auch Zielfunktionen angeht.
@@ -5802,13 +5813,13 @@ Design of a counter rotating fan using a multidisciplinary and multifidelity
 \end_layout
 
 \begin_layout Standard
-Im Rahmen des EU-Projekts COBRA wurde eine gegenläufige Fanstufe ausgelegt
- und optimiert.
+Im Rahmen des EU-Projekts COBRA wurde eine gegenläufige aerodynamisch und
+ akustisch optimierte Fanstufe ausgelegt.
  Daran beteiligten sich die Partner DLR, ONERA, COMOTI und Safran Aircraft
  Engines.
- Innerhalb des Projekts COBRA wurde eine sehr komplexe Multifidelity-Optimierung
- mit der hier entwickelten Multifidelity-Software erfolgreich durchgeführt
- und im Rahmen dieser Arbeit betreut.
+ Innerhalb des Projekts COBRA wurde eine Multifidelity-Optimierung mit dem
+ hier entwickelten Verfahren erfolgreich durchgeführt und im Rahmen dieser
+ Arbeit betreut.
  Die Ergebnisse dieser Optimierung sind in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5816,7 +5827,7 @@ key "meillard2017"
 
 \end_inset
 
- veröffentlicht und werden in diesem Abschnitt kurz zusammengefasst.
+ veröffentlicht und wurden experimentell überprüft.
  
 \end_layout
 
@@ -5825,10 +5836,9 @@ Zielfunktionen und Nebenbedingungen
 \end_layout
 
 \begin_layout Standard
-Ausgangspunkt dieser Optimierung ist ein Basisdesign von Safran Aircraft
- Engines.
- Ausgehend von diesem Design sollte ohne Einbußen im Wirkungsgrad eine Reduktion
- der Schallemissionen um -3dB erreicht werden.
+Ausgehen von einem Designvorschlag von Safran Aircraft Engines sollte, ohne
+ Einbußen im Wirkungsgrad, eine Reduktion der Schallemissionen um -3dB erreicht
+ werden.
  Daraus ergeben sich die zwei verwendeten Zielfunktionen:
 \end_layout
 
@@ -5841,11 +5851,14 @@ Minimierung des Schalldrucks in Austrittsrichtung
 \end_layout
 
 \begin_layout Standard
-Weiterhin werden 15 Nebenbedingungen definiert, die geometrische, aerodynamische
-, strukturmechanische und akustische Kriterien umfassen.
- Die Erfüllung der Nebenbedingungen stellt bei dieser Optimierung die größte
- Herausforderung dar, da die festgelegten Gültigkeitsintervalle sehr eng
- gesetzt sind.
+Die zu entwickelnde aeroakustisch optimierte Fanstufe wird von einem Planetenget
+riebe angetrieben, dessen Konzept der Industriepartner SAFRAN entwickelt
+ und für technisch realisierbar hält.
+ Daraus ergeben sich eine Reihe von komplexen Nebenbedingungen.
+ Erst während der Auslegungsarbeiten / Optimierungen stellte sich heraus,
+ das zur Erfüllung aller nur sehr enger Lösungsraum existiert.
+ Diese 15 Nebenbedingungen umfassen geometrische, aerodynamische, strukturmechan
+ische und akustische Kriterien.
  Zu den wichtigsten Nebenbedingungen gehört die Einhaltung eines sehr eng
  gesetzten Drehmomentenverhältnisses der Rotoren, eine axiale Abtrömung
  am Austritt der Fanstufe, strukturmechanische Restriktion der maximalen
@@ -5858,9 +5871,18 @@ Parametrisierung
 \end_layout
 
 \begin_layout Standard
-Beide Rotoren werden jeweils durch 5 Profilschnitte beschrieben.
+Die Parameter-basierte Beschreibung der 3D-Schaufelformen bzw.
+ der gesamten Fanstufe erfolgt sehr ähnlich zum Testfall in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:CRISP-Testfall"
+
+\end_inset
+
+.
+ Beide Rotoren werden jeweils durch 5 Profilschnitte beschrieben.
  Neben der Profilparametrisierung wird auch die Drehzahl beider Rotoren
- in sehr engen Grenzen freigegeben.
+ in engen Grenzen freigegeben.
  Damit ergibt sich eine Gesamtzahl von 112 freien Parametern.
  
 \end_layout
@@ -5871,12 +5893,11 @@ Gütestufen
 
 \begin_layout Standard
 Es werden zwei Gütestufen verwendet, die sich durch die Anzahl der Zellen
- der CFD-Netze (2.000.000 gegen 300.000 Zellen) und durch die Anzahl der Elemente
- der FEM-Berechnung (19.000 gegen 2376 Elemente) unterscheiden.
- Die Prozessketten haben einen zeitlichen Faktor von ca.
- 7.5, wobei die Prozesskette hoher Güte ca.
+ der CFD-Netze (2.000.000 / 300.000 Zellen) und durch die Anzahl der Elemente
+ der FEM-Berechnung (19.000 / 2376 Elemente) unterscheiden.
+ Die Prozesskette hoher Güte benötigt ca.
  7.5h und die Prozesskette niedriger Güte ca.
- 1h benötigt.
+ 1h.
  
 \end_layout
 
@@ -5936,11 +5957,9 @@ s und auch der Ersatzmodelle.
 Der Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden: Die
  finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das Ausgangsde
 sign, konnte die Schallemissionen aber um 3dB senken.
- Weiterhin konnte die maximale Spannung des zweiten Rotors um 62% gesenkt
- und die dynamischen Kriterien erfüllt werden.
- Auch die aerodynamischen und geometrischen Restriktionen wurden allesamt
- erfüllt.
- 
+ Es wurden alle Getriebe-bedingten Nebenbedingungen erfüllt und auch alle
+ festigkeitsmechanischen Forderungen für den aeroakustischen Test, welcher
+ im Winter 2017/2018 stattgefunden hat und das Auslegungsergebnis bestätigt.
 \end_layout
 
 \begin_layout Subsection
@@ -5978,7 +5997,7 @@ key "hemmert2019"
 
  veröffentlicht.
  Die hier gezeigte Zusammenfassung der vorläufigen Ergebnisse erfolgt in
- freundlicher Zustimmung des Autors.
+ freundlicher Zustimmung der Autoren.
 \end_layout
 
 \begin_layout Paragraph
@@ -6033,7 +6052,7 @@ Gütestufen
 \end_layout
 
 \begin_layout Standard
-Es werden zwei Gütestufen verwendet, diese unterscheide sich hauptsächlich
+Es werden zwei Gütestufen verwendet, diese unterscheiden sich hauptsächlich
  durch die Zellen der CFD-Netze (7.600.000 gegen 400.000 Zellen) und durch
  die Anzahl der Elemente der FEM-Berechnung (43.200 gegen 10.000 Elemente).
  Das Konvergenzkriterium wird für die niedrige Gütestufe geringer eingestellt.
@@ -6102,10 +6121,7 @@ kten in den entsprechenden Betriebspunkten.
 \end_layout
 
 \begin_layout Standard
-Ein Vergleich zu einer reinen Single-Fidelity-Optimierung konnte in diesem
- Fall nicht angestellt werden, da die Laufzeiten hierfür zu lang gewesen
- wären.
- Weiterhin kann man sich die Frage stellen, warum nicht erst auf dem Modell
+Weiterhin kann man sich die Frage stellen, warum nicht erst auf dem Modell
  niedriger Güte optimiert und dann mit den Ergebnissen eine Optimierung
  hoher Güte gestartet wurde.
  

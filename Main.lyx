@@ -75,6 +75,20 @@
 \defineasbibitem{\bibitem}
 \makeatother % @ wieder auf code 12 zurücksetzen
 
+
+\makeatletter % @in Befehlen auf code 11 setzen
+\newcommand\Abstractname{Abstract}
+\newenvironment{Abstract}{%
+\titlepage
+    \@beginparpenalty\@lowpenalty
+     \begin{center}%
+       \bfseries \Abstractname
+       \@endparpenalty\@M
+      \end{center}}%
+     {\par\endtitlepage\global\no@Kurzfassungfassungfalse}
+\defineasbibitem{\bibitem}
+\makeatother % @ wieder auf code 12 zurücksetzen
+
 \definecolor{hellgrau}{gray}{0.8}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -804,65 +818,6 @@ description "Anzahl der Flowparameter"
 
 \end_layout
 
-\begin_layout Standard
-
-\series bold
-\size huge
-TODO:
-\end_layout
-
-\begin_layout Itemize
-Literaturverzeichnis checken
-\end_layout
-
-\begin_layout Itemize
-Abstract/Kurzfassung schreiben
-\end_layout
-
-\begin_layout Itemize
-Bilder / Layout
-\end_layout
-
-\begin_layout Itemize
-Deckblatt RUB !!
-\end_layout
-
-\begin_layout Itemize
-Abstract auf Englisch
-\end_layout
-
-\begin_layout Itemize
-Alle Abbildungen nochmal prüfen
-\end_layout
-
-\begin_layout Itemize
-Kapitel 3 Laufzeiten ein Beispiel einfügen.
- Und 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Theroretische-Beschleunigung-ein"
-
-\end_inset
-
- tRef/tMF 
-\end_layout
-
-\begin_layout Itemize
-Bilder Member -> Individuen
-\end_layout
-
-\begin_layout Itemize
-Slaves -> Knoten
-\end_layout
-
-\begin_layout Itemize
-Flowparameter? Am Anfang rechtfertigen?
-\end_layout
-
-\begin_layout Itemize
-Christian Korrektur: Seite 20 -> Gradienteninformation in Optimierungen.
-\end_layout
-
 \begin_layout Chapter*
 
 \size normal
@@ -898,7 +853,7 @@ Das Ziel dieser Arbeit ist die Entwicklung eines industriell einsetzbaren
 e Suchräume und sehr laufzeitintensive Prozessketten.
  Das hier vorgestellte Multifidelity-Optimierungsverfahren sorgt dafür,
  dass hochdimensionale Suchräume effizienter abgetastet werden und damit
- die Laufzeit der Optimierungen deutlich reduziert wird.
+ die Laufzeit der Optimierungen deutlich reduziert werden.
  Hierfür werden schnellere Prozessketten niedrigerer Güte herangezogen und
  mit Hilfe der dort enthaltenen Informationen die Anzahl an teuren Prozessketten
 auswertungen reduziert.
@@ -909,19 +864,78 @@ Um dies zu erreichen wird zum einen die Entwicklung einer hocheffizienten,
  flexiblen und modularisierten Ersatzmodellsoftware vorgestellt und zum
  anderen die Entwicklung einer vollständig automatisierten Multifidelity-Optimie
 rungsstrategie.
- Weiterhin unterstützt die entwickelte Software zahlreiche moderne Hardwarearchi
-tekturen und ist für den Betrieb innerhalb einer Großrechnerumgebung ausgelegt.
+ Die entwickelte Software unterstützt zahlreiche moderne Hardwarearchitekturen
+ und ist für den Betrieb innerhalb einer Großrechnerumgebung ausgelegt.
  
 \end_layout
 
 \begin_layout Standard
-Weiterhin wird das entwickelte Verfahren zahlreichen Tests in Form von Optimieru
-ngen analytischer Testfunktionen unterzogen, welche die Vorteile dieses
- Verfahrens belegen.
- Neben diesen Tests wurde das hier entwickelte Verfahren zudem für zahlreichen
- Anwendungen aus Industrie und Forschung verwendet.
- Die dort gewonnenen Ergebnisse und Erkenntnisse werden innerhalb dieser
- Arbeit vorgestellt.
+Das entwickelte Verfahren wird zahlreichen Tests in Form von Optimierungen
+ analytischer Testfunktionen unterzogen, welche die Vorteile dieses Verfahrens
+ belegen.
+ Neben diesen Tests wurde das hier entwickelte Verfahren innerhalb von einigen
+ Turbomaschinen-Anwendungen aus Industrie und Forschung angewendet.
+ Die dort gewonnenen Ergebnisse und Erkenntnisse werden in dieser Arbeit
+ vorgestellt.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\size normal
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+abstract
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Abstract}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The aim of this thesis is the development of an industrially applicable
+ multifidelity optimization process.
+ This process is specially adapted to the problems of turbomachinery development.
+ The challenges in the optimization of turbomachinery are the existence
+ of several objective functions and numerous constraints, as well as high-dimens
+ional search spaces and very runtime-intensive process chains.
+ The multifidelity optimization method presented here ensures that high-dimensio
+nal search spaces are sampled more efficiently and thus the runtime of the
+ optimizations is significantly reduced.
+ For this purpose, faster process chains of lower quality are used and the
+ number of expensive process chain evaluations is reduced with the help
+ of the information contained therein.
+\end_layout
+
+\begin_layout Standard
+In order to achieve this, the development of a highly efficient, flexible
+ and modularized surrogate model software is presented on the one hand,
+ and the development of a fully automated multifidelity optimization strategy
+ on the other hand.
+ The developed software supports numerous modern hardware architectures
+ and is designed for operation within a supercomputer environment.
+ 
+\end_layout
+
+\begin_layout Standard
+The developed procedure is subjected to numerous tests in the form of optimizati
+ons of analytical test functions, which prove the advantages of this procedure.
+ In addition to these tests, the procedure developed here has been applied
+ in several turbomachinery applications in industry and research.
+ The results and findings obtained there are presented in this paper.
  
 \end_layout
 
