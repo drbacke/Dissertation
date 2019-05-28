@@ -332,12 +332,11 @@ reference "wrap:Eindimensionales-analytisches-Be-1"
 \begin_inset Formula $\frac{1}{a}$
 \end_inset
 
- mit den verschiedenen voreingstellten Skalierungsfaktoren 
+ mit den verschiedenen Skalierungsfaktoren 
 \begin_inset Formula $A$
 \end_inset
 
  verglichen.
- Hiermit ist es möglich, das Trainingsergebnis direkt zu verifizieren.
  Der Einfachheit halber werden direkt die Reziprokwerte dargestellt, da
  diese mit dem eingestellten Skalierungsfaktor 
 \begin_inset Formula $A$
@@ -411,6 +410,15 @@ reference "tab:Auflistung-der-Optimierungstestf"
 \end_inset
 
  festgelegt.
+ Eine einzelne freie Variable 
+\begin_inset Formula $x_{r}$
+\end_inset
+
+ wird über den Index 
+\begin_inset Formula $r\in\left\{ 0,...,k-1\right\} $
+\end_inset
+
+ beschrieben.
  Die verwendete analytische Funktion 
 \begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
 \end_inset
@@ -476,7 +484,7 @@ Single-Fidelity
 \begin_inset Float table
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -579,7 +587,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(0,0\right)$
 \end_inset
 
  
@@ -698,7 +706,7 @@ Referenz
 \begin_inset Text
 
 \begin_layout Plain Layout
-4
+3
 \end_layout
 
 \end_inset
@@ -771,7 +779,7 @@ Mit diesem Testfall wird das Verhalten der Entscheidungsfunktion bei einer
 .
  Die Funktion niedriger Güte ist zusätzlich mit einem gleichverteilten Rauschen
  belegt 
-\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(0,1\right)$
+\begin_inset Formula $f_{ZDT}\left(\vec{x}\right)+U\left(a,b\right)$
 \end_inset
 
 .
@@ -956,8 +964,8 @@ Vergleicht man die Beschleunigungsfaktoren
 \begin_inset Formula $t_{fact}$
 \end_inset
 
- miteinander, so kann die Optimierung 1a die stärkste Beschleunigung mit
- einem Faktor von 2.2 erreichen.
+ miteinander, so hat die Optimierung 1a die stärkste Beschleunigung mit
+ einem Faktor von 2.2 erreicht.
  Weiterhin ist zu sehen, dass die Beschleunigung mit steigender Breite 
 \begin_inset Formula $b$
 \end_inset
@@ -1398,8 +1406,8 @@ Dieser Testfall soll den Einfluss der Initialisierung bei einer komplexen
 n Orten.
  Als Startdatenbasis wurde eine sehr kleine Menge von Stützstellen hoher
  Güte gewählt und die Menge an Stützstellen niedriger Güte variiert.
- Die verwendete Entscheidungsfunktion war die in dieser Arbeit entwickelte
- 
+ Die verwendete Entscheidungsfunktion war wiederum die in dieser Arbeit
+ entwickelte 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1427,7 +1435,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ../images/ErgebnissKapitel/Testfall4_initL_tFact.eps
+	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
 	scale 25
 
 \end_inset
@@ -1477,11 +1485,7 @@ Sobald ein Wert von
 \begin_inset Formula $f_{hf}\left(\vec{x}\right)<1.248$
 \end_inset
 
- unterschritten wurde, wird die Funktion 
-\begin_inset Formula $f_{hf}\left(\vec{x}\right)$
-\end_inset
-
- als konvergent angenommen.
+ unterschritten wurde, wird die Optimierungsaufgabe als konvergent angenommen.
  Weiterhin wurde für die Entscheidungsfunktion die Trainingszeit und die
  Zeit für die Optimierung auf dem Ersatzmodell auf 0 gesetzt, da diese aufgrund
  der extrem niedrigen Prozesskettenzeiten überwiegen würde.
@@ -6121,10 +6125,7 @@ kten in den entsprechenden Betriebspunkten.
 \end_layout
 
 \begin_layout Standard
-Ein Vergleich zu einer reinen Single-Fidelity-Optimierung konnte in diesem
- Fall nicht angestellt werden, da die Laufzeiten hierfür zu lang gewesen
- wären.
- Weiterhin kann man sich die Frage stellen, warum nicht erst auf dem Modell
+Weiterhin kann man sich die Frage stellen, warum nicht erst auf dem Modell
  niedriger Güte optimiert und dann mit den Ergebnissen eine Optimierung
  hoher Güte gestartet wurde.
  
