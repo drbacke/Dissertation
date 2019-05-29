@@ -388,14 +388,6 @@ There's no use continuing\MessageBreak this LaTeX run now!
   \end{picture}
 \end{titlepage}%
 \cleardoublepage
-\begin{titlepage}%
-  \unitlength1mm
-  \begin{picture}(160,240)(25,0)
-        \put(55,200){\parbox[t]{108mm}{\Large\textbf{\@title}}}
-        \put(55,120){\let\@formten\relax\FirmaEINS}
-        \put(55,115){\let\@formten\relax\FirmaZWEI}
-  \end{picture}
-\end{titlepage}%
   \setcounter{footnote}{0}%
   \global\let\thanks\relax
   \global\let\maketitle\relax
