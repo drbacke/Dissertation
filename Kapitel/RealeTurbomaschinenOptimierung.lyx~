@@ -1500,7 +1500,7 @@ reference "tab:Anzahl-der-jeweiligen-1"
 \end_inset
 
  zeigt die Anzahl der erzeugten Individuen der jeweiligen Testfälle 2(a-g).
- Typischerweise durchläuft eine solche Optimierung drei Entscheidungs-Phasen:
+ Typischerweise durchläuft eine solche Optimierung drei Entscheidungsphasen:
 \end_layout
 
 \begin_layout Enumerate
@@ -1592,6 +1592,17 @@ Testfall 2(e-g): In diesem Bereich fallen die Entscheidungsphasen 1-2 fast
 
  wieder sinkt.
  
+\end_layout
+
+\begin_layout Standard
+Dieser Testfall zeigt das Verhalten der Entscheidungsfunktion bei sehr unterschi
+edlichen Startbedingungen der hier gestellten Optimierungsaufgabe, bei der
+ immer ein hoher Beschleunigungsfaktor erzielt werden konnte.
+ Die unterschiedliche Anzahl an Individuen niedriger Güte für die Initialisierun
+g wurde durch die Entscheidungsfunktion also effektiv ausgeglichen.
+ Besonders bei einem unerfahrenen Anwender kann dieses Verhalten von Vorteil
+ sein, da eine sinnvolle Anzahl der initialen Individuen nur schwer abschätzbar
+ ist.
 \end_layout
 
 \begin_layout Standard
@@ -2612,7 +2623,7 @@ Erwarteter Volumenzugewinn
  Dies wiederum bedeutet, dass sich die Suche auf dem Ersatzmodell vom Startpunkt
  kaum wegbewegt und das explorative Vorgehen dadurch stark eingeschränkt
  wird.
- Bei einer Multifidelity-Optimierung sollten aber besonders diese 
+ Bei einer Multifidelity-Optimierung sollten aber besonders dieses 
 \begin_inset Quotes gld
 \end_inset
 
@@ -2620,8 +2631,8 @@ explorativen
 \begin_inset Quotes grd
 \end_inset
 
- Bereiche interessant sein, da dort mit wenig Aufwand eine Schätzung gegeben
- werden kann.
+ Verhalten genutzt werden, da mit wenig Aufwand eine Schätzung gegeben werden
+ kann.
  Aus diesem Grund wurde diese Restriktion in diesen Benchmarks nicht mehr
  verwendet.
  

@@ -1595,6 +1595,17 @@ Testfall 2(e-g): In diesem Bereich fallen die Entscheidungsphasen 1-2 fast
 \end_layout
 
 \begin_layout Standard
+Dieser Testfall zeigt das Verhalten der Entscheidungsfunktion bei sehr unterschi
+edlichen Startbedingungen der hier gestellten Optimierungsaufgabe, bei der
+ immer ein hoher Beschleunigungsfaktor erzielt werden konnte.
+ Die unterschiedliche Anzahl an Individuen niedriger Güte für die Initialisierun
+g wurde durch die Entscheidungsfunktion also effektiv ausgeglichen.
+ Besonders bei einem unerfahrenen Anwender kann dieses Verhalten von Vorteil
+ sein, da eine sinnvolle Anzahl der initialen Individuen nur schwer abschätzbar
+ ist.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap table
 lines 0
 placement o
@@ -2612,7 +2623,7 @@ Erwarteter Volumenzugewinn
  Dies wiederum bedeutet, dass sich die Suche auf dem Ersatzmodell vom Startpunkt
  kaum wegbewegt und das explorative Vorgehen dadurch stark eingeschränkt
  wird.
- Bei einer Multifidelity-Optimierung sollten aber besonders diese 
+ Bei einer Multifidelity-Optimierung sollten aber besonders dieses 
 \begin_inset Quotes gld
 \end_inset
 
@@ -2620,8 +2631,8 @@ explorativen
 \begin_inset Quotes grd
 \end_inset
 
- Bereiche interessant sein, da dort mit wenig Aufwand eine Schätzung gegeben
- werden kann.
+ Verhalten genutzt werden, da mit wenig Aufwand eine Schätzung gegeben werden
+ kann.
  Aus diesem Grund wurde diese Restriktion in diesen Benchmarks nicht mehr
  verwendet.
  
@@ -2992,18 +3003,6 @@ Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
 ung auf der Schaufeloberfläche wird aus dem jeweiligen CFD-Ergebnis ermittelt.
  Die Auswirkungen der unterschiedlichen Druckverteilungen ist im Vergleich
  zu den auftretenden Fliehkräften aber sehr gering.
-\end_layout
-
-\begin_layout Standard
-Für weitergehende Informationen bezüglich der Prozesskette wie z.B.
- die verwendete Software und deren Einstellungen, wird auf 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Reimer2016"
-
-\end_inset
-
- verwiesen.
 \end_layout
 
 \begin_layout Paragraph
