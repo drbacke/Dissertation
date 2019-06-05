@@ -6,7 +6,6 @@
 \origin unavailable
 \textclass dlrreport
 \begin_preamble
-
 \usepackage{nomencl}
 \makenomenclature
 
@@ -36,6 +35,7 @@
 
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{bibgerm}
 %\usepackage{harvard} 
@@ -43,6 +43,7 @@
 %\usepackage[authoryear]{natbib}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%\def\pagedeclaration#1{\dotfill\nobreakspace#1 }
 
 
 \usepackage{setspace}
@@ -59,7 +60,6 @@
 \ifthenelse{\equal{#1}{G}}{\item[\textbf{Griechische Symbole}]}{%
 \ifthenelse{\equal{#1}{A}}{\item[\textbf{Abkürzungen}]}{%
 \ifthenelse{\equal{#1}{S}}{\item[\textbf{Strömungstechnische Bezeichnungen}]}{}}}}}
-\def\pagedeclaration#1{\dotfill\nobreakspace#1 }
 
 
 \makeatletter % @in Befehlen auf code 11 setzen
@@ -75,19 +75,6 @@
 \defineasbibitem{\bibitem}
 \makeatother % @ wieder auf code 12 zurücksetzen
 
-
-\makeatletter % @in Befehlen auf code 11 setzen
-\newcommand\Abstractname{Abstract}
-\newenvironment{Abstract}{%
-\titlepage
-    \@beginparpenalty\@lowpenalty
-     \begin{center}%
-       \bfseries \Abstractname
-       \@endparpenalty\@M
-      \end{center}}%
-     {\par\endtitlepage\global\no@Kurzfassungfassungfalse}
-\defineasbibitem{\bibitem}
-\makeatother % @ wieder auf code 12 zurücksetzen
 
 \definecolor{hellgrau}{gray}{0.8}
 
@@ -203,6 +190,162 @@ status open
 
 \backslash
 maketitle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 30bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+\size largest
+Multifidelity-Optimierungsverfahren für Turbomaschinen
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 50bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Dissertation
+\end_layout
+
+\begin_layout Standard
+\align center
+zur 
+\end_layout
+
+\begin_layout Standard
+\align center
+Erlangung des Grades
+\end_layout
+
+\begin_layout Standard
+\align center
+Doktor-Ingenieur
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 40bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+der
+\end_layout
+
+\begin_layout Standard
+\align center
+Fakultät für Maschinenbau
+\end_layout
+
+\begin_layout Standard
+\align center
+der Ruhr-Universität Bochum
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+von
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+Andreas Schmitz
+\end_layout
+
+\begin_layout Standard
+\align center
+geb.
+ in Waldbröl
+\end_layout
+
+\begin_layout Standard
+\align center
+Bochum 2019
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace 15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+Erster Referent: Prof.
+ Dr.-Ing.
+ R.
+ Mönig (Ruhr-Universität Boch)
+\end_layout
+
+\begin_layout Standard
+\align center
+Zweiter Referent: Prof.
+ Dr.
+ rer.
+ nat.
+ H.
+ Gottschalk (Bergische Universität Wuppertal)
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty} 
 \end_layout
 
 \end_inset
@@ -336,7 +479,7 @@ description "Efficient Global Optimization. Ein Optimierungsverfahren, welches d
 LatexCommand nomenclature
 prefix "A"
 symbol "GPU"
-description "Abkürzung für Graphics Processing Unit. Grafikbeschleuniger in der Regel als Zusatzkarte in einem Rechner"
+description "Abkürzung für Graphics Processing Unit. Grafikbeschleuniger, in der Regel als Zusatzkarte in einem Rechner"
 
 \end_inset
 
@@ -345,7 +488,7 @@ description "Abkürzung für Graphics Processing Unit. Grafikbeschleuniger in de
 LatexCommand nomenclature
 prefix "A"
 symbol "GPGPU"
-description "General Purpose Computation on Graphics Processing Unit. Beschreibt die Verwendung von GPUs über den ursprünglichen Einsatz hinaus. Meist für die Verwendung von massiv parallelen rechenintensiven Algorithmen."
+description "General Purpose Computation on Graphics Processing Unit. Beschreibt die Verwendung von GPUs über den ursprünglichen Einsatz hinaus. Meist für die Verwendung von massiv parallelen und  rechenintensiven Algorithmen."
 
 \end_inset
 
@@ -748,7 +891,7 @@ description "Anzahl der Nebenbedingungen"
 LatexCommand nomenclature
 prefix "L"
 symbol "s"
-description "Anzahl der verschiedenen Gütestufen bei einem Mutlifidelty Modell"
+description "Anzahl der verschiedenen Gütestufen bei einem Multifidelty Modell"
 
 \end_inset
 
@@ -818,9 +961,7 @@ description "Anzahl der Flowparameter"
 
 \end_layout
 
-\begin_layout Chapter*
-
-\size normal
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -828,8 +969,19 @@ status open
 
 
 \backslash
-Kurzfassung 
+thispagestyle{empty} 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+
+\size normal
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -841,6 +993,44 @@ addcontentsline{toc}{chapter}{Kurzfassung}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+thepage}{
+\backslash
+Roman{page}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+Kurzfassung
 \end_layout
 
 \begin_layout Standard
@@ -870,7 +1060,7 @@ rungsstrategie.
 \end_layout
 
 \begin_layout Standard
-Das entwickelte Verfahren wird zahlreichen Tests in Form von Optimierungen
+Das entwickelte Verfahren wurde zahlreichen Tests in Form von Optimierungen
  analytischer Testfunktionen unterzogen, welche die Vorteile dieses Verfahrens
  belegen.
  Neben diesen Tests wurde das hier entwickelte Verfahren innerhalb von einigen
@@ -880,18 +1070,11 @@ Das entwickelte Verfahren wird zahlreichen Tests in Form von Optimierungen
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Chapter*
 
 \size normal
 \begin_inset ERT
 status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-abstract
-\end_layout
 
 \begin_layout Plain Layout
 
@@ -903,6 +1086,13 @@ addcontentsline{toc}{chapter}{Abstract}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\series bold
+Abstract
 \end_layout
 
 \begin_layout Standard
@@ -936,7 +1126,6 @@ ons of analytical test functions, which prove the advantages of this procedure.
  In addition to these tests, the procedure developed here has been applied
  in several turbomachinery applications in industry and research.
  The results and findings obtained there are presented in this paper.
- 
 \end_layout
 
 \begin_layout Standard

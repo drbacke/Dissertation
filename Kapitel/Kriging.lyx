@@ -859,7 +859,18 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 \nonumber \\
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[Z_{g}^{*}\left(\vec{x}\right)\right]=0\nonumber \\
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g\vec{,x})\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}(\vec{x}_{j})w_{i,j}(g\vec{,x})\right]=0\nonumber \\
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}(\vec{x}_{j})w_{i,j}(g\vec{,x})\right]=0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align}
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}(\vec{x}_{j})\right]w_{i,j}(g\vec{,x})=0\label{eq:ErwartungswertZXCoKriging}
 \end{align}
 
@@ -1771,7 +1782,8 @@ name "sec:VergleicheCoKrigingAndere"
 
 \end_inset
 
-Vergleich des Co-Kriging-Verfahrens mit anderen Verfahren aus der Literatur
+Vergleich des hier vorgestellten Co-Kriging-Verfahrens mit anderen Verfahren
+ aus der Literatur
 \end_layout
 
 \begin_layout Standard

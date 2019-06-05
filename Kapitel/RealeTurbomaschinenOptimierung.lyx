@@ -1435,7 +1435,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/andreas/documents/DissGIT/Dissertation/images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
+	filename ../images/ErgebnissKapitel/Testfall0_Entscheidungsfunktino.eps
 	scale 25
 
 \end_inset
@@ -2567,7 +2567,15 @@ key "Reimer2016"
 
 \end_inset
 
- die Nutzung von Rauschtermen für jede Gütestufe und einem Skalierungsfaktor.
+ die Nutzung von Rauschtermen für jede Gütestufe und einem Skalierungsfaktor
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Kovarianzmatrix"
+
+\end_inset
+
+).
  Weiterhin wurde das Initialiserungsverfahren, welches in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2633,8 +2641,8 @@ explorativen
 
  Verhalten genutzt werden, da mit wenig Aufwand eine Schätzung gegeben werden
  kann.
- Aus diesem Grund wurde diese Restriktion in diesen Benchmarks nicht mehr
- verwendet.
+ Aus diesem Grund wurde diese Restriktion in diesem Anwendungsbeispiel nicht
+ mehr verwendet.
  
 \end_layout
 
@@ -2674,8 +2682,7 @@ Jede Optimierung erhielt 6+1 Knoten auf dem DLR-AT Cluster, wobei ein Knoten
 
 \begin_layout Standard
 Für die Prozesskettenberechnung waren 6 Knoten vorgesehen.
- Das Training und alle AutoOpti internen Prozesse fanden auf jeweils einem
- eigenen Knoten statt.
+ Das Training fand auf jeweils einem eigenen Knoten statt.
  
 \end_layout
 
@@ -3000,7 +3007,7 @@ Als letzter Schritt der Prozesskette wird eine strukturmechanische Simulation
  Hierfür wird die maximale Dehnung der Schaufel bestimmt und als Nebenbedingung
  verwendet.
  Das verwendete FEM-Netz ist für beide Gütestufen identisch und die Druckverteil
-ung auf der Schaufeloberfläche wird aus dem jeweiligen CFD-Ergebnis ermittelt.
+ung wird auf der Schaufeloberfläche aus dem jeweiligen CFD-Ergebnis ermittelt.
  Die Auswirkungen der unterschiedlichen Druckverteilungen ist im Vergleich
  zu den auftretenden Fliehkräften aber sehr gering.
 \end_layout
@@ -3393,7 +3400,7 @@ Eine weitere Nebenbedingung ist der absolute Abströmwinkel der Fanstufe
 \end_inset
 
 , dieser wird auf maximal 3° festgelegt, um eine axiale Abströmung zu erhalten.
- Weiterhin sind alle aerodynamischen Größen massenstromgemittelt.
+ Alle aerodynamischen Größen sind massenstromgemittelt.
  Strukturmechanisch wird die maximale Dehnung 
 \begin_inset Formula $\varepsilon$
 \end_inset
@@ -4139,21 +4146,19 @@ Vorder- und Hinterkantenradien
 \begin_inset Formula $r_{LE},r_{TE}$
 \end_inset
 
-, Vorder- und Hinterkantenwinkeln 
+, Vorder- und Hinterkantenwinkel 
 \begin_inset Formula $\beta_{LE},\beta_{TE}$
 \end_inset
 
-, dem Staffelungswinkel 
+, Staffelungswinkel 
 \begin_inset Formula $\beta_{ST}$
 \end_inset
 
-, der Sehnenlänge 
+, Sehnenlänge 
 \begin_inset Formula $c$
 \end_inset
 
- und zwei Konstruktionspunkten, welche die Saugseitenkrümmung beschreiben.
- Für den Rotor und Stator sind jeweils drei Profile an Nabe, Mitte und Gehäuse
- definiert.
+ und zwei Konstruktionspunkte, welche die Form der Saugseite beschreiben.
  Weiterhin kann die radiale Position des mittleren Profils in engen Grenzen
  geändert werden.
 \end_layout
@@ -4232,8 +4237,7 @@ name "par:Einstellungen-Optimierung-und"
 \end_layout
 
 \begin_layout Itemize
-Startdatenbasis: Es wurden 25 Individuen hoher Güte und 75 Individuen niedriger
- Güte bestimmt.
+Es wurden 25 Individuen hoher Güte und 75 Individuen niedriger Güte bestimmt.
  Diese Startdatenbasis wurde einmal erzeugt und diente dann als Initialisierung
  für alle durchgeführten Optimierungsläufe.
  Die Bestimmung der Parameter erfolgte zufällig gleichverteilt.
@@ -4272,8 +4276,6 @@ reference "subsec:EVG"
 \begin_layout Itemize
 Jedes Optimierungssetup wurde 4x wiederholt, um Zufälligkeiten abbilden
  zu können.
- Eine Ausnahme stellt Optimierung 2b dar, diese konnte aus Zeitgründen nur
- einmal wiederholt werden.
  
 \end_layout
 
@@ -4330,8 +4332,7 @@ Minimaler prozentualer Anteil an Individuen hoher Güte 10%.
 \end_layout
 
 \begin_layout Enumerate
-Minimaler prozentualer Anteil an Individuen hoher Güte 5% (nur eine Wiederholung
-).
+Minimaler prozentualer Anteil an Individuen hoher Güte 5% (keine Wiederholung).
 \end_layout
 
 \end_deeper
@@ -4398,7 +4399,6 @@ status open
 	filename ../images/ErgebnissKapitel/Opti_CumVolGain.eps
 	scale 40
 	BoundingBox 11bp 150bp 600bp 642bp
-	clip
 
 \end_inset
 
@@ -4487,7 +4487,7 @@ Die Optimierungstestläufe 2a erzeugen zuerst einen Volumenzugewinn.
 Vergleicht man den mittleren Volumenzugewinn der Optimierungen hoher Güte
  bei 800.000s, so konnten Multifidelity Optimierungen denselben Volumenzugewinn
  bereits nach ca.
- 400.000s erreichen und sind damit ungefähr doppelt so schnell.
+ 400.000s erreichen und sind damit fast doppelt so schnell.
 \end_layout
 
 \begin_layout Standard
@@ -4521,7 +4521,7 @@ reference "fig:Prozentualer-Anteil-der"
  Die schwarzen Kurven markieren den Anteil der High-Fidelity Optimierungen,
  welcher unter einem Prozent liegt und damit vernachlässigbar ist.
  Die Multifidelity-Optimierungen beanspruchen mit 4% einen deutlich höheren
- Trainingszeitanteil.
+ Zeitanteil.
  Die Multifidelity-Optimierung 2b liegt aufgrund der höheren Stützstellenanzahl
  bei ca.
  5%.
@@ -4650,8 +4650,8 @@ reference "tab:Übersicht-aller-Nebenbedingungen"
 \end_inset
 
 , welche nicht erfüllt wurden.
- Alle Restriktionen sind erfüllt, wenn dieser Term der Wert Null erreicht,
- wobei die Größenordnung des Restriktionsterms nicht normiert ist.
+ Sind alle Restriktionen erfüllt, erreicht dieser Term den Wert Null.
+ Die Restriktionsterme wurden nicht normiert.
  Die schwarze Kurve beschreibt die High-Fidelity-Optimierung.
  Trotz des späteren Starts erfüllen beide Multifidelity-Optimierungen die
  Restriktionen deutlich schneller und können von den zusätzlichen Individuen
@@ -4716,7 +4716,7 @@ In dem Verlauf von Optimierung 2a ist bei Nummer 300 ein leichter Sprung
  zu erkennen.
  Das Entscheidungskriterium zeigt ab dieser Stelle häufiger Werte unter
  Eins.
- Dies lässt sich dadurch erklären, dass ab Individuen-Nummer 299 das erste
+ Dies lässt sich dadurch erklären, dass mit Individuen-Nummer 299 das erste
  Individuum gefunden wurde, welches alle Restriktionen erfüllt.
  Die Wahrscheinlichkeit die Nebenbedingungen zu erfüllen, ist ab diesem
  Zeitpunkt erhöht und übt damit einen großen Einfluss auf die Entscheidungsfunkt
@@ -4813,7 +4813,7 @@ t aufbauen und die ersten Individuen mit sehr hohem Wirkungsgrad auffinden.
  weniger breite Paretofront und auch schlechtere Zielfunktionswerte.
  Beispielsweise ist der maximale Wirkungsgrad der Multifidelity-Optimierung
  um ca.
- 0.05 Punkte besser.
+ 0.5%-Punkte besser.
 \end_layout
 
 \begin_layout Standard
@@ -4926,12 +4926,7 @@ reference "fig:OptimierungenEntscheidungsfVerläfe"
 \end_inset
 
  stellt die Ergebnisse grafisch dar, wobei jeder Punkt das Ergebnis einer
- Optimierung nach 800.000 Sekunden beschreibt.
- In dieser Abbildung sind deutlich mehr Optimierungen dargestellt, als hier
- aufgeführt werden.
- Dies liegt daran, dass noch zusätzliche Optimierungen mit leicht unterschiedlic
-hen Einstellungen durchgeführt wurden.
- Aus Platzgründen werden hier aber nur die wesentlichen Ergebnisse dargestellt.
+ weiteren Optimierung nach 800.000 Sekunden beschreibt.
  Auf der Abszisse wird der am Optimierungsende erreichte Anteil zwischen
  Stützstellen hoher 
 \begin_inset Formula $n_{h}$
@@ -4947,17 +4942,16 @@ hen Einstellungen durchgeführt wurden.
 
 .
  Auf der Ordinate wird der erreichte Volumenzugewinn gezeigt.
- Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte einen
- höheren Volumenzugewinn bewirkt.
+ Es ist erkennbar, dass ein geringerer Anteil an Samples hoher Güte bei
+ einem definierten Zeitumfang einen höheren Volumenzugewinn bewirkt.
  Die Prozesskette niedriger Güte muss bereits einen hohen Informationsgehalt
  besitzen.
  Die Streuung der einzelnen Optimierungen kommt zum einen durch einige Zufälligk
 eiten innerhalb des Optimierungsprozesses (Initialisierung der Ersatzmodelle
  und Optimierung auf den Ersatzmodellen) zustande und zum anderen durch
- die jeweiligen Entscheidungsverläufe der Optimierungen, da hier nur das
- Endergebnis der Optimierung dargestellt wird.
- Weiterhin ist der Volumenzugewinn Null, wenn kein Individuum hoher Güte
- berechnet wird.
+ die jeweiligen Entscheidungsverläufe der Optimierungen.
+ Weiterhin ist zu beachten, dass der Volumenzugewinn Null ist, wenn kein
+ Individuum hoher Güte berechnet wird.
  
 \end_layout
 
@@ -5495,12 +5489,9 @@ reference "fig:Paretofront-der-besten"
 \end_inset
 
  mit 1,2,3 markierten Individuen aerodynamisch bewertet.
- Da es sich um ein Benchmark der Optimierungsverfahren handelt, liegt der
- Fokus bei dieser Auswertung auf den Unterschieden zwischen den verschiedenen
- Ergebnissen.
- Es soll herausgestellt werden, dass die Individuen der Multifidelity-Optimierun
-gen einem fortgeschritteneren Optimierungsstand entsprechen.
- 
+ Da es sich um einen Benchmark der Optimierungsverfahren handelt, liegt
+ der Fokus bei dieser Auswertung auf den grundlegenden Unterschieden zwischen
+ den Individuen, um den unterschiedlichen Optimierungsstand zu belegen.
 \end_layout
 
 \begin_layout Standard
@@ -5608,8 +5599,8 @@ reference "fig:Radiale-Verteilung-des-1"
 
 \end_inset
 
-, so fällt bei der Umlenkung auf, dass die Individuen 1 und 3 eine relativ
- ähnliche Umlenkung haben.
+, so fällt auf, dass die Individuen 1 und 3 eine relativ ähnliche Umlenkung
+ haben.
  Individuum 1 besitzt allerdings die niedrigeren Totaldruckverluste und
  kann dadurch den Gesamtwirkungsgrad nochmals erhöhen.
  Individuum 2 lenkt im gehäusenahen Bereich etwas stärker um und reagiert
@@ -5750,8 +5741,8 @@ reference "fig:Strakverlauf-der-einzelnen"
  Bei den Rotoren der Individuen 1 und 2 ist deutlich erkennbar, dass diese
  eine geringere Sehnenlänge (ca.
  25% kürzer) im gehäusenahen Bereich aufweisen als Individuum 3.
- Der mittlere Bereich dagegen weist mehr Sehnenlänge auf (ca.
- 10% mehr).
+ Dagegen sind im mittleren Bereich die Sehnen um ca.
+ 10% länger.
  Vergleicht man dies mit den Werten aus Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5768,7 +5759,7 @@ reference "fig:Radiale-Verteilung-des"
 gt, bei einer so schmalen Bauweise könnte die Struktur an ihre Belastungsgrenzen
  kommen.
  Bei den Statoren der Individuen 1 und 2 ist die Sehnenlänge im unteren
- Drittel deutlich kürzer als bei Individum Drei.
+ Drittel deutlich kürzer als bei Individum 3.
  So konnte durch die Reduktion der umströmten Fläche die Verluste reduziert
  werden.
  Insgesamt weisen die Multifidelity-Individuen bei der hier gezeigten Problemste
@@ -5859,7 +5850,8 @@ riebe angetrieben, dessen Konzept der Industriepartner SAFRAN entwickelt
  und für technisch realisierbar hält.
  Daraus ergeben sich eine Reihe von komplexen Nebenbedingungen.
  Erst während der Auslegungsarbeiten / Optimierungen stellte sich heraus,
- das zur Erfüllung aller nur sehr enger Lösungsraum existiert.
+ dass zur Erfüllung aller Nebenbedingungen nur ein sehr begrenzter Lösungsraum
+ existiert.
  Diese 15 Nebenbedingungen umfassen geometrische, aerodynamische, strukturmechan
 ische und akustische Kriterien.
  Zu den wichtigsten Nebenbedingungen gehört die Einhaltung eines sehr eng
@@ -5933,7 +5925,7 @@ Ergebnisse
 \end_layout
 
 \begin_layout Standard
-Die gesamte Optimierung hatte eine Laufzeit von ca.
+Diese Optimierung hatte eine Laufzeit von ca.
  1 Monat und wurde auf dem Cluster des Instituts für Antriebstechnik am
  DLR durchgeführt.
  Die Anzahl der verwendeten Rechenknoten lag im Mittel bei 10 Knoten und
@@ -5949,10 +5941,9 @@ reference "subsec:CRISP-Testfall"
 \end_layout
 
 \begin_layout Standard
-Die Durchführung einer solch komplexen Optimierung erwies sich als große
- Herausforderung und benötigte eine intensive Betreuung und Begutachtung
- des Verlaufs der Zielfunktionen, Nebenbedingungen, der Konvergenz des CFD-Löser
-s und auch der Ersatzmodelle.
+Die Durchführung einer solch komplexen Optimierung benötigte eine intensive
+ Betreuung und Begutachtung des Verlaufs der Zielfunktionen, der Nebenbedingunge
+n, der Konvergenz des CFD-Lösers und auch der Ersatzmodelle.
  
 \end_layout
 
@@ -5960,9 +5951,8 @@ s und auch der Ersatzmodelle.
 Der Aufwand konnte aber durch die Ergebnisse gerechtfertigt werden: Die
  finale Geometrie erreichte einen vergleichbaren Wirkungsgrad wie das Ausgangsde
 sign, konnte die Schallemissionen aber um 3dB senken.
- Es wurden alle Getriebe-bedingten Nebenbedingungen erfüllt und auch alle
- festigkeitsmechanischen Forderungen für den aeroakustischen Test, welcher
- im Winter 2017/2018 stattgefunden hat und das Auslegungsergebnis bestätigt.
+ Es wurden alle Getriebe-bedingten Nebenbedingungen und auch alle festigkeitsmec
+hanischen Forderungen für den aeroakustischen Test erfüllt.
 \end_layout
 
 \begin_layout Subsection
@@ -6862,51 +6852,6 @@ reference "subsec:CRISP-Testfall"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Subsection
-\begin_inset Quotes gld
-\end_inset
-
-Application of an Algorithmically Differentiated Turbomachinery Flow Solver
- to the Optimization of a Fan Stage
-\begin_inset Quotes grd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Eine weitere Anwendung der in dieser Arbeit entwickelten Kriging-Software
- ist in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Backhaus"
-
-\end_inset
-
- zu finden.
- Diese Arbeit beschäftigt sich mit der algorithmischen Differenzierung von
- CFD-Codes.
- Damit ist es möglich, unter relativ geringem numerischen Aufwand, partielle
- Ableitungen für zahlreiche Funktionale, wie z.B.
- den Wirkungsgrad, zu erhalten.
- Die gewonnenen partiellen Ableitungen flossen dann in die hier vorgestellte
- Gradient-Enhanced-Kriging-Software ein und konnten eine Benchmarkoptimierung
- beschleunigen.
- Durch die Verwendung der partiellen Ableitungen werden die Kovarianzmatrizen
- des Kriging-Verfahren bereits nach wenigen Individuen sehr groß und damit
- das Training entsprechend aufwändig.
- Aus diesem Grund sind die in dieser Arbeit entwickelten Beschleunigungsverfahre
-n aus Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:Numerische-Effizienz-steigern"
-
-\end_inset
-
- von zentraler Bedeutung.
- 
 \end_layout
 
 \end_body

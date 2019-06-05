@@ -79,6 +79,17 @@ status open
 
 
 \backslash
+renewcommand{
+\backslash
+thepage}{
+\backslash
+arabic{page}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 setcounter{page}{1}  
 \end_layout
 
@@ -146,8 +157,7 @@ Zur Verwendung von genaueren und damit auch komplexeren Modellen werden
  zunehmend sehr große HPC-Cluster eingesetzt, welche die benötigte Rechenleistun
 g zur Verfügung zu stellen.
  Solch ein Cluster ist allerdings kostspielig und die Optimierungs- und
- CFD-Verfahren müssen auf die spezielle Hardware von solchen Clustern angepasst
- werden.
+ CFD-Verfahren müssen auf die spezielle Hardware angepasst werden.
  Diese Problemstellung ist so komplex, dass sich daraus ein eigener Forschungszw
 eig entwickelt hat.
  Dennoch ist man trotz der enormen Rechenleistung, die moderne HPC-Cluster
@@ -203,10 +213,10 @@ Bei Optimierungen im Turbomaschinenbereich handelt es sich meist um nichtlineare
  in den letzten Jahren zahlreiche Optimierungsverfahren entwickelt und erfolgrei
 ch für die Turbomaschinenauslegung eingesetzt worden.
  Innerhalb dieses Abschnitts werden die in der Turbomaschinenforschung aktuell
- verwendeten Verfahren kurz beschrieben.
- Zu jedem Verfahren wird erst eine allgemeine Übersichtsliteratur vorgestellt
- und anschließend folgen einige Veröffentlichungen zu industrienahen Anwendungen
- dieser Verfahren aus den letzten sieben Jahren.
+ verwendeten Verfahren kurz beschrieben und zu jedem Verfahren allgemeine
+ Übersichtsliteratur vorgestellt sowie anschließend einige Veröffentlichungen
+ zu industrienahen Anwendungen dieser Verfahren aus den letzten sieben Jahren
+ gezeigt.
  
 \end_layout
 
@@ -299,11 +309,6 @@ sionale, aerodynamisch optimierte Geometrie.
  
 \end_layout
 
-\begin_layout Standard
-Da sich diese Arbeit mit dem Thema der ersatzmodellgestützen Optimierung
- befasst, soll der Fokus auf diese Thematik gelegt werden.
-\end_layout
-
 \begin_layout Paragraph*
 Beschleunigung von Optimierungen mit Ersatzmodellen:
 \end_layout
@@ -311,7 +316,7 @@ Beschleunigung von Optimierungen mit Ersatzmodellen:
 \begin_layout Standard
 Bei Ersatzmodellen handelt es sich um Interpolations- oder Approximationsverfahr
 en, welche während einer Optimierung Vorhersagen über unbekannte Parametersätze
- machen können.
+ machen.
  So können besonders vielversprechende Parametersätze schneller gefunden
  werden als bei der Verwendung einer reinen Evolutionsstrategie.
  
@@ -483,7 +488,11 @@ key "cox1992statistical,mockus1994application,perttunen1991computational,Jones19
 \end_inset
 
 .
- Das EGO-Verfahren (für Efficient Global Optimization) 
+ 
+\end_layout
+
+\begin_layout Standard
+Das EGO-Verfahren (für Efficient Global Optimization) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Jones1998,Jones2001"
@@ -492,8 +501,7 @@ key "Jones1998,Jones2001"
 
  hat in modernen Optimierungsalgorithmen besondere Bedeutung erlangt.
  Dieses Verfahren ermöglicht eine gute Balance zwischen der Exploration
- und Exploitation von statistischen Ersatzmodellen innerhalb globaler Optimierun
-gen.
+ und Exploitation innerhalb globaler Optimierungen.
  Die Arbeit von Voß et al.
  
 \begin_inset CommandInset citation
@@ -567,8 +575,8 @@ key "Baert2015"
 
 \end_inset
 
-, Seite 11-12) und belegen dies mit der erfolgreichen Optimierung des Bypass-Kan
-als.
+, Seite 11-12) und belegen dies mit der erfolgreichen Optimierung eines
+ Bypass-Kanals.
 \end_layout
 
 \begin_layout Standard
@@ -813,7 +821,11 @@ Efficient-Global-Optimization
 \end_inset
 
 -Verfahren verwenden.
- Es gibt bereits Umsetzungen des CO-Kriging Verfahrens, wobei die meisten
+ 
+\end_layout
+
+\begin_layout Standard
+Es gibt bereits Umsetzungen des CO-Kriging Verfahrens, wobei die meisten
  auf der Arbeit von Kennedy und O'Hagan 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -947,7 +959,7 @@ Die Anforderungen lassen sich hierbei in zwei Kategorien unterteilen.
 \end_layout
 
 \begin_layout Paragraph
-Anforderungen Turbomaschinenoptimierung
+Anforderungen Turbomaschinenoptimierung:
 \end_layout
 
 \begin_layout Standard
@@ -994,7 +1006,7 @@ Durch das Multifidelity-Verfahren sollen insbesondere die hochdimensionalen
 \end_layout
 
 \begin_layout Paragraph*
-Software- und hardwaretechnische Anforderungen
+Software- und hardwaretechnische Anforderungen:
 \end_layout
 
 \begin_layout Standard
@@ -1069,14 +1081,8 @@ reference "subsec:Streaming-SIMD-Extensions"
  
 \end_layout
 
-\begin_layout Standard
-Ein weiterer wichtiger Punkt ist die Forderung einer offenen objektorientierten
- Softwarestruktur, um eine spätere Erweiterbarkeit zu gewährleisten.
- 
-\end_layout
-
 \begin_layout Paragraph*
-Zielsetzung
+Zielsetzung:
 \end_layout
 
 \begin_layout Standard
@@ -1147,9 +1153,8 @@ mierung
 Der erste Punkt umfasst die Entwicklung und Integration eines CO-Kriging-Ersatzm
 odells für die AutoOpti-Umgebung.
  In der hier beschriebenen Umsetzung werden alle Kriging Verfahren (Ordinary-,
- Gradient-Enhanced-,CO-Kriging) in einer Softwarestruktur untergebracht
- und zum anderen werden auch Klassifikatoren wie z.B.
- Supporting-Vector-Machines in die Software implementiert.
+ Gradient-Enhanced-,CO-Kriging) und auch Klassifikatoren wie z.B.
+ Supporting-Vector-Machines in einer Softwarestruktur untergebracht.
  Hierfür wird eine moderne Interface-basierte Programmierung verwendet.
  Die in der Literatur beschriebenen Programme beschränken sich in der Regel
  auf einzelne Ersatzmodelle welche oftmals in Frameworks wie Matlab (siehe

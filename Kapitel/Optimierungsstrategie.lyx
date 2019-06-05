@@ -83,9 +83,9 @@ name "chap:Optimierungsstrategie"
 \end_layout
 
 \begin_layout Standard
-In diesem Kapitel erfolgt eine erste Einführung in die Turbomaschinenoptimierung.
+In diesem Kapitel erfolgt eine Einführung in die Turbomaschinenoptimierung.
  Hierfür werden im ersten Teil allgemeine Grundlagen und Begrifflichkeiten
- erklärt, wobei ein Grundwissen über Optimierung vorausgesetzt wird.
+ erklärt, wobei ein Grundwissen über Optimierungen vorausgesetzt wird.
  Im zweiten Teil werden die Besonderheiten und die damit verbundenen Schwierigke
 iten der Optimierung von Turbomaschinen erläutert.
  Darauf aufbauend wird im dritten Teil dieses Kapitels die bisher im DLR
@@ -120,7 +120,7 @@ name "subsec:OptiDisziplinen"
 \end_layout
 
 \begin_layout Paragraph*
-Aerodynamik
+Aerodynamik:
 \end_layout
 
 \begin_layout Standard
@@ -154,7 +154,7 @@ key "anderson1995computational,Braunling2004,schlichting2006grenzschicht"
 \end_layout
 
 \begin_layout Paragraph*
-Strukturmechanik
+Strukturmechanik:
 \end_layout
 
 \begin_layout Standard
@@ -181,7 +181,7 @@ key "Braunling2004,zienkiewicz2005finite,gere1965analysis,przemieniecki1985theor
 \end_layout
 
 \begin_layout Paragraph*
-Aeroelastik
+Aeroelastik:
 \end_layout
 
 \begin_layout Standard
@@ -191,13 +191,13 @@ anik angesehen werden.
  Hierbei handelt es sich um eine aeroelastische Instabilität, die durch
  die Wechselwirkung einer Schaufelschwingung mit den dadurch hervorgerufenen,
  instationären Druckverteilungen auf den Schaufeln verursacht wird.
- Diese instationären aerodynamischen Druckverteilungen können die auslösende
- Schwingung entweder dämpfen oder anfachen.
+ Diese instationären aerodynamischen Druckverteilungen können die Schwingung
+ entweder dämpfen oder anfachen.
  Im letzten Fall treten selbsterregte Schwingungen auf (Eigenschwingungen)
  und die Schaufel wird instabil.
- Die hierfür notwendigen Berechnungen sind allerdings mit so hohem numerischem
- Aufwand verbunden, dass diese oftmals erst nach einer Optimierung für ausgewähl
-te Geometrien durchgeführt werden.
+ Die hierfür notwendigen Berechnungen sind allerdings mit hohem numerischem
+ Aufwand verbunden, sodass diese erst nach einer Optimierung für ausgewählte
+ Geometrien durchgeführt werden.
  Einen umfassenden Überblick dazu bieten: 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -209,7 +209,7 @@ key "Hodges2011,bisplinghoff1957aeroelasticity,sechler1952elasticity"
 \end_layout
 
 \begin_layout Paragraph*
-Aeroakustik
+Aeroakustik:
 \end_layout
 
 \begin_layout Standard
@@ -346,11 +346,9 @@ Flowparameter
 
 \begin_layout Standard
 Wird mit einem Satz freier Parameter beispielsweise eine Verdichtergeometrie
- erzeugt und diese im Anschluss dann mit einem aeromechanisch bewertet,
- so entstehen durch das nachfolgende Post-Processing eine Vielzahl von Ergebnisg
-rößen.
- Oftmals werden hier hunderte bis tausende an Ergebnisgrößen pro Simulation
- erzeugt.
+ erzeugt und diese im Anschluss aeromechanisch bewertet, so entstehen durch
+ das nachfolgende Post-Processing eine Vielzahl von Ergebnisgrößen.
+ Oftmals werden hunderte bis tausende an Ergebnisgrößen pro Simulation erzeugt.
  Als Flowparameter bezeichnet man alle Ergebnisgrößen, welche von den genutzten
  numerischen Verfahren erzeugt und im Optimierungsprozess abgespeichert
  werden.
@@ -370,14 +368,6 @@ Individuum (auch
 \end_inset
 
 Member
-\begin_inset Quotes grd
-\end_inset
-
-, Stützstelle oder 
-\begin_inset Quotes gld
-\end_inset
-
-Sample
 \begin_inset Quotes grd
 \end_inset
 
@@ -436,7 +426,7 @@ Aus der Formulierung wird ersichtlich, dass dieser Ansatz die Möglichkeit
  verwendet.
  Damit können mehrere Ziele gleichzeitig optimiert werden, ohne diese gegeneinan
 der zu gewichten und so eine Menge an optimalen Lösungen zu finden.
- Der Paretorang soll im folgenden erläutert werden.
+ 
 \end_layout
 
 \begin_layout Paragraph*
@@ -470,9 +460,10 @@ key "pareto1964cours,ehrgott2005multicriteria,miettinen2012nonlinear,Voss2008"
 , falls bzgl.
  aller Zielfunktionen gilt: 
 \begin_inset Formula 
-\begin{equation}
-M_{1}\prec M_{2}\Longleftrightarrow y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\label{eq:Dominanz}
-\end{equation}
+\begin{align}
+M_{1}\prec M_{2}\Longleftrightarrow & y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \label{eq:Dominanz}\\
+ & \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)
+\end{align}
 
 \end_inset
 
@@ -555,8 +546,9 @@ reference "eq:Dominanz"
 ) muss daher erweitert werden zu:
 \begin_inset Formula 
 \begin{align}
-M_{1}\prec M_{2}\Longleftrightarrow & d\left(M_{1}\right)<d\left(M_{2}\right)\vee\left[d\left(M_{1}\right)\leq d\left(M_{2}\right)\wedge\right.\label{eq:Domianzn}\\
- & \left.\left(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right)\right)\right]\nonumber 
+M_{1}\prec M_{2}\Longleftrightarrow & d\left(M_{1}\right)<d\left(M_{2}\right)\vee\left[d\left(M_{1}\right)\leq d\left(M_{2}\right)\right.\label{eq:Domianzn}\\
+ & \wedge(y_{i}\left(M_{1}\right)\leq y_{i}\left(M_{2}\right)\forall i\in\left\{ 1,...,z\right\} \nonumber \\
+ & \left.\wedge\exists j\in\left\{ 1,...,z\right\} :y_{j}\left(M_{1}\right)<y_{j}\left(M_{2}\right))\right]
 \end{align}
 
 \end_inset
@@ -587,7 +579,8 @@ reference "eq:Domianzn"
 \end_inset
 
  hat bei der Bestimmung des Paretorangs die Erfüllung der Nebenbedingungen
- Vorrang vor den Zielfunktionswerten 
+ Vorrang vor den Zielfunktionswerten.
+ 
 \end_layout
 
 \begin_layout Section
@@ -610,7 +603,7 @@ Die Auslegung und damit auch Optimierung von Turbomaschinen stellt eine
 \end_layout
 
 \begin_layout Paragraph*
-Mehrere Disziplinen
+Mehrere Disziplinen:
 \end_layout
 
 \begin_layout Standard
@@ -626,7 +619,7 @@ edlichen Quellen stammt.
 \end_layout
 
 \begin_layout Paragraph*
-Mehrere Zielfunktionen und Nebenbedingungen
+Mehrere Zielfunktionen und Nebenbedingungen:
 \end_layout
 
 \begin_layout Standard
@@ -656,7 +649,7 @@ ngen während der laufenden Optimierung zulassen.
 \end_layout
 
 \begin_layout Paragraph*
-Gradienteninformation
+Gradienteninformation:
 \end_layout
 
 \begin_layout Standard
@@ -685,7 +678,7 @@ dige Gradienteninformationen verarbeiten können muss.
 \end_layout
 
 \begin_layout Paragraph*
-Konvergenz der verwendeten Programme
+Konvergenz der verwendeten Programme:
 \end_layout
 
 \begin_layout Standard
@@ -710,7 +703,7 @@ reference "fig:OptiStandardProcess"
 \end_layout
 
 \begin_layout Paragraph*
-Lange Prozesskettenzeiten
+Lange Prozesskettenzeiten:
 \end_layout
 
 \begin_layout Standard
@@ -736,7 +729,7 @@ Ein Optimierungsverfahren sollte also mit so wenig Berechnungen wie möglich
 \end_layout
 
 \begin_layout Paragraph*
-Hochdimensionaler Suchraum
+Hochdimensionaler Suchraum:
 \end_layout
 
 \begin_layout Standard
@@ -809,7 +802,7 @@ key "Siller2009"
 \end_inset
 
 .
- Einen Suchraum dieser Größe ausreichend zu samplen, ist bei den vorhandenen
+ Einen Suchraum dieser Größe ausreichend abzutasten, ist bei den vorhandenen
  Prozesskettenzeiten unmöglich.
  Der Optimierungsprozess muss speziell für eine so große Parameteranzahl
  ausgelegt sein, um ausgehend von einer Initialisierung möglichst schnell
@@ -841,10 +834,11 @@ name "sec:Automatisierte-Optimierung-imDLR"
 \end_layout
 
 \begin_layout Standard
-Auf die Optimierungssoftware AutoOpti wurde bereits mehrfach Bezug genommen
- und in diesem Abschnitt soll der bisherige Stand von AutoOpti dokumentiert
- und erläutert werden.
- Dieser bildet die Basis für die in dieser Arbeit entwickelten Methoden.
+Auf die Optimierungssoftware AutoOpti wurde bereits Bezug genommen.
+ Daher wird in diesem Abschnitt soll der bisherige Stand von AutoOpti dokumentie
+rt und erläutert.
+ Dies ist notwendig, da die hier entwickelten Verfahren innerhalb dieser
+ Optimierungsumgebung implementiert wurden.
  
 \end_layout
 
@@ -909,13 +903,14 @@ tung sowie die Erzeugung neuer Individuen unabhängig voneinander agieren.
 \end_layout
 
 \begin_layout Itemize
-Der Root-Prozess ist für die Verwaltung und Steuerung der Optimierung zuständig.
+Der Master-Prozess ist für die Verwaltung und Steuerung der Optimierung
+ zuständig.
  
 \end_layout
 
 \begin_layout Itemize
 Die Slave-Prozesse dienen zur Berechnung der Prozesskette und werden vom
- Root-Prozess gestartet und gesteuert.
+ Master-Prozess gestartet und gesteuert.
  Meist wird innerhalb einer Prozesskette eine Geometrie erzeugt und diese
  dann mit den numerischen Simulationsverfahren bewertet.
  Damit übernehmen die Slave-Prozesse den numerisch aufwendigen Teil der
@@ -947,7 +942,7 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1009,7 +1004,7 @@ key "McKay1979"
 \end_layout
 
 \begin_layout Itemize
-Mutation eines intialen Individuums
+Mutation eines initialen Individuums
 \end_layout
 
 \begin_layout Standard
@@ -1053,7 +1048,7 @@ Eine mögliche Lösung bietet das dritte Verfahren.
 \begin_layout Standard
 Der eigentliche Optimierungsprozess startet nach der Initialisierungsphase
  mit der bereits erzeugten initialen Datenbank.
- Der Root-Prozess erzeugt einen oder mehrere vielversprechende Parametersätze
+ Der Master-Prozess erzeugt einen oder mehrere vielversprechende Parametersätze
  auf Basis der bereits vorhandenen Individuen.
  Für die Erzeugung dieser neuen Parametersätze gibt es zahlreiche Verfahren,
  welche die Geschwindigkeit und den Konvergenzverlauf der Optimierung maßgeblich
@@ -1079,7 +1074,7 @@ reference "subsec:Ersatzmodellbeschleunigung"
 \end_layout
 
 \begin_layout Standard
-Nachdem der Root-Prozess einen vielversprechenden Parametersatz generiert
+Nachdem der Master-Prozess einen vielversprechenden Parametersatz generiert
  hat, muss dieser zur Berechnung an einen freien Slave-Prozess verschickt
  werden.
  Die Kommunikation findet bei AutoOpti über ein gemeinsames Dateisystem
@@ -1092,7 +1087,7 @@ Nachdem der Root-Prozess einen vielversprechenden Parametersatz generiert
 \end_layout
 
 \begin_layout Standard
-Nachdem der Root-Prozess die neuen Parametersätze an die Slave-Prozesse
+Nachdem der Master-Prozess die neuen Parametersätze an die Slave-Prozesse
  verschickt hat, können diese die Prozesskette durchlaufen.
  Bei erfolgreicher Ausführung der Prozesskette müssen alle relevanten Ergebnisse
  in einer Datei bereit gestellt werden.
@@ -1104,23 +1099,23 @@ Nachdem der Root-Prozess die neuen Parametersätze an die Slave-Prozesse
 
 \begin_layout Paragraph*
 5.
- Slave-Prozesse senden die Ergebnisse an den Root-Prozess:
+ Slave-Prozesse senden die Ergebnisse an den Master-Prozess:
 \end_layout
 
 \begin_layout Standard
 Die Slave-Prozesse schicken die berechneten Flowparameter zurück an den
- Root-Prozess.
+ Master-Prozess.
  Die Kommunikation findet auch hier über ein gemeinsames Dateisystem statt.
  
 \end_layout
 
 \begin_layout Paragraph*
 6.
- Auswertung der Ergebnisse durch den Root-Prozess:
+ Auswertung der Ergebnisse durch den Master-Prozess:
 \end_layout
 
 \begin_layout Standard
-Aus den vom Slave bereitgestellten Flowparametern berechnet der Root Prozess
+Aus den vom Slave bereitgestellten Flowparametern berechnet der Master-Prozess
  nun die Zielfunktionen, Nebenbedingungen und daraus auch das Gütekriterium.
  Ein möglicher Gütewert wäre hier der Paretorang (siehe Kapitel 
 \begin_inset CommandInset ref
@@ -1130,9 +1125,9 @@ reference "subsec:OptimierungsBegriffe"
 \end_inset
 
 ).
- Nachdem diese Werte bestimmt worden sind, trägt der Root-Prozess das Individuum
- gemäß seiner Güte in die Datenbank ein.
- Danach springt der Root-Prozess wieder zu Punkt 2.
+ Nachdem diese Werte bestimmt worden sind, trägt der Master-Prozess das
+ Individuum gemäß seiner Güte in die Datenbank ein.
+ Danach springt der Master-Prozess wieder zu Punkt 2.
 \end_layout
 
 \begin_layout Subsection
@@ -1164,7 +1159,7 @@ Im vorhergehenden Abschnitt wurde der grundlegende Ablauf einer Optimierung
  In der Kombination mit den großen Parameterräumen und langen Prozesskettenzeite
 n wäre eine solche Optimierung nicht mehr rentabel.
  Um den Gesamtprozess zu beschleunigen, versucht man die Individuenerzeugung
- im Root-Prozess (siehe Abbildung 
+ im Master-Prozess (siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:OptiStandardProcess"
@@ -1362,9 +1357,9 @@ Flowparametern
 \end_layout
 
 \begin_layout Standard
-Das Training kann entweder synchron durch den Root-Prozess geschehen oder
+Das Training kann entweder synchron durch den Master-Prozess geschehen oder
  asynchron durch einen eigenen Prozess.
- Bei der synchronen Variante trainiert der Root-Prozess die Ersatzmodelle
+ Bei der synchronen Variante trainiert der Master-Prozess die Ersatzmodelle
  und ist in dieser Zeit blockiert.
  Wird in dieser Zeit ein Slave-Prozess frei, so muss dieser warten bis das
  Training beendet ist.
@@ -1372,7 +1367,7 @@ Das Training kann entweder synchron durch den Root-Prozess geschehen oder
 
 \begin_layout Standard
 Bei der asynchronen Variante wird das Training in einem externen Prozess
- gestartet und der Root-Prozess verwendet für die benötigten Vorhersagen
+ gestartet und der Master-Prozess verwendet für die benötigten Vorhersagen
  dann immer die jeweils vorliegenden Modelle.
  
 \end_layout

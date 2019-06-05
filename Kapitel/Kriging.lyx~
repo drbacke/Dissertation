@@ -859,7 +859,18 @@ Kriging ist ein linearer erwartungstreuer Schätzer, was bedeutet, dass der
 \nonumber \\
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[Z_{g}^{*}\left(\vec{x}\right)\right]=0\nonumber \\
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\vec{Z}_{i}^{T}\vec{w}_{i}(g\vec{,x})\right]=0\nonumber \\
-\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}(\vec{x}_{j})w_{i,j}(g\vec{,x})\right]=0\nonumber \\
+\Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-E\left[\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}Z_{i}(\vec{x}_{j})w_{i,j}(g\vec{,x})\right]=0\nonumber 
+\end{align}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula 
+\begin{align}
 \Leftrightarrow & E\left[Z_{g}\left(\vec{x}\right)\right]-\sum_{i=1}^{s}\sum_{j=1}^{n_{i}}E\left[Z_{i}(\vec{x}_{j})\right]w_{i,j}(g\vec{,x})=0\label{eq:ErwartungswertZXCoKriging}
 \end{align}
 
@@ -1940,8 +1951,8 @@ Die Trainingszeiten steigen an, da die gesamte Kovarianzmatrix Cholesky-zerlegt
  werden muss und der zu trainierende Hyperparameterraum deutlich größer
  ist.
  In den hier betrachteten Turbomaschinen-Anwendungsfällen sind die Prozessketten
-zeiten allerdings so dominant, dass die Trainingszeit immernoch keine wesentlich
-e Rolle spielt (siehe Kapitel 
+zeiten allerdings so dominant, dass die Trainingszeit keine wesentliche
+ Rolle spielt (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Reale-Turbomaschinen-Optimierung-1"

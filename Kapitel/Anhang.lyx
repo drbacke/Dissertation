@@ -2135,7 +2135,7 @@ In Matrix-Schreibweise ergibt sich die folgende Formulierung, wobei
 \end_layout
 
 \begin_layout Subsection
-Kovarianz zwischen Vorhersagen Gewichtsformulierung
+Kovarianz zwischen Vorhersagen: Allgemeine Formulierung
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:Kovarianz-zwischen-Vorhersagen"
@@ -2169,7 +2169,7 @@ cov\left(Z_{g_{1}}^{*}\left(\vec{x_{1}}\right),Z_{g_{2}}^{*}\left(\vec{x_{2}}\ri
 \end_layout
 
 \begin_layout Subsection
-Kovarianz zwischen Vorhersagen
+Kovarianz zwischen Vorhersagen: Gewichte eingesetzt
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:AnhangKovarianz-zwischen-Vorhersagen"
@@ -3705,46 +3705,6 @@ Die Formel lässt sich damit weiterhin vereinfachen:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Grundbegriffe der Informatik
-\end_layout
-
-\begin_layout Standard
-Klasse
-\end_layout
-
-\begin_layout Standard
-Geheimnissprinzip
-\end_layout
-
-\begin_layout Standard
-Methoden (Getter und Setter Methoden)
-\end_layout
-
-\begin_layout Standard
-Attribute
-\end_layout
-
-\begin_layout Standard
-Objekt -> Instanz und Instantiierung
-\end_layout
-
-\begin_layout Standard
-UML Diagramm
-\end_layout
-
-\begin_layout Standard
-SIMD
-\end_layout
-
-\begin_layout Standard
-CPU-Cache (Levels)
-\end_layout
-
-\begin_layout Standard
-Interface basierte Programmierung
 \end_layout
 
 \begin_layout Subsection
@@ -8845,8 +8805,7 @@ Benchmark der besten Verteilung mehrerer Trainings mit 1000 Samples auf
 \end_layout
 
 \begin_layout Subsection
-Benchmark Rückwärtsdiff.
- Likelihood 
+Benchmark Rückwärtsdifferenzierung Likelihood 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Rückwärtsdifferenzierung-des-LikelihoodBenchmark"

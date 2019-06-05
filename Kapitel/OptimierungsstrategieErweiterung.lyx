@@ -957,6 +957,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../images/Opti_Surrogate_Multifidelity2.eps
+	lyxscale 140
 	scale 60
 
 \end_inset
@@ -1681,7 +1682,6 @@ status open
 	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
 	scale 40
 	BoundingBox 60bp 50bp 714bp 535bp
-	clip
 
 \end_inset
 
@@ -2576,6 +2576,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/MultifidelityKapitel/BeschleunigungVerz_1.pdf
+	scale 70
 
 \end_inset
 

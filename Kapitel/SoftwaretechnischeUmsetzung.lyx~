@@ -84,7 +84,7 @@ name "chap:Implementierung-der-DLR-Kriging-"
 
 \begin_layout Standard
 Innerhalb dieser Arbeit wurde eine Kriging-Software entwickelt und die Implement
-ierung eines Multifidelity-Verfahrens in AutoOpti vorgenommen.
+ierung des hier vorgestellten Multifidelity-Verfahrens vorgenommen.
  Im ersten Teil dieses Kapitels werden die verwendete Modellierung der Kovarianz
 funktion, die Behandlung von verrauschten Funktionen und eine mögliche Regularis
 ierung der Kovarianzmatrix beschrieben.
@@ -322,9 +322,6 @@ Sei
 
  wird als Semivariogramm bezeichnet.
  Weiterhin wird das Kovariogramm wie folgt definiert:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 cov\left(\vec{x}_{1},\vec{x}_{2}\right)\coloneqq\frac{1}{2}var\left[Z\left(\vec{x_{1}}\right)\right]+\frac{1}{2}var\left[Z\left(\vec{x_{2}}\right)\right]-\gamma\left(\vec{x}_{1},\vec{x}_{2}\right)\label{eq:CovMAsdas}
@@ -2258,10 +2255,12 @@ status open
 
 \begin_layout Plain Layout
 \noindent
-\align center
+\align left
 \begin_inset Graphics
 	filename ../images/KrigingKapitel/KonstantenRauschFunktionPunkte.eps
-	scale 40
+	scale 42
+	BoundingBox 15bp 213bp 792bp 584bp
+	clip
 
 \end_inset
 
@@ -2354,28 +2353,78 @@ reference "fig:RauschBeispielVarianzDiag"
 \begin_inset Formula $\sigma^{2}+\lambda=1$
 \end_inset
 
-, was dann wiederum der Varianz des Erzeugungsprozesses entspricht.
+, was dann wiederum der Varianz des Erzeugungsprozesses entspricht.Das hier
+ gezeigte Verhalten entspricht also den Erwartungen.
+ Allerdings kann dies bei einer geringeren Datenlage oder einer komplexeren
+ Funktion dazu führen, dass der Diagonalaufschlag deutlich überschätzt wird.
+ Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
+ Funktion des Trainings verfügbar sein.
+ 
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
+\noindent
+\align left
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "60col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align left
+\begin_inset Graphics
+	filename ../images/KrigingKapitel/DiagonalLikelihoodVarianz.eps
+	scale 49.5
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace*{\fill}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "24col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 \align center
-\begin_inset Graphics
-	filename ../images/KrigingKapitel/DiagonalLikelihood.eps
-	scale 60
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../images/KrigingKapitel/DiagonalVarianz.eps
-	scale 60
-
-\end_inset
-
-
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2407,13 +2456,9 @@ name "fig:RauschBeispielVarianzDiag"
 
 \end_layout
 
-\begin_layout Standard
-Das hier gezeigte Verhalten entspricht also den Erwartungen.
- Allerdings kann dies bei einer geringeren Datenlage oder einer komplexeren
- Funktion dazu führen, dass der Diagonalaufschlag deutlich überschätzt wird.
- Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
- Funktion des Trainings verfügbar sein.
- 
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -2605,9 +2650,8 @@ Es gilt: Bei Kenntnis der Stützstellen
 \end_inset
 
  maximieren.
-\end_layout
+\shape default
 
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 \max_{h_{1},...,h_{o}}L(\vec{h})=\max_{h_{1},...,h_{o}}\left(\frac{1}{\left(2\pi\right)^{\frac{n}{2}}\det\left(\mathbf{Cov}\mathrm{(\vec{h})}\right)^{\frac{1}{2}}}e^{-\frac{1}{2}\left(\vec{y}_{s}-\vec{F}(\vec{h})\right)^{T}\mathbf{\mathbf{Cov}\mathrm{(\vec{h})}{}^{\textrm{-1}}}\left(\vec{y}_{s}-\vec{F}(\vec{h})\right)}\right)
@@ -3142,264 +3186,6 @@ ktion aufweist.
 \end_layout
 
 \begin_layout Subsubsection*
-\begin_inset Note Note
-status open
-
-\begin_layout Subsubsection*
-Zufällige Initialisierung der Hyperparameter mit Vererbung
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:RandomInit2"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Wrap table
-lines 0
-placement O
-overhang 0in
-width "52col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Zeichen
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sigma_{search}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Korrelationsl.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\vec{\theta}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $0.05\left|\theta_{max}-\theta_{min}\right|$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Varianzen
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $0.25$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Skalierung
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $a$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $0.1$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "tab:Kategorien-von-Hyperparametern-1"
-
-\end_inset
-
-Kategorien von Hyperparametern und die verwendete Suchbreite
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-Um das zufällige Initialisierungsverfahren zu beschleunigen, wird jeweils
- nur ein Wert für die Korrelationslängen einer Gütestufe 
-\begin_inset Formula $k\in\{1,...,s\}$
-\end_inset
-
- angenommen:
-\begin_inset Formula 
-\begin{equation}
-\theta_{k}=\theta_{i,k}\forall i\in\{1,...,o\}
-\end{equation}
-
-\end_inset
-
-Nachdem ein erster erfolgreicher Parametersatz 
-\begin_inset Formula $\theta_{k,best}$
-\end_inset
-
- gefunden wurde, wird ausgehend von diesem Satz normalverteilt variiert.
- Dadurch kann eine schnellere Konvergenz erreicht werden.
-\begin_inset Formula 
-\begin{equation}
-\theta_{k}=\mathcal{N}(\theta_{k,best},\sigma_{search})
-\end{equation}
-
-\end_inset
-
-Die Standardabweichung 
-\begin_inset Formula $\sigma_{search}$
-\end_inset
-
- der Normalverteilung gibt in diesem Fall die Suchbreite an.
- Je größer der Wert, desto weiträumiger wird gesucht.
- Der Skalierungsfaktor 
-\begin_inset Formula $a$
-\end_inset
-
- und die Prozessvarianzen werden auf dieselbe Art und Weise variiert.
- Tabelle 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:Kategorien-von-Hyperparametern-1"
-
-\end_inset
-
- stellt die Suchweiten dar, wobei diese auf Erfahrungswerten beruhen.
- Der Skalierungsfaktor und auch die Prozessvarianz werden bei der Initialisierun
-g mit 
-\begin_inset Formula $\sigma^{2}=1;a=1$
-\end_inset
-
- belegt.
- Die Initialisierung der Prozessvarianz folgt aufgrund der Standardisierung
- aus Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:NormalisierungYs"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
 Initialisierung auf Basis bereits vorhandener Krigingmodelle
 \begin_inset CommandInset label
 LatexCommand label
@@ -3437,72 +3223,16 @@ t
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 31
-placement o
-overhang 0in
-width "45col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/UltraRestart/Vergleich.png
-	lyxscale 15
-	scale 15
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../images/UltraRestart/VergleichTrainingsZeit.png
-	lyxscale 15
-	scale 15
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:RestartRandomLikelihood"
-
-\end_inset
-
-Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
- eine Testoptimierung
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Im ersten Fall besteht die Gefahr, dass das Training durch die ungünstige
  Initialisierung in einem lokalen Minimum bleibt und so nicht die optimalen
  Hyperparameter findet.
  Das wiederum führt zu schlechten Vorhersagen.
  Im Extremfall kann es sogar passieren, dass das lokale Minimum während
  der gesamten Optimierung nicht mehr verlassen wird.
- 
-\end_layout
-
-\begin_layout Standard
-Der zweite Fall ist insbesondere am Anfang der Optimierung interessant,
+ Der zweite Fall ist insbesondere am Anfang der Optimierung interessant,
  da dann nur wenig Samples verfügbar sind und somit die Schätzung der Hyperparam
 eter noch stark variiert.
- 
-\end_layout
-
-\begin_layout Standard
-Das in dieser Arbeit neu entwickelte Initialisierungsverfahren stellt eine
+ Das in dieser Arbeit neu entwickelte Initialisierungsverfahren stellt eine
  hybride Form der zufälligen Initialisierung und der Verwendung alter Modelle
  dar.
  Ein Kriterium entscheidet darüber, ob ein altes Kriging-Modell verwendet
@@ -3517,8 +3247,7 @@ Das in dieser Arbeit neu entwickelte Initialisierungsverfahren stellt eine
  ins Gewicht.
  Es werden im weiteren Verlauf noch einige Beispiele gezeigt, die den Nutzen
  dieses Verfahrens belegen.
- Der in AutoOpti verwendete Algorithmus wird durch folgenden Pseudcode beschrieb
-en:
+ Der verwendete Algorithmus wird durch folgenden Pseudcode beschrieben:
 \begin_inset listings
 lstparams "numbers=left,basicstyle={\scriptsize},tabsize=4"
 inline false
@@ -3623,6 +3352,41 @@ dann initType = random
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/UltraRestart/Vergleich.eps
+	scale 39
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RestartRandomLikelihood"
+
+\end_inset
+
+Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
+ eine Testoptimierung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Der Algorithmus startet mit dem Auslesen der Dateinamen der letzten 20 Krigingmo
 delle aus der laufenden Optimierung (Zeile 2).
  Sind noch keine 20 Krigingmodelle erzeugt worden, soll die Initialisierung
@@ -3655,11 +3419,7 @@ reference "sec:COKrigingTraining"
  Dies ist oft am Anfang einer Optimierung der Fall, wenn noch nicht genügend
  Daten vorhanden sind.
  Dieses Verfahren wird in der hier entwickelten Software als Standard verwendet.
- 
-\end_layout
-
-\begin_layout Standard
-Abbildung 
+ Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:RestartRandomLikelihood"
@@ -3881,7 +3641,7 @@ lines 0
 placement o
 overhang 0in
 width "45col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -10087,7 +9847,7 @@ lt.
  rentabel sein kann.
  Die oftmals vertretene Meinung, dass viele Algorithmen aufgrund der schlechten
  Parallelisierbarkeit besser auf CPUs ausführbar sind, stimmt nur noch bedingt
- bis garnicht, da moderne CPUs auch auf SIMD Befehle mit vielen Recheneinheiten
+ bis garnicht, da moderne CPUs auch auf SIMD-Befehle mit vielen Recheneinheiten
  zurückgreifen (siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
