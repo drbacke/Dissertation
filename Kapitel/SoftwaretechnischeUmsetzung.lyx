@@ -232,9 +232,9 @@ Um ein solches Modell praktisch nutzbar zu machen, müssen drei verschiedene
 \end_layout
 
 \begin_layout Enumerate
-Die Definition der Ortsabhängigkeit der Kovarianzfunktion, beispielsweise
- kann diese nur abhängig vom Radius (radiale Basisfunktionen) sein oder
- nur durch den Verbindungsvektor 
+Die Definition der Ortsabhängigkeit der Kovarianzfunktion: Beispielsweise
+ kann die Kovarianz nur abhängig vom Radius (radiale Basisfunktionen) sein
+ oder nur durch den Verbindungsvektor 
 \begin_inset Formula $\triangle\vec{x}=\vec{x}_{1}-\vec{x_{2}}$
 \end_inset
 
@@ -449,11 +449,7 @@ reference "fig:Beispielhaftes-VarioKovariogramm"
 
  grafisch dargestellt.
  Der Einfachheit halber beschränkt sich das gezeigte Kovariogramm auf eine
- räumliche Dimension 
-\begin_inset Formula $\vec{x},\triangle\vec{x}\in\mathbb{R^{\textrm{k}}}$
-\end_inset
-
-.
+ räumliche Dimension.
 \end_layout
 
 \begin_layout Standard
@@ -573,9 +569,6 @@ reference "eq:KovariogrammGrundformel"
 \end_inset
 
  umformulieren zu:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 cov(\triangle\vec{x})=\sigma^{2}+\lambda\delta(\triangle\vec{x})-2\gamma(\triangle\vec{x})\label{eq:KovarianzmodellAllgemein}
@@ -1371,8 +1364,8 @@ reference "eq:asdasd"
 \begin_inset Formula $\mathbf{\widetilde{R}}\in\mathbb{R}^{n\times n}$
 \end_inset
 
- für die Konditionierung der Matrix ableiten, welcher einer reinen Einsmatrix
- entspricht.
+ für die Konditionierung der Matrix ableiten, welcher einer Einsmatrix entsprich
+t.
 \begin_inset Formula 
 \begin{align}
 \mathbf{Cov} & =\sigma^{2}\left[\begin{array}{ccc}
@@ -1578,14 +1571,7 @@ Die Werte
 \begin_inset Formula $\lambda_{min}$
 \end_inset
 
- (siehe Gleichung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:DiagonalSchätzungCoKriging"
-
-\end_inset
-
-) permanent.
+ permanent.
  Für dieses Problem sind zwei Lösungen möglich:
 \end_layout
 
@@ -1633,8 +1619,8 @@ reference "sec:COKrigingTraining"
 \end_layout
 
 \begin_layout Standard
-Aus diesem Grund wird die zweite Variante gewählt, also die untere Grenze
- nur initial eingestellt und nur noch dann verändert, wenn numerische Probleme
+Aus diesem Grund wird hier die zweite Variante gewählt, also die untere
+ Grenze initial eingestellt und nur dann verändert, wenn numerische Probleme
  während des Trainings auftreten.
  Ein geeigneter Wert für die obere Grenze der Konditionszahl liegt erfahrungsgem
 äß bei 
@@ -1704,8 +1690,8 @@ reference "subsec:Kovarianz-parametrisiertes-Model"
 \end_inset
 
 ).
- Deswegen ist der Diagonalaufschlag für diesen Fall als Hyperparameter zu
- behandeln und muss mit trainiert werden.
+ Deswegen wird der Diagonalaufschlag als Hyperparameter mit Untergrenze
+ behandelt und muss mit trainiert werden.
  Die Umsetzung soll folgend gezeigt werden.
  
 \end_layout
@@ -1719,8 +1705,8 @@ reference "chap:MinimierungsverfahrenTraining"
 
 \end_inset
 
-) zu verwenden, müssen noch die Ableitungen der Kovarianzfunktionen nach
- den Rauschtermen gebildet werden.
+) zu verwenden, müssen die Ableitungen der Kovarianzfunktionen nach den
+ Rauschtermen gebildet werden.
  Diese sind in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2327,8 +2313,8 @@ reference "fig:RauschBeiespielDiagonalaufschlagVarianz"
 \end_inset
 
  zeigt für verschiedene Diagonalaufschläge den resultierenden Likelihood-Wert,
- wobei ein kleiner Likelihood ein besseres Ergebnis darstellt.
- Das Ergebnis zeigt, dass der Likelihood-Wert für einem Diagonalaufschlag
+ wobei ein kleiner Likelihood ein besseres Resultat darstellt.
+ Die Abbildung zeigt, dass der Likelihood-Wert für einem Diagonalaufschlag
  im Bereich von 
 \begin_inset Formula $\lambda>0\land\lambda<1$
 \end_inset
@@ -2349,12 +2335,12 @@ reference "fig:RauschBeispielVarianzDiag"
  und der Diagonalaufschlag für den Bereich des optimalen Likelihood-Wertes
  gezeigt.
  Das Ergebnis ist auch hier plausibel, denn in der Summe ergeben die beiden
- Werte immer den Wert 
+ Werte immer Eins 
 \begin_inset Formula $\sigma^{2}+\lambda=1$
 \end_inset
 
-, was dann wiederum der Varianz des Erzeugungsprozesses entspricht.Das hier
- gezeigte Verhalten entspricht also den Erwartungen.
+, was dann wiederum der Varianz des Erzeugungsprozesses entspricht.
+ Das hier gezeigte Verhalten entspricht also den Erwartungen.
  Allerdings kann dies bei einer geringeren Datenlage oder einer komplexeren
  Funktion dazu führen, dass der Diagonalaufschlag deutlich überschätzt wird.
  Aus diesem Grund sollte das Training des Diagonalaufschlags als optionale
@@ -2702,7 +2688,7 @@ reference "eq:LikelihoodMultivariateNorm"
 
 \end_inset
 
- das gleich Maximum.
+ das gleiche Maximum.
  Die Konstanten können ignoriert werden, da diese für das Maximum keine
  Rolle spielen: 
 \begin_inset Formula 
@@ -2815,7 +2801,7 @@ reference "eq:KovarianzfunktionenCoKrigingGauss"
 \end_layout
 
 \begin_layout Standard
-Die Maximierung Likelihood-Funktion in Abhängigkeit der Erwartungswerte
+Die Maximierung der Likelihood-Funktion in Abhängigkeit der Erwartungswerte
  
 \begin_inset Formula $\overrightarrow{F}\in\mathbb{R^{\mathrm{n_{all}}}}$
 \end_inset
@@ -2865,7 +2851,7 @@ MLE\left(\overrightarrow{F}\right)=\max_{\overrightarrow{F}}\left(\frac{1}{\left
 \end_layout
 
 \begin_layout Standard
-Sie 
+Sei 
 \begin_inset Formula $\mathbf{G}\in\mathbb{R^{\mathrm{n_{all}\times s}}}$
 \end_inset
 
@@ -3013,8 +2999,7 @@ Um das Training starten zu können, ist eine geeignete Initialisierung der
  Diese kann die Konvergenz und auch die Stabilität der Minimierung stark
  beeinflussen.
  Innerhalb dieser Arbeit wurden mehrere Ansätze entwickelt um eine geeignete
- Initialisierung zu finden.
- 
+ Initialisierung zu finden, welche folgend vorgestellt werden:
 \end_layout
 
 \begin_layout Subsubsection*
@@ -3022,7 +3007,7 @@ Allgemeine Vorbemerkungen und Definitionen
 \end_layout
 
 \begin_layout Standard
-Mit welcher Anzahl an Stützstellen ein Training initialisiert wird, kann
+Die Anzahl an Stützstellen mit der ein Training initialisiert wird, kann
  dieses wesentlich beeinflussen.
  In 
 \begin_inset CommandInset citation
@@ -3071,7 +3056,7 @@ n vorhanden ist oder nicht.
 \end_layout
 
 \begin_layout Paragraph*
-Normalisierung der Daten
+Standardisierung der Daten
 \end_layout
 
 \begin_layout Standard
@@ -3204,12 +3189,7 @@ Innerhalb einer Optimierung werden permanent neue Stützstellen berechnet.
  trainierten Modellen zur Initialisierung zu verwenden.
  Diese Art der Wiederverwendung von alten Modellen ist für das Kriging Verfahren
  ohne Probleme möglich.
- 
-\end_layout
-
-\begin_layout Standard
-Bei der Wiederverwendung alter Hyperparametersätz müssen jedoch zwei Problemstel
-lungen beachtet werden:
+ Allerdings müssen zwei Problemstellungen beachtet werden:
 \end_layout
 
 \begin_layout Enumerate
@@ -3352,12 +3332,32 @@ dann initType = random
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
+Der Algorithmus startet mit dem Auslesen der Dateinamen der letzten 20 Krigingmo
+delle aus der laufenden Optimierung (Zeile 2).
+ Sind noch keine 20 Krigingmodelle erzeugt worden, soll die Initialisierung
+ zufällig erfolgen (Zeile 3-6), wobei dieser Wert vom Anwender eingestellt
+ werden kann.
+ In der darauf folgenden Schleife findet die Bewertung der einzelnen Kriging
+ Modelle statt.
+ Für die Bewertung muss erst der alte Likelihood-Wert ausgelesen werden.
+ Dies geschieht in Zeile 10.
+ Im nächsten Schritt wird der Likelihood-Wert mit der aktuellen Datenbasis
+ neu berechnet.
+ In der darauffolgenden If-Abfrage geht es darum, das beste Modell der 20
+ eingelesenen Krigingmodelle zu finden.
+ Hierfür wird der beste Likelihood-Wert gesucht (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:COKrigingTraining"
+
+\end_inset
+
+).
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3387,27 +3387,6 @@ Vergleich verschiedener Initialisierungsverfahren und deren Auswirkung auf
 
 \end_inset
 
-Der Algorithmus startet mit dem Auslesen der Dateinamen der letzten 20 Krigingmo
-delle aus der laufenden Optimierung (Zeile 2).
- Sind noch keine 20 Krigingmodelle erzeugt worden, soll die Initialisierung
- zufällig erfolgen (Zeile 3-6), wobei dieser Wert vom Anwender eingestellt
- werden kann.
- In der darauf folgenden Schleife findet die Bewertung der einzelnen Kriging
- Modelle statt.
- Für die Bewertung muss erst der alte Likelihood-Wert ausgelesen werden.
- Dies geschieht in Zeile 10.
- Im nächsten Schritt wird der Likelihood-Wert mit der aktuellen Datenbasis
- neu berechnet.
- In der darauffolgenden If-Abfrage geht es darum, das beste Modell der 20
- eingelesenen Krigingmodelle zu finden.
- Hierfür wird der beste Likelihood-Wert gesucht (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:COKrigingTraining"
-
-\end_inset
-
-).
  Zudem gilt die Bedingung, dass der neu berechnete Likelihood kleiner sein
  muss als der bereits eingelesene aus dem vorhergehenden Modell.
  Die Überlegung ist hierbei, dass eine neue Stützstelle, welche nicht in
@@ -3585,7 +3564,7 @@ Die Schrittweite wird in jedem Iterationsschritt für jeden Hyperparameter
 \end_inset
 
  multipliziert und dadurch erhöht.
- Ist dieses Produkt kleiner als Null ist, dann wird die Schrittweite verkleinert
+ Ist dieses Produkt kleiner als Null, dann wird die Schrittweite verkleinert
  durch Multiplikation mit 
 \begin_inset Formula $\eta^{-}$
 \end_inset
@@ -3992,13 +3971,13 @@ lines 0
 placement o
 overhang 0in
 width "45col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../images/RPROP2/Vergleich.png
-	scale 17
+	filename ../images/RPROP2/RPROP2.eps
+	scale 35
 
 \end_inset
 
@@ -4032,7 +4011,7 @@ Als erstes wird der initiale Likelihood-Wert mit den bisherigen Lernraten
 \begin_inset Formula $\eta^{+}$
 \end_inset
 
- leicht erhöht und verringert und jeweils der Likelihood-Wert bestimmt.
+ leicht erhöht/verringert und jeweils der Likelihood-Wert bestimmt.
  Sollte sich das neue 
 \begin_inset Formula $\eta^{+}$
 \end_inset
@@ -4052,7 +4031,7 @@ Als erstes wird der initiale Likelihood-Wert mit den bisherigen Lernraten
 Für diese Art der Lernratenregelung sind maximal 4 neue Likelihood-Auswertungen
  notwendig, im Gegenzug hat man allerdings eine deutliche Verringerung der
  Iterationsanzahl und muss somit weniger partielle Ableitungen bestimmen.
- Diese sollte insbesondere für das Co-Kriging von großem Vorteil sein.
+ Diese sollte insbesondere für das Co-Kriging von großen Vorteil sein.
 \end_layout
 
 \begin_layout Standard
@@ -4746,9 +4725,7 @@ Es kann vorkommen, dass die Funktionen der Gütestufen so stark korreliert
  wählt.
  Prinzipiell ist dieses Verhalten auch sinnvoll und erwünscht, jedoch interessie
 rt den Anwender letztendlich das Ergebnis hoher Güte.
- Aus diesem Grund wird der Volumenzugewinn im Raum hoher Güte berechnet:
- Mit einem Individuum niedriger Güte kann kein Volumenzugewinn erreicht
- werden, es wird nur das Ersatzmodell verbessert.
+ Aus diesem Grund wird der Volumenzugewinn im Raum hoher Güte berechnet.
 \end_layout
 
 \begin_layout Standard
@@ -4760,7 +4737,7 @@ Daher kann es sinnvoll sein, eine Mindestrate von Individuen hoher Güte
  werden.
  Bei besonders aussichtsreichen Individuen niedriger Güte kann dieser Zwang
  allerdings auch umgangen werden.
- Die Entscheidungsfunktion wird so nur teilweise ausgehebelt.
+ Die Entscheidungsfunktion wird also nur teilweise ausgehebelt.
 \end_layout
 
 \begin_layout Standard
@@ -4772,7 +4749,7 @@ reference "eq:IzuT"
 
 \end_inset
 
-) aufweisen, als alle Individuen der letzten 10 Optimierungsschritte.
+) aufweisen, als alle Individuen der letzten 10 Optimierungsschritte:
 \end_layout
 
 \begin_layout Enumerate
@@ -4841,14 +4818,15 @@ name "sec:Numerische-Effizienz-steigern"
 
 \begin_layout Standard
 Innerhalb dieses Abschnittes werden wichtige softwaretechnische Entwicklungen
- dieser Arbeit vorgestellt, insbesondere der modulare Aufbau der Software,
- der es ermöglicht, verschiedene Verfahren innerhalb einer Software zu implement
-ieren und so Redundanzen zu vermeiden.
- Zudem werden Verfahren vorgestellt, welche die Effizienz der Software steigern
- und auf verschiedenen Hardwarearchitekturen einsetzbar sind.
- Weiterhin wurde eine asynchrone und ausfallsichere Netzwerkbibliothek entwickel
-t, welche es ermöglicht, zahlreiche numerische Operationen asynchron auf
- mehrere Rechner zu verteilen.
+ dieser Arbeit vorgestellt.
+ Insbesondere der modulare Aufbau der Software, der es ermöglicht, verschiedene
+ Verfahren innerhalb einer Software zu implementieren und so Redundanzen
+ zu vermeiden.
+ Darauffolgend werden Verfahren vorgestellt, welche die Effizienz der Software
+ steigern und auf verschiedenen Hardwarearchitekturen einsetzbar sind.
+ Am Ende des Abschnitts wird eine im Rahmen dieser Arbeit entwickelte asynchrone
+ und ausfallsichere Netzwerkbibliothek vorgestellt, welche es ermöglicht,
+ zahlreiche numerische Operationen asynchron auf mehrere Rechner zu verteilen.
 \end_layout
 
 \begin_layout Subsection
@@ -4872,7 +4850,7 @@ key "LeGratiet,forrester2007multi"
 \end_inset
 
 ) sind oftmals in Matlab oder ähnlichen Umgebungen realisiert.
- Allerdings entstehen dabei Schwächen in der Performance, der Erweiterbarkeit
+ Dabei entstehen oftmals Schwächen in der Performance, der Erweiterbarkeit
  und bei der Benutzerfreundlichkeit.
  Das hier entwickelte Verfahren wurde von Anfang an auf Erweiterbarkeit
  und Modularität ausgelegt.
@@ -4886,8 +4864,8 @@ key "steimann2016moderne"
 
 ) zum Einsatz.
  Dies ermöglicht eine sehr große Flexibilität und Modularität in der Software,
- was bereits an den zahlreichen integrierten Verfahren und nutzbaren Architektur
-en zu sehen ist.
+ was an den zahlreichen integrierten Verfahren und nutzbaren Architekturen
+ ersichtlich ist.
  Die gewählte Programmiersprache ist C++, wobei der GCC-Compiler ab Version
  4.7 unterstützt wird.
  Eine Kompilierung mit dem Intel Compiler ist ebenfalls ab Version 12.1 möglich.
@@ -4983,8 +4961,9 @@ CorrelationFunction
 \begin_inset Quotes grd
 \end_inset
 
- legt den Aufbau der Kovarianzklassen fest und in den Spezialisierungen
- sind die Implementierungen der einzelnen Kovarianzfunktionen enthalten.
+ ist eine virtuelle Klasse und legt den Aufbau der Kovarianzklassen fest.
+ Die Spezialisierungen entsprechen den Implementierungen der einzelnen Kovarianz
+funktionen.
  Im Rahmen dieser Arbeit wurden die Gauss-, Spline- und Exponential-Kovarianzfun
 ktionen umgesetzt.
  Die Gleichungen der Funktionen und auch deren Ableitungen nach Hyperparametern
@@ -5002,7 +4981,7 @@ reference "subsec:Exponential-Korrelationsfunktion"
 
 \end_inset
 
-,
+, 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Gauss-Korrelationsfunktion-mit"
@@ -5090,7 +5069,7 @@ partialDerNumber
 \end_inset
 
 .
- Die Ergebnisse werden von den Methoden in die Matrix 
+ Die Ergebnisse werden in die Matrix 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5111,12 +5090,7 @@ CovMatrixDer
  dem Gradient-Enhanced- oder dem Co-Kriging, können die Kovarianzmatrizen
  unterschiedliche Strukturen aufweisen.
  Die Position der unterschiedlichen Einträge der Matrix wird daher festgelegt
- und in einem internen assoziativen Container gespeichert.
- Dieser wird zu Anfang des Programms erzeugt und allen Objekten, die Zugriff
- auf die Matrizen nehmen, zur Verfügung gestellt.
- Auf diese Weise werden der Kovarianzfunktion nur zwei Objekte der Point-Klasse
- übergeben und die Kovarianzfunktion schreibt die Ergebnisse direkt an die
- korrekte Stelle der entsprechenden Matrix.
+ und in einem global verfügbaren internen assoziativen Container gespeichert.
  Hierdurch wird der Aufbau der Matrix zentral gespeichert, was mögliche
  Änderungen vereinfacht.
  Zudem ist damit eine effiziente asynchrone Parallelisierung möglich.
@@ -5194,9 +5168,8 @@ Neben der Steuerung der Kovarianzfunktionen übernimmt diese Klasse auch
 \begin_inset Formula $a$
 \end_inset
 
- nicht direkt einer Kovarianzmodellfunktion zugeordnet werden, da er von
- mehreren Kovarianzmodellfunktionen verwendet wird und sollte aus diesem
- Grund in einer übergeordneten Instanz verwaltet werden.
+ nicht direkt einer Kovarianzmodellfunktion zugeordnet werden und sollte
+ aus diesem Grund in einer übergeordneten Instanz verwaltet werden.
  Diese übergeordnete Instanz ist der CorrelationContainer.
  Ebenfalls stellen die Diagonalaufschläge eine Besonderheit dar und werden
  dort ebenfalls zentral verwaltet.
@@ -5239,7 +5212,7 @@ DensityFunction
 \end_inset
 
  und deren Spezialisierungen sollen es ermöglichen, unterschiedliche Interpolati
-ons-/Klassifikations-Verfahren innerhalb des Programms umsetzen zu können.
+ons-/Klassifikations-Verfahren innerhalb des Programms umzusetzen.
  Prinzipiell lassen sich mit dieser Klassenstruktur alle Arten von Verfahren
  einbinden, die die folgenden Merkmale aufweisen:
 \end_layout
@@ -5404,10 +5377,10 @@ MinimizerInterface
 
  beschreibt die Schnittstelle für ein Minimierungsverfahren, wobei fünf
  Spezialisierungen diese Schnittstelle implementieren.
- Die Struktur wird in dem UML-Diagramm in Abbildung 
+ Die Struktur wird in dem UML-Diagramm in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:UML-Diagramm-der-Klasse"
+reference "subsec:UML-Diagramm:-MinimizerInterface"
 
 \end_inset
 
@@ -5436,7 +5409,7 @@ reference "sec:Initialisierung-der-Hyperparamet"
 \end_inset
 
  beschrieben.
- Dabei handelt es sich um zufällige Initialisierungsverfahren.
+ Dabei handelt es sich um zufallsbasierte Initialisierungsverfahren.
  Weiterhin macht die Software keinen Unterschied zwischen einem Trainings-
  und Initialisierungsverfahren, beide Verfahren sind auch als Trainingsverfahren
  zulässig und umgekehrt.
@@ -5667,7 +5640,11 @@ constraintFunctionDerivative
 
  geben einen Restriktionsterm, bzw.
  dessen Ableitung zurück und sind nur optional.
- Die Methode 
+ 
+\end_layout
+
+\begin_layout Standard
+Die Methode 
 \begin_inset Quotes gld
 \end_inset
 
@@ -5726,9 +5703,8 @@ reference "eq:LogLikelihood"
 
 \end_inset
 
-) eines Kriging-Modells sind viele komplexe Matrixoperationen notwendig.
- Die Laufzeiten von Vorhersage und Training hängen hauptsächlich von diesen
- Matrixoperationen ab.
+) eines Kriging-Modells sind viele komplexe Matrixoperationen notwendig
+ von denen die Laufzeit der Vorhersage und des Trainings hauptsächlich abhängt.
  Weiterhin werden diese Modelle innerhalb verschiedenster Hardware-Architekturen
  verwendet, bspw.
  AMD/Intel CPUs und NVidia GPUs.
@@ -6207,7 +6183,7 @@ key "Kueppers2016c"
 
  zu finden.
  Weiterhin wird die Verwendung von GPUs für die Beschleunigung der hier
- entwickelten Ersatzmodelle innerhalb einer Optimierungen in Kapitel 
+ entwickelten Ersatzmodelle innerhalb von Optimierungen in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Verwendung-von-GPGPU"
@@ -6261,7 +6237,7 @@ Matrix
 \begin_inset Quotes grd
 \end_inset
 
- erfolgt innerhalb der vorliegenden Arbeit.
+ erfolgte innerhalb der vorliegenden Arbeit.
  
 \end_layout
 
@@ -6279,7 +6255,7 @@ name "chap:Verteiltes-Rechnen-1"
 \begin_layout Standard
 Für diese Arbeit wurde eine umfangreiche Bibliothek entwickelt, welche es
  ermöglicht, Matrixoperationen asynchron auf mehrere Rechner zu verteilen.
- Die Rechner können dabei eine unterschiedliche Architektur besitzen, bspw.
+ Die Rechner können dabei unterschiedliche Architekturen besitzen, bspw.
  ist eine gleichzeitige Nutzung von Servern mit GPUs und konventionellen
  CPUs möglich.
  
@@ -6289,12 +6265,12 @@ Für diese Arbeit wurde eine umfangreiche Bibliothek entwickelt, welche es
 Bei der Entwicklung wurden MPI-Bibliotheken vermieden, da zahlreichen inkompatib
 len MPI-Umsetzungen existieren und MPI eine Synchronität der Netzwerkkommunikati
 on voraussetzt.
- Die Asynchronität war hierbei der wichtigste Punkt, da Optimierungen oftmals
+ Die Synchronität war hierbei der wichtigste Punkt, da Optimierungen oftmals
  über Wochen laufen und es durchaus vorkommt, dass einzelnen Rechenknoten
  ausfallen.
  Verwendet man MPI, so fällt die gesamte Rechnung damit aus.
- Bei einer asynchronen Umsetzung übernimmt ein anderer Knoten ohne zeitlichen
- Verzug die Aufgaben des ausgefallenen Rechners.
+ Bei der hier vorgestellten asynchronen Umsetzung übernimmt ein anderer
+ Knoten die Aufgaben des ausgefallenen Rechners.
  
 \end_layout
 
@@ -6332,7 +6308,7 @@ reference "fig:Schematische-Darstellung-der"
  Der Client stellt das auszuführende Programm dar, welches die zu berechnenden
  Probleme beinhaltet.
  In diesem Fall handelt es sich um die hier entwickelte Kriging-Software,
- welche dafür eine Client-Klasse implementieren muss.
+ welche dafür die Client-Klasse implementieren muss.
  Die Client-Klasse wird im späterem Verlauf dieses Abschnitts erklärt.
  Auf der anderen Seite sind mehrere Server, die jeweils einen Dämon-Prozess
  starten, einen Netzwerk-Port öffnen und auf Aufgaben des Clients warten.
@@ -6342,38 +6318,8 @@ reference "fig:Schematische-Darstellung-der"
 \end_layout
 
 \begin_layout Standard
-Eine weitere Besonderheit ist, dass jeder Client auf jedem Server virtuelle
- Variablen/Objekte allokieren kann, z.B.
- eine Matrix.
- Hierfür werden die Daten auf Client-Seite serialisiert und übertragen,
- womit dem Server dann ein vollständiges Objekt mit eigenem Namen und allen
- zugehörigen Methoden sowie Attributen zur Verfügung steht.
- Die Methoden und Attribute können folgend von Client-Seite aus über ein
- eigenes Protokoll angesprochen und auf dem Server ausgeführt werden.
- Ergebnisse können dann in eine neues, virtuelles Objekt gespeichert werden,
- welches der Client wieder zurück übertragen kann.
- Voraussetzung dafür ist allerdings, dass die Klasse des Objekts das 
-\begin_inset Quotes gld
-\end_inset
-
-SaveableOnServer
-\begin_inset Quotes grd
-\end_inset
-
--Interface implementiert hat (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Softwarearchitektur-und-Laufzeit"
-
-\end_inset
-
-).
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Wrap figure
-lines 11
+lines 15
 placement O
 overhang 0in
 width "50col%"
@@ -6382,7 +6328,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/loadbalancing_round_robin.eps
-	scale 45
+	scale 43
 
 \end_inset
 
@@ -6407,7 +6353,33 @@ Schematische Darstellung der Client/Server Verbindungen und des Round-Robin
 
 \end_inset
 
-Steht auf Client-Seite eine Aufgabe an, wird sie in kleinere Teilaufgaben
+Eine weitere Besonderheit ist, dass jeder Client auf jedem Server virtuelle
+ Variablen/Objekte allokieren kann, z.B.
+ eine Matrix.
+ Hierfür werden die Daten auf Client-Seite serialisiert und übertragen,
+ womit dem Server dann ein vollständiges Objekt mit eigenen Namen und allen
+ zugehörigen Methoden sowie Attributen zur Verfügung steht.
+ Die Methoden und Attribute können Client-seitig über ein eigenes Protokoll
+ angesprochen und auf dem Server ausgeführt werden.
+ Ergebnisse können dann in eine neues, virtuelles Objekt gespeichert werden,
+ welches der Client wieder zurück übertragen kann.
+ Voraussetzung dafür ist allerdings, dass die Klasse des Objekts das 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+-Interface implementiert hat (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Softwarearchitektur-und-Laufzeit"
+
+\end_inset
+
+).
+ Steht auf Client-Seite eine Aufgabe an, wird sie in kleinere Teilaufgaben
  zerlegt und auf einem 
 \begin_inset Quotes gld
 \end_inset
@@ -6417,108 +6389,14 @@ Aufgabenstack
 \end_inset
 
  abgelegt.
- Falls auf Server-Seite dafür Objekte/Daten benötigt werden (z.B.
- eine Matrix), kann der Client dafür auf dem Server ein virtuelles Objekt
- desselben Typs mit Variablennamen allokieren.
- Ein Round-Robin-Scheduler verteilt diese Aufgaben nach und nach an die
- verbundenen Server, sofern diese bereit sind.
+ Ein Round-Robin-Scheduler verteilt diese Aufgaben an die verbundenen Server,
+ sofern diese bereit sind.
  Dann erledigen sie diese Teilaufgabe, senden das Ergebnis an den Client
  zurück und stehen danach für neue Aufgaben zur Verfügung.
- Die Größe dieser Pakete/Teilaufgaben wird jeweils vom Scheduler bestimmt
- und ist wichtig für die Effizienz des Verfahrens, die genaue Aufteilung
- wird in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "kueppers2016"
-
-\end_inset
-
- detailliert beschrieben.
  Der Client sammelt alle Teillösungen, setzt diese am Ende zu einer Gesamtlösung
  zusammen und kann anschließend die Server beenden oder im Wartemodus belassen.
- 
-\end_layout
-
-\begin_layout Paragraph*
-Exemplarischer Ablauf einer Matrix-Addition:
-\end_layout
-
-\begin_layout Standard
-Folgend wird ein exemplarischer Ablauf einer Matrix-Addition auf zwei Servern
- abgebildet, um die Prozessinteraktion zu verdeutlichen:
-\end_layout
-
-\begin_layout Enumerate
-Die Server-Software muss auf den entsprechenden Rechnern gestartet werden.
- 
-\end_layout
-
-\begin_layout Enumerate
-Der Client wird gestartet und belegt lokal die zu addierenden Matrizen.
-\end_layout
-
-\begin_layout Enumerate
-Der Client verbindet sich mit beiden Servern.
-\end_layout
-
-\begin_layout Enumerate
-Der Client startet für jeden Server einen Überwachungsthread, der in regelmäßige
-n Abständen einen Ping sendet und so überprüft, ob der jeweilige Server
- noch verfügbar ist.
- Ist dies nicht der Fall, wird der Server von der Liste verfügbarer Rechner
- gestrichen und die laufende Aufgabe an einen anderen Server weitergegeben.
-\end_layout
-
-\begin_layout Enumerate
-Der Client startet die Netzwerk-Matrix-Addition mit einem Befehl.
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Der Client zerlegt die Addition in mehrere Teilmatrix-Additionen.
-\end_layout
-
-\begin_layout Enumerate
-Der Client allokiert alle nötigen Teilmatrizen auf jedem Server und übersendet
- die serialisierten Daten.
-\end_layout
-
-\begin_layout Enumerate
-Alle Teil-Matrix-Additions-Befehle werden auf den Stack vom Client gelegt.
-\end_layout
-
-\begin_layout Enumerate
-Der Client startet den Scheduler, der die Aufgaben des Stacks nimmt und
- an die Server sendet.
-\end_layout
-
-\begin_layout Enumerate
-Jeder Server addiert die jeweiligen Teilmatrizen und speichert die Ergebnisse
- lokal in eine neue Matrix.
- Diese wird anschließend in den Typ 
-\begin_inset Quotes gld
-\end_inset
-
-SaveableOnServer
-\begin_inset Quotes grd
-\end_inset
-
- konvertiert.
-\end_layout
-
-\begin_layout Enumerate
-Jeder Server sendet danach die Teilergebnisse serialisiert zurück und ist
- wieder bereit für die nächste Aufgabe.
-\end_layout
-
-\begin_layout Enumerate
-Die Schritte b-f werden solange wiederholt, bis der Stack leer ist.
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
-Hat der Client alle Teilergebnisse, wandelt er diese in Matrix-Objekte um
- und setzt die Teilmatrizen zu einer Gesamtmatrix zusammen.
+ Im folgenden sollen einige Begrifflichkeiten und Funktionen der hier vorgestell
+ten Netzwerkbibliothek erläutert werden:
 \end_layout
 
 \begin_layout Paragraph
@@ -6542,7 +6420,8 @@ SaveableOnServer
 \end_layout
 
 \begin_layout Itemize
-getSerializedData: Ein typloser Datenstrom der die Daten des Objekts beschreibt.
+getSerializedData: Stellt einen typlosen Datenstrom welcher die Daten des
+ Objekts beschreibt bereit.
  Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6653,8 +6532,9 @@ ClientFunctions
 -Klasse, die die aufrufbaren Methoden wie z.B.
  die Matrix Multiplikation usw.
  beinhaltet.
- Diese Methoden werden innerhalb des Kriging-Programms aufgerufen und liefern
- die entsprechenden Ergebnisse sofort zurück.
+ Ein Anwender muss für die Verwendung nur die gewünschte Methode aufrufen,
+ die Kommunikation und Verteilung laufen dann im Hintergrund ab.
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -6664,12 +6544,10 @@ Server:
 \begin_layout Standard
 Die hier beschriebene Server-Software ist ein eigenständiges Programm, welches
  auf einem Rechner ausgeführt wird und dann auf Aufgaben wartet.
- Solange es keine Aufgaben erfüllt, verbraucht es praktisch keine Kapazitäten
- und wartet im Hintergrund.
- Der Aufbau der zugehörigen Klassen ist in Abbildung 
+ Der Aufbau der zugehörigen Klassen ist in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:UML-Diagramm-der"
+reference "subsec:UML-Diagramm:-ZMQConnection,"
 
 \end_inset
 
@@ -6682,11 +6560,9 @@ ZMQServer
 \begin_inset Quotes grd
 \end_inset
 
--Klasse.
- Diese enthält genau zwei Verbindungen: eine zur hauptsächlichen Kommunikation
- mit dem Client und eine Ping-Verbindung, welche in regelmäßigen Abständen
- Netzwerk-Pings sendet und dem Client dadurch mitteilt, dass der Server
- noch läuft.
+-Klasse, welche zwei Verbindungen enthält: Eine zur Kommunikation mit dem
+ Client und eine Ping-Verbindung, welche in regelmäßigen Abständen Netzwerk-Ping
+s sendet und dem Client dadurch mitteilt, dass der Server noch läuft.
 \end_layout
 
 \begin_layout Standard
@@ -6763,7 +6639,7 @@ mat2
 \end_layout
 
 \begin_layout Enumerate
-Der Client muss die beiden Matrizen in 
+Der Client wandelt die beiden Matrizen in 
 \begin_inset Quotes gld
 \end_inset
 
@@ -6771,8 +6647,15 @@ SaveableOnServer
 \begin_inset Quotes grd
 \end_inset
 
--Objekte umwandeln.
- Dies ist nur möglich, wenn das Interface implementiert wurde.
+-Objekte um, was nur dann möglich ist, wenn das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert wurde.
  Diese Objekte können dann serialisiert und übertragen werden.
 \end_layout
 
@@ -6999,6 +6882,88 @@ key "Dworak2011,hintjens2013zeromq"
  verwiesen.
 \end_layout
 
+\begin_layout Paragraph*
+Exemplarischer Ablauf einer Matrix-Addition:
+\end_layout
+
+\begin_layout Standard
+Folgend wird ein exemplarischer Ablauf einer Matrix-Addition auf zwei Servern
+ abgebildet, um die Prozessinteraktion zu verdeutlichen:
+\end_layout
+
+\begin_layout Enumerate
+Die Server-Software muss auf den entsprechenden Rechnern gestartet werden.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Der Client wird gestartet und belegt lokal die zu addierenden Matrizen.
+\end_layout
+
+\begin_layout Enumerate
+Der Client verbindet sich mit beiden Servern.
+\end_layout
+
+\begin_layout Enumerate
+Der Client startet für jeden Server einen Überwachungsthread, der in regelmäßige
+n Abständen einen Ping sendet und so überprüft, ob der jeweilige Server
+ noch verfügbar ist.
+ Ist dies nicht der Fall, wird der Server von der Liste verfügbarer Rechner
+ gestrichen und die laufende Aufgabe an einen anderen Server weitergegeben.
+\end_layout
+
+\begin_layout Enumerate
+Der Client startet die Netzwerk-Matrix-Addition mit einem Befehl.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Der Client zerlegt die Addition in mehrere Teilmatrix-Additionen.
+\end_layout
+
+\begin_layout Enumerate
+Der Client allokiert alle nötigen Teilmatrizen auf jedem Server und übersendet
+ die serialisierten Daten.
+\end_layout
+
+\begin_layout Enumerate
+Alle Teil-Matrix-Additions-Befehle werden auf den Stack vom Client gelegt.
+\end_layout
+
+\begin_layout Enumerate
+Der Client startet den Scheduler, der die Aufgaben des Stacks nimmt und
+ an die Server sendet.
+\end_layout
+
+\begin_layout Enumerate
+Jeder Server addiert die jeweiligen Teilmatrizen und speichert die Ergebnisse
+ lokal in eine neue Matrix.
+ Diese wird anschließend in den Typ 
+\begin_inset Quotes gld
+\end_inset
+
+SaveableOnServer
+\begin_inset Quotes grd
+\end_inset
+
+ konvertiert.
+\end_layout
+
+\begin_layout Enumerate
+Jeder Server sendet danach die Teilergebnisse serialisiert zurück und ist
+ wieder bereit für die nächste Aufgabe.
+\end_layout
+
+\begin_layout Enumerate
+Die Schritte b-f werden solange wiederholt, bis der Stack leer ist.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Hat der Client alle Teilergebnisse, wandelt er diese in Matrix-Objekte um
+ und setzt die Teilmatrizen zu einer Gesamtmatrix zusammen.
+\end_layout
+
 \begin_layout Paragraph
 Geschwindigkeit bei mehreren Servern:
 \end_layout
@@ -7084,8 +7049,8 @@ key "kueppers2016b,kueppers2016"
 Man kann sehen, dass der Verlust einer 1:1 Verbindung sehr klein ist, womit
  die Verzögerung durch die Netzwerkkommunikation als gering einzustufen
  ist.
- Bei einer Anzahl von 2-3 Servern ist der Verlust ab einer Stützstellenanzahl
- von 2000 ebenfalls sehr klein.
+ Bei einer Anzahl von 2-3 Servern ist der Verlust ab 2000 Stützstellen ebenfalls
+ relativ gering.
  Mit zunehmender Anzahl an Servern nimmt der Verlust ebenfalls zu.
  Dieses Verhalten ist zu erwarten, da die Problemstellung für eine so hohe
  Anzahl an leistungsstarken Rechnern noch zu klein ist.
@@ -7152,11 +7117,12 @@ Berechnung von
 \begin_layout Standard
 Geht man von einem üblichen Beispiel mit 1000 Stützstellen und 80 Hyperparameter
 n aus, so ergeben sich für die Dichtefunktion ca.
- 500.000 Aufrufe und für die partiellen Ableitungen 80x500.000 Aufrufe.
+ 500.000 Aufrufe, bzw.
+ 80x500.000 Aufrufe für die partiellen Ableitungen.
  Insgesamt sind dies ca.
  40.5 Millionen Aufrufe für eine Iteration.
  Das bedeutet, dass jeder gesparte Befehl innerhalb des Kovarianzfunktionsaufruf
-s sich sehr stark auf die Laufzeit auswirkt.
+s sehr stark auf die Laufzeit auswirkt.
  Folgend sind einige Möglichkeiten zur Beschleunigung der Berechnung aufgelistet
 :
 \end_layout
@@ -7183,7 +7149,7 @@ CPU-Befehlssätze SSE/AVX verwenden
 \end_layout
 
 \begin_layout Paragraph*
-Exponentialfunktion:
+Exponentialfunktion im Voraus berechnen:
 \end_layout
 
 \begin_layout Standard
@@ -7201,6 +7167,10 @@ reference "eq:ExpoKorrelationsfunktion-1"
 
 ) nur einmal zu Anfang der Iteration durchgeführt und dann gepuffert.
  
+\end_layout
+
+\begin_layout Paragraph*
+Puffern von Zwischenergebnissen:
 \end_layout
 
 \begin_layout Standard
@@ -7234,6 +7204,10 @@ reference "eq:AbleitungsKorrGauss2"
 den.
  Der Vorteil liegt darin, dass ein Abruf aus dem RAM deutlich schneller
  ist als die erneute Berechnung der Exponentialfunktion.
+\end_layout
+
+\begin_layout Paragraph*
+Standardimplementierung der Exponentialfunktion austauschen:
 \end_layout
 
 \begin_layout Standard
@@ -7282,13 +7256,6 @@ nslevel zu beschleunigen.
  auf Grafikkarten ähnlich.
  Die SSE-Befehlssatzerweiterung umfasst ursprünglich 70 Instruktionen und
  8 neue Register, genannt XMM0 bis XMM7.
- Die 128
-\begin_inset space ~
-\end_inset
-
-Bit breiten Register wurden allerdings nicht in einem Schritt verarbeitet,
- wie es bei heutigen CPUs (z.B.
- Intel Core CPUs) üblich ist.
  
 \end_layout
 
@@ -7299,7 +7266,7 @@ Es gibt zahlreiche Umsetzungen der SSE-Befehle.
  jeweils eigene Implementationen dieser Architektur vornehmen.
  Der momentane Nachfolger von SSE heißt AVX (Advanced Vector Extensions)
  und wird wieder gemeinsam von AMD und Intel verfolgt.
- Dieser verbreitert die Register auf 16x
+ Die Register wurden auf 16x
 \begin_inset space ~
 \end_inset
 
@@ -7307,14 +7274,15 @@ Es gibt zahlreiche Umsetzungen der SSE-Befehle.
 \begin_inset space ~
 \end_inset
 
-Bit (AVX Version 1) und jeder Prozessorkern besitzt eigene AVX-Einheiten.
- In modernen CPUs kann jede AVX-Einheit eine FMA-Operation (fused multiply
- add) in der Form 
+Bit (AVX Version 1) erweitert und jeder Prozessorkern besitzt eigene AVX-Einheit
+en.
+ Weiterhin kann jede AVX-Einheit (je nach CPU-Typ) zusätzlich eine FMA-Operation
+ (fused multiply add) in der Form 
 \begin_inset Formula $a\leftarrow a(b+c)$
 \end_inset
 
- in einem Takt ausführen, wodurch die theoretische Rechenleistung nochmals
- erheblich ansteigt.
+ in nur einem Takt ausführen, wodurch die theoretische Rechenleistung nochmals
+ ansteigt.
  Der Parallelisierungsgrad und damit auch die Performance aktueller CPUs
  wird heutzutage also nicht nur über die Anzahl der Kerne und deren Kernfrequenz
  bestimmt, sondern maßgeblich durch die Breite, Frequenz und dem Befehlssatz
@@ -7340,8 +7308,8 @@ key "AGN,INTEL"
  gemacht wird.
  
 \shape italic
-Auf die Anwendung von Pseudocode wird in diesem Fall aufgrund der sehr spezielle
-n SSE-Befehle weitestgehend verzichtet.
+Auf die Anwendung von Pseudocode wird in diesem Fall, aufgrund der sehr
+ speziellen SSE-Befehle, weitestgehend verzichtet.
 
 \shape default
  Diese Methode wird zur Berechnung der Einträge der Kovarianzmatrix verwendet
@@ -7484,12 +7452,8 @@ __m128d
 \begin_inset Quotes erd
 \end_inset
 
- definiert, welcher einen 128 Bit großen SSE-Datentyp darstellt und zwei
- 64
-\begin_inset space ~
-\end_inset
-
-Bit Werte aufnehmen kann.
+ definiert, welcher einen 128-Bit großen SSE-Datentyp darstellt und zwei
+ 64-Bit Werte aufnehmen kann.
  Zudem wird die Variable correlSSE mithilfe der Funktion_mm_setzero_pd()
  auf 0 gesetzt.
  Das Array thetasExpArray in Zeile 4 beinhaltet die berechneten Hyperparameter
@@ -7508,14 +7472,10 @@ Bit Werte aufnehmen kann.
  beinhalten.
  Die darauffolgende for-Schleife iteriert über die Anzahl an freien Variablen.
  Der Zähler wird hier immer um den Wert zwei erhöht, da mit den SSE-Routinen
- zwei 64 Bit-Werte gleichzeitig aus dem Speicher in die Register geladen
+ zwei 64-Bit-Werte gleichzeitig aus dem Speicher in die Register geladen
  und berechnet werden.
- Dies hat zufolge, dass der Speicher eine 128
-\begin_inset space ~
-\end_inset
-
-Bit-Ausrichtung besitzen muss.
- In den Zeilen 9-11 werden 128 Bit aus den Arrays an der Stelle i in die
+ Dies hat zufolge, dass der Speicher eine 128-Bit-Ausrichtung besitzen muss.
+ In den Zeilen 9-11 werden 128-Bit aus den Arrays an der Stelle i in die
  SSE-Register der CPU übertragen.
  
 \end_layout
@@ -7534,7 +7494,7 @@ name "par:Einschub-Speicherausrichtung"
 \begin_layout Standard
 
 \shape italic
-In aktuellen C++ Compilern wird eine Speicherausrichtung von 128 Bit gewährleist
+In aktuellen C++ Compilern wird eine Speicherausrichtung von 128-Bit gewährleist
 et.
  Tabelle 
 \shape default
@@ -7550,18 +7510,18 @@ reference "tab:128Bit-Speicherausrichtung"
  zeigt diese Speicherausrichtung und die damit entstehende Problematik beim
  Programmieren.
  Die erste Zeile der Tabelle beschreibt den Index eines normalen Arrays
- mit 6 Einträgen und jeder Eintrag hat die Größe eines 64 Bit-Werts.
+ mit 6 Einträgen und jeder Eintrag hat die Größe eines 64-Bit-Werts.
  Der Compiler garantiert in diesem Fall einen zusammenhängenden Speicher
- von 128 Bit, dargestellt durch die dritte Zeile.
-\end_layout
+ von 128-Bit, dargestellt durch die dritte Zeile.
+ 
+\shape default
 
-\begin_layout Standard
 \begin_inset Wrap table
 lines 0
 placement o
 overhang 0col%
 width "50col%"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -7723,8 +7683,6 @@ name "tab:128Bit-Speicherausrichtung"
 
 Die Zeilen 13-16 stellen die eigentliche Berechnung in den SSE-Registern
  der CPU dar.
- Durch die breiteren Register werden hier immer zwei Werte auf einmal verarbeite
-t.
  In Zeile 19 werden die beiden Werte in den Registern zusammenaddiert und
  dann in Zeile 20 wieder zurück in den RAM kopiert.
  
@@ -7734,7 +7692,12 @@ t.
 Ist die Anzahl der Variablen nicht durch zwei teilbar, so bleibt ein Rest
  bestehen.
  Dieser wird in den Zeilen 21-23 auf konventionelle Weise berechnet.
- Die gemessenen Geschwindigkeitsvorteile durch SSE4 liegen bei ca.
+ 
+\end_layout
+
+\begin_layout Standard
+Die gemessenen Geschwindigkeitsvorteile durch SSE4 für diese Methode liegen
+ bei ca.
  30
 \begin_inset space ~
 \end_inset
@@ -7755,12 +7718,54 @@ name "subsec:Reduktion-von-Stützstellen"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 13
+placement O
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_All.eps
+	scale 20
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_Filtered.eps
+	scale 20
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:PunkteFilterBeispiel"
+
+\end_inset
+
+Anwendung des Filters anhand eines analytischen Beispiels.
+ Die Färbung zeigt den Funktionswert an.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Während einer Optimierung können eine Vielzahl an Stützstellen erzeugt werden
  und damit große Kovarianzmatrizen entstehen.
  Um Rechenzeit zu sparen, können Stützstellen aussortiert werden, welche
  dem jeweiligen Ersatzmodell keinen oder nur einen geringen Informationszugewinn
  bringen.
- Als notwendige Metrik bietet sich die Verwendung der Korrelationsfunktion
+ Als notwendiges Maß bietet sich die Verwendung der Korrelationsfunktion
  (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7907,48 +7912,6 @@ schleife deletePoint über alle deleteIndices
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 12
-placement o
-overhang 0in
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_All.eps
-	scale 20
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/SampleFilterAlgo_Filtered.eps
-	scale 20
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:PunkteFilterBeispiel"
-
-\end_inset
-
-Anwendung des Filters anhand eines analytischen Beispiels.
- Die Färbung zeigt den Funktionswert an.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 In den Zeilen 3-8 werden die Korrelationen für alle möglichen Punktepaare
  berechnet und innerhalb der Map direkt sortiert.
  Die Schleife in den Zeilen 11-15 startet bei dem größten Korrelationswert
@@ -7959,20 +7922,15 @@ In den Zeilen 3-8 werden die Korrelationen für alle möglichen Punktepaare
  Ansonsten wird dieser zum Löschen eingetragen.
  Auf diese Weise kann sichergestellt werden, dass nicht beide Punkte gelöscht
  werden.
- 
-\end_layout
-
-\begin_layout Standard
-In Abbildung 
+ In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:PunkteFilterBeispiel"
 
 \end_inset
 
- wird ein Beispiel für diesen Filter gezeigt.
- Es wurde die ZDT3-Funktion mit zwei Variablen verwendet (siehe Kapitel
- 
+ wird ein Beispiel auf Basis der ZDT3-Funktion mit zwei Variablen gezeigt
+ (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:ZDT3"
@@ -8027,7 +7985,10 @@ reference "subsec:Cholesky-Zerlegung"
  gelöst werden.
  So kann bei der Likelihood Berechnung auf die direkte Bestimmung der Inversen
  verzichtet werden.
- Das Maximum des Likelihoodterms (siehe 
+\end_layout
+
+\begin_layout Standard
+Das Maximum des Likelihoodterms (siehe 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:LogLikelihood"
@@ -8042,7 +8003,8 @@ reference "eq:LogLikelihood"
 
 \end_inset
 
-Die Invertierung der Kovarianzmatrix besteht aus zwei Schritten:
+Typischerweise werden folgende Schritte zur Berechnung dieses Terms durchgeführt
+:
 \end_layout
 
 \begin_layout Enumerate
@@ -8065,7 +8027,8 @@ key "press2007numerical"
 \begin_inset Formula $\mathbf{\mathbf{Cov}\in\mathbb{R}}^{n\times n}$
 \end_inset
 
-
+.
+ Die Determinante kann direkt mithilfe der Cholesky-Zerlegung bestimmt werden.
 \end_layout
 
 \begin_layout Enumerate
@@ -8073,29 +8036,20 @@ Die Vor- und Rückwärtssubstitution mit
 \begin_inset Formula $n^{3}$
 \end_inset
 
- Gleitkomma-Operationen
-\end_layout
-
-\begin_layout Standard
-Die Determinante der Kovarianzmatrix wird aus der Cholesky-Zerlegung von
- 
-\begin_inset Formula $\mathbf{\mathbf{Cov}}$
+ Gleitkomma-Operationen, zur Bestimmung der Inversen Kovarianzmatrix 
+\begin_inset Formula $\mathbf{\mathbf{Cov}}^{-1}$
 \end_inset
 
- gewonnen (siehe 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Cholesky-Zerlegung"
-
-\end_inset
-
-).
- Der quadratische Term 
+ um den quadratischen Term 
 \begin_inset Formula $\left(\vec{y}_{s}-\overrightarrow{F}\right)^{T}\mathbf{\mathbf{Cov}}^{-1}\left(\vec{y}_{s}-\overrightarrow{F}\right)$
 \end_inset
 
- beinhaltet allerdings noch die inverse Kovarianzmatrix und kann mithilfe
- der Cholesky-Zerlegung berechnet werden.
+ zu berechnen.
+\end_layout
+
+\begin_layout Standard
+Der quadratische Term kann allerdings auch ohne die Vor- und Rückwärtssubstituti
+on, mithilfe eines einfachen Gleichungssystems gelöst werden.
  Die genaue Berechnung wird in Anhang 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8104,11 +8058,7 @@ reference "subsec:Bestimmung"
 \end_inset
 
  gezeigt.
-\end_layout
-
-\begin_layout Standard
-\noindent
-Damit ergibt sich folgender Aufwand:
+ Damit ergibt sich folgender Aufwand:
 \end_layout
 
 \begin_layout Enumerate
@@ -8304,11 +8254,10 @@ Der Aufwand beider Schritte liegt bei
 \end_layout
 
 \begin_layout Enumerate
-Ungefähr 
 \begin_inset Formula $\frac{1}{6}n^{3}$
 \end_inset
 
-Multiplikationen/Additionen, 
+ Multiplikationen/Additionen, 
 \begin_inset Formula $\frac{1}{2}n^{2}$
 \end_inset
 
@@ -8339,7 +8288,7 @@ key "Mader2008,Griewank2008"
 \end_inset
 
 ).
- Einen Ansatz für das Kriging-Verfahren kann in 
+ Ein solcher Ansatz für das Kriging-Verfahren kann in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "toal2009adjoint"
@@ -8348,7 +8297,7 @@ key "toal2009adjoint"
 
  gefunden werden und bietet die Möglichkeit auf die Vor- und Rückwärtssubstituti
 on zu verzichten, allerdings werden rückwärtsdifferenzierte Algorithmen
- des Cholesky Algorithmus und auch der Vor- und Rückwärtssubstitution benötigt.
+ des Cholesky-Algorithmus und auch der Vor- und Rückwärtssubstitution benötigt.
  
 \end_layout
 
@@ -8362,7 +8311,7 @@ key "Toal2011"
 
  einen Algorithmus, welcher die Invertierung zwar benötigt, aber keine rückwärts
 differenzierten Algorithmen.
- Ein Geschwindigkeitsvorteil wird dadurch erreiche, dass die partiellen
+ Ein Geschwindigkeitsvorteil wird dadurch erreicht, dass die partiellen
  Ableitungen der Kovarianzmatrix 
 \begin_inset Formula $\frac{\partial\mathbf{\mathbf{\mathbf{Cov}}}}{\partial h_{l}}$
 \end_inset
@@ -8562,7 +8511,7 @@ D_{flndet}^{T} & =\left(\begin{array}{c}
 \end_inset
 
 Der Vektor lässt sich auch als Diagonalmatrix interpretieren und kann mit
- wenig Zeitaufwand aus der choleskyzerlegten Matrix bestimmt werden:
+ wenig Zeitaufwand aus der Cholesky-zerlegten Matrix bestimmt werden:
 \begin_inset Formula 
 \begin{align}
 \bar{D}_{flndet}= & \left[\begin{array}{ccc}
@@ -8695,10 +8644,10 @@ key "Murray2016,Sarkka2013"
 
 \end_inset
 
- einige moderne Varianten präsentiert, welche es ermöglichen Level 2-3 BLAS-Rout
-inen zu verwenden.
- Diese stellen die effizientesten Methoden dar und werden in der hier entwickelt
-en Software auch verwendet.
+ eine moderne Variante präsentiert, welche es ermöglicht Level 2-3 BLAS-Routinen
+ zu verwenden.
+ Diese stellen aktuell die effizientesten Methoden dar und werden in der
+ hier entwickelten Software auch verwendet.
 \end_layout
 
 \begin_layout Subsection
@@ -8971,7 +8920,8 @@ reference "fig:Vergleich-der-Zeiten"
 
 \end_inset
 
- (links) zeigt die benötigte Zeit für die Erzeugung der partiellen Ableitungen.
+ (links) zeigt die benötigte Gesamtzeit für die Erzeugung der partiellen
+ Ableitungen.
  Der Rückwärtsmodus ist in diesem Fall ca.
  1.5x schneller als der Vorwärtsmodus.
  Die folgenden Abbildungen zeigen die Zeiten der verschiedenen Schritte
@@ -9068,8 +9018,18 @@ Dabei gilt: Je mehr Zufallszahlen dieser Vektor beinhaltet, desto genauer
 \begin_inset Formula $\vec{d}$
 \end_inset
 
- um eine ausreichende Genauigkeit zu erhalten und macht damit die Methode
- letztlich wieder ineffizient.
+ um eine ausreichende Genauigkeit zu erhalten.
+ In den hier durchgeführten Tests konnte keine Beschleunigung erreicht werden,
+ da bei geringer Dimension von 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ der Verlust an Genauigkeit zu einer erhöhten Traingingsiterationsanzahl
+ führte oder bei höherer Dimension von 
+\begin_inset Formula $\vec{d}$
+\end_inset
+
+ der Zeitvorteil verloren ging.
  
 \end_layout
 
@@ -9380,8 +9340,8 @@ Weiterhin ist die direkte Anbindung des Speichers auf der Platine der GPU
  selbst ein Vorteil.
  Durch die immer größer werdende SIMD-Einheiten (Single Instruction Multiple
  Data) in modernen CPUs (bspw.
- AVX512 mit 512 breiten Registern) verschwindet dieser Unterschied allerdings
- zusehends.
+ AVX512 mit 512 breiten Registern) verschwindet der Unterschied zwischen
+ den Architekturen allerdings zusehends.
  Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9389,9 +9349,8 @@ reference "tab:CoresCPUGPU"
 
 \end_inset
 
- zeigt zwei verschiedene CPUs von Intel und eine aktuelle GPU von Nvidia.
- Eine historische Betrachtung der Anzahl von Recheneinheiten bei CPUs zeigt,
- dass sich diese fast verzehnfacht haben.
+ zeigt die Anzahl der Recheneinheiten von zwei verschiedenen Intel CPUs
+ und einer aktuellen GPU von Nvidia.
  
 \begin_inset Wrap figure
 lines 0
@@ -9434,8 +9393,8 @@ Auch auf programmiertechnischer Seite verschwindet der Unterschied zwischen
  Hardware vollständig ausnutzt) zu einer Expertenaufgabe geworden.
  Aus diesem Grund bieten sowohl Intel als auch NVidia zahlreiche hardwareoptimie
 rte Bibliotheken für alle Arten von Rechenoperationen an.
- Unterschiede zwischen einer GPU und CPU zeigen sich bei dem Transfer von
- Daten.
+ Größere Unterschiede zwischen GPUs und CPUs zeigen sich allerdings bei
+ dem Transfer von Daten.
  Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9450,7 +9409,7 @@ s zu finden ist.
 
 \begin_layout Standard
 Folgend wird der Ablauf einer Matrix-Zerlegung auf einer GPU und auf einer
- CPU beschrieben, wobei der Fokus auf dem Datentransfer gelegt wird:
+ CPU beschrieben, wobei der Fokus auf dem Datentransfer liegt:
 \end_layout
 
 \begin_layout Subparagraph
@@ -9579,8 +9538,8 @@ Fließkommagenauigkeit
 \end_layout
 
 \begin_layout Standard
-Es ist unerlässlich die numerische Berechnung mit doppelter Fließkommagenauigkei
-t (64Bit) durchzuführen.
+Beim Kriging-Verfahren ist die numerische Berechnung mit doppelter Fließkommagen
+auigkeit (64Bit) aus Stabilitätsgründen unerlässlich.
  Aus diesem Grund sollte die Leistung der einzelnen GPU-Architekturen berücksich
 tigt werden.
  In Tabelle 
@@ -10833,8 +10792,8 @@ Das Ergebnis zeigt, dass die Geschwindigkeit nahezu linear mit Anzahl der
  besser nutzen lassen.
  Jedoch kann der GPU-RAM eine Beschränkung darstellen, so wie es bei 4 gleichzei
 tigen Trainings auf einer K40 bei 15000 Stützstellen zu sehen ist.
- Die Karten sind somit für diesen Fall sehr gut geeignet.
- 
+ Die Karten sind somit für diesen Fall sehr gut geeignet, sofern der Speicher
+ ausreichend groß ist.
 \end_layout
 
 \begin_layout Standard
@@ -10947,43 +10906,6 @@ Vorhersagefehler
 \end_layout
 
 \begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0in
-width "50col%"
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/khonprediction.png
-	scale 18
-	BoundingBox 0bp 0bp 563bp 376bp
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:KhonFehlerVorhersage"
-
-\end_inset
-
-Exemplarische Ausgabe eines vorhergesagten Fehlers der maximalen mechanischen
- Dehnung eines Rotors.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 Eine einfache Möglichkeit die Qualität der Ersatzmodelle zu bestimmen, ist
  die Überprüfung der Differenz zwischen Vorhersage und realen Werten.
  Da der Optimierungsalgorithmus ein exploratives Vorgehen (siehe Kapitel
@@ -11017,11 +10939,56 @@ reference "fig:KhonFehlerVorhersage"
  
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection*
 Zeitlicher Verlauf des Likelihood-Werts
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 17
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/khonprediction.pdf
+	lyxscale 18
+	scale 40
+	BoundingBox 0bp 0bp 563bp 376bp
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:KhonFehlerVorhersage"
+
+\end_inset
+
+Exemplarische Ausgabe eines vorhergesagten Fehlers der maximalen mechanischen
+ Dehnung eines Rotors.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Über den Verlauf des Likelihood-Werts können das Training der Ersatzmodelle
  überwacht und auch um fehlerhafte Daten schnell detektiert werden.
  Um dies zu verdeutlichen, werden in Abbildung 
@@ -11060,12 +11027,8 @@ reference "subsec:UltraRestart"
  Solange dieser Plot noch rote Punkte aufweist, kann davon ausgegangen werden,
  dass die Hyperparameter der Ersatzmodelle noch nicht optimal eingestellt
  sind.
- 
-\end_layout
-
-\begin_layout Standard
-Weiterhin lassen sich auch Aussagen über die Güte der Daten anhand des Kurvenver
-laufs treffen.
+ Weiterhin lassen sich auch Aussagen über die Güte der Daten anhand des
+ Kurvenverlaufs treffen.
  In Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -11086,6 +11049,7 @@ reference "fig:KhonGobalConvergence"
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -11144,13 +11108,29 @@ Die Überwachung der Hyperparameter während einer laufenden Optimierung ist
  Betrachtet man bspw.
  die Mukoko Optimierung, so wurden 38 Ersatzmodelle und 158 Parameter vewendet,
  was zu über 6000 Hyperparametern führt.
+ Dennoch ist es zumindest möglich, eine grafische Plausibilitäts-Überprüfung
+ durchzuführen.
+ Hierfür müssen die Optimierungsparameter und auch die Ersatzmodelle sinnvoll
+ nummeriert werden.
+ Beispielsweise sollten alle Parameter eines Rotors durchlaufend nummeriert
+ werden.
+ Wird dies gemacht und die Hyperparameter nach Größe eingefärbt, so lässt
+ sich eine grafische Matrix erzeugen, wie sie exemplarisch in Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Hyperparameter-Matrix-aus-einer"
+
+\end_inset
+
+ gezeigt wird.
  
 \begin_inset Wrap figure
 lines 0
 placement o
 overhang 0in
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -11179,22 +11159,7 @@ Hyperparameter-Matrix aus einer laufenden Optimierung
 
 \end_inset
 
-Dennoch ist es zumindest möglich, eine grafische Plausibilitäts-Überprüfung
- durchzuführen.
- Hierfür müssen die Optimierungsparameter und auch die Ersatzmodelle sinnvoll
- nummeriert werden.
- Beispielsweise sollten alle Parameter eines Rotors durchlaufend nummeriert
- werden.
- Werden die Hyperparameter nach Größe eingefärbt, so lässt sich eine grafische
- Matrix erzeugen, wie sie exemplarisch in Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Hyperparameter-Matrix-aus-einer"
-
-\end_inset
-
- gezeigt wird.
- In dem gewählten Plot stellt grün einen hohen Wert dar und rot einen sehr
+In dem gewählten Plot stellt grün einen hohen Wert dar und rot einen sehr
  niedrigen, wobei ein sehr niedriger Wert darauf schließen lässt, dass das
  Funktional von dem zugehörigen Parameter kaum beeinflusst wird.
  Innerhalb dieses Plots sind grüne und rote/gelbe Blöcke zu erkennen.

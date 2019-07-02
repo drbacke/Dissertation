@@ -1154,8 +1154,7 @@ Der erste Punkt umfasst die Entwicklung und Integration eines CO-Kriging-Ersatzm
 odells für die AutoOpti-Umgebung.
  In der hier beschriebenen Umsetzung werden alle Kriging Verfahren (Ordinary-,
  Gradient-Enhanced-,CO-Kriging) und auch Klassifikatoren wie z.B.
- Supporting-Vector-Machines in einer Softwarestruktur untergebracht in die
- Software implementiert.
+ Supporting-Vector-Machines in einer Softwarestruktur untergebracht.
  Hierfür wird eine moderne Interface-basierte Programmierung verwendet.
  Die in der Literatur beschriebenen Programme beschränken sich in der Regel
  auf einzelne Ersatzmodelle welche oftmals in Frameworks wie Matlab (siehe

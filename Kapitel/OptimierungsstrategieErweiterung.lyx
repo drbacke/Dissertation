@@ -201,7 +201,7 @@ key "Drela2008"
  (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "käters20001999,köller1999entwicklung"
+key "kaeters20001999,koeller1999entwicklung"
 
 \end_inset
 
@@ -560,7 +560,7 @@ reference "fig:Beispielhafte-Geometrischen-Vari"
 
 \end_inset
 
- werden zwei dieser möglichen Variationen dargestellt.
+ werden zwei dieser möglichen Variationen gezeigt.
  Innerhalb dieses Beispiels werden zwei verschiedene Netzauflösungen miteinander
  verglichen.
  Ein grobes Netz mit ca.
@@ -579,9 +579,10 @@ reference "fig:MisesTestcase_Netze"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename ../images/LF_Mesh.eps
 	lyxscale 50
@@ -638,8 +639,7 @@ reference "sec:AnhangAerodynamische-Größen"
 
 \end_inset
 
-).
- In Tabelle 
+) und in Tabelle 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:MisesTestRandbedingungen"
@@ -679,9 +679,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename /home/schm_ad/Diss/images/MultifidelityKapitel/Differenzfunkion_HF_LF_Mises.eps
-	scale 80
+	scale 70
 
 \end_inset
 
@@ -748,7 +749,7 @@ key "Kugeler2005,NURNBERGERPHD"
 
 ).
  Aerodynamisch werden die Verlustpolaren des Rotor 1-Mittelschnittprofils
- vom RIG250-Verdichters (siehe 
+ vom RIG250-Verdichter (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Schonweitz2013"
@@ -769,10 +770,8 @@ reference "fig:rig250VergleichMisesTrace"
  sind beim Verlauf des Abströmwinkels deutliche Unterschiede im berechneten
  Verhalten zu erkennen.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -810,12 +809,11 @@ Vergleich zwischen dem 2D-CFD-Verfahren MISES und dem 3D-CFD-Verfahren TRACE
 \begin_layout Standard
 Die vorangestellten Beispiele lassen allerdings keine allgemeine Aussage
  über die Nutzbarkeit unterschiedlicher Simulationsverfahren innerhalb von
- Multifidelity-Optimierungen zu.
- da die funktionalen Zusammenhänge zwischen den Gütestufen sehr unterschiedlich
- ausfallen können und vom jeweiligen Anwendungsfall sowie den verwendeten
- Simulationsverfahren abhängen.
- Zudem können die Funktionale auch so große Unterschiede aufweisen, dass
- die Daten nur sehr schwach korreliert sind und der Einsatz eines Mutlifidelity-
+ Multifidelity-Optimierungen zu, da die funktionalen Zusammenhänge zwischen
+ den Gütestufen sehr unterschiedlich ausfallen können und vom jeweiligen
+ Anwendungsfall sowie den verwendeten Simulationsverfahren abhängen.
+ Zudem können die Funktionale auch große Unterschiede aufweisen, sodass
+ die Daten nur sehr schwach korreliert sind und der Einsatz eines Multifidelity-
 Verfahrens dann nicht mehr lohnenswert ist.
  
 \end_layout
@@ -833,8 +831,8 @@ reference "chap:Reale-Turbomaschinen-Optimierung-1"
 
  werden verschiedene Anwendungen gezeigt, welche im Rahmen dieser Arbeit
  betreut oder durchgeführt wurden.
- Mit Hilfe dieser Ergebnisse ist zumindest eine erste Einschätzung einiger
- Anwendungen möglich.
+ Mit Hilfe dieser Ergebnisse ist eine erste Einschätzung einiger Anwendungen
+ möglich.
  
 \end_layout
 
@@ -850,8 +848,8 @@ name "sec:Multifidelity-OptimierungsstrateAutoOpti"
 \end_layout
 
 \begin_layout Standard
-Innerhalb dieses Abschnitts soll die in dieser Arbeit entwickelte Multifidelity-
-Optimierungsstrategie beschrieben werden.
+Innerhalb dieses Abschnitts soll die hier entwickelte Multifidelity-Optimierungs
+strategie beschrieben werden.
  Das Verfahren wurde in die Optimierungssoftware AutoOpti eingebunden, welches
  in Kapitel 
 \begin_inset CommandInset ref
@@ -1166,11 +1164,8 @@ Möglichkeiten der Individuenerzeugung mit mehreren Gütestufen
 
 \end_inset
 
-Ein zentraler Punkt bei der Durchführung einer Multifidelity-Optimierung
- ist die Entscheidung, mit welcher Prozesskette und damit Gütestufe ein
- neu erzeugtes Individuum berechnet werden soll.
- Aus diesem Grund wird folgend eine Übersicht über mögliche Entscheidungsfunktio
-nen gegeben und darauf aufbauend die hier entwickelte Strategie beschrieben.
+Folgend wird eine Übersicht über mögliche Entscheidungsfunktionen gegeben
+ und darauf aufbauend die hier entwickelte Strategie beschrieben.
  
 \end_layout
 
@@ -1600,7 +1595,7 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 
  gezeigt.
  Für die Modellierung des Informationszugewinns eignen sich statistische
- Ersatzmodelle, diese sagen neben einem Erwartungswert für einen unbekannten
+ Ersatzmodelle, welche neben einem Erwartungswert für einen unbekannten
  Ort 
 \begin_inset Formula $\vec{x_{0}}\in\mathbb{R}^{k}$
 \end_inset
@@ -1613,7 +1608,7 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \begin_inset Formula $\sigma^{*}\in\mathbb{R}$
 \end_inset
 
- voraus.
+ voraussagen.
  Fügt man einem solchen Ersatzmodell an einem unbekannten Ort eine neue
  Stützstelle hinzu, so wird die vorhergesagte Varianz dort reduziert.
  Im Falle eines Co-Krigings wird die Varianz je nach Gütestufe mehr oder
@@ -1630,6 +1625,45 @@ reference "sec:Umsetzung-der-Entscheidungsfunkt"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0in
+width "59col%"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
+	scale 40
+	BoundingBox 0bp -1bp 650bp 494bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:BeispielSinusHFLF"
+
+\end_inset
+
+Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
+ von Stützstellen verschiedener Gütestufen (LF bedeutet niedrige- und HF
+ hohe Güte).
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 Um einen Eindruck der Varianzreduktion zu bekommen, wird in Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1667,48 +1701,6 @@ g im Normalfall mit Null vorhergesagt.
 ch groß, wobei die niedrigeren Gütestufen eine größere Restunsicherheit
  aufweisen als die höheren.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0in
-width "57col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../images/MultifidelityKapitel/Grundlagen_Sin_variance_LF_Bearbeitet.eps
-	scale 40
-	BoundingBox 60bp 50bp 714bp 535bp
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:BeispielSinusHFLF"
-
-\end_inset
-
-Beispielhafte Entwicklung der vorhergesagten Standardabweichung beim Hinzufügen
- von Stützstellen verschiedener Gütestufen (LF bedeutet niedrige- und HF
- hohe Güte).
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1940,14 +1932,14 @@ reference "subsec:OptimierungsBegriffe"
 
  Nebenbedingungen existiert ein Ersatzmodell.
  Um alle Vorhersagen in der Entscheidungsfunktion zu berücksichtigen, bietet
- sich eine gewichtete Summe an und Gleichung 
+ sich eine gewichtete Summe an, womit sich Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:asdsa"
 
 \end_inset
 
- erweitert sich zu:
+ erweitert:
 \begin_inset Formula 
 \begin{align}
 \frac{I_{g|j}}{t_{j}} & =\frac{1}{\sum_{i}^{c+z}w_{i}}\sum_{i}^{c+z}w_{i}\frac{\sigma_{g,i}^{2}-\sigma_{g,i|j}^{2}}{t_{train}+t_{opti}+t_{pr,j}}\label{eq:asdsa-1}
@@ -2062,8 +2054,8 @@ Die Abbildung zeigt deutlich, wie im Verlauf der Optimierung ein Wechsel
 \end_layout
 
 \begin_layout Standard
-Weiterhin sind die verschiedenen Nebenbedingungen unterschiedlich schwer
- zu erfüllen und sollten daher unterschiedlich stark gewichtet werden.
+Da die verschiedenen Nebenbedingungen unterschiedlich schwer zu erfüllen
+ sind, sollten diese unterschiedlich stark gewichtet werden.
  Als geeignete Gewichtung für die Nebenbedingungen kann die Wahrscheinlichkeit
  
 \begin_inset Formula $P_{i}\in\mathbb{R}$
@@ -2129,10 +2121,6 @@ Nebenbedingungen
 \end_deeper
 \begin_layout Standard
 Die Zielfunktionen untereinander werden gleich gewichtet.
- Letztlich bleibt dann noch die Frage offen, wie Zielfunktionen und Nebenbedingu
-ngen zueinander gewichtet werden (Punkt 2).
- Hier bietet sich die Gesamtwahrscheinlichkeit für die Erfüllung aller Nebenbedi
-ngungen an.
  Daraus ergibt sich:
 \begin_inset Formula 
 \begin{align}
@@ -2301,7 +2289,7 @@ reference "eq:globalesKrit"
 
 \end_inset
 
-,
+ und 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Entscheidungsfunktion"
@@ -2331,7 +2319,7 @@ reference "eq:globalesKrit"
 
 \end_inset
 
- zu einer anderen Entscheidung führt als das lokale.
+ zu einer anderen Entscheidung führt als das Lokale.
  In allen anderen Fällen liefern die globale und lokale Entscheidungsfunktion
  immer ein identisches Ergebnis.
  In Anhang 
@@ -2453,7 +2441,7 @@ reference "eq:Maxium"
 \begin_inset Formula $i_{best}=i_{bestL}$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard

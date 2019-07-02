@@ -32,7 +32,7 @@
 \usepackage{amssymb} 
 \usepackage{fancyhdr}
 \usepackage{capt-of}
-
+\usepackage{wrapfig}
 
 
 
@@ -1063,8 +1063,8 @@ rungsstrategie.
 Das entwickelte Verfahren wurde zahlreichen Tests in Form von Optimierungen
  analytischer Testfunktionen unterzogen, welche die Vorteile dieses Verfahrens
  belegen.
- Neben diesen Tests wurde das hier entwickelte Verfahren innerhalb von einigen
- Turbomaschinen-Anwendungen aus Industrie und Forschung angewendet.
+ Neben diesen Tests wurde das hier entwickelte Verfahren innerhalb von unterschi
+edlichen Turbomaschinen-Anwendungen aus Industrie und Forschung angewendet.
  Die dort gewonnenen Ergebnisse und Erkenntnisse werden in dieser Arbeit
  vorgestellt.
  

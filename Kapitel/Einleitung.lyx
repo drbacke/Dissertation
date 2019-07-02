@@ -459,14 +459,7 @@ key "cressie1990origins,Cressie1993,matheron1963principles"
  und der Statistik 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "sacks1970statistical"
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "sacks1989design"
+key "sacks1970statistical,sacks1989design"
 
 \end_inset
 

@@ -85,7 +85,8 @@ name "chap:Optimierungsstrategie"
 \begin_layout Standard
 In diesem Kapitel erfolgt eine Einführung in die Turbomaschinenoptimierung.
  Hierfür werden im ersten Teil allgemeine Grundlagen und Begrifflichkeiten
- erklärt, wobei ein Grundwissen über Optimierungen vorausgesetzt wird.
+ erklärt, wobei ein Grundwissen über mathematische Optimierungen vorausgesetzt
+ wird.
  Im zweiten Teil werden die Besonderheiten und die damit verbundenen Schwierigke
 iten der Optimierung von Turbomaschinen erläutert.
  Darauf aufbauend wird im dritten Teil dieses Kapitels die bisher im DLR
@@ -815,7 +816,7 @@ Für weitere Informationen bieten folgende Literaturstellen einen umfassenden
   
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Shyy2001,Muller-Tows2000,Shahpar2000,Bellman1972,ehrgott2005multicriteria,Gian2006,miettinen2012nonlinear,Spiegel2000"
+key "Muller-Tows2000,Shahpar2000,Bellman1972,ehrgott2005multicriteria,Gian2006,miettinen2012nonlinear,Spiegel2000"
 
 \end_inset
 
@@ -1083,7 +1084,7 @@ Nachdem der Master-Prozess einen vielversprechenden Parametersatz generiert
 
 \begin_layout Paragraph*
 4.
- Slave-Prozesse berechnen die Prozesskette:
+ Slave-Prozesse durchlaufen die Prozesskette:
 \end_layout
 
 \begin_layout Standard
@@ -1291,7 +1292,7 @@ Nutzung von Ersatzmodellen im Optimierungsprozess
 
 \begin_layout Paragraph*
 1.
- Training der Ersatzmodelle
+ Training der Ersatzmodelle:
 \end_layout
 
 \begin_layout Standard
@@ -1319,10 +1320,8 @@ reference "chap:Die-Kriging-Verfahren"
 \begin_layout Standard
 Jedes dieser Verfahren benötigt ein Training, welches oftmals als Lernverfahren
  bezeichnet wird.
- Es dient zur Bestimmung von ersatzmodellspezifischen Parametern, dabei
- kann es sich z.B.
- um Korrelationslängen, Gewichte, Skalierungsfaktoren usw.
- handeln.
+ Es dient zur Bestimmung von ersatzmodellspezifischen Parametern, wie z.B.
+ Korrelationslängen, Gewichte, Skalierungsfaktoren usw..
  Die Ersatzmodellparameter werden mithilfe der vorhandenen Daten eingestellt,
  um möglichst gute Vorhersagen zu erlangen.
  Meistens sind diese Trainingsverfahren sehr aufwendig und benötigen je
@@ -1352,7 +1351,8 @@ Flowparametern
 \end_inset
 
  zusammengesetzten Zielfunktionen wird für jeden in der Zielfunktion verwendeten
- Flowparameter ebenfalls ein Ersatzmodell trainiert.
+ Flowparameter ebenfalls ein Ersatzmodell trainiert und aus den einzelnen
+ Vorhersagen der Zielfunktionswert berechnet.
  
 \end_layout
 
@@ -1367,14 +1367,14 @@ Das Training kann entweder synchron durch den Master-Prozess geschehen oder
 
 \begin_layout Standard
 Bei der asynchronen Variante wird das Training in einem externen Prozess
- gestartet und der Master-Prozess verwendet für die benötigten Vorhersagen
- dann immer die jeweils vorliegenden Modelle.
+ gestartet und der Master-Prozess verwendet für die Vorhersagen dann die
+ jeweils vorliegenden Modelle.
  
 \end_layout
 
 \begin_layout Paragraph*
 2.
- Optimierung auf den Ersatzmodellen
+ Optimierung auf den Ersatzmodellen:
 \end_layout
 
 \begin_layout Standard
@@ -1392,7 +1392,7 @@ en.
 
 \begin_layout Paragraph*
 3.
- Auswahl der vielversprechendsten Individuen
+ Auswahl der vielversprechendsten Individuen:
 \begin_inset CommandInset label
 LatexCommand label
 name "subsec:EVG"
@@ -1413,7 +1413,7 @@ Meistens werden in Turbomaschinenoptimierungen mehrere Zielfunktionen und
  Für die Optimierung auf dem Ersatzmodell ist also ein Gütekriterium zu
  bevorzugen, welches mehrere Zielfunktionen und Nebenbedingungen vereint
  und auch den zu erwartenden Optimierungsfortschritt zu einer bestehenden
- Paretofront genauer quantifizieren kann als der Paretorang.
+ Paretofront genauer quantifizieren kann.
  In AutoOpti findet dafür das 
 \begin_inset Quotes gld
 \end_inset

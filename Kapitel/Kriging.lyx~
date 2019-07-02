@@ -90,8 +90,6 @@ he Umsetzbarkeit gelegt.
  Dieser Punkt wird in der einschlägigen Literatur oftmals außer Acht gelassen,
  was die Effizienz der Software sowie die Generalisierbarkeit negativ beeinfluss
 t.
- Innerhalb der hier entwickelten Software wurden alle beschriebenen Kriging-Verf
-ahren umgesetzt.
  
 \end_layout
 
@@ -100,7 +98,8 @@ Im ersten Abschnitt wird ein kurzer Überblick über die Historie und die
  speziellen Eigenschaften der Kriging-Verfahren gegeben.
  Darauf folgt die Herleitung der allgemeinen Kriging-Vorhersage-Gleichungen,
  welche für alle Kriging-Varianten (wie z.B.
- das Co-Kriging) Gültigkeit besitzen.
+ das Co-Kriging) Gültigkeit besitzen und auch alle innerhalb der entwickelten
+ Software umgesetzt wurden.
  Anschließen werden die Unterschiede in den Kriging-Unterverfahren und deren
  Umsetzung beschrieben.
  Im letzten Abschnitt wird die hier entwickelte Umsetzung des Kriging-Verfahrens
@@ -134,16 +133,15 @@ key "kbiqb1953statistical"
 \end_inset
 
 .
- Das Verfahren wurde später nach ihm benannt.
- Der französische Mathematiker Georges Matheron (1963) entwickelte aus Kriges
- Arbeit die Kriging-Theorie 
+ Das Verfahren wurde später nach ihm benannt und vom französischen Mathematiker
+ Georges Matheron (1963) zu der heute bekannten Kriging-Theorie 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "matheron1963principles"
 
 \end_inset
 
-.
+ weiterentwickelt.
  Das Kriging Verfahren hat heute in den Geowissenschaften sowie vielen anderen
  Forschungsbereichen Verwendung gefunden.
 \end_layout
@@ -223,8 +221,6 @@ key "shepard1968two"
 \end_inset
 
 , beachten eine lokale Häufung von Stützstellen nicht.
- Bei einer lokalen Häufung von Stützstellen sollten diese weniger stark
- gewichtet werden.
  Ein statistisches Verfahren wie Kriging hingegen berücksichtigt die gesamte
  räumliche Verteilung der Stützstellen 
 \begin_inset CommandInset citation
@@ -233,7 +229,7 @@ key "Krueger2013"
 
 \end_inset
 
-.
+ und gewichtet lokal gehäufte Stützstellen geringer.
 \end_layout
 
 \begin_layout Itemize
@@ -399,7 +395,8 @@ reference "sec:Multifidelity-OptimierungsstrateAutoOpti"
 \begin_inset Formula $\vec{x}\in\mathbb{R^{\mathrm{k}}}$
 \end_inset
 
- liefern:
+ liefern, diese werden folgend vorgestellt und dienen als Leitfaden für
+ die darauffolgenden Herleitungen:
 \end_layout
 
 \begin_layout Enumerate
@@ -560,9 +557,12 @@ Das Verfahren besitzt eine globale Varianz
 \begin_inset Formula $\textrm{var}\left[Z_{g}\right]$
 \end_inset
 
+ für jede Gütestufe 
+\begin_inset Formula $g$
+\end_inset
+
 , welche sich in der Nähe von bekannten Stützstellen verringert.
- Jede Gütestufe besitzt eine eigene globale Varianz, welche über das Trainingsve
-rfahren bestimmt wird, siehe Kapitel 
+ Diese wird über das Trainingsverfahren bestimmt, siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:CoKrigingAnalytische-Bestimmung-derErwwartzungswerte"
@@ -650,18 +650,17 @@ reference "sec:Numerische-Effizienz-steigern"
 \end_layout
 
 \begin_layout Itemize
-Im Normalfall werden die Sützstellen interpoliert und die vorhergesagt Unsicherh
-eit ist an diesen Stellen.
- Das Kriging-Verfahren bietet aber auch die Möglichkeit die Stützstellen
- zu approximieren, siehe Kapitel 
+Im Normalfall werden die Stützstellen interpoliert und die vorhergesagte
+ Unsicherheit ist an diesen Stellen nahe Null.
+ Das Kriging-Verfahren bietet zudem aber auch die Möglichkeit die Stützstellen
+ zu approximieren (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:RegularisierungUndRauschen"
 
 \end_inset
 
-.
- 
+) und ist somit sehr flexibel einsetzbar.
 \end_layout
 
 \begin_layout Standard
@@ -788,8 +787,7 @@ Die grundlegende Annahme dabei ist, dass der zu schätzende Wert
 
 \end_inset
 
-.
- Da die Stützstellen 
+Da die Stützstellen 
 \begin_inset Formula $y_{i}\left(\vec{x}_{j}\right)$
 \end_inset
 
@@ -1219,8 +1217,7 @@ reference "eq:VarianzSchaetzfehlerGewichte"
 
 \end_inset
 
- ein, so erhält man die Formel für die Vorhersage der Standardabweichung
- des Schätzfehlers:
+ ein, so erhält man die Formel für die Vorhersage der Varianz des Schätzfehlers:
 \begin_inset Formula 
 \begin{align}
 \textrm{var}\left[F_{g}\left(\vec{x}\right)\right] & =\textrm{var}\left[Z_{g}\left(\vec{x}\right)\right]-\vec{c}(g\vec{,x})^{T}\mathbf{Cov}^{-1}\vec{c}(g\vec{,x})+\frac{\left(\vec{c}^{T}\mathbf{Cov}^{-1}\vec{F}-\beta_{g}\right)^{2}}{\vec{F}^{T}\mathbf{Cov}^{-1}\vec{F}}\label{eq:VarianzVorhersage}
@@ -1389,7 +1386,7 @@ reference "subsec:Kovarianz-zwischen-zwei"
 \end_inset
 
 ) und dann eine geeignete Modellierung für diese zu finden.
- Geht man von stochastischen Prozessen 
+ Geht man von den stochastischen Prozessen 
 \begin_inset Formula $Z_{i}$
 \end_inset
 
@@ -1398,7 +1395,7 @@ reference "subsec:Kovarianz-zwischen-zwei"
 \end_inset
 
  aus, wobei die höhere Gütestufe mit dem niedrigeren Index gekennzeichnet
- ist, so sind für die vollständige Beschreibung der Kovarianzmatrix an zwei
+ ist, so sind für die vollständige Beschreibung der Kovarianzmatrix an den
  Stellen 
 \begin_inset Formula $\vec{x}$
 \end_inset
@@ -1535,7 +1532,7 @@ reference "subsec:COKrigingKovarianzmodell"
 \end_inset
 
  beschriebene Kovarianzmodell vereinfacht sich jedoch sehr stark.
- Es wird nur noch eine Kovarianzfunktion 
+ Es wird nur noch eine parametrisierte Kovarianzmodellfunktion 
 \begin_inset Formula $cov\left(Z\left(\vec{x}\right),Z\left(\vec{x}^{'}\right)\right)$
 \end_inset
 
@@ -1565,7 +1562,9 @@ Das Gradient-Enhanced-Kriging (GEK) ist eine Erweiterung des Ordinary-Kriging.
 \begin_inset Formula $\frac{\partial y\left(x\right)}{\partial x}$
 \end_inset
 
- an einigen beprobten Orten mit in die Bildung des Modells ein.
+ an beprobten Orten mit in die Bildung des Modells ein, wobei ein großer
+ Vorteil des Verfahrens ist, dass nicht alle partiellen Ableitungen benötigt
+ werden.
  Der Trainingsvektor 
 \begin_inset Formula $\vec{y}\in\mathbb{R^{\mathrm{n+m}}}$
 \end_inset
@@ -1782,7 +1781,8 @@ name "sec:VergleicheCoKrigingAndere"
 
 \end_inset
 
-Vergleich des Co-Kriging-Verfahrens mit anderen Verfahren aus der Literatur
+Vergleich des hier vorgestellten Co-Kriging-Verfahrens mit anderen Verfahren
+ aus der Literatur
 \end_layout
 
 \begin_layout Standard
@@ -1799,7 +1799,7 @@ reference "subsec:COKrigingKovarianzmodell"
 \begin_inset Formula $\mathbf{Cov}\in\mathbb{R^{\mathrm{n_{all}}\times\textrm{n_{all}}}}$
 \end_inset
 
-und des Erwartungswertvektors 
+ und des Erwartungswertvektors 
 \begin_inset Formula $\vec{F}$
 \end_inset
 
@@ -1916,7 +1916,7 @@ reference "chap:MinimierungsverfahrenTraining"
 
 \begin_deeper
 \begin_layout Enumerate
-Die Punkteverteilung der Gütestufen ist unabhängig voneinander.
+Die Punktverteilung der Gütestufen ist unabhängig voneinander.
 \end_layout
 
 \begin_layout Enumerate
@@ -1990,9 +1990,9 @@ reference "eq:CovLowLowBeschreibung"
 \end_inset
 
 ).
- Dieses Vorgehen führt dadurch zu erheblichen numerischen Problemen.
+ Dieses Vorgehen führt zu erheblichen numerischen Problemen.
  Der Grund liegt darin, dass die positive Definitheit der Kovarianzmatrix
- nicht mehr gesichert.
+ nicht mehr gesichert ist.
  Um dieses Problem zu umgehen, wurde in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2003,7 +2003,7 @@ key "han2009improving"
  vorgeschlagen, für alle drei Kovarianzfunktionen denselben Hyperparametersatz
  zu verwenden.
  Verglichen mit einem Ordinary-Kriging, welches die Stützstellen aller Gütestufe
-n beinhaltet, besteht der Unterschied nur noch in einer eigenen globalen
+n beinhaltet, besteht der Unterschied dann nur noch in einer eigenen globalen
  Varianz und einem eigenen globalen Erwartungswert für die verschiedenen
  Gütestufen.
  Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun
