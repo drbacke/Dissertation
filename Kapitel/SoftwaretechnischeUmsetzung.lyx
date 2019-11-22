@@ -4247,15 +4247,16 @@ reference "subsec:UltraRestart"
 \end_inset
 
 , da ab diesem Zeitpunkt genügend alte Krigingmodelle vorhanden sind.
- Dieser Übergang wird mit einer gestrichelten
-\begin_inset Wrap table
-lines 0
-placement O
-overhang 0in
-width "50col%"
+ Dieser Übergang wird mit einer gestrichelten Linie gekennzeichnet.
+ 
+\begin_inset Float table
+placement H
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="3">
 <features tabularvalignment="middle">
@@ -4285,7 +4286,7 @@ RPROP2
 \begin_inset Text
 
 \begin_layout Plain Layout
-QN
+Quasi Newton
 \end_layout
 
 \end_inset
@@ -4296,7 +4297,7 @@ QN
 \begin_inset Text
 
 \begin_layout Plain Layout
-53.5
+53.5 s
 \end_layout
 
 \end_inset
@@ -4305,7 +4306,7 @@ QN
 \begin_inset Text
 
 \begin_layout Plain Layout
-42.83
+42.83 s
 \end_layout
 
 \end_inset
@@ -4314,7 +4315,7 @@ QN
 \begin_inset Text
 
 \begin_layout Plain Layout
-12.7
+12.7 s
 \end_layout
 
 \end_inset
@@ -4342,15 +4343,10 @@ Mittlere Trainingszeit für alle durchgeführten Trainings in Sekunden.
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
- Linie gekennzeichnet.
- Der Testfehler ist bei allen Verfahren auf einem ähnlich guten Niveau:
- Der Mittelwert des Massenstroms liegt bei 514 kg/s und der Testfehler (absolute
+Der Testfehler ist bei allen Verfahren auf einem ähnlich guten Niveau: Der
+ Mittelwert des Massenstroms liegt bei 514 kg/s und der Testfehler (absolute
  Differenz zwischen Vorhersage und Echtwert) liegt damit bei ca.
  1%.
  Das RPROP2-Verfahren zeigt insgesamt den besten Testfehler.
@@ -6452,7 +6448,7 @@ freeMem: Der belegte Speicher des Objekts wird vollständig geleert.
 
 \begin_layout Standard
 \begin_inset Wrap figure
-lines 12
+lines 10
 placement o
 overhang 0in
 width "50col%"
@@ -7008,12 +7004,13 @@ lines 0
 placement o
 overhang 0col%
 width "50col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/Fabiab_Netzwerk_one_many_total_speedup.eps
 	scale 45
+	rotateAngle 90
 
 \end_inset
 
@@ -10952,7 +10949,7 @@ Zeitlicher Verlauf des Likelihood-Werts
 
 \begin_layout Standard
 \begin_inset Wrap figure
-lines 17
+lines 16
 placement o
 overhang 0in
 width "50col%"
@@ -11027,27 +11024,7 @@ reference "subsec:UltraRestart"
  Solange dieser Plot noch rote Punkte aufweist, kann davon ausgegangen werden,
  dass die Hyperparameter der Ersatzmodelle noch nicht optimal eingestellt
  sind.
- Weiterhin lassen sich auch Aussagen über die Güte der Daten anhand des
- Kurvenverlaufs treffen.
- In Abbildung 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:KhonGobalConvergence"
-
-\end_inset
-
- rechts, ist ab Iteration 1000 ein Ausreißer im Verlauf des Likelihood-Plots
- zu sehen.
- Dieser Ausreißer wurde während der laufenden Optimierung bemerkt und konnte
- auf einen systematischen Fehler in der Prozesskette zurückgeführt werden,
- welcher aus einer Prozesskettenänderung während der Laufzeit resultierte
- und zu fehlerhaften Daten führte.
- Der Fehler konnte während der Laufzeit behoben und die Optimierung mit
- wenig Zeitverlust fortgesetzt werden.
  
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -11055,17 +11032,16 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
-	lyxscale 30
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
 	scale 35
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
-	lyxscale 30
+	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
 	scale 35
 
 \end_inset
@@ -11089,13 +11065,25 @@ Verlauf von zwei Ersatzmodellen der Mukoko Optimierung, wobei das rechte
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
-\end_layout
+Weiterhin lassen sich auch Aussagen über die Güte der Daten anhand des Kurvenver
+laufs treffen.
+ In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:KhonGobalConvergence"
 
 \end_inset
 
-
+ (rechts), ist bei Iteration 1000 ein Ausreißer im Verlauf des Likelihoods
+ zu sehen.
+ Dieser Ausreißer wurde während der laufenden Optimierung bemerkt und konnte
+ auf einen systematischen Fehler in der Prozesskette zurückgeführt werden,
+ welcher aus einer Prozesskettenänderung während der Laufzeit resultierte.
+ Der Fehler konnte während der Laufzeit behoben und die Optimierung mit
+ wenig Zeitverlust fortgesetzt werden.
+ 
 \end_layout
 
 \begin_layout Subsubsection*

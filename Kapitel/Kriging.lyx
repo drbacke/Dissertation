@@ -1865,8 +1865,8 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
  Dies bietet numerische Vorteile, da hierfür nur die jeweiligen Submatrizen
  der gesamten Kovarianzmatrix invertiert werden müssen und auch der jeweilige
  Hyperparamterraum kleiner ist.
- Dieser Ansatz bedingt allerdings, dass an jedem bekannten Punkt niedriger
- Güte auch eine Stützstelle hoher Güte bekannt sein muss.
+ Dieser Ansatz bedingt allerdings, dass an jedem bekannten Punkt hoher Güte
+ auch eine Stützstelle niedriger Güte bekannt sein muss.
  Aufbauend auf der Arbeit von 
 \begin_inset CommandInset citation
 LatexCommand cite

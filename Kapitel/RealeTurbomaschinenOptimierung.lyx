@@ -4095,7 +4095,7 @@ has_inner_box 1
 inner_pos "t"
 use_parbox 0
 use_makebox 0
-width "45col%"
+width "42col%"
 special "none"
 height "1in"
 height_special "totalheight"
@@ -4390,7 +4390,7 @@ has_inner_box 1
 inner_pos "t"
 use_parbox 0
 use_makebox 0
-width "50col%"
+width "53col%"
 special "none"
 height "1in"
 height_special "totalheight"
@@ -4406,7 +4406,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../images/ErgebnissKapitel/Strak_Variables_2.pdf
-	scale 30
+	scale 33
 
 \end_inset
 
@@ -4848,8 +4848,6 @@ Restart
 \end_layout
 
 \begin_layout Standard
-
-\shape italic
 Die Multifidelity-Optimierungen erreichen den Volumenzugewinn der Referenz
  bei etwa der halben Zeit bzw.
  zum gewählten Abbruchzeitpunkt einen deutlich höheren Wert.
@@ -4858,8 +4856,6 @@ Die Multifidelity-Optimierungen erreichen den Volumenzugewinn der Referenz
 \end_layout
 
 \begin_layout Standard
-
-\shape italic
 Diese Aussage wird für eine Vielzahl von Turbomaschinenanwendungen gelten,
  wenn die Fidelitystufen durch die Variation der Netzauflösung erzeugt werden.
  Diese Prozessketten sind für den Anwender schnell generiert und weisen

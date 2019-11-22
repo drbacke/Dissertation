@@ -1865,8 +1865,8 @@ reference "subsec:Kovarianzfunktion-CO-Kriging"
  Dies bietet numerische Vorteile, da hierfür nur die jeweiligen Submatrizen
  der gesamten Kovarianzmatrix invertiert werden müssen und auch der jeweilige
  Hyperparamterraum kleiner ist.
- Dieser Ansatz bedingt allerdings, dass an jedem bekannten Punkt niedriger
- Güte auch eine Stützstelle hoher Güte bekannt sein muss.
+ Dieser Ansatz bedingt allerdings, dass an jedem bekannten Punkt hoher Güte
+ auch eine Stützstelle hoher Güte bekannt sein muss.
  Aufbauend auf der Arbeit von 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -2003,7 +2003,7 @@ key "han2009improving"
  vorgeschlagen, für alle drei Kovarianzfunktionen denselben Hyperparametersatz
  zu verwenden.
  Verglichen mit einem Ordinary-Kriging, welches die Stützstellen aller Gütestufe
-n beinhaltet, besteht der Unterschied dann nur noch in einer eigenen globalen
+n beinhaltet, besteht der Unterschied dann nur in einer eigenen globalen
  Varianz und einem eigenen globalen Erwartungswert für die verschiedenen
  Gütestufen.
  Damit könnte nur noch eine für das gesamte Modell gültige konstante Verschiebun

@@ -381,7 +381,7 @@ Ein Tupel freier Parameter
 \end_inset
 
  mit zugeordneten Flowparametern 
-\begin_inset Formula $\left(f_{1},....,y_{z}\right)$
+\begin_inset Formula $\left(f_{1},....,f_{z}\right)$
 \end_inset
 
  und Zielfunktionswerten 
@@ -738,7 +738,7 @@ Die Problematik von hochdimensionalen Suchräumen wird auch als
 \begin_inset Quotes gld
 \end_inset
 
-Curse of Dimensions
+Curse of dimensionality
 \begin_inset Quotes grd
 \end_inset
 
@@ -1199,10 +1199,14 @@ reference "fig:ErsatzmodellOpti"
 
  soll der in AutoOpti verwendete Prozess zur Nutzung von Ersatzmodellen
  genauer beschrieben werden.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -1266,6 +1270,45 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+Nutzung von Ersatzmodellen im Optimierungsprozess
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../images/Opti_Surrogate2.eps
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ErsatzmodellOpti"
@@ -1273,11 +1316,6 @@ name "fig:ErsatzmodellOpti"
 \end_inset
 
 Nutzung von Ersatzmodellen im Optimierungsprozess
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
