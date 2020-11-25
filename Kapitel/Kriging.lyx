@@ -281,11 +281,11 @@ lines 17
 placement o
 overhang 0in
 width "45col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/KrigingKapitel/Konfiinterval.eps
+	filename ../images/KrigingKapitel/Konfiinterval.eps
 	scale 30
 
 \end_inset
@@ -950,7 +950,7 @@ Wobei
 \begin_inset Formula $\mathbf{Cov\in\mathbb{R^{\mathrm{n_{all}\times n_{all}}}}}$
 \end_inset
 
- die Kovarianzmatrix (Bildungsforschrift in Kapitel 
+ die Kovarianzmatrix (Bildungsvorschrift in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Kovarianzmatrix"

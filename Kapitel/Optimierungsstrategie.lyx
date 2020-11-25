@@ -836,8 +836,8 @@ name "sec:Automatisierte-Optimierung-imDLR"
 
 \begin_layout Standard
 Auf die Optimierungssoftware AutoOpti wurde bereits Bezug genommen.
- Daher wird in diesem Abschnitt soll der bisherige Stand von AutoOpti dokumentie
-rt und erläutert.
+ Daher wird in diesem Abschnitt der bisherige Stand von AutoOpti dokumentiert
+ und erläutert.
  Dies ist notwendig, da die hier entwickelten Verfahren innerhalb dieser
  Optimierungsumgebung implementiert wurden.
  
@@ -1200,13 +1200,13 @@ reference "fig:ErsatzmodellOpti"
  soll der in AutoOpti verwendete Prozess zur Nutzung von Ersatzmodellen
  genauer beschrieben werden.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -1378,7 +1378,7 @@ reference "chap:Die-Kriging-Verfahren"
 \end_layout
 
 \begin_layout Standard
-In AutoOpti werden für jede Zielfunktion und Nebenbedingung seperate Ersatzmodel
+In AutoOpti werden für jede Zielfunktion und Nebenbedingung separate Ersatzmodel
 le trainiert.
  Bei aus mehreren 
 \begin_inset Quotes gld

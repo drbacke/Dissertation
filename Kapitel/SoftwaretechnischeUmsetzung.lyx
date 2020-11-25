@@ -516,7 +516,7 @@ Nugget
 \end_inset
 
  bezeichnet und entspricht einem ortsunabhängigen Rauschen.
- Um dies zu modellieren, wird eine eine Sprungfunktion 
+ Um dies zu modellieren, wird eine Sprungfunktion 
 \begin_inset Formula $\delta$
 \end_inset
 
@@ -2684,7 +2684,7 @@ reference "eq:LikelihoodMultivariateNorm"
  und Gleichung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:LikelihoodMultivariateNorm"
+reference "eq:LogLikelihoodZwischen"
 
 \end_inset
 
@@ -6484,7 +6484,9 @@ UML Diagramm des SaveAbleOnServer Interface
 Die Serialisierung und Deserialisierung ist in diesem Fall über das Interface
  sichergestellt.
  Die korrekte Implementierung der (De-)Serialisierung aber nicht, da diese
- Art der Zusicherung mit der Programmiersprache C++ nicht möglich ist.
+ Art der Zusicherung (z.B.
+ durch Design by Contract) mit der Programmiersprache C++ nicht möglich
+ ist.
  Im Falle einer korrekten Implementierung ist es mit diesem System möglich,
  vollständige Objekte über das Netzwerk zu verschicken.
  Das besondere dabei ist, dass diese Objekte auf dem Server typunabhängig
@@ -7010,7 +7012,6 @@ status open
 \begin_inset Graphics
 	filename ../images/SoftwareTechnUmsetzung/Fabiab_Netzwerk_one_many_total_speedup.eps
 	scale 45
-	rotateAngle 90
 
 \end_inset
 
@@ -8276,7 +8277,7 @@ Vorwärts- und Rückwärtseinsetzen insgesamt:
 \begin_layout Standard
 Der Hauptaufwand liegt bei der Vorwärts- und Rückwärtssubstitution, womit
  eine alternative Berechnung von Punkt (c) von besonderem Interesse ist.
- Eine Möglichkeit bietet die algorithmischen Differentiation im Rückwärtsmodus
+ Eine Möglichkeit bietet die algorithmische Differentiation im Rückwärtsmodus
  (siehe 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -9021,7 +9022,7 @@ Dabei gilt: Je mehr Zufallszahlen dieser Vektor beinhaltet, desto genauer
 \begin_inset Formula $\vec{d}$
 \end_inset
 
- der Verlust an Genauigkeit zu einer erhöhten Traingingsiterationsanzahl
+ der Verlust an Genauigkeit zu einer erhöhten Trainingsiterationsanzahl
  führte oder bei höherer Dimension von 
 \begin_inset Formula $\vec{d}$
 \end_inset
@@ -11034,14 +11035,14 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
+	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence1.png
 	scale 35
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename /home/schm_ad/Diss/images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
+	filename ../images/SoftwareTechnUmsetzung/Mukoko/khon_global_convergence12.png
 	scale 35
 
 \end_inset
